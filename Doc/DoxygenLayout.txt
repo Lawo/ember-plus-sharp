@@ -1,0 +1,9 @@
+  <tab type="usergroup" title="EmberPlus-net">
+    <tab type="usergroup" title="Tutorials">
+      <tab type="user" url="\ref MvvmTutorial" title="MVVM"/>
+      <tab type="user" url="\ref TheLawoEmberPlusLibrary" title="The Lawo.EmberPlus Library"/>
+      <tab type="user" url="\ref TheLawoEmberPlusModelNamespace" title="The Lawo.EmberPlus.Model Namespace"/>
+      <tab type="user" url="\ref TheLawoEmberPlusEmberNamespace" title="The Lawo.EmberPlus.Ember Namespace"/>
+      <tab type="user" url="\ref TheLawoEmberPlusS101Namespace" title="The Lawo.EmberPlus.S101 Namespace"/>
+    </tab>
+  </tab>

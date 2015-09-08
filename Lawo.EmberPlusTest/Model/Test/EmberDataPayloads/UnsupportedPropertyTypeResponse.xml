@@ -1,0 +1,16 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Parameter">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">Whatever1</identifier>
+      <value type="Boolean">true</value>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">2</number>
+    <contents type="Set">
+      <identifier type="UTF8String">Whatever2</identifier>
+      <value type="Boolean">false</value>
+    </contents>
+  </RootElement>
+</Root>

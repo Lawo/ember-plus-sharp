@@ -1,0 +1,76 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Parameter">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">BooleanParameter</identifier>
+      <access type="Integer">3</access>
+      <type type="Integer">4</type>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">2</number>
+    <contents type="Set">
+      <identifier type="UTF8String">IntegerParameter</identifier>
+      <access type="Integer">3</access>
+      <minimum type="Integer">{0}</minimum>
+      <maximum type="Integer">{1}</maximum>
+      <type type="Integer">1</type>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">3</number>
+    <contents type="Set">
+      <identifier type="UTF8String">EnumParameter</identifier>
+      <access type="Integer">3</access>
+      <enumMap type="StringIntegerCollection">
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">Zero</entryString>
+          <entryInteger type="Integer">0</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">One</entryString>
+          <entryInteger type="Integer">1</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">Two</entryString>
+          <entryInteger type="Integer">2</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">Three</entryString>
+          <entryInteger type="Integer">3</entryInteger>
+        </StringIntegerPair>
+      </enumMap>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">4</number>
+    <contents type="Set">
+      <identifier type="UTF8String">OctetstringParameter</identifier>
+      <access type="Integer">3</access>
+      <type type="Integer">7</type>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">5</number>
+    <contents type="Set">
+      <identifier type="UTF8String">RealParameter</identifier>
+      <access type="Integer">3</access>
+      <minimum type="Real">{2:R}</minimum>
+      <maximum type="Real">{3:R}</maximum>
+      <type type="Integer">2</type>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">6</number>
+    <contents type="Set">
+      <identifier type="UTF8String">StringParameter</identifier>
+      <access type="Integer">3</access>
+      <type type="Integer">3</type>
+      <!-- enumeration fields in parameters with incompatible types must be ignored. -->
+      <enumeration type="UTF8String">Zero
+One
+Two
+Three</enumeration>
+    </contents>
+  </RootElement>
+</Root>

@@ -1,0 +1,261 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Parameter">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">BooleanParameter</identifier>
+      <description type="UTF8String">This is the first element.</description>
+      <value type="Boolean">{0}</value>
+      <minimum type="Boolean">false</minimum> <!-- The minimum for a static non-numeric parameter must be skipped -->
+      <maximum type="Boolean">true</maximum> <!-- The maximum for a static non-numeric parameter must be skipped -->
+      <access type="Integer">3</access>
+      <factor type="Integer">42</factor> <!-- The factor for a static non-integer parameter must be skipped -->
+      <isOnline type="Boolean">true</isOnline>
+      <formula type ="UTF8String">(1 * $)
+(1 * $)</formula> <!-- The formula for a static non-numeric parameter must be skipped -->
+      <default type="Boolean">false</default>
+      <type type="Integer">4</type>
+      <streamIdentifier type="Integer">0</streamIdentifier>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">2</number>
+    <contents type="Set">
+      <identifier type="UTF8String">IntegerParameter</identifier>
+      <description type="UTF8String">This is the second element.</description>
+      <value type="Integer">{1}</value>
+      <minimum type="Integer">0</minimum>
+      <maximum type="Integer">100</maximum>
+      <access type="Integer">3</access>
+      <format type="UTF8String">%d</format>
+      <isOnline type="Boolean">true</isOnline>
+      <default type="Integer">0</default>
+      <type type="Integer">1</type>
+      <streamIdentifier type="Integer">1</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">0</format>
+        <offset type="Integer">0</offset>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">3</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FactorIntegerParameter</identifier>
+      <description type="UTF8String">This is the third element.</description>
+      <value type="Integer">{2}</value>
+      <minimum type="Integer">0</minimum>
+      <maximum type="Integer">100</maximum>
+      <access type="Integer">3</access>
+      <format type="UTF8String">%d</format>
+      <factor type="Integer">1</factor>
+      <isOnline type="Boolean">true</isOnline>
+      <default type="Integer">0</default>
+      <type type="Integer">1</type>
+      <streamIdentifier type="Integer">1</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">0</format>
+        <offset type="Integer">1</offset>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">4</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FormulaIntegerParameter</identifier>
+      <description type="UTF8String">This is the fourth element.</description>
+      <value type="Integer">{3}</value>
+      <minimum type="Integer">0</minimum>
+      <maximum type="Integer">100</maximum>
+      <access type="Integer">3</access>
+      <format type="UTF8String">%d</format>
+      <isOnline type="Boolean">true</isOnline>
+      <formula type ="UTF8String">(1 * $)
+(1 * $)</formula>
+      <default type="Integer">0</default>
+      <type type="Integer">1</type>
+      <streamIdentifier type="Integer">1</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">0</format>
+        <offset type="Integer">2</offset>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">5</number>
+    <contents type="Set">
+      <identifier type="UTF8String">EnumerationParameter</identifier>
+      <description type="UTF8String">This is the fifth element.</description>
+      <value type="Integer">{4}</value>
+      <access type="Integer">3</access>
+      <enumeration type="UTF8String">Zero
+One
+Two
+Three</enumeration>
+      <isOnline type="Boolean">true</isOnline>
+      <default type="Integer">0</default>
+      <type type="Integer">6</type>
+      <streamIdentifier type="Integer">1</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">0</format>
+        <offset type="Integer">3</offset>
+        <C-17 type="A-42"> <!-- Unknown fields must be skipped correctly. -->
+          <C-5 type="UTF8String">Whatever</C-5>
+        </C-17>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">6</number>
+    <contents type="Set">
+      <identifier type="UTF8String">EnumMapParameter</identifier>
+      <description type="UTF8String">This is the sixth element.</description>
+      <value type="Integer">{5}</value>
+      <access type="Integer">3</access>
+      <isOnline type="Boolean">true</isOnline>
+      <default type="Integer">0</default>
+      <type type="Integer">6</type>
+      <streamIdentifier type="Integer">1</streamIdentifier>
+      <enumMap type="StringIntegerCollection">
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">Zero</entryString>
+          <entryInteger type="Integer">0</entryInteger>
+          <C-17 type="A-42"> <!-- Unknown fields must be skipped correctly. -->
+            <C-5 type="UTF8String">Whatever</C-5>
+          </C-17>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">One</entryString>
+          <entryInteger type="Integer">1</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">Two</entryString>
+          <entryInteger type="Integer">2</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">Three</entryString>
+          <entryInteger type="Integer">3</entryInteger>
+        </StringIntegerPair>
+      </enumMap>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">0</format>
+        <offset type="Integer">4</offset>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">42</number>
+    <contents type="Set">
+      <identifier type="UTF8String">Uninteresting Parameter</identifier>
+      <description type="UTF8String">Uninteresting Description.</description>
+      <value type="UTF8String">Whatever</value>
+      <access type="Integer">3</access>
+      <isOnline type="Boolean">true</isOnline>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">0</format>
+        <offset type="Integer">2069</offset>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Node">
+    <number type="Integer">43</number>
+    <contents type="Set">
+      <identifier type="UTF8String">Uninteresting Node.</identifier>
+      <description type="UTF8String">Uninteresting Node.</description>
+    </contents>
+    <children type="ElementCollection"> <!-- For the static case this should be skipped because we're not interested. -->
+      <Element type="Parameter">
+        <number type="Integer">1</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Whatever</identifier>
+          <value type="Boolean">true</value>
+        </contents>
+      </Element>
+    </children>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">7</number>
+    <contents type="Set">
+      <identifier type="UTF8String">OctetstringParameter</identifier>
+      <description type="UTF8String">This is the seventh element.</description>
+      <value type="Octetstring">{6}</value>
+      <access type="Integer">3</access>
+      <isOnline type="Boolean">true</isOnline>
+      <default type="Octetstring">+l==</default>
+      <type type="Integer">7</type>
+      <streamIdentifier type="Integer">2</streamIdentifier>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">8</number>
+    <contents type="Set">
+      <identifier type="UTF8String">RealParameter</identifier>
+      <description type="UTF8String">This is the eighth element.</description>
+      <value type="Real">{7:R}</value>
+      <minimum type="Real">0.0</minimum>
+      <maximum type="Real">1E42</maximum>
+      <access type="Integer">3</access>
+      <format type="UTF8String">%g</format>
+      <isOnline type="Boolean">true</isOnline>
+      <formula type ="UTF8String">(1 * $)
+(1 * $)</formula>
+      <default type="Real">0.0</default>
+      <type type="Integer">2</type>
+      <streamIdentifier type="Integer">3</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">21</format>
+        <offset type="Integer">0</offset>
+      </streamDescriptor>
+    </contents>
+  </RootElement>
+  <RootElement type="Matrix">
+    <number type="Integer">44</number>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">9</number>
+    <contents type="Set">
+      <identifier type="UTF8String">StringParameter</identifier>
+      <description type="UTF8String">This is the ninth element.</description>
+      <value type="UTF8String">{8}</value>
+      <C-314 type="Integer">89</C-314> <!-- Unknown fields must be skipped correctly. -->
+      <access type="Integer">3</access>
+      <isOnline type="Boolean">true</isOnline>
+      <C-271 type="A-99"> <!-- Unknown fields must be skipped correctly. -->
+        <C-0 type="UTF8String">Whatever</C-0>
+      </C-271>
+      <default type="UTF8String">Hello</default>
+      <type type="Integer">3</type>
+      <streamIdentifier type="Integer">4</streamIdentifier>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedMatrix">
+    <path type="RelativeObjectIdentifier">45</path>
+  </RootElement>
+  <RootElement type="Node">
+    <number type="Integer">10</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FieldNode</identifier>
+      <description type="UTF8String">This is the tenth element.</description>
+      <isRoot type="Boolean">false</isRoot>
+      <isOnline type="Boolean">true</isOnline>
+    </contents>
+  </RootElement>
+  <RootElement type="Node">
+    <number type="Integer">11</number>
+    <C-42 type="Sequence"> <!-- Unknown Node fields must be skipped correctly. -->
+      <C-33 type="A-55">
+        <C-0 type="Integer">13</C-0>
+      </C-33>
+    </C-42>
+    <contents type="Set">
+      <identifier type="UTF8String">CollectionNode</identifier>
+      <C-113 type="UTF8String">Whatever</C-113> <!-- Unknown fields must be skipped correctly. -->
+      <description type="UTF8String">This is the eleventh element.</description>
+      <C-314 type="A-666"> <!-- Unknown fields must be skipped correctly. -->
+        <C-1 type="Real">3.14159265359</C-1>
+      </C-314>
+      <isRoot type="Boolean">false</isRoot>
+      <isOnline type="Boolean">true</isOnline>
+    </contents>
+    <C-999 type="Boolean">true</C-999> <!-- Unknown fields must be skipped correctly. -->
+  </RootElement>
+</Root>

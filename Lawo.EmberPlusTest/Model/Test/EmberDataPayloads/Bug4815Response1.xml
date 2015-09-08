@@ -1,0 +1,9 @@
+<Root type="RootElementCollection">
+  <RootElement type="QualifiedNode">
+    <path type="RelativeObjectIdentifier">1</path>
+    <contents type="Set">
+      <identifier type="UTF8String">ZoneNode</identifier>
+      <isOnline type="Boolean">false</isOnline>
+    </contents>
+  </RootElement>
+</Root>

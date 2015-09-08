@@ -1,0 +1,25 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.EmberPlus.Model
+{
+    using System;
+
+    /// <summary>Indicates how a parameter can be accessed.</summary>
+    [Flags]
+    public enum ParameterAccess
+    {
+        /// <summary>No access</summary>
+        None = 0,
+
+        /// <summary>Read Only</summary>
+        Read = 1,
+
+        /// <summary>Write Only</summary>
+        Write = 2,
+
+        /// <summary>Read and Write</summary>
+        ReadWrite = Read | Write
+    }
+}

@@ -1,0 +1,38 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">1</path>
+    <contents type="Set">
+      <value type="Boolean">false</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">2</path>
+    <contents type="Set">
+      <value type="Integer">0</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">3</path>
+    <contents type="Set">
+      <value type="Integer">2</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">4</path>
+    <contents type="Set">
+      <value type="Octetstring" />
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">5</path>
+    <contents type="Set">
+      <value type="Real">0</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">6</path>
+    <contents type="Set">
+      <value type="UTF8String"></value>
+    </contents>
+  </RootElement>
+</Root>

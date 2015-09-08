@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<S101Log>
+  <Event type="Message" timeUtc="14:20:17.36" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="14:20:17.36" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Parameter">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">BooleanTrigger</identifier>
+            <value type="Boolean">false</value>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+        <RootElement type="Parameter">
+          <number type="Integer">2</number>
+          <contents type="Set">
+            <identifier type="UTF8String">IntegerTrigger</identifier>
+            <value type="Integer">42</value>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+        <RootElement type="Parameter">
+          <number type="Integer">3</number>
+          <contents type="Set">
+            <identifier type="UTF8String">OctetstringTrigger</identifier>
+            <value type="Octetstring">+g==</value>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+        <RootElement type="Parameter">
+          <number type="Integer">4</number>
+          <contents type="Set">
+            <identifier type="UTF8String">RealTrigger</identifier>
+            <value type="Real">3.14159265359</value>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+        <RootElement type="Parameter">
+          <number type="Integer">5</number>
+          <contents type="Set">
+            <identifier type="UTF8String">StringTrigger</identifier>
+            <value type="UTF8String">Hello</value>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+        <RootElement type="Parameter">
+          <number type="Integer">6</number>
+          <contents type="Set">
+            <identifier type="UTF8String">NullTrigger</identifier>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="14:20:17.38" direction="Receive" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1</path>
+          <contents type="Set">
+            <value type="Boolean">false</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">2</path>
+          <contents type="Set">
+            <value type="Integer">42</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">3</path>
+          <contents type="Set">
+            <value type="Octetstring">+g==</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">4</path>
+          <contents type="Set">
+            <value type="Real">3.14159265359</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">5</path>
+          <contents type="Set">
+            <value type="UTF8String">Hello</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">6</path>
+          <contents type="Set">
+            <value type="Integer">0</value>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

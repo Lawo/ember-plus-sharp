@@ -1,0 +1,14 @@
+<Root type="RootElementCollection">
+  <RootElement type="Node">
+    <number type="Integer">1</number>
+    <children type="ElementCollection">
+      <Element type="Parameter">
+        <number type="Integer">1</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Ravenna</identifier>
+          <value type="Integer">42</value>
+        </contents>
+      </Element>
+    </children>
+  </RootElement>
+</Root>

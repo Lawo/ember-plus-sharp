@@ -1,0 +1,14 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Parameter">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">Enum</identifier>
+      <value type="Integer">0</value>
+      <enumeration type="UTF8String">Zero
+~One
+Two
+Three
+Four</enumeration>
+    </contents>
+  </RootElement>
+</Root>

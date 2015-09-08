@@ -1,0 +1,22 @@
+﻿<Root type="StreamCollection">
+  <StreamEntry type="StreamEntry">
+    <streamIdentifier type="Integer">0</streamIdentifier>
+    <streamValue type="Boolean">true</streamValue>
+  </StreamEntry>
+  <StreamEntry type="StreamEntry">
+    <streamIdentifier type="Integer">1</streamIdentifier>
+    <streamValue type="Integer">42</streamValue>
+  </StreamEntry>
+  <StreamEntry type="StreamEntry">
+    <streamIdentifier type="Integer">2</streamIdentifier>
+    <streamValue type="Octetstring">vNfExDztEw==</streamValue>
+  </StreamEntry>
+  <StreamEntry type="StreamEntry">
+    <streamIdentifier type="Integer">3</streamIdentifier>
+    <streamValue type="Real">3.14159265359</streamValue>
+  </StreamEntry>
+  <StreamEntry type="StreamEntry">
+    <streamIdentifier type="Integer">4</streamIdentifier>
+    <streamValue type="UTF8String">Hello</streamValue>
+  </StreamEntry>
+</Root>

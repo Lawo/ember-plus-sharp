@@ -1,0 +1,17 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.EmberPlus.S101
+{
+    internal static class Constants
+    {
+        // See http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf
+        internal const int MessageHeaderMaxLength = 9;
+
+        /// <summary>The default size of the temporary in-memory buffer that is allocated to read from/write to a stream
+        /// that is presumed to send/receive its data directly to/from a physical resource, like a network or a file on
+        /// a disk.</summary>
+        internal const int PhysicalStreamBufferSize = 8192;
+    }
+}

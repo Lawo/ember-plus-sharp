@@ -1,0 +1,24 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.EmberPlus.Model.Test
+{
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+    internal sealed class NullableRoot : Root<NullableRoot>
+    {
+        internal NullableBooleanParameter BooleanParameter { get; private set; }
+
+        internal NullableIntegerParameter IntegerParameter { get; private set; }
+
+        internal NullableEnumParameter<Enumeration> EnumParameter { get; private set; }
+
+        internal NullableOctetstringParameter OctetstringParameter { get; private set; }
+
+        internal NullableRealParameter RealParameter { get; private set; }
+
+        internal NullableStringParameter StringParameter { get; private set; }
+    }
+}

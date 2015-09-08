@@ -1,0 +1,78 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Copyright 2008-2012 Andreas Huber Doenni, original from http://phuse.codeplex.com.
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.IO
+{
+    using System;
+    using System.Threading.Tasks;
+
+    /// <summary>Implements the common members of <see cref="ReadBuffer"/> and <see cref="WriteBuffer"/>.</summary>
+    /// <remarks>
+    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
+    /// guaranteed to be thread safe.</para>
+    /// </remarks>
+    public abstract class Buffer
+    {
+        private byte[] buffer;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>Gets the number of bytes the buffer can contain.</summary>
+        public int Capacity
+        {
+            get { return this.buffer.Length; }
+        }
+
+        /// <summary>Gets or sets the byte in the buffer at <paramref name="index"/>.</summary>
+        /// <exception cref="IndexOutOfRangeException"><paramref name="index"/> >= <see cref="Capacity"/>.</exception>
+        public byte this[int index]
+        {
+            get { return this.buffer[index]; }
+            set { this.buffer[index] = value; }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        internal static Task<int> ThrowInvalidAsyncOperationException()
+        {
+            throw new InvalidOperationException("Call to async operation on sync buffer.");
+        }
+
+        internal static int ThrowInvalidSyncOperationException()
+        {
+            throw new InvalidOperationException("Call to sync operation on async buffer.");
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>Initializes a new instance of the <see cref="Buffer"/> class.</summary>
+        /// <param name="bufferSize">The size of the buffer in bytes.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
+        protected Buffer(int bufferSize)
+        {
+            if (bufferSize <= 0)
+            {
+                throw new ArgumentOutOfRangeException("bufferSize", ExceptionMessages.PositiveNumberRequired);
+            }
+
+            this.buffer = new byte[bufferSize];
+        }
+
+        /// <summary>Gets a reference to the internal <see cref="byte"/> array.</summary>
+        protected byte[] GetBuffer()
+        {
+            return this.buffer;
+        }
+
+        /// <summary>Ensures that <see cref="Capacity"/> >= <paramref name="size"/>.</summary>
+        protected void EnsureCapacity(int size)
+        {
+            if (size > this.buffer.Length)
+            {
+                Array.Resize(ref this.buffer, size);
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">1</path>
+    <contents type="Set">
+      <value type="Boolean">{0}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">2</path>
+    <contents type="Set">
+      <value type="Integer">{1}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">3</path>
+    <contents type="Set">
+      <value type="Integer">{2}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">4</path>
+    <contents type="Set">
+      <value type="Integer">{3}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">5</path>
+    <contents type="Set">
+      <value type="Integer">{4}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">6</path>
+    <contents type="Set">
+      <value type="Integer">{5}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">7</path>
+    <contents type="Set">
+      <value type="Octetstring">{6}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">8</path>
+    <contents type="Set">
+      <value type="Real">{7:R}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">9</path>
+    <contents type="Set">
+      <value type="UTF8String">{8}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">10.1</path>
+    <contents type="Set">
+      <value type="Integer">{1}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">11.1</path>
+    <contents type="Set">
+      <value type="Boolean">{9}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">11.2</path>
+    <contents type="Set">
+      <value type="Boolean">{10}</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">11.3</path>
+    <contents type="Set">
+      <value type="Boolean">{11}</value>
+    </contents>
+  </RootElement>
+</Root>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<S101Log>
+  <Event type="Message" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+  </Event>
+</S101Log>

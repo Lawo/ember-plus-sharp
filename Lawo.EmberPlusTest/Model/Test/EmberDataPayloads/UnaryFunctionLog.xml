@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<S101Log>
+  <Event type="StartingReadLoop" timeUtc="16:02:27.02" />
+  <Event type="Message" timeUtc="16:02:27.16" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.18" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Function">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Function</identifier>
+            <arguments type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+            </arguments>
+            <result type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+            </result>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

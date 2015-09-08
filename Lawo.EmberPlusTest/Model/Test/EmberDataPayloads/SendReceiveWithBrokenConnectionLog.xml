@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<S101Log>
+  <Event type="StartingReadLoop" timeUtc="14:20:17.35" />
+  <Event type="Message" timeUtc="14:20:17.36" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="14:20:17.36" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Parameter">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">BooleanTrigger</identifier>
+            <value type="Boolean">false</value>
+            <access type="Integer">3</access>
+            <type type="Integer">5</type>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

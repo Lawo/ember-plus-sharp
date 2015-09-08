@@ -1,0 +1,9 @@
+<Root type="RootElementCollection">
+  <RootElement type="QualifiedNode">
+    <path type="RelativeObjectIdentifier">1.1</path>
+    <contents type="Set">
+      <identifier type="UTF8String">Ravenna</identifier>
+      <description type="UTF8String">Ravenna</description>
+    </contents>
+  </RootElement>
+</Root>

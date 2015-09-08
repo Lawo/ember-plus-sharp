@@ -1,0 +1,8 @@
+<Root type="RootElementCollection">
+  <RootElement type="Node">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <isOnline type="Boolean">true</isOnline>
+    </contents>
+  </RootElement>
+</Root>

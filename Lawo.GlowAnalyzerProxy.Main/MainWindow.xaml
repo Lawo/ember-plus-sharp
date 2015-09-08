@@ -1,0 +1,188 @@
+﻿<Window
+    x:ClassModifier="internal"
+    x:Class="Lawo.GlowAnalyzerProxy.Main.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:local="clr-namespace:Lawo.GlowAnalyzerProxy.Main"
+    MinHeight="540"
+    MinWidth="960"
+    Height="540"
+    Width="960"
+    ResizeMode="CanResize"
+    Title="{Binding Title}">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <Binding
+                                Path="(Validation.Errors).CurrentItem.ErrorContent"
+                                RelativeSource="{x:Static RelativeSource.Self}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="15,1,15,1"/>
+        </Style>
+        <Style x:Key="TrippleDotButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="5,0,5,0"/>
+        </Style>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <ie:CallMethodAction TargetObject="{Binding}" MethodName="SaveSettings"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Margin="{StaticResource Margin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource GridMargin}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource GridMargin}"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="{StaticResource GridMargin}"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Header="Settings">
+            <Grid Margin="{StaticResource Margin}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="{StaticResource GridMargin}"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="{StaticResource GridMargin}"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="{StaticResource GridMargin}"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="{StaticResource GridMargin}"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="{StaticResource GridMargin}"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Listening Port:</Label>
+                <TextBox
+                    Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
+                    ToolTip="The port on which this proxy listens for a connection request from the Ember+ consumer."
+                    ToolTipService.ShowOnDisabled="True" Text="{Binding ListeningPort, ValidatesOnDataErrors=True}"/>
+                <Label Grid.Row="2" Grid.Column="0">Provider Host Name:</Label>
+                <!-- [PrimitivePropertyBinding] -->
+                <TextBox
+                    Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
+                    ToolTip="The host name or IP address of the Ember+ provider."
+                    ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderHostName}"/>
+                <!-- [PrimitivePropertyBinding] -->
+                <Label Grid.Row="4" Grid.Column="0">Provider Port:</Label>
+                <TextBox
+                    Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
+                    ToolTip="The port on which the Ember+ provider listens for consumer connection requests."
+                    ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderPort, ValidatesOnDataErrors=True}"/>
+                <Label Grid.Row="6" Grid.Column="0">Log Folder:</Label>
+                <TextBox
+                    Grid.Row="6" Grid.Column="2"
+                    ToolTip="The folder into which the log files are written.&#x0d;&#x0a;A new log file is created whenever the consumer successfully establishes a TCP/IP connection with this proxy."
+                    Text="{Binding LogFolder, ValidatesOnDataErrors=True}"/>
+                <Button
+                    Grid.Row="6" Grid.Column="3" Style="{StaticResource TrippleDotButtonStyle}"
+                    IsEnabled="{Binding CanEditSettings}" Content="..." Click="OnSelectLogFolderButton_Click"/>
+                <CheckBox
+                    Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
+                    IsChecked="{Binding AutoScrollToMostRecentEvent, Mode=TwoWay}"
+                    Content="Auto-scroll to Most Recent Event" />
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="2" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="{StaticResource GridMargin}"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!-- [CallViewModelMethod] -->
+            <Button
+                Grid.Column="0" IsEnabled="{Binding CanStart}" ToolTip="Start the proxy."
+                ToolTipService.ShowOnDisabled="True" Content="Start">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="Start"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <!-- [CallViewModelMethod] -->
+            <Button
+                Grid.Column="2" IsEnabled="{Binding CanStop}" ToolTip="Stop the proxy."
+                ToolTipService.ShowOnDisabled="True" Content="Stop">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="Stop"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </Grid>
+        <GroupBox Grid.Row="4" Header="Events">
+            <!-- [CollectionPropertyBinding] -->
+            <DataGrid
+                Margin="{StaticResource Margin}" SelectionMode="Single" CanUserResizeRows="False"
+                CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False"
+                ToolTip="Lists events in chronological order." ItemsSource="{Binding Events}"
+                SelectedItem="{Binding SelectedEvent}" AutoGeneratingColumn="OnDataGrid_AutoGeneratingColumn"
+                x:Name="EventsDataGrid"/>
+            <!-- [CollectionPropertyBinding] -->
+        </GroupBox>
+        <Grid Grid.Row="0" Grid.RowSpan="5" Grid.Column="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="{StaticResource GridMargin}"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="{StaticResource GridMargin}"/>
+                <ColumnDefinition/> 
+            </Grid.ColumnDefinitions>
+            <!-- [CompositePropertyBinding] -->
+            <local:ConnectionStatusUserControl
+                Grid.Row="0" Grid.Column="0" DataContext="{Binding ConsumerConnection}"
+                Header="Consumer to Proxy Connection Status"/>
+            <local:ConnectionStatusUserControl
+                Grid.Row="0" Grid.Column="2" DataContext="{Binding ProviderConnection}"
+                Header="Proxy to Provider Connection Status"/>
+            <!-- [CompositePropertyBinding] -->
+            <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Event Detail">
+                <Grid Margin="{StaticResource Margin}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <FlowDocumentScrollViewer
+                        HorizontalScrollBarVisibility="Auto" ToolTip="Shows the currently selected event."
+                        Document="{Binding SelectedEventDetail}"/>
+                    <Button
+                        Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0"
+                        Visibility="{Binding IsSelectedEventDetailPartial, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Content="Load Full Event">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ie:CallMethodAction TargetObject="{Binding}" MethodName="LoadFullEventDetail"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

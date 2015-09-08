@@ -1,0 +1,163 @@
+﻿      <Element type="Parameter">
+        <number type="Integer">1</number>
+        <contents type="Set">
+          <identifier type="UTF8String">BooleanParameter</identifier>
+          <description type="UTF8String">This is the first element.</description>
+          <value type="Boolean">false</value>
+          <access type="Integer">3</access>
+          <default type="Boolean">false</default>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">2</number>
+        <contents type="Set">
+          <identifier type="UTF8String">IntegerParameter</identifier>
+          <description type="UTF8String">This is the second element.</description>
+          <value type="Integer">42</value>
+          <minimum type="Integer">0</minimum>
+          <maximum type="Integer">100</maximum>
+          <access type="Integer">3</access>
+          <format type="UTF8String">%d</format>
+          <default type="Integer">0</default>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">3</number>
+        <contents type="Set">
+          <identifier type="UTF8String">FactorIntegerParameter</identifier>
+          <description type="UTF8String">This is the third element.</description>
+          <value type="Integer">42</value>
+          <minimum type="Integer">0</minimum>
+          <maximum type="Integer">100</maximum>
+          <access type="Integer">3</access>
+          <format type="UTF8String">%d</format>
+          <factor type="Integer">6</factor>
+          <default type="Integer">0</default>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">4</number>
+        <contents type="Set">
+          <identifier type="UTF8String">FormulaIntegerParameter</identifier>
+          <description type="UTF8String">This is the fourth element.</description>
+          <value type="Integer">45054</value>
+          <minimum type="Integer">0</minimum>
+          <maximum type="Integer">65535</maximum>
+          <access type="Integer">3</access>
+          <format type="UTF8String">%d</format>
+          <formula type ="UTF8String">($ / 16)
+    ($ * 16)</formula>
+          <default type="Integer">0</default>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">5</number>
+        <contents type="Set">
+          <identifier type="UTF8String">EnumMapParameter</identifier>
+          <description type="UTF8String">This is the fifth element.</description>
+          <value type="Integer">2</value>
+          <access type="Integer">3</access>
+          <default type="Integer">0</default>
+          <enumMap type="StringIntegerCollection">
+            <StringIntegerPair type ="StringIntegerPair">
+              <entryString type="UTF8String">Zero</entryString>
+              <entryInteger type="Integer">0</entryInteger>
+            </StringIntegerPair>
+            <StringIntegerPair type ="StringIntegerPair">
+              <entryString type="UTF8String">One</entryString>
+              <entryInteger type="Integer">1</entryInteger>
+            </StringIntegerPair>
+            <StringIntegerPair type ="StringIntegerPair">
+              <entryString type="UTF8String">Two</entryString>
+              <entryInteger type="Integer">2</entryInteger>
+            </StringIntegerPair>
+            <StringIntegerPair type ="StringIntegerPair">
+              <entryString type="UTF8String">Three</entryString>
+              <entryInteger type="Integer">3</entryInteger>
+            </StringIntegerPair>
+          </enumMap>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">6</number>
+        <contents type="Set">
+          <identifier type="UTF8String">OctetstringParameter</identifier>
+          <description type="UTF8String">This is the sixth element.</description>
+          <value type="Octetstring">abcd</value>
+          <access type="Integer">3</access>
+          <default type="Octetstring">+l==</default>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">7</number>
+        <contents type="Set">
+          <identifier type="UTF8String">RealParameter</identifier>
+          <description type="UTF8String">This is the seventh element.</description>
+          <value type="Real">3.14159265395</value>
+          <minimum type="Real">0.0</minimum>
+          <maximum type="Real">1E42</maximum>
+          <access type="Integer">3</access>
+          <format type="UTF8String">%g</format>
+          <default type="Real">0.0</default>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type="Integer">8</number>
+        <contents type="Set">
+          <identifier type="UTF8String">StringParameter</identifier>
+          <description type="UTF8String">This is the eighth element.</description>
+          <value type="UTF8String">Hello sweety</value>
+          <access type="Integer">3</access>
+          <default type="UTF8String">Hello</default>
+        </contents>
+      </Element>
+      <Element type="Node">
+        <number type="Integer">9</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Node1</identifier>
+          <description type="UTF8String">This is the ninth element.</description>
+        </contents>
+        <children type="ElementCollection">
+{0}
+        </children>
+      </Element>
+      <Element type="Node">
+        <number type="Integer">10</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Node2</identifier>
+          <description type="UTF8String">This is the tenth element.</description>
+        </contents>
+        <children type="ElementCollection">
+{0}
+        </children>
+      </Element>
+      <Element type="Node">
+        <number type="Integer">11</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Node3</identifier>
+          <description type="UTF8String">This is the eleventh element.</description>
+        </contents>
+        <children type="ElementCollection">
+{0}
+        </children>
+      </Element>
+      <Element type="Node">
+        <number type="Integer">12</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Node4</identifier>
+          <description type="UTF8String">This is the twelfth element.</description>
+        </contents>
+        <children type="ElementCollection">
+{0}
+        </children>
+      </Element>
+      <Element type="Node">
+        <number type="Integer">13</number>
+        <contents type="Set">
+          <identifier type="UTF8String">Node5</identifier>
+          <description type="UTF8String">This is the thirteenth element.</description>
+        </contents>
+        <children type="ElementCollection">
+{0}
+        </children>
+      </Element>

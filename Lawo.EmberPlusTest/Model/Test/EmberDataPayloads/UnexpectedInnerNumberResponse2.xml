@@ -1,0 +1,9 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Node">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FieldNode</identifier>
+      <isOnline type="Integer">0</isOnline>
+    </contents>
+  </RootElement>
+</Root>

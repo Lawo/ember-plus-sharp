@@ -1,0 +1,130 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Parameter">
+    <number type="Integer">3</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FactorIntegerParameter</identifier>
+      <description type="UTF8String">{0}</description>
+      <value type="Integer">{1}</value>
+      <minimum type="Integer">{2}</minimum>
+      <maximum type="Integer">{3}</maximum>
+      <access type="Integer">{4}</access>
+      <format type="UTF8String">{5}</format>
+      <factor type="Integer">{6}</factor>
+      <isOnline type="Boolean">{7}</isOnline>
+      <default type="Integer">{8}</default>
+      <type type="Integer">1</type>
+      <streamIdentifier type="Integer">{9}</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">{10}</format>
+        <offset type="Integer">{11}</offset>
+      </streamDescriptor>
+      <schemaIdentifiers type="UTF8String">{22}
+{23}</schemaIdentifiers>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">4</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FormulaIntegerParameter</identifier>
+      <description type="UTF8String">{0}</description>
+      <value type="Integer">{1}</value>
+      <minimum type="Integer">{2}</minimum>
+      <maximum type="Integer">{3}</maximum>
+      <access type="Integer">{4}</access>
+      <format type="UTF8String">{5}</format>
+      <isOnline type="Boolean">{7}</isOnline>
+      <formula type="UTF8String">{12}</formula>
+      <step type="Integer">42</step>
+      <default type="Integer">{8}</default>
+      <type type="Integer">1</type>
+      <streamIdentifier type="Integer">{9}</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">{10}</format>
+        <offset type="Integer">{11}</offset>
+      </streamDescriptor>
+      <schemaIdentifiers type="UTF8String">{22}
+{23}</schemaIdentifiers>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">5</number>
+    <contents type="Set">
+      <identifier type="UTF8String">EnumerationParameter</identifier>
+      <description type="UTF8String">{0}</description>
+      <value type="Integer">{1}</value>
+      <access type="Integer">{4}</access>
+      <enumeration type="UTF8String">{13}
+{14}
+~noEntry
+{15}
+{16}</enumeration>
+      <isOnline type="Boolean">{7}</isOnline>
+      <default type="Integer">{8}</default>
+      <type type="Integer">6</type>
+      <streamIdentifier type="Integer">{9}</streamIdentifier>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">{10}</format>
+        <offset type="Integer">{11}</offset>
+      </streamDescriptor>
+      <schemaIdentifiers type="UTF8String">{22}
+{23}</schemaIdentifiers>
+    </contents>
+  </RootElement>
+  <RootElement type="Parameter">
+    <number type="Integer">6</number>
+    <contents type="Set">
+      <identifier type="UTF8String">EnumMapParameter</identifier>
+      <description type="UTF8String">{0}</description>
+      <value type="Integer">{1}</value>
+      <access type="Integer">{4}</access>
+      <isOnline type="Boolean">{7}</isOnline>
+      <default type="Integer">{8}</default>
+      <type type="Integer">6</type>
+      <streamIdentifier type="Integer">{9}</streamIdentifier>
+      <enumMap type="StringIntegerCollection">
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">{13}</entryString>
+          <entryInteger type="Integer">{17}</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">{14}</entryString>
+          <entryInteger type="Integer">{18}</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">{15}</entryString>
+          <entryInteger type="Integer">{19}</entryInteger>
+        </StringIntegerPair>
+        <StringIntegerPair type ="StringIntegerPair">
+          <entryString type="UTF8String">{16}</entryString>
+          <entryInteger type="Integer">{20}</entryInteger>
+        </StringIntegerPair>
+      </enumMap>
+      <streamDescriptor type="StreamDescription">
+        <format type="Integer">{10}</format>
+        <offset type="Integer">{11}</offset>
+      </streamDescriptor>
+      <schemaIdentifiers type="UTF8String">{22}
+{23}</schemaIdentifiers>
+    </contents>
+  </RootElement>
+  <RootElement type="Node">
+    <number type="Integer">10</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FieldNode</identifier>
+      <description type="UTF8String">{0}</description>
+      <isRoot type="Boolean">{21}</isRoot>
+      <isOnline type="Boolean">{7}</isOnline>
+      <schemaIdentifiers type="UTF8String">{22}
+{23}</schemaIdentifiers>
+    </contents>
+    <children type="ElementCollection">
+      <Element type="Parameter">
+        <number type="Integer">1</number>
+        <contents type="Set">
+          <identifier type="UTF8String">SomeParameter</identifier>
+          <value type="Integer">113</value>
+        </contents>
+      </Element>
+    </children>
+  </RootElement>
+</Root>

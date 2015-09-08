@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<S101Log>
+  <Event type="StartingReadLoop" timeUtc="14:09:30.29" />
+  <Event type="RawData" timeUtc="14:09:30.38" direction="Receive">FE000E00018001020A0260806B80A0806280A0030201200000000000000000EDFDDDFFFE000E00016001020A021353FF</Event>
+  <Event type="Message" timeUtc="14:09:30.40" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="14:09:30.44" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Node">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">FieldNode</identifier>
+          </contents>
+          <children type="ElementCollection">
+            <Element type="Parameter">
+              <number type="Integer">1</number>
+              <contents type="Set">
+                <identifier type="UTF8String">SomeParameter</identifier>
+                <value type="Integer">1</value>
+                <access type="Integer">0</access>
+              </contents>
+            </Element>
+            <Element type="Node">
+              <number type="Integer">2</number>
+              <contents type="Set">
+                <identifier type="UTF8String">FieldNode</identifier>
+              </contents>
+              <children type="ElementCollection">
+                <Element type="Parameter">
+                  <number type="Integer">1</number>
+                  <contents type="Set">
+                    <identifier type="UTF8String">SomeParameter</identifier>
+                    <value type="Integer">2</value>
+                    <access type="Integer">1</access>
+                  </contents>
+                </Element>
+                <Element type="Node">
+                  <number type="Integer">2</number>
+                  <contents type="Set">
+                    <identifier type="UTF8String">FieldNode</identifier>
+                  </contents>
+                  <children type="ElementCollection">
+                    <Element type="Parameter">
+                      <number type="Integer">1</number>
+                      <contents type="Set">
+                        <identifier type="UTF8String">SomeParameter</identifier>
+                        <value type="Integer">3</value>
+                        <access type="Integer">2</access>
+                      </contents>
+                    </Element>
+                    <Element type="Node">
+                      <number type="Integer">2</number>
+                      <contents type="Set">
+                        <identifier type="UTF8String">FieldNode</identifier>
+                      </contents>
+                      <children type="ElementCollection">
+                        <Element type="Parameter">
+                          <number type="Integer">1</number>
+                          <contents type="Set">
+                            <identifier type="UTF8String">SomeParameter</identifier>
+                            <value type="Integer">4</value>
+                            <access type="Integer">3</access>
+                          </contents>
+                        </Element>
+                      </children>
+                    </Element>
+                  </children>
+                </Element>
+              </children>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="14:09:30.44" direction="Send">FE000E00018001020A0260806B80A0806380A003020101A1803180A00B0C094669656C644E6F646500000000A2806480A0806180A003020101A1803180A00F0C0D536F6D65506172616D65746572A203020101A5030201000000000000000000A0806380A003020102A1803180A00B0C094669656C644E6F646500000000A2806480A0806180A003020101A1803180A00F0C0D536F6D65506172616D65746572A203020102A5030201010000000000000000A0806380A003020102A1803180A00B0C094669656C644E6F646500000000A2806480A0806180A003020101A1803180A00F0C0D536F6D65506172616D65746572A203020103A5030201020000000000000000A0806380A003020102A1803180A00B0C094669656C644E6F646500000000A2806480A0806180A003020101A1803180A00F0C0D536F6D65506172616D65746572A203020104A503020103000000000000000000000000000000000000000000000000000000000000000000000000000000000000000062C7FFFE000E00016001020A021353FF</Event>
+  <Event type="StoppingReadLoop" timeUtc="14:09:31.44" />
+  <Event type="RawData" timeUtc="14:09:31.44" direction="Receive" />
+  <Event type="RemoteGracefulDisconnect" timeUtc="14:09:31.44" />
+</S101Log>

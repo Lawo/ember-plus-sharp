@@ -1,0 +1,32 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.IO
+{
+    using System;
+
+    /// <summary>Provides the data for the <see cref="IMonitoredConnection.ConnectionLost"/> event.</summary>
+    /// <remarks>
+    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
+    /// guaranteed to be thread safe.</para>
+    /// </remarks>
+    public sealed class ConnectionLostEventArgs : EventArgs
+    {
+        private readonly Exception exception;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>Initializes a new instance of the <see cref="ConnectionLostEventArgs"/> class.</summary>
+        public ConnectionLostEventArgs(Exception exception)
+        {
+            this.exception = exception;
+        }
+
+        /// <summary>Gets the exception that was thrown when the connection was lost.</summary>
+        public Exception Exception
+        {
+            get { return this.exception; }
+        }
+    }
+}

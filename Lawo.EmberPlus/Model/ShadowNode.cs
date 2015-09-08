@@ -1,0 +1,31 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.EmberPlus.Model
+{
+    using System.Diagnostics.CodeAnalysis;
+    using Lawo.EmberPlus.Ember;
+
+    /// <summary>Represents a node that is invisible from the public interface.</summary>
+    /// <remarks>Shadow nodes are used to process elements that are referenced through basePath fields in matrices.
+    /// </remarks>
+    internal sealed class ShadowNode : NodeBase<ShadowNode>
+    {
+        internal ShadowNode()
+        {
+            this.IsOnlineChangeStatus = IsOnlineChangeStatus.Unchanged;
+        }
+
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Official Glow name.")]
+        internal sealed override ChildrenState ReadContents(EmberReader reader, ElementType actualType)
+        {
+            throw new ModelException("Unexpected contents for intermediate node in basePath.");
+        }
+
+        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
+        {
+            this.HasChanges = false;
+        }
+    }
+}

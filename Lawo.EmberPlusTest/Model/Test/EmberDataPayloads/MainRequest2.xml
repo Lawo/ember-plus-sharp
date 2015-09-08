@@ -1,0 +1,18 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="QualifiedNode">
+    <path type="RelativeObjectIdentifier">10</path>
+    <children type="ElementCollection">
+      <Element type="Command">
+        <number type="Integer">32</number>
+      </Element>
+    </children>
+  </RootElement>
+  <RootElement type="QualifiedNode">
+    <path type="RelativeObjectIdentifier">11</path>
+    <children type="ElementCollection">
+      <Element type="Command">
+        <number type="Integer">32</number>
+      </Element>
+    </children>
+  </RootElement>
+</Root>

@@ -1,0 +1,11 @@
+﻿<Application
+    x:ClassModifier="internal"
+    x:Class="Lawo.GlowAnalyzerProxy.Main.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <GridLength x:Key="GridMargin">10</GridLength>
+        <Thickness x:Key="Margin">10</Thickness>
+    </Application.Resources>
+</Application>

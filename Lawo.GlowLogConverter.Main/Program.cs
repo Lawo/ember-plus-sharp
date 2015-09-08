@@ -1,0 +1,37 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.GlowLogConverter.Main
+{
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Reflection;
+    using System.Xml;
+
+    internal static class Program
+    {
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will never be localized.")]
+        private static void Main(string[] args)
+        {
+            if ((args.Length != 1) || !File.Exists(args[0]))
+            {
+                Console.WriteLine(
+                    "Invalid number of arguments or invalid argument!" + Environment.NewLine + Environment.NewLine +
+                    Assembly.GetExecutingAssembly().GetName().Name + " source" +
+                    Environment.NewLine + Environment.NewLine +
+                    "  source    Specifies the source S101Log XML file.");
+                return;
+            }
+
+            var settings = new XmlWriterSettings() { Indent = true, CloseOutput = true };
+
+            using (var reader = XmlReader.Create(args[0], null, null))
+            using (var writer = XmlWriter.Create(Path.ChangeExtension(args[0], "converted.xml"), settings))
+            {
+                Lawo.EmberPlus.Glow.GlowLogConverter.Convert(reader, writer);
+            }
+        }
+    }
+}

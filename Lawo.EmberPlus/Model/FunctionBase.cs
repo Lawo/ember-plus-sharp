@@ -1,0 +1,236 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.EmberPlus.Model
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Lawo.EmberPlus.Ember;
+    using Lawo.EmberPlus.Glow;
+
+    /// <summary>Provides the common functionality for all functions.</summary>
+    /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
+    /// <remarks>
+    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
+    /// guaranteed to be thread safe.</para>
+    /// </remarks>
+    public abstract class FunctionBase<TMostDerived> : Element<TMostDerived>, IFunction
+        where TMostDerived : FunctionBase<TMostDerived>
+    {
+        private readonly Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>> invocations =
+            new Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>>();
+
+        private KeyValuePair<string, ParameterType>[] arguments;
+        private KeyValuePair<string, ParameterType>[] result;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
+        IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Arguments
+        {
+            get { return this.arguments; }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
+        IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Result
+        {
+            get { return this.result; }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
+        async Task<IResult> IFunction.Invoke(params object[] actualArguments)
+        {
+            if (actualArguments.Length != this.arguments.Length)
+            {
+                throw new ArgumentException(
+                    "The number of actual arguments is not equal to the number of expected arguments.");
+            }
+
+            return await InvokeCore(
+                new DynamicResult(this.result),
+                this.arguments.Zip(actualArguments, (e, a) => CreateWriter(e, a)).ToArray());
+        }
+
+        internal FunctionBase(
+            KeyValuePair<string, ParameterType>[] arguments, KeyValuePair<string, ParameterType>[] result)
+        {
+            this.arguments = arguments;
+            this.result = result;
+        }
+
+        internal Task<TResult> InvokeCore<TResult>(
+            TResult invokeResult, params Action<EmberWriter>[] writers) where TResult : ResultBase<TResult>
+        {
+            this.invocations.Enqueue(new KeyValuePair<IInvocationResult, Action<EmberWriter>[]>(invokeResult, writers));
+            this.HasChanges = true;
+            return invokeResult.Task;
+        }
+
+        internal override ChildrenState ReadContents(EmberReader reader, ElementType actualType)
+        {
+            this.AssertElementType(ElementType.Function, actualType);
+            var argumentsRead = false;
+            var resultRead = false;
+
+            while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+            {
+                switch (reader.GetContextSpecificOuterNumber())
+                {
+                    case GlowFunctionContents.Description.OuterNumber:
+                        this.Description = reader.AssertAndReadContentsAsString();
+                        break;
+                    case GlowFunctionContents.Arguments.OuterNumber:
+                        this.arguments = this.ReadTupleDescription(reader, this.arguments);
+                        argumentsRead = true;
+                        break;
+                    case GlowFunctionContents.Result.OuterNumber:
+                        this.result = this.ReadTupleDescription(reader, this.result);
+                        resultRead = true;
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            if ((!argumentsRead && (this.arguments.Length > 0)) || (!resultRead && (this.result.Length > 0)))
+            {
+                throw this.CreateSignatureMismatchException();
+            }
+
+            return ChildrenState.Complete;
+        }
+
+        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
+        {
+            if (this.HasChanges)
+            {
+                writer.WriteStartApplicationDefinedType(
+                    GlowElementCollection.Element.OuterId, GlowQualifiedFunction.InnerNumber);
+
+                writer.WriteValue(GlowQualifiedFunction.Path.OuterId, this.NumberPath);
+                writer.WriteStartApplicationDefinedType(
+                    GlowQualifiedFunction.Children.OuterId, GlowElementCollection.InnerNumber);
+                this.WriteInvocations(writer, invocationCollection);
+                writer.WriteEndContainer();
+                writer.WriteEndContainer();
+                this.HasChanges = false;
+            }
+        }
+
+        internal abstract KeyValuePair<string, ParameterType>[] ReadTupleDescription(
+            EmberReader reader, KeyValuePair<string, ParameterType>[] expectedTypes);
+
+        internal virtual KeyValuePair<string, ParameterType> ReadTupleItemDescription(
+            EmberReader reader, KeyValuePair<string, ParameterType>[] expectedTypes, int index)
+        {
+            reader.AssertInnerNumber(GlowTupleItemDescription.InnerNumber);
+            reader.ReadAndAssertOuter(GlowTupleItemDescription.Type.OuterId);
+            var type = this.ReadEnum<ParameterType>(reader, GlowTupleItemDescription.Type.Name);
+            string name = null;
+
+            while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+            {
+                switch (reader.GetContextSpecificOuterNumber())
+                {
+                    case GlowTupleItemDescription.TheName.OuterNumber:
+                        name = reader.AssertAndReadContentsAsString();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            return new KeyValuePair<string, ParameterType>(name, type);
+        }
+
+        internal int ReadTupleDescription(
+            EmberReader reader,
+            KeyValuePair<string, ParameterType>[] expectedTypes,
+            Action<int, KeyValuePair<string, ParameterType>> addItem)
+        {
+            reader.AssertInnerNumber(GlowTupleDescription.InnerNumber);
+            int index;
+
+            for (index = 0; reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer);)
+            {
+                if (reader.GetContextSpecificOuterNumber() == GlowTupleDescription.TupleItemDescription.OuterNumber)
+                {
+                    addItem(index, this.ReadTupleItemDescription(reader, expectedTypes, index));
+                    ++index;
+                }
+                else
+                {
+                    reader.Skip();
+                }
+            }
+
+            return index;
+        }
+
+        internal ModelException CreateSignatureMismatchException()
+        {
+            const string Format =
+                "The signature of the function with the path {0} does not match the signature of the one sent by the provider.";
+            return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void WriteInvocations(EmberWriter writer, IInvocationCollection invocationCollection)
+        {
+            while (this.invocations.Count > 0)
+            {
+                writer.WriteStartApplicationDefinedType(GlowElementCollection.Element.OuterId, GlowCommand.InnerNumber);
+                writer.WriteValue(GlowCommand.Number.OuterId, 33);
+                writer.WriteStartApplicationDefinedType(GlowCommand.Invocation.OuterId, GlowInvocation.InnerNumber);
+                var invocation = this.invocations.Dequeue();
+                var invocationId = invocationCollection.Add(invocation.Key);
+                writer.WriteValue(GlowInvocation.InvocationId.OuterId, invocationId);
+                writer.WriteStartSequence(GlowInvocation.Arguments.OuterId);
+
+                foreach (var writeValue in invocation.Value)
+                {
+                    writeValue(writer);
+                }
+
+                writer.WriteEndContainer();
+                writer.WriteEndContainer();
+                writer.WriteEndContainer();
+            }
+        }
+
+        private static Action<EmberWriter> CreateWriter(
+            KeyValuePair<string, ParameterType> expectedType, object argument)
+        {
+            try
+            {
+                switch (expectedType.Value)
+                {
+                    case ParameterType.Integer:
+                        return new ValueWriter<long>((long)argument).WriteValue;
+                    case ParameterType.Real:
+                        return new ValueWriter<double>((double)argument).WriteValue;
+                    case ParameterType.String:
+                        return new ValueWriter<string>((string)argument).WriteValue;
+                    case ParameterType.Boolean:
+                        return new ValueWriter<bool>((bool)argument).WriteValue;
+                    default:
+                        return new ValueWriter<byte[]>((byte[])argument).WriteValue;
+                }
+            }
+            catch (InvalidCastException ex)
+            {
+                throw new ArgumentException(
+                    "The type of at least one actual argument is not equal to the expected type.", ex);
+            }
+        }
+    }
+}

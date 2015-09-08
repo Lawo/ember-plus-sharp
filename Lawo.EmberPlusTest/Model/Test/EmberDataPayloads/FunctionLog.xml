@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<S101Log>
+  <Event type="StartingReadLoop" timeUtc="16:02:27.02" />
+  <Event type="Message" timeUtc="16:02:27.16" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.18" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Function0</identifier>
+            <description type="UTF8String">Function0</description>
+          </contents>
+        </RootElement>
+        <RootElement type="Function">
+          <number type="Integer">2</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Function1</identifier>
+            <arguments type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+                <C-42 type="A-32768"> <!-- Unknown fields must be skipped correctly. -->
+                  <C-0 type="Integer">1</C-0>
+                </C-42>
+              </TupleItemDescription>
+              <C-43 type="A-32769"> <!-- Unknown fields must be skipped correctly. -->
+                <C-0 type="Integer">1</C-0>
+              </C-43>
+            </arguments>
+            <result type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+              <C-44 type="A-32770"> <!-- Unknown fields must be skipped correctly. -->
+                <C-0 type="Integer">1</C-0>
+              </C-44>
+            </result>
+            <C-13 type="A-2014"> <!-- Unknown fields must be skipped correctly. -->
+              <C-28 type="Integer">1</C-28>
+            </C-13>
+          </contents>
+        </RootElement>
+        <RootElement type="Function">
+          <number type="Integer">3</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Function2</identifier>
+            <arguments type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">2</type>
+                <name type="UTF8String">real</name>
+              </TupleItemDescription>
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">3</type>
+                <name type="UTF8String">string</name>
+              </TupleItemDescription>
+            </arguments>
+            <result type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">2</type>
+                <name type="UTF8String">real</name>
+              </TupleItemDescription>
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">3</type>
+                <name type="UTF8String">string</name>
+              </TupleItemDescription>
+            </result>
+          </contents>
+        </RootElement>
+        <RootElement type="Function">
+          <number type="Integer">4</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Function3</identifier>
+            <arguments type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">4</type>
+                <name type="UTF8String">boolean</name>
+              </TupleItemDescription>
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">7</type>
+                <name type="UTF8String">octets</name>
+              </TupleItemDescription>
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+            </arguments>
+            <result type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">4</type>
+                <name type="UTF8String">boolean</name>
+              </TupleItemDescription>
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">7</type>
+                <name type="UTF8String">octets</name>
+              </TupleItemDescription>
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+            </result>
+          </contents>
+        </RootElement>
+        <RootElement type="Node">
+          <number type="Integer">5</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Node</identifier>
+          </contents>
+          <children type="ElementCollection">
+            <Element type="Function">
+              <number type="Integer">1</number>
+              <contents type="Set">
+                <identifier type="UTF8String">Function4</identifier>
+                <arguments type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                </arguments>
+                <result type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                </result>
+              </contents>
+            </Element>
+            <Element type="Function">
+              <number type="Integer">2</number>
+              <contents type="Set">
+                <identifier type="UTF8String">Function5</identifier>
+                <arguments type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                </arguments>
+                <result type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                </result>
+              </contents>
+            </Element>
+            <Element type="Function">
+              <number type="Integer">3</number>
+              <contents type="Set">
+                <identifier type="UTF8String">Function6</identifier>
+                <arguments type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                </arguments>
+                <result type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">1</type>
+                  </TupleItemDescription>
+                </result>
+              </contents>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">1</invocationId>
+                <arguments type="Sequence" />
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">1</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <C-42 type="A-32768"> <!-- Unknown fields must be skipped correctly. -->
+            <C-0 type="Integer">1</C-0>
+          </C-42>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">2</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Integer">42</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">2</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <Value type="Integer">42</Value>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="4">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">3</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">3</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Real">3.14159265359</Value>
+                  <Value type="UTF8String">Hello there.</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="4">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">3</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <Value type="Real">3.14159265359</Value>
+          <Value type="UTF8String">Hello there.</Value>
+        </result>
+        <C-42 type="A-32768"> <!-- Unknown fields must be skipped correctly. -->
+          <C-0 type="Integer">1</C-0>
+        </C-42>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">4</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">4</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Boolean">true</Value>
+                  <Value type="Octetstring">Kio=</Value>
+                  <Value type="Integer">13</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">4</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <Value type="Boolean">true</Value>
+          <Value type="Octetstring">Kio=</Value>
+          <Value type="Integer">13</Value>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="6">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">5.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">5</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Integer">1</Value>
+                  <Value type="Integer">2</Value>
+                  <Value type="Integer">3</Value>
+                  <Value type="Integer">4</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="6">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">5</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <Value type="Integer">1</Value>
+          <Value type="Integer">2</Value>
+          <Value type="Integer">3</Value>
+          <Value type="Integer">4</Value>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">5.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">6</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Integer">1</Value>
+                  <Value type="Integer">2</Value>
+                  <Value type="Integer">3</Value>
+                  <Value type="Integer">4</Value>
+                  <Value type="Integer">5</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">6</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <Value type="Integer">1</Value>
+          <Value type="Integer">2</Value>
+          <Value type="Integer">3</Value>
+          <Value type="Integer">4</Value>
+          <Value type="Integer">5</Value>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="8">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">5.3</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">7</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Integer">1</Value>
+                  <Value type="Integer">2</Value>
+                  <Value type="Integer">3</Value>
+                  <Value type="Integer">4</Value>
+                  <Value type="Integer">5</Value>
+                  <Value type="Integer">6</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="8">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">7</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence">
+          <Value type="Integer">1</Value>
+          <Value type="Integer">2</Value>
+          <Value type="Integer">3</Value>
+          <Value type="Integer">4</Value>
+          <Value type="Integer">5</Value>
+          <Value type="Integer">6</Value>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="9">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">8</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Integer">42</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="9">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">8</invocationId>
+        <success type="Boolean">false</success>
+        <result type="Sequence">
+          <Value type="Integer">42</Value>
+        </result>
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

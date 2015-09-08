@@ -1,0 +1,58 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Parameter"> <!-- Child that has been seen before -->
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <type type="Integer">4</type>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">10.1</path>
+    <contents type="Set">
+      <identifier type="UTF8String">SomeParameter</identifier>
+      <value type="Integer">{0}</value>
+      <access type="Integer">3</access>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedParameter"> <!-- Qualified elements we're not interested in must be skipped -->
+    <path type="RelativeObjectIdentifier">10.2.1</path>
+    <contents type ="Set">
+      <identifier type="UTF8String">Whatever</identifier>
+      <value type="Integer">42</value>
+    </contents>
+  </RootElement>
+  <RootElement type="QualifiedNode">
+    <path type="RelativeObjectIdentifier">11</path>
+    <children type="ElementCollection">
+      <Element type="Parameter">
+        <number type ="Integer">1</number>
+        <contents type ="Set">
+          <identifier type="UTF8String">_1</identifier>
+          <value type="Boolean">{1}</value>
+          <access type="Integer">3</access>
+        </contents>
+      </Element>
+      <Element type="Parameter">
+        <number type ="Integer">2</number>
+        <contents type ="Set">
+          <identifier type="UTF8String">_2</identifier>
+          <value type="Boolean">{2}</value>
+          <access type="Integer">3</access>
+        </contents>
+      </Element>
+      <Element type="A-157"> <!-- Unknown elements should be skipped correctly. -->
+        <C-0 type ="Integer">3</C-0>
+        <C-3 type ="Set">
+          <C-1 type="Boolean">false</C-1>
+        </C-3>
+      </Element>
+      <Element type="Parameter">
+        <number type ="Integer">3</number>
+        <contents type ="Set">
+          <identifier type="UTF8String">_3</identifier>
+          <value type="Boolean">{3}</value>
+          <access type="Integer">3</access>
+        </contents>
+      </Element>
+    </children>
+  </RootElement>
+</Root>

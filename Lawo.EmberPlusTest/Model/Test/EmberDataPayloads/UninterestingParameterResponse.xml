@@ -1,0 +1,8 @@
+<Root type="RootElementCollection">
+  <RootElement type="Node">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">UninterestingNode</identifier>
+    </contents>
+  </RootElement>
+</Root>

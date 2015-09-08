@@ -1,0 +1,68 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Lawo.Reflection
+{
+    using System;
+    using System.Reflection;
+    using Lawo.UnitTesting;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>Tests the <see cref="ReflectionHelper"/> class.</summary>
+    [TestClass]
+    public sealed class ReflectionHelperTest : TestBase
+    {
+        private int someField;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>Initializes a new instance of the <see cref="ReflectionHelperTest"/> class.</summary>
+        public ReflectionHelperTest()
+        {
+            this.someField = this.Random.Next();
+        }
+
+        /// <summary>Tests the main use cases.</summary>
+        [TestCategory("Unattended")]
+        [TestMethod]
+        public void MainTest()
+        {
+            var property = this.GetProperty(o => o.SomeProperty);
+            var value = this.Random.Next();
+            this.SomeProperty = value;
+            Assert.AreEqual(value, property.Value);
+            Assert.AreEqual(value, this.SomeProperty);
+            value = this.Random.Next();
+            property.Value = value;
+            Assert.AreEqual(value, property.Value);
+            Assert.AreEqual(value, this.SomeProperty);
+        }
+
+        /// <summary>Tests exceptional paths.</summary>
+        [TestCategory("Unattended")]
+        [TestMethod]
+        public void ExceptionTest()
+        {
+            AssertThrow<ArgumentNullException>(
+                () => ((ReflectionHelperTest)null).GetProperty(o => o.SomeProperty).ToString(),
+                () => this.GetProperty<ReflectionHelperTest, int>(null));
+            AssertThrow<ArgumentException>(
+                () => this.GetProperty(o => 1),
+                () => this.GetProperty(o => o.someField));
+
+            var property = this.GetProperty(o => o.SomeReadOnlyProperty);
+            Assert.AreEqual(this.someField, property.Value);
+            AssertThrow<InvalidOperationException>(() => property.Value = 42);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private int SomeProperty { get; set; }
+
+        private int SomeReadOnlyProperty
+        {
+            get { return this.someField; }
+        }
+    }
+}

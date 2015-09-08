@@ -1,0 +1,11 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Node">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">Node1</identifier>
+    </contents>
+    <children type="ElementCollection">
+{0}
+    </children>
+  </RootElement>
+</Root>

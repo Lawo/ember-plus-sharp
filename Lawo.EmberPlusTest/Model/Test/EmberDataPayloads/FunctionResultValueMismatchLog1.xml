@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<S101Log>
+  <Event type="Message" timeUtc="16:02:27.16" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.18" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Function">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Function</identifier>
+            <arguments type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+            </arguments>
+            <result type="Sequence">
+              <TupleItemDescription type="TupleItemDescription">
+                <type type="Integer">1</type>
+                <name type="UTF8String">integer</name>
+              </TupleItemDescription>
+            </result>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Receive" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">1</invocationId>
+                <arguments type="Sequence">
+                  <Value type="Integer">42</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="16:02:27.25" direction="Send" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">1</invocationId>
+        <success type="Boolean">true</success>
+        <result type="Sequence" />
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

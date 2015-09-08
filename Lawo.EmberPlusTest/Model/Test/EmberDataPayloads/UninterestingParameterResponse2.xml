@@ -1,0 +1,9 @@
+<Root type="RootElementCollection">
+  <RootElement type="Parameter">
+    <number type="Integer">2</number>
+    <contents type="Set">
+      <identifier type="UTF8String">UninterestingParameter</identifier>
+      <value type="Boolean">true</value>
+    </contents>
+  </RootElement>
+</Root>

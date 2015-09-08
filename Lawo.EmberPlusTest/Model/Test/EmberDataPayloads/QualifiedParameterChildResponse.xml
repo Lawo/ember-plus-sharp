@@ -1,0 +1,20 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Node">
+    <number type="Integer">1</number>
+    <contents type="Set">
+      <identifier type="UTF8String">FieldNode</identifier>
+    </contents>
+    <children type="ElementCollection">
+      <Element type="Parameter">
+        <number type="Integer">1</number>
+        <contents type="Set">
+          <identifier type="UTF8String">SomeParameter</identifier>
+          <value type="Integer">113</value>
+        </contents>
+      </Element>
+    </children>
+  </RootElement>
+  <RootElement type="QualifiedParameter">
+    <path type="RelativeObjectIdentifier">1.1.1</path>
+  </RootElement>
+</Root>

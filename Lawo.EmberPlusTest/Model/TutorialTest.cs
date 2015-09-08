@@ -1,0 +1,437 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Tutorial
+{
+    //// [Using Declarations]
+    using System;
+    using System.Linq;
+    using System.Net.Sockets;
+    using System.Threading.Tasks;
+    using Lawo.EmberPlus.Glow;
+    using Lawo.EmberPlus.Model;
+    using Lawo.EmberPlus.S101;
+    using Lawo.Threading.Tasks;
+    //// [Using Declarations]
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>Tests the <see cref="Consumer{T}"/>-based code shown in the tutorial.</summary>
+    [TestClass]
+    public class TutorialTest
+    {
+        /// <summary>Establishes a connection to a provider and creates a dynamic local copy of the database.</summary>
+        [TestMethod]
+        public void DynamicConnectTest()
+        {
+            Main();
+        }
+
+        /// <summary>Iterates over the dynamic local database.</summary>
+        [TestMethod]
+        public void DynamicIterateTest()
+        {
+            //// [Dynamic Iterate]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<MyRoot>.CreateAsync(client))
+                    {
+                        WriteChildren(consumer.Root, 0);
+                    }
+                });
+            //// [Dynamic Iterate]
+        }
+
+        /// <summary>Modifies parameters in the dynamic local database.</summary>
+        [TestMethod]
+        public void DynamicModifyTest()
+        {
+            //// [Dynamic Modify]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<MyRoot>.CreateAsync(client))
+                    {
+                        INode root = consumer.Root;
+
+                        // Navigate to the parameters we're interested in.
+                        var sapphire = (INode)root.Children.Where(c => c.Identifier == "Sapphire").First();
+                        var sources = (INode)sapphire.Children.Where(c => c.Identifier == "Sources").First();
+                        var fpgm1 = (INode)sources.Children.Where(c => c.Identifier == "FPGM 1").First();
+                        var fader = (INode)fpgm1.Children.Where(c => c.Identifier == "Fader").First();
+                        var dbValue = (IParameter)fader.Children.Where(c => c.Identifier == "dB Value").First();
+                        var position = (IParameter)fader.Children.Where(c => c.Identifier == "Position").First();
+
+                        // Set parameters to the desired values.
+                        dbValue.Value = -67.0;
+                        position.Value = 128L;
+
+                        // We send the changes back to the provider with the call below. Here, this is necessary so that
+                        // the changes are sent before Dispose is called on the consumer. In a real-world application
+                        // however, SendAsync often does not need to be called explicitly because it is automatically
+                        // called every 100ms as long as there are pending changes. See AutoSendInterval for more
+                        // information.
+                        await consumer.SendAsync();
+                    }
+                });
+            //// [Dynamic Modify]
+        }
+
+        /// <summary>Waits for the connection to be lost.</summary>
+        [TestMethod]
+        public void ConnectionLostTest()
+        {
+            //// [Connection Lost]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<MyRoot>.CreateAsync(client))
+                    {
+                        var connectionLost = new TaskCompletionSource<Exception>();
+                        consumer.ConnectionLost += (s, e) => connectionLost.SetResult(e.Exception);
+
+                        Console.WriteLine("Waiting for the provider to disconnect...");
+                        var exception = await connectionLost.Task;
+                        Console.WriteLine("Connection Lost!");
+                        Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine);
+                    }
+                });
+            //// [Connection Lost]
+        }
+
+        /// <summary>Iterates over the static local database.</summary>
+        [TestMethod]
+        public void StaticIterateTest()
+        {
+            //// [Static Iterate]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<SapphireRoot>.CreateAsync(client))
+                    {
+                        WriteChildren(consumer.Root, 0);
+                    }
+                });
+            //// [Static Iterate]
+        }
+
+        /// <summary>Modifies parameters in the dynamic local database.</summary>
+        [TestMethod]
+        public void StaticModifyTest()
+        {
+            //// [Static Modify]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<SapphireRoot>.CreateAsync(client))
+                    {
+                        var fader = consumer.Root.Sapphire.Sources.Fpgm1.Fader;
+                        fader.DBValue.Value = -67.0;
+                        fader.Position.Value = 128;
+                        await consumer.SendAsync();
+                    }
+                });
+            //// [Static Modify]
+        }
+
+        /// <summary>Tests <see cref="CollectionNode{T}"/>.</summary>
+        [TestMethod]
+        public void CollectionNodeTest()
+        {
+            //// [Collection Node]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<UnboundedSapphireRoot>.CreateAsync(client))
+                    {
+                        foreach (var source in consumer.Root.Sapphire.Sources.Children)
+                        {
+                            Console.WriteLine(source.Fader.Position.Value);
+                        }
+                    }
+                });
+            //// [Collection Node]
+        }
+
+        /// <summary>Iterates over the mixed local database.</summary>
+        [TestMethod]
+        public void MixedIterateTest()
+        {
+            //// [Mixed Iterate]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<MixedSapphireRoot>.CreateAsync(client))
+                    {
+                        WriteChildren(consumer.Root, 0);
+                    }
+                });
+            //// [Mixed Iterate]
+        }
+
+        /// <summary>Modifies parameters in the mixed local database.</summary>
+        [TestMethod]
+        public void MixedModifyTest()
+        {
+            //// [Mixed Modify]
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<MixedSapphireRoot>.CreateAsync(client))
+                    {
+                        foreach (var source in consumer.Root.Sapphire.Sources.Children)
+                        {
+                            source.Fader.DBValue.Value = -67.0;
+                            source.Fader.Position.Value = 128;
+                            source.Dsp.Input.LRMode.Value = LRMode.Mono;
+                            source.Dsp.Input.Phase.Value = false;
+                        }
+
+                        await consumer.SendAsync();
+                    }
+                });
+            //// [Mixed Modify]
+        }
+
+        /// <summary>Benoit Test.</summary>
+        [TestMethod]
+        public void BenoitTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync(
+                        "10.2.241.108", 9000, new S101Logger(GlowTypes.Instance, Console.Out)))
+                    using (var consumer = await Consumer<GvgRoot>.CreateAsync(client))
+                    {
+                        consumer.Root.Production.LoadSnapshot.Value = "folder0000/snapshot0001";
+                        await consumer.SendAsync();
+                        await Task.Delay(60000);
+                    }
+                });
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private sealed class GvgRoot : DynamicRoot<GvgRoot>
+        {
+            [Element(Identifier = "_6")]
+            public Production Production { get; private set; }
+        }
+
+        private sealed class Production : DynamicFieldNode<Production>
+        {
+            [Element(Identifier = "_20052")]
+            public NullableStringParameter LoadSnapshot { get; private set; }
+        }
+
+        //// [Main Method]
+        private static void Main()
+        {
+            // This is necessary so that we can execute async code in a console application.
+            AsyncPump.Run(
+                async () =>
+                {
+                    // Establish S101 protocol
+                    using (S101Client client = await ConnectAsync("localhost", 9000))
+
+                    // Query the provider database for *all* elements and store them in a local copy
+                    using (Consumer<MyRoot> consumer = await Consumer<MyRoot>.CreateAsync(client))
+                    {
+                        // Get the root of the local database.
+                        INode root = consumer.Root;
+
+                        // For now just output the number of direct children under the root node.
+                        Console.WriteLine(root.Children.Count);
+                    }
+                });
+        }
+        //// [Main Method]
+
+        //// [S101 Connect Method]
+        private static async Task<S101Client> ConnectAsync(string host, int port)
+        {
+            // Create TCP connection
+            var tcpClient = new TcpClient();
+            await tcpClient.ConnectAsync(host, port);
+
+            // Establish S101 protocol
+            // S101 provides message packaging, CRC integrity checks and a keep-alive mechanism.
+            var stream = tcpClient.GetStream();
+            return new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync);
+        }
+        //// [S101 Connect Method]
+
+        private static async Task<S101Client> ConnectAsync(string host, int port, S101Logger logger)
+        {
+            var tcpClient = new TcpClient();
+            await tcpClient.ConnectAsync(host, port);
+            var stream = tcpClient.GetStream();
+            return new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync, logger);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
+        //// [Write Children]
+        private static void WriteChildren(INode node, int depth)
+        {
+            var indent = new string(' ', 2 * depth);
+
+            foreach (var child in node.Children)
+            {
+                var childNode = child as INode;
+
+                if (childNode != null)
+                {
+                    Console.WriteLine("{0}Node {1}", indent, child.Identifier);
+                    WriteChildren(childNode, depth + 1);
+                }
+                else
+                {
+                    var childParameter = child as IParameter;
+
+                    if (childParameter != null)
+                    {
+                        Console.WriteLine("{0}Parameter {1}: {2}", indent, child.Identifier, childParameter.Value);
+                    }
+                }
+            }
+        }
+        //// [Write Children]
+
+        //// [Dynamic Root Class]
+        // Note that the most-derived subtype MyRoot needs to be passed to the generic base class.
+        private sealed class MyRoot : DynamicRoot<MyRoot>
+        {
+        }
+        //// [Dynamic Root Class]
+
+        //// [Static Database Types]
+        private sealed class SapphireRoot : Root<SapphireRoot>
+        {
+            internal Sapphire Sapphire { get; private set; }
+        }
+
+        private sealed class Sapphire : FieldNode<Sapphire>
+        {
+            internal Sources Sources { get; private set; }
+        }
+
+        private sealed class Sources : FieldNode<Sources>
+        {
+            [Element(Identifier = "FPGM 1")]
+            internal Source Fpgm1 { get; private set; }
+
+            [Element(Identifier = "FPGM 2")]
+            internal Source Fpgm2 { get; private set; }
+        }
+
+        private sealed class Source : FieldNode<Source>
+        {
+            internal Fader Fader { get; private set; }
+
+            [Element(Identifier = "DSP")]
+            internal Dsp Dsp { get; private set; }
+        }
+
+        private sealed class Fader : FieldNode<Fader>
+        {
+            [Element(Identifier = "dB Value")]
+            internal RealParameter DBValue { get; private set; }
+
+            internal IntegerParameter Position { get; private set; }
+        }
+
+        private sealed class Dsp : FieldNode<Dsp>
+        {
+            internal Input Input { get; private set; }
+        }
+
+        private sealed class Input : FieldNode<Input>
+        {
+            internal BooleanParameter Phase { get; private set; }
+
+            [Element(Identifier = "LR Mode")]
+            internal EnumParameter<LRMode> LRMode { get; private set; }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Demo Code.")]
+        private enum LRMode
+        {
+            Stereo,
+
+            RightToBoth,
+
+            Side,
+
+            LeftToBoth,
+
+            Mono,
+
+            MidSideToXY
+        }
+        //// [Static Database Types]
+
+        //// [Unbounded Database Types]
+        private sealed class UnboundedSapphireRoot : Root<UnboundedSapphireRoot>
+        {
+            internal UnboundedSapphire Sapphire { get; private set; }
+        }
+
+        private sealed class UnboundedSapphire : FieldNode<UnboundedSapphire>
+        {
+            internal CollectionNode<Source> Sources { get; private set; }
+        }
+        //// [Unbounded Database Types]
+
+        //// [Optional Fader Source]
+        private sealed class OptionalFaderSource : FieldNode<OptionalFaderSource>
+        {
+            [Element(IsOptional = true)]
+            internal Fader Fader { get; private set; }
+
+            [Element(Identifier = "DSP")]
+            internal Dsp Dsp { get; private set; }
+        }
+        //// [Optional Fader Source]
+
+        //// [Mixed Database Types]
+        // Subclassing Root means that the Children collection of this node will only contain the elements declared
+        // with properties, in this case a single node with the identifier Sapphire, which is also accessible through
+        // the property.
+        private sealed class MixedSapphireRoot : Root<MixedSapphireRoot>
+        {
+            internal MixedSapphire Sapphire { get; private set; }
+        }
+
+        // Subclassing DynamicFieldNode means that the Children collection of this node will contain *all* elements
+        // reported by the provider. Additionally, the node with the identifier Sources is also accessible through the
+        // property.
+        private sealed class MixedSapphire : DynamicFieldNode<MixedSapphire>
+        {
+            internal CollectionNode<MixedSource> Sources { get; private set; }
+        }
+
+        // Subclassing DynamicFieldNode means that the Children collection of this node will contain *all* elements
+        // reported by the provider. Additionally, the nodes Fader and Dsp are also accessible through their
+        // respective properties. The Fader and Dsp types themselves derive from FieldNode, so their Children
+        // collections will only contain the parameters declared as properties.
+        private sealed class MixedSource : DynamicFieldNode<MixedSource>
+        {
+            internal Fader Fader { get; private set; }
+
+            [Element(Identifier = "DSP")]
+            internal Dsp Dsp { get; private set; }
+        }
+        //// [Mixed Database Types]
+    }
+}

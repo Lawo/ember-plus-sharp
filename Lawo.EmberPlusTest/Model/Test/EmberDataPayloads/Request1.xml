@@ -1,0 +1,5 @@
+﻿<Root type="RootElementCollection">
+  <RootElement type="Command">
+    <number type="Integer">32</number>
+  </RootElement>
+</Root>
