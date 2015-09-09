@@ -20,7 +20,7 @@ then be used in an application that needs to communicate with an existing <b>Emb
 supporting this use case are demonstrated on the \ref TheLawoEmberPlusModelNamespace page.
 
 As a byproduct, this library also offers support for lower level <b>Ember+</b> communication, as described on the
-\ref TheLawoEmberPlusEmberNamespace and \ref TheLawoEmberPlusS101Namespace pages.
+[The Lawo.EmberPlus.Ember Namespace](EmberNamespace.md) and \ref TheLawoEmberPlusS101Namespace pages.
 
 All classes in the library are transport-agnostic. <b>Ember+</b> protocol messages can be sent over any bidirectional
 connection-oriented transport capable of sending and receiving bytes, like e.g. TCP/IP, named pipes, RS232, and so on.
