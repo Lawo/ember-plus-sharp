@@ -30,6 +30,36 @@
       <DocumentationSource sourceFile="..\Lawo\Lawo.csproj" />
       <DocumentationSource sourceFile="..\Lawo.EmberPlus\Lawo.EmberPlus.csproj" />
     </DocumentationSources>
+    <MissingTags>Summary, Namespace, TypeParameter</MissingTags>
+    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <MaximumGroupParts>2</MaximumGroupParts>
+    <NamespaceGrouping>False</NamespaceGrouping>
+    <SyntaxFilters>C#</SyntaxFilters>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <PresentationStyle>VS2013</PresentationStyle>
+    <Preliminary>False</Preliminary>
+    <NamingMethod>Guid</NamingMethod>
+    <HelpTitle>A Sandcastle Documented Class Library</HelpTitle>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <TocParentId>-1</TocParentId>
+    <TocParentVersion>100</TocParentVersion>
+    <TopicVersion>100</TopicVersion>
+    <TocOrder>-1</TocOrder>
+    <ProductTitle>Ember+ Sharp</ProductTitle>
+    <VendorName>Lawo</VendorName>
+    <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
+    <CatalogVersion>100</CatalogVersion>
+    <CatalogProductId>VS</CatalogProductId>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="Lawo" isDocumented="True" xmlns="">Contains types related to the ones in System.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True" xmlns="">Contains types related to the ones in System.ComponentModel.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True" xmlns="">Contains types related to the ones in System.Diagnostics.Tracing.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.IO" isDocumented="True" xmlns="">Contains types related to the ones in System.IO.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True" xmlns="">Contains types related to the ones in System.Linq.Expressions.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True" xmlns="">Contains types related to the ones in System.Reflection.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Threading" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.Tasks.</NamespaceSummaryItem></NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
