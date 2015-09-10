@@ -13,7 +13,7 @@
     <RootNamespace>Lawo.EmberPlusDoc</RootNamespace>
     <Name>Lawo.EmberPlusDoc</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
+    <FrameworkVersion>.NET Portable Library 4.5</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Lawo.EmberPlusDoc</HtmlHelpName>
     <Language>en-US</Language>
@@ -60,6 +60,12 @@
 <NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True" xmlns="">Contains types related to the ones in System.Reflection.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="Lawo.Threading" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.Tasks.</NamespaceSummaryItem></NamespaceSummaries>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <IndentHtml>False</IndentHtml>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <CleanIntermediates>True</CleanIntermediates>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

@@ -127,10 +127,10 @@ namespace Lawo.EmberPlus.Ember
         /// <value><c>true</c>, if all of the following conditions hold; otherwise, <c>false</c>:
         /// <list type="bullet">
         /// <item>The last call to <see cref="Read"/> has returned <c>true</c>, and</item>
-        /// <item>The <see cref="InnerNumber"/> property equals <see cref="M:InnerNumber.Boolean"/>,
-        /// <see cref="M:InnerNumber.Integer"/>, <see cref="M:InnerNumber.OctetString"/>,
-        /// <see cref="M:InnerNumber.Real"/>, <see cref="M:InnerNumber.Utf8String"/> or
-        /// <see cref="M:InnerNumber.RelativeObjectIdentifier"/>, and</item>
+        /// <item>The <see cref="InnerNumber"/> property equals <see cref="InnerNumber.Boolean"/>,
+        /// <see cref="InnerNumber.Integer"/>, <see cref="InnerNumber.Octetstring"/>,
+        /// <see cref="InnerNumber.Real"/>, <see cref="InnerNumber.Utf8String"/> or
+        /// <see cref="InnerNumber.RelativeObjectIdentifier"/>, and</item>
         /// <item>None of the ReadContents methods have yet been called for the current data value.</item>
         /// </list></value>
         public bool CanReadContents { get; private set; }

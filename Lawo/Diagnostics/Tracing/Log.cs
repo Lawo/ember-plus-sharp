@@ -189,6 +189,10 @@ namespace Lawo.Diagnostics.Tracing
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private Log()
+        {
+        }
+
         [Event(1, Level = EventLevel.Verbose)]
         private void LogDebug(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName)
         {
