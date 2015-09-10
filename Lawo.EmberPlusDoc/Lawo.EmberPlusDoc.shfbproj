@@ -38,9 +38,9 @@
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <PresentationStyle>VS2013</PresentationStyle>
-    <Preliminary>False</Preliminary>
-    <NamingMethod>Guid</NamingMethod>
-    <HelpTitle>A Sandcastle Documented Class Library</HelpTitle>
+    <Preliminary>True</Preliminary>
+    <NamingMethod>HashedMemberName</NamingMethod>
+    <HelpTitle>Ember+ Sharp Library Documentation</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <TocParentId>-1</TocParentId>
     <TocParentVersion>100</TocParentVersion>
@@ -61,7 +61,7 @@
 <NamespaceSummaryItem name="Lawo.Threading" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.Tasks.</NamespaceSummaryItem></NamespaceSummaries>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
-    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <HelpFileFormat>Website</HelpFileFormat>
     <IndentHtml>False</IndentHtml>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" isSelected="true" title="Welcome to the [TODO: Add project name]">
+  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" isSelected="true" title="Welcome to the Ember+ Sharp Library">
     <HelpKeywords>
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>
