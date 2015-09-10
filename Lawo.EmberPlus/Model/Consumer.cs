@@ -107,7 +107,8 @@ namespace Lawo.EmberPlus.Model
             }
         }
 
-        /// <summary>Calls <see cref="S101Client.Dispose"/>.</summary>
+        /// <summary>Stops synchronizing changes to the object tree accessible through the <see cref="Root"/> property
+        /// and raises the <see cref="ConnectionLost"/> event.</summary>
         public void Dispose()
         {
             if (!this.disposed)
@@ -123,15 +124,15 @@ namespace Lawo.EmberPlus.Model
         }
 
         /// <summary>Returns the return value of
-        /// <see cref="CreateAsync(S101Client, int)"/>(<paramref name="client"/>, 10000).</summary>
+        /// <see cref="CreateAsync(S101Client, int)">CreateAsync(<paramref name="client"/>, 10000)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
         public static Task<Consumer<TRoot>> CreateAsync(S101Client client)
         {
             return CreateAsync(client, 10000);
         }
 
-        /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, byte)"/>(<paramref name="client"/>,
-        /// <paramref name="timeout"/>, 0x00).</summary>
+        /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, byte)">CreateAsync(<paramref name="client"/>,
+        /// <paramref name="timeout"/>, 0x00)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
         public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout)
         {
@@ -160,8 +161,10 @@ namespace Lawo.EmberPlus.Model
         /// <remarks>
         /// <para>This method returns when initial values have been received for all non-optional
         /// <typeparamref name="TRoot"/> properties and recursively for all non-optional properties of
-        /// <see cref="FieldNode{T}"/> subclass objects.</para>
-        /// <para>Future changes signaled by the provider are reported by raising the
+        /// <see cref="FieldNode{T}"/> subclass objects. Afterwards, all changes are continuously synchronized such that
+        /// the state of the object tree accessible through the <see cref="Root"/> property mirrors the state of the
+        /// tree held by the provider.</para>
+        /// <para>All changes to the object tree are reported by raising the
         /// <see cref="INotifyPropertyChanged.PropertyChanged"/> event of the affected objects.</para>
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]

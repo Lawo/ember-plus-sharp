@@ -15,12 +15,9 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Calls <see cref="SubscribedObservableCollection{T}.Dispose()"/> on the
-        /// <see cref="SubscribedObservableCollection{T}"/> object passed to the constructor.</summary>
-        /// <remarks><see cref="SubscribedObservableCollection{T}.Dispose()"/> unsubscribes the underlying
-        /// collection from change notifications. If the subscription is intended to be permanent it is permissible to
-        /// never call <see cref="Dispose"/>.
-        /// </remarks>
+        /// <summary>Unsubscribes the underlying collection from change notifications.</summary>
+        /// <remarks>If the subscription is intended to be permanent it is permissible to never call
+        /// <see cref="Dispose"/>.</remarks>
         public void Dispose()
         {
             this.dispose();
