@@ -106,6 +106,11 @@ namespace Lawo.IO
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Initializes a new instance of the <see cref="NonSeekableStream"/> class.</summary>
+        protected NonSeekableStream()
+        {
+        }
+
         /// <summary>Checks whether the object has been disposed and if so throws <see cref="ObjectDisposedException"/>.
         /// </summary>
         protected void AssertNotDisposed()

@@ -29,5 +29,11 @@ namespace Lawo.EmberPlus.Model
         /// <summary>Gets <b>connections</b>.</summary>
         [Element(Identifier = "connections")]
         public CollectionNode<CollectionNode<TConnection>> Connections { get; private set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private MatrixParameters()
+        {
+        }
     }
 }

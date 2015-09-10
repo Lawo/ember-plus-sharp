@@ -19,5 +19,11 @@ namespace Lawo.EmberPlus.Model
         [Element(Identifier = "sources")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
         public CollectionNode<StringParameter> Sources { get; private set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private MatrixLabels()
+        {
+        }
     }
 }

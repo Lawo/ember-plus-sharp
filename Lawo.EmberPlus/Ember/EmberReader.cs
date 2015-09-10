@@ -88,7 +88,7 @@ namespace Lawo.EmberPlus.Ember
         /// </list></exception>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         /// <remarks>The number of an Universal class identifier is returned unaltered.
-        /// <see cref="M:InnerNumber.FirstApplication"/> is added to the number of an Application class identifier.</remarks>
+        /// <see cref="InnerNumber.FirstApplication"/> is added to the number of an Application class identifier.</remarks>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "There's not much of an alternative.")]
         public int InnerNumber
         {
@@ -104,7 +104,7 @@ namespace Lawo.EmberPlus.Ember
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
         /// <item>The last <see cref="Read"/> call returned <c>false</c> or threw an exception, or</item>
-        /// <item>The value of <see cref="InnerNumber"/> currently equals <see cref="M:InnerNumber.EndContainer"/>.</item>
+        /// <item>The value of <see cref="InnerNumber"/> currently equals <see cref="InnerNumber.EndContainer"/>.</item>
         /// </list></exception>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         public EmberId OuterId
@@ -206,7 +206,7 @@ namespace Lawo.EmberPlus.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="M:InnerNumber.Boolean"/>, or</item>
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Boolean"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>
@@ -222,7 +222,7 @@ namespace Lawo.EmberPlus.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="M:InnerNumber.Integer"/>, or</item>
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Integer"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>
@@ -238,7 +238,7 @@ namespace Lawo.EmberPlus.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="M:InnerNumber.Octetstring"/>,
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Octetstring"/>,
         /// or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
@@ -266,7 +266,7 @@ namespace Lawo.EmberPlus.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="M:InnerNumber.Real"/>, or</item>
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Real"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>
@@ -282,7 +282,7 @@ namespace Lawo.EmberPlus.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="M:InnerNumber.Utf8String"/>,
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Utf8String"/>,
         /// or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
@@ -300,7 +300,7 @@ namespace Lawo.EmberPlus.Ember
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item>The value of <see cref="InnerNumber"/> is not equal to
-        /// <see cref="M:InnerNumber.RelativeObjectIdentifier"/>, or</item>
+        /// <see cref="InnerNumber.RelativeObjectIdentifier"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>

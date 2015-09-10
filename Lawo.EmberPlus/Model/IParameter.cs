@@ -16,7 +16,7 @@ namespace Lawo.EmberPlus.Model
     {
         /// <summary>Gets or sets <b>value</b>.</summary>
         /// <exception cref="ArgumentException">Attempted to set a value with a type that does not match
-        /// <see cref="M:Type"/>.</exception>
+        /// <see cref="Type"/>.</exception>
         /// <exception cref="ArgumentNullException">Attempted to set to <c>null</c>.</exception>
         object Value { get; set; }
 

@@ -13,7 +13,7 @@ namespace Lawo.EmberPlus.Ember
     /// <para>An <see cref="EmberType"/> instance contains most of the information that is necessary to read and write
     /// a data value of a given type with <see cref="EmberReader"/> and <see cref="EmberWriter"/>. Moreover, it also
     /// contains the information to convert a data value to and from XML.</para>
-    /// <para>An <see cref="EmberType"/> object is typically created by providing a <see cref="Type"/> object
+    /// <para>An <see cref="EmberType"/> object is typically created by providing a <see cref="System.Type"/> object
     /// representing a class that contains two constants describing the type itself and that optionally contains one
     /// nested class describing each field. Each of the nested classes in turn contains 3 constants. So, a primitive
     /// type (which does not contain any fields) can be represented like e.g. <see cref="BerBoolean"/>,
@@ -45,7 +45,7 @@ namespace Lawo.EmberPlus.Ember
     /// serialized EmBER representation to and from e.g. XML, can easily use reflection to build high performance lookup
     /// tables from the information contained in these classes.</para>
     /// <para>The fields of a type can usually unambiguously be identified by an <see cref="EmberType"/> instance
-    /// constructed by passing a single <see cref="Type"/> instance. However, certain DTDs store fields in plain BER
+    /// constructed by passing a single <see cref="System.Type"/> instance. However, certain DTDs store fields in plain BER
     /// sequence or set types. For these fields, it is necessary to also consider one or more parent fields. This is why
     /// the constructor also accepts two or more types, where the first types represent the path to the last type.
     /// </para>

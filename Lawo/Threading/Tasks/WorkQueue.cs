@@ -21,6 +21,11 @@ namespace Lawo.Threading.Tasks
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Initializes a new instance of the <see cref="WorkQueue"/> class.</summary>
+        public WorkQueue()
+        {
+        }
+
         /// <summary>Enqueues <paramref name="action"/>.</summary>
         /// <returns>A task that represents the execution of <paramref name="action"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="action"/> equals <c>null</c>.</exception>
