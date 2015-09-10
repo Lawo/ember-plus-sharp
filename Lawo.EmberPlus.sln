@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawo.EmberPlus", "Lawo.EmberPlus\Lawo.EmberPlus.csproj", "{CD75460D-43D8-4602-8E78-4C6EA6DE9C87}"
 EndProject
@@ -26,6 +26,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawo.GlowAnalyzerProxy.Main", "Lawo.GlowAnalyzerProxy.Main\Lawo.GlowAnalyzerProxy.Main.csproj", "{8273A6F1-CFC5-4A5E-8B2B-089EA6317312}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawo.GlowLogConverter.Main", "Lawo.GlowLogConverter.Main\Lawo.GlowLogConverter.Main.csproj", "{C9E3FDA8-F9A9-48BC-9249-36E86A18D371}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Lawo.EmberPlusDoc", "Lawo.EmberPlusDoc\Lawo.EmberPlusDoc.shfbproj", "{96F4978F-752E-42EC-87D5-6B34A5174F0E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CD75460D-43D8-4602-8E78-4C6EA6DE9C87} = {CD75460D-43D8-4602-8E78-4C6EA6DE9C87}
+		{4B9ED1F0-F237-4132-B247-CBC37DF5177A} = {4B9ED1F0-F237-4132-B247-CBC37DF5177A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +115,22 @@ Global
 		{C9E3FDA8-F9A9-48BC-9249-36E86A18D371}.Release|ARM.ActiveCfg = Release|Any CPU
 		{C9E3FDA8-F9A9-48BC-9249-36E86A18D371}.Release|x64.ActiveCfg = Release|Any CPU
 		{C9E3FDA8-F9A9-48BC-9249-36E86A18D371}.Release|x86.ActiveCfg = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|x64.Build.0 = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Debug|x86.Build.0 = Debug|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|ARM.Build.0 = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|x64.ActiveCfg = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|x64.Build.0 = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|x86.ActiveCfg = Release|Any CPU
+		{96F4978F-752E-42EC-87D5-6B34A5174F0E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

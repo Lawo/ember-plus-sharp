@@ -5,12 +5,13 @@
 namespace Lawo.IO
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Net.Sockets;
     using System.Text;
     using System.Threading.Tasks;
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="TelnetStream"/>.</summary>
     [TestClass]
@@ -18,6 +19,7 @@ namespace Lawo.IO
     {
         /// <summary>Tests the main use case.</summary>
         [TestMethod]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Test method must be an instance method.")]
         public async Task MainTest()
         {
             var client = new TcpClient();
@@ -43,7 +45,7 @@ namespace Lawo.IO
             }
         }
 
-        private async Task<bool> WaitForPrompt(StreamReader reader, string prompt)
+        private static async Task<bool> WaitForPrompt(StreamReader reader, string prompt)
         {
             var buffer = new char[1024];
             int read;
