@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<bibliography>
+  <reference name="X.690">
+    <author>ITU-T Study Group 17</author>
+    <title>X.690</title>
+    <publisher>ITU-T</publisher>
+    <link>http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf</link>
+  </reference>
+  <reference name="Ember+ Specification">
+    <author>Marius Keuck and Philip Boger</author>
+    <title>Ember+ Specification</title>
+    <publisher>L-S-B Broadcast Technologies GmbH</publisher>
+    <link>https://github.com/Lawo/ember-plus/raw/master/documentation/Ember%2B%20Documentation.pdf</link>
+  </reference>
+</bibliography>

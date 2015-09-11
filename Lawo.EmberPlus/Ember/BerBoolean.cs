@@ -4,8 +4,7 @@
 
 namespace Lawo.EmberPlus.Ember
 {
-    /// <summary>Describes the <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>
-    /// Boolean type.</summary>
+    /// <summary>Describes the BER boolean type as specified in <b>X.690</b><cite>X.690</cite>, chapter 8.2.</summary>
     /// <threadsafety static="true" instance="false"/>
     public static class BerBoolean
     {

@@ -4,8 +4,7 @@
 
 namespace Lawo.EmberPlus.Ember
 {
-    /// <summary>See <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>, chapter
-    /// 8.1.2.2.</summary>
+    /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.2.2.</summary>
     internal enum Class
     {
         /// <summary>Universal class.</summary>

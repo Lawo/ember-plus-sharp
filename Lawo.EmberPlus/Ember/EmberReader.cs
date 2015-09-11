@@ -12,11 +12,10 @@ namespace Lawo.EmberPlus.Ember
 
     using IO;
 
-    /// <summary>Represents a reader that provides the means to read
-    /// <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>-encoded input.</summary>
-    /// <remarks>Only the subset defined in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a> is supported.</remarks>
+    /// <summary>Represents a reader that provides the means to read BER-encoded input, as specified in
+    /// <b>X.690</b><cite>X.690</cite>.</summary>
+    /// <remarks>Only the subset defined in the <b>Ember+ Specification</b><cite>Ember+ Specification</cite> is
+    /// supported.</remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberReader : IDisposable
     {
