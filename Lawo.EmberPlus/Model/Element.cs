@@ -11,16 +11,13 @@ namespace Lawo.EmberPlus.Model
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using Lawo.ComponentModel;
-    using Lawo.EmberPlus.Ember;
+    using ComponentModel;
+    using Ember;
 
     /// <summary>Represents an element in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
     /// Specification</a>.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class Element : NotifyPropertyChanged, IElement
     {
         private IParent parent;

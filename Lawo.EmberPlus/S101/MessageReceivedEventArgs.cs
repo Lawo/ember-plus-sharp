@@ -7,10 +7,7 @@ namespace Lawo.EmberPlus.S101
     using System;
 
     /// <summary>Provides the data for the <see cref="S101Client.EmberDataReceived"/> event.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class MessageReceivedEventArgs : EventArgs
     {
         private readonly S101Message message;

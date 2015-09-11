@@ -13,10 +13,7 @@ namespace Lawo.UnitTesting
 
     /// <summary>Facilitates construction of a new object via reflection.</summary>
     /// <typeparam name="T">The type of the object to create.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class Activator<T>
     {
         /// <summary>Creates a new instance by passing <paramref name="p1"/> to a matching constructor of

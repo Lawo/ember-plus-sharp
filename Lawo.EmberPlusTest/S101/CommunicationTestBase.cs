@@ -14,15 +14,12 @@ namespace Lawo.EmberPlus.S101
     using System.Threading.Tasks;
     using System.Xml;
 
-    using Lawo.EmberPlus.Ember;
-    using Lawo.IO;
-    using Lawo.UnitTesting;
+    using Ember;
+    using IO;
+    using UnitTesting;
 
     /// <summary>Provides methods that facilitate writing S101 communication unit tests.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class CommunicationTestBase : TestBase
     {
         private static readonly EmberData EmberDataCommandField = new EmberData(0x01, 0x0A, 0x02);

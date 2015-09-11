@@ -10,9 +10,9 @@ namespace Lawo.EmberPlus.Model
     using System.Linq;
     using System.Reflection;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:PartialElementsMustBeDocumented", Justification = "The content tag is not supported by Doxygen.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:PartialElementsMustBeDocumented", Justification = "Temporary, TODO")]
     public abstract partial class FieldNode<TMostDerived> where TMostDerived : FieldNode<TMostDerived>
     {
         private abstract class MetaElement

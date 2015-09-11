@@ -8,8 +8,8 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Glow;
+    using Ember;
+    using Glow;
 
     /// <summary>Represents a parameter for which the value type is determined at runtime.</summary>
     /// <remarks>The annoying number of switch-case statements stems from the fact that a provider can send the fields

@@ -5,12 +5,9 @@
 namespace Lawo.EmberPlus.S101
 {
     /// <summary>Represents a Keep Alive Request.</summary>
-    /// <remarks>
-    /// <para>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>, Chapter "Message Framing".</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <remarks>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
+    /// Specification</a>, Chapter "Message Framing".</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class KeepAliveRequest : S101Command
     {
         /// <summary>Initializes a new instance of the <see cref="KeepAliveRequest"/> class.</summary>

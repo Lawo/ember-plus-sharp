@@ -9,7 +9,7 @@ namespace Lawo.EmberPlus.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Transparently encodes a single frame.</summary>
     /// <remarks>
@@ -17,9 +17,8 @@ namespace Lawo.EmberPlus.S101
     /// <see cref="FramingStream.FramingStream"/>. Afterwards, when data is written to this stream
     /// then it is first encoded and the encoded form is then appended to the <see cref="WriteBuffer"/> object.</para>
     /// <para><b>Caution</b>: <see cref="DisposeAsync"/> <b>must</b> be called in the end.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     internal sealed class FramingStream : BufferStream
     {
         private ushort crc = 0xFFFF;

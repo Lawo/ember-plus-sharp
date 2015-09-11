@@ -19,10 +19,7 @@ namespace Lawo
     /// and possibly initialized, in the catch block the resource is disposed and the exception rethrown.</para>
     /// <para>This class is an adapted version of the facility presented in
     /// <a href="http://www.ddj.com/dept/cpp/184403758">this article</a>.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
-    /// <threadsafety static="true" instance="false"/>
     /// <example>
     /// <code>
     /// StreamWriter CreateWriter()
@@ -42,6 +39,7 @@ namespace Lawo
     /// }
     /// </code>
     /// </example>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "These operations do not make sense on this type.")]
     public sealed class ScopeGuard<T> : IDisposable where T : IDisposable
     {

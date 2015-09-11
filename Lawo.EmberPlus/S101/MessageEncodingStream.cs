@@ -20,9 +20,8 @@ namespace Lawo.EmberPlus.S101
     /// <para><b>Caution</b>: <see cref="DisposeAsync"/> <b>must</b> be called in the end.</para>
     /// <para>If necessary, the message plus payload is automatically partitioned into multiple packets such that the
     /// unencoded length of each packet does not exceed 1024 bytes.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     internal sealed class MessageEncodingStream : NonSeekableStream
     {
         private const int MaxFrameLength = 1024;

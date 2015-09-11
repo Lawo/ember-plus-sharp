@@ -6,22 +6,18 @@ namespace Lawo.EmberPlus.S101
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using System.Xml;
 
-    using Lawo.EmberPlus.Ember;
-    using Lawo.IO;
-    using Lawo.Threading.Tasks;
+    using Ember;
+    using IO;
+    using Threading.Tasks;
 
     /// <summary>Simulates S101 communication.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101Robot
     {
         private readonly TaskQueue taskQueue = new TaskQueue();

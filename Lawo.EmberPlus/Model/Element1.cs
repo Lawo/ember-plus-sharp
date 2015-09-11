@@ -10,16 +10,13 @@ namespace Lawo.EmberPlus.Model
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     /// <summary>Represents an element in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
     /// Specification</a>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class Element<TMostDerived> : Element where TMostDerived : Element<TMostDerived>
     {
         private static readonly Func<TMostDerived> Constructor = GetConstructor();

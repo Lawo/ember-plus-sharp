@@ -4,7 +4,7 @@
 
 namespace Lawo.EmberPlus.Model
 {
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     internal interface IInvocationResult : IResult
     {

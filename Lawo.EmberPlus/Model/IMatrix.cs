@@ -4,10 +4,8 @@
 
 namespace Lawo.EmberPlus.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>Represents a matrix in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+

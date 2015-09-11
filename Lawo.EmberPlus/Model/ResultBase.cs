@@ -8,11 +8,13 @@ namespace Lawo.EmberPlus.Model
     using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Glow;
+
+    using Ember;
+    using Glow;
 
     /// <summary>Implements common functionality of all function results.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class ResultBase<TMostDerived> : IInvocationResult where TMostDerived : ResultBase<TMostDerived>
     {
         private readonly IValueReader[] valueReaders;

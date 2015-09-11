@@ -11,7 +11,7 @@ namespace Lawo.EmberPlus.Model
     using System.Linq;
     using System.Reflection;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     internal sealed class EnumParameterImpl<TEnum> where TEnum : struct
     {

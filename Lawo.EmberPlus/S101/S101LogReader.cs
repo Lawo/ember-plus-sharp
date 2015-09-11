@@ -7,13 +7,11 @@ namespace Lawo.EmberPlus.S101
     using System;
     using System.Globalization;
     using System.Xml;
-    using Lawo.EmberPlus.Ember;
+
+    using Ember;
 
     /// <summary>Reads the information written by a <see cref="S101Logger"/> instance.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101LogReader
     {
         private static readonly byte[] NoPayload = new byte[0];

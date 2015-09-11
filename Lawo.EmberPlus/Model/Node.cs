@@ -5,24 +5,18 @@
 namespace Lawo.EmberPlus.Model
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Text;
 
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Glow;
+    using Ember;
+    using Glow;
 
     /// <summary>Represents a node in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
     /// Specification</a>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class Node<TMostDerived> : NodeBase<TMostDerived>, INode
         where TMostDerived : Node<TMostDerived>
     {

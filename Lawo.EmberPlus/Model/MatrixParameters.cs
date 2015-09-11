@@ -10,6 +10,7 @@ namespace Lawo.EmberPlus.Model
     /// <typeparam name="TTarget">The type of the node containing the parameters of a single target.</typeparam>
     /// <typeparam name="TSource">The type of the node containing the parameters of a single source.</typeparam>
     /// <typeparam name="TConnection">The type of the node containing the parameters of a single connection.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public sealed class MatrixParameters<TTarget, TSource, TConnection> :

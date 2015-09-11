@@ -7,8 +7,9 @@ namespace Lawo.EmberPlus.Model
     using System;
     using System.Linq;
     using System.Reflection;
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Glow;
+
+    using Ember;
+    using Glow;
 
     internal sealed class ValueWriter<T>
     {

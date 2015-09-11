@@ -7,10 +7,7 @@ namespace Lawo.EmberPlus.Model
     using System;
 
     /// <summary>The exception that is thrown when a model-related error occurs.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class ModelException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="ModelException"/> class.</summary>

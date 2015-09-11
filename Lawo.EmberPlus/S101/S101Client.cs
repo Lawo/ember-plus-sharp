@@ -7,13 +7,12 @@ namespace Lawo.EmberPlus.S101
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Runtime.InteropServices;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
-    using Lawo.Threading;
-    using Lawo.Threading.Tasks;
+    using IO;
+    using Threading;
+    using Threading.Tasks;
 
     /// <summary>Provides methods to communicate with S101-encoded messages over a given connection.</summary>
     /// <remarks>
@@ -27,16 +26,16 @@ namespace Lawo.EmberPlus.S101
     /// message containing a <see cref="KeepAliveRequest"/> is sent. If no message of any kind is received during the
     /// second half of the timeout period, the <see cref="ConnectionLost"/> event is raised with an
     /// <see cref="S101Exception"/>.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe. This class <b>requires</b> that <see cref="SynchronizationContext.Current"/>
-    /// returns a context that executes all continuations on a single thread. For an <see cref="S101Client"/> object
-    /// constructed on the GUI thread of a Windows Forms, WPF or Windows Store App this already the case. Other
-    /// environments, e.g. Console Applications, ASP.net applications or unit test environments either do not have a
-    /// synchronization context (<see cref="SynchronizationContext.Current"/> equals <c>null</c>) or do not guarantee
-    /// execution on a single thread. For such environments it is the responsibility of the client to set
+    /// <para>This class <b>requires</b> that <see cref="SynchronizationContext.Current"/> returns a context that
+    /// executes all continuations on a single thread. For an <see cref="S101Client"/> object constructed on the GUI
+    /// thread of a Windows Forms, WPF or Windows Store App this already the case. Other environments, e.g. Console
+    /// Applications, ASP.net applications or unit test environments either do not have a synchronization context
+    /// (<see cref="SynchronizationContext.Current"/> equals <c>null</c>) or do not guarantee execution on a single
+    /// thread. For such environments it is the responsibility of the client to set
     /// <see cref="SynchronizationContext.Current"/> appropriately before constructing a <see cref="S101Client"/>
     /// object. <see cref="AsyncPump.Run"/> provides an easy way to do that.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101Client : IMonitoredConnection
     {
         private readonly WorkQueue logQueue = new WorkQueue();

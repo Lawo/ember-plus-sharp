@@ -8,6 +8,7 @@ namespace Lawo.EmberPlus.S101
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>Provides information about a logged event.</summary>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "There's no point in comparing instances of this type.")]
     public struct EventInfo
     {

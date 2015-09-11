@@ -19,9 +19,8 @@ namespace Lawo.EmberPlus.S101
     /// the decoded form is then returned.</para>
     /// <para>If a message contains multiple packets, their payload is automatically joined such that it can be read
     /// through this stream as if the message consisted of only one packet.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     internal sealed class MessageDecodingStream : NonSeekableStream
     {
         private readonly ReadBuffer rawBuffer;

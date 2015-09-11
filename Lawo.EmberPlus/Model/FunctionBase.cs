@@ -11,15 +11,12 @@ namespace Lawo.EmberPlus.Model
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Glow;
+    using Ember;
+    using Glow;
 
     /// <summary>Provides the common functionality for all functions.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class FunctionBase<TMostDerived> : Element<TMostDerived>, IFunction
         where TMostDerived : FunctionBase<TMostDerived>
     {

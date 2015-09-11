@@ -7,6 +7,7 @@ namespace Lawo.EmberPlus.Model
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>Represents a label set of a matrix.</summary>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public sealed class MatrixLabels : FieldNode<MatrixLabels>
     {

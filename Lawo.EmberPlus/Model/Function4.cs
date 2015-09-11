@@ -16,10 +16,7 @@ namespace Lawo.EmberPlus.Model
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Function", Justification = "Intentional, usability from other languages is not a priority.")]
     public sealed class Function<T1, T2, T3, T4, TResult> : StaticFunction<Function<T1, T2, T3, T4, TResult>>

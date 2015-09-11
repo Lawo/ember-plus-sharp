@@ -7,10 +7,7 @@ namespace Lawo.EmberPlus.Model
     using System;
 
     /// <summary>Describes the format and the offset of a value in a stream.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public struct StreamDescription : IEquatable<StreamDescription>
     {
         private readonly StreamFormat format;

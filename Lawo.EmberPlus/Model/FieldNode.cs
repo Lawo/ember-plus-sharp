@@ -12,7 +12,7 @@ namespace Lawo.EmberPlus.Model
     using System.Reflection;
     using System.Threading;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     /// <summary>Represents a node containing a number of static elements in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
@@ -39,9 +39,8 @@ namespace Lawo.EmberPlus.Model
     /// <see cref="Function{T, U, V, W}"/>, <see cref="Function{T, U, V, W, X}"/>,
     /// <see cref="Function{T, U, V, W, X, Y}"/>, or <see cref="Function{T, U, V, W, X, Y, Z}"/>.</item>
     /// </list></para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract partial class FieldNode<TMostDerived> : Node<TMostDerived>
         where TMostDerived : FieldNode<TMostDerived>

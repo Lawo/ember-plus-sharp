@@ -4,14 +4,14 @@
 
 namespace Lawo.EmberPlus.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using Lawo.EmberPlus.Ember;
+
+    using Ember;
 
     /// <summary>Represents a node containing a unbounded number of identically-typed elements in the protocol specified
     /// in the
@@ -20,10 +20,7 @@ namespace Lawo.EmberPlus.Model
     /// <typeparam name="TElement">The type of the elements this node contains. This must either be an
     /// <see cref="Element{T}"/> subclass, <see cref="IParameter"/>, <see cref="INode"/> or <see cref="IFunction"/>.
     /// </typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public sealed class CollectionNode<TElement> : Node<CollectionNode<TElement>> where TElement : IElement
     {

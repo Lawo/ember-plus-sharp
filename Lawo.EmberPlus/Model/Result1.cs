@@ -4,10 +4,9 @@
 
 namespace Lawo.EmberPlus.Model
 {
-    using Lawo.EmberPlus.Ember;
-
     /// <summary>Represents a function result with a single component.</summary>
     /// <typeparam name="T1">The type of the only component.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class Result<T1> : ResultBase<Result<T1>>
     {
         private readonly ValueReader<T1> component1Reader;

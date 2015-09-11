@@ -8,10 +8,7 @@ namespace Lawo.EmberPlus.Model
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>The exception that is thrown when the invocation of a function fails.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "These ctors do not make much sense here.")]
     public sealed class InvocationFailedException : Exception
     {

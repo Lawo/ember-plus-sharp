@@ -8,8 +8,8 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Glow;
+    using Ember;
+    using Glow;
 
     /// <summary>Represents the root containing a number of static elements in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
@@ -30,9 +30,8 @@ namespace Lawo.EmberPlus.Model
     /// <item>A <see cref="FieldNode{TMostDerived}"/> subtype.</item>
     /// <item><see cref="CollectionNode{TElement}"/>.</item>
     /// </list></para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract class Root<TMostDerived> : FieldNode<TMostDerived>, IParent where TMostDerived : Root<TMostDerived>
     {

@@ -5,7 +5,7 @@
 namespace Lawo.EmberPlus.Model
 {
     using System.Diagnostics.CodeAnalysis;
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     /// <summary>Represents a node that is invisible from the public interface.</summary>
     /// <remarks>Shadow nodes are used to process elements that are referenced through basePath fields in matrices.

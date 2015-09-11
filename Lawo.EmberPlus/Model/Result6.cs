@@ -5,7 +5,6 @@
 namespace Lawo.EmberPlus.Model
 {
     using System.Diagnostics.CodeAnalysis;
-    using Lawo.EmberPlus.Ember;
 
     /// <summary>Represents a function result with 6 components.</summary>
     /// <typeparam name="T1">The type of the first component.</typeparam>
@@ -14,6 +13,7 @@ namespace Lawo.EmberPlus.Model
     /// <typeparam name="T4">The type of the fourth component.</typeparam>
     /// <typeparam name="T5">The type of the fifth component.</typeparam>
     /// <typeparam name="T6">The type of the sixth component.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     public sealed class Result<T1, T2, T3, T4, T5, T6> : ResultBase<Result<T1, T2, T3, T4, T5, T6>>
     {

@@ -14,13 +14,10 @@ namespace Lawo.EmberPlus.S101
     using Lawo.Threading.Tasks;
 
     /// <summary>Represents a writer that provides the means to generate S101-encoded messages.</summary>
-    /// <remarks>
-    /// <para>See
+    /// <remarks>See
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>, Chapter "Message Framing".</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// Specification</a>, Chapter "Message Framing".</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101Writer
     {
         private readonly TaskSingleton taskSingleton = new TaskSingleton();

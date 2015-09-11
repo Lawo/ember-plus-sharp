@@ -8,16 +8,13 @@ namespace Lawo.EmberPlus.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Represents a command including command-specific data but excluding payload. This is the base of all
     /// commands.</summary>
-    /// <remarks>
-    /// <para>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>, Chapter "Message Framing".</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <remarks>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
+    /// Specification</a>, Chapter "Message Framing".</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class S101Command : IEquatable<S101Command>
     {
         private const byte DefaultVersion = 0x01;

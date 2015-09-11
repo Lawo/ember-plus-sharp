@@ -12,15 +12,13 @@ namespace Lawo.UnitTesting
     using System.Globalization;
     using System.Reflection;
     using System.Threading.Tasks;
-    using Lawo.Reflection;
+
+    using Reflection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /// <summary>Provides methods that facilitate writing unit tests.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class TestBase
     {
         private readonly Random random;

@@ -14,16 +14,13 @@ namespace Lawo.EmberPlus.Model
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.S101;
-    using Lawo.IO;
+    using Ember;
+    using IO;
+    using S101;
 
     /// <summary>Communicates with a provider to create and maintain a <typeparamref name="TRoot"/> object.</summary>
     /// <typeparam name="TRoot">The type of the root object to be filled and maintained.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection where TRoot : Root<TRoot>
     {
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);

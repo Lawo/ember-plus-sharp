@@ -5,7 +5,8 @@
 namespace Lawo.EmberPlus.Model
 {
     using System;
-    using Lawo.EmberPlus.Ember;
+
+    using Ember;
 
     internal sealed class ValueReader<T> : IValueReader
     {

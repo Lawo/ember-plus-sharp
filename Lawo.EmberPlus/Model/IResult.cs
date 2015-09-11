@@ -5,7 +5,6 @@
 namespace Lawo.EmberPlus.Model
 {
     using System.Collections.Generic;
-    using Lawo.EmberPlus.Ember;
 
     /// <summary>Represents a function result.</summary>
     public interface IResult

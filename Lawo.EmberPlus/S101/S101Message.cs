@@ -9,16 +9,15 @@ namespace Lawo.EmberPlus.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Represents a message excluding payload.</summary>
     /// <remarks>
     /// <para>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
     /// Specification</a>, Chapter "Message Framing".</para>
     /// <para>Non-Ember messages are not currently supported.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101Message
     {
         private readonly byte messageType;

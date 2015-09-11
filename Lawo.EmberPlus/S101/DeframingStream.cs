@@ -9,15 +9,12 @@ namespace Lawo.EmberPlus.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Transparently decodes a single frame.</summary>
-    /// <remarks>
-    /// <para>A call to any of the Read methods of this stream removes data from <see cref="ReadBuffer"/>
-    /// object passed to the constructor. The data is then decoded and the decoded form is then returned.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <remarks>A call to any of the Read methods of this stream removes data from <see cref="ReadBuffer"/>
+    /// object passed to the constructor. The data is then decoded and the decoded form is then returned.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     internal sealed class DeframingStream : BufferStream
     {
         private State state;

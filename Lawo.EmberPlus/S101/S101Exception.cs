@@ -7,10 +7,7 @@ namespace Lawo.EmberPlus.S101
     using System;
 
     /// <summary>The exception that is thrown when an error occurs while parsing S101-encoded data.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101Exception : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="S101Exception"/> class.</summary>

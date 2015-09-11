@@ -11,10 +11,7 @@ namespace Lawo.EmberPlus.Model
     /// Specification</a>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class NullableParameter<TMostDerived, TValue> : ParameterBase<TMostDerived, TValue>
         where TMostDerived : NullableParameter<TMostDerived, TValue>
     {

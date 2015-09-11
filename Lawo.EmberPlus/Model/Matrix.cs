@@ -7,7 +7,8 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-    using Lawo.EmberPlus.Ember;
+
+    using Ember;
 
     /// <summary>Represents a matrix in the protocol specified in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
@@ -15,10 +16,7 @@ namespace Lawo.EmberPlus.Model
     /// <typeparam name="TTarget">The type of the node containing the parameters of a single target.</typeparam>
     /// <typeparam name="TSource">The type of the node containing the parameters of a single source.</typeparam>
     /// <typeparam name="TConnection">The type of the node containing the parameters of a single connection.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     public sealed class Matrix<TTarget, TSource, TConnection> :
         ElementWithSchemas<Matrix<TTarget, TSource, TConnection>>, IMatrix

@@ -10,14 +10,11 @@ namespace Lawo.EmberPlus.S101
     using System.IO;
     using System.Xml;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     /// <summary>Represents a logger that logs message payloads according to the types passed to the constructor.
     /// </summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class S101Logger : IS101Logger
     {
         private readonly IEmberConverter converter;

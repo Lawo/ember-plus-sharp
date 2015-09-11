@@ -17,9 +17,8 @@ namespace Lawo.EmberPlus.Model
     /// <para>A subclass object contains all children sent by the provider. Static children can be defined and
     /// accessed as described in the <see cref="Root{T}"/> class remarks. Dynamic children are accessible through
     /// the collection exposed by <see cref="DynamicChildren"/>.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract class DynamicRoot<TMostDerived> : Root<TMostDerived>
         where TMostDerived : DynamicRoot<TMostDerived>

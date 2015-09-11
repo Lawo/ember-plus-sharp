@@ -4,12 +4,10 @@
 
 namespace Lawo.EmberPlus.Model
 {
-    using System.Diagnostics.CodeAnalysis;
-    using Lawo.EmberPlus.Ember;
-
     /// <summary>Represents a function result with 2 components.</summary>
     /// <typeparam name="T1">The type of the first component.</typeparam>
     /// <typeparam name="T2">The type of the second component.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class Result<T1, T2> : ResultBase<Result<T1, T2>>
     {
         private readonly ValueReader<T1> component1Reader;
