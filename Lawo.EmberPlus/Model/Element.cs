@@ -92,7 +92,7 @@ namespace Lawo.EmberPlus.Model
         /// <summary>Gets or sets an arbitrary object value, see <see cref="IElement.Tag"/>.</summary>
         public object Tag { get; set; }
 
-        /// <summary>See <see cref="IElement.GetPath"/>.</summary>
+        /// <inheritdoc/>
         public string GetPath()
         {
             var path = new StringBuilder(64);

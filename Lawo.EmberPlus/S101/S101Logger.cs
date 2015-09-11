@@ -80,13 +80,13 @@ namespace Lawo.EmberPlus.S101
             this.xmlLogWriter.Flush();
         }
 
-        /// <summary>See <see cref="IS101Logger.LogEvent(string)"/>.</summary>
+        /// <inheritdoc/>
         public EventInfo LogEvent(string eventName)
         {
             return this.LogEvent(eventName, null);
         }
 
-        /// <summary>See <see cref="IS101Logger.LogEvent(string, string)"/>.</summary>
+        /// <inheritdoc/>
         public EventInfo LogEvent(string eventName, string data)
         {
             var info = new EventInfo(this.WriteStartEvent(eventName));
@@ -95,7 +95,7 @@ namespace Lawo.EmberPlus.S101
             return info;
         }
 
-        /// <summary>See <see cref="IS101Logger.LogData"/>.</summary>
+        /// <inheritdoc/>
         public EventInfo LogData(string type, string direction, byte[] buffer, int index, int count)
         {
             BufferHelper.AssertValidRange(buffer, "buffer", index, "index", count, "count");
@@ -106,13 +106,13 @@ namespace Lawo.EmberPlus.S101
             return info;
         }
 
-        /// <summary>See <see cref="IS101Logger.LogMessage"/>.</summary>
+        /// <inheritdoc/>
         public EventInfo LogMessage(string direction, S101Message message, byte[] payload)
         {
             return this.LogMessage(DateTime.UtcNow, direction, message, payload);
         }
 
-        /// <summary>See <see cref="IS101Logger.LogException"/>.</summary>
+        /// <inheritdoc/>
         public EventInfo LogException(Exception exception)
         {
             if (exception == null)

@@ -61,7 +61,7 @@ namespace Lawo
         {
             private bool disposeCalled;
 
-            /// <summary>See <see cref="IDisposable.Dispose"/>.</summary>
+            /// <inheritdoc/>
             public void Dispose()
             {
                 this.disposeCalled = true;

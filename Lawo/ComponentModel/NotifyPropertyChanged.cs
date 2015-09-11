@@ -15,7 +15,7 @@ namespace Lawo.ComponentModel
     /// <threadsafety static="true" instance="false"/>
     public abstract class NotifyPropertyChanged : INotifyPropertyChanged
     {
-        /// <summary>See <see cref="INotifyPropertyChanged.PropertyChanged"/>.</summary>
+        /// <inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

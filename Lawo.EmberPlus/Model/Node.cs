@@ -33,7 +33,7 @@ namespace Lawo.EmberPlus.Model
             private set { this.SetValue(ref this.isRoot, value); }
         }
 
-        /// <summary>See <see cref="INode.GetElement"/>.</summary>
+        /// <inheritdoc/>
         public IElement GetElement(string path)
         {
             if (path == null)

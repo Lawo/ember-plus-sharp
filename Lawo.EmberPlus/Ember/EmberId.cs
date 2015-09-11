@@ -35,27 +35,27 @@ namespace Lawo.EmberPlus.Ember
             return new EmberId(Class.ContextSpecific, true, number);
         }
 
-        /// <summary>See <see cref="IEquatable{T}.Equals"/></summary>
+        /// <inheritdoc/>
         public bool Equals(EmberId other)
         {
             return (this.theClass == other.theClass) &&
                 (this.isConstructed == other.isConstructed) && (this.number == other.number);
         }
 
-        /// <summary>See <see cref="object.Equals(object)"/></summary>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             var other = obj as EmberId?;
             return other.HasValue && this.Equals(other.Value);
         }
 
-        /// <summary>See <see cref="object.GetHashCode"/>.</summary>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return HashCode.Combine((int)this.theClass, this.isConstructed ? 1 : 0, this.number);
         }
 
-        /// <summary>See <see cref="object.ToString"/>.</summary>
+        /// <summary>Returns a string that represents the current object.</summary>
         public override string ToString()
         {
             return ToChar(this.theClass) + "-" + this.number.ToString(CultureInfo.InvariantCulture);

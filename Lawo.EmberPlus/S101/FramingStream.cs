@@ -42,7 +42,7 @@ namespace Lawo.EmberPlus.S101
             }
         }
 
-        /// <summary>See <see cref="Stream.WriteAsync(byte[], int, int, CancellationToken)"/>.</summary>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Validated with call to BufferHelper.AssertValidRange.")]
         public sealed override async Task WriteAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)

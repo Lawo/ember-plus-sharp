@@ -44,7 +44,7 @@ namespace Lawo.EmberPlus.S101
             get { return this.applicationBytes; }
         }
 
-        /// <summary>See <see cref="object.ToString"/>.</summary>
+        /// <inheritdoc/>
         public sealed override string ToString()
         {
             return base.ToString() + ' ' + dtd.ToString("X2", CultureInfo.InvariantCulture) +

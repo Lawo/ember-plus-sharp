@@ -28,25 +28,25 @@ namespace Lawo.IO
             return Completed;
         }
 
-        /// <summary>See <see cref="Stream.CanRead"/></summary>
+        /// <inheritdoc/>
         public override bool CanRead
         {
             get { return false; }
         }
 
-        /// <summary>See <see cref="Stream.Read"/></summary>
+        /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)
         {
             throw CreateNotSupportedException();
         }
 
-        /// <summary>See <see cref="Stream.CanWrite"/></summary>
+        /// <inheritdoc/>
         public override bool CanWrite
         {
             get { return false; }
         }
 
-        /// <summary>See <see cref="Stream.Write"/></summary>
+        /// <inheritdoc/>
         public override void Write(byte[] buffer, int offset, int count)
         {
             throw CreateNotSupportedException();

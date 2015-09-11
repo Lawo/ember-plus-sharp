@@ -24,7 +24,7 @@ namespace Lawo.EmberPlus.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>See <see cref="IEquatable{T}.Equals"/>.</summary>
+        /// <inheritdoc/>
         public bool Equals(S101Command other)
         {
             // We're enforcing the glow dtd version for EmberData instances, so it is sufficient to compare the
@@ -32,19 +32,19 @@ namespace Lawo.EmberPlus.S101
             return (other != null) && (other.commandType == this.commandType);
         }
 
-        /// <summary>See <see cref="object.Equals(object)"/>.</summary>
+        /// <inheritdoc/>
         public sealed override bool Equals(object obj)
         {
             return this.Equals(obj as S101Command);
         }
 
-        /// <summary>See <see cref="object.GetHashCode"/>.</summary>
+        /// <inheritdoc/>
         public sealed override int GetHashCode()
         {
             return (int)this.commandType;
         }
 
-        /// <summary>See <see cref="object.ToString"/>.</summary>
+        /// <inheritdoc/>
         public override string ToString()
         {
             return this.commandType.ToString();

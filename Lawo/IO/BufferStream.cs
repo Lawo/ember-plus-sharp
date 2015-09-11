@@ -51,13 +51,13 @@ namespace Lawo.IO
             }
         }
 
-        /// <summary>See <see cref="Stream.CanRead"/>.</summary>
+        /// <inheritdoc/>
         public sealed override bool CanRead
         {
             get { return this.readBuffer != null; }
         }
 
-        /// <summary>See <see cref="Stream.CanWrite"/>.</summary>
+        /// <inheritdoc/>
         public override bool CanWrite
         {
             get { return this.writeBuffer != null; }

@@ -12,13 +12,13 @@ namespace Lawo.GlowAnalyzerProxy.Main
     /// <summary>Implements <see cref="IValueConverter"/> for <see cref="bool"/> and <see cref="Visibility"/>.</summary>
     public sealed class BoolToVisibilityConverter : IValueConverter
     {
-        /// <summary>See <see cref="IValueConverter.Convert"/>.</summary>
+        /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool)value ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        /// <summary>See <see cref="IValueConverter.ConvertBack"/>.</summary>
+        /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (Visibility)value == Visibility.Visible;

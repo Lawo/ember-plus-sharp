@@ -57,7 +57,7 @@ namespace Lawo.IO
             this.dataAvailable = dataAvailable;
         }
 
-        /// <summary>See <see cref="Stream.ReadAsync(byte[], int, int, CancellationToken)"/>.</summary>
+        /// <inheritdoc/>
         public sealed override async Task<int> ReadAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
@@ -84,7 +84,7 @@ namespace Lawo.IO
             return index - offset;
         }
 
-        /// <summary>See <see cref="Stream.WriteAsync(byte[], int, int, CancellationToken)"/>.</summary>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Validated with call to BufferHelper.AssertValidRange.")]
         public sealed override async Task WriteAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)
@@ -99,7 +99,7 @@ namespace Lawo.IO
             }
         }
 
-        /// <summary>See <see cref="NonSeekableStream.FlushAsync"/>.</summary>
+        /// <inheritdoc/>
         public sealed override async Task FlushAsync(CancellationToken cancellationToken)
         {
             await this.WriteBuffer.FlushAsync(cancellationToken);

@@ -27,20 +27,20 @@ namespace Lawo.EmberPlus.Model
             get { return this.offset; }
         }
 
-        /// <summary>See <see cref="IEquatable{T}.Equals"/>.</summary>
+        /// <inheritdoc/>
         public bool Equals(StreamDescription other)
         {
             return (this.format == other.format) && (this.offset == other.offset);
         }
 
-        /// <summary>See <see cref="object.Equals(object)"/>.</summary>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             var other = obj as StreamDescription?;
             return other.HasValue && this.Equals(other.Value);
         }
 
-        /// <summary>See <see cref="object.GetHashCode"/>.</summary>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return HashCode.Combine((int)this.format, this.offset);
