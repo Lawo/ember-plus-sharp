@@ -205,11 +205,10 @@ namespace Lawo.EmberPlus.S101
         /// <see cref="S101Message.Command"/> does not allow for a payload. Must reference an appropriate payload if
         /// <see cref="S101Message.Command"/> requires a payload.</param>
         /// <exception cref="ArgumentException"><list type="bullet">
-        /// <item>The <see cref="S101Message.Command"/> property of <paramref name="message"/>
-        /// is of a type that requires a payload and <paramref name="payload"/> equals <c>null</c>; or</item>
-        /// <item>The <see cref="S101Message.Command"/> property of <paramref name="message"/>
-        /// is of a type that does not allow for a payload and <paramref name="payload"/> is not equal to <c>null</c>.
-        /// </item>
+        /// <item>The <see cref="S101Message.Command"/> property of <paramref name="message"/> is of a type that
+        /// requires a payload and <paramref name="payload"/> equals <c>null</c>, or</item>
+        /// <item>The <see cref="S101Message.Command"/> property of <paramref name="message"/> is of a type that does
+        /// not allow for a payload and <paramref name="payload"/> is not equal to <c>null</c>.</item>
         /// </list></exception>
         /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the constructor, see
         /// <see cref="Exception.Message"/> for more information.</exception>

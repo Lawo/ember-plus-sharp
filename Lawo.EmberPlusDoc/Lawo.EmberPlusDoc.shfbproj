@@ -53,17 +53,18 @@
     <CatalogProductId>VS</CatalogProductId>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="Lawo" isDocumented="True">Contains types related to the ones in the System namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True">Contains types related to the ones in the System.ComponentModel namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True">Contains types related to the ones in the System.Diagnostics.Tracing namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.IO" isDocumented="True">Contains types related to the ones in the System.IO namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True">Contains types related to the ones in the System.Linq.Expressions namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True">Contains types related to the ones in the System.Reflection namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Threading" isDocumented="True">Contains types related to the ones in the System.Threading namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True">Contains types related to the ones in the System.Threading.Tasks namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.Model" isDocumented="True">Contains types that support the creation of an Ember+ consumer.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.S101" isDocumented="True">Contains a class that establishes and maintains an S101 connection as well as supporting abstractions for S101 messages and commands.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.Glow" isDocumented="True">Contains types that describe the structure of the Glow DTD.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.Ember" isDocumented="True">Contains types that support the encoding and decoding of EmBER messages.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True">Contains types related to the ones in the System.ComponentModel namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True">Contains types related to the ones in the System.Diagnostics.Tracing namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.IO" isDocumented="True">Contains types related to the ones in the System.IO namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True">Contains types related to the ones in the System.Linq.Expressions namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True">Contains types related to the ones in the System.Reflection namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Threading" isDocumented="True">Contains types related to the ones in the System.Threading namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True">Contains types related to the ones in the System.Threading.Tasks namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.Model" isDocumented="True">Contains types that support the creation of an Ember+ consumer.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.S101" isDocumented="True">Contains a class that establishes and maintains an S101 connection as well as supporting abstractions for S101 messages and commands.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.Glow" isDocumented="True">Contains types that describe the structure of the Glow DTD.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.Ember" isDocumented="True">Contains types that support the encoding and decoding of EmBER messages.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
     <IndentHtml>False</IndentHtml>
@@ -74,14 +75,18 @@
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True" xmlns="">
         <component id="Code Block Component">
-  <basePath value="{@HtmlEncProjectFolder}" />
-  <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
-  <allowMissingSource value="false" />
-  <removeRegionMarkers value="false" />
-  <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="true" outlining="false" keepSeeTags="false" defaultTitle="true" />
-</component>
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
+          <allowMissingSource value="false" />
+          <removeRegionMarkers value="false" />
+          <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="true" outlining="false" keepSeeTags="false" defaultTitle="true" />
+        </component>
       </ComponentConfig>
     </ComponentConfigurations>
+    <FeedbackEMailLinkText>Andreas Huber</FeedbackEMailLinkText>
+    <FeedbackEMailAddress>andreas.huber%40lawo.com</FeedbackEMailAddress>
+    <CopyrightText>Copyright 2012-2015 Lawo AG. All rights reserved.</CopyrightText>
+    <CopyrightHref>http://www.lawo.com</CopyrightHref>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
