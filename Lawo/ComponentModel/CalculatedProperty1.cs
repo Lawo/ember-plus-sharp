@@ -6,12 +6,13 @@ namespace Lawo.ComponentModel
 {
     using System;
     using System.ComponentModel;
-    using Lawo.Reflection;
+    using Reflection;
 
     /// <summary>Represents a calculated property, the value of which is calculated from a number of source properties.
     /// </summary>
     /// <typeparam name="T">The type of the property.</typeparam>
     /// <seealso cref="CalculatedProperty"/>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class CalculatedProperty<T> : IDisposable
     {
         private readonly MultiBinding<T> binding;

@@ -6,9 +6,8 @@ namespace Lawo.Diagnostics.Tracing
 {
     using System.Diagnostics.Tracing;
 
-    /// <summary>
-    /// Log listener base class.
-    /// </summary>
+    /// <summary>Log listener base class.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class LogListener : EventListener
     {
         private EventLevel eventLevel;

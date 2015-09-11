@@ -9,10 +9,7 @@ namespace Lawo.IO
     using System.Threading.Tasks;
 
     /// <summary>Implements the common members of <see cref="ReadBuffer"/> and <see cref="WriteBuffer"/>.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class Buffer
     {
         private byte[] buffer;

@@ -7,6 +7,7 @@ namespace Lawo
     using System.Collections.Generic;
 
     /// <summary>Provides fast methods to compare values of generic types.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class GenericCompare
     {
         /// <summary>Determines whether the specified object instances are considered equal.</summary>

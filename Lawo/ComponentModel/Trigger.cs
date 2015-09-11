@@ -6,12 +6,10 @@ namespace Lawo.ComponentModel
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
-    using Lawo.Reflection;
+    using Reflection;
 
     /// <summary>Provides a method to create a trigger.</summary>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
+    /// <threadsafety static="true" instance="false"/>
     public static class Trigger
     {
         /// <summary>Creates a trigger such that <paramref name="handler"/> is called whenever

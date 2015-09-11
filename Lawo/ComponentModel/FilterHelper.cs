@@ -7,11 +7,11 @@ namespace Lawo.ComponentModel
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Collections.Specialized;
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>Provides methods to filter and sort the items in a <see cref="ReadOnlyObservableCollection{T}"/>
     /// into a <see cref="ReadOnlyObservableCollection{T}"/>.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class FilterHelper
     {
         /// <summary>Returns an optionally sorted collection of items filtered from the items in

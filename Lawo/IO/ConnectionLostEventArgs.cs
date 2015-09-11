@@ -7,10 +7,7 @@ namespace Lawo.IO
     using System;
 
     /// <summary>Provides the data for the <see cref="IMonitoredConnection.ConnectionLost"/> event.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class ConnectionLostEventArgs : EventArgs
     {
         private readonly Exception exception;

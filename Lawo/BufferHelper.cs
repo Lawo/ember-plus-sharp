@@ -9,6 +9,7 @@ namespace Lawo
     using System.Globalization;
 
     /// <summary>Provides helper functions for buffers.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class BufferHelper
     {
         /// <summary>Checks that <paramref name="index"/> and <paramref name="count"/> form a valid range in

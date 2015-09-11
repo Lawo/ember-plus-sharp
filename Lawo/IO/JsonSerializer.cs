@@ -8,61 +8,38 @@ namespace Lawo.IO
     using System.Runtime.Serialization.Json;
     using System.Text;
 
-    /// <summary>
-    /// Serializes objects to the JavaScript Object Notation (JSON) and deserializes JSON data to objects.
+    /// <summary>Serializes objects to the JavaScript Object Notation (JSON) and deserializes JSON data to objects.
     /// </summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class JsonSerializer
     {
-        /// <summary>
-        /// Serializes objects to the JavaScript Object Notation (JSON).
-        /// </summary>
+        /// <summary>Serializes objects to the JavaScript Object Notation (JSON).</summary>
         /// <typeparam name="T">The type to be serialized (data contract).</typeparam>
         /// <param name="data">The data contract object.</param>
         /// <returns>The serialized JSON string.</returns>
         public static string Serialize<T>(T data)
         {
-            var stream = new MemoryStream();
-
-            try
+            using (var stream = new MemoryStream())
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-                serializer.WriteObject(stream, data);
-                string jsonData = Encoding.UTF8.GetString(stream.ToArray(), 0, (int)stream.Length);
-                stream.Dispose();
+                new DataContractJsonSerializer(typeof(T)).WriteObject(stream, data);
+                stream.Position = 0;
 
-                return jsonData;
-            }
-            catch
-            {
-                stream.Dispose();
-
-                throw;
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
             }
         }
 
-        /// <summary>
-        /// Deserializes JSON data to objects.
-        /// </summary>
+        /// <summary>Deserializes JSON data to objects.</summary>
         /// <typeparam name="T">The type to be deserialized (data contract).</typeparam>
         /// <param name="jsonData">The JSON string.</param>
         /// <returns>The data contract object.</returns>
         public static T Deserialize<T>(string jsonData)
         {
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonData));
-
-            try
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonData)))
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-                T data = (T)serializer.ReadObject(stream);
-                stream.Dispose();
-
-                return data;
-            }
-            catch
-            {
-                stream.Dispose();
-
-                throw;
+                return (T)new DataContractJsonSerializer(typeof(T)).ReadObject(stream);
             }
         }
     }

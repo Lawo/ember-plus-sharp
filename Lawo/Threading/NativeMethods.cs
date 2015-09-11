@@ -9,6 +9,7 @@ namespace Lawo.Threading
     using System.Runtime.InteropServices;
 
     /// <summary>Provides access to native methods.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class NativeMethods
     {
         /// <summary>Returns the return value of

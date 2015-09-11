@@ -18,6 +18,7 @@ namespace Lawo.Threading.Tasks
     /// (<see cref="SynchronizationContext.Current"/> is either <c>null</c> or is a
     /// <see cref="SynchronizationContext"/> object that schedules continuations on different threads as under ASP.NET)
     /// then this class can be used to force execution on a single thread.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class AsyncPump
     {
         /// <summary>Runs <paramref name="asyncMethod"/> on the current thread.</summary>

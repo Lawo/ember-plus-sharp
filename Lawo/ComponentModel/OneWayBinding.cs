@@ -6,12 +6,10 @@ namespace Lawo.ComponentModel
 {
     using System;
     using System.ComponentModel;
-    using Lawo.Reflection;
+    using Reflection;
 
     /// <summary>Provides methods to create one-way <see cref="Binding{T, U, V, W}"/> instances.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: This type is thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class OneWayBinding
     {
         /// <summary>Creates a one-way binding between <paramref name="source"/> and <paramref name="target"/> by

@@ -4,14 +4,10 @@
 
 namespace Lawo.Diagnostics.Tracing
 {
-    using System;
-    using System.Diagnostics;
     using System.Diagnostics.Tracing;
-    using System.Globalization;
 
-    /// <summary>
-    /// Console event listener listens to log events and writes them to the console in debug mode.
-    /// </summary>
+    /// <summary>Console event listener listens to log events and writes them to the console in debug mode.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class ConsoleLogListener : LogListener
     {
         private static ConsoleLogListener instance;

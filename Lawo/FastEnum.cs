@@ -9,6 +9,7 @@ namespace Lawo
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>Provides cached implementations for some of the <see cref="Enum"/> methods.</summary>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "We reimplement a part of Enum.")]
     public static class FastEnum
     {

@@ -5,12 +5,13 @@
 namespace Lawo.ComponentModel
 {
     using System;
-    using Lawo.Reflection;
+    using Reflection;
 
     /// <summary>Provides data for the <see cref="Binding{T, U, V, W}.ChangeOriginatedAtSource"/> and
     /// <see cref="Binding{T, U, V, W}.ChangeOriginatedAtTarget"/> events.</summary>
     /// <typeparam name="TOwner">The type of the owner object.</typeparam>
     /// <typeparam name="TProperty">The type of the property.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class ChangeOriginatedAtEventArgs<TOwner, TProperty> : EventArgs
     {
         private readonly IProperty<TOwner, TProperty> property;

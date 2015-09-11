@@ -8,10 +8,7 @@ namespace Lawo
     using System;
 
     /// <summary>Helper class for creation of <see cref="ScopeGuard{T}"/> objects.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class ScopeGuard
     {
         /// <summary>Creates a new <see cref="ScopeGuard{T}"/> object.</summary>

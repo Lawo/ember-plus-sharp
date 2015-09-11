@@ -17,6 +17,7 @@ namespace Lawo.ComponentModel
     /// calculated from the values of the source properties. Whenever one of the source properties changes, the value of
     /// the target property is recalculated and set.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Somehow the CA dictionary does not seem to work here.")]
     public static class MultiBinding
     {

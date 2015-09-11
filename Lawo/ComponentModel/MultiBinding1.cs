@@ -14,6 +14,7 @@ namespace Lawo.ComponentModel
     /// </summary>
     /// <typeparam name="T">The type of the target property.</typeparam>
     /// <seealso cref="MultiBinding"/>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Somehow the CA dictionary does not seem to work here.")]
     public sealed class MultiBinding<T> : IDisposable
     {

@@ -18,9 +18,8 @@ namespace Lawo.IO
     /// form is then returned.</para>
     /// <para>A call to <see cref="WriteAsync"/> encodes the passed data and then appends the encoded form to the
     /// internal write buffer, while flushing as needed.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public sealed class TelnetStream : BufferStream

@@ -14,6 +14,7 @@ namespace Lawo.ComponentModel
     /// <summary>Provides methods to flatten a <see cref="ReadOnlyObservableCollection{T}"/> containing
     /// <see cref="ReadOnlyObservableCollection{T}"/> instances into one <see cref="ReadOnlyObservableCollection{T}"/>.
     /// </summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class FlattenHelper
     {
         /// <summary>Returns a collection containing all the elements in the inner collection.</summary>

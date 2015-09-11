@@ -9,12 +9,9 @@ namespace Lawo.Threading.Tasks
     using System.Threading.Tasks;
 
     /// <summary>Represents a virtual queue for tasks.</summary>
-    /// <remarks>
-    /// <para>Enqueued tasks are guaranteed to be executed sequentially, in the order in which they were enqueued.
-    /// </para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
+    /// <remarks>Enqueued tasks are guaranteed to be executed sequentially, in the order in which they were enqueued.
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class TaskQueue
     {

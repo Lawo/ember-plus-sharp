@@ -10,9 +10,7 @@ namespace Lawo.ComponentModel
 
     /// <summary>Provides helper methods for collections that implement <see cref="INotifyCollectionChanged"/>.
     /// </summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: This type is thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class ObservableCollectionHelper
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

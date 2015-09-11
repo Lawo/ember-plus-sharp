@@ -9,6 +9,7 @@ namespace Lawo.ComponentModel
 
     /// <summary>Represents a disposable <see cref="ReadOnlyObservableCollection{T}"/>.</summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class DisposableReadOnlyObservableCollection<T> : ReadOnlyObservableCollection<T>, IDisposable
     {
         private readonly Action dispose;

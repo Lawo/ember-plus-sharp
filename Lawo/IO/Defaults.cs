@@ -5,6 +5,7 @@
 namespace Lawo.IO
 {
     /// <summary>Provides common defaults.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class Defaults
     {
         /// <summary>The default size of the temporary in-memory buffer that is allocated to read/write from a stream

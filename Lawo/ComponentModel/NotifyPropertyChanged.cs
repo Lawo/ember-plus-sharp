@@ -12,10 +12,7 @@ namespace Lawo.ComponentModel
     using Lawo.Reflection;
 
     /// <summary>Provides a generic implementation for <see cref="INotifyPropertyChanged"/>.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public abstract class NotifyPropertyChanged : INotifyPropertyChanged
     {
         /// <summary>See <see cref="INotifyPropertyChanged.PropertyChanged"/>.</summary>

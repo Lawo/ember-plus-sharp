@@ -13,10 +13,7 @@ namespace Lawo.IO
 
     /// <summary>Overrides <see cref="Stream"/> members associated with seeking so that they throw
     /// <see cref="NotSupportedException"/>.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public abstract class NonSeekableStream : Stream
     {

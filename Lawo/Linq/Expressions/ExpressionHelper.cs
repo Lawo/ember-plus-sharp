@@ -10,6 +10,7 @@ namespace Lawo.Linq.Expressions
     using System.Reflection;
 
     /// <summary>Provides helper methods for expressions.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class ExpressionHelper
     {
         /// <summary>Returns the <see cref="PropertyInfo"/> associated with the property identified by

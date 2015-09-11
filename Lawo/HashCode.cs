@@ -5,6 +5,7 @@
 namespace Lawo
 {
     /// <summary>Provides helper methods for hash codes.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class HashCode
     {
         /// <summary>Returns the combination of <paramref name="hash1"/> and <paramref name="hash2"/>.</summary>

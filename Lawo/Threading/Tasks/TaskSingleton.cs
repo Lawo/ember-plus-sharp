@@ -9,10 +9,7 @@ namespace Lawo.Threading.Tasks
     using System.Threading.Tasks;
 
     /// <summary>Provides the means to simplify the implementation of non-reentrant async methods.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class TaskSingleton
     {

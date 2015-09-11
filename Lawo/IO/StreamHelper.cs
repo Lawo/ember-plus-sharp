@@ -10,6 +10,7 @@ namespace Lawo.IO
     using System.Threading.Tasks;
 
     /// <summary>Provides common stream algorithms.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class StreamHelper
     {
         /// <summary>Repeatedly calls <paramref name="read"/> until <paramref name="count"/> bytes have been read into

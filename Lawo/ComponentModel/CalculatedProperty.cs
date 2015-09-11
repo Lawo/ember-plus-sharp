@@ -8,7 +8,7 @@ namespace Lawo.ComponentModel
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using Lawo.Reflection;
+    using Reflection;
 
     /// <summary>Provides methods to create <see cref="CalculatedProperty{T}"/> instances.</summary>
     /// <remarks>
@@ -24,6 +24,7 @@ namespace Lawo.ComponentModel
     /// recalculated. If the new value differs from the old value, <see cref="INotifyPropertyChanged.PropertyChanged"/>
     /// is raised accordingly.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class CalculatedProperty
     {
         /// <summary>Creates and returns a <see cref="CalculatedProperty{T}"/> instance.</summary>

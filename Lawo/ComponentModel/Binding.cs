@@ -7,17 +7,14 @@ namespace Lawo.ComponentModel
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using Lawo.Reflection;
+    using Reflection;
 
     /// <summary>Represents a binding between two properties.</summary>
     /// <typeparam name="TSourceOwner">The type of the object owning the source property.</typeparam>
     /// <typeparam name="TSource">The type of the source property.</typeparam>
     /// <typeparam name="TTargetOwner">The type of the object owning the target property.</typeparam>
     /// <typeparam name="TTarget">The type of the target property.</typeparam>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "Client code almost never needs to mention this type.")]
     public sealed class Binding<TSourceOwner, TSource, TTargetOwner, TTarget> : IDisposable
         where TSourceOwner : INotifyPropertyChanged

@@ -13,6 +13,7 @@ namespace Lawo.ComponentModel
 
     /// <summary>Provides methods to project the items in a collection implementing
     /// <see cref="INotifyCollectionChanged"/> into a <see cref="ReadOnlyObservableCollection{T}"/>.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class ProjectionHelper
     {
         /// <summary>Returns a collection of items projected from the items in <paramref name="originalItems"/>.

@@ -22,9 +22,8 @@ namespace Lawo.IO
     /// <see cref="Stream.WriteAsync(byte[], int, int, CancellationToken)"/> method should be implemented in terms of
     /// the <see cref="Buffer.this"/>, <see cref="WriteBuffer.Count"/> and <see cref="WriteBuffer.Flush"/> members of
     /// the object accessible through the <see cref="WriteBuffer"/> property.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public abstract class BufferStream : NonSeekableStream
     {

@@ -5,13 +5,12 @@
 namespace Lawo.Reflection
 {
     using System;
-    using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Lawo.Linq.Expressions;
+    using Linq.Expressions;
 
     /// <summary>Provides methods to create <see cref="IProperty{T, U}"/> instances.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public static class ReflectionHelper
     {
         /// <summary>Creates an instance implementing <see cref="IProperty{T, U}"/>.</summary>
