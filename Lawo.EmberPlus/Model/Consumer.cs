@@ -140,7 +140,7 @@ namespace Lawo.EmberPlus.Model
         /// </summary>
         /// <param name="client">The <see cref="S101Client"/> to use.</param>
         /// <param name="timeout">The total amount of time, in milliseconds, this method will wait for the provider to
-        /// send all requested elements. Default is 10000. Specify -1 to wait indefinitely.</param>
+        /// send all requested elements. Specify -1 to wait indefinitely.</param>
         /// <param name="slot">The slot to communicate with. All outgoing <see cref="S101Message"/> objects will have
         /// their <see cref="S101Message.Slot"/> property set to this value. Incoming messages are ignored, if their
         /// <see cref="S101Message.Slot"/> property does not match this value.</param>

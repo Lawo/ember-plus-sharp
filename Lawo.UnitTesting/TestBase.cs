@@ -199,7 +199,7 @@ namespace Lawo.UnitTesting
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="TestBase"/> class by calling
-        /// <see cref="TestBase(int)"/>((int)DateTime.Now.TimeOfDay.TotalMilliseconds).</summary>
+        /// <see cref="TestBase(int)">TestBase((int)DateTime.Now.TimeOfDay.TotalMilliseconds)</see>.</summary>
         /// <remarks>Deriving test classes should normally call this constructor.</remarks>
         protected TestBase() : this((int)DateTime.Now.TimeOfDay.TotalMilliseconds)
         {

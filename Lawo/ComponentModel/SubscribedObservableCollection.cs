@@ -19,7 +19,7 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Calls <see cref="Dispose(bool)">Dispose</see><c>(true)</c>.</summary>
+        /// <summary>Calls <see cref="Dispose(bool)">Dispose(true)</see>.</summary>
         public void Dispose()
         {
             this.Dispose(true);

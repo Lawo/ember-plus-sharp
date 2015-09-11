@@ -50,8 +50,8 @@ namespace Lawo.EmberPlus.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="S101Client"/> class by calling
-        /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger)"/>(<paramref name="connection"/>,
-        /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, <c>null</c>).</summary>
+        /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger)">S101Client(<paramref name="connection"/>,
+        /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, null)</see>.</summary>
         [CLSCompliant(false)]
         public S101Client(IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync) :
             this(connection, readAsync, writeAsync, null)
@@ -59,8 +59,8 @@ namespace Lawo.EmberPlus.S101
         }
 
         /// <summary>Initializes a new instance of the <see cref="S101Client"/> class by calling
-        /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger, int, int)"/>(<paramref name="connection"/>,
-        /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, <paramref name="logger"/>, 3000, 8192).
+        /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger, int, int)">S101Client(<paramref name="connection"/>,
+        /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, <paramref name="logger"/>, 3000, 8192)</see>.
         /// </summary>
         [CLSCompliant(false)]
         public S101Client(
@@ -191,7 +191,8 @@ namespace Lawo.EmberPlus.S101
             }
         }
 
-        /// <summary>Calls <see cref="SendMessageAsync(S101Message, byte[])"/>(<paramref name="message"/>, null).
+        /// <summary>Calls
+        /// <see cref="SendMessageAsync(S101Message, byte[])">SendMessageAsync(<paramref name="message"/>, null)</see>.
         /// </summary>
         public Task SendMessageAsync(S101Message message)
         {
@@ -205,7 +206,7 @@ namespace Lawo.EmberPlus.S101
         /// <see cref="S101Message.Command"/> requires a payload.</param>
         /// <exception cref="ArgumentException"><list type="bullet">
         /// <item>The <see cref="S101Message.Command"/> property of <paramref name="message"/>
-        /// is of a type that requires a payload and <paramref name="payload"/> equals <c>null</c>, or</item>
+        /// is of a type that requires a payload and <paramref name="payload"/> equals <c>null</c>; or</item>
         /// <item>The <see cref="S101Message.Command"/> property of <paramref name="message"/>
         /// is of a type that does not allow for a payload and <paramref name="payload"/> is not equal to <c>null</c>.
         /// </item>

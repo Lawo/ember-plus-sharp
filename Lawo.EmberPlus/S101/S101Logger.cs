@@ -24,9 +24,9 @@ namespace Lawo.EmberPlus.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="S101Logger"/> class by calling
-        /// <see cref="S101Logger(EmberTypeBag, TextWriter, XmlWriterSettings)">S101Logger</see>(
-        /// <paramref name="types"/>, <paramref name="logWriter"/>, new <see cref="XmlWriterSettings"/> { Indent = true
-        /// }).</summary>
+        /// <see cref="S101Logger(EmberTypeBag, TextWriter, XmlWriterSettings)">S101Logger(
+        /// <paramref name="types"/>, <paramref name="logWriter"/>, new XmlWriterSettings { Indent = true })</see>.
+        /// </summary>
         public S101Logger(EmberTypeBag types, TextWriter logWriter) :
             this(types, logWriter, new XmlWriterSettings { Indent = true })
         {

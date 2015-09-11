@@ -9,8 +9,8 @@ namespace Lawo.EmberPlus.S101
     /// <summary>Represents a logger for S101 activity.</summary>
     public interface IS101Logger : IDisposable
     {
-        /// <summary>Logs an event by calling <see cref="LogEvent(string, string)"/>(<paramref name="eventName"/>,
-        /// <c>null</c>).</summary>
+        /// <summary>Logs an event by calling
+        /// <see cref="LogEvent(string, string)">LogEvent(<paramref name="eventName"/>, null)</see>.</summary>
         EventInfo LogEvent(string eventName);
 
         /// <summary>Logs an event with string data.</summary>

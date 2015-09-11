@@ -13,8 +13,8 @@ namespace Lawo.ComponentModel
     public static class TwoWayBinding
     {
         /// <summary>Creates a two-way binding between <paramref name="source"/> and <paramref name="target"/> by
-        /// calling <see cref="Create{T, U, V, W}"/>(<paramref name="source"/>, v => v, <paramref name="target"/>, v => v).
-        /// </summary>
+        /// calling <see cref="Create{T, U, V, W}">Create(<paramref name="source"/>, v => v, <paramref name="target"/>,
+        /// v => v)</see>.</summary>
         /// <typeparam name="TSourceOwner">The type of the object owning the source property.</typeparam>
         /// <typeparam name="TTargetOwner">The type of the object owning the target property.</typeparam>
         /// <typeparam name="TProperty">The type of the source and target properties.</typeparam>

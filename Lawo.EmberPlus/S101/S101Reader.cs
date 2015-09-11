@@ -29,7 +29,7 @@ namespace Lawo.EmberPlus.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="S101Reader"/> class by calling
-        /// <see cref="S101Reader(ReadAsyncCallback, int)"/>(<paramref name="readAsync"/>, 8192).</summary>
+        /// <see cref="S101Reader(ReadAsyncCallback, int)">S101Reader(<paramref name="readAsync"/>, 8192)</see>.</summary>
         [CLSCompliant(false)]
         public S101Reader(ReadAsyncCallback readAsync) : this(readAsync, Constants.PhysicalStreamBufferSize)
         {

@@ -33,7 +33,7 @@ namespace Lawo.EmberPlus.Ember
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="EmberReader"/> class by calling
-        /// <see cref="EmberReader(Stream, int)"/>(<paramref name="stream"/>, 1024).</summary>
+        /// <see cref="EmberReader(Stream, int)">EmberReader(<paramref name="stream"/>, 1024)</see>.</summary>
         public EmberReader(Stream stream) : this(stream, Constants.MemoryStreamBufferSize)
         {
         }
