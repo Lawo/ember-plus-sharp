@@ -6,7 +6,7 @@ namespace Lawo.EmberPlus.Glow
 {
     using System.Diagnostics.CodeAnalysis;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     internal static class GlowQualifiedParameter
     {

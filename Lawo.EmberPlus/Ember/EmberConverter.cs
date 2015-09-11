@@ -13,10 +13,7 @@ namespace Lawo.EmberPlus.Ember
     using System.Xml;
 
     /// <summary>Provides methods to convert EmBER to XML and XML to EmBER.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class EmberConverter : IEmberConverter
     {
         private readonly Dictionary<int, string> typeNames;

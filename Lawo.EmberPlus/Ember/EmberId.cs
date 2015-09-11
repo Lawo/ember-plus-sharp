@@ -9,13 +9,10 @@ namespace Lawo.EmberPlus.Ember
 
     /// <summary>Represents a <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>
     /// identifier (see chapter 8.1.2).</summary>
-    /// <remarks>
-    /// <para>Only the subset defined in the
+    /// <remarks>Only the subset defined in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a> is supported.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// Specification</a> is supported.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public struct EmberId : IEquatable<EmberId>
     {
         private readonly Class theClass;

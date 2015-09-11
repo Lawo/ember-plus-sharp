@@ -9,17 +9,14 @@ namespace Lawo.EmberPlus.Ember
     using System.IO;
     using System.Text;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Represents a writer that provides the means to generate
     /// <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>-encoded output.</summary>
-    /// <remarks>
-    /// <para>Only the subset defined in the
+    /// <remarks>Only the subset defined in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a> is supported.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// Specification</a> is supported.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class EmberWriter : IDisposable
     {
         private const int StartShift8Bit = Constants.BitsPerLong - Constants.BitsPerByte;

@@ -4,7 +4,7 @@
 
 namespace Lawo.EmberPlus.Glow
 {
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     internal static class GlowElementCollection
     {

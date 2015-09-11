@@ -4,12 +4,10 @@
 
 namespace Lawo.EmberPlus.Glow
 {
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
     /// <summary>Provides a singleton <see cref="EmberTypeBag"/> instance containing all Glow types.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: This type is safe for multithreaded operations.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class GlowTypes
     {
         private static readonly EmberTypeBag TheInstance = new EmberTypeBag(

@@ -12,17 +12,15 @@ namespace Lawo.EmberPlus.Glow
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Xml;
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Model;
-    using Lawo.EmberPlus.S101;
+
+    using Ember;
+    using Model;
+    using S101;
 
     /// <summary>Converts the log written by an <see cref="S101Logger"/> instantiated with
     /// <see cref="GlowTypes.Instance"/> into an equivalent log the payloads of which can be much more easily read
     /// by humans.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class GlowLogConverter
     {
         /// <summary>Converts the XML read with <paramref name="logReader"/> and writes it into

@@ -10,12 +10,9 @@ namespace Lawo.EmberPlus.Ember
     using System.Reflection;
 
     /// <summary>Represents an unordered collection of <see cref="EmberType"/> instances.</summary>
-    /// <remarks>
-    /// <para>There's usually exactly one singleton <see cref="EmberTypeBag"/> instance for each DTD, see e.g.
-    /// <see cref="Glow.GlowTypes"/>.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <remarks>There's usually exactly one singleton <see cref="EmberTypeBag"/> instance for each DTD, see e.g.
+    /// <see cref="Glow.GlowTypes"/>.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class EmberTypeBag
     {
         private const string InnerNumberFieldName = "InnerNumber";

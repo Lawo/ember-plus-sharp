@@ -49,9 +49,8 @@ namespace Lawo.EmberPlus.Ember
     /// sequence or set types. For these fields, it is necessary to also consider one or more parent fields. This is why
     /// the constructor also accepts two or more types, where the first types represent the path to the last type.
     /// </para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
     /// </remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class EmberType
     {
         private readonly Type[] types;

@@ -10,17 +10,14 @@ namespace Lawo.EmberPlus.Ember
     using System.Globalization;
     using System.IO;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Represents a reader that provides the means to read
     /// <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>-encoded input.</summary>
-    /// <remarks>
-    /// <para>Only the subset defined in the
+    /// <remarks>Only the subset defined in the
     /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a> is supported.</para>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// Specification</a> is supported.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class EmberReader : IDisposable
     {
         private static readonly EmberId EndContainer = EmberId.CreateUniversal(Ember.InnerNumber.EndContainer);

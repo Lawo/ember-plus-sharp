@@ -7,7 +7,7 @@ namespace Lawo.EmberPlus.Ember
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>Provides constants for the number of an inner identifier of a EmBER-encoded data value.</summary>
-    /// <remarks><b>Thread Safety</b>: This type is safe for multithreaded operations.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class InnerNumber
     {
         /// <summary>The end of a sequence, a set or an application-defined data value.</summary>

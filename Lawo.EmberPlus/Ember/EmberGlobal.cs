@@ -5,9 +5,8 @@
 namespace Lawo.EmberPlus.Ember
 {
     /// <summary>Describes the global type.</summary>
-    /// <remarks>
-    /// <para>The constants in this type are usually referenced by the class containing the DTD root type.</para>
-    /// <para><b>Thread Safety</b>: This type is safe for multithreaded operations.</para></remarks>
+    /// <remarks>The constants in this type are usually referenced by the class containing the DTD root type.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class EmberGlobal
     {
         /// <summary>The inner number.</summary>

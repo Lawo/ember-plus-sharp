@@ -9,17 +9,14 @@ namespace Lawo.EmberPlus.Glow
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Xml;
-    using Lawo.EmberPlus.Ember;
-    using Lawo.EmberPlus.Model;
-    using Lawo.EmberPlus.S101;
+
+    using Ember;
+    using Model;
+    using S101;
 
     /// <summary>Reads the events written by a <see cref="S101Logger"/> instantiated with
-    /// <see cref="GlowTypes.Instance"/> and applies them to the tree rooted in
-    /// <see cref="Root"/>.</summary>
-    /// <remarks>
-    /// <para><b>Thread Safety</b>: Any public static members of this type are thread safe. Any instance members are not
-    /// guaranteed to be thread safe.</para>
-    /// </remarks>
+    /// <see cref="GlowTypes.Instance"/> and applies them to the tree rooted in <see cref="Root"/>.</summary>
+    /// <threadsafety static="true" instance="false"/>
     public sealed class GlowLogInterpreter
     {
         private readonly MyDynamicRoot root = Root<MyDynamicRoot>.Construct(new Context(null, 0, string.Empty));

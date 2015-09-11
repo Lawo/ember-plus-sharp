@@ -6,7 +6,7 @@ namespace Lawo.EmberPlus.Ember
 {
     /// <summary>Describes the <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>
     /// RelativeObjectIdentifier type.</summary>
-    /// <remarks><b>Thread Safety</b>: This type is safe for multithreaded operations.</remarks>
+    /// <threadsafety static="true" instance="false"/>
     public static class BerRelativeObjectIdentifier
     {
         /// <summary>The inner number.</summary>
