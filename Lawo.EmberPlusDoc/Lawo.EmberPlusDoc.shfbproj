@@ -52,14 +52,18 @@
     <CatalogVersion>100</CatalogVersion>
     <CatalogProductId>VS</CatalogProductId>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="Lawo" isDocumented="True" xmlns="">Contains types related to the ones in System.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True" xmlns="">Contains types related to the ones in System.ComponentModel.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True" xmlns="">Contains types related to the ones in System.Diagnostics.Tracing.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.IO" isDocumented="True" xmlns="">Contains types related to the ones in System.IO.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True" xmlns="">Contains types related to the ones in System.Linq.Expressions.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True" xmlns="">Contains types related to the ones in System.Reflection.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Threading" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True" xmlns="">Contains types related to the ones in System.Threading.Tasks.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="Lawo" isDocumented="True">Contains types related to the ones in the System namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True">Contains types related to the ones in the System.ComponentModel namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True">Contains types related to the ones in the System.Diagnostics.Tracing namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.IO" isDocumented="True">Contains types related to the ones in the System.IO namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True">Contains types related to the ones in the System.Linq.Expressions namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True">Contains types related to the ones in the System.Reflection namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Threading" isDocumented="True">Contains types related to the ones in the System.Threading namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True">Contains types related to the ones in the System.Threading.Tasks namespace.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.EmberPlus.Model" isDocumented="True">Contains types that support the creation of an Ember+ consumer.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.EmberPlus.S101" isDocumented="True">Contains a class that establishes and maintains an S101 connection as well as supporting abstractions for S101 messages and commands.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.EmberPlus.Glow" isDocumented="True">Contains types that describe the structure of the Glow DTD.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Lawo.EmberPlus.Ember" isDocumented="True">Contains types that support the encoding and decoding of EmBER messages.</NamespaceSummaryItem></NamespaceSummaries>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
     <IndentHtml>False</IndentHtml>
