@@ -7,7 +7,7 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    /// <summary>Represents a node in the object tree accessible through
+    /// <summary>Provides the common interface for all nodes in the object tree accessible through
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     public interface INode : IElementWithSchemas
     {

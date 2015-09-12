@@ -9,7 +9,7 @@ namespace Lawo.EmberPlus.Model
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>Represents a function in the object tree accessible through
+    /// <summary>Provides the common interface for all functions in the object tree accessible through
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     public interface IFunction : IElement
     {
