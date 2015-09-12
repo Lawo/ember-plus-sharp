@@ -31,42 +31,42 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets <b>access</b>, see <see cref="IParameter.Access"/>.</summary>
+        /// <inheritdoc/>
         public ParameterAccess Access
         {
             get { return this.access; }
             private set { this.SetValue(ref this.access, value); }
         }
 
-        /// <summary>Gets <b>format</b>, see <see cref="IParameter.Format"/>.</summary>
+        /// <inheritdoc/>
         public string Format
         {
             get { return this.format; }
             private set { this.SetValue(ref this.format, value); }
         }
 
-        /// <summary>Gets <b>defaultValue</b>.</summary>
+        /// <inheritdoc cref="IParameter.DefaultValue"/>
         public TValue DefaultValue
         {
             get { return this.defaultValue; }
             private set { this.SetValue(ref this.defaultValue, value); }
         }
 
-        /// <summary>Gets <b>type</b>, <see cref="IParameter.Type"/>.</summary>
+        /// <inheritdoc/>
         public ParameterType Type
         {
             get { return this.type.Value; }
             private set { this.SetValue(ref this.type, value); }
         }
 
-        /// <summary>Gets <b>streamIdentifier</b>, see <see cref="IParameter.StreamIdentifier"/>.</summary>
+        /// <inheritdoc/>
         public int? StreamIdentifier
         {
             get { return this.streamIdentifier; }
             private set { this.SetValue(ref this.streamIdentifier, value); }
         }
 
-        /// <summary>Gets <b>streamDescriptor</b>, see <see cref="IParameter.StreamDescriptor"/>.</summary>
+        /// <inheritdoc/>
         public StreamDescription? StreamDescriptor
         {
             get { return this.streamDescriptor; }

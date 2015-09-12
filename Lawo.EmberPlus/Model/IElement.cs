@@ -13,6 +13,9 @@ namespace Lawo.EmberPlus.Model
     {
         /// <summary>Gets the parent of this element.</summary>
         /// <value>The parent of the element if it is not the root element; otherwise <c>null</c>.</value>
+        /// <remarks>Is <c>null</c> for the value of <see cref="IMatrix.Parameters">IMatrix.Parameters</see> and
+        /// <see cref="MatrixLabels"/> elements in the <see cref="IMatrix.Labels">IMatrix.Labels</see> collection.
+        /// </remarks>
         INode Parent { get; }
 
         /// <summary>Gets <b>number</b>.</summary>

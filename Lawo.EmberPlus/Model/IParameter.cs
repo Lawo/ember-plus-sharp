@@ -37,7 +37,7 @@ namespace Lawo.EmberPlus.Model
         int? Factor { get; }
 
         /// <summary>Gets <b>formula</b>.</summary>
-        /// <remarks>The formulas are separated by <c>\\n</c>. If this property is not equal to <c>null</c>, the value of
+        /// <remarks>The formulas are separated by <c>\n</c>. If this property is not equal to <c>null</c>, the value of
         /// <see cref="Value"/> should be converted with the first formula before further processing (e.g. the display
         /// on a UI). Vice versa, client code must use the second formula before setting <see cref="Value"/>.</remarks>
         string Formula { get; }

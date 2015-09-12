@@ -26,7 +26,7 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets a value indicating whether this is a root node, see <see cref="INode.IsRoot"/>.</summary>
+        /// <inheritdoc/>
         public bool IsRoot
         {
             get { return this.GetIsRoot(); }

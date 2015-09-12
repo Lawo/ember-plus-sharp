@@ -21,14 +21,14 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets <b>factor</b>, see <see cref="IParameter.Factor"/>.</summary>
+        /// <inheritdoc cref="IParameter.Factor"/>
         public int? Factor
         {
             get { return this.factor; }
             private set { this.SetValue(ref this.factor, value); }
         }
 
-        /// <summary>Gets <b>enumMap</b>, see <see cref="IParameter.EnumMap"/>.</summary>
+        /// <inheritdoc cref="IParameter.EnumMap"/>
         public IReadOnlyList<KeyValuePair<string, int>> EnumMap
         {
             get { return this.enumMap; }

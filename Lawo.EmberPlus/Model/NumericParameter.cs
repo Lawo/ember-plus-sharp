@@ -23,21 +23,21 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets minimum.</summary>
+        /// <inheritdoc cref="IParameter.Minimum"/>
         public TValue? Minimum
         {
             get { return this.minimum; }
             private set { this.SetValue(ref this.minimum, value); }
         }
 
-        /// <summary>Gets maximum.</summary>
+        /// <inheritdoc cref="IParameter.Maximum"/>
         public TValue? Maximum
         {
             get { return this.maximum; }
             private set { this.SetValue(ref this.maximum, value); }
         }
 
-        /// <summary>Gets formula, see <see cref="IParameter.Formula"/>.</summary>
+        /// <inheritdoc cref="IParameter.Formula"/>
         public string Formula
         {
             get { return this.formula; }

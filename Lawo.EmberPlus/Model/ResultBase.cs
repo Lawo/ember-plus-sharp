@@ -25,7 +25,7 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets the items in the result, see <see cref="IResult.Items"/>.</summary>
+        /// <inheritdoc/>
         public IEnumerable<object> Items
         {
             get { return this.valueReaders.Select(r => r.Value); }

@@ -30,9 +30,7 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets the parent, see <see cref="IElement.Parent"/>.</summary>
-        /// <remarks>Is <c>null</c> for the value of <see cref="IMatrix.Parameters"/> and <see cref="MatrixLabels"/>
-        /// elements in the <see cref="IMatrix.Labels"/> collection.</remarks>
+        /// <inheritdoc/>
         public INode Parent
         {
             get
@@ -43,27 +41,26 @@ namespace Lawo.EmberPlus.Model
             }
         }
 
-        /// <summary>Gets <b>number</b>, see <see cref="IElement.Number"/>.</summary>
+        /// <inheritdoc/>
         public int Number
         {
             get { return this.numberPath.Length == 0 ? 0 : this.numberPath[this.numberPath.Length - 1]; }
         }
 
-        /// <summary>Gets <b>identifier</b>, see <see cref="IElement.Identifier"/>.</summary>
+        /// <inheritdoc/>
         public string Identifier
         {
             get { return this.identifier; }
         }
 
-        /// <summary>Gets <b>description</b>, see <see cref="IElement.Description"/>.</summary>
+        /// <inheritdoc/>
         public string Description
         {
             get { return this.description; }
             internal set { this.SetValue(ref this.description, value); }
         }
 
-        /// <summary>Gets a value indicating whether this element is online, see <see cref="IElement.IsOnline"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsOnline
         {
             get
@@ -89,7 +86,7 @@ namespace Lawo.EmberPlus.Model
             }
         }
 
-        /// <summary>Gets or sets an arbitrary object value, see <see cref="IElement.Tag"/>.</summary>
+        /// <inheritdoc/>
         public object Tag { get; set; }
 
         /// <inheritdoc/>

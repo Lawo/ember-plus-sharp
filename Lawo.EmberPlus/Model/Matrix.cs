@@ -35,63 +35,63 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets <b>type</b>, see <see cref="IMatrix.Type"/>.</summary>
+        /// <inheritdoc/>
         public MatrixType Type
         {
             get { return this.type; }
             private set { this.SetValue(ref this.type, value); }
         }
 
-        /// <summary>Gets <b>maximumTotalConnects</b>, see <see cref="IMatrix.MaximumTotalConnects"/>.</summary>
+        /// <inheritdoc/>
         public int MaximumTotalConnects
         {
             get { return this.maximumTotalConnects; }
             private set { this.SetValue(ref this.maximumTotalConnects, value); }
         }
 
-        /// <summary>Gets <b>maximumConnectsPerTarget</b>, see <see cref="IMatrix.MaximumConnectsPerTarget"/>.</summary>
+        /// <inheritdoc/>
         public int MaximumConnectsPerTarget
         {
             get { return this.maximumConnectsPerTarget; }
             private set { this.SetValue(ref this.maximumConnectsPerTarget, value); }
         }
 
-        /// <summary>Gets the parameters associated with the matrix.</summary>
+        /// <inheritdoc cref="IMatrix.Parameters"/>
         public MatrixParameters<TTarget, TSource, TConnection> Parameters
         {
             get { return this.parameters; }
             private set { this.SetValue(ref this.parameters, value); }
         }
 
-        /// <summary>Gets <b>gainParameterNumber</b>, see <see cref="IMatrix.GainParameterNumber"/>.</summary>
+        /// <inheritdoc/>
         public int? GainParameterNumber
         {
             get { return this.gainParameterNumber; }
             private set { this.SetValue(ref this.gainParameterNumber, value); }
         }
 
-        /// <summary>Gets <b>labels</b>, see <see cref="IMatrix.Labels"/>.</summary>
+        /// <inheritdoc/>
         public IReadOnlyList<KeyValuePair<string, MatrixLabels>> Labels
         {
             get { return this.labels; }
             private set { this.SetValue(ref this.labels, value); }
         }
 
-        /// <summary>Gets <b>targets</b>, see <see cref="IMatrix.Targets"/>.</summary>
+        /// <inheritdoc/>
         public IReadOnlyList<int> Targets
         {
             get { return this.targets; }
             private set { this.SetValue(ref this.targets, value); }
         }
 
-        /// <summary>Gets <b>sources</b>, see <see cref="IMatrix.Sources"/>.</summary>
+        /// <inheritdoc/>
         public IReadOnlyList<int> Sources
         {
             get { return this.sources; }
             private set { this.SetValue(ref this.sources, value); }
         }
 
-        /// <summary>Gets <b>connections</b>, see <see cref="IMatrix.Connections"/>.</summary>
+        /// <inheritdoc/>
         public IReadOnlyDictionary<int, ObservableCollection<int>> Connections
         {
             get { return this.connections; }
