@@ -8,7 +8,7 @@ namespace Lawo.ComponentModel
     using System.Collections.ObjectModel;
 
     /// <summary>Represents a disposable <see cref="ReadOnlyObservableCollection{T}"/>.</summary>
-    /// <typeparam name="T">The type of elements in the collection.</typeparam>
+    /// <typeparam name="T">The type of the elements in the collection.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public sealed class DisposableReadOnlyObservableCollection<T> : ReadOnlyObservableCollection<T>, IDisposable
     {
