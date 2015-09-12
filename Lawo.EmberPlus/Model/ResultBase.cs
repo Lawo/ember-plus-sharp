@@ -12,7 +12,9 @@ namespace Lawo.EmberPlus.Model
     using Ember;
     using Glow;
 
-    /// <summary>Implements common functionality of all function results.</summary>
+    /// <summary>This class is not intended to be referenced in your code.</summary>
+    /// <remarks>Provides the common implementation for all results of functions in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class ResultBase<TMostDerived> : IInvocationResult where TMostDerived : ResultBase<TMostDerived>

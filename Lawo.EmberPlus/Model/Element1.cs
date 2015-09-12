@@ -12,8 +12,9 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Represents an element in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <summary>This API is not intended to be used directly from your code.</summary>
+    /// <remarks>Provides common implementation for all elements in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class Element<TMostDerived> : Element where TMostDerived : Element<TMostDerived>

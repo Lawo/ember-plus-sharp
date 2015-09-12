@@ -8,9 +8,10 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Represents the common base of nodes containing dynamic elements in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <summary>This API is not intended to be used directly from your code.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
+    /// <remarks>Provides the common implementation for all nodes containing dynamic elements in the object tree
+    /// accessible through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract class DynamicNodeBase<TMostDerived> : FieldNode<TMostDerived>

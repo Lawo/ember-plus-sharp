@@ -12,8 +12,9 @@ namespace Lawo.EmberPlus.Model
     using Ember;
     using Glow;
 
-    /// <summary>Provides the common functionality for all nodes that can appear in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <summary>This API is not intended to be used directly from your code.</summary>
+    /// <remarks>Provides common implementation for all nodes in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class NodeBase<TMostDerived> : ElementWithSchemas<TMostDerived>, IParent

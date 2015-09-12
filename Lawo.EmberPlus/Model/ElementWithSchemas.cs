@@ -8,8 +8,9 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Represents an element with schemas in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <summary>This class is not intended to be referenced in your code.</summary>
+    /// <remarks>Provides the common implementation for all elements with schemas in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class ElementWithSchemas<TMostDerived> : Element<TMostDerived>, IElementWithSchemas

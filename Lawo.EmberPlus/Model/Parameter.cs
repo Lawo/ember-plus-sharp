@@ -8,8 +8,9 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Represents a parameter in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <summary>This API is not intended to be used directly from your code.</summary>
+    /// <remarks>Provides the common implementation for all not nullable parameters in the object tree accessible
+    /// through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <threadsafety static="true" instance="false"/>

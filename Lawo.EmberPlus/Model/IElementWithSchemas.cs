@@ -6,7 +6,7 @@ namespace Lawo.EmberPlus.Model
 {
     using System.Collections.Generic;
 
-    /// <summary>Represents an element with schemas in the object tree accessible through
+    /// <summary>Provides the common interface for all elements with schemas in the object tree accessible through
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     public interface IElementWithSchemas : IElement
     {

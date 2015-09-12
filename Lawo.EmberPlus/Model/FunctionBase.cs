@@ -14,7 +14,8 @@ namespace Lawo.EmberPlus.Model
     using Ember;
     using Glow;
 
-    /// <summary>Provides the common functionality for all functions.</summary>
+    /// <summary>This API is not intended to be used directly from your code.</summary>
+    /// <remarks>Provides the common implementation for all functions.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class FunctionBase<TMostDerived> : Element<TMostDerived>, IFunction

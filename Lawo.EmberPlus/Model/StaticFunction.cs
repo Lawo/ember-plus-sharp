@@ -13,7 +13,9 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Provides the common functionality for all static functions.</summary>
+    /// <summary>This API is not intended to be used directly from your code.</summary>
+    /// <remarks>Provides the common implementation for all static functions in the object tree
+    /// accessible through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class StaticFunction<TMostDerived> : FunctionBase<TMostDerived>

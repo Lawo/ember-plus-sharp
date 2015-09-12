@@ -7,8 +7,9 @@ namespace Lawo.EmberPlus.Model
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>Represents a parameter with a value type value in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <summary>This class is not intended to be referenced in your code.</summary>
+    /// <remarks>Provides the common implementation for all parameters with a value type value in the object tree
+    /// accessible through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <threadsafety static="true" instance="false"/>

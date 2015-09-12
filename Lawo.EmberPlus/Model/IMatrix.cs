@@ -7,7 +7,7 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    /// <summary>Represents a matrix in the object tree accessible through
+    /// <summary>Provides the common interface for all matrices in the object tree accessible through
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <remarks>Members for which the provider does not define a value are equal to <c>null</c>.</remarks>
     public interface IMatrix : IElementWithSchemas

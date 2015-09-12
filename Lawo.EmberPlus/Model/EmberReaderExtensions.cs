@@ -6,7 +6,8 @@ namespace Lawo.EmberPlus.Model
 {
     using System;
     using System.Globalization;
-    using Lawo.EmberPlus.Ember;
+
+    using Ember;
 
     internal static class EmberReaderExtensions
     {
