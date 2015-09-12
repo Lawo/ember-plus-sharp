@@ -6,9 +6,8 @@ namespace Lawo.EmberPlus.Model
 {
     using System;
 
-    /// <summary>Provides additional information for a property representing an Ember+ element, as defined in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Provides additional information for a property representing an element in the object tree accessible
+    /// through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <remarks>This attribute only needs to be applied to properties where the property name is not identical to the
     /// Glow identifier or if the element is optional.</remarks>
     /// <threadsafety static="true" instance="false"/>

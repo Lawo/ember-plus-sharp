@@ -13,10 +13,8 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Represents a node containing a unbounded number of identically-typed elements in the protocol specified
-    /// in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a node containing an unbounded number of identically-typed elements in the object tree
+    /// accessible through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TElement">The type of the elements this node contains. This must either be an
     /// <see cref="Element{T}"/> subclass, <see cref="IParameter"/>, <see cref="INode"/> or <see cref="IFunction"/>.
     /// </typeparam>

@@ -7,17 +7,14 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
 
-    using Lawo.EmberPlus.Ember;
+    using Ember;
 
-    /// <summary>Represents the root containing dynamic and optional static elements in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents the root containing dynamic and optional static elements in the object tree accessible
+    /// through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
-    /// <remarks>
-    /// <para>A subclass object contains all children sent by the provider. Static children can be defined and
+    /// <remarks>A subclass object contains all children sent by the provider. Static children can be defined and
     /// accessed as described in the <see cref="Root{T}"/> class remarks. Dynamic children are accessible through
-    /// the collection exposed by <see cref="DynamicChildren"/>.</para>
-    /// </remarks>
+    /// the collection exposed by <see cref="DynamicChildren"/>.</remarks>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract class DynamicRoot<TMostDerived> : Root<TMostDerived>

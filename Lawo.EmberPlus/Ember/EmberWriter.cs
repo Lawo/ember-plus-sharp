@@ -323,8 +323,7 @@ namespace Lawo.EmberPlus.Ember
             return shift;
         }
 
-        /// <summary>See <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>, chapter
-        /// 8.1.2.</summary>
+        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.2.</summary>
         private static void WriteIdentifier(WriteBuffer writeBuffer, EmberId emberId)
         {
             if (emberId.Number <= 30)
@@ -338,8 +337,7 @@ namespace Lawo.EmberPlus.Ember
             }
         }
 
-        /// <summary>See <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>, chapter
-        /// 8.1.3.</summary>
+        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.3.</summary>
         private static void WriteLength(WriteBuffer writeBuffer, int? length, int shift, int lengthLength)
         {
             if (lengthLength == 1)
@@ -353,10 +351,10 @@ namespace Lawo.EmberPlus.Ember
             }
         }
 
-        /// <summary>See <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">BER</a>, chapter
-        /// 8.5 and <a href="http://technet.microsoft.com/en-us/library/0b34tf65(v=vs.110).aspx">IEEE Floating-Point
-        /// Representation</a>, of course the assumption is that C# has the same floating point representation as C++
-        /// (pretty safe, as floating point calculations are done by the hardware).</summary>
+        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.5 and
+        /// <a href="http://technet.microsoft.com/en-us/library/0b34tf65.aspx">IEEE Floating-Point Representation</a>.
+        /// Of course the assumption is that C# has the same floating point representation as C++ (pretty safe, as
+        /// floating point calculations are done by the hardware).</summary>
         private static void WriteReal(WriteBuffer writeBuffer, double value)
         {
             if (!BitConverter.IsLittleEndian)

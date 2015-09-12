@@ -5,11 +5,11 @@
 namespace Lawo.EmberPlus.Model
 {
     using System.Collections.Generic;
-    using Lawo.EmberPlus.Ember;
 
-    /// <summary>Represents an element with schemas in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    using Ember;
+
+    /// <summary>Represents an element with schemas in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class ElementWithSchemas<TMostDerived> : Element<TMostDerived>, IElementWithSchemas

@@ -18,8 +18,10 @@ namespace Lawo.EmberPlus.Model
     using IO;
     using S101;
 
-    /// <summary>Communicates with a provider to create and maintain a <typeparamref name="TRoot"/> object.</summary>
-    /// <typeparam name="TRoot">The type of the root object to be filled and maintained.</typeparam>
+    /// <summary>Implements an Ember+ consumer that communicates with an Ember+ provider as specified in the
+    /// <b>Ember+ Specification</b><cite>Ember+ Specification</cite>.</summary>
+    /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree held by
+    /// the provider.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection where TRoot : Root<TRoot>
     {
