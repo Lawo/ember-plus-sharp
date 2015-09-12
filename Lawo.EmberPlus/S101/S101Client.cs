@@ -16,8 +16,7 @@ namespace Lawo.EmberPlus.S101
 
     /// <summary>Provides methods to communicate with S101-encoded messages over a given connection.</summary>
     /// <remarks>
-    /// <para>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>, Chapter "Message Framing".</para>
+    /// <para>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".</para>
     /// <para>Automatically answers any message containing a <see cref="KeepAliveRequest"/> command with a message
     /// containing a <see cref="KeepAliveResponse"/> command.</para>
     /// <para>Automatically sends messages containing a <see cref="KeepAliveRequest"/> command according to the value

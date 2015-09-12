@@ -8,9 +8,8 @@ namespace Lawo.EmberPlus.Model
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>Represents a function accepting one argument in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a function accepting one argument in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="T1">The type of the argument.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <threadsafety static="true" instance="false"/>

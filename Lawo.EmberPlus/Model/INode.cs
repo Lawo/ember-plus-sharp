@@ -7,9 +7,8 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    /// <summary>Represents a node in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a node in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     public interface INode : IElementWithSchemas
     {
         /// <summary>Gets a value indicating whether this is a root node.</summary>

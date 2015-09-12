@@ -9,9 +9,8 @@ namespace Lawo.EmberPlus.Model
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>Represents a function in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a function in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     public interface IFunction : IElement
     {
         /// <summary>Gets <b>arguments</b>.</summary>

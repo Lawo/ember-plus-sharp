@@ -12,9 +12,8 @@ namespace Lawo.EmberPlus.Model
     using Ember;
     using Glow;
 
-    /// <summary>Represents a node in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a node in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public abstract class Node<TMostDerived> : NodeBase<TMostDerived>, INode

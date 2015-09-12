@@ -12,8 +12,8 @@ namespace Lawo.EmberPlus.S101
 
     /// <summary>Represents a command including command-specific data but excluding payload. This is the base of all
     /// commands.</summary>
-    /// <remarks>See <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>, Chapter "Message Framing".</remarks>
+    /// <remarks>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".
+    /// </remarks>
     /// <threadsafety static="true" instance="false"/>
     public abstract class S101Command : IEquatable<S101Command>
     {

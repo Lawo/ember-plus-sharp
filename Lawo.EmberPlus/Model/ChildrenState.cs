@@ -23,7 +23,7 @@ namespace Lawo.EmberPlus.Model
 
         /// <summary>Returns the lowest state of <paramref name="left"/> and <paramref name="right"/>.</summary>
         /// <remarks>Note that this is a generalization of the boolean &amp; operator to more than two states. Also
-        /// known as <a href="http://en.wikipedia.org/wiki/Fuzzy_logic">Fuzzy Logic</a>.</remarks>
+        /// known as <see href="http://en.wikipedia.org/wiki/Fuzzy_logic">Fuzzy Logic</see>.</remarks>
         public static ChildrenState operator &(ChildrenState left, ChildrenState right)
         {
             return new ChildrenState(Math.Min(left.state, right.state));

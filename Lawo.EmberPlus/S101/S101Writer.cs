@@ -5,18 +5,16 @@
 namespace Lawo.EmberPlus.S101
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
-    using Lawo.Threading.Tasks;
+    using IO;
+    using Threading.Tasks;
 
     /// <summary>Represents a writer that provides the means to generate S101-encoded messages.</summary>
-    /// <remarks>See
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>, Chapter "Message Framing".</remarks>
+    /// <remarks>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".
+    /// </remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Writer
     {

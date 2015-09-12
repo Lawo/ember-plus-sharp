@@ -18,7 +18,7 @@ namespace Lawo
     /// would be necessary for the creation of each of these resource objects. In the try block the resource is created
     /// and possibly initialized, in the catch block the resource is disposed and the exception rethrown.</para>
     /// <para>This class is an adapted version of the facility presented in
-    /// <a href="http://www.ddj.com/dept/cpp/184403758">this article</a>.</para>
+    /// <see href="http://www.ddj.com/dept/cpp/184403758">this article</see>.</para>
     /// </remarks>
     /// <example>
     /// <code>

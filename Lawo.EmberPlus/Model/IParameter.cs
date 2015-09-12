@@ -7,9 +7,8 @@ namespace Lawo.EmberPlus.Model
     using System;
     using System.Collections.Generic;
 
-    /// <summary>Represents a parameter in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a parameter in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <remarks>Members for which the provider does not define a value are equal to <c>null</c>.</remarks>
     public interface IParameter : IElementWithSchemas
     {

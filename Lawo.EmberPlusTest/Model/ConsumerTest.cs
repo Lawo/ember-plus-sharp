@@ -1043,7 +1043,7 @@ namespace Lawo.EmberPlus.Model
                 });
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/1620">Bug 1620</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1620">Bug 1620</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1620Test()
@@ -1057,7 +1057,7 @@ namespace Lawo.EmberPlus.Model
                 }));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1766Test()
@@ -1065,7 +1065,7 @@ namespace Lawo.EmberPlus.Model
             AsyncPump.Run(() => TestWithRobot<EmptyNodeRoot>("Bug1766Log.xml", consumer => Task.FromResult(false)));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1834Test()
@@ -1073,7 +1073,7 @@ namespace Lawo.EmberPlus.Model
             AsyncPump.Run(() => TestWithRobot<EmptyRoot>("Bug1834Log.xml", consumer => Task.FromResult(false)));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1836Test()
@@ -1106,7 +1106,7 @@ namespace Lawo.EmberPlus.Model
                 });
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/1866">Bug 1866</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1866">Bug 1866</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1866Test()
@@ -1120,7 +1120,7 @@ namespace Lawo.EmberPlus.Model
                 }));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug2755Test()
@@ -1136,7 +1136,7 @@ namespace Lawo.EmberPlus.Model
                 new S101Logger(GlowTypes.Instance, Console.Out)));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/3345">Bug 3345</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/3345">Bug 3345</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug3345Test()
@@ -1152,7 +1152,7 @@ namespace Lawo.EmberPlus.Model
                 }));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug4424Test()
@@ -1162,7 +1162,7 @@ namespace Lawo.EmberPlus.Model
                 "No data value available for the required property Lawo.EmberPlus.Model.Test.TwoParameterRoot.Parameter2 in the node with the path /."));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/4463">Bug 4463</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4463">Bug 4463</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug4463Test()
@@ -1171,7 +1171,7 @@ namespace Lawo.EmberPlus.Model
                 () => TestWithRobot<EmptyZoneNodeRoot>("Bug4463Log.xml", c => Task.FromResult(false), true));
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/4815">Bug 4815</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4815">Bug 4815</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug4815Test()
@@ -1235,7 +1235,7 @@ namespace Lawo.EmberPlus.Model
                 });
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/5201">Bug 5201</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5201">Bug 5201</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug5201Test()
@@ -1277,7 +1277,7 @@ namespace Lawo.EmberPlus.Model
                 });
         }
 
-        /// <summary>Exposes <a href="https://redmine.lawo.de/redmine/issues/5639">Bug 5639</a>.</summary>
+        /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5639">Bug 5639</see>.</summary>
         [TestCategory("Unattended")]
         [TestMethod]
         public void Bug5639Test()

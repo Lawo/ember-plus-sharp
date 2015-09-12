@@ -608,9 +608,9 @@ namespace Lawo.EmberPlus.Ember
         }
 
         /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.5 and
-        /// <a href="http://technet.microsoft.com/en-us/library/0b34tf65.aspx">IEEE Floating-Point Representation</a>.
-        /// Of course the assumption is that C# has the same floating point representation as C++ (pretty safe, as
-        /// floating point calculations are done by the hardware).</summary>
+        /// <see href="http://technet.microsoft.com/en-us/library/0b34tf65.aspx">IEEE Floating-Point
+        /// Representation</see>. Of course the assumption is that C# has the same floating point representation as C++
+        /// (pretty safe, as floating point calculations are done by the hardware).</summary>
         private static double ReadReal(ReadBuffer readBuffer, int length)
         {
             if (!BitConverter.IsLittleEndian)

@@ -9,9 +9,8 @@ namespace Lawo.EmberPlus.Model
     using Ember;
     using Glow;
 
-    /// <summary>Represents a nullable real parameter in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a nullable real parameter in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public sealed class NullableRealParameter : NullableNumericParameter<NullableRealParameter, double>

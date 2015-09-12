@@ -20,8 +20,8 @@ namespace Lawo.EmberPlus.Model
 
     /// <summary>Implements an Ember+ consumer that communicates with an Ember+ provider as specified in the
     /// <b>Ember+ Specification</b><cite>Ember+ Specification</cite>.</summary>
-    /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree held by
-    /// the provider.</typeparam>
+    /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree published
+    /// by the provider.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection where TRoot : Root<TRoot>
     {
@@ -43,7 +43,8 @@ namespace Lawo.EmberPlus.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Gets the root object.</summary>
+        /// <summary>Gets the root of the object tree that mirrors the state of the tree published by the provider.
+        /// </summary>
         public TRoot Root
         {
             get { return this.root; }

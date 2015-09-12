@@ -6,12 +6,11 @@ namespace Lawo.IO
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>Transparently encodes and decodes the communication with a telnet server as defined in
-    /// <a href="http://tools.ietf.org/html/rfc854">RFC 854</a>.</summary>
+    /// <see href="http://tools.ietf.org/html/rfc854">RFC 854</see>.</summary>
     /// <remarks>
     /// <para>A call to <see cref="ReadAsync"/> removes data from the internal read buffer. If the internal buffer is
     /// empty, it is filled first by invoking <see cref="ReadAsyncCallback"/>. The data is then decoded and the decoded

@@ -10,9 +10,8 @@ namespace Lawo.EmberPlus.Model
 
     using Ember;
 
-    /// <summary>Represents a matrix in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a matrix in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TTarget">The type of the node containing the parameters of a single target.</typeparam>
     /// <typeparam name="TSource">The type of the node containing the parameters of a single source.</typeparam>
     /// <typeparam name="TConnection">The type of the node containing the parameters of a single connection.</typeparam>

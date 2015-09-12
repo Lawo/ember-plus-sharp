@@ -7,9 +7,8 @@ namespace Lawo.EmberPlus.Model
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>Represents a parameter with a value type value in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a parameter with a value type value in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <threadsafety static="true" instance="false"/>

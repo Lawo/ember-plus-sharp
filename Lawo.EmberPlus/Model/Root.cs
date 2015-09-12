@@ -8,12 +8,12 @@ namespace Lawo.EmberPlus.Model
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
+
     using Ember;
     using Glow;
 
-    /// <summary>Represents the root containing a number of static elements in the protocol specified in the
-    /// <a href="http://ember-plus.googlecode.com/svn/trunk/documentation/Ember+%20Documentation.pdf">Ember+
-    /// Specification</a>.</summary>
+    /// <summary>Represents a root object containing a number of static elements accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <remarks>
     /// <para><typeparamref name="TMostDerived"/> must contain a property with a getter and a setter for each root

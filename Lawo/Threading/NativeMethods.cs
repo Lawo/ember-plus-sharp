@@ -13,7 +13,7 @@ namespace Lawo.Threading
     public static class NativeMethods
     {
         /// <summary>Returns the return value of
-        /// <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms683183.aspx">GetCurrentThreadId</a>.
+        /// <see href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms683183.aspx">GetCurrentThreadId</see>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Expensive method.")]
         [SuppressMessage("Microsoft.Interoperability", "CA1401:PInvokesShouldNotBeVisible", Justification = "Public access to this method is not a security concern.")]
