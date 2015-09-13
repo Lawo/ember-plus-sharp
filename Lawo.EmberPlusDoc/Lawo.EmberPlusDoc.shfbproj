@@ -115,13 +115,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Content" />
+    <Folder Include="Content\Introduction" />
+    <Folder Include="Content\DynamicInterface" />
+    <Folder Include="Content\Prerequisites" />
     <Folder Include="icons" />
     <Folder Include="media" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bibliography.xml" />
+    <None Include="Content\DynamicInterface\DynamicInterface.aml" />
+    <None Include="Content\DynamicInterface\DynamicLocalCopy.aml" />
     <None Include="Content\EmberNamespace.aml" />
+    <None Include="Content\Introduction\Introduction.aml" />
     <None Include="Content\ModelNamespace.aml" />
+    <None Include="Content\Prerequisites\Prerequisites.aml" />
     <None Include="Content\S101Namespace.aml" />
     <None Include="Content\Welcome.aml" />
     <Content Include="media\sapphire.EmBER">

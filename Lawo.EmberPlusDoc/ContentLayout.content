@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" isSelected="true" title="Welcome to the Ember+ Sharp Library">
+  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Library">
     <HelpKeywords>
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>
   </Topic>
-  <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" title="The Lawo.EmberPlus.Model Namespace" />
+  <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" isExpanded="true" title="The Lawo.EmberPlus.Model Namespace">
+    <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Prerequisites" />
+    <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Introduction" />
+    <Topic id="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" visible="True" isExpanded="true" title="Dynamic Interface">
+      <Topic id="f6285c3c-ef54-453e-90ad-5546ec1a7a1d" visible="True" isSelected="true" title="Create a Local Copy of the Provider Database" />
+    </Topic>
+  </Topic>
   <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="The Lawo.EmberPlus.S101 Namespace" />
   <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="The Lawo.EmberPlus.Ember Namespace" />
 </Topics>

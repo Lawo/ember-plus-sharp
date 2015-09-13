@@ -2,58 +2,19 @@
 <topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction>
-      <autoOutline>2</autoOutline>
-    </introduction>
-    <section address="Prerequisites">
-      <title>Prerequisites</title>
-      <content/>
-      <sections>
-        <section address="TinyEmber">
-          <title>Tiny Ember+</title>
-          <content>
-            <para>
-              This tutorial will show working code that can be copy-pasted into a console application, which can then be
-              used to connect to <application>Tiny Ember+</application>. <application>Tiny Ember+</application> is a
-              part of the <application>Ember+ SDK</application>, which can be downloaded from the
-              <externalLink>
-                <linkText>Ember+ Releases Page</linkText>
-                <linkUri>http://github.com/Lawo/ember-plus/releases</linkUri>
-              </externalLink>.
-            </para>
-            <para>
-              Download
-              <externalLink>
-                <linkText>sapphire.EmBER</linkText>
-                <linkUri>../media/sapphire.EmBER</linkUri>
-              </externalLink>
-              and open it in <application>Tiny Ember+</application>.
-            </para>
-            <alert class="note">
-              <para>
-                Please keep <application>Tiny Ember+</application> running throughout this tutorial.
-              </para>
-            </alert>
-            <para>The fully expanded tree should look like this:</para>
-            <mediaLink><image xlink:href="TinyEmberPlusTree"/></mediaLink>
-          </content>
-        </section>
-        <section address="Assemblies">
-          <title>Assemblies</title>
-          <content>
-            <para>
-              The code shown in this tutorial requires references to the <application>Lawo</application> and
-              <application>Lawo.EmberPlus</application> assemblies. You can either reference these assemblies directly
-              or pull the associated projects into your solution and add project references. The projects can be found
-              on the
-              <externalLink>
-                <linkText>Ember+ Sharp Repository Page</linkText>
-                <linkUri>http://github.com/Lawo/ember-plus-sharp</linkUri>
-              </externalLink>.
-            </para>
-          </content>
-        </section>
-      </sections>
+    <introduction/>
+    <section>
+      <content>
+        <para>This topic contains the following sections:</para>
+        <list class="bullet">
+          <listItem><para><link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67" /></para></listItem>
+          <listItem><para><link xlink:href="50028a38-6bef-4010-8e08-23fc3d5ae501" /></para></listItem>
+          <listItem><para><link xlink:href="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" /></para></listItem>
+          <listItem><para></para></listItem>
+          <listItem><para></para></listItem>
+          <listItem><para></para></listItem>
+        </list>
+      </content>
     </section>
     <relatedTopics/>
   </developerConceptualDocument>
