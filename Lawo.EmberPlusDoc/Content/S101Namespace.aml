@@ -9,17 +9,21 @@
       <title>Tutorial</title>
       <content>
         <para>
-          This namespace currently offers abstractions for S101 messages
+          The most frequently used class of this namespace certainly is
+          <codeEntityReference>T:Lawo.EmberPlus.S101.S101Client</codeEntityReference>, the usage of which is
+          demonstrated on the <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/> page.
+        </para>
+        <para>
+          The other types in this namespace offer lower level abstractions like S101 messages
           (<codeEntityReference>T:Lawo.EmberPlus.S101.S101Message</codeEntityReference>) plus
           commands (<codeEntityReference>T:Lawo.EmberPlus.S101.KeepAliveRequest</codeEntityReference>,
           <codeEntityReference>T:Lawo.EmberPlus.S101.KeepAliveResponse</codeEntityReference>,
-          <codeEntityReference>T:Lawo.EmberPlus.S101.EmberData</codeEntityReference>) and
-          supports their encoding (<codeEntityReference>T:Lawo.EmberPlus.S101.S101Writer</codeEntityReference>) and
-          decoding (<codeEntityReference>T:Lawo.EmberPlus.S101.S101Reader</codeEntityReference>).
+          <codeEntityReference>T:Lawo.EmberPlus.S101.EmberData</codeEntityReference>) as well as their encoding
+          (<codeEntityReference>T:Lawo.EmberPlus.S101.S101Writer</codeEntityReference>) and
+          decoding (<codeEntityReference>T:Lawo.EmberPlus.S101.S101Reader</codeEntityReference>). The usage is
+          demonstrated in the following test:
         </para>
-        <para>
-          The usage is demonstrated in the following test:
-        </para>
+        <code source="..\Lawo.EmberPlusTest\S101\S101WriterTest.cs" region="Payload Test" language="c#"/>
       </content>
     </section>
     <relatedTopics/>

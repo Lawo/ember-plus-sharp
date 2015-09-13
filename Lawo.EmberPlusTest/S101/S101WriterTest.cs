@@ -52,8 +52,8 @@ namespace Lawo.EmberPlus.S101
             AsyncPump.Run(
                 async () =>
                 {
-                    //// [Payload Test]
-                    var writtenMessage = EmberDataMessage;
+                    #region Payload Test
+                    var writtenMessage = new S101Message(0x00, new EmberData(0x01, 0x0A, 0x02));
                     var writtenPayload = new byte[8192];
                     this.Random.NextBytes(writtenPayload);
 
@@ -98,7 +98,7 @@ namespace Lawo.EmberPlus.S101
 
                         await reader.DisposeAsync(CancellationToken.None);
                     }
-                    //// [Payload Test]
+                    #endregion
                 });
         }
 
