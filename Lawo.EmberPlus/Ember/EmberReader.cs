@@ -13,8 +13,8 @@ namespace Lawo.EmberPlus.Ember
     using IO;
 
     /// <summary>Represents a reader that provides the means to read BER-encoded input, as specified in
-    /// <b>X.690</b><cite>X.690</cite>.</summary>
-    /// <remarks>Only the subset defined in the <b>Ember+ Specification</b><cite>Ember+ Specification</cite> is
+    /// <i>"X.690"</i><cite>X.690</cite>.</summary>
+    /// <remarks>Only the subset defined in the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite> is
     /// supported.</remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberReader : IDisposable
@@ -596,7 +596,7 @@ namespace Lawo.EmberPlus.Ember
                 ((emberId == Sequence) || (emberId == Set) || (emberId.Class == Class.Application));
         }
 
-        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.2.</summary>
+        /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.2.</summary>
         private static EmberId ReadIdentifier(ReadBuffer readBuffer)
         {
             readBuffer.Fill(1);
@@ -607,7 +607,7 @@ namespace Lawo.EmberPlus.Ember
             return new EmberId(theClass, isConstructed, (number <= 30) ? number : Read7Bit(readBuffer));
         }
 
-        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.5 and
+        /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.5 and
         /// <see href="http://technet.microsoft.com/en-us/library/0b34tf65.aspx">IEEE Floating-Point
         /// Representation</see>. Of course the assumption is that C# has the same floating point representation as C++
         /// (pretty safe, as floating point calculations are done by the hardware).</summary>
@@ -729,7 +729,7 @@ namespace Lawo.EmberPlus.Ember
             return BitConverter.Int64BitsToDouble(sign | exponent | mantissa);
         }
 
-        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.3.</summary>
+        /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.3.</summary>
         private static int? ReadLength(ReadBuffer readBuffer)
         {
             var position = readBuffer.Position;

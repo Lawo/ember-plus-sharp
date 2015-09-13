@@ -4,7 +4,7 @@
 
 namespace Lawo.EmberPlus.Ember
 {
-    /// <summary>Describes the BER relative object identifier type as specified in <b>X.690</b><cite>X.690</cite>,
+    /// <summary>Describes the BER relative object identifier type as specified in <i>"X.690"</i><cite>X.690</cite>,
     /// chapter 8.20.</summary>
     /// <threadsafety static="true" instance="false"/>
     public static class BerRelativeObjectIdentifier

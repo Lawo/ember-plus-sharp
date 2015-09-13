@@ -12,8 +12,8 @@ namespace Lawo.EmberPlus.Ember
     using IO;
 
     /// <summary>Represents a writer that provides the means to generate BER-encoded output, as specified in
-    /// <b>X.690</b><cite>X.690</cite>.</summary>
-    /// <remarks>Only the subset defined in the <b>Ember+ Specification</b><cite>Ember+ Specification</cite> is
+    /// <i>"X.690"</i><cite>X.690</cite>.</summary>
+    /// <remarks>Only the subset defined in the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite> is
     /// supported.</remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberWriter : IDisposable
@@ -323,7 +323,7 @@ namespace Lawo.EmberPlus.Ember
             return shift;
         }
 
-        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.2.</summary>
+        /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.2.</summary>
         private static void WriteIdentifier(WriteBuffer writeBuffer, EmberId emberId)
         {
             if (emberId.Number <= 30)
@@ -337,7 +337,7 @@ namespace Lawo.EmberPlus.Ember
             }
         }
 
-        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.3.</summary>
+        /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.3.</summary>
         private static void WriteLength(WriteBuffer writeBuffer, int? length, int shift, int lengthLength)
         {
             if (lengthLength == 1)
@@ -351,7 +351,7 @@ namespace Lawo.EmberPlus.Ember
             }
         }
 
-        /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.5 and
+        /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.5 and
         /// <see href="http://technet.microsoft.com/en-us/library/0b34tf65.aspx">IEEE Floating-Point
         /// Representation</see>. Of course the assumption is that C# has the same floating point representation as C++
         /// (pretty safe, as floating point calculations are done by the hardware).</summary>

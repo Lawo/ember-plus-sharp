@@ -7,8 +7,8 @@ namespace Lawo.EmberPlus.Ember
     using System;
     using System.Globalization;
 
-    /// <summary>Represents a BER identifier as specified in <b>X.690</b><cite>X.690</cite>, chapter 8.1.2.</summary>
-    /// <remarks>Only the subset defined in the <b>Ember+ Specification</b><cite>Ember+ Specification</cite> is
+    /// <summary>Represents a BER identifier as specified in <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.2.</summary>
+    /// <remarks>Only the subset defined in the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite> is
     /// supported.</remarks>
     /// <threadsafety static="true" instance="false"/>
     public struct EmberId : IEquatable<EmberId>

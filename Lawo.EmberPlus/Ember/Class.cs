@@ -4,7 +4,7 @@
 
 namespace Lawo.EmberPlus.Ember
 {
-    /// <summary>See <b>X.690</b><cite>X.690</cite>, chapter 8.1.2.2.</summary>
+    /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.2.2.</summary>
     internal enum Class
     {
         /// <summary>Universal class.</summary>

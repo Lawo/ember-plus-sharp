@@ -13,7 +13,7 @@ namespace Lawo.EmberPlus.S101
     using Threading.Tasks;
 
     /// <summary>Represents a writer that provides the means to generate S101-encoded messages.</summary>
-    /// <remarks>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".
+    /// <remarks>See the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>, chapter "Message Framing".
     /// </remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Writer

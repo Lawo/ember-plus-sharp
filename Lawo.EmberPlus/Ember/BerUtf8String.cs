@@ -4,7 +4,7 @@
 
 namespace Lawo.EmberPlus.Ember
 {
-    /// <summary>Describes the BER UTF8String type as specified in <b>X.690</b><cite>X.690</cite>, chapter 8.21.10.
+    /// <summary>Describes the BER UTF8String type as specified in <i>"X.690"</i><cite>X.690</cite>, chapter 8.21.10.
     /// </summary>
     /// <threadsafety static="true" instance="false"/>
     public static class BerUtf8String

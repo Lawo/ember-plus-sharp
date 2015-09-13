@@ -14,7 +14,7 @@ namespace Lawo.EmberPlus.S101
     using IO;
 
     /// <summary>Represents a command indicating that the following payload contains EmBER data.</summary>
-    /// <remarks>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".
+    /// <remarks>See the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>, chapter "Message Framing".
     /// </remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberData : S101Command

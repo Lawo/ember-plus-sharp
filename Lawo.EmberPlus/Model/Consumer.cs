@@ -19,7 +19,7 @@ namespace Lawo.EmberPlus.Model
     using S101;
 
     /// <summary>Implements an Ember+ consumer that communicates with an Ember+ provider as specified in the
-    /// <b>Ember+ Specification</b><cite>Ember+ Specification</cite>.</summary>
+    /// <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>.</summary>
     /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree published
     /// by the provider.</typeparam>
     /// <threadsafety static="true" instance="false"/>

@@ -5,7 +5,7 @@
 namespace Lawo.EmberPlus.S101
 {
     /// <summary>Represents a Keep Alive Request.</summary>
-    /// <remarks>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".
+    /// <remarks>See the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>, chapter "Message Framing".
     /// </remarks>
     /// <threadsafety static="true" instance="false"/>
     public sealed class KeepAliveRequest : S101Command

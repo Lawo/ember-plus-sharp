@@ -13,7 +13,7 @@ namespace Lawo.EmberPlus.S101
 
     /// <summary>Represents a message excluding payload.</summary>
     /// <remarks>
-    /// <para>See the <b>Ember+ Specification</b><cite>Ember+ Specification</cite>, chapter "Message Framing".</para>
+    /// <para>See the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>, chapter "Message Framing".</para>
     /// <para>Non-Ember messages are not currently supported.</para>
     /// </remarks>
     /// <threadsafety static="true" instance="false"/>

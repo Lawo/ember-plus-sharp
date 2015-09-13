@@ -53,17 +53,18 @@
     <CatalogProductId>VS</CatalogProductId>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="Lawo" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.ComponentModel"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Diagnostics.Tracing"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.IO" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.IO"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Linq.Expressions"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Reflection"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Threading" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Threading"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Threading.Tasks"/&gt; namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.Model" isDocumented="True">Contains types that support the creation of an Ember+ consumer.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.S101" isDocumented="True">Contains a class that establishes and maintains an S101 connection as well as supporting abstractions for S101 messages and commands.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.Glow" isDocumented="True">Contains types that describe the structure of the Glow DTD.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Lawo.EmberPlus.Ember" isDocumented="True">Contains types that support the encoding and decoding of EmBER messages.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="Lawo.ComponentModel" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.ComponentModel"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Diagnostics.Tracing" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Diagnostics.Tracing"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.IO" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.IO"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Linq.Expressions" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Linq.Expressions"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Reflection" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Reflection"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Threading" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Threading"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.Threading.Tasks" isDocumented="True">Contains types related to the ones in the &lt;see cref="N:System.Threading.Tasks"/&gt; namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.Model" isDocumented="True">Contains types that support the creation of an Ember+ consumer.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.S101" isDocumented="True">Contains a class that establishes and maintains an S101 connection as well as supporting abstractions for S101 messages and commands.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.Glow" isDocumented="True">Contains types that describe the structure of the Glow DTD.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Lawo.EmberPlus.Ember" isDocumented="True">Contains types that support the encoding and decoding of EmBER messages.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
     <IndentHtml>False</IndentHtml>
@@ -114,14 +115,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Content" />
-    <Folder Include="Content\VersionHistory" />
     <Folder Include="icons" />
     <Folder Include="media" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bibliography.xml" />
-    <None Include="Content\VersionHistory\v1.0.0.0.aml" />
-    <None Include="Content\VersionHistory\VersionHistory.aml" />
+    <None Include="Content\EmberNamespace.aml" />
+    <None Include="Content\ModelNamespace.aml" />
+    <None Include="Content\S101Namespace.aml" />
     <None Include="Content\Welcome.aml" />
   </ItemGroup>
   <ItemGroup>
