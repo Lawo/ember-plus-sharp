@@ -3,7 +3,7 @@
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
-      <autoOutline/>
+      <autoOutline>2</autoOutline>
     </introduction>
     <section address="Overview">
       <title>Overview</title>
@@ -25,7 +25,164 @@
           communication, as described on the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
           <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/> pages.
         </para>
+        <para>
+          All classes in the library are transport-agnostic. <application>Ember+</application> protocol messages can be
+          sent over any bidirectional connection-oriented transport capable of sending and receiving bytes, like e.g.
+          TCP/IP, named pipes, RS232, and so on.
+        </para>
       </content>
+    </section>
+    <section address="FutureDirections">
+      <title>Future Directions</title>
+      <content>
+        <para>
+          The following <application>Ember+</application> features are not currently supported but will be implemented
+          when the need arises:
+        </para>
+        <list class="ordered">
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Matrices</linkText>
+                <linkUri>https://redmine.lawo.de/redmine/issues/1309</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Streams</linkText>
+                <linkUri>https://redmine.lawo.de/redmine/issues/1314</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>S101 out-of-frame bytes</linkText>
+                <linkUri>https://redmine.lawo.de/redmine/issues/1315</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>S101 Versioning</para>
+            <list class="bullet">
+              <listItem>
+                <para>Messages with a Message Type not equal to 0x0E</para>
+              </listItem>
+              <listItem>
+                <para>Commands with a Version not equal to 0x01</para>
+              </listItem>
+            </list>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="KnownIssues">
+      <title>Known Issues/Limitations</title>
+      <content/>
+      <sections>
+        <section address="IndefiniteLengthForm">
+          <title>Indefinite Length Form for Outgoing Messages</title>
+          <content>
+            <para>
+              Whenever permitted by the specification, the library uses the indefinite length form for payloads of
+              outgoing messages with <codeEntityReference>T:Lawo.EmberPlus.S101.EmberData</codeEntityReference> commands
+              (both forms are supported for incoming messages). This simplifies the implementation and reduces the
+              necessary memory and CPU resources to assemble a message at the expense of message size.
+            </para>
+            <para>
+              Informal measurements for messages with
+              <codeEntityReference>T:Lawo.EmberPlus.S101.EmberData</codeEntityReference> command and Glow DTD have shown
+              the following overheads:
+            </para>
+            <list class="bullet">
+              <listItem>
+                <para>Small messages with nested containers and little other data:</para>
+                <list class="bullet">
+                  <listItem>
+                    <para>
+                      100% for a message with an empty <codeInline>RootElementCollection</codeInline> (worst case)
+                    </para>
+                  </listItem>
+                  <listItem>
+                    <para>~50% for typical messages</para>
+                  </listItem>
+                </list>
+              </listItem>
+              <listItem>
+                <para>
+                  &lt;20% for larger messages with more data. For example, the overhead for the following payload is
+                  10.39%:
+                </para>
+                <code language="xml">
+                  <![CDATA[
+                  <Root type="RootElementCollection">
+                    <RootElement type="Node">
+                      <number type="Integer">7</number>
+                      <children type="ElementCollection">
+                        <Element type="Node">
+                          <number type="Integer">5</number>
+                          <children type="ElementCollection">
+                            <Element type="Node">
+                              <number type="Integer">0</number>
+                              <children type="ElementCollection">
+                                <Element type="Node">
+                                  <number type="Integer">0</number>
+                                  <contents type="Set">
+                                    <identifier type="UTF8String">Properties</identifier>
+                                    <description type="UTF8String">Properties</description>
+                                    <isOnline type="Boolean">true</isOnline>
+                                  </contents>
+                                </Element>
+                                <Element type="Node">
+                                  <number type="Integer">1</number>
+                                  <contents type="Set">
+                                    <identifier type="UTF8String">TestStaticItems</identifier>
+                                    <description type="UTF8String">TestStaticItems</description>
+                                    <isOnline type="Boolean">true</isOnline>
+                                  </contents>
+                                </Element>
+                                <Element type="Node">
+                                  <number type="Integer">2</number>
+                                  <contents type="Set">
+                                    <identifier type="UTF8String">TestDynamicItems</identifier>
+                                    <description type="UTF8String">TestDynamicItems</description>
+                                    <isOnline type="Boolean">true</isOnline>
+                                  </contents>
+                                </Element>
+                              </children>
+                            </Element>
+                          </children>
+                        </Element>
+                      </children>
+                    </RootElement>
+                  </Root>
+                  ]]>
+                </code>
+              </listItem>
+            </list>
+            <para>
+              Bandwidth-wise it seems the indefinite length form approach will have a barely noticeable impact because
+              the library allows for value changes to multiple parameters to be sent in a single message:
+            </para>
+            <list class="bullet">
+              <listItem>
+                <para>
+                  A change that involves many parameters will thus be sent in a large message where the overhead is
+                  typically below 20%.
+                </para>
+              </listItem>
+              <listItem>
+                <para>
+                  Changes involving few parameters will be relatively rare with small message sizes, which makes the
+                  large percentual overheads insignificant.
+                </para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+      </sections>
     </section>
     <bibliography/>
     <relatedTopics/>
