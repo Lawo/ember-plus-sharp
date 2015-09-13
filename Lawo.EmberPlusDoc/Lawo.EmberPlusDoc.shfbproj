@@ -124,12 +124,26 @@
     <None Include="Content\ModelNamespace.aml" />
     <None Include="Content\S101Namespace.aml" />
     <None Include="Content\Welcome.aml" />
+    <Content Include="media\sapphire.EmBER">
+      <ImageId>sapphire</ImageId>
+      <AlternateText>sapphire</AlternateText>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ContentLayout Include="ContentLayout.content" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\GlowAnalyzerProxy.png">
+      <ImageId>GlowAnalyzerProxy</ImageId>
+      <AlternateText>Glow Analyzer Proxy</AlternateText>
+    </Image>
+    <Image Include="media\TinyEmberPlusTree.png">
+      <ImageId>TinyEmberPlusTree</ImageId>
+      <AlternateText>Tiny Ember Plus Tree</AlternateText>
+    </Image>
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />

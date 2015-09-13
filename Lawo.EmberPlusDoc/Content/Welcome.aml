@@ -9,7 +9,7 @@
       <title>Overview</title>
       <content>
         <para>
-          This library implements the protocol described in the
+          This library implements most parts of the protocol described in the
           <quoteInline>Ember+ Specification</quoteInline><cite>Ember+ Specification</cite>. If you are unfamiliar with
           <application>Ember+</application>, it is recommended to read the <quoteInline>Introduction</quoteInline>
           (currently pages 8 and 9).
