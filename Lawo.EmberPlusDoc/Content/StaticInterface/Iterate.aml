@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="0957f1fa-abf4-4fb8-9430-1230ce2c6947" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <autoOutline/>
+    </introduction>
+    <section address="DatabaseClasses">
+      <title>Database Classes</title>
+      <content>
+      </content>
+    </section>
+    <section address="MainMethod">
+      <title>Main Method</title>
+      <content>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

@@ -26,9 +26,7 @@
           and open it in <application>Tiny Ember+</application>.
         </para>
         <alert class="note">
-          <para>
-            Please keep <application>Tiny Ember+</application> running throughout this tutorial.
-          </para>
+          <para>Please keep <application>Tiny Ember+</application> running throughout this tutorial.</para>
         </alert>
         <para>The fully expanded tree should look like this:</para>
         <mediaLink>

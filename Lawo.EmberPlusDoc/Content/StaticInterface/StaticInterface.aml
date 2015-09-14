@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="06184592-a364-4e11-9721-551b6316ffc1" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        The static interface should be used in applications that have detailed expectations about the contents of the
+        provider database. The static interface cannot be used in applications that need to connect to providers with
+        databases of unknown contents.
+      </para>
+      <para>
+        The main difference between the dynamic and the static interface is that the former will query the provider for
+        all elements and replicate them in the local database while the latter will only query and replicate the
+        elements that the client code is interested in. Apart from that the static interface offers a superset of
+        the functionality of the dynamic one.
+      </para>
+    </introduction>
+    <section>
+      <content>
+        <para>This topic contains the following subtopics:</para>
+        <list class="bullet">
+          <listItem><para><link xlink:href="0957f1fa-abf4-4fb8-9430-1230ce2c6947"/></para></listItem>
+          <listItem><para><link xlink:href="e3a579ce-d73e-459b-ab70-48b79cc9e0c8"/></para></listItem>
+          <listItem><para><link xlink:href="86ad72ee-d788-4511-9608-c27e29445f96"/></para></listItem>
+          <listItem><para><link xlink:href="15613e0f-7337-4a90-b538-1c402b4f8ad7"/></para></listItem>
+          <listItem><para><link xlink:href="3d672617-cf26-40a0-bae0-9b3df394cf0e"/></para></listItem>
+        </list>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

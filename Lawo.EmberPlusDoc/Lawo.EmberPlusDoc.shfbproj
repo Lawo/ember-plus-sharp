@@ -75,12 +75,12 @@
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
-  <basePath value="{@HtmlEncProjectFolder}" />
-  <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
-  <allowMissingSource value="false" />
-  <removeRegionMarkers value="false" />
-  <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
-</component>
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
+          <allowMissingSource value="false" />
+          <removeRegionMarkers value="false" />
+          <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
+        </component>
       </ComponentConfig>
     </ComponentConfigurations>
     <FeedbackEMailLinkText>Andreas Huber</FeedbackEMailLinkText>
@@ -117,6 +117,7 @@
     <Folder Include="Content" />
     <Folder Include="Content\Introduction" />
     <Folder Include="Content\DynamicInterface" />
+    <Folder Include="Content\StaticInterface" />
     <Folder Include="Content\Prerequisites" />
     <Folder Include="icons" />
     <Folder Include="media" />
@@ -134,6 +135,12 @@
     <None Include="Content\ModelNamespace.aml" />
     <None Include="Content\Prerequisites\Prerequisites.aml" />
     <None Include="Content\S101Namespace.aml" />
+    <None Include="Content\StaticInterface\Iterate.aml" />
+    <None Include="Content\StaticInterface\NullableParameters.aml" />
+    <None Include="Content\StaticInterface\OptionalElements.aml" />
+    <None Include="Content\StaticInterface\SendLocalChanges.aml" />
+    <None Include="Content\StaticInterface\StaticInterface.aml" />
+    <None Include="Content\StaticInterface\UnboundedNodes.aml" />
     <None Include="Content\Welcome.aml" />
     <Content Include="media\sapphire.EmBER">
       <ImageId>sapphire</ImageId>
