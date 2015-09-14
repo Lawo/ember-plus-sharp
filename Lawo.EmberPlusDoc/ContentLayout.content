@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Library">
-    <HelpKeywords>
-      <HelpKeyword index="K" term="Welcome" />
-    </HelpKeywords>
-  </Topic>
+  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Library"/>
   <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" isExpanded="true" title="The Lawo.EmberPlus.Model Namespace">
     <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Prerequisites" />
     <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Introduction" />

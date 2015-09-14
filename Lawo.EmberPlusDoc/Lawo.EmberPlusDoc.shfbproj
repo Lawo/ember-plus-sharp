@@ -124,10 +124,10 @@
   <ItemGroup>
     <None Include="bibliography.xml" />
     <None Include="Content\DynamicInterface\DynamicInterface.aml" />
-    <None Include="Content\DynamicInterface\DynamicIterate.aml" />
-    <None Include="Content\DynamicInterface\DynamicLocalCopy.aml" />
+    <None Include="Content\DynamicInterface\Iterate.aml" />
+    <None Include="Content\DynamicInterface\LocalCopy.aml" />
     <None Include="Content\DynamicInterface\ReactToChanges.aml" />
-    <None Include="Content\DynamicInterface\DynamicSendLocalChanges.aml" />
+    <None Include="Content\DynamicInterface\SendLocalChanges.aml" />
     <None Include="Content\DynamicInterface\HandleCommunicationErrors.aml" />
     <None Include="Content\EmberNamespace.aml" />
     <None Include="Content\Introduction\Introduction.aml" />
