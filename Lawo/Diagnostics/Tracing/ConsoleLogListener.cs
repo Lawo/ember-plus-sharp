@@ -4,7 +4,10 @@
 
 namespace Lawo.Diagnostics.Tracing
 {
+    using System;
+    using System.Diagnostics;
     using System.Diagnostics.Tracing;
+    using System.Globalization;
 
     /// <summary>Console event listener listens to log events and writes them to the console in debug mode.</summary>
     /// <threadsafety static="true" instance="false"/>
@@ -38,9 +41,9 @@ namespace Lawo.Diagnostics.Tracing
             {
 #if DEBUG
                 const string Format = "{0:yyyy-MM-dd HH\\:mm\\:ss\\.fff} {1, -13} [{3}] {6} : {2}";
-                var payload = eventData.Payload;
-                var newFormatedLine = string.Format(CultureInfo.InvariantCulture, Format, DateTime.Now, eventData.Level, payload[0], payload[1], payload[2], payload[3], payload[4]);
-
+                var p = eventData.Payload;
+                var newFormatedLine = string.Format(
+                    CultureInfo.InvariantCulture, Format, DateTime.Now, eventData.Level, p[0], p[1], p[2], p[3], p[4]);
                 Debug.WriteLine(newFormatedLine);
 #endif
             }

@@ -15,12 +15,23 @@
     <section address="CreateTheProject">
       <title>Create the Project</title>
       <content>
-        <para>
-          Open <application>Visual Studio 2015</application> and create a new <application>Console
-          Application</application> project that uses the <application>.NET Framework 4.5</application>. Add references
-          to <application>Lawo</application> and <application>Lawo.EmberPlus</application>, see
-          <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67#Assemblies"/>.
-        </para>
+        <list class="ordered">
+          <listItem>
+            <para>Start <application>Visual Studio 2015</application>.</para>
+          </listItem>
+          <listItem>
+            <para>
+              Create a new <application>Console Application</application> project that uses the <application>.NET
+              Framework 4.5</application>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Add references to <application>Lawo</application> and <application>Lawo.EmberPlus</application>, see
+              <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67#Assemblies"/>.
+            </para>
+          </listItem>
+        </list>
       </content>
     </section>
     <section address="UsingDeclarations">
@@ -38,6 +49,43 @@
           Since these first steps will be mostly the same whenever we'd like to connect to a provider, we'll put them
           into a handy method:
         </para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="S101 Connect Method" language="c#"/>
+      </content>
+    </section>
+    <section address="RootClass">
+      <title>Root Class</title>
+      <content>
+        <para>
+          Next, we need to create a new nested class, an object of which will henceforth represent the root of our local
+          copy of the provider database.
+        </para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Dynamic Root Class" language="c#"/>
+        <alert class="note">
+          <para>
+            The library requires the creation of such a class for the fully dynamic use case although it isn't
+            technically necessary. We will go into the rationale for this later.
+          </para>
+        </alert>
+      </content>
+    </section>
+    <section address="MainMethod">
+      <title>Main Method</title>
+      <content>
+        <para>
+          We can now connect to any provider with the following code:
+        </para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Main Method" language="c#"/>
+        <alert class="note">
+          <para>
+            The call to
+            <codeEntityReference qualifyHint="true">M:Lawo.Threading.Tasks.AsyncPump.Run(System.Func{System.Threading.Tasks.Task})</codeEntityReference>
+            is only necessary because there is no direct support for <codeInline>async</codeInline> methods in a
+            <application>Console Application</application>. In GUI applications (e.g. <application>Windows
+            Forms</application>, <application>WPF</application>, <application>Windows Store</application>) the
+            <codeInline>async</codeInline> methods are typically called directly from an
+            <codeInline>async void</codeInline> event handler.
+          </para>
+        </alert>
       </content>
     </section>
     <relatedTopics/>

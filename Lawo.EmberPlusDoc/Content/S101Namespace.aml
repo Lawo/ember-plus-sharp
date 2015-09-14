@@ -11,7 +11,7 @@
         <para>
           The most frequently used class of this namespace certainly is
           <codeEntityReference>T:Lawo.EmberPlus.S101.S101Client</codeEntityReference>, the usage of which is
-          demonstrated by the <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/> topic.
+          demonstrated in the <link xlink:href="f6285c3c-ef54-453e-90ad-5546ec1a7a1d#TcpConnectionAndS101" /> section.
         </para>
         <para>
           The other types in this namespace offer lower level abstractions like S101 messages

@@ -22,13 +22,13 @@
         </para>
         <para>
           As a byproduct, this library also offers support for lower level <application>Ember+</application>
-          communication, as described on the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
-          <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/> pages.
+          communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
+          <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/> topics.
         </para>
         <para>
           All classes in the library are transport-agnostic. <application>Ember+</application> protocol messages can be
           sent over any bidirectional connection-oriented transport capable of sending and receiving bytes, like e.g.
-          TCP/IP, named pipes, RS232, and so on.
+          <application>TCP/IP</application>, named pipes, <application>RS232</application>, and so on.
         </para>
       </content>
     </section>
