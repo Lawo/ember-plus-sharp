@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" revisionNumber="1">
   <developerConceptualDocument
-    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
-    xmlns:xlink="http://www.w3.org/1999/xlink">
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction/>
     <section>
       <content>
         <para>
-          On an abstract level, a <application>Ember+</application> provider as specified in the
+          On an abstract level, an <application>Ember+</application> provider as specified in the
           <quoteInline>Ember+ Specification</quoteInline><cite>Ember+ Specification</cite> can be seen as a database for
-          elements (an element can either be a parameter, a node, a matrix or a function). When a
+          elements (an element can either be a parameter, a node, a matrix or a function). When an
           <application>Ember+</application> consumer connects to a provider, the consumer queries the provider and
           builds an (often partial) local copy of the database. The two databases are then kept in sync through the
           exchange of appropriate messages until the consumer decides to terminate the connection.

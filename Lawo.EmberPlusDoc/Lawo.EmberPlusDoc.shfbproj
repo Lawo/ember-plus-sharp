@@ -126,6 +126,7 @@
     <None Include="Content\DynamicInterface\DynamicInterface.aml" />
     <None Include="Content\DynamicInterface\DynamicIterate.aml" />
     <None Include="Content\DynamicInterface\DynamicLocalCopy.aml" />
+    <None Include="Content\DynamicInterface\DynamicReactToChanges.aml" />
     <None Include="Content\EmberNamespace.aml" />
     <None Include="Content\Introduction\Introduction.aml" />
     <None Include="Content\ModelNamespace.aml" />

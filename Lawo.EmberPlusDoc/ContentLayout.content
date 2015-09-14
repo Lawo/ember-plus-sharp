@@ -10,7 +10,8 @@
     <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Introduction" />
     <Topic id="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" visible="True" isExpanded="true" title="Dynamic Interface">
       <Topic id="f6285c3c-ef54-453e-90ad-5546ec1a7a1d" visible="True" title="Create a Local Copy of the Provider Database" />
-      <Topic id="e0972d29-96f3-4dea-936b-f77001d077b1" visible="True" isSelected="true" title="Iterate over the Local Database" />
+      <Topic id="e0972d29-96f3-4dea-936b-f77001d077b1" visible="True" title="Iterate over the Local Database" />
+      <Topic id="7cdb703a-14dd-42d3-8ea2-28a9b8af6663" visible="True" isSelected="true" title="React to Changes" />
     </Topic>
   </Topic>
   <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="The Lawo.EmberPlus.S101 Namespace" />
