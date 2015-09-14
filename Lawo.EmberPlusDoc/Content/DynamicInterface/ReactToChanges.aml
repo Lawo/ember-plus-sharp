@@ -26,6 +26,24 @@
         </para>
       </content>
     </section>
+    <section address="CollectionChanges">
+      <title>Collection Changes</title>
+      <content>
+        <para>
+          All exposed collections implement the
+          <codeEntityReference>T:System.Collections.Specialized.INotifyCollectionChanged</codeEntityReference> interface.
+        </para>
+        <alert class="note">
+          <para>
+            Throughout its lifetime, a consumer automatically sends <codeInline>getDirectory</codeInline> commands to
+            query for children client code has declared interest in. This is done recursively down to leaf elements and
+            new nodes are only announced through
+            <codeEntityReference>T:System.Collections.Specialized.INotifyCollectionChanged</codeEntityReference>
+            once all children (including grandchildren, great-grandchildren, etc.) have been received from the provider.
+          </para>
+        </alert>
+      </content>
+    </section>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

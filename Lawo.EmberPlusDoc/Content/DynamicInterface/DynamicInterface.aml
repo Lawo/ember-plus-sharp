@@ -12,15 +12,13 @@
     </introduction>
     <section>
       <content>
-        <para>This topic contains the following sections:</para>
+        <para>This topic contains the following subtopics:</para>
         <list class="bullet">
           <listItem><para><link xlink:href="f6285c3c-ef54-453e-90ad-5546ec1a7a1d"/></para></listItem>
           <listItem><para><link xlink:href="e0972d29-96f3-4dea-936b-f77001d077b1"/></para></listItem>
           <listItem><para><link xlink:href="7cdb703a-14dd-42d3-8ea2-28a9b8af6663"/></para></listItem>
-          <listItem><para></para></listItem>
-          <listItem><para></para></listItem>
-          <listItem><para></para></listItem>
-          <listItem><para></para></listItem>
+          <listItem><para><link xlink:href="84d499e7-ec08-4311-8038-987c167eaa43" /></para></listItem>
+          <listItem><para><link xlink:href="df1c42d3-bc00-4786-88d6-2372b281043a" /></para></listItem>
         </list>
       </content>
     </section>
