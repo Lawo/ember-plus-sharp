@@ -115,32 +115,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Content" />
-    <Folder Include="Content\Introduction" />
-    <Folder Include="Content\DynamicInterface" />
-    <Folder Include="Content\StaticInterface" />
-    <Folder Include="Content\Prerequisites" />
+    <Folder Include="Content\ModelNamespace" />
+    <Folder Include="Content\ModelNamespace\DynamicInterface\" />
+    <Folder Include="Content\ModelNamespace\Introduction\" />
+    <Folder Include="Content\ModelNamespace\Prerequisites\" />
+    <Folder Include="Content\ModelNamespace\StaticInterface\" />
     <Folder Include="icons" />
     <Folder Include="media" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bibliography.xml" />
-    <None Include="Content\DynamicInterface\DynamicInterface.aml" />
-    <None Include="Content\DynamicInterface\Iterate.aml" />
-    <None Include="Content\DynamicInterface\LocalCopy.aml" />
-    <None Include="Content\DynamicInterface\ReactToChanges.aml" />
-    <None Include="Content\DynamicInterface\SendLocalChanges.aml" />
-    <None Include="Content\DynamicInterface\HandleCommunicationErrors.aml" />
     <None Include="Content\EmberNamespace.aml" />
-    <None Include="Content\Introduction\Introduction.aml" />
-    <None Include="Content\ModelNamespace.aml" />
-    <None Include="Content\Prerequisites\Prerequisites.aml" />
+    <None Include="Content\ModelNamespace\DynamicInterface\DynamicInterface.aml" />
+    <None Include="Content\ModelNamespace\DynamicInterface\HandleCommunicationErrors.aml" />
+    <None Include="Content\ModelNamespace\DynamicInterface\Iterate.aml" />
+    <None Include="Content\ModelNamespace\DynamicInterface\LocalCopy.aml" />
+    <None Include="Content\ModelNamespace\DynamicInterface\ReactToChanges.aml" />
+    <None Include="Content\ModelNamespace\DynamicInterface\SendLocalChanges.aml" />
+    <None Include="Content\ModelNamespace\Introduction\Introduction.aml" />
+    <None Include="Content\ModelNamespace\ModelNamespace.aml" />
+    <None Include="Content\ModelNamespace\Prerequisites\Prerequisites.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\Iterate.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\NullableParameters.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\OptionalElements.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\SendLocalChanges.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\StaticInterface.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\UnboundedNodes.aml" />
     <None Include="Content\S101Namespace.aml" />
-    <None Include="Content\StaticInterface\Iterate.aml" />
-    <None Include="Content\StaticInterface\NullableParameters.aml" />
-    <None Include="Content\StaticInterface\OptionalElements.aml" />
-    <None Include="Content\StaticInterface\SendLocalChanges.aml" />
-    <None Include="Content\StaticInterface\StaticInterface.aml" />
-    <None Include="Content\StaticInterface\UnboundedNodes.aml" />
     <None Include="Content\Welcome.aml" />
     <Content Include="media\sapphire.EmBER">
       <ImageId>sapphire</ImageId>
