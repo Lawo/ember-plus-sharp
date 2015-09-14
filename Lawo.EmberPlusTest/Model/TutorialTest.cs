@@ -4,16 +4,15 @@
 
 namespace Tutorial
 {
-    //// [Using Declarations]
+    #region Using Declarations
     using System;
     using System.Linq;
     using System.Net.Sockets;
     using System.Threading.Tasks;
-    using Lawo.EmberPlus.Glow;
     using Lawo.EmberPlus.Model;
     using Lawo.EmberPlus.S101;
     using Lawo.Threading.Tasks;
-    //// [Using Declarations]
+    #endregion
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,7 +31,7 @@ namespace Tutorial
         [TestMethod]
         public void DynamicIterateTest()
         {
-            //// [Dynamic Iterate]
+            #region Dynamic Iterate
             AsyncPump.Run(
                 async () =>
                 {
@@ -42,14 +41,14 @@ namespace Tutorial
                         WriteChildren(consumer.Root, 0);
                     }
                 });
-            //// [Dynamic Iterate]
+            #endregion
         }
 
         /// <summary>Modifies parameters in the dynamic local database.</summary>
         [TestMethod]
         public void DynamicModifyTest()
         {
-            //// [Dynamic Modify]
+            #region Dynamic Modify
             AsyncPump.Run(
                 async () =>
                 {
@@ -78,14 +77,14 @@ namespace Tutorial
                         await consumer.SendAsync();
                     }
                 });
-            //// [Dynamic Modify]
+            #endregion
         }
 
         /// <summary>Waits for the connection to be lost.</summary>
         [TestMethod]
         public void ConnectionLostTest()
         {
-            //// [Connection Lost]
+            #region Connection Lost
             AsyncPump.Run(
                 async () =>
                 {
@@ -101,14 +100,14 @@ namespace Tutorial
                         Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine);
                     }
                 });
-            //// [Connection Lost]
+            #endregion
         }
 
         /// <summary>Iterates over the static local database.</summary>
         [TestMethod]
         public void StaticIterateTest()
         {
-            //// [Static Iterate]
+            #region Static Iterate
             AsyncPump.Run(
                 async () =>
                 {
@@ -118,14 +117,14 @@ namespace Tutorial
                         WriteChildren(consumer.Root, 0);
                     }
                 });
-            //// [Static Iterate]
+            #endregion
         }
 
         /// <summary>Modifies parameters in the dynamic local database.</summary>
         [TestMethod]
         public void StaticModifyTest()
         {
-            //// [Static Modify]
+            #region Static Modify
             AsyncPump.Run(
                 async () =>
                 {
@@ -138,14 +137,14 @@ namespace Tutorial
                         await consumer.SendAsync();
                     }
                 });
-            //// [Static Modify]
+            #endregion
         }
 
         /// <summary>Tests <see cref="CollectionNode{T}"/>.</summary>
         [TestMethod]
         public void CollectionNodeTest()
         {
-            //// [Collection Node]
+            #region Collection Node
             AsyncPump.Run(
                 async () =>
                 {
@@ -158,14 +157,14 @@ namespace Tutorial
                         }
                     }
                 });
-            //// [Collection Node]
+            #endregion
         }
 
         /// <summary>Iterates over the mixed local database.</summary>
         [TestMethod]
         public void MixedIterateTest()
         {
-            //// [Mixed Iterate]
+            #region Mixed Iterate
             AsyncPump.Run(
                 async () =>
                 {
@@ -175,14 +174,14 @@ namespace Tutorial
                         WriteChildren(consumer.Root, 0);
                     }
                 });
-            //// [Mixed Iterate]
+            #endregion
         }
 
         /// <summary>Modifies parameters in the mixed local database.</summary>
         [TestMethod]
         public void MixedModifyTest()
         {
-            //// [Mixed Modify]
+            #region Mixed Modify
             AsyncPump.Run(
                 async () =>
                 {
@@ -200,42 +199,12 @@ namespace Tutorial
                         await consumer.SendAsync();
                     }
                 });
-            //// [Mixed Modify]
-        }
-
-        /// <summary>Benoit Test.</summary>
-        [TestMethod]
-        public void BenoitTest()
-        {
-            AsyncPump.Run(
-                async () =>
-                {
-                    using (var client = await ConnectAsync(
-                        "10.2.241.108", 9000, new S101Logger(GlowTypes.Instance, Console.Out)))
-                    using (var consumer = await Consumer<GvgRoot>.CreateAsync(client))
-                    {
-                        consumer.Root.Production.LoadSnapshot.Value = "folder0000/snapshot0001";
-                        await consumer.SendAsync();
-                        await Task.Delay(60000);
-                    }
-                });
+            #endregion
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private sealed class GvgRoot : DynamicRoot<GvgRoot>
-        {
-            [Element(Identifier = "_6")]
-            public Production Production { get; private set; }
-        }
-
-        private sealed class Production : DynamicFieldNode<Production>
-        {
-            [Element(Identifier = "_20052")]
-            public NullableStringParameter LoadSnapshot { get; private set; }
-        }
-
-        //// [Main Method]
+        #region Main Method
         private static void Main()
         {
             // This is necessary so that we can execute async code in a console application.
@@ -256,9 +225,9 @@ namespace Tutorial
                     }
                 });
         }
-        //// [Main Method]
+        #endregion
 
-        //// [S101 Connect Method]
+        #region S101 Connect Method
         private static async Task<S101Client> ConnectAsync(string host, int port)
         {
             // Create TCP connection
@@ -270,18 +239,10 @@ namespace Tutorial
             var stream = tcpClient.GetStream();
             return new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync);
         }
-        //// [S101 Connect Method]
-
-        private static async Task<S101Client> ConnectAsync(string host, int port, S101Logger logger)
-        {
-            var tcpClient = new TcpClient();
-            await tcpClient.ConnectAsync(host, port);
-            var stream = tcpClient.GetStream();
-            return new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync, logger);
-        }
+        #endregion
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
-        //// [Write Children]
+        #region Write Children
         private static void WriteChildren(INode node, int depth)
         {
             var indent = new string(' ', 2 * depth);
@@ -306,16 +267,16 @@ namespace Tutorial
                 }
             }
         }
-        //// [Write Children]
+        #endregion
 
-        //// [Dynamic Root Class]
+        #region Dynamic Root Class
         // Note that the most-derived subtype MyRoot needs to be passed to the generic base class.
         private sealed class MyRoot : DynamicRoot<MyRoot>
         {
         }
-        //// [Dynamic Root Class]
+        #endregion
 
-        //// [Static Database Types]
+        #region Static Database Types
         private sealed class SapphireRoot : Root<SapphireRoot>
         {
             internal Sapphire Sapphire { get; private set; }
@@ -379,9 +340,9 @@ namespace Tutorial
 
             MidSideToXY
         }
-        //// [Static Database Types]
+        #endregion
 
-        //// [Unbounded Database Types]
+        #region Unbounded Database Types
         private sealed class UnboundedSapphireRoot : Root<UnboundedSapphireRoot>
         {
             internal UnboundedSapphire Sapphire { get; private set; }
@@ -391,9 +352,9 @@ namespace Tutorial
         {
             internal CollectionNode<Source> Sources { get; private set; }
         }
-        //// [Unbounded Database Types]
+        #endregion
 
-        //// [Optional Fader Source]
+        #region Optional Fader Source
         private sealed class OptionalFaderSource : FieldNode<OptionalFaderSource>
         {
             [Element(IsOptional = true)]
@@ -402,9 +363,9 @@ namespace Tutorial
             [Element(Identifier = "DSP")]
             internal Dsp Dsp { get; private set; }
         }
-        //// [Optional Fader Source]
+        #endregion
 
-        //// [Mixed Database Types]
+        #region Mixed Database Types
         // Subclassing Root means that the Children collection of this node will only contain the elements declared
         // with properties, in this case a single node with the identifier Sapphire, which is also accessible through
         // the property.
@@ -432,6 +393,6 @@ namespace Tutorial
             [Element(Identifier = "DSP")]
             internal Dsp Dsp { get; private set; }
         }
-        //// [Mixed Database Types]
+        #endregion
     }
 }
