@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
   <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Library" />
-  <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" isExpanded="true" title="The Lawo.EmberPlus.Model Namespace">
-    <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Prerequisites" />
-    <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Introduction" />
-    <Topic id="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" visible="True" isExpanded="true" title="Dynamic Interface">
-      <Topic id="f6285c3c-ef54-453e-90ad-5546ec1a7a1d" visible="True" title="Create a Local Copy of the Provider Database" />
-      <Topic id="e0972d29-96f3-4dea-936b-f77001d077b1" visible="True" title="Iterate over the Local Database" />
-      <Topic id="7cdb703a-14dd-42d3-8ea2-28a9b8af6663" visible="True" title="React to Changes" />
-      <Topic id="84d499e7-ec08-4311-8038-987c167eaa43" visible="True" title="Send Local Changes to the Provider" />
-      <Topic id="df1c42d3-bc00-4786-88d6-2372b281043a" visible="True" title="Handle Communication Errors" />
+  <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" isExpanded="true" title="Lawo.EmberPlus.Model Namespace Tutorial">
+    <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Page 1: Prerequisites" />
+    <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Page 2: Introduction" />
+    <Topic id="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" visible="True" isExpanded="true" title="Page 3: Dynamic Interface">
+      <Topic id="f6285c3c-ef54-453e-90ad-5546ec1a7a1d" visible="True" title="Page 4: Create a Local Copy of the Provider Database" />
+      <Topic id="e0972d29-96f3-4dea-936b-f77001d077b1" visible="True" title="Page 5: Iterate over the Local Database" />
+      <Topic id="7cdb703a-14dd-42d3-8ea2-28a9b8af6663" visible="True" title="Page 6: React to Changes" />
+      <Topic id="84d499e7-ec08-4311-8038-987c167eaa43" visible="True" title="Page 7: Send Local Changes to the Provider" />
+      <Topic id="df1c42d3-bc00-4786-88d6-2372b281043a" visible="True" title="Page 8: Handle Communication Errors" />
     </Topic>
-    <Topic id="06184592-a364-4e11-9721-551b6316ffc1" visible="True" isExpanded="true">
-      <Topic id="0957f1fa-abf4-4fb8-9430-1230ce2c6947" visible="True" title="Iterate over the Local Database" />
-      <Topic id="e3a579ce-d73e-459b-ab70-48b79cc9e0c8" visible="True" title="Send Local Changes to the Provider" />
-      <Topic id="86ad72ee-d788-4511-9608-c27e29445f96" visible="True" title="Unbounded Nodes" />
-      <Topic id="15613e0f-7337-4a90-b538-1c402b4f8ad7" visible="True" title="Optional Elements" />
-      <Topic id="3d672617-cf26-40a0-bae0-9b3df394cf0e" visible="True" isSelected="true" title="Nullable Parameters" />
+    <Topic id="06184592-a364-4e11-9721-551b6316ffc1" visible="True" isExpanded="true" title="Page 9: Static Interface">
+      <Topic id="0957f1fa-abf4-4fb8-9430-1230ce2c6947" visible="True" title="Page 10: Iterate over the Local Database" />
+      <Topic id="e3a579ce-d73e-459b-ab70-48b79cc9e0c8" visible="True" title="Page 11: Send Local Changes to the Provider" />
+      <Topic id="86ad72ee-d788-4511-9608-c27e29445f96" visible="True" title="Page 12: Unbounded Nodes" />
+      <Topic id="15613e0f-7337-4a90-b538-1c402b4f8ad7" visible="True" title="Page 13: Optional Elements" />
+      <Topic id="3d672617-cf26-40a0-bae0-9b3df394cf0e" visible="True" title="Page 14: Nullable Parameters" />
     </Topic>
   </Topic>
-  <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="The Lawo.EmberPlus.S101 Namespace" />
-  <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="The Lawo.EmberPlus.Ember Namespace" />
+  <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" isSelected="true" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
+  <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
 </Topics>

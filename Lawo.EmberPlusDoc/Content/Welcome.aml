@@ -18,12 +18,12 @@
           First and foremost, this library provides the means to quickly implement an <application>Ember+</application>
           consumer in code, which can then be used in an application that needs to communicate with an existing
           <application>Ember+</application> provider. Most of the types supporting this use case are demonstrated by the
-          <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/> topic.
+          <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/>.
         </para>
         <para>
           As a byproduct, this library also offers support for lower level <application>Ember+</application>
           communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
-          <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/> topics.
+          the <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/>.
         </para>
       </content>
     </section>

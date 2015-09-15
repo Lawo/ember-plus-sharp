@@ -5,15 +5,16 @@
     <introduction/>
     <section>
       <content>
-        <para>This topic contains the following subtopics:</para>
-        <list class="bullet">
-          <listItem><para><link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67"/></para></listItem>
-          <listItem><para><link xlink:href="50028a38-6bef-4010-8e08-23fc3d5ae501"/></para></listItem>
-          <listItem><para><link xlink:href="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78"/></para></listItem>
-          <listItem><para><link xlink:href="06184592-a364-4e11-9721-551b6316ffc1"/></para></listItem>
-          <listItem><para></para></listItem>
-          <listItem><para></para></listItem>
-        </list>
+        <para>
+          Welcome to the <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> Namespace Tutorial.
+        </para>
+        <alert class ="important">
+          <para>
+            If you plan to follow this tutorial by running the presented code, it is strongly recommended to start with
+            the link below and then follow the numbered pages.
+          </para>
+        </alert>
+        <para>Proceed to <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67"/>.</para>
       </content>
     </section>
     <relatedTopics/>

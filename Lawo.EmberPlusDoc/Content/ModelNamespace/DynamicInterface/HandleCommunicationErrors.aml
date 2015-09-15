@@ -38,6 +38,10 @@
           <codeEntityReference autoUpgrade="true" qualifyHint="true">M:Lawo.EmberPlus.Model.Consumer`1.SendAsync</codeEntityReference>
           can throw communication-related exceptions, which can be caught and handled as usual.
         </para>
+        <para>
+          This concludes the tutorial for the dynamic interface. Proceed to
+          <link xlink:href="06184592-a364-4e11-9721-551b6316ffc1"/>.
+        </para>
       </content>
     </section>
     <relatedTopics/>
