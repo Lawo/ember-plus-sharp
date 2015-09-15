@@ -5,8 +5,19 @@
     <introduction/>
     <section>
       <content>
-        <para>
-        </para>
+        <para>Now that we have types for everything, changes can be made much more cleanly:</para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Static Modify" language="c#"/>
+        <alert class="note">
+          <para>
+            While many simple typos or other programmer mistakes would lead to exceptions with the dynamic interface
+            (see <link xlink:href="84d499e7-ec08-4311-8038-987c167eaa43"/>), here most of them will be caught by the
+            compiler. Moreover, since we now have <application>IntelliSense</application> for our database, fewer typos
+            are made in the first place. Of course, whether the expectations expressed in the types match with what a
+            particular provider offers is still verified at runtime, but it is done in one place
+            (<codeEntityReference autoUpgrade="true" qualifyHint="true">M:Lawo.EmberPlus.Model.Consumer`1.CreateAsync(Lawo.EmberPlus.S101.S101Client)</codeEntityReference>)
+            and thus client code can handle mismatches with a single <codeInline>catch</codeInline> block.
+          </para>
+        </alert>
         <para>Proceed to <link xlink:href="86ad72ee-d788-4511-9608-c27e29445f96"/>.</para>
       </content>
     </section>

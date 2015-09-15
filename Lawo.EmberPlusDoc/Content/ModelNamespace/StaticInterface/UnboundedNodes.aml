@@ -6,6 +6,16 @@
     <section>
       <content>
         <para>
+          Suppose the actual number of sources in our provider database was configurable. The consumer would then want to find out
+          at runtime exactly how many sources there are. This can be achieved with the following classes ...
+        </para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Unbounded Database Types" language="c#"/>
+        <para>... which are used as follows:</para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Collection Node" language="c#"/>
+        <para>
+          Note that <codeEntityReference>T:Lawo.EmberPlus.Model.CollectionNode`1</codeEntityReference> introduces a
+          single point of unboundedness, all the benefits of the static interface and
+          <application>IntelliSense</application> remain available for its children.
         </para>
         <para>Proceed to <link xlink:href="15613e0f-7337-4a90-b538-1c402b4f8ad7"/>.</para>
       </content>
