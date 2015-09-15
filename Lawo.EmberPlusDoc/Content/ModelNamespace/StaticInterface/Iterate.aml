@@ -3,6 +3,11 @@
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
+      <para>
+        It is assumed that you've followed the steps from <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67"/> to
+        <link xlink:href="df1c42d3-bc00-4786-88d6-2372b281043a"/>, and thus have a runnable project open in
+        <application>Visual Studio 2015</application>.
+      </para>
       <autoOutline/>
     </introduction>
     <section address="DatabaseClasses">
