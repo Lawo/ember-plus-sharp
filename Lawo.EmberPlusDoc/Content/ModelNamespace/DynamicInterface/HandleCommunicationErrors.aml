@@ -39,7 +39,8 @@
           can throw communication-related exceptions, which can be caught and handled as usual.
         </para>
         <para>
-          This concludes the tutorial for the dynamic interface. Proceed to
+          This concludes the dynamic interface part of the
+          <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> namespace tutorial. Proceed to
           <link xlink:href="06184592-a364-4e11-9721-551b6316ffc1"/>.
         </para>
       </content>

@@ -6,7 +6,7 @@
     <section>
       <content>
         <para>
-          Welcome to the <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> Namespace Tutorial.
+          Welcome to the <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> namespace tutorial.
         </para>
         <alert class ="important">
           <para>

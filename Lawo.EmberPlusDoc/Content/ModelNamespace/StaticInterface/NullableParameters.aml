@@ -30,7 +30,8 @@
           <codeEntityReference>T:Lawo.EmberPlus.Model.NullableBooleanParameter</codeEntityReference>.
         </para>
         <para>
-          This concludes the static interface part of the. Proceed to
+          This concludes the static interface part of the
+          <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> namespace tutorial. Proceed to
           <link xlink:href="100750a0-fa84-4a68-874d-5e313eb83c9b"/>.
         </para>
       </content>

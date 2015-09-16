@@ -10,7 +10,7 @@
           modifications we'd like:
         </para>
         <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Mixed Modify" language="c#"/>
-        <para>The <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> Namespace Tutorial ends here.</para>
+        <para>The <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> namespace tutorial ends here.</para>
       </content>
     </section>
     <relatedTopics/>
