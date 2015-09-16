@@ -118,6 +118,7 @@
     <Folder Include="Content\ModelNamespace" />
     <Folder Include="Content\ModelNamespace\DynamicInterface\" />
     <Folder Include="Content\ModelNamespace\Introduction\" />
+    <Folder Include="Content\ModelNamespace\MixedInterface" />
     <Folder Include="Content\ModelNamespace\Prerequisites\" />
     <Folder Include="Content\ModelNamespace\StaticInterface\" />
     <Folder Include="icons" />
@@ -133,6 +134,9 @@
     <None Include="Content\ModelNamespace\DynamicInterface\ReactToChanges.aml" />
     <None Include="Content\ModelNamespace\DynamicInterface\SendLocalChanges.aml" />
     <None Include="Content\ModelNamespace\Introduction\Introduction.aml" />
+    <None Include="Content\ModelNamespace\MixedInterface\Iterate.aml" />
+    <None Include="Content\ModelNamespace\MixedInterface\MixedInterface.aml" />
+    <None Include="Content\ModelNamespace\MixedInterface\SendLocalChanges.aml" />
     <None Include="Content\ModelNamespace\ModelNamespace.aml" />
     <None Include="Content\ModelNamespace\Prerequisites\Prerequisites.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\Iterate.aml" />

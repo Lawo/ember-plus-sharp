@@ -18,7 +18,11 @@
       <Topic id="15613e0f-7337-4a90-b538-1c402b4f8ad7" visible="True" title="Page 13: Optional Elements" />
       <Topic id="3d672617-cf26-40a0-bae0-9b3df394cf0e" visible="True" title="Page 14: Nullable Parameters" />
     </Topic>
+    <Topic id="100750a0-fa84-4a68-874d-5e313eb83c9b" visible="True" isExpanded="true" title="Page 15: Mixed Interface">
+      <Topic id="56add6fd-a91e-4e3e-a02e-e3e70d4958aa" visible="True" title="Page 16: Iterate over the Local Database" />
+      <Topic id="881824cc-edf4-4007-b30c-cb460d2dcf97" visible="True" isSelected="true" title="Page 17: Send Local Changes to the Provider" />
+    </Topic>
   </Topic>
-  <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" isSelected="true" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
+  <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
   <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
 </Topics>

@@ -29,6 +29,10 @@
           For these cases, the library provides nullable variants for all parameter types, e.g.
           <codeEntityReference>T:Lawo.EmberPlus.Model.NullableBooleanParameter</codeEntityReference>.
         </para>
+        <para>
+          This concludes the static interface part of the. Proceed to
+          <link xlink:href="100750a0-fa84-4a68-874d-5e313eb83c9b"/>.
+        </para>
       </content>
     </section>
     <relatedTopics/>

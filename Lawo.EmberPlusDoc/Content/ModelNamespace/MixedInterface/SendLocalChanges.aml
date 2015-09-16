@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="881824cc-edf4-4007-b30c-cb460d2dcf97" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction/>
+    <section>
+      <content>
+        <para>
+          Since we declared properties for all the elements we'd like to access directly, we can easily make the
+          modifications we'd like:
+        </para>
+        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Mixed Modify" language="c#"/>
+        <para>The <codeEntityReference>N:Lawo.EmberPlus.Model</codeEntityReference> Namespace Tutorial ends here.</para>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>
