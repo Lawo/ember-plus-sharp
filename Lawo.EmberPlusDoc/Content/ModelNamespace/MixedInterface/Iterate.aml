@@ -27,8 +27,12 @@
         <para>... and get the following output:</para>
         <code>
           Node Sapphire
+            Node identity
+              Parameter product: sapphire
+              Parameter company: (c) L-S-B Broadcast Technologies GmbH
             Node Sources
               Node FPGM 1
+                Parameter Audio Type: 2
                 Node Fader
                   Parameter dB Value: -255.999999999998
                   Parameter Position: 0
@@ -36,8 +40,8 @@
                   Node Input
                     Parameter Phase: True
                     Parameter LR Mode: Stereo
-                Parameter Audio Type: 2
               Node FPGM 2
+                Parameter Audio Type: 2
                 Node Fader
                   Parameter dB Value: 9
                   Parameter Position: 255
@@ -45,10 +49,6 @@
                   Node Input
                     Parameter Phase: False
                     Parameter LR Mode: Stereo
-                Parameter Audio Type: 2
-            Node identity
-              Parameter product: sapphire
-              Parameter company: (c) L-S-B Broadcast Technologies GmbH
         </code>
         <para>
           Note how the <codeInline>Audio Type</codeInline> parameters and the <codeInline>identity</codeInline> node

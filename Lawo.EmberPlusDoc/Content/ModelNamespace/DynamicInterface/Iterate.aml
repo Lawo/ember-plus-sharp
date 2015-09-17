@@ -15,8 +15,12 @@
         <para>... which produces the following output:</para>
         <code>
           Node Sapphire
+            Node identity
+              Parameter product: sapphire
+              Parameter company: (c) L-S-B Broadcast Technologies GmbH
             Node Sources
               Node FPGM 1
+                Parameter Audio Type: 2
                 Node Fader
                   Parameter Number: 1
                   Parameter dB Value: -255.999999999998
@@ -28,8 +32,8 @@
                     Parameter LR Mode: 0
                   Node Delay
                     Parameter Time (ms): 0
-                Parameter Audio Type: 2
               Node FPGM 2
+                Parameter Audio Type: 2
                 Node Fader
                   Parameter Number: 2
                   Parameter dB Value: 9
@@ -41,10 +45,6 @@
                     Parameter LR Mode: 0
                   Node Delay
                     Parameter Time (ms): 0
-                Parameter Audio Type: 2
-            Node identity
-              Parameter product: sapphire
-              Parameter company: (c) L-S-B Broadcast Technologies GmbH
         </code>
         <para>Proceed to <link xlink:href="7cdb703a-14dd-42d3-8ea2-28a9b8af6663"/>.</para>
       </content>
