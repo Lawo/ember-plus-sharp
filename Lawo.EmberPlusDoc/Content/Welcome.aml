@@ -9,6 +9,26 @@
       <title>Overview</title>
       <content>
         <para>
+          The primary goal of this project is to make <application>Ember+</application><cite>Ember+ Specification</cite>
+          as simple as possible for .NET developers. For this purpose the following is provided:
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para><link xlink:href="046877b5-3e57-48ca-8868-7885de0e3842#Library"/></para>
+          </listItem>
+          <listItem>
+            <para>
+              <link xlink:href="046877b5-3e57-48ca-8868-7885de0e3842#Tools"/> that help capture, visualize and analyze
+              <application>Ember+</application> communication between a consumer and a provider.
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="Library">
+      <title>The Ember+ Sharp Library</title>
+      <content>
+        <para>
           This library implements most parts of the protocol described in the
           <quoteInline>Ember+ Specification</quoteInline><cite>Ember+ Specification</cite>. If you are unfamiliar with
           <application>Ember+</application>, it is recommended to read the <quoteInline>Introduction</quoteInline>
@@ -16,7 +36,7 @@
         </para>
         <para>
           First and foremost, this library provides the means to quickly implement an <application>Ember+</application>
-          consumer in code, which can then be used in an application that needs to communicate with an existing
+          consumer, which can then be used in an application that needs to communicate with an existing
           <application>Ember+</application> provider. Most of the types supporting this use case are demonstrated by the
           <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/>.
         </para>
@@ -25,6 +45,31 @@
           communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
           the <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/>.
         </para>
+      </content>
+    </section>
+    <section address="Tools">
+      <title>Tools</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <application>GlowAnalyzerProxy</application>: A <application>Windows</application> application that acts
+              as a middleman between an <application>Ember+</application> consumer and a provider, which works as
+              follows:
+            </para>
+            <list class="bullet">
+              <listItem>
+                <para>Traffic received from either party is immediately forwarded to the other one.</para>
+              </listItem>
+              <listItem>
+                <para>All messages are written into a log file.</para>
+              </listItem>
+              <listItem>
+                <para>The XML equivalent of each message can be displayed.</para>
+              </listItem>
+            </list>
+          </listItem>
+        </list>
       </content>
     </section>
     <section address="FutureDirections">
