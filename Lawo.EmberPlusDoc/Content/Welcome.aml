@@ -14,11 +14,13 @@
         </para>
         <list class="bullet">
           <listItem>
-            <para><link xlink:href="046877b5-3e57-48ca-8868-7885de0e3842#Library"/></para>
+            <para>
+              <link xlink:href="#Library">The Ember+ Sharp Library</link>
+            </para>
           </listItem>
           <listItem>
             <para>
-              <link xlink:href="046877b5-3e57-48ca-8868-7885de0e3842#Tools"/> that help capture, visualize and analyze
+              <link xlink:href="#Tools">Tools</link> that help capture, visualize and analyze
               <application>Ember+</application> communication between a consumer and a provider.
             </para>
           </listItem>

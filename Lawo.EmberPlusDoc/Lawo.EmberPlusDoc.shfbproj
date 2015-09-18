@@ -40,7 +40,7 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>True</Preliminary>
     <NamingMethod>HashedMemberName</NamingMethod>
-    <HelpTitle>Ember+ Sharp Library Documentation</HelpTitle>
+    <HelpTitle>Ember+ Sharp Project Documentation</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <TocParentId>-1</TocParentId>
     <TocParentVersion>100</TocParentVersion>
