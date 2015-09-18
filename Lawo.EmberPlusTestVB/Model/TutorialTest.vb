@@ -44,24 +44,24 @@ Public Class TutorialTestVB
                     Using con = Await Consumer(Of MyRoot).CreateAsync(client)
                         Dim root As INode = con.Root
 
-                            ' Navigate to the parameters we're interested in.
-                            Dim sapphire = DirectCast(root.Children.Where(Function(c) c.Identifier = "Sapphire").First(), INode)
+                        ' Navigate to the parameters we're interested in.
+                        Dim sapphire = DirectCast(root.Children.Where(Function(c) c.Identifier = "Sapphire").First(), INode)
                         Dim sources = DirectCast(sapphire.Children.Where(Function(c) c.Identifier = "Sources").First(), INode)
                         Dim fpgm1 = DirectCast(sources.Children.Where(Function(c) c.Identifier = "FPGM 1").First(), INode)
                         Dim fader = DirectCast(fpgm1.Children.Where(Function(c) c.Identifier = "Fader").First(), INode)
                         Dim dbValue = DirectCast(fader.Children.Where(Function(c) c.Identifier = "dB Value").First(), IParameter)
                         Dim position = DirectCast(fader.Children.Where(Function(c) c.Identifier = "Position").First(), IParameter)
 
-                            ' Set parameters to the desired values.
-                            dbValue.Value = -67.0
+                        ' Set parameters to the desired values.
+                        dbValue.Value = -67.0
                         position.Value = 128L
 
-                            ' We send the changes back to the provider with the call below. Here, this is necessary so that
-                            ' the changes are sent before Dispose is called on the consumer. In a real-world application
-                            ' however, SendAsync often does not need to be called explicitly because it is automatically
-                            ' called every 100ms as long as there are pending changes. See AutoSendInterval for more
-                            ' information.
-                            Await con.SendAsync()
+                        ' We send the changes back to the provider with the call below. Here, this is necessary so that
+                        ' the changes are sent before Dispose is called on the consumer. In a real-world application
+                        ' however, SendAsync often does not need to be called explicitly because it is automatically
+                        ' called every 100ms as long as there are pending changes. See AutoSendInterval for more
+                        ' information.
+                        Await con.SendAsync()
                     End Using
                 End Using
             End Function)
@@ -177,15 +177,15 @@ Public Class TutorialTestVB
         ' This is necessary so that we can execute async code in a console application.
         AsyncPump.Run(
             Async Function()
-                    ' Establish S101 protocol
-                    Using client As S101Client = Await ConnectAsync("localhost", 9000)
-                        ' Query the provider database for *all* elements and store them in a local copy
-                        Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
-                            ' Get the root of the local database.
-                            Dim root As INode = con.Root
+                ' Establish S101 protocol
+                Using client As S101Client = Await ConnectAsync("localhost", 9000)
+                    ' Query the provider database for *all* elements and store them in a local copy
+                    Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
+                        ' Get the root of the local database.
+                        Dim root As INode = con.Root
 
-                            ' For now just output the number of direct children under the root node.
-                            Console.WriteLine(root.Children.Count)
+                        ' For now just output the number of direct children under the root node.
+                        Console.WriteLine(root.Children.Count)
                     End Using
                 End Using
             End Function)
