@@ -5,8 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A81DC2B8-8E3C-442E-B311-A38B22D18DFF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace>Lawo.EmberPlusTestVB</RootNamespace>
     <AssemblyName>Lawo.EmberPlusTestVB</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
@@ -82,7 +81,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="TutorialTest.vb" />
+    <Compile Include="Model\TutorialTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
