@@ -25,163 +25,171 @@ Namespace Tutorial
         <TestMethod>
         Public Sub DynamicIterateTest()
 #Region "Dynamic Iterate"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of MyRoot).CreateAsync(client)
-                                      WriteChildren(con.Root, 0)
-                                  End Using
-                              End Using
-                          End Function)
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MyRoot).CreateAsync(client)
+                            WriteChildren(con.Root, 0)
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub DynamicModifyTest()
 #Region "Dynamic Modify"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of MyRoot).CreateAsync(client)
-                                      Dim root As INode = con.Root
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MyRoot).CreateAsync(client)
+                            Dim root As INode = con.Root
 
-                                      ' Navigate to the parameters we're interested in.
-                                      Dim sapphire = DirectCast(root.Children.Where(Function(c) c.Identifier = "Sapphire").First(), INode)
-                                      Dim sources = DirectCast(sapphire.Children.Where(Function(c) c.Identifier = "Sources").First(), INode)
-                                      Dim fpgm1 = DirectCast(sources.Children.Where(Function(c) c.Identifier = "FPGM 1").First(), INode)
-                                      Dim fader = DirectCast(fpgm1.Children.Where(Function(c) c.Identifier = "Fader").First(), INode)
-                                      Dim dbValue = DirectCast(fader.Children.Where(Function(c) c.Identifier = "dB Value").First(), IParameter)
-                                      Dim position = DirectCast(fader.Children.Where(Function(c) c.Identifier = "Position").First(), IParameter)
+                            ' Navigate to the parameters we're interested in.
+                            Dim sapphire = DirectCast(root.Children.Where(Function(c) c.Identifier = "Sapphire").First(), INode)
+                            Dim sources = DirectCast(sapphire.Children.Where(Function(c) c.Identifier = "Sources").First(), INode)
+                            Dim fpgm1 = DirectCast(sources.Children.Where(Function(c) c.Identifier = "FPGM 1").First(), INode)
+                            Dim fader = DirectCast(fpgm1.Children.Where(Function(c) c.Identifier = "Fader").First(), INode)
+                            Dim dbValue = DirectCast(fader.Children.Where(Function(c) c.Identifier = "dB Value").First(), IParameter)
+                            Dim position = DirectCast(fader.Children.Where(Function(c) c.Identifier = "Position").First(), IParameter)
 
-                                      ' Set parameters to the desired values.
-                                      dbValue.Value = -67.0
-                                      position.Value = 128L
+                            ' Set parameters to the desired values.
+                            dbValue.Value = -67.0
+                            position.Value = 128L
 
-                                      ' We send the changes back to the provider with the call below. Here, this is necessary so that
-                                      ' the changes are sent before Dispose is called on the consumer. In a real-world application
-                                      ' however, SendAsync often does not need to be called explicitly because it is automatically
-                                      ' called every 100ms as long as there are pending changes. See AutoSendInterval for more
-                                      ' information.
-                                      Await con.SendAsync()
-                                  End Using
-                              End Using
-                          End Function)
+                            ' We send the changes back to the provider with the call below. Here, this is necessary so that
+                            ' the changes are sent before Dispose is called on the consumer. In a real-world application
+                            ' however, SendAsync often does not need to be called explicitly because it is automatically
+                            ' called every 100ms as long as there are pending changes. See AutoSendInterval for more
+                            ' information.
+                            Await con.SendAsync()
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub ConnectionLostTest()
 #Region "Connection Lost"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of MyRoot).CreateAsync(client)
-                                      Dim connectionLost = New TaskCompletionSource(Of Exception)()
-                                      AddHandler con.ConnectionLost, Sub(s, e) connectionLost.SetResult(e.Exception)
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MyRoot).CreateAsync(client)
+                            Dim connectionLost = New TaskCompletionSource(Of Exception)()
+                            AddHandler con.ConnectionLost, Sub(s, e) connectionLost.SetResult(e.Exception)
 
-                                      Console.WriteLine("Waiting for the provider to disconnect...")
-                                      Dim exception = Await connectionLost.Task
-                                      Console.WriteLine("Connection Lost!")
-                                      Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine)
-                                  End Using
-                              End Using
-
-                          End Function)
+                            Console.WriteLine("Waiting for the provider to disconnect...")
+                            Dim exception = Await connectionLost.Task
+                            Console.WriteLine("Connection Lost!")
+                            Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine)
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub StaticIterateTest()
 #Region "Static Iterate"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
-                                      WriteChildren(con.Root, 0)
-                                  End Using
-                              End Using
-                          End Function)
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                            WriteChildren(con.Root, 0)
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub StaticModifyTest()
 #Region "Static Modify"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
-                                      Dim fader = con.Root.Sapphire.Sources.Fpgm1.Fader
-                                      fader.DBValue.Value = -67.0
-                                      fader.Position.Value = 128
-                                      Await con.SendAsync()
-                                  End Using
-                              End Using
-                          End Function)
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                            Dim fader = con.Root.Sapphire.Sources.Fpgm1.Fader
+                            fader.DBValue.Value = -67.0
+                            fader.Position.Value = 128
+                            Await con.SendAsync()
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub CollectionNodeTest()
 #Region "Collection Node"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of UnboundedSapphireRoot).CreateAsync(client)
-                                      For Each source In con.Root.Sapphire.Sources.Children
-                                          Console.WriteLine(source.Fader.Position.Value)
-                                      Next
-                                  End Using
-                              End Using
-                          End Function)
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of UnboundedSapphireRoot).CreateAsync(client)
+                            For Each source In con.Root.Sapphire.Sources.Children
+                                Console.WriteLine(source.Fader.Position.Value)
+                            Next
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub MixedIterateTest()
 #Region "Mixed Iterate"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
-                                      WriteChildren(con.Root, 0)
-                                  End Using
-                              End Using
-                          End Function)
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
+                            WriteChildren(con.Root, 0)
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
         <TestMethod>
         Public Sub MixedModifyTest()
 #Region "Mixed Modify"
-            AsyncPump.Run(Async Function()
-                              Using client = Await ConnectAsync("localhost", 9000)
-                                  Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
-                                      For Each source In con.Root.Sapphire.Sources.Children
-                                          source.Fader.DBValue.Value = -67.0
-                                          source.Fader.Position.Value = 128
-                                          source.Dsp.Input.LRMode.Value = LRMode.Mono
-                                          source.Dsp.Input.Phase.Value = False
-                                      Next
+            AsyncPump.Run(
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
+                            For Each source In con.Root.Sapphire.Sources.Children
+                                source.Fader.DBValue.Value = -67.0
+                                source.Fader.Position.Value = 128
+                                source.Dsp.Input.LRMode.Value = LRMode.Mono
+                                source.Dsp.Input.Phase.Value = False
+                            Next
 
-                                      Await con.SendAsync()
-                                  End Using
-                              End Using
-                          End Function)
+                            Await con.SendAsync()
+                        End Using
+                    End Using
+                End Function)
 #End Region
         End Sub
 
-        '''/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 #Region "Main Method"
         Private Shared Sub Main()
             ' This is necessary so that we can execute async code in a console application.
-            AsyncPump.Run(Async Function()
-                              ' Establish S101 protocol
-                              Using client As S101Client = Await ConnectAsync("localhost", 9000)
-                                  ' Query the provider database for *all* elements and store them in a local copy
-                                  Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
-                                      ' Get the root of the local database.
-                                      Dim root As INode = con.Root
+            AsyncPump.Run(
+                Async Function()
+                    ' Establish S101 protocol
+                    Using client As S101Client = Await ConnectAsync("localhost", 9000)
+                        ' Query the provider database for *all* elements and store them in a local copy
+                        Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
+                            ' Get the root of the local database.
+                            Dim root As INode = con.Root
 
-                                      ' For now just output the number of direct children under the root node.
-                                      Console.WriteLine(root.Children.Count)
-                                  End Using
-                              End Using
-                          End Function)
+                            ' For now just output the number of direct children under the root node.
+                            Console.WriteLine(root.Children.Count)
+                        End Using
+                    End Using
+                End Function)
         End Sub
 #End Region
 
