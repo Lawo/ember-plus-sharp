@@ -103,6 +103,24 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    Public Sub ReactToChangesTest()
+#Region "React to Changes"
+        AsyncPump.Run(
+            Async Function()
+                Using client = Await ConnectAsync("localhost", 9000)
+                    Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                        Dim valueChanged = New TaskCompletionSource(Of String)()
+                        Dim positionParameter = con.Root.Sapphire.Sources.Fpgm1.Fader.Position
+                        AddHandler positionParameter.PropertyChanged, Sub(s, e) valueChanged.SetResult(DirectCast(s, IElement).GetPath())
+                        Console.WriteLine("Waiting for the parameter to change...")
+                        Console.WriteLine("A value of the element with the path {0} has been changed.", Await valueChanged.Task)
+                    End Using
+                End Using
+            End Function)
+#End Region
+    End Sub
+
+    <TestMethod>
     Public Sub StaticModifyTest()
 #Region "Static Modify"
         AsyncPump.Run(
@@ -113,24 +131,6 @@ Public Class TutorialTestVB
                         fader.DBValue.Value = -67.0
                         fader.Position.Value = 128
                         Await con.SendAsync()
-                    End Using
-                End Using
-            End Function)
-#End Region
-    End Sub
-
-    <TestMethod>
-    Public Sub ReactToChangesTest()
-#Region "React to Changes"
-        AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
-                        Dim valueChanged = New TaskCompletionSource(Of String)()
-                        Dim positionParameter = con.Root.Sapphire.Sources.Fpgm1.Fader.Position
-                        AddHandler positionParameter.PropertyChanged, Sub(s, e) valueChanged.SetResult(DirectCast(s, IElement).GetPath())
-                        Console.WriteLine("Waiting for the property to change...")
-                        Console.WriteLine("The element with the path {0} has been changed.", Await valueChanged.Task)
                     End Using
                 End Using
             End Function)

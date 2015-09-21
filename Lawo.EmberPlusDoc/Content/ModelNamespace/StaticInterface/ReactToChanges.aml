@@ -13,7 +13,7 @@
         </para>
         <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="React to Changes" language="c#"/>
         <para>
-          We can test this by running the above program and then modfiying the parameter in
+          We can test this by running the above program and then modfiying a value of the parameter in
           <application>Tiny Ember+</application>.
         </para>
         <para>Proceed to <link xlink:href="e3a579ce-d73e-459b-ab70-48b79cc9e0c8"/>.</para>

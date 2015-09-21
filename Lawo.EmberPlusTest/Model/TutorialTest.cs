@@ -120,6 +120,27 @@ namespace Tutorial
             #endregion
         }
 
+        /// <summary>Demonstrates how to react to changes.</summary>
+        [TestMethod]
+        public void ReactToChangesTest()
+        {
+            #region React to Changes
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<SapphireRoot>.CreateAsync(client))
+                    {
+                        var valueChanged = new TaskCompletionSource<string>();
+                        var positionParameter = consumer.Root.Sapphire.Sources.Fpgm1.Fader.Position;
+                        positionParameter.PropertyChanged += (s, e) => valueChanged.SetResult(((IElement)s).GetPath());
+                        Console.WriteLine("Waiting for the parameter to change...");
+                        Console.WriteLine("A value of the element with the path {0} has been changed.", await valueChanged.Task);
+                    }
+                });
+            #endregion
+        }
+
         /// <summary>Modifies parameters in the dynamic local database.</summary>
         [TestMethod]
         public void StaticModifyTest()
@@ -135,27 +156,6 @@ namespace Tutorial
                         fader.DBValue.Value = -67.0;
                         fader.Position.Value = 128;
                         await consumer.SendAsync();
-                    }
-                });
-            #endregion
-        }
-
-        /// <summary>Demonstrates how to react to changes.</summary>
-        [TestMethod]
-        public void ReactToChangesTest()
-        {
-            #region React to Changes
-            AsyncPump.Run(
-                async () =>
-                {
-                    using (var client = await ConnectAsync("localhost", 9000))
-                    using (var consumer = await Consumer<SapphireRoot>.CreateAsync(client))
-                    {
-                        var valueChanged = new TaskCompletionSource<string>();
-                        var positionParameter = consumer.Root.Sapphire.Sources.Fpgm1.Fader.Position;
-                        positionParameter.PropertyChanged += (s, e) => valueChanged.SetResult(((IElement)s).GetPath());
-                        Console.WriteLine("Waiting for the property to change...");
-                        Console.WriteLine("The element with the path {0} has been changed.", await valueChanged.Task);
                     }
                 });
             #endregion
