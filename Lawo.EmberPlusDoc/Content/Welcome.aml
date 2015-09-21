@@ -5,7 +5,8 @@
     <introduction>
       <para>
         The primary goal of this project is to make <application>Ember+</application><cite>Ember+ Specification</cite>
-        as simple as possible for .NET developers. For this purpose the following is provided:
+        as simple as possible for <application>.NET</application> developers. For this purpose the following is
+        provided:
       </para>
       <list class="bullet">
         <listItem>
