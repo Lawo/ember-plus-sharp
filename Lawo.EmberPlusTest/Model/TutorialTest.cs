@@ -152,8 +152,8 @@ namespace Tutorial
                     using (var consumer = await Consumer<SapphireRoot>.CreateAsync(client))
                     {
                         var valueChanged = new TaskCompletionSource<string>();
-                        var positionProperty = consumer.Root.Sapphire.Sources.Fpgm1.Fader.Position;
-                        positionProperty.PropertyChanged += (s, e) => valueChanged.SetResult(((IElement)s).GetPath());
+                        var positionParameter = consumer.Root.Sapphire.Sources.Fpgm1.Fader.Position;
+                        positionParameter.PropertyChanged += (s, e) => valueChanged.SetResult(((IElement)s).GetPath());
                         Console.WriteLine("Waiting for the property to change...");
                         Console.WriteLine("The element with the path {0} has been changed.", await valueChanged.Task);
                     }
