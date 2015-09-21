@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" isSelected="true" title="Welcome to the Ember+ Sharp Project" />
+  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Project" />
   <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" isExpanded="true" title="Lawo.EmberPlus.Model Namespace Tutorial">
     <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Page 1: Prerequisites" />
     <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Page 2: Introduction" />
@@ -13,14 +13,15 @@
     </Topic>
     <Topic id="06184592-a364-4e11-9721-551b6316ffc1" visible="True" isExpanded="true" title="Page 9: Static Interface">
       <Topic id="0957f1fa-abf4-4fb8-9430-1230ce2c6947" visible="True" title="Page 10: Iterate over the Local Database" />
-      <Topic id="e3a579ce-d73e-459b-ab70-48b79cc9e0c8" visible="True" title="Page 11: Send Local Changes to the Provider" />
-      <Topic id="86ad72ee-d788-4511-9608-c27e29445f96" visible="True" title="Page 12: Unbounded Nodes" />
-      <Topic id="15613e0f-7337-4a90-b538-1c402b4f8ad7" visible="True" title="Page 13: Optional Elements" />
-      <Topic id="3d672617-cf26-40a0-bae0-9b3df394cf0e" visible="True" title="Page 14: Nullable Parameters" />
+      <Topic id="945c7c21-060f-4fb9-9cbd-842f0e031472" visible="True" title="Page 11: React to Changes" />
+      <Topic id="e3a579ce-d73e-459b-ab70-48b79cc9e0c8" visible="True" title="Page 12: Send Local Changes to the Provider" />
+      <Topic id="86ad72ee-d788-4511-9608-c27e29445f96" visible="True" title="Page 13: Unbounded Nodes" />
+      <Topic id="15613e0f-7337-4a90-b538-1c402b4f8ad7" visible="True" title="Page 14: Optional Elements" />
+      <Topic id="3d672617-cf26-40a0-bae0-9b3df394cf0e" visible="True" title="Page 15: Nullable Parameters" />
     </Topic>
-    <Topic id="100750a0-fa84-4a68-874d-5e313eb83c9b" visible="True" isExpanded="true" title="Page 15: Mixed Interface">
-      <Topic id="56add6fd-a91e-4e3e-a02e-e3e70d4958aa" visible="True" title="Page 16: Iterate over the Local Database" />
-      <Topic id="881824cc-edf4-4007-b30c-cb460d2dcf97" visible="True" title="Page 17: Send Local Changes to the Provider" />
+    <Topic id="100750a0-fa84-4a68-874d-5e313eb83c9b" visible="True" isExpanded="true" title="Page 16: Mixed Interface">
+      <Topic id="56add6fd-a91e-4e3e-a02e-e3e70d4958aa" visible="True" title="Page 17: Iterate over the Local Database" />
+      <Topic id="881824cc-edf4-4007-b30c-cb460d2dcf97" visible="True" isSelected="true" title="Page 18: Send Local Changes to the Provider" />
     </Topic>
   </Topic>
   <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlus.Ember Namespace Tutorial" />

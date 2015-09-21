@@ -71,7 +71,7 @@
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
-    <RootNamespaceTitle>Reference</RootNamespaceTitle>
+    <RootNamespaceTitle>Library Reference</RootNamespaceTitle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
@@ -142,6 +142,7 @@
     <None Include="Content\ModelNamespace\StaticInterface\Iterate.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\NullableParameters.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\OptionalElements.aml" />
+    <None Include="Content\ModelNamespace\StaticInterface\ReactToChanges.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\SendLocalChanges.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\StaticInterface.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\UnboundedNodes.aml" />

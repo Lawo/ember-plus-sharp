@@ -120,6 +120,24 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    Public Sub ReactToChangesTest()
+#Region "React to Changes"
+        AsyncPump.Run(
+            Async Function()
+                Using client = Await ConnectAsync("localhost", 9000)
+                    Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                        Dim valueChanged = New TaskCompletionSource(Of String)()
+                        Dim positionPropety = con.Root.Sapphire.Sources.Fpgm1.Fader.Position
+                        AddHandler positionPropety.PropertyChanged, Sub(s, e) valueChanged.SetResult(DirectCast(s, IElement).GetPath())
+                        Console.WriteLine("Waiting for the property to change...")
+                        Console.WriteLine("The element with the path {0} has been changed.", Await valueChanged.Task)
+                    End Using
+                End Using
+            End Function)
+#End Region
+    End Sub
+
+    <TestMethod>
     Public Sub CollectionNodeTest()
 #Region "Collection Node"
         AsyncPump.Run(
