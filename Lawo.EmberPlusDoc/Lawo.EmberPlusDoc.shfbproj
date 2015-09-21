@@ -71,7 +71,7 @@
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
-    <RootNamespaceTitle>Library Reference</RootNamespaceTitle>
+    <RootNamespaceTitle>Reference</RootNamespaceTitle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
@@ -127,6 +127,8 @@
   <ItemGroup>
     <None Include="bibliography.xml" />
     <None Include="Content\EmberNamespace.aml" />
+    <None Include="Content\FutureDirections.aml" />
+    <None Include="Content\KnownIssues.aml" />
     <None Include="Content\ModelNamespace\DynamicInterface\DynamicInterface.aml" />
     <None Include="Content\ModelNamespace\DynamicInterface\HandleCommunicationErrors.aml" />
     <None Include="Content\ModelNamespace\DynamicInterface\Iterate.aml" />
@@ -147,6 +149,7 @@
     <None Include="Content\ModelNamespace\StaticInterface\StaticInterface.aml" />
     <None Include="Content\ModelNamespace\StaticInterface\UnboundedNodes.aml" />
     <None Include="Content\S101Namespace.aml" />
+    <None Include="Content\Library.aml" />
     <None Include="Content\Welcome.aml" />
     <Content Include="media\sapphire.EmBER">
       <ImageId>sapphire</ImageId>
