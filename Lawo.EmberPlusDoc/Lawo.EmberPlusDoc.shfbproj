@@ -151,6 +151,7 @@
     <None Include="Content\Library\ModelNamespace\StaticInterface\StaticInterface.aml" />
     <None Include="Content\Library\ModelNamespace\StaticInterface\UnboundedNodes.aml" />
     <None Include="Content\Library\S101Namespace.aml" />
+    <None Include="Content\Tools.aml" />
     <None Include="Content\Welcome.aml" />
     <Content Include="media\sapphire.EmBER">
       <ImageId>sapphire</ImageId>

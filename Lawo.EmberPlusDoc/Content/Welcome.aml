@@ -50,21 +50,18 @@
         <list class="bullet">
           <listItem>
             <para>
-              <application>GlowAnalyzerProxy</application>: A <application>Windows</application> application that acts
-              as a middleman between an <application>Ember+</application> consumer and a provider, which works as
-              follows:
+              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">GlowAnalyzerProxy</link> is a
+              <application>Windows</application> application that acts as a middleman between an
+              <application>Ember+</application> consumer and a provider that logs and visualizes all traffic.
             </para>
-            <list class="bullet">
-              <listItem>
-                <para>Traffic received from either party is immediately forwarded to the other one.</para>
-              </listItem>
-              <listItem>
-                <para>All messages are written into a log file.</para>
-              </listItem>
-              <listItem>
-                <para>The XML equivalent of each message can be displayed.</para>
-              </listItem>
-            </list>
+          </listItem>
+          <listItem>
+            <para>
+              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#ConvertGlowLog">ConvertGlowLog</link> is a
+              <application>Console</application> application that converts XML log files as they have been written by
+              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">GlowAnalyzerProxy</link> into an
+              even more human-readable format.
+            </para>
           </listItem>
         </list>
       </content>

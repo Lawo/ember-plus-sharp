@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction/>
+    <section address="GlowAnalyzerProxy">
+      <title>GlowAnalyzerProxy</title>
+      <content>
+        <para>
+          <application>GlowAnalyzerProxy</application> is a <application>Windows</application> application that acts
+          as a middleman between an <application>Ember+</application> consumer and a provider. The application works
+          as follows:
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>Traffic received from either party is immediately forwarded to the other one.</para>
+          </listItem>
+          <listItem>
+            <para>All messages are converted into human-readable XML and written into a log file.</para>
+          </listItem>
+          <listItem>
+            <para>The main properties of each message are displayed in a scrollable list.</para>
+          </listItem>
+          <listItem>
+            <para>The full detail is shown for the currently selected message.</para>
+          </listItem>
+        </list>
+        <mediaLink><image xlink:href="GlowAnalyzerProxy"/></mediaLink>
+      </content>
+    </section>
+    <section address="ConvertGlowLog">
+      <title>ConvertGlowLog</title>
+      <content>
+        <para>
+          <application>ConvertGlowLog</application> is a <application>Console</application> application that converts
+          XML log files as they have been written by <application>GlowAnalyzerProxy</application> into an even more
+          human-readable format.
+        </para>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b8313245-587c-4147-91e6-0accaccb2a77" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction/>
+    <section>
+      <content>
+        <para>
+          The following <application>Ember+</application> features are not currently supported but will be implemented
+          when the need arises:
+        </para>
+        <list class="ordered">
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Matrices</linkText>
+                <linkUri>https://redmine.lawo.de/redmine/issues/1309</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Streams</linkText>
+                <linkUri>https://redmine.lawo.de/redmine/issues/1314</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>S101 out-of-frame bytes</linkText>
+                <linkUri>https://redmine.lawo.de/redmine/issues/1315</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>S101 Versioning</para>
+            <list class="bullet">
+              <listItem>
+                <para>Messages with a Message Type not equal to 0x0E</para>
+              </listItem>
+              <listItem>
+                <para>Commands with a Version not equal to 0x01</para>
+              </listItem>
+            </list>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

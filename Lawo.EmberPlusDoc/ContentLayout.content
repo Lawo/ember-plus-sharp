@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
   <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Project" />
-  <Topic id="915a270d-2a20-432f-9531-ce6aa3260566" visible="True" isExpanded="true" title="Ember+ Sharp Library">
+  <Topic id="915a270d-2a20-432f-9531-ce6aa3260566" visible="True" title="Ember+ Sharp Library">
     <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" title="Lawo.EmberPlus.Model Namespace Tutorial">
       <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Page 1: Prerequisites" />
       <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Page 2: Introduction" />
@@ -26,8 +26,9 @@
       </Topic>
     </Topic>
     <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
-    <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" isSelected="true" apiParentMode="InsertAfter" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
+    <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" apiParentMode="InsertAfter" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
   </Topic>
+  <Topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" visible="True" isSelected="true" />
   <Topic id="b8313245-587c-4147-91e6-0accaccb2a77" visible="True" title="Future Directions" />
   <Topic id="358ebb3d-e950-4b89-b711-0571c6fbc03f" visible="True" title="Known Issues and Limitations" />
 </Topics>

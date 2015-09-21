@@ -29,9 +29,7 @@
           <para>Please keep <application>Tiny Ember+</application> running throughout this tutorial.</para>
         </alert>
         <para>The fully expanded tree should look like this:</para>
-        <mediaLink>
-          <image xlink:href="TinyEmberPlusTree"/>
-        </mediaLink>
+        <mediaLink><image xlink:href="TinyEmberPlusTree"/></mediaLink>
       </content>
     </section>
     <section address="Assemblies">
