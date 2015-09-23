@@ -28,7 +28,7 @@
     <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
     <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" apiParentMode="InsertAfter" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
   </Topic>
-  <Topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" visible="True" isSelected="true" />
+  <Topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" visible="True" isSelected="true" title="Ember+ Sharp Tools" />
   <Topic id="b8313245-587c-4147-91e6-0accaccb2a77" visible="True" title="Future Directions" />
   <Topic id="358ebb3d-e950-4b89-b711-0571c6fbc03f" visible="True" title="Known Issues and Limitations" />
 </Topics>

@@ -42,10 +42,19 @@
           communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
           the <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/>.
         </para>
+        <para>
+          Comprehensive 
+          <externalLink>
+            <linkText>Reference</linkText>
+            <linkUri>5EF7F8A.htm</linkUri>
+            <linkTarget>_self</linkTarget>
+          </externalLink>
+          documentation is available for all types.
+      </para>
       </content>
     </section>
     <section address="Tools">
-      <title>Tools</title>
+      <title>Ember+ Sharp Tools</title>
       <content>
         <list class="bullet">
           <listItem>
