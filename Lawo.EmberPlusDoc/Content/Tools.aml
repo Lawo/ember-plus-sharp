@@ -16,13 +16,13 @@
             <para>Traffic received from either party is immediately forwarded to the other one.</para>
           </listItem>
           <listItem>
-            <para>All messages are converted into human-readable XML and written into a log file.</para>
+            <para>All events (messages and exceptions) are written into an XML log file.</para>
           </listItem>
           <listItem>
-            <para>The main properties of each message are displayed in a scrollable list.</para>
+            <para>The main properties of all events are displayed in a scrollable list.</para>
           </listItem>
           <listItem>
-            <para>The full detail is shown for the currently selected message.</para>
+            <para>The full detail is shown for the currently selected event.</para>
           </listItem>
         </list>
         <mediaLink><image xlink:href="GlowAnalyzerProxy"/></mediaLink>

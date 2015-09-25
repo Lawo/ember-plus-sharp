@@ -4,33 +4,16 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
       <para>
-        The primary goal of this project is to make <application>Ember+</application><cite>Ember+ Specification</cite>
-        as simple as possible for <application>.NET</application> developers. For this purpose the following is
-        provided:
+        The primary goal of this project is to make <application>Ember+</application> as simple as possible for
+        <application>.NET</application> developers. If you are unfamiliar with <application>Ember+</application>,
+        it is recommended to read at least the <quoteInline>Introduction</quoteInline> of the
+        <quoteInline>Ember+ Specification</quoteInline><cite>Ember+ Specification</cite> (currently pages 8 and 9).
       </para>
-      <list class="bullet">
-        <listItem>
-          <para>
-            <link xlink:href="#Library">Ember+ Sharp Library</link>
-          </para>
-        </listItem>
-        <listItem>
-          <para>
-            <link xlink:href="#Tools">Tools</link> that help capture, visualize and analyze
-            <application>Ember+</application> communication between a consumer and a provider.
-          </para>
-        </listItem>
-      </list>
+      <autoOutline/>
     </introduction>
     <section address="Library">
       <title>Ember+ Sharp Library</title>
       <content>
-        <para>
-          This library implements most parts of the protocol described in the
-          <quoteInline>Ember+ Specification</quoteInline><cite>Ember+ Specification</cite>. If you are unfamiliar with
-          <application>Ember+</application>, it is recommended to read the <quoteInline>Introduction</quoteInline>
-          (currently pages 8 and 9).
-        </para>
         <para>
           First and foremost, this library provides the means to quickly implement an <application>Ember+</application>
           consumer, which can then be used in an application that needs to communicate with an existing

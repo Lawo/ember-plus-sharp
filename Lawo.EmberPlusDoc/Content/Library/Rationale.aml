@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c17ed1f5-6b3d-40f5-af29-b1d031ae24cd" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        Some of the types in the <codeEntityReference>N:Lawo.EmberPlus.S101</codeEntityReference> and
+        <codeEntityReference>N:Lawo.EmberPlus.Ember</codeEntityReference> namespaces duplicate functionality already
+        offered by <application>EmberLib.net</application> in the
+        <externalLink>
+          <linkText>ember-plus</linkText>
+          <linkUri>https://github.com/Lawo/ember-plus</linkUri>
+        </externalLink>
+        repository. For the reasons documented below, it has been decided to reimplement all functionality from scratch.
+      </para>
+      <autoOutline/>
+    </introduction>
+    <section address="UnitTests">
+      <title>Unit Tests</title>
+      <content>
+        <para>
+          There are no unit tests for <application>EmberLib.net</application>. It seems obvious that for just about any
+          serious application, reliable communication over <application>Ember+</application> is of the utmost
+          importance. It is therefore dangerous to use a library that cannot be easily tested whenever a new library
+          release is published. By comparison, the <application>Ember+ Sharp Library</application> is currently covered
+          with automated tests to ~95% statement coverage.
+        </para>
+      </content>
+    </section>
+    <section address="DotNetConventions">
+      <title>.NET Conventions</title>
+      <content>
+        <para>
+          In many places the API provided by <application>EmberLib.net</application>, does not seem to follow
+          well-established .NET conventions, for example:
+        </para>
+        <list class="bullet">
+          <listItem><para>Error conditions are largely undocumented.</para></listItem>
+          <listItem><para>Some error conditions are reported by callbacks instead of exceptions.</para></listItem>
+          <listItem>
+            <para>
+              The library makes it overly difficult to operate on
+              <codeEntityReference>T:System.IO.Stream</codeEntityReference> objects. Most
+              <application>.NET</application> communication APIs however provide streams (e.g.
+              <codeEntityReference>T:System.Net.Sockets.NetworkStream</codeEntityReference> or
+              <codeEntityReference>T:System.IO.Pipes.PipeStream</codeEntityReference>).
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="Efficiency">
+      <title>Efficiency</title>
+      <content>
+        <para></para>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>
