@@ -1,9 +1,6 @@
-  <tab type="usergroup" title="EmberPlus-net">
+  <tab type="usergroup" title="Ember+ Sharp">
     <tab type="usergroup" title="Tutorials">
       <tab type="user" url="\ref MvvmTutorial" title="MVVM"/>
-      <tab type="user" url="\ref TheLawoEmberPlusLibrary" title="The Lawo.EmberPlus Library"/>
-      <tab type="user" url="\ref TheLawoEmberPlusModelNamespace" title="The Lawo.EmberPlus.Model Namespace"/>
-      <tab type="user" url="\ref TheLawoEmberPlusEmberNamespace" title="The Lawo.EmberPlus.Ember Namespace"/>
-      <tab type="user" url="\ref TheLawoEmberPlusS101Namespace" title="The Lawo.EmberPlus.S101 Namespace"/>
+      <tab type="user" url="http://lawo.github.io/ember-plus-sharp/html/046877b5-3e57-48ca-8868-7885de0e3842.htm#Library" title="Ember+ Sharp Library"/>
     </tab>
   </tab>
