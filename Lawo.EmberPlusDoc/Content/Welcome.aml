@@ -15,25 +15,9 @@
       <title>Ember+ Sharp Library</title>
       <content>
         <para>
-          First and foremost, this library provides the means to quickly implement an <application>Ember+</application>
-          consumer, which can then be used in an application that needs to communicate with an existing
-          <application>Ember+</application> provider. Most of the types supporting this use case are demonstrated by the
-          <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/>.
+          The <link xlink:href="915a270d-2a20-432f-9531-ce6aa3260566"/> provides the means to quickly implement fully
+          type-safe <application>Ember+</application> consumers in any .NET language.
         </para>
-        <para>
-          As a byproduct, this library also offers support for lower level <application>Ember+</application>
-          communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
-          the <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/>.
-        </para>
-        <para>
-          Comprehensive 
-          <externalLink>
-            <linkText>Reference</linkText>
-            <linkUri>5EF7F8A.htm</linkUri>
-            <linkTarget>_self</linkTarget>
-          </externalLink>
-          documentation is available for all types.
-      </para>
       </content>
     </section>
     <section address="Tools">
@@ -56,6 +40,42 @@
             </para>
           </listItem>
         </list>
+      </content>
+    </section>
+    <section address="Downloads">
+      <title>Downloads</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Assemblies, Tools and Documentation</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Source Code</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/archive/master.zip</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="Feedback">
+      <title>Feedback</title>
+      <content>
+        <para>
+          Please use the
+          <externalLink>
+            <linkText>issue tracker</linkText>
+            <linkUri>https://github.com/Lawo/ember-plus-sharp/issues</linkUri>
+          </externalLink>
+          to suggest a feature, file a bug or ask a question.
+        </para>
       </content>
     </section>
     <bibliography/>

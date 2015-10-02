@@ -14,7 +14,7 @@
           part of the <application>Ember+ SDK</application>, which can be downloaded from the
           <externalLink>
             <linkText>Ember+ Releases Page</linkText>
-            <linkUri>http://github.com/Lawo/ember-plus/releases</linkUri>
+            <linkUri>https://github.com/Lawo/ember-plus/releases</linkUri>
           </externalLink>.
         </para>
         <para>
@@ -38,12 +38,9 @@
         <para>
           The code shown in this tutorial requires references to the <application>Lawo</application> and
           <application>Lawo.EmberPlus</application> assemblies. You can either reference these assemblies directly
-          or pull the associated projects into your solution and add project references. The projects can be found
-          on the
-          <externalLink>
-            <linkText>Ember+ Sharp Repository Page</linkText>
-            <linkUri>http://github.com/Lawo/ember-plus-sharp</linkUri>
-          </externalLink>.
+          or pull the source code of the associated projects into your solution and add project references. Please see
+          <link xlink:href="046877b5-3e57-48ca-8868-7885de0e3842#Downloads">Downloads</link> on how to obtain the
+          assemblies or the source code.
         </para>
         <para>Proceed to <link xlink:href="50028a38-6bef-4010-8e08-23fc3d5ae501"/>.</para>
       </content>
