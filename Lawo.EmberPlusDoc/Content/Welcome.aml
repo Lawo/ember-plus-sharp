@@ -50,7 +50,7 @@
             <para>
               <externalLink>
                 <linkText>Assemblies, Tools and Documentation</linkText>
-                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases</linkUri>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases/tag/v0.0.0.1</linkUri>
               </externalLink>
             </para>
           </listItem>
@@ -58,7 +58,7 @@
             <para>
               <externalLink>
                 <linkText>Source Code</linkText>
-                <linkUri>https://github.com/Lawo/ember-plus-sharp/archive/master.zip</linkUri>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/archive/v0.0.0.1.zip</linkUri>
               </externalLink>
             </para>
           </listItem>
