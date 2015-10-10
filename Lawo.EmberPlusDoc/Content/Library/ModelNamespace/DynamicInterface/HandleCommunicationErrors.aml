@@ -4,7 +4,7 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
       <para>
-        Communication errors are signalled through two different mechanisms, see the sections below for more
+        Communication errors are signaled through two different mechanisms, see the sections below for more
         information.
       </para>
       <autoOutline/>

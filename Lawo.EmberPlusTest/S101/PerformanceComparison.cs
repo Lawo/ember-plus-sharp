@@ -12,9 +12,8 @@ namespace Lawo.EmberPlus.S101
     using System.Threading.Tasks;
 
     using EmberLib.Glow.Framing;
-    using Lawo.IO;
-    using Lawo.Threading.Tasks;
-    using Lawo.UnitTesting;
+    using IO;
+    using Threading.Tasks;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>Compares the performance of this implementation with the one of EmberLib.net.</summary>
@@ -27,7 +26,7 @@ namespace Lawo.EmberPlus.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Compares <see cref="S101Reader"/> sync and async performance .</summary>
+        /// <summary>Measures <see cref="S101Reader"/> asynchronous performance.</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will not be localized.")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Text references code elements.")]
         [TestCategory("Unattended")]
