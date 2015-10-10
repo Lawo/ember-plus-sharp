@@ -26,16 +26,16 @@
         <list class="bullet">
           <listItem>
             <para>
-              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">GlowAnalyzerProxy</link> is a
+              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow Analyzer Proxy</link> is a
               <application>Windows</application> application that acts as a middleman between an
               <application>Ember+</application> consumer and a provider that logs and visualizes all traffic.
             </para>
           </listItem>
           <listItem>
             <para>
-              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#ConvertGlowLog">ConvertGlowLog</link> is a
+              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#ConvertGlowLog">Convert Glow Log</link> is a
               <application>Console</application> application that converts XML log files as they have been written by
-              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">GlowAnalyzerProxy</link> into an
+              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow Analyzer Proxy</link> into an
               even more human-readable format.
             </para>
           </listItem>
