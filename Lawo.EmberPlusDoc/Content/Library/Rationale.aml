@@ -9,10 +9,10 @@
       <title>Other Libraries Require a High Effort to Implement a New Consumer</title>
       <content>
         <para>
-          Currently, all other publicly available <application>Ember+</application> libraries only implement the
-          serialization and deserialization of <application>Glow DTD</application> objects. Every new implementation of
-          a fully functional <application>Ember+</application> consumer that uses one of these libraries therefore
-          requires that the following is repeated:
+          Currently, all other publicly available <application>Ember+</application> libraries only offer APIs for the
+          the serialization and deserialization of <application>Glow DTD</application> objects. Every company that
+          decides to have one of their products act as a fully functional <application>Ember+</application> consumer
+          therefore needs to repeat the following steps:
         </para>
         <list class="bullet">
           <listItem>
@@ -21,7 +21,7 @@
               capabilities:
             </para>
             <list class="bullet">
-              <listItem><para>Apply a change received from the server.</para></listItem>
+              <listItem><para>Apply a change received from the provider.</para></listItem>
               <listItem><para>Apply a locally made change.</para></listItem>
               <listItem><para>Enable client code to be notified about changes.</para></listItem>
               <listItem>
@@ -40,7 +40,9 @@
               received from the provider.
             </para>
           </listItem>
-          <listItem><para>Apply change messages received from the provider.</para></listItem>
+          <listItem>
+            <para>Apply change messages received from the provider to the local data structure.</para>
+          </listItem>
           <listItem>
             <para>Serialize local changes into appropriate messages and send them to the provider.</para>
           </listItem>
@@ -49,7 +51,7 @@
         <para>
           The <link xlink:href="915a270d-2a20-432f-9531-ce6aa3260566"/> on the other hand implements all of the above in
           easily reusable components such that a consumer can be implemented in less than an hour. With any other
-          publicly available library this takes at least days if not weeks.
+          publicly available library this currently takes at least days if not weeks.
         </para>
       </content>
     </section>
@@ -101,16 +103,15 @@
           </listItem>
           <listItem>
             <para>
-              From a cursory glance at the <application>EmberLib.net</application> source code, it seems that the
-              implementation is unnecessarily inefficient in many places. This impression is partially confirmed by a
-              [performance comparison](\ref EmberLibNetVsLawoEmberPlusPerformanceComparison) of the
+              For applications that visualize data communicated over <application>Ember+</application>, it seems best
+              when messages are processed directly on the GUI thread. With such an approach, it is absolutely crucial
+              that all code involved in the processing <application>Ember+</application> traffic must offer the best
+              possible performance. From a cursory glance at the <application>EmberLib.net</application> source code, it
+              appears that the implementation is unnecessarily inefficient in many places. This impression is partially
+              confirmed by a [performance comparison](\ref EmberLibNetVsLawoEmberPlusPerformanceComparison) of the
               <codeInline>GlowOutput</codeInline> class with the
               <codeEntityReference>T:Lawo.EmberPlus.S101.S101Writer</codeEntityReference> class. The former is ~1.9
-              times slower than the latter. For a number of reasons it seems best when <application>Ember+</application>
-              messages are processed directly on the GUI thread (only after initial connection), where performance
-              problems are most likely to be observable by the human operator. It is therefore clear that all code
-              involved in the processing <application>Ember+</application> traffic must offer the best possible
-              performance.
+              times slower than the latter.
             </para>
           </listItem>
         </list>
