@@ -1,9 +1,12 @@
 $ErrorActionPreference = "Stop"
 "Build and Publish Ember+ Sharp"
+$packageName = "EmberPlusSharp_Windows_AnyCpu_Release.zip"
+
+# Read Credentials
+$password = Read-Host 'cimaster Password'
+$gitHubApiKey = Read-Host 'GitHub API Key'
 
 # Delete existing package
-$packageName = "EmberPlusSharp_Windows_AnyCpu_Release.zip"
-$password = Read-Host 'cimaster Password'
 echo open cimaster.lawo.de >temp.ftp
 echo cimaster >>temp.ftp
 echo $password >>temp.ftp
@@ -59,6 +62,7 @@ $version = [Reflection.Assembly]::Loadfile([IO.Path]::Combine($packageDirectory,
 "Package version is " + $version + "."
 $extension = [IO.Path]::GetExtension($packageName)
 $newPackageName = $packageName.Replace($extension, "-" + $version + $extension)
+$newPackagePath = [IO.Path]::Combine($packageDirectory, $newPackageName);
 Rename-Item $packagePath $newPackageName
 
 "Cloning gh-pages..."
@@ -84,6 +88,32 @@ git checkout -q master
 git tag $tag
 
 "Pushing everything..."
-# git push --all origin
+git push origin refs/heads/* refs/tags/*
 
-cd ..
+"Creating GitHub Release..."
+$auth = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($gitHubApiKey + ":x-oauth-basic"))
+$releaseData = @{ tag_name = $tag; draft = $true; prerelease = $false; }
+
+$releaseParams = @{
+    Uri = "https://api.github.com/repos/Lawo/ember-plus-sharp/releases";
+    Method = 'POST';
+    Headers = @{ Authorization = $auth; }
+    ContentType = 'application/json';
+    Body = (ConvertTo-Json $releaseData -Compress)
+}
+
+$result = Invoke-RestMethod @releaseParams
+
+"Uploading Zip..."
+$uploadUri = $result | Select -ExpandProperty upload_url
+$uploadUri = $uploadUri -replace '\{\?name\}', "?name=$newPackageName"
+
+$uploadParams = @{
+    Uri = $uploadUri;
+    Method = 'POST';
+    Headers = @{ Authorization = $auth }
+    ContentType = 'application/zip';
+    InFile = $newPackagePath
+}
+
+$result = Invoke-RestMethod @uploadParams
