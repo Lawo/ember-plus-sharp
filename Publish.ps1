@@ -62,7 +62,7 @@ $version = [Reflection.Assembly]::Loadfile([IO.Path]::Combine($packageDirectory,
 "Package version is " + $version + "."
 $extension = [IO.Path]::GetExtension($packageName)
 $newPackageName = $packageName.Replace($extension, "-" + $version + $extension)
-$newPackagePath = [IO.Path]::Combine($packageDirectory, $newPackageName);
+$newPackagePath = [IO.Path]::Combine($tempDirectory, $newPackageName);
 Rename-Item $packagePath $newPackageName
 
 "Cloning gh-pages..."
@@ -80,7 +80,7 @@ git add -A
 
 "Committing documentation changes..."
 $tag = "v" + $version
-$message = "Publish " + $tag + " documentation."
+$message = "Publish " + $tag + " documentation"
 git commit -m $message
 
 "Setting tag on master branch..."
@@ -88,7 +88,7 @@ git checkout -q master
 git tag $tag
 
 "Pushing everything..."
-git push origin refs/heads/* refs/tags/*
+git push -q origin refs/heads/* refs/tags/*
 
 "Creating GitHub Release..."
 $auth = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($gitHubApiKey + ":x-oauth-basic"))
@@ -116,4 +116,4 @@ $uploadParams = @{
     InFile = $newPackagePath
 }
 
-$result = Invoke-RestMethod @uploadParams
+Invoke-RestMethod @uploadParams
