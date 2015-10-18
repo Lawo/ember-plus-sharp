@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 "Build and Publish Ember+ Sharp"
-$packageName = "EmberPlusSharp_Windows_AnyCpu_Release.zip"
+$packageName = "EmberPlusSharp.zip"
 
 # Read Credentials
 $password = Read-Host 'cimaster Password'
@@ -36,7 +36,7 @@ catch
 
 # Start Build
 "Starting build..."
-[void](Invoke-WebRequest "http://cimaster.lawo.de:8080/job/EmberPlusSharp_Windows_AnyCpu_Release/build?token=B497D548-5260-49C0-8932-5A40187E7866")
+[void](Invoke-WebRequest "http://cimaster.lawo.de:8080/job/EmberPlusSharp/build?token=B497D548-5260-49C0-8932-5A40187E7866")
 
 # Download package as soon as it's available
 $downloadSucceeded = $false
@@ -106,7 +106,7 @@ $result = Invoke-RestMethod @releaseParams
 
 "Uploading Zip..."
 $uploadUri = $result | Select -ExpandProperty upload_url
-$uploadUri = $uploadUri -replace '\{\?name\}', "?name=$newPackageName"
+$uploadUri = $uploadUri -replace '\{\?name,label\}', "?name=$newPackageName"
 
 $uploadParams = @{
     Uri = $uploadUri;
