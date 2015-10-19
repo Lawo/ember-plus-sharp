@@ -59,7 +59,7 @@
         </Rule>
       </Rules>
       <AnalyzerSettings>
-        <StringProperty Name="Copyright">Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</StringProperty>
+        <StringProperty Name="Copyright">Copyright 2012-2015 Lawo AG (http://www.lawo.com).</StringProperty>
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.OrderingRules">

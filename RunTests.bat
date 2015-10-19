@@ -1,3 +1,7 @@
+rem Copyright 2012-2015 Lawo AG (http://www.lawo.com).
+rem Distributed under the Boost Software License, Version 1.0.
+rem (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
 rmdir TestResults /s /q
 rmdir CoverageResults /s /q
 

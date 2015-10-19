@@ -1,5 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com). All rights reserved.</copyright>
+// <copyright>Copyright 2012-2015 Lawo AG (http://www.lawo.com).</copyright>
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace Lawo.Diagnostics.Tracing
@@ -9,11 +11,12 @@ namespace Lawo.Diagnostics.Tracing
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    using Lawo.Reflection;
-    using Lawo.Threading;
-    using Lawo.Threading.Tasks;
-    using Lawo.UnitTesting;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Reflection;
+    using Threading;
+    using Threading.Tasks;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="Log"/> class.</summary>
     [TestClass]
@@ -42,7 +45,7 @@ namespace Lawo.Diagnostics.Tracing
                     Assert.AreEqual(logMessage, logEvent.LogMessage);
                     Assert.AreEqual(NativeMethods.GetCurrentThreadId(), logEvent.ThreadId);
                     Assert.IsTrue(logEvent.FilePath.Contains("LogTest.cs"));
-                    Assert.AreEqual(35, logEvent.LineNumber);
+                    Assert.AreEqual(38, logEvent.LineNumber);
                     Assert.AreEqual(moduleName, logEvent.ModluleName);
                 });
         }

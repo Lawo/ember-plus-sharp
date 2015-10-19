@@ -1,4 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
 <S101Log>
   <Event type="StartingReadLoop" timeUtc="14:54:30.86" />
   <Event type="RawData" timeUtc="14:54:30.86" direction="Receive">FE000E00018001020A0260806B80A0806280A0030201200000000000000000EDFDDDFFFE000E00016001020A021353FF</Event>
