@@ -8,45 +8,22 @@
     <introduction/>
     <section>
       <content>
-        <para>
-          The following <application>Ember+</application> features are not currently supported but will be implemented
-          when the need arises:
-        </para>
-        <list class="ordered">
+        <list class="bullet">
           <listItem>
             <para>
               <externalLink>
-                <linkText>Matrices</linkText>
-                <linkUri>https://redmine.lawo.de/redmine/issues/1309</linkUri>
+                <linkText>Short to Medium Term</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/issues?q=is%3Aopen+is%3Aissue+milestone%3A*</linkUri>
               </externalLink>
             </para>
           </listItem>
           <listItem>
             <para>
               <externalLink>
-                <linkText>Streams</linkText>
-                <linkUri>https://redmine.lawo.de/redmine/issues/1314</linkUri>
+                <linkText>Long Term</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/issues?q=is%3Aopen+is%3Aissue+no%3Amilestone</linkUri>
               </externalLink>
             </para>
-          </listItem>
-          <listItem>
-            <para>
-              <externalLink>
-                <linkText>S101 out-of-frame bytes</linkText>
-                <linkUri>https://redmine.lawo.de/redmine/issues/1315</linkUri>
-              </externalLink>
-            </para>
-          </listItem>
-          <listItem>
-            <para>S101 Versioning</para>
-            <list class="bullet">
-              <listItem>
-                <para>Messages with a Message Type not equal to 0x0E</para>
-              </listItem>
-              <listItem>
-                <para>Commands with a Version not equal to 0x01</para>
-              </listItem>
-            </list>
           </listItem>
         </list>
       </content>
