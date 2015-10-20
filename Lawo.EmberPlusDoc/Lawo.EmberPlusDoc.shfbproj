@@ -14,7 +14,7 @@
     <Name>Lawo.EmberPlusDoc</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Portable Library 4.5</FrameworkVersion>
-    <OutputPath>.\Help\</OutputPath>
+    <OutputPath>Documentation\</OutputPath>
     <HtmlHelpName>Lawo.EmberPlusDoc</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>

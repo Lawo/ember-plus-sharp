@@ -78,7 +78,7 @@ cd $ghpagesDirectory
 Remove-Item * -Recurse -Exclude .git
 
 "Adding new documentation..."
-$documentationPattern = [IO.Path]::Combine($packageDirectory, "Help", "*.*")
+$documentationPattern = [IO.Path]::Combine($packageDirectory, "Documentation", "*.*")
 xcopy $documentationPattern . /e /q
 git add -A
 
