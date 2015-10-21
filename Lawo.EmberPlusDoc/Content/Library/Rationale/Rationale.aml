@@ -111,7 +111,7 @@
               that all code involved in the processing <application>Ember+</application> traffic must offer the best
               possible performance. From a cursory glance at the <application>EmberLib.net</application> source code, it
               appears that the implementation is unnecessarily inefficient in many places. This impression is partially
-              confirmed by a [performance comparison](\ref EmberLibNetVsLawoEmberPlusPerformanceComparison) of the
+              confirmed by a <link xlink:href="2733eaf4-84f9-496d-afa2-bd6d3ab0f291"/> of the
               <codeInline>GlowOutput</codeInline> class with the
               <codeEntityReference>T:Lawo.EmberPlus.S101.S101Writer</codeEntityReference> class. The former is ~1.9
               times slower than the latter.
