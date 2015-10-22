@@ -124,6 +124,7 @@
     <Folder Include="Content\Library\ModelNamespace\Prerequisites\" />
     <Folder Include="Content\Library\ModelNamespace\StaticInterface\" />
     <Folder Include="Content\Library" />
+    <Folder Include="Content\Library\ComponentModelNamespace" />
     <Folder Include="Content\Library\Rationale" />
     <Folder Include="icons" />
     <Folder Include="media" />
@@ -132,6 +133,8 @@
     <None Include="bibliography.xml" />
     <None Include="Content\FutureDirections.aml" />
     <None Include="Content\KnownIssues.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\ComponentModelNamespace.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\DataSynchronization.aml" />
     <None Include="Content\Library\EmberNamespace.aml" />
     <None Include="Content\Library\Library.aml" />
     <None Include="Content\Library\ModelNamespace\DynamicInterface\DynamicInterface.aml" />

@@ -26,9 +26,12 @@
       </Topic>
     </Topic>
     <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
-    <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" apiParentMode="InsertAfter" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
+    <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
+    <Topic id="fa86e52c-0fb0-4acb-9b55-fb689eb5f17c" visible="True" isExpanded="true" apiParentMode="InsertAfter" title="Lawo.ComponentModel Namespace Tutorial">
+      <Topic id="1bb898de-b98c-4b38-958a-1368c2ffebd0" visible="True" isSelected="true" title="Data Synchronization" />
+    </Topic>
     <Topic id="c17ed1f5-6b3d-40f5-af29-b1d031ae24cd" visible="True" isExpanded="true" title="Rationale">
-      <Topic id="2733eaf4-84f9-496d-afa2-bd6d3ab0f291" visible="True" isSelected="true" title="Performance Comparison" />
+      <Topic id="2733eaf4-84f9-496d-afa2-bd6d3ab0f291" visible="True" title="Performance Comparison" />
     </Topic>
   </Topic>
   <Topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" visible="True" title="Ember+ Sharp Tools" />

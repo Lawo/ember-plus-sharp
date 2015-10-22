@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="fa86e52c-0fb0-4acb-9b55-fb689eb5f17c" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction/>
+    <section>
+      <content>
+        <para>
+          For a nice introduction to MVVM please refer to
+          <externalLink>
+            <linkText>Ivo Manolov's Blog</linkText>
+            <linkUri>http://blogs.msdn.com/b/ivo_manolov/archive/2012/03/17/10284665.aspx</linkUri>
+          </externalLink>.
+        </para>
+        <alert class="note">
+          <para>
+            Please ignore the section discussing the
+            <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> interface and its implementation.
+            We will see below how <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> is no
+            longer necessary with XAML frameworks that offer triggers or behaviors.
+          </para>
+        </alert>
+        <para>This topic contains the following subtopics:</para>
+        <list class="bullet">
+          <listItem><para><link xlink:href="1bb898de-b98c-4b38-958a-1368c2ffebd0"/></para></listItem>
+          <listItem></listItem>
+        </list>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>
