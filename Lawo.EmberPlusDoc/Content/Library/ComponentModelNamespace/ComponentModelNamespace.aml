@@ -6,7 +6,8 @@
     <section>
       <content>
         <para>
-          For a nice introduction to MVVM please refer to
+          The types in this namespace help to implement the MVVM pattern. For a nice introduction to MVVM please refer
+          to
           <externalLink>
             <linkText>Ivo Manolov's Blog</linkText>
             <linkUri>http://blogs.msdn.com/b/ivo_manolov/archive/2012/03/17/10284665.aspx</linkUri>
@@ -18,6 +19,83 @@
             <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> interface and its implementation.
             We will see below how <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> is no
             longer necessary with XAML frameworks that offer triggers or behaviors.
+          </para>
+        </alert>
+        <para>To summarize, the important facts of MVVM are the following:</para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              At compile time, there is a unidirectional dependency between the different entities: The View references
+              the ViewModel, which in turn references the Model. However, the ViewModel does not know anything about the
+              View and the Model does not know anything about the View or the ViewModel.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              The main responsibility of the ViewModel is to provide the data in the format needed by the View, offer
+              methods for the actions that can be performed on the View and provide events that the View needs to
+              subscribe to.
+            </para>
+          </listItem>
+          <listItem>
+            <para>The ViewModel is fully GUI-technology-agnostic and can be exercised by automated tests.</para>
+          </listItem>
+          <listItem>
+            <para>
+              The View defines how the data of the ViewModel is presented to the user. It is often implemented solely in
+              XAML. In the cases where C# code is necessary, the code only concerns itself with the presentation of the
+              data but not the business logic.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              The Model is implemented without consideration for how the GUI will look like. It simply provides all
+              necessary data, offers methods to modify the data and enforces the business logic. The data is provided in
+              the format that is most convenient and efficient for the Model.
+            </para>
+          </listItem>
+        </list>
+        <para>
+          A ViewModel is particularly easy to consume from a XAML-based GUI (WPF, Silverlight, Windows Store App, etc.):
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Databinding: Normal properties as well as
+              <codeEntityReference>T:System.Collections.ObjectModel.ObservableCollection`1</codeEntityReference>
+              properties can be bound to controls directly in XAML (no code behind is necessary). Changes in the GUI are
+              automatically pushed to the bound properties and changes to the properties automatically lead to updates
+              of the GUI.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Control Behavior:
+              <codeEntityReference qualifyHint="true">P:Windows.UI.Xaml.Controls.Control.IsEnabled</codeEntityReference>
+              and similar GUI behavior properties can be bound to properties of the ViewModel directly in XAML.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Triggers and Behaviors: Events on GUI controls can be bound to ViewModel methods directly in XAML, such
+              that a method is called whenever the associated event is raised (see
+              <codeEntityReference>T:Microsoft.Xaml.Interactions.Core.CallMethodAction</codeEntityReference>).
+            </para>
+          </listItem>
+        </list>
+        <alert class="note">
+          <para>
+            For simple applications, it is often unclear at first where to best draw the line between the Model and the
+            ViewModel. If one follows the MVVM pattern to the letter and implements all the business logic in the Model,
+            the ViewModel often degenerates into a class that does little else than forward function calls between the
+            Model and the View. In such cases I think it is perfectly acceptable to implement much or even all business
+            logic in the ViewModel. Note that the most important aspect of MVVM is the separation between View and
+            ViewModel. Whether and where to separate the Model from the ViewModel is of lower importance and should be
+            decided based on the use cases. For example, the Model in the
+            <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow Analyzer Proxy</link>
+            application is the <codeInline>Settings</codeInline> class, which is responsible for the storage of the
+            application settings. All other business logic is implemented in the
+            <codeInline>MainWindowViewModel</codeInline>.
           </para>
         </alert>
         <para>This topic contains the following subtopics:</para>
