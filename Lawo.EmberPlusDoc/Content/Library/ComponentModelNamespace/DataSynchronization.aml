@@ -2,11 +2,227 @@
 <topic id="1bb898de-b98c-4b38-958a-1368c2ffebd0" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
+    <introduction>
+      <para>
+        The <application>ViewModel</application> and the <application>View</application> each hold their own copy of the
+        data shown on the <application>View</application>. Moreover, the <application>ViewModel</application> often
+        also needs to duplicate at least some of the data provided by the <application>Model</application>. Data
+        therefore needs to be synchronized between these entities. The following sections detail the responsibilities of
+        the developer and suggest supporting classes.
+      </para>
+      <alert class="note">
         <para>
+          The developer responsibilities below should be read as suggestions rather than rules. For complex scenarios,
+          it probably makes sense to implement things as suggested. In simple cases shortcuts can be taken, for example:
         </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              For a GUI that only displays data that never changes, it makes little sense to implement change
+              propagation. It is sufficient to implement initialization.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              For data that is only ever displayed and changed from a single view, change propagation from
+              <application>Model</application> to <application>ViewModel</application> to
+              <application>View</application> is unnecessary and does not need to be implemented.
+            </para>
+          </listItem>
+        </list>
+      </alert>
+      <autoOutline/>
+    </introduction>
+    <section address="Initialization">
+      <title>Initialization</title>
+      <content>
+        <table>
+          <tableHeader>
+            <row>
+              <entry><para>Entity</para></entry>
+              <entry><para>Developer Responsibilities</para></entry>
+              <entry><para>Supporting Classes</para></entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry><para><application>Model</application></para></entry>
+            <entry><list class="bullet"><listItem><para>Implement property getters</para></listItem></list></entry>
+            <entry/>
+          </row>
+          <row>
+            <entry><para><application>ViewModel</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem><para>Call property getters in <application>Model</application></para></listItem>
+                <listItem><para>Implement property getters</para></listItem>
+              </list>
+            </entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.OneWayBinding</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.TwoWayBinding</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference></para>
+                </listItem>
+              </list>
+            </entry>
+          </row>
+          <row>
+            <entry><para><application>View</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para>
+                    Set <codeEntityReference>P:Windows.UI.Xaml.FrameworkElement.DataContext</codeEntityReference>
+                  </para>
+                </listItem>
+                <listItem><para>Use binding expressions in <application>XAML</application></para></listItem>
+              </list>
+            </entry>
+            <entry/>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section address="ViewToModel">
+      <title>Change Propagation from View to ViewModel to Model</title>
+      <content>
+        <table>
+          <tableHeader>
+            <row>
+              <entry><para>Entity</para></entry>
+              <entry><para>Developer Responsibilities</para></entry>
+              <entry><para>Supporting Classes</para></entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry><para><application>Model</application></para></entry>
+            <entry><list class="bullet"><listItem><para>Implement property setters</para></listItem></list></entry>
+            <entry/>
+          </row>
+          <row>
+            <entry><para><application>ViewModel</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem><para>Implement property setters</para></listItem>
+                <listItem><para>Call property setters in <application>Model</application></para></listItem>
+              </list>
+            </entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.OneWayBinding</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.TwoWayBinding</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference></para>
+                </listItem>
+              </list>
+            </entry>
+          </row>
+          <row>
+            <entry><para><application>View</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para>
+                    Set <codeEntityReference>P:Windows.UI.Xaml.FrameworkElement.DataContext</codeEntityReference>
+                  </para>
+                </listItem>
+                <listItem><para>Use binding expressions in <application>XAML</application></para></listItem>
+              </list>
+            </entry>
+            <entry/>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section address="ModelToView">
+      <title>Change Propagation from Model to ViewModel to View</title>
+      <content>
+        <table>
+          <tableHeader>
+            <row>
+              <entry><para>Entity</para></entry>
+              <entry><para>Developer Responsibilities</para></entry>
+              <entry><para>Supporting Classes</para></entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry><para><application>Model</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para>
+                    Implement <codeEntityReference>T:System.ComponentModel.INotifyPropertyChanged</codeEntityReference>
+                  </para>
+                </listItem>
+              </list>
+            </entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.NotifyPropertyChanged</codeEntityReference></para>
+                </listItem>
+              </list>
+            </entry>
+          </row>
+          <row>
+            <entry><para><application>ViewModel</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para>
+                    Implement <codeEntityReference>T:System.ComponentModel.INotifyPropertyChanged</codeEntityReference>
+                  </para>
+                </listItem>
+                <listItem>
+                  <para>
+                    Subscribe to
+                    <codeEntityReference>E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged</codeEntityReference>
+                    events of the <application>Model</application>
+                  </para>
+                </listItem>
+              </list>
+            </entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.NotifyPropertyChanged</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.OneWayBinding</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.TwoWayBinding</codeEntityReference></para>
+                </listItem>
+                <listItem>
+                  <para><codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference></para>
+                </listItem>
+              </list>
+            </entry>
+          </row>
+          <row>
+            <entry><para><application>View</application></para></entry>
+            <entry>
+              <list class="bullet">
+                <listItem>
+                  <para>
+                    Set <codeEntityReference>P:Windows.UI.Xaml.FrameworkElement.DataContext</codeEntityReference>
+                  </para>
+                </listItem>
+                <listItem><para>Use binding expressions in <application>XAML</application></para></listItem>
+              </list>
+            </entry>
+            <entry/>
+          </row>
+        </table>
       </content>
     </section>
     <relatedTopics/>
