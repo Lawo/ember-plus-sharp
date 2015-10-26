@@ -19,7 +19,8 @@
       <content>
         <para>
           The <link xlink:href="915a270d-2a20-432f-9531-ce6aa3260566"/> provides the means to quickly implement fully
-          type-safe <application>Ember+</application> consumers in any .NET language.
+          type-safe <application>Ember+</application> consumers in just about any <application>.NET</application>
+          language.
         </para>
       </content>
     </section>
@@ -37,31 +38,31 @@
           <listItem>
             <para>
               <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#ConvertGlowLog">Convert Glow Log</link> is a
-              <application>Console</application> application that converts XML log files as they have been written by
-              <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow Analyzer Proxy</link> into an
-              even more human-readable format.
+              <application>Console</application> application that converts <application>XML</application> log files as
+              they have been written by <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow
+              Analyzer Proxy</link> into an even more human-readable format.
             </para>
           </listItem>
         </list>
       </content>
     </section>
-    <section address="Downloads">
-      <title>Downloads</title>
+    <section address="Releases">
+      <title>Releases</title>
       <content>
         <list class="bullet">
           <listItem>
             <para>
               <externalLink>
-                <linkText>v0.0.0.1 Release</linkText>
-                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases/tag/v0.0.0.1</linkUri>
+                <linkText>Latest</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases/latest</linkUri>
               </externalLink>
             </para>
           </listItem>
           <listItem>
             <para>
               <externalLink>
-                <linkText>Latest Release</linkText>
-                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases</linkUri>
+                <linkText>v0.0.0.1 (the release this documentation refers to)</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases/tag/v0.0.0.1</linkUri>
               </externalLink>
             </para>
           </listItem>
