@@ -5,23 +5,20 @@
 <topic id="06184592-a364-4e11-9721-551b6316ffc1" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>
-          The static interface should be used in applications that have detailed expectations about the contents of the
-          provider database. The static interface cannot be used in applications that need to connect to providers with
-          databases of unknown contents.
-        </para>
-        <para>
-          The main difference between the dynamic and the static interface is that the former will query the provider for
-          all elements and replicate them in the local database while the latter will only query and replicate the
-          elements that the client code is interested in. Apart from that the static interface offers a superset of
-          the functionality of the dynamic one.
-        </para>
-        <para>Proceed to <link xlink:href="0957f1fa-abf4-4fb8-9430-1230ce2c6947"/>.</para>
-      </content>
-    </section>
+    <introduction>
+      <para>
+        The static interface should be used in applications that have detailed expectations about the contents of the
+        provider database. The static interface cannot be used in applications that need to connect to providers with
+        databases of unknown contents.
+      </para>
+      <para>
+        The main difference between the dynamic and the static interface is that the former will query the provider for
+        all elements and replicate them in the local database while the latter will only query and replicate the
+        elements that the client code is interested in. Apart from that the static interface offers a superset of
+        the functionality of the dynamic one.
+      </para>
+      <para>Proceed to <link xlink:href="0957f1fa-abf4-4fb8-9430-1230ce2c6947"/>.</para>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

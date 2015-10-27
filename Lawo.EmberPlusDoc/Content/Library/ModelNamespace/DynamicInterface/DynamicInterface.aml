@@ -5,18 +5,15 @@
 <topic id="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>
-          The dynamic interface can be used to connect to a provider with a database containing unknown elements. It is
-          best suited for applications that are able to consume a database of just about any contents, like e.g.
-          <application>Ember+ Viewer</application>. As we will see, the dynamic interface is poorly suited for
-          applications that have certain expectations about the contents of the database.
-        </para>
-        <para>Proceed to <link xlink:href="f6285c3c-ef54-453e-90ad-5546ec1a7a1d"/>.</para>
-      </content>
-    </section>
+    <introduction>
+      <para>
+        The dynamic interface can be used to connect to a provider with a database containing unknown elements. It is
+        best suited for applications that are able to consume a database of just about any contents, like e.g.
+        <application>Ember+ Viewer</application>. As we will see, the dynamic interface is poorly suited for
+        applications that have certain expectations about the contents of the database.
+      </para>
+      <para>Proceed to <link xlink:href="f6285c3c-ef54-453e-90ad-5546ec1a7a1d"/>.</para>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

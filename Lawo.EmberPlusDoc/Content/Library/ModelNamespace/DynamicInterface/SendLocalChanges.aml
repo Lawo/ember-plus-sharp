@@ -5,53 +5,50 @@
 <topic id="84d499e7-ec08-4311-8038-987c167eaa43" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>
-          As you might expect, modifying a value is as easy as setting the
-          <codeEntityReference qualifyHint="true">P:Lawo.EmberPlus.Model.IParameter.Value</codeEntityReference>
-          property. In a generic application like e.g. a viewer it would be straightforward to do so. In the code below
-          however, for demonstration purposes we're going to set two specific parameters. As mentioned earlier, the
-          dynamic interface is not very well suited for tasks that make assumptions about the contents of the database:
-        </para>
-        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Dynamic Modify" language="c#"/>
-        <para>Specifically, the code above has the following problems:</para>
-        <list class="bullet">
-          <listItem>
-            <para>
-              No attempt is made to handle exceptions that might result from incorrect assumptions. Such exceptions
-              could be thrown when an expected element is not present (e.g. the parameter is named
-              <codeInline>dBValue</codeInline> rather than <codeInline>dB Value</codeInline>), the actual element has a
-              different type (e.g. <codeInline>Position</codeInline> is of type
-              <codeEntityReference>T:Lawo.EmberPlus.Model.INode</codeEntityReference> rather than
-              <codeEntityReference>T:Lawo.EmberPlus.Model.IParameter</codeEntityReference>) or
-              <codeInline>dB Value</codeInline> is really a <codeInline>long</codeInline> rather than a
-              <codeInline>double</codeInline>. Robust code would have to handle these exceptions which would make the
-              process even more tedious than it already is.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              The interface offers no way of getting an element by name. The code above has to use
-              <application>LINQ</application> to search for the desired elements, which is cumbersome and inefficient.
-            </para>
-          </listItem>
-        </list>
-        <para>We will see later how the static interface is a much better fit for this scenario.</para>
-        <alert class="note">
+    <introduction>
+      <para>
+        As you might expect, modifying a value is as easy as setting the
+        <codeEntityReference qualifyHint="true">P:Lawo.EmberPlus.Model.IParameter.Value</codeEntityReference>
+        property. In a generic application like e.g. a viewer it would be straightforward to do so. In the code below
+        however, for demonstration purposes we're going to set two specific parameters. As mentioned earlier, the
+        dynamic interface is not very well suited for tasks that make assumptions about the contents of the database:
+      </para>
+      <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Dynamic Modify" language="c#"/>
+      <para>Specifically, the code above has the following problems:</para>
+      <list class="bullet">
+        <listItem>
           <para>
-            As soon as a parameter is modified locally, provider changes are no longer applied to the parameter until
-            the
-            <codeEntityReference qualifyHint="true">P:Lawo.EmberPlus.Model.Consumer`1.AutoSendInterval</codeEntityReference>
-            has elapsed or
-            <codeEntityReference qualifyHint="true">M:Lawo.EmberPlus.Model.Consumer`1.SendAsync</codeEntityReference> is
-            called.
+            No attempt is made to handle exceptions that might result from incorrect assumptions. Such exceptions
+            could be thrown when an expected element is not present (e.g. the parameter is named
+            <codeInline>dBValue</codeInline> rather than <codeInline>dB Value</codeInline>), the actual element has a
+            different type (e.g. <codeInline>Position</codeInline> is of type
+            <codeEntityReference>T:Lawo.EmberPlus.Model.INode</codeEntityReference> rather than
+            <codeEntityReference>T:Lawo.EmberPlus.Model.IParameter</codeEntityReference>) or
+            <codeInline>dB Value</codeInline> is really a <codeInline>long</codeInline> rather than a
+            <codeInline>double</codeInline>. Robust code would have to handle these exceptions which would make the
+            process even more tedious than it already is.
           </para>
-        </alert>
-        <para>Proceed to <link xlink:href="df1c42d3-bc00-4786-88d6-2372b281043a"/>.</para>
-      </content>
-    </section>
+        </listItem>
+        <listItem>
+          <para>
+            The interface offers no way of getting an element by name. The code above has to use
+            <application>LINQ</application> to search for the desired elements, which is cumbersome and inefficient.
+          </para>
+        </listItem>
+      </list>
+      <para>We will see later how the static interface is a much better fit for this scenario.</para>
+      <alert class="note">
+        <para>
+          As soon as a parameter is modified locally, provider changes are no longer applied to the parameter until
+          the
+          <codeEntityReference qualifyHint="true">P:Lawo.EmberPlus.Model.Consumer`1.AutoSendInterval</codeEntityReference>
+          has elapsed or
+          <codeEntityReference qualifyHint="true">M:Lawo.EmberPlus.Model.Consumer`1.SendAsync</codeEntityReference> is
+          called.
+        </para>
+      </alert>
+      <para>Proceed to <link xlink:href="df1c42d3-bc00-4786-88d6-2372b281043a"/>.</para>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

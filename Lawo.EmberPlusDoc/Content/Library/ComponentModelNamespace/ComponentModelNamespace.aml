@@ -5,126 +5,123 @@
 <topic id="fa86e52c-0fb0-4acb-9b55-fb689eb5f17c" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
+    <introduction>
+      <para>
+        The types in this namespace help to implement the <application>MVVM</application> pattern. For a nice
+        introduction to <application>MVVM</application> please refer to
+        <externalLink>
+          <linkText>Ivo Manolov's Blog</linkText>
+          <linkUri>http://blogs.msdn.com/b/ivo_manolov/archive/2012/03/17/10284665.aspx</linkUri>
+        </externalLink>.
+      </para>
+      <alert class="note">
         <para>
-          The types in this namespace help to implement the <application>MVVM</application> pattern. For a nice
-          introduction to <application>MVVM</application> please refer to
-          <externalLink>
-            <linkText>Ivo Manolov's Blog</linkText>
-            <linkUri>http://blogs.msdn.com/b/ivo_manolov/archive/2012/03/17/10284665.aspx</linkUri>
-          </externalLink>.
+          Please ignore the section discussing the
+          <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> interface and its implementation.
+          We will see below how <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> is no
+          longer necessary with <application>XAML</application> frameworks that offer triggers or behaviors.
         </para>
-        <alert class="note">
+      </alert>
+      <para>To summarize, the important facts of <application>MVVM</application> are the following:</para>
+      <list class="bullet">
+        <listItem>
           <para>
-            Please ignore the section discussing the
-            <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> interface and its implementation.
-            We will see below how <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference> is no
-            longer necessary with <application>XAML</application> frameworks that offer triggers or behaviors.
+            At compile time, there is a unidirectional dependency between the different entities: The
+            <application>View</application> references
+            the <application>ViewModel</application>, which in turn references the <application>Model</application>.
+            However, the <application>ViewModel</application> does not know anything about the
+            <application>View</application> and the <application>Model</application> does not know anything about the
+            <application>View</application> or the <application>ViewModel</application>.
           </para>
-        </alert>
-        <para>To summarize, the important facts of <application>MVVM</application> are the following:</para>
-        <list class="bullet">
-          <listItem>
-            <para>
-              At compile time, there is a unidirectional dependency between the different entities: The
-              <application>View</application> references
-              the <application>ViewModel</application>, which in turn references the <application>Model</application>.
-              However, the <application>ViewModel</application> does not know anything about the
-              <application>View</application> and the <application>Model</application> does not know anything about the
-              <application>View</application> or the <application>ViewModel</application>.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              The main responsibility of the <application>ViewModel</application> is to provide the data in the format
-              needed by the <application>View</application>, offer methods for the actions that can be performed on the
-              <application>View</application> and provide events that the <application>View</application> needs to
-              subscribe to.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              The <application>ViewModel</application> is fully GUI-technology-agnostic and can be exercised by
-              automated tests.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              The <application>View</application> defines how the data of the <application>ViewModel</application> is
-              presented to the user. It is often implemented solely in <application>XAML</application>. In the cases
-              where <application>C#</application> code is necessary, the code only concerns itself with the presentation
-              of the data but not the business logic.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              The <application>Model</application> is implemented without consideration for how the GUI will look like.
-              It simply provides all necessary data, offers methods to modify the data and enforces the business logic.
-              The data is provided in the format that is most convenient and efficient for the
-              <application>Model</application>.
-            </para>
-          </listItem>
-        </list>
+        </listItem>
+        <listItem>
+          <para>
+            The main responsibility of the <application>ViewModel</application> is to provide the data in the format
+            needed by the <application>View</application>, offer methods for the actions that can be performed on the
+            <application>View</application> and provide events that the <application>View</application> needs to
+            subscribe to.
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            The <application>ViewModel</application> is fully GUI-technology-agnostic and can be exercised by
+            automated tests.
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            The <application>View</application> defines how the data of the <application>ViewModel</application> is
+            presented to the user. It is often implemented solely in <application>XAML</application>. In the cases
+            where <application>C#</application> code is necessary, the code only concerns itself with the presentation
+            of the data but not the business logic.
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            The <application>Model</application> is implemented without consideration for how the GUI will look like.
+            It simply provides all necessary data, offers methods to modify the data and enforces the business logic.
+            The data is provided in the format that is most convenient and efficient for the
+            <application>Model</application>.
+          </para>
+        </listItem>
+      </list>
+      <para>
+        A <application>ViewModel</application> is particularly easy to consume from a
+        <application>XAML</application>-based GUI (<application>WPF</application>,
+        <application>Silverlight</application>, <application>Windows Store App</application>, etc.):
+      </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+            Databinding: Normal properties as well as
+            <codeEntityReference>T:System.Collections.ObjectModel.ObservableCollection`1</codeEntityReference>
+            properties can be bound to controls directly in <application>XAML</application> (no code behind is
+            necessary). Changes in the GUI are automatically pushed to the bound properties and changes to the
+            properties automatically lead to updates of the GUI.
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            Control Behavior:
+            <codeEntityReference qualifyHint="true">P:Windows.UI.Xaml.Controls.Control.IsEnabled</codeEntityReference>
+            and similar GUI behavior properties can be bound to properties of the <application>ViewModel</application>
+            directly in <application>XAML</application>.
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            Triggers and Behaviors: Events on GUI controls can be bound to <application>ViewModel</application>
+            methods directly in <application>XAML</application>, such that a method is called whenever the associated
+            event is raised (see
+            <codeEntityReference>T:Microsoft.Xaml.Interactions.Core.CallMethodAction</codeEntityReference>).
+          </para>
+        </listItem>
+      </list>
+      <alert class="note">
         <para>
-          A <application>ViewModel</application> is particularly easy to consume from a
-          <application>XAML</application>-based GUI (<application>WPF</application>,
-          <application>Silverlight</application>, <application>Windows Store App</application>, etc.):
+          For simple applications, it is often unclear at first where to best draw the line between the
+          <application>Model</application> and the <application>ViewModel</application>. If one follows the
+          <application>MVVM</application> pattern to the letter and implements all the business logic in the
+          <application>Model</application>, the <application>ViewModel</application> often degenerates into a class
+          that does little else than forward function calls between the <application>Model</application> and the
+          <application>View</application>. In such cases I think it is perfectly acceptable to implement much or even
+          all business logic in the <application>ViewModel</application>. Note that the most important aspect of
+          <application>MVVM</application> is the separation between <application>View</application> and
+          <application>ViewModel</application>. Whether and where to separate the <application>Model</application>
+          from the <application>ViewModel</application> is of lower importance and should be decided based on the use
+          cases. For example, the <application>Model</application> in the
+          <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow Analyzer Proxy</link>
+          application is the <codeInline>Settings</codeInline> class, which is responsible for the storage of the
+          application settings. All other business logic is implemented in the
+          <codeInline>MainWindowViewModel</codeInline>.
         </para>
-        <list class="bullet">
-          <listItem>
-            <para>
-              Databinding: Normal properties as well as
-              <codeEntityReference>T:System.Collections.ObjectModel.ObservableCollection`1</codeEntityReference>
-              properties can be bound to controls directly in <application>XAML</application> (no code behind is
-              necessary). Changes in the GUI are automatically pushed to the bound properties and changes to the
-              properties automatically lead to updates of the GUI.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              Control Behavior:
-              <codeEntityReference qualifyHint="true">P:Windows.UI.Xaml.Controls.Control.IsEnabled</codeEntityReference>
-              and similar GUI behavior properties can be bound to properties of the <application>ViewModel</application>
-              directly in <application>XAML</application>.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              Triggers and Behaviors: Events on GUI controls can be bound to <application>ViewModel</application>
-              methods directly in <application>XAML</application>, such that a method is called whenever the associated
-              event is raised (see
-              <codeEntityReference>T:Microsoft.Xaml.Interactions.Core.CallMethodAction</codeEntityReference>).
-            </para>
-          </listItem>
-        </list>
-        <alert class="note">
-          <para>
-            For simple applications, it is often unclear at first where to best draw the line between the
-            <application>Model</application> and the <application>ViewModel</application>. If one follows the
-            <application>MVVM</application> pattern to the letter and implements all the business logic in the
-            <application>Model</application>, the <application>ViewModel</application> often degenerates into a class
-            that does little else than forward function calls between the <application>Model</application> and the
-            <application>View</application>. In such cases I think it is perfectly acceptable to implement much or even
-            all business logic in the <application>ViewModel</application>. Note that the most important aspect of
-            <application>MVVM</application> is the separation between <application>View</application> and
-            <application>ViewModel</application>. Whether and where to separate the <application>Model</application>
-            from the <application>ViewModel</application> is of lower importance and should be decided based on the use
-            cases. For example, the <application>Model</application> in the
-            <link xlink:href="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d#GlowAnalyzerProxy">Glow Analyzer Proxy</link>
-            application is the <codeInline>Settings</codeInline> class, which is responsible for the storage of the
-            application settings. All other business logic is implemented in the
-            <codeInline>MainWindowViewModel</codeInline>.
-          </para>
-        </alert>
-        <para>This topic contains the following subtopics:</para>
-        <list class="bullet">
-          <listItem><para><link xlink:href="1bb898de-b98c-4b38-958a-1368c2ffebd0"/></para></listItem>
-          <listItem><para><link xlink:href="d640f3f7-b516-4428-8ceb-d7a9a703babd"/></para></listItem>
-        </list>
-      </content>
-    </section>
+      </alert>
+      <para>This topic contains the following subtopics:</para>
+      <list class="bullet">
+        <listItem><para><link xlink:href="1bb898de-b98c-4b38-958a-1368c2ffebd0"/></para></listItem>
+        <listItem><para><link xlink:href="d640f3f7-b516-4428-8ceb-d7a9a703babd"/></para></listItem>
+      </list>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

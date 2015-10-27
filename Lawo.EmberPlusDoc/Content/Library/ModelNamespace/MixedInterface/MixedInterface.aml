@@ -5,18 +5,15 @@
 <topic id="100750a0-fa84-4a68-874d-5e313eb83c9b" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>
-          In some cases we only need to ensure that a few select elements are present in the database, but would still
-          like to display other elements of the database in a GUI. As we've seen earlier, the dynamic interface does not
-          support this scenario very nicely because it is cumbersome to navigate to the desired elements. The static
-          interface does not support this scenario at all.
-        </para>
-        <para>Proceed to <link xlink:href="56add6fd-a91e-4e3e-a02e-e3e70d4958aa"/>.</para>
-      </content>
-    </section>
+    <introduction>
+      <para>
+        In some cases we only need to ensure that a few select elements are present in the database, but would still
+        like to display other elements of the database in a GUI. As we've seen earlier, the dynamic interface does not
+        support this scenario very nicely because it is cumbersome to navigate to the desired elements. The static
+        interface does not support this scenario at all.
+      </para>
+      <para>Proceed to <link xlink:href="56add6fd-a91e-4e3e-a02e-e3e70d4958aa"/>.</para>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

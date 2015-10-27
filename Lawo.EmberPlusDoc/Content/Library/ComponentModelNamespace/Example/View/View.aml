@@ -5,16 +5,13 @@
 <topic id="3cb24140-51e8-496c-966c-e556f0418e85" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>This topic contains the following subtopics:</para>
-        <list class="bullet">
-          <listItem><para><link xlink:href="f7165a59-bc56-4571-8dcb-79b4161ceb01"/></para></listItem>
-          <listItem><para><link xlink:href="ac9ad3f4-2105-45ee-8dbf-c60bcfe85227"/></para></listItem>
-        </list>
-      </content>
-    </section>
+    <introduction>
+      <para>This topic contains the following subtopics:</para>
+      <list class="bullet">
+        <listItem><para><link xlink:href="f7165a59-bc56-4571-8dcb-79b4161ceb01"/></para></listItem>
+        <listItem><para><link xlink:href="ac9ad3f4-2105-45ee-8dbf-c60bcfe85227"/></para></listItem>
+      </list>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

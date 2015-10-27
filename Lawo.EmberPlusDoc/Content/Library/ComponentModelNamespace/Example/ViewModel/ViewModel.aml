@@ -5,17 +5,14 @@
 <topic id="a8575c94-9500-4717-b35b-cd2f5eff1a4e" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>A few things are of note here, please see the following subtopics for more information:</para>
-        <list class="bullet">
-          <listItem><para><link xlink:href="48ea11d2-ae3a-4fb7-9baf-1612d57d3f97"/></para></listItem>
-          <listItem><para><link xlink:href="76a6666d-9320-449b-8b85-1efbf4df4709"/></para></listItem>
-          <listItem><para><link xlink:href="5ab5798e-fc1a-4c8d-999c-d19329329614"/></para></listItem>
-        </list>
-      </content>
-    </section>
+    <introduction>
+      <para>A few things are of note here, please see the following subtopics for more information:</para>
+      <list class="bullet">
+        <listItem><para><link xlink:href="48ea11d2-ae3a-4fb7-9baf-1612d57d3f97"/></para></listItem>
+        <listItem><para><link xlink:href="76a6666d-9320-449b-8b85-1efbf4df4709"/></para></listItem>
+        <listItem><para><link xlink:href="5ab5798e-fc1a-4c8d-999c-d19329329614"/></para></listItem>
+      </list>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

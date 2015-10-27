@@ -5,31 +5,28 @@
 <topic id="915a270d-2a20-432f-9531-ce6aa3260566" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>
-          First and foremost, this library provides the means to quickly implement an <application>Ember+</application>
-          consumer, which can then be used in an application that needs to communicate with an existing
-          <application>Ember+</application> provider. Most of the types supporting this use case are demonstrated by the
-          <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/>.
-        </para>
-        <para>
-          As a byproduct, this library also offers support for lower level <application>Ember+</application>
-          communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
-          the <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/>.
-        </para>
-        <para>
-          Comprehensive
-          <externalLink>
-            <linkText>Reference</linkText>
-            <linkUri>5EF7F8A.htm</linkUri>
-            <linkTarget>_self</linkTarget>
-          </externalLink>
-          documentation is available for all types.
-        </para>
-      </content>
-    </section>
+    <introduction>
+      <para>
+        First and foremost, this library provides the means to quickly implement an <application>Ember+</application>
+        consumer, which can then be used in an application that needs to communicate with an existing
+        <application>Ember+</application> provider. Most of the types supporting this use case are demonstrated by the
+        <link xlink:href="427fadff-8d32-472e-83d1-3ceaf705ae51"/>.
+      </para>
+      <para>
+        As a byproduct, this library also offers support for lower level <application>Ember+</application>
+        communication, as demonstrated by the <link xlink:href="aad74cef-7ff7-47c7-9086-76d8c3d9415c"/> and
+        the <link xlink:href="57f78c21-7c7b-4c7f-9035-70774e053625"/>.
+      </para>
+      <para>
+        Comprehensive
+        <externalLink>
+          <linkText>Reference</linkText>
+          <linkUri>5EF7F8A.htm</linkUri>
+          <linkTarget>_self</linkTarget>
+        </externalLink>
+        documentation is available for all types.
+      </para>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>

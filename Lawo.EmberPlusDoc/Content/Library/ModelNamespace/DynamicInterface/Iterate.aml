@@ -5,53 +5,50 @@
 <topic id="e0972d29-96f3-4dea-936b-f77001d077b1" revisionNumber="1">
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <introduction/>
-    <section>
-      <content>
-        <para>
-          Next, we'd like to write out all elements of the local database. This can be achieved with the following
-          method ...
-        </para>
-        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Write Children" language="c#"/>
-        <para>... which we call from <codeInline>Main()</codeInline> as follows ...</para>
-        <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Dynamic Iterate" language="c#"/>
-        <para>... which produces the following output:</para>
-        <code>
-          Node Sapphire
-            Node identity
-              Parameter product: sapphire
-              Parameter company: (c) L-S-B Broadcast Technologies GmbH
-            Node Sources
-              Node FPGM 1
-                Parameter Audio Type: 2
-                Node Fader
-                  Parameter Number: 1
-                  Parameter dB Value: -255.999999999998
-                  Parameter Position: 0
-                Node DSP
-                  Node Input
-                    Parameter Gain: 0
-                    Parameter Phase: True
-                    Parameter LR Mode: 0
-                  Node Delay
-                    Parameter Time (ms): 0
-              Node FPGM 2
-                Parameter Audio Type: 2
-                Node Fader
-                  Parameter Number: 2
-                  Parameter dB Value: 9
-                  Parameter Position: 255
-                Node DSP
-                  Node Input
-                    Parameter Gain: 0
-                    Parameter Phase: False
-                    Parameter LR Mode: 0
-                  Node Delay
-                    Parameter Time (ms): 0
-        </code>
-        <para>Proceed to <link xlink:href="7cdb703a-14dd-42d3-8ea2-28a9b8af6663"/>.</para>
-      </content>
-    </section>
+    <introduction>
+      <para>
+        Next, we'd like to write out all elements of the local database. This can be achieved with the following
+        method ...
+      </para>
+      <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Write Children" language="c#"/>
+      <para>... which we call from <codeInline>Main()</codeInline> as follows ...</para>
+      <code source="..\Lawo.EmberPlusTest\Model\TutorialTest.cs" region="Dynamic Iterate" language="c#"/>
+      <para>... which produces the following output:</para>
+      <code>
+        Node Sapphire
+          Node identity
+            Parameter product: sapphire
+            Parameter company: (c) L-S-B Broadcast Technologies GmbH
+          Node Sources
+            Node FPGM 1
+              Parameter Audio Type: 2
+              Node Fader
+                Parameter Number: 1
+                Parameter dB Value: -255.999999999998
+                Parameter Position: 0
+              Node DSP
+                Node Input
+                  Parameter Gain: 0
+                  Parameter Phase: True
+                  Parameter LR Mode: 0
+                Node Delay
+                  Parameter Time (ms): 0
+            Node FPGM 2
+              Parameter Audio Type: 2
+              Node Fader
+                Parameter Number: 2
+                Parameter dB Value: 9
+                Parameter Position: 255
+              Node DSP
+                Node Input
+                  Parameter Gain: 0
+                  Parameter Phase: False
+                  Parameter LR Mode: 0
+                Node Delay
+                  Parameter Time (ms): 0
+      </code>
+      <para>Proceed to <link xlink:href="7cdb703a-14dd-42d3-8ea2-28a9b8af6663"/>.</para>
+    </introduction>
     <relatedTopics/>
   </developerConceptualDocument>
 </topic>
