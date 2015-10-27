@@ -43,30 +43,30 @@
             <listItem>
               <para>
                 <codeInline>CanEditSettings</codeInline>: Defines the value of the
-                <codeEntityReference>P:System.Windows.UIElement.IsEnabled</codeEntityReference>
+                <codeEntityReference linkText="IsEnabled">P:System.Windows.UIElement.IsEnabled</codeEntityReference>
                 property of the <codeEntityReference>T:System.Windows.Controls.TextBox</codeEntityReference> controls for
                 <ui>Listening Port</ui>, <ui>Provider Host Name</ui> and <ui>Provider Port</ui> as well as the
-                <ui>... </ui> <codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
+                <ui>... </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
               </para>
             </listItem>
             <listItem>
               <para>
                 <codeInline>CanStart</codeInline>: Defines the value of the
-                <codeEntityReference>P:System.Windows.UIElement.IsEnabled</codeEntityReference> property of the
+                <codeEntityReference linkText="IsEnabled">P:System.Windows.UIElement.IsEnabled</codeEntityReference> property of the
                 <ui>Start </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
               </para>
             </listItem>
             <listItem>
               <para>
                 <codeInline>CanStop</codeInline>: Defines the value of the
-                <codeEntityReference>P:System.Windows.UIElement.IsEnabled</codeEntityReference> property of the
+                <codeEntityReference linkText="IsEnabled">P:System.Windows.UIElement.IsEnabled</codeEntityReference> property of the
                 <ui>Stop </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
               </para>
             </listItem>
             <listItem>
               <para>
                 <codeInline>CanLoadFullEventDetail</codeInline>: Defines the value of the
-                <codeEntityReference>P:System.Windows.UIElement.Visibility</codeEntityReference> property of the
+                <codeEntityReference linkText="Visibility">P:System.Windows.UIElement.Visibility</codeEntityReference> property of the
                 <ui>Load Full Event </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
               </para>
             </listItem>
@@ -77,15 +77,20 @@
           <list class="bullet">
             <listItem>
               <para>
-                <codeInline>Start()</codeInline>: Is called when the <ui>Start</ui> button is clicked.
+                <codeInline>Start()</codeInline>: Is called when the <ui>Start </ui>
+                <codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference> is clicked.
               </para>
             </listItem>
             <listItem>
-              <para><codeInline>Stop()</codeInline>: Is called when the <ui>Stop</ui> button is clicked.</para>
+              <para>
+                <codeInline>Stop()</codeInline>: Is called when the <ui>Stop </ui>
+                <codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference> is clicked.
+              </para>
             </listItem>
             <listItem>
               <para>
-                <codeInline>LoadFullEventDetail()</codeInline>: Is called when the <ui>Load Full Event</ui> button is
+                <codeInline>LoadFullEventDetail()</codeInline>: Is called when the <ui>Load Full Event </ui>
+                <codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference> is
                 clicked.
               </para>
             </listItem>

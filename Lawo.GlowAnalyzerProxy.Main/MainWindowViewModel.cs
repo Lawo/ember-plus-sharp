@@ -45,9 +45,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private string logFolder;
         private bool? autoScrollToMostRecentEvent;
         private readonly CalculatedProperty<bool> canEditSettings;
-        //// [CalculatedProperty1]
+        #region  CalculatedProperty1
         private readonly CalculatedProperty<bool> canStart;
-        //// [CalculatedProperty1]
+        #endregion
         private readonly CalculatedProperty<bool> canStop;
         private Event selectedEvent;
         private FlowDocument selectedEventDetail;
@@ -60,7 +60,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Must be accessible from XAML.")]
-        //// [ReadOnlyProperty]
+        #region ReadOnlyProperty
         public string Title
         {
             get
@@ -69,7 +69,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
-        //// [ReadOnlyProperty]
+        #endregion
 
         public string ListeningPort
         {
@@ -77,13 +77,13 @@ namespace Lawo.GlowAnalyzerProxy.Main
             set { this.SetValue(ref this.listeningPort, value); }
         }
 
-        //// [ReadWriteProperty]
+        #region ReadWriteProperty
         public string ProviderHostName
         {
             get { return this.providerHostName; }
             set { this.SetValue(ref this.providerHostName, value); }
         }
-        //// [ReadWriteProperty]
+        #endregion
 
         public string ProviderPort
         {
@@ -108,12 +108,12 @@ namespace Lawo.GlowAnalyzerProxy.Main
             get { return this.canEditSettings.Value; }
         }
 
-        //// [CalculatedProperty3]
+        #region CalculatedProperty3
         public bool CanStart
         {
             get { return this.canStart.Value; }
         }
-        //// [CalculatedProperty3]
+        #endregion
 
         public void Start()
         {
@@ -142,24 +142,24 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.settings.Save();
         }
 
-        //// [CompositeProperty]
+        #region CompositeProperty
         public ConnectionViewModel ConsumerConnection
         {
             get { return this.consumerConnection; }
         }
-        //// [CompositeProperty]
+        #endregion
 
         public ConnectionViewModel ProviderConnection
         {
             get { return this.providerConnection; }
         }
 
-        //// [CollectionProperty]
+        #region CollectionProperty
         public ReadOnlyObservableCollection<Event> Events
         {
             get { return this.readOnlyEvents; }
         }
-        //// [CollectionProperty]
+        #endregion
 
         public Event SelectedEvent
         {
@@ -235,7 +235,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.providerConnection = new ConnectionViewModel(this);
             this.readOnlyEvents = new ReadOnlyObservableCollection<Event>(this.events);
 
-            //// [TwoWayBinding]
+            #region TwoWayBinding
             TwoWayBinding.Create(
                 this.settings.GetProperty(o => o.ListeningPort), this.GetProperty(o => o.ListeningPort));
             TwoWayBinding.Create(
@@ -249,14 +249,14 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 a => a,
                 this.GetProperty(o => o.AutoScrollToMostRecentEvent),
                 a => a.GetValueOrDefault());
+            #endregion
 
-            //// [TwoWayBinding]
             this.canEditSettings = CalculatedProperty.Create(
                 this.GetProperty(o => o.IsStarted),
                 this.GetProperty(o => o.IsStopped),
                 (isStarted, isStopped) => !isStarted && isStopped,
                 this.GetProperty(o => o.CanEditSettings));
-            //// [CalculatedProperty2]
+            #region  CalculatedProperty2
             this.canStart = CalculatedProperty.Create(
                 this.GetProperty(o => o.IsStarted),
                 this.GetProperty(o => o.IsStopped),
@@ -265,7 +265,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 this.GetProperty(o => o.LogFolder),
                 (isStarted, isStopped, lp, pp, lf) => !isStarted && isStopped && string.IsNullOrEmpty(ValidatePort(lp) + ValidatePort(pp) + ValidateFolder(lf)),
                 this.GetProperty(o => o.CanStart));
-            //// [CalculatedProperty2]
+            #endregion
             this.canStop = CalculatedProperty.Create(
                 this.GetProperty(o => o.IsStopped), s => !s, this.GetProperty(o => o.CanStop));
 

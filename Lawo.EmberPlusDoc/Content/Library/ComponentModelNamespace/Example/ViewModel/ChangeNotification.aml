@@ -7,20 +7,76 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
       <para>
+        The <application>View</application> holds a copy of the data provided by the
+        <application>ViewModel</application>, which is why the <application>View</application> needs to be notified when
+        the data in the <application>ViewModel</application> changes. All <application>XAML</application>-based
+        <application>View</application> objects automatically look for implementations of
+        <codeEntityReference>T:System.Componentmodel.INotifyPropertyChanged</codeEntityReference> and
+        <codeEntityReference>T:System.Collections.Specialized.INotifyCollectionChanged</codeEntityReference>
+        and subscribe to the provided events as appropriate. <application>ViewModel</application> developers can reuse
+        the following implementations:
       </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+            <codeEntityReference>T:Lawo.ComponentModel.NotifyPropertyChanged</codeEntityReference>:
+            <application>ViewModel</application> implementations as well as the types of composite properties usually
+            derive from this base class.
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            Collection properties are usually of the type
+            <codeEntityReference>T:System.Collections.ObjectModel.ObservableCollection`1</codeEntityReference> or
+            <codeEntityReference>T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1</codeEntityReference>.
+          </para>
+        </listItem>
+      </list>
       <autoOutline/>
     </introduction>
     <section address="PrimitiveProperties">
       <title>Primitive Properties</title>
       <content>
         <para>
+          A primitive property provides data that can directly be shown in the <application>View</application> (e.g.
+          <codeInline>string</codeInline>, <codeInline>double</codeInline>, <codeInline>int</codeInline>, etc.). A
+          property where the value may change while it is being displayed in the <application>View</application>
+          typically looks as follows:
         </para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="ReadWriteProperty" language="c#"/>
+        <alert class="note">
+          <para>
+            <codeEntityReference linkText="SetValue">M:Lawo.ComponentModel.NotifyPropertyChanged.SetValue``1(``0@,``0,System.String)</codeEntityReference>
+            does its magic with the
+            <codeEntityReference>T:System.Runtime.CompilerServices.CallerMemberNameAttribute</codeEntityReference>.
+            <codeEntityReference linkText="SetValue">M:Lawo.ComponentModel.NotifyPropertyChanged.SetValue``1(``0@,``0,System.String)</codeEntityReference>
+            should therefore only ever be called directly from a setter of a property.
+          </para>
+        </alert>
+        <para>
+          Of course, properties that never change their value do not need to concern themselves with change
+          notification:
+        </para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="ReadOnlyProperty" language="c#"/>
       </content>
     </section>
     <section address="CompositeProperties">
       <title>Composite Properties</title>
       <content>
+        <para>The getter of a composite property returns a value, which cannot directly be shown on the GUI:</para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="CompositeProperty" language="c#"/>
         <para>
+          In this case the property value never changes. Of course, in general such properties can change their value
+          too. Then, change notification needs to be implemented by calling
+          <codeEntityReference linkText="SetValue">M:Lawo.ComponentModel.NotifyPropertyChanged.SetValue``1(``0@,``0,System.String)</codeEntityReference>
+          in the property setter just like a primitive property setter does.
+        </para>
+        <para>
+          Since the <application>View</application> will bind to properties of the returned value,
+          <codeInline>ConnectionViewModel</codeInline> must also implement
+          <codeEntityReference>T:System.Componentmodel.INotifyPropertyChanged</codeEntityReference>,
+          here again by deriving from
+          <codeEntityReference>T:Lawo.ComponentModel.NotifyPropertyChanged</codeEntityReference>.
         </para>
       </content>
     </section>
@@ -28,6 +84,21 @@
       <title>Collection Properties</title>
       <content>
         <para>
+          Whenever a <application>View</application> needs to display multiple items in a list, the associated
+          <application>ViewModel</application> typically offers the necessary data through a property getter that
+          returns a collection implementing the
+          <codeEntityReference>T:System.Collections.Specialized.INotifyCollectionChanged</codeEntityReference>
+          interface:
+        </para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="CollectionProperty" language="c#"/>
+        <para>
+          The <application>.NET</application> framework implementations
+          <codeEntityReference>T:System.Collections.ObjectModel.ObservableCollection`1</codeEntityReference> and
+          <codeEntityReference>T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1</codeEntityReference>
+          are almost always sufficient. The former should only be used if the <application>View</application> itself can
+          directly add and/or remove items. The latter is preferable when such operations are offered through
+          <application>ViewModel</application> methods and of course also when the collection is immutable from the
+          <application>View</application>.
         </para>
       </content>
     </section>
