@@ -7,13 +7,34 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
       <para>
+        Without library support, binding the value of a <application>C#</application> source property to the value of a
+        <application>C#</application> target property is rather tedious and error-prone. This is due to the fact that
+        implementations of <codeEntityReference>T:System.ComponentModel.INotifyPropertyChanged</codeEntityReference>
+        signal a property change by calling the subscribed handler with the property name as a string. The handler then
+        needs to compare the passed string to find out exactly which property has been changed. The
+        <codeEntityReference>N:Lawo.ComponentModel</codeEntityReference> and
+        <codeEntityReference>N:Lawo.Reflection</codeEntityReference> namespaces offer a few tools to make this
+        process much easier.
       </para>
+      <para>Bindings are typically created in the ViewModel constructor.</para>
+      <alert class="note">
+        <para>
+          All the binding methods discussed below return an object that represents the newly created binding. The
+          binding can be broken by calling <codeEntityReference>M:System.IDisposable.Dispose</codeEntityReference>. In
+          many cases however, it is sensible to never explicitly remove a binding.
+        </para>
+      </alert>
       <autoOutline/>
     </introduction>
     <section address="TwoWayBinding">
       <title>Two-Way Binding</title>
       <content>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="TwoWayBinding" language="c#"/>
         <para>
+          <codeEntityReference>T:Lawo.ComponentModel.TwoWayBinding</codeEntityReference> can be used to simply "forward"
+          a property from the <application>Model</application> to the <application>ViewModel</application> and vice
+          versa. Overloads that accept conversion functions can be used to convert between properties of differing
+          types.
         </para>
       </content>
     </section>
@@ -21,6 +42,10 @@
       <title>One-Way Binding</title>
       <content>
         <para>
+          <codeEntityReference>T:Lawo.ComponentModel.OneWayBinding</codeEntityReference> can be used if changes only
+          need to be propagated from the <application>Model</application> to the <application>ViewModel</application>
+          but not the other way round. <application>ViewModel</application> properties bound in such a way are typically
+          read-only for the <application>View</application>.
         </para>
       </content>
     </section>
@@ -28,6 +53,8 @@
       <title>Multi-Binding</title>
       <content>
         <para>
+          <codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference> can be used if the value of a
+          <application>ViewModel</application> property depends on multiple other properties.
         </para>
       </content>
     </section>
@@ -35,7 +62,45 @@
       <title>Calculated Property</title>
       <content>
         <para>
+          <codeEntityReference>T:Lawo.ComponentModel.CalculatedProperty</codeEntityReference> offers a slightly easier
+          way than <link xlink:href="#MultiBinding">MultiBinding</link> to implement a
+          <application>ViewModel</application> property that depends on multiple other properties. The differences are:
         </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference> can bind between
+              any source and target properties as long as all owners of source properties implement
+              <codeEntityReference>T:System.ComponentModel.INotifyPropertyChanged</codeEntityReference>.
+              <codeEntityReference>T:Lawo.ComponentModel.CalculatedProperty</codeEntityReference> additionally requires
+              that the owner of the target property derives from
+              <codeEntityReference>T:Lawo.ComponentModel.NotifyPropertyChanged</codeEntityReference>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference> requires a target property
+              with a getter and a setter. With
+              <codeEntityReference>T:Lawo.ComponentModel.CalculatedProperty</codeEntityReference> only the getter needs
+              to implemented.
+            </para>
+          </listItem>
+        </list>
+        <para>
+          To implement a calculated property in <codeInline>MainWindowViewModel</codeInline>, firstly we need a field:
+        </para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="CalculatedProperty1" language="c#"/>
+        <para>
+          Secondly, the field needs to be assigned an appropriately initialized instance:
+        </para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="CalculatedProperty2" language="c#"/>
+        <para>
+          The first 5 arguments represent the source properties that the calculated property is derived from. The next
+          argument calculates the value of the target property from the values of the source properties. The last
+          argument represents the target property.
+        </para>
+        <para>The implementation of the actual property looks as follows:</para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="CalculatedProperty3" language="c#"/>
       </content>
     </section>
     <relatedTopics/>
