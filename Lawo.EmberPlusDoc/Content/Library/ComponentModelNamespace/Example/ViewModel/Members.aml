@@ -8,9 +8,107 @@
     <introduction>
       <para>
         Please compare the <link xlink:href="a8575c94-9500-4717-b35b-cd2f5eff1a4e">MainWindowViewModel code</link> with
-        the screenshot of the application above:
-        Note how there is roughly a 1:1 mapping between the controls on the GUI and the members of the ViewModel.
+        the screenshot of the application:
       </para>
+      <mediaLink><image xlink:href="GlowAnalyzerProxy"/></mediaLink>
+      <para>
+        Note how there is roughly a 1:1 mapping between the controls on the GUI and the members of the
+        <codeInline>MainWindowViewModel</codeInline>. There are different types of members:
+      </para>
+      <list class="bullet">
+        <listItem>
+          <para>Properties, the values of which are directly shown and sometimes also edited on the GUI:</para>
+          <list class="bullet">
+            <listItem><para><codeInline>Title</codeInline></para></listItem>
+            <listItem><para><codeInline>ListeningPort</codeInline></para></listItem>
+            <listItem><para><codeInline>ProviderHostName</codeInline></para></listItem>
+            <listItem><para><codeInline>ProviderPort</codeInline></para></listItem>
+            <listItem><para><codeInline>LogFolder</codeInline></para></listItem>
+            <listItem><para><codeInline>AutoScrollToMostRecentEvent</codeInline></para></listItem>
+            <listItem><para><codeInline>Events</codeInline></para></listItem>
+            <listItem><para><codeInline>SelectedEvent</codeInline></para></listItem>
+            <listItem><para><codeInline>SelectedEventDetail</codeInline></para></listItem>
+          </list>
+        </listItem>
+        <listItem>
+          <para>Properties, the values of which contain other properties, which in turn are shown on the GUI:</para>
+          <list class="bullet">
+            <listItem><para><codeInline>ConsumerConnection</codeInline></para></listItem>
+            <listItem><para><codeInline>ProviderConnection</codeInline></para></listItem>
+          </list>
+        </listItem>
+        <listItem>
+          <para>Properties, the values of which are used to define how the controls behave:</para>
+          <list class="bullet">
+            <listItem>
+              <para>
+                <codeInline>CanEditSettings</codeInline>: Defines the value of the
+                <codeEntityReference>P:System.Windows.UIElement.IsEnabled</codeEntityReference>
+                property of the <codeEntityReference>T:System.Windows.Controls.TextBox</codeEntityReference> controls for
+                <ui>Listening Port</ui>, <ui>Provider Host Name</ui> and <ui>Provider Port</ui> as well as the
+                <ui>... </ui> <codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>CanStart</codeInline>: Defines the value of the
+                <codeEntityReference>P:System.Windows.UIElement.IsEnabled</codeEntityReference> property of the
+                <ui>Start </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>CanStop</codeInline>: Defines the value of the
+                <codeEntityReference>P:System.Windows.UIElement.IsEnabled</codeEntityReference> property of the
+                <ui>Stop </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>CanLoadFullEventDetail</codeInline>: Defines the value of the
+                <codeEntityReference>P:System.Windows.UIElement.Visibility</codeEntityReference> property of the
+                <ui>Load Full Event </ui><codeEntityReference>T:System.Windows.Controls.Button</codeEntityReference>.
+              </para>
+            </listItem>
+          </list>
+        </listItem>
+        <listItem>
+          <para>Methods, which are called when the user makes an input:</para>
+          <list class="bullet">
+            <listItem>
+              <para>
+                <codeInline>Start()</codeInline>: Is called when the <ui>Start</ui> button is clicked.
+              </para>
+            </listItem>
+            <listItem>
+              <para><codeInline>Stop()</codeInline>: Is called when the <ui>Stop</ui> button is clicked.</para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>LoadFullEventDetail()</codeInline>: Is called when the <ui>Load Full Event</ui> button is
+                clicked.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>SaveSettings()</codeInline>: Is called when the <ui>x</ui> in the top-right corner of
+                the application is clicked.
+              </para>
+            </listItem>
+          </list>
+        </listItem>
+      </list>
+      <alert class="note">
+        <para>
+          We are deliberately not using an <codeEntityReference>T:System.Windows.Input.ICommand</codeEntityReference>
+          implementation (usually called <codeInline>DelegateCommand</codeInline> or
+          <codeInline>RelayCommand</codeInline>) to combine e.g. <codeInline>CanStart</codeInline> and
+          <codeInline>Start()</codeInline>. Although doing so would make it slightly easier to bind e.g. a button to a
+          command, providing said command is harder than implementing two methods. For actions that are always available
+          (like e.g. <codeInline>SaveSettings()</codeInline>) we only need to implement one method and by doing so we
+          efficiently communicate that this action is always available.
+        </para>
+      </alert>
     </introduction>
     <relatedTopics/>
   </developerConceptualDocument>

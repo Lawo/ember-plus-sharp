@@ -173,7 +173,7 @@
                         Document="{Binding SelectedEventDetail}"/>
                     <Button
                         Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0"
-                        Visibility="{Binding IsSelectedEventDetailPartial, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding CanLoadFullEventDetail, Converter={StaticResource BoolToVisibilityConverter}}"
                         Content="Load Full Event">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">

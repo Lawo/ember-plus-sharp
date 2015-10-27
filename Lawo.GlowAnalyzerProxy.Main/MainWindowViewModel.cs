@@ -51,7 +51,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private readonly CalculatedProperty<bool> canStop;
         private Event selectedEvent;
         private FlowDocument selectedEventDetail;
-        private bool isSelectedEventDetailPartial;
+        private bool canLoadFullEventDetail;
         private bool isStarted;
         private bool isStopped = true;
         private DateTime now;
@@ -175,7 +175,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     if (value == null)
                     {
                         this.SelectedEventDetail = null;
-                        this.IsSelectedEventDetailPartial = false;
+                        this.CanLoadFullEventDetail = false;
                     }
                     else
                     {
@@ -191,20 +191,20 @@ namespace Lawo.GlowAnalyzerProxy.Main
             private set { this.SetValue(ref this.selectedEventDetail, value); }
         }
 
-        public bool IsSelectedEventDetailPartial
+        public bool CanLoadFullEventDetail
         {
-            get { return this.isSelectedEventDetailPartial; }
-            set { this.SetValue(ref this.isSelectedEventDetailPartial, value); }
+            get { return this.canLoadFullEventDetail; }
+            private set { this.SetValue(ref this.canLoadFullEventDetail, value); }
         }
 
         public void LoadFullEventDetail()
         {
-            if (!this.IsSelectedEventDetailPartial)
+            if (!this.CanLoadFullEventDetail)
             {
                 throw new InvalidOperationException("Full event detail has already been loaded.");
             }
 
-            this.IsSelectedEventDetailPartial = false;
+            this.CanLoadFullEventDetail = false;
             this.LoadEventDetail(int.MaxValue);
         }
 
@@ -522,7 +522,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 }
 
                 SetSelectedEventDetail(eventText.Replace("\r\n  ", "\r\n").Substring(2));
-                this.IsSelectedEventDetailPartial = isPartial;
+                this.CanLoadFullEventDetail = isPartial;
             }
         }
 

@@ -43,7 +43,7 @@
 
             public FlowDocument SelectedEventDetail { get { ... } private set { ... } }
 
-            public bool IsSelectedEventDetailPartial { get { ... } set { ... } }
+            public bool CanLoadFullEventDetail { get { ... } private set { ... } }
 
             public void LoadFullEventDetail() { ... }
 
