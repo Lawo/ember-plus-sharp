@@ -117,6 +117,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Content" />
+    <Folder Include="Content\Library\ComponentModelNamespace\Example" />
+    <Folder Include="Content\Library\ComponentModelNamespace\Example\View" />
+    <Folder Include="Content\Library\ComponentModelNamespace\Example\ViewModel" />
     <Folder Include="Content\Library\ModelNamespace\" />
     <Folder Include="Content\Library\ModelNamespace\DynamicInterface\" />
     <Folder Include="Content\Library\ModelNamespace\Introduction\" />
@@ -135,6 +138,15 @@
     <None Include="Content\KnownIssues.aml" />
     <None Include="Content\Library\ComponentModelNamespace\ComponentModelNamespace.aml" />
     <None Include="Content\Library\ComponentModelNamespace\DataSynchronization.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\Example.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\Model.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\ViewModel\BindingToModelData.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\ViewModel\ChangeNotification.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\ViewModel\Members.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\ViewModel\ViewModel.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\View\BindingToViewModelData.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\View\CallingViewModelMethods.aml" />
+    <None Include="Content\Library\ComponentModelNamespace\Example\View\View.aml" />
     <None Include="Content\Library\EmberNamespace.aml" />
     <None Include="Content\Library\Library.aml" />
     <None Include="Content\Library\ModelNamespace\DynamicInterface\DynamicInterface.aml" />

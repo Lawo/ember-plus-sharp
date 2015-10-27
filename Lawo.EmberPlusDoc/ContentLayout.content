@@ -28,7 +28,19 @@
     <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlus.Ember Namespace Tutorial" />
     <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="Lawo.EmberPlus.S101 Namespace Tutorial" />
     <Topic id="fa86e52c-0fb0-4acb-9b55-fb689eb5f17c" visible="True" isExpanded="true" apiParentMode="InsertAfter" title="Lawo.ComponentModel Namespace Tutorial">
-      <Topic id="1bb898de-b98c-4b38-958a-1368c2ffebd0" visible="True" isSelected="true" title="Data Synchronization" />
+      <Topic id="1bb898de-b98c-4b38-958a-1368c2ffebd0" visible="True" title="Data Synchronization" />
+      <Topic id="d640f3f7-b516-4428-8ceb-d7a9a703babd" visible="True" isExpanded="true" title="Example">
+        <Topic id="bbf1edda-4568-4afa-b5c6-27bb3e76aa5e" visible="True" title="Model" />
+        <Topic id="a8575c94-9500-4717-b35b-cd2f5eff1a4e" visible="True" isExpanded="true" title="ViewModel">
+          <Topic id="48ea11d2-ae3a-4fb7-9baf-1612d57d3f97" visible="True" title="Members" />
+          <Topic id="76a6666d-9320-449b-8b85-1efbf4df4709" visible="True" title="Change Notification" />
+          <Topic id="5ab5798e-fc1a-4c8d-999c-d19329329614" visible="True" title="Binding to Model Data" />
+        </Topic>
+        <Topic id="3cb24140-51e8-496c-966c-e556f0418e85" visible="True" isExpanded="true" title="View">
+          <Topic id="f7165a59-bc56-4571-8dcb-79b4161ceb01" visible="True" title="Binding to ViewModel Data" />
+          <Topic id="ac9ad3f4-2105-45ee-8dbf-c60bcfe85227" visible="True" isSelected="true" title="Calling ViewModel Methods" />
+        </Topic>
+      </Topic>
     </Topic>
     <Topic id="c17ed1f5-6b3d-40f5-af29-b1d031ae24cd" visible="True" isExpanded="true" title="Rationale">
       <Topic id="2733eaf4-84f9-496d-afa2-bd6d3ab0f291" visible="True" title="Performance Comparison" />
