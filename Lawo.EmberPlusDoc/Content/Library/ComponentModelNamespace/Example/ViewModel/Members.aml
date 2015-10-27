@@ -7,6 +7,9 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
       <para>
+        Please compare the <link xlink:href="a8575c94-9500-4717-b35b-cd2f5eff1a4e">MainWindowViewModel code</link> with
+        the screenshot of the application above:
+        Note how there is roughly a 1:1 mapping between the controls on the GUI and the members of the ViewModel.
       </para>
     </introduction>
     <relatedTopics/>
