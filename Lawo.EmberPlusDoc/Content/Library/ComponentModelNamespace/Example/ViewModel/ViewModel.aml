@@ -6,6 +6,62 @@
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
+      <code language="c#">
+        internal sealed class MainWindowViewModel : NotifyPropertyChanged
+        {
+            public string Title { get { ... } }
+
+            public string ListeningPort { get { ... } set { ... } }
+
+            public string ProviderHostName { get { ... } set { ... } }
+
+            public string ProviderPort { get { ... } set { ... } }
+
+            public string LogFolder { get { ... } set { ... } }
+
+            public bool? AutoScrollToMostRecentEvent { get { ... } set { ... } }
+
+            public bool CanEditSettings { get { ... } }
+
+            public bool CanStart { get { ... } }
+
+            public void Start() { ... }
+
+            public bool CanStop { get { ... } }
+
+            public void Stop() { ... }
+
+            public void SaveSettings() { ... }
+
+            public ConnectionViewModel ConsumerConnection { get { ... } }
+
+            public ConnectionViewModel ProviderConnection { get { ... } }
+
+            public ReadOnlyObservableCollection&lt;Event&gt; Events { get { ... } }
+
+            public LogEntry SelectedEvent { get { ... } set { ... } }
+
+            public FlowDocument SelectedEventDetail { get { ... } private set { ... } }
+
+            public bool IsSelectedEventDetailPartial { get { ... } set { ... } }
+
+            public void LoadFullEventDetail() { ... }
+
+            public event EventHandler&lt;ScrollEventIntoViewEventArgs&gt; ScrollEventIntoView;
+
+            internal MainWindowViewModel(Settings settings) { ... }
+        }
+      </code>
+      <code language="c#">
+        internal sealed class ConnectionViewModel : NotifyPropertyChanged
+        {
+            public string ConnectionCount { get { ... } }
+
+            public string BytesReceived { get { ... } }
+
+            public string SecondsSinceLastReceived { get { ... } }
+        }
+      </code>
       <para>A few things are of note here, please see the following subtopics for more information:</para>
       <list class="bullet">
         <listItem><para><link xlink:href="48ea11d2-ae3a-4fb7-9baf-1612d57d3f97"/></para></listItem>
