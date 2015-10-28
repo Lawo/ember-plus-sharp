@@ -101,6 +101,28 @@
         </para>
         <para>The implementation of the actual property looks as follows:</para>
         <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindowViewModel.cs" region="CalculatedProperty3" language="c#"/>
+        <alert class="caution">
+          <para>
+            By design, the
+            <codeEntityReference qualifyHint="true">E:Lawo.ComponentModel.NotifyPropertyChanged.PropertyChanged</codeEntityReference>
+            event occurs before the
+            <codeEntityReference>T:Lawo.ComponentModel.CalculatedProperty`1</codeEntityReference> instance can be
+            assigned to the field.
+          </para>
+          <para>
+            Therefore, if an event handler is already subscribed to
+            <codeEntityReference>E:Lawo.ComponentModel.NotifyPropertyChanged.PropertyChanged</codeEntityReference>
+            while a <codeEntityReference>T:Lawo.ComponentModel.CalculatedProperty`1</codeEntityReference> instance is
+            created, the event handler will provoke a
+            <codeEntityReference>T:System.NullReferenceException</codeEntityReference> if it attempts to call the
+            getter of the calculated property.
+          </para>
+          <para>
+            This problem can easily be avoided by only ever calling
+            <codeEntityReference qualifyHint="true" autoUpgrade="true">M:Lawo.ComponentModel.CalculatedProperty.Create``1(Lawo.Reflection.IProperty{System.ComponentModel.INotifyPropertyChanged,``0},Lawo.Reflection.IProperty{Lawo.ComponentModel.NotifyPropertyChanged,``0})</codeEntityReference>
+            inside a constructor and immediately assigning the resulting instance to a <codeInline>private readonly</codeInline> field.
+          </para>
+        </alert>
       </content>
     </section>
     <relatedTopics/>
