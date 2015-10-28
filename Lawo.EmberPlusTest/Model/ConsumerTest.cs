@@ -690,27 +690,27 @@ namespace Lawo.EmberPlus.Model
                             AssertSignature(allInteger.Take(6), allInteger.Take(6), consumer.Root.Node.Function6);
 
                             consumer.AutoSendInterval = 10;
-                            await consumer.Root.Function0.Invoke();
-                            Assert.AreEqual(42, (await consumer.Root.Function1.Invoke(42)).Item1);
-                            var result2 = await consumer.Root.Function2.Invoke(3.14159265359, "Hello there.");
+                            await consumer.Root.Function0.InvokeAsync();
+                            Assert.AreEqual(42, (await consumer.Root.Function1.InvokeAsync(42)).Item1);
+                            var result2 = await consumer.Root.Function2.InvokeAsync(3.14159265359, "Hello there.");
                             Assert.AreEqual(3.14159265359, result2.Item1);
                             Assert.AreEqual("Hello there.", result2.Item2);
-                            var result3 = await consumer.Root.Function3.Invoke(true, new byte[] { 42, 42 }, 13);
+                            var result3 = await consumer.Root.Function3.InvokeAsync(true, new byte[] { 42, 42 }, 13);
                             Assert.AreEqual(true, result3.Item1);
                             CollectionAssert.AreEqual(new byte[] { 42, 42 }, result3.Item2);
                             Assert.AreEqual(13, result3.Item3);
-                            var result4 = await consumer.Root.Node.Function4.Invoke(1, 2, 3, 4);
+                            var result4 = await consumer.Root.Node.Function4.InvokeAsync(1, 2, 3, 4);
                             Assert.AreEqual(1, result4.Item1);
                             Assert.AreEqual(2, result4.Item2);
                             Assert.AreEqual(3, result4.Item3);
                             Assert.AreEqual(4, result4.Item4);
-                            var result5 = await consumer.Root.Node.Function5.Invoke(1, 2, 3, 4, 5);
+                            var result5 = await consumer.Root.Node.Function5.InvokeAsync(1, 2, 3, 4, 5);
                             Assert.AreEqual(1, result5.Item1);
                             Assert.AreEqual(2, result5.Item2);
                             Assert.AreEqual(3, result5.Item3);
                             Assert.AreEqual(4, result5.Item4);
                             Assert.AreEqual(5, result5.Item5);
-                            var result6 = await consumer.Root.Node.Function6.Invoke(1, 2, 3, 4, 5, 6);
+                            var result6 = await consumer.Root.Node.Function6.InvokeAsync(1, 2, 3, 4, 5, 6);
                             Assert.AreEqual(1, result6.Item1);
                             Assert.AreEqual(2, result6.Item2);
                             Assert.AreEqual(3, result6.Item3);
@@ -720,7 +720,7 @@ namespace Lawo.EmberPlus.Model
 
                             try
                             {
-                                await consumer.Root.Function1.Invoke(42);
+                                await consumer.Root.Function1.InvokeAsync(42);
                             }
                             catch (InvocationFailedException ex)
                             {
@@ -771,26 +771,26 @@ namespace Lawo.EmberPlus.Model
                             AssertSignature(allInteger.Take(6), allInteger.Take(6), function6);
 
                             await AssertThrowAsync<ArgumentException>(
-                                () => function0.Invoke(0),
+                                () => function0.InvokeAsync(0),
                                 "The number of actual arguments is not equal to the number of expected arguments.");
                             await AssertThrowAsync<ArgumentException>(
-                                () => function1.Invoke(),
+                                () => function1.InvokeAsync(),
                                 "The number of actual arguments is not equal to the number of expected arguments.");
                             await AssertThrowAsync<ArgumentException>(
-                                () => function1.Invoke(13),
+                                () => function1.InvokeAsync(13),
                                 "The type of at least one actual argument is not equal to the expected type.");
 
                             consumer.AutoSendInterval = 10;
-                            var result0 = await function0.Invoke();
+                            var result0 = await function0.InvokeAsync();
                             Assert.AreEqual(0, result0.Items.Count());
-                            var result1 = await function1.Invoke(42L);
+                            var result1 = await function1.InvokeAsync(42L);
                             Assert.AreEqual(1, result1.Items.Count());
                             Assert.AreEqual(42L, result1.Items.First());
-                            var result2 = await function2.Invoke(3.14159265359, "Hello there.");
+                            var result2 = await function2.InvokeAsync(3.14159265359, "Hello there.");
                             Assert.AreEqual(2, result2.Items.Count());
                             Assert.AreEqual(3.14159265359, result2.Items.First());
                             Assert.AreEqual("Hello there.", result2.Items.Skip(1).First());
-                            var result3 = await function3.Invoke(true, new byte[] { 42, 42 }, 13L);
+                            var result3 = await function3.InvokeAsync(true, new byte[] { 42, 42 }, 13L);
                             Assert.AreEqual(3, result3.Items.Count());
                             Assert.AreEqual(true, result3.Items.First());
                             CollectionAssert.AreEqual(new byte[] { 42, 42 }, (byte[])result3.Items.Skip(1).First());
@@ -799,19 +799,19 @@ namespace Lawo.EmberPlus.Model
 
                             CollectionAssert.AreEqual(
                                 expected.Take(4).ToArray(),
-                                (await function4.Invoke(1L, 2L, 3L, 4L)).Items.Select(o => (long)o).ToArray());
+                                (await function4.InvokeAsync(1L, 2L, 3L, 4L)).Items.Select(o => (long)o).ToArray());
 
                             CollectionAssert.AreEqual(
                                 expected.Take(5).ToArray(),
-                                (await function5.Invoke(1L, 2L, 3L, 4L, 5L)).Items.Select(o => (long)o).ToArray());
+                                (await function5.InvokeAsync(1L, 2L, 3L, 4L, 5L)).Items.Select(o => (long)o).ToArray());
 
                             CollectionAssert.AreEqual(
                                 expected.Take(6).ToArray(),
-                                (await function6.Invoke(1L, 2L, 3L, 4L, 5L, 6L)).Items.Select(o => (long)o).ToArray());
+                                (await function6.InvokeAsync(1L, 2L, 3L, 4L, 5L, 6L)).Items.Select(o => (long)o).ToArray());
 
                             try
                             {
-                                await function1.Invoke(42L);
+                                await function1.InvokeAsync(42L);
                             }
                             catch (InvocationFailedException ex)
                             {
@@ -1015,7 +1015,7 @@ namespace Lawo.EmberPlus.Model
                             c =>
                             {
                                 c.AutoSendInterval = 10;
-                                return c.Root.Function.Invoke(42);
+                                return c.Root.Function.InvokeAsync(42);
                             }),
                         "The received tuple length does not match the tuple description length of 1.");
                     await AssertThrowAsync<ModelException>(
@@ -1024,7 +1024,7 @@ namespace Lawo.EmberPlus.Model
                             c =>
                             {
                                 c.AutoSendInterval = 10;
-                                return c.Root.Function.Invoke(42);
+                                return c.Root.Function.InvokeAsync(42);
                             }),
                         "The received tuple length does not match the tuple description length of 1.");
                     await AssertThrowInCreateAsync<ModelException, ZoneNodeRoot>(

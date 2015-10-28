@@ -6,6 +6,7 @@
 
 namespace Lawo.EmberPlus.Model
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
@@ -23,9 +24,16 @@ namespace Lawo.EmberPlus.Model
         /// <see cref="Consumer{T}.AutoSendInterval"/>. When
         /// <see cref="Consumer{T}.AutoSendInterval"/> equals <see cref="Timeout.Infinite"/>,
         /// <see cref="Consumer{T}.SendAsync"/> must be called before awaiting the returned task.</remarks>
+        public Task<TResult> InvokeAsync()
+        {
+            return this.InvokeCoreAsync(new TResult());
+        }
+
+        /// <summary>Returns the return value of <see cref="InvokeAsync"/>.</summary>
+        [Obsolete("Call InvokeAsync instead.")]
         public Task<TResult> Invoke()
         {
-            return this.InvokeCore(new TResult());
+            return this.InvokeAsync();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

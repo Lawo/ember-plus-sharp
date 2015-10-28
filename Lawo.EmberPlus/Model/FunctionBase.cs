@@ -44,17 +44,15 @@ namespace Lawo.EmberPlus.Model
         }
 
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
-        async Task<IResult> IFunction.Invoke(params object[] actualArguments)
+        Task<IResult> IFunction.InvokeAsync(params object[] actualArguments)
         {
-            if (actualArguments.Length != this.arguments.Length)
-            {
-                throw new ArgumentException(
-                    "The number of actual arguments is not equal to the number of expected arguments.");
-            }
+            return InvokeCoreAsync(actualArguments);
+        }
 
-            return await InvokeCore(
-                new DynamicResult(this.result),
-                this.arguments.Zip(actualArguments, (e, a) => CreateWriter(e, a)).ToArray());
+        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
+        Task<IResult> IFunction.Invoke(params object[] actualArguments)
+        {
+            return InvokeCoreAsync(actualArguments);
         }
 
         internal FunctionBase(
@@ -64,7 +62,7 @@ namespace Lawo.EmberPlus.Model
             this.result = result;
         }
 
-        internal Task<TResult> InvokeCore<TResult>(
+        internal Task<TResult> InvokeCoreAsync<TResult>(
             TResult invokeResult, params Action<EmberWriter>[] writers) where TResult : ResultBase<TResult>
         {
             this.invocations.Enqueue(new KeyValuePair<IInvocationResult, Action<EmberWriter>[]>(invokeResult, writers));
@@ -183,6 +181,19 @@ namespace Lawo.EmberPlus.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private async Task<IResult> InvokeCoreAsync(object[] actualArguments)
+        {
+            if (actualArguments.Length != this.arguments.Length)
+            {
+                throw new ArgumentException(
+                    "The number of actual arguments is not equal to the number of expected arguments.");
+            }
+
+            return await InvokeCoreAsync(
+                new DynamicResult(this.result),
+                this.arguments.Zip(actualArguments, (e, a) => CreateWriter(e, a)).ToArray());
+        }
 
         private void WriteInvocations(EmberWriter writer, IInvocationCollection invocationCollection)
         {
