@@ -6,7 +6,6 @@
 
 namespace Lawo.GlowAnalyzerProxy.Main
 {
-    using System.Collections.Specialized;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
@@ -15,14 +14,14 @@ namespace Lawo.GlowAnalyzerProxy.Main
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
     internal sealed partial class MainWindow : Window
     {
-        //// [SetDataContext]
+        #region SetDataContext
         public MainWindow()
         {
             this.InitializeComponent();
             this.DataContext = new MainWindowViewModel(Properties.Settings.Default);
             this.ViewModel.ScrollEventIntoView += this.OnScrollEventIntoView;
         }
-        //// [SetDataContext]
+        #endregion
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

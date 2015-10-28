@@ -6,6 +6,18 @@
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
+      <para>
+        Before the <application>ViewModel</application> data can be accessed by the <application>View</application>, an
+        object of the former needs to be set as the
+        <codeEntityReference>P:Windows.UI.Xaml.FrameworkElement.DataContext</codeEntityReference> of the latter. Here,
+        this is done in the code-behind of the <application>View</application>:
+      </para>
+      <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindow.xaml.cs" region="SetDataContext" language="c#"/>
+      <para>
+        Note that an object of the <codeInline>Settings</codeInline> class (which acts as the
+        <application>Model</application> here) is passed to the <codeInline>MainWindowViewModel</codeInline>
+        constructor.
+      </para>
       <autoOutline/>
     </introduction>
     <section address="PrimitiveProperties">
