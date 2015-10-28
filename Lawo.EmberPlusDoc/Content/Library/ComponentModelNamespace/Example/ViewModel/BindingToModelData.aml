@@ -16,7 +16,7 @@
         <codeEntityReference>N:Lawo.Reflection</codeEntityReference> namespaces offer a few tools to make this
         process much easier.
       </para>
-      <para>Bindings are typically created in the ViewModel constructor.</para>
+      <para>Bindings are typically created in the <application>ViewModel</application> constructor.</para>
       <alert class="note">
         <para>
           All the binding methods discussed below return an object that represents the newly created binding. The
@@ -120,7 +120,9 @@
           <para>
             This problem can easily be avoided by only ever calling
             <codeEntityReference qualifyHint="true" autoUpgrade="true">M:Lawo.ComponentModel.CalculatedProperty.Create``1(Lawo.Reflection.IProperty{System.ComponentModel.INotifyPropertyChanged,``0},Lawo.Reflection.IProperty{Lawo.ComponentModel.NotifyPropertyChanged,``0})</codeEntityReference>
-            inside a constructor and immediately assigning the resulting instance to a <codeInline>private readonly</codeInline> field.
+            inside a constructor and immediately assigning the resulting instance to a <codeInline>private
+            readonly</codeInline> field. In scenarios where this is not possible,
+            <codeEntityReference>T:Lawo.ComponentModel.MultiBinding</codeEntityReference> should be used instead.
           </para>
         </alert>
       </content>

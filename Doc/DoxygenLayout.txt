@@ -1,5 +1,3 @@
   <tab type="usergroup" title="Ember+ Sharp">
-    <tab type="usergroup" title="Tutorials">
-      <tab type="user" url="http://lawo.github.io/ember-plus-sharp/html/915a270d-2a20-432f-9531-ce6aa3260566.htm" title="Ember+ Sharp Library"/>
-    </tab>
+    <tab type="user" url="http://lawo.github.io/ember-plus-sharp/html/915a270d-2a20-432f-9531-ce6aa3260566.htm" title="Ember+ Sharp Library"/>
   </tab>

@@ -23,21 +23,82 @@
     <section address="PrimitiveProperties">
       <title>Primitive Properties</title>
       <content>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindow.xaml" region="PrimitivePropertyBinding" language="xaml"/>
         <para>
+          The <codeInline>Text="{Binding ProviderHostName}"</codeInline> part in the code above establishes a two-way
+          binding between <codeInline>MainWindowViewModel.ProviderHostName</codeInline> and
+          <codeEntityReference linkText="TextBox.Text">P:System.Windows.Controls.TextBox.Text</codeEntityReference>. This
+          means that the following operations take place automatically:
         </para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Initialization: When the
+              <codeEntityReference linkText="DataContext">P:System.Windows.FrameworkElement.DataContext</codeEntityReference>
+              is set, <codeInline>MainWindow</codeInline> automatically calls the
+              <codeInline>MainWindowViewModel.ProviderHostName</codeInline> getter and assigns the value to
+              <codeEntityReference linkText="TextBox.Text">P:System.Windows.Controls.TextBox.Text</codeEntityReference>.
+              <codeInline>MainWindow</codeInline> also automatically subscribes to
+              <codeEntityReference qualifyHint="true">E:Lawo.ComponentModel.NotifyPropertyChanged.PropertyChanged</codeEntityReference>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Change Propagation from <application>View</application> to <application>ViewModel</application>: When the
+              user changes the text in the
+              <codeEntityReference>T:System.Windows.Controls.TextBox</codeEntityReference>,
+              <codeInline>MainWindow</codeInline> automatically sets the new value on
+              <codeInline>MainWindowViewModel.ProviderHostName</codeInline>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Change Propagation from <application>ViewModel</application> to <application>View</application>: When the
+              business logic changes <codeInline>MainWindowViewModel.ProviderHostName</codeInline>, the
+              <codeEntityReference qualifyHint="true">E:Lawo.ComponentModel.NotifyPropertyChanged.PropertyChanged</codeEntityReference>
+              event is raised. Since <codeInline>MainWindow</codeInline> is subscribed to the event it then
+              automatically calls the <codeInline>MainWindowViewModel.ProviderHostName</codeInline> property getter and
+              sets the value on
+              <codeEntityReference linkText="TextBox.Text">P:System.Windows.Controls.TextBox.Text</codeEntityReference>.
+            </para>
+          </listItem>
+        </list>
       </content>
     </section>
     <section address="CompositeProperties">
       <title>Composite Properties</title>
       <content>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindow.xaml" region="CompositePropertyBinding" language="xaml"/>
         <para>
+          The <codeInline>DataContext="{Binding ConsumerConnection}"</codeInline> and
+          <codeInline>DataContext="{Binding ProviderConnection}"</codeInline> parts in the code above bind the
+          <codeInline>ConnectionViewModel</codeInline> values returned by the properties to the
+          <codeEntityReference linkText="DataContext">P:System.Windows.FrameworkElement.DataContext</codeEntityReference>
+          of the two <codeInline>ConnectionStatusUserControl</codeInline> instances. This allows
+          <codeInline>ConnectionStatusUserControl</codeInline> to bind directly to
+          <codeInline>ConnectionViewModel</codeInline> properties:
+        </para>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\ConnectionStatusUserControl.xaml" region="PrimitivePropertyBinding" language="xaml"/>
+        <para>
+          Note how we have used <codeInline>ConnectionStatusUserControl</codeInline> in
+          <codeInline>MainWindow</codeInline> and <codeInline>ConnectionViewModel</codeInline> in
+          <codeInline>MainWindowViewModel</codeInline> to avoid duplicating identical parts.
         </para>
       </content>
     </section>
     <section address="CollectionProperties">
       <title>Collection Properties</title>
       <content>
+        <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindow.xaml" region="CollectionPropertyBinding" language="xaml"/>
         <para>
+          The <codeInline>ItemsSource="{Binding Events}"</codeInline> part ensures that the elements in the
+          <codeEntityReference>T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1</codeEntityReference>
+          are shown in the <codeEntityReference>T:System.Windows.Controls.DataGrid</codeEntityReference>. Since the
+          collection implements
+          <codeEntityReference>T:System.Collections.Specialized.INotifyCollectionChanged</codeEntityReference>,
+          any changes to the collection are immediately reflected in the GUI. The
+          <codeInline>SelectedItem="{Binding SelectedEvent}"</codeInline> part makes the currently selected
+          <codeInline>Event</codeInline> available in the <codeInline>MainWindowViewModel</codeInline>.
         </para>
       </content>
     </section>

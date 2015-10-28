@@ -6,7 +6,11 @@
   <developerConceptualDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
+      <code source="..\Lawo.GlowAnalyzerProxy.Main\MainWindow.xaml" region="CallViewModelMethod" language="xaml"/>
       <para>
+        The above is <application>WPF</application>-specific, similar mechanisms exist for <application>Windows Store
+        Apps</application>, see
+        <codeEntityReference>T:Microsoft.Xaml.Interactions.Core.CallMethodAction</codeEntityReference>
       </para>
     </introduction>
     <relatedTopics/>

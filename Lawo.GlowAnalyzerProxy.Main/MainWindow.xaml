@@ -81,12 +81,12 @@
                     ToolTip="The port on which this proxy listens for a connection request from the Ember+ consumer."
                     ToolTipService.ShowOnDisabled="True" Text="{Binding ListeningPort, ValidatesOnDataErrors=True}"/>
                 <Label Grid.Row="2" Grid.Column="0">Provider Host Name:</Label>
-                <!-- [PrimitivePropertyBinding] -->
+                <!-- #region PrimitivePropertyBinding -->
                 <TextBox
                     Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
                     ToolTip="The host name or IP address of the Ember+ provider."
                     ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderHostName}"/>
-                <!-- [PrimitivePropertyBinding] -->
+                <!-- #endregion -->
                 <Label Grid.Row="4" Grid.Column="0">Provider Port:</Label>
                 <TextBox
                     Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
@@ -112,7 +112,7 @@
                 <ColumnDefinition Width="{StaticResource GridMargin}"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <!-- [CallViewModelMethod] -->
+            <!-- #region CallViewModelMethod -->
             <Button
                 Grid.Column="0" IsEnabled="{Binding CanStart}" ToolTip="Start the proxy."
                 ToolTipService.ShowOnDisabled="True" Content="Start">
@@ -122,7 +122,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <!-- [CallViewModelMethod] -->
+            <!-- #endregion -->
             <Button
                 Grid.Column="2" IsEnabled="{Binding CanStop}" ToolTip="Stop the proxy."
                 ToolTipService.ShowOnDisabled="True" Content="Stop">
@@ -134,14 +134,14 @@
             </Button>
         </Grid>
         <GroupBox Grid.Row="4" Header="Events">
-            <!-- [CollectionPropertyBinding] -->
+            <!-- #region CollectionPropertyBinding -->
             <DataGrid
                 Margin="{StaticResource Margin}" SelectionMode="Single" CanUserResizeRows="False"
                 CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False"
                 ToolTip="Lists events in chronological order." ItemsSource="{Binding Events}"
                 SelectedItem="{Binding SelectedEvent}" AutoGeneratingColumn="OnDataGrid_AutoGeneratingColumn"
                 x:Name="EventsDataGrid"/>
-            <!-- [CollectionPropertyBinding] -->
+            <!-- #endregion -->
         </GroupBox>
         <Grid Grid.Row="0" Grid.RowSpan="5" Grid.Column="2" >
             <Grid.RowDefinitions>
@@ -154,14 +154,14 @@
                 <ColumnDefinition Width="{StaticResource GridMargin}"/>
                 <ColumnDefinition/> 
             </Grid.ColumnDefinitions>
-            <!-- [CompositePropertyBinding] -->
+            <!-- #region CompositePropertyBinding -->
             <local:ConnectionStatusUserControl
                 Grid.Row="0" Grid.Column="0" DataContext="{Binding ConsumerConnection}"
                 Header="Consumer to Proxy Connection Status"/>
             <local:ConnectionStatusUserControl
                 Grid.Row="0" Grid.Column="2" DataContext="{Binding ProviderConnection}"
                 Header="Proxy to Provider Connection Status"/>
-            <!-- [CompositePropertyBinding] -->
+            <!-- #endregion -->
             <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Event Detail">
                 <Grid Margin="{StaticResource Margin}">
                     <Grid.RowDefinitions>
