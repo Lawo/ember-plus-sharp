@@ -377,7 +377,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     if (exception != null)
                     {
                         await EnqueueLogOperationAsync(
-                            logInfo, "Exception", null, null, i => i.Logger.LogException(exception));
+                            logInfo, "Exception", null, null, i => i.Logger.LogException(null, exception));
                     }
 
                     await EnqueueLogOperationAsync(logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });

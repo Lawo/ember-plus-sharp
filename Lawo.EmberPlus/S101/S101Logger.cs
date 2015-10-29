@@ -115,7 +115,7 @@ namespace Lawo.EmberPlus.S101
         }
 
         /// <inheritdoc/>
-        public EventInfo LogException(Exception exception)
+        public EventInfo LogException(string direction, Exception exception)
         {
             if (exception == null)
             {
@@ -123,6 +123,7 @@ namespace Lawo.EmberPlus.S101
             }
 
             var info = new EventInfo(this.WriteStartEvent(LogNames.Exception));
+            this.xmlLogWriter.WriteAttributeString(LogNames.Direction, direction);
             this.xmlLogWriter.WriteString(exception.ToString());
             this.WriteEndEvent();
             return info;

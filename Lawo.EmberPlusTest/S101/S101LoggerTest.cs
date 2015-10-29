@@ -36,7 +36,7 @@ namespace Lawo.EmberPlus.S101
                         () => logger.LogData("Whatever", "Send", null, 0, 0),
                         () => logger.LogMessage(null, new S101Message(0x00, new KeepAliveRequest()), null),
                         () => logger.LogMessage("Send", null, null),
-                        () => logger.LogException(null));
+                        () => logger.LogException("Send", null));
                 }
             }
         }

@@ -325,7 +325,7 @@ namespace Lawo.EmberPlus.S101
                 }
                 else
                 {
-                    logAction = () => this.logger.LogException(exception);
+                    logAction = () => this.logger.LogException(LogNames.Receive, exception);
                 }
 
                 // We're deliberately not awaiting this task, so that the Dispose call will be enqueued even if this

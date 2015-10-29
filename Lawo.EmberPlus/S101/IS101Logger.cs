@@ -53,6 +53,6 @@ namespace Lawo.EmberPlus.S101
         /// <summary>Logs <paramref name="exception"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="exception"/> equals <c>null</c>.</exception>
         /// <exception cref="ObjectDisposedException"><see cref="IDisposable.Dispose"/> has been called.</exception>
-        EventInfo LogException(Exception exception);
+        EventInfo LogException(string direction, Exception exception);
     }
 }
