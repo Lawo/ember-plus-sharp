@@ -352,7 +352,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     }
 
                     var logInfo = new LogInfo(logPath);
-                    Exception exception;
 
                     try
                     {
@@ -362,30 +361,23 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                             using (this.ProviderConnection.Client = await ConnectToProvider())
                             {
-                                await Task.WhenAll(this.ForwardFromConsumerAsync(logInfo), this.ForwardFromProviderAsync(logInfo));
+                                await Task.WhenAll(
+                                    this.ForwardFromConsumerAsync(logInfo), this.ForwardFromProviderAsync(logInfo));
                             }
                         }
-
-                        exception = null;
                     }
                     catch (Exception ex)
                     {
-                        exception = ex;
+                        await EnqueueLogOperationAsync(
+                            logInfo, "Exception", null, null, i => i.Logger.LogException(null, ex));
                     }
                     finally
                     {
                         this.ConsumerConnection.Client = null;
                         this.ProviderConnection.Client = null;
+                        await EnqueueLogOperationAsync(logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
                         listener.Start();
                     }
-
-                    if (exception != null)
-                    {
-                        await EnqueueLogOperationAsync(
-                            logInfo, "Exception", null, null, i => i.Logger.LogException(null, exception));
-                    }
-
-                    await EnqueueLogOperationAsync(logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
                 }
                 else
                 {
