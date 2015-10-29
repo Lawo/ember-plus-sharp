@@ -23,17 +23,17 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     using ComponentModel;
     using EmberPlus.S101;
-    using Properties;
     using IO;
+    using Properties;
     using Reflection;
     using Threading.Tasks;
 
     internal sealed class MainWindowViewModel : NotifyPropertyChanged, IDataErrorInfo
     {
-        const string ShortConsumerToProvider = "C to P";
-        const string ConsumerToProvider = "Consumer to Provider";
-        const string ShortProviderToConsumer = "P to C";
-        const string ProviderToConsumer = "Provider to Consumer";
+        private const string ShortConsumerToProvider = "C to P";
+        private const string ConsumerToProvider = "Consumer to Provider";
+        private const string ShortProviderToConsumer = "P to C";
+        private const string ProviderToConsumer = "Provider to Consumer";
         private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
         private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
 
@@ -362,7 +362,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                             using (this.ProviderConnection.Client = await ConnectToProvider())
                             {
-                                await Task.WhenAll(this.ForwardFromConsumer(logInfo), this.ForwardFromProvider(logInfo));
+                                await Task.WhenAll(this.ForwardFromConsumerAsync(logInfo), this.ForwardFromProviderAsync(logInfo));
                             }
                         }
 
@@ -407,13 +407,13 @@ namespace Lawo.GlowAnalyzerProxy.Main
             return providerClient;
         }
 
-        private Task ForwardFromConsumer(LogInfo logInfo)
+        private Task ForwardFromConsumerAsync(LogInfo logInfo)
         {
             return this.ForwardAsync(
                 this.ConsumerConnection, this.ProviderConnection, logInfo, ShortConsumerToProvider, ConsumerToProvider);
         }
 
-        private Task ForwardFromProvider(LogInfo logInfo)
+        private Task ForwardFromProviderAsync(LogInfo logInfo)
         {
             return this.ForwardAsync(
                 this.ProviderConnection, this.ConsumerConnection, logInfo, ShortProviderToConsumer, ProviderToConsumer);
