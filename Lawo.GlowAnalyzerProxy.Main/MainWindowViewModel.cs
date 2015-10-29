@@ -20,15 +20,20 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System.Threading.Tasks;
     using System.Windows.Documents;
     using System.Windows.Media;
-    using Lawo.ComponentModel;
-    using Lawo.EmberPlus.S101;
-    using Lawo.GlowAnalyzerProxy.Main.Properties;
-    using Lawo.IO;
-    using Lawo.Reflection;
-    using Lawo.Threading.Tasks;
+
+    using ComponentModel;
+    using EmberPlus.S101;
+    using Properties;
+    using IO;
+    using Reflection;
+    using Threading.Tasks;
 
     internal sealed class MainWindowViewModel : NotifyPropertyChanged, IDataErrorInfo
     {
+        const string ShortConsumerToProvider = "C to P";
+        const string ConsumerToProvider = "Consumer to Provider";
+        const string ShortProviderToConsumer = "P to C";
+        const string ProviderToConsumer = "Provider to Consumer";
         private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
         private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
 
@@ -405,13 +410,13 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private Task ForwardFromConsumer(LogInfo logInfo)
         {
             return this.ForwardAsync(
-                this.ConsumerConnection, this.ProviderConnection, logInfo, "C to P", "Consumer to Provider");
+                this.ConsumerConnection, this.ProviderConnection, logInfo, ShortConsumerToProvider, ConsumerToProvider);
         }
 
         private Task ForwardFromProvider(LogInfo logInfo)
         {
             return this.ForwardAsync(
-                this.ProviderConnection, this.ConsumerConnection, logInfo, "P to C", "Provider to Consumer");
+                this.ProviderConnection, this.ConsumerConnection, logInfo, ShortProviderToConsumer, ProviderToConsumer);
         }
 
         private async Task ForwardAsync(
