@@ -355,29 +355,36 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                     try
                     {
-                        using (this.ConsumerConnection.Client = await listener.AcceptTcpClientAsync())
-                        {
-                            listener.Stop();
+                        this.ConsumerConnection.Client = await listener.AcceptTcpClientAsync();
+                        listener.Stop();
+                    }
+                    catch (Exception ex)
+                    {
+                        await EnqueueLogOperationAsync(
+                            logInfo, "Exception", null, null, i => i.Logger.LogException("Consumer to Proxy", ex));
+                    }
 
+                    using (this.ConsumerConnection.Client)
+                    {
+                        try
+                        {
                             using (this.ProviderConnection.Client = await ConnectToProvider())
                             {
                                 await Task.WhenAll(
                                     this.ForwardFromConsumerAsync(logInfo), this.ForwardFromProviderAsync(logInfo));
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            await EnqueueLogOperationAsync(
+                                logInfo, "Exception", null, null, i => i.Logger.LogException("Proxy to Provider", ex));
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        await EnqueueLogOperationAsync(
-                            logInfo, "Exception", null, null, i => i.Logger.LogException(null, ex));
-                    }
-                    finally
-                    {
-                        this.ConsumerConnection.Client = null;
-                        this.ProviderConnection.Client = null;
-                        await EnqueueLogOperationAsync(logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
-                        listener.Start();
-                    }
+
+                    this.ConsumerConnection.Client = null;
+                    this.ProviderConnection.Client = null;
+                    await EnqueueLogOperationAsync(logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
+                    listener.Start();
                 }
                 else
                 {
@@ -449,6 +456,11 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
             catch (ObjectDisposedException)
             {
+            }
+            catch (Exception ex)
+            {
+                await EnqueueLogOperationAsync(
+                    logInfo, "Exception", shortDirection, null, i => i.Logger.LogException(direction, ex));
             }
             finally
             {
