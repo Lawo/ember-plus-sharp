@@ -76,7 +76,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                 if (this.client != null)
                 {
-                    ++this.ConnectionCountCore;
                     this.BytesReceivedCore = 0;
                     this.LastReceived = DateTime.UtcNow;
                 }

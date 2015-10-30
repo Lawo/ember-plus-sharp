@@ -344,6 +344,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             {
                 if (listener.Pending())
                 {
+                    ++this.ConsumerConnection.ConnectionCountCore;
                     string logPath;
 
                     while (File.Exists(logPath = GetLogFilename()))
@@ -355,35 +356,44 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                     try
                     {
-                        this.ConsumerConnection.Client = await listener.AcceptTcpClientAsync();
-                        listener.Stop();
-                    }
-                    catch (Exception ex)
-                    {
-                        await EnqueueLogOperationAsync(
-                            logInfo, "Exception", null, null, i => i.Logger.LogException("Consumer to Proxy", ex));
-                    }
+                        ++this.ProviderConnection.ConnectionCountCore;
+                        this.ProviderConnection.Client = await ConnectToProvider();
 
-                    using (this.ConsumerConnection.Client)
-                    {
                         try
                         {
-                            using (this.ProviderConnection.Client = await ConnectToProvider())
-                            {
-                                await Task.WhenAll(
-                                    this.ForwardFromConsumerAsync(logInfo), this.ForwardFromProviderAsync(logInfo));
-                            }
+                            this.ConsumerConnection.Client = await listener.AcceptTcpClientAsync();
+                            listener.Stop();
+                            await Task.WhenAll(
+                                this.ForwardFromConsumerAsync(logInfo), this.ForwardFromProviderAsync(logInfo));
                         }
                         catch (Exception ex)
                         {
+                            listener.Stop();
                             await EnqueueLogOperationAsync(
-                                logInfo, "Exception", null, null, i => i.Logger.LogException("Proxy to Provider", ex));
+                                logInfo, "Exception", null, null, i => i.Logger.LogException("Consumer to Proxy", ex));
+                        }
+
+                        if (this.ConsumerConnection.Client != null)
+                        {
+                            this.ConsumerConnection.Client.Close();
+                            this.ConsumerConnection.Client = null;
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        listener.Stop();
+                        await EnqueueLogOperationAsync(
+                            logInfo, "Exception", null, null, i => i.Logger.LogException("Proxy to Provider", ex));
+                    }
 
-                    this.ConsumerConnection.Client = null;
-                    this.ProviderConnection.Client = null;
-                    await EnqueueLogOperationAsync(logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
+                    if (this.ProviderConnection.Client != null)
+                    {
+                        this.ProviderConnection.Client.Close();
+                        this.ProviderConnection.Client = null;
+                    }
+
+                    await EnqueueLogOperationAsync(
+                        logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
                     listener.Start();
                 }
                 else
