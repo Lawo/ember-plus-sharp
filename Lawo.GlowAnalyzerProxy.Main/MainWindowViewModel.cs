@@ -313,7 +313,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.ConsumerConnection.ConnectionCountCore = 0;
             this.ProviderConnection.ConnectionCountCore = 0;
             var listener = new TcpListener(IPAddress.Any, int.Parse(this.ListeningPort));
-            listener.Start();
+            listener.Start(1);
 
             try
             {
@@ -394,7 +394,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                     await EnqueueLogOperationAsync(
                         logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
-                    listener.Start();
+                    listener.Start(1);
                 }
                 else
                 {
