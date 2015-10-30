@@ -94,7 +94,7 @@
                     ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderPort, ValidatesOnDataErrors=True}"/>
                 <Label Grid.Row="6" Grid.Column="0">Log Folder:</Label>
                 <TextBox
-                    Grid.Row="6" Grid.Column="2"
+                    Grid.Row="6" Grid.Column="2" IsEnabled="{Binding CanEditSettings}"
                     ToolTip="The folder into which the log files are written.&#x0d;&#x0a;A new log file is created whenever a consumer attempts to establish a TCP/IP connection with this proxy."
                     Text="{Binding LogFolder, ValidatesOnDataErrors=True}"/>
                 <Button
