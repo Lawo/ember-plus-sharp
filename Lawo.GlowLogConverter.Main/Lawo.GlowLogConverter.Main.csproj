@@ -66,9 +66,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lawo.EmberPlus\Lawo.EmberPlus.csproj">
+    <ProjectReference Include="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj">
       <Project>{cd75460d-43d8-4602-8e78-4c6ea6de9c87}</Project>
-      <Name>Lawo.EmberPlus</Name>
+      <Name>Lawo.EmberPlusSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

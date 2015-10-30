@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<topic id="945c7c21-060f-4fb9-9cbd-842f0e031472" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        As we've seen on <link xlink:href="7cdb703a-14dd-42d3-8ea2-28a9b8af6663"/>, all model types implement
+        <codeEntityReference>T:Lawo.EmberPlusSharp.Model.IElement</codeEntityReference>, which itself inherits
+        <codeEntityReference qualifyHint="true">E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged</codeEntityReference>.
+        We can use this event as follows:
+      </para>
+      <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="React to Changes" language="c#"/>
+      <para>
+        We can test this by running the above program and then modfiying a value of the parameter in
+        <application>Tiny Ember+</application>.
+      </para>
+      <para>Proceed to <link xlink:href="e3a579ce-d73e-459b-ab70-48b79cc9e0c8"/>.</para>
+    </introduction>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

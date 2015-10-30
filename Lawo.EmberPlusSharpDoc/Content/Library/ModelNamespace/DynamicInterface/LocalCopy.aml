@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<topic id="f6285c3c-ef54-453e-90ad-5546ec1a7a1d" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <autoOutline/>
+    </introduction>
+    <section address="RunTinyEmber">
+      <title>Run Tiny Ember+</title>
+      <content>
+        <para>See <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67#TinyEmber"/>.</para>
+      </content>
+    </section>
+    <section address="CreateTheProject">
+      <title>Create the Project</title>
+      <content>
+        <list class="ordered">
+          <listItem>
+            <para>Start <application>Visual Studio 2015</application>.</para>
+          </listItem>
+          <listItem>
+            <para>
+              Create a new <application>Console Application</application> project that uses the <application>.NET
+              Framework 4.5</application>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Add references to <application>Lawo</application> and <application>Lawo.EmberPlusSharp</application>, see
+              <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67#Assemblies"/>.
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="UsingDeclarations">
+      <title>Using Declarations</title>
+      <content>
+        <para>Replace the default using declarations with the following:</para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Using Declarations" language="c#"/>
+      </content>
+    </section>
+    <section address="TcpConnectionAndS101">
+      <title>TCP Connection and S101</title>
+      <content>
+        <para>
+          Before we can query the provider we first need to create a connection and then establish the S101 protocol.
+          Since these first steps will be mostly the same whenever we'd like to connect to a provider, we'll put them
+          into a handy method:
+        </para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="S101 Connect Method" language="c#"/>
+      </content>
+    </section>
+    <section address="RootClass">
+      <title>Root Class</title>
+      <content>
+        <para>
+          Next, we need to create a new nested class, an object of which will henceforth represent the root of our local
+          copy of the provider database.
+        </para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Dynamic Root Class" language="c#"/>
+        <alert class="note">
+          <para>
+            The library requires the creation of such a class for the fully dynamic use case although it isn't
+            technically necessary. We will go into the rationale for this later.
+          </para>
+        </alert>
+      </content>
+    </section>
+    <section address="MainMethod">
+      <title>Main Method</title>
+      <content>
+        <para>
+          We can now connect to any provider with the following code:
+        </para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Main Method" language="c#"/>
+        <alert class="note">
+          <para>
+            The call to
+            <codeEntityReference qualifyHint="true">M:Lawo.Threading.Tasks.AsyncPump.Run(System.Func{System.Threading.Tasks.Task})</codeEntityReference>
+            is only necessary because there is no direct support for <codeInline>async</codeInline> methods in a
+            <application>Console Application</application>. In GUI applications (e.g. <application>Windows
+            Forms</application>, <application>WPF</application>, <application>Windows Store</application>) the
+            <codeInline>async</codeInline> methods are typically called directly from an
+            <codeInline>async void</codeInline> event handler.
+          </para>
+        </alert>
+        <para>Proceed to <link xlink:href="e0972d29-96f3-4dea-936b-f77001d077b1"/>.</para>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

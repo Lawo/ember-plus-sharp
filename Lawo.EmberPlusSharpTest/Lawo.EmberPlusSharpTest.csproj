@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D93DC0DD-C137-428F-B84B-3F4387124C85}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lawo.EmberPlusSharp</RootNamespace>
+    <AssemblyName>Lawo.EmberPlusSharpTest</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Lawo.EmberPlusSharpTest.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Lawo.EmberPlusSharpTest.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\StrongNameKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BerLib, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\BerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="EmberLib, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EmberLib.dll</HintPath>
+    </Reference>
+    <Reference Include="EmberLib.Framing, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EmberLib.Framing.dll</HintPath>
+    </Reference>
+    <Reference Include="EmberLib.Glow, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EmberLib.Glow.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Ember\EmberDataPayloads\EmberPayloads.cs" />
+    <Compile Include="Model\Test\EmptyRoot.cs" />
+    <Compile Include="Model\Test\FunctionNode.cs" />
+    <Compile Include="Model\Test\EmptyZoneNode.cs" />
+    <Compile Include="Model\Test\EmptyZoneNodeRoot.cs" />
+    <Compile Include="Model\Test\InterfaceElementRoot.cs" />
+    <Compile Include="Model\Test\ZoneNodeRoot.cs" />
+    <Compile Include="Model\Test\TwoParameterRoot.cs" />
+    <Compile Include="Model\Test\FunctionRoot.cs" />
+    <Compile Include="Model\Test\EmptyNode.cs" />
+    <Compile Include="Model\Test\EmptyNodeRoot.cs" />
+    <Compile Include="Model\Test\ChangeNotificationRoot.cs" />
+    <Compile Include="Model\Test\FunctionSignatureMismatchRoot4.cs" />
+    <Compile Include="Model\Test\FunctionSignatureMismatchRoot5.cs" />
+    <Compile Include="Model\Test\FunctionResultMismatchRoot.cs" />
+    <Compile Include="Model\Test\FunctionSignatureMismatchRoot6.cs" />
+    <Compile Include="Model\Test\FunctionSignatureMismatchRoot3.cs" />
+    <Compile Include="Model\Test\FunctionSignatureMismatchRoot2.cs" />
+    <Compile Include="Model\Test\UnsupportedTypeInFunctionRoot2.cs" />
+    <Compile Include="Model\Test\FunctionSignatureMismatchRoot1.cs" />
+    <Compile Include="Model\Test\UnsupportedTypeInFunctionRoot1.cs" />
+    <Compile Include="Model\Test\SingleParameterRoot.cs" />
+    <Compile Include="Model\Test\Ravenna.cs" />
+    <Compile Include="Model\Test\MediaSession.cs" />
+    <Compile Include="Model\Test\MediaSessionReceiver.cs" />
+    <Compile Include="Model\Test\ZoneNode.cs" />
+    <Compile Include="Model\TutorialTest.cs" />
+    <Compile Include="Model\DynamicNodeHelper.cs" />
+    <Compile Include="Model\Test\EmptyDynamicRoot.cs" />
+    <Compile Include="Model\Test\BigTreeStaticRoot.cs" />
+    <Compile Include="Model\Test\BigTreeNode.cs" />
+    <Compile Include="Model\Test\BigTreeDynamicRoot.cs" />
+    <Compile Include="Model\Test\DynamicTestFieldNode.cs" />
+    <Compile Include="Model\Test\DynamicTestRoot.cs" />
+    <Compile Include="Model\Test\NoEnumParameterRoot.cs" />
+    <Compile Include="Model\Test\EnumParameterRoot.cs" />
+    <Compile Include="Model\Test\Enumeration.cs" />
+    <Compile Include="Model\Test\NullableRoot.cs" />
+    <Compile Include="Model\Test\SingleNodeRoot.cs" />
+    <Compile Include="S101\CompleteOnDispose.cs" />
+    <Compile Include="S101\EmberDataPayloads\S101Payloads.cs" />
+    <Compile Include="Glow\GlowLogConverterTest.cs" />
+    <Compile Include="S101\S101LogReaderTest.cs" />
+    <Compile Include="S101\S101RobotTest.cs" />
+    <Compile Include="S101\S101LoggerTest.cs" />
+    <Compile Include="Model\ElementAttributeTest.cs" />
+    <Compile Include="Model\StreamDescriptionTest.cs" />
+    <Compile Include="Model\Test\UnsupportedPropertyTypeRoot.cs" />
+    <Compile Include="Model\Test\NoDefaultConstructorRoot.cs" />
+    <Compile Include="Model\Test\RecursiveFieldNode.cs" />
+    <Compile Include="Model\Test\DuplicateElementRoot.cs" />
+    <Compile Include="Model\Test\PropertiesRoot.cs" />
+    <Compile Include="Model\Test\EmberDataPayloads\ModelPayloads.cs" />
+    <Compile Include="Model\Test\TestFieldNode.cs" />
+    <Compile Include="Model\Test\MainRoot.cs" />
+    <Compile Include="S101\CommunicationTestBase.cs" />
+    <Compile Include="Ember\EmberWriterTest.cs" />
+    <Compile Include="Ember\CompatibilityTest.cs" />
+    <Compile Include="Ember\EmberReaderTest.cs" />
+    <Compile Include="Ember\IdentifierTest.cs" />
+    <Compile Include="Ember\EmberConverterTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\ConsumerTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="S101\S101ClientTest.cs" />
+    <Compile Include="S101\S101ReaderTest.cs" />
+    <Compile Include="S101\S101WriterTest.cs" />
+    <Compile Include="S101\CompatibilityTest.cs" />
+    <Compile Include="S101\PerformanceComparison.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj">
+      <Project>{cd75460d-43d8-4602-8e78-4c6ea6de9c87}</Project>
+      <Name>Lawo.EmberPlusSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lawo.UnitTesting\Lawo.UnitTesting.csproj">
+      <Project>{018d45fd-bc81-433e-9b90-788d4ae2d31c}</Project>
+      <Name>Lawo.UnitTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lawo\Lawo.csproj">
+      <Project>{4b9ed1f0-f237-4132-b247-cbc37df5177a}</Project>
+      <Name>Lawo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
+      <Link>CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_00.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_01.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_00.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_01.ember" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_10.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_11.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_12.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_13.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_14.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_15.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_16.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_17.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_18.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_19.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_02.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_20.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_21.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_22.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_23.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_24.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_25.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_26.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_27.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_28.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_29.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_03.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_30.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_31.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_32.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_33.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_34.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_35.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_36.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_37.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_38.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_39.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_04.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_40.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_41.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_42.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_43.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_05.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_06.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_07.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_08.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\consumer-to-provider_message_09.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_10.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_11.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_12.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_13.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_14.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_15.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_16.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_17.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_18.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_19.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_02.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_20.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_21.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_22.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_23.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_24.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_25.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_26.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_27.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_28.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_29.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_03.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_30.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_31.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_32.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_33.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_34.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_35.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_36.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_37.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_38.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_39.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_04.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_40.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_41.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_42.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_43.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_44.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_45.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_46.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_47.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_48.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_05.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_06.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_07.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_08.ember" />
+    <EmbeddedResource Include="Ember\EmberDataPayloads\provider-to-consumer_message_09.ember" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Request1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MainResponse1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MainRequest2.xml" />
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MainResponse2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\PropertiesResponse1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MainRequest3.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\DuplicateElementResponse1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NoDataValueAvailableReponse1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\StreamEntriesResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\InvalidPathResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NoDataValueAvailableReponse2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ValueOutOfRangeResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnexpectedValueResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\QualifiedParameterChildResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MissingTypeResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\TypeMismatchResponse1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\TypeMismatchResponse2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ember\EmberDataPayloads\BigPayload.ember" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NoValueResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NullableResponse1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NullableRequest2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NullableResponse2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\EndOfContainerResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\EndOfStreamResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\InvalidEmberResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnexpectedOuterIdResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnexpectedNonContextSpecificResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnexpectedInnerNumberResponse1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnexpectedInnerNumberResponse2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MissingEnumerationResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\EntryCountMismatchResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MissingNamedConstantResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\EnumParameterResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\BigTreeRootTemplate.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\BigTreeNodeChildrenTemplate.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="S101\EmberDataPayloads\SkipLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="S101\EmberDataPayloads\MissingPayloadLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="S101\EmberDataPayloads\IncomingLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NumberOutOfRangeResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="S101\EmberDataPayloads\VersionLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnsupportedGlowVersionLog1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnsupportedGlowVersionLog2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnsupportedGlowVersionLog3.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnsupportedGlowVersionLog4.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnexpectedDtdLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnsupportedPropertyTypeResponse.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UninterestingParameterResponse.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\InterestingParameterResponse.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UninterestingParameterResponse2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug1866Log.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug1766Log.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\AccessLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\TriggerLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug1620Log.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChangeNotificationLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\SendReceiveWithBrokenConnectionLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ThrowAfterCreateLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\SlotLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\IncompleteLog1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\IncompleteLog2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\InvalidParameterType.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\FunctionLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\UnaryFunctionLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\FunctionResultValueMismatchLog1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\FunctionResultValueMismatchLog2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug1834Log.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\NullaryFunctionLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug3345Log.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug4424Log.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\IsOnlineLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\OfflineRequiredElementLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug4463Log.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MainLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug4815Response1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug4815Response2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug4815Response3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug4815Request2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug5201Response1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug5201Response2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug5201Request2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug5201Response3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug5639Log.xml" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\StyleCop\v4.7\StyleCop.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<topic id="0957f1fa-abf4-4fb8-9430-1230ce2c6947" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        It is assumed that you've followed the steps from <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67"/> to
+        <link xlink:href="df1c42d3-bc00-4786-88d6-2372b281043a"/>, and thus have a runnable project open in
+        <application>Visual Studio 2015</application>.
+      </para>
+      <autoOutline/>
+    </introduction>
+    <section address="DatabaseClasses">
+      <title>Database Classes</title>
+      <content>
+        <para>
+          First we need to declare our expectations about the provider database with the following nested types:
+        </para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Static Database Types" language="c#"/>
+        <para>A few things are of note here:</para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              The elements <codeInline>FPGM 1</codeInline>, <codeInline>FPGM 2</codeInline> and
+              <codeInline>dB Value</codeInline> have identifiers that cannot be <application>C#</application> property
+              names. The associated properties need to carry an
+              <codeEntityReference>T:Lawo.EmberPlusSharp.Model.ElementAttribute</codeEntityReference> instance with the
+              correct identifier.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              The getters and setters of the various properties can have any accessibility. However, since client code
+              should never set any of the properties, it is best to declare the setter <codeInline>private</codeInline>.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              The <codeEntityReference>T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute</codeEntityReference>
+              is only present to suppress a <application>StyleCop</application> warning. If you do not use
+              <application>StyleCop</application>, the attribute is unnecessary.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              The constants in the <codeInline>enum</codeInline> and <codeInline>LRMode</codeInline> have names that
+              differ from the ones presented by the provider. This is possible because the library only checks that the
+              provider enumeration and the local <codeInline>enum</codeInline> have an equal number of constants and
+              that they have the same integer values.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              In rare cases, client code might only be interested in the integer value of an enumeration or does not
+              want to statically confine the possible values an enumeration can have. In these cases, client code should
+              use <codeEntityReference>T:Lawo.EmberPlusSharp.Model.IntegerParameter</codeEntityReference> rather than
+              <codeEntityReference>T:Lawo.EmberPlusSharp.Model.EnumParameter`1</codeEntityReference>.
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="MainMethod">
+      <title>Main Method</title>
+      <content>
+        <para>We can now iterate over the local database as follows ...</para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Static Iterate" language="c#"/>
+        <para>... and get the following output:</para>
+        <code>
+          Node Sapphire
+            Node Sources
+              Node FPGM 1
+                Node Fader
+                  Parameter dB Value: -255.999999999998
+                  Parameter Position: 0
+                Node DSP
+                  Node Input
+                    Parameter Phase: True
+                    Parameter LR Mode: Stereo
+              Node FPGM 2
+                Node Fader
+                  Parameter dB Value: 9
+                  Parameter Position: 255
+                Node DSP
+                  Node Input
+                    Parameter Phase: False
+                    Parameter LR Mode: Stereo
+        </code>
+        <para>Notes:</para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              Compared to the output we've seen on <link xlink:href="e0972d29-96f3-4dea-936b-f77001d077b1"/>, this time
+              the database only contains the elements that we've explicitly declared interest in. So, for large provider
+              databases, the static interface offers a way to reduce the memory footprint on the consumer side.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeEntityReference autoUpgrade="true" qualifyHint="true">M:Lawo.EmberPlusSharp.Model.Consumer`1.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)</codeEntityReference>
+              verifies that the expectations we've declared match with what the provider sends. Any mismatch is signaled
+              with a <codeEntityReference>T:Lawo.EmberPlusSharp.Model.ModelException</codeEntityReference>. This verification
+              includes the presence of required parameters and nodes, the match of types and many other checks.
+            </para>
+          </listItem>
+        </list>
+        <para>Proceed to <link xlink:href="945c7c21-060f-4fb9-9cbd-842f0e031472"/>.</para>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

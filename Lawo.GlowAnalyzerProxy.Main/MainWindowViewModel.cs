@@ -22,7 +22,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System.Windows.Media;
 
     using ComponentModel;
-    using EmberPlus.S101;
+    using EmberPlusSharp.S101;
     using IO;
     using Properties;
     using Reflection;

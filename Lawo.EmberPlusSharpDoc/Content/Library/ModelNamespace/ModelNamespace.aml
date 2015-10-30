@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        Welcome to the <codeEntityReference>N:Lawo.EmberPlusSharp.Model</codeEntityReference> namespace tutorial.
+      </para>
+      <alert class ="important">
+        <para>
+          If you plan to follow this tutorial by running the presented code, it is strongly recommended to start with
+          the link below and then follow the numbered pages.
+        </para>
+      </alert>
+      <para>Proceed to <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67"/>.</para>
+    </introduction>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

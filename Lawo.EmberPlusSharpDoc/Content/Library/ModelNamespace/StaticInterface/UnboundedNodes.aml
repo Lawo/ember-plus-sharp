@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<topic id="86ad72ee-d788-4511-9608-c27e29445f96" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        Suppose the actual number of sources in our provider database was configurable. The consumer would then want to find out
+        at runtime exactly how many sources there are. This can be achieved with the following classes ...
+      </para>
+      <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Unbounded Database Types" language="c#"/>
+      <para>... which are used as follows:</para>
+      <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Collection Node" language="c#"/>
+      <para>
+        Note that <codeEntityReference>T:Lawo.EmberPlusSharp.Model.CollectionNode`1</codeEntityReference> introduces a
+        single point of unboundedness, all the benefits of the static interface and
+        <application>IntelliSense</application> remain available for its children.
+      </para>
+      <para>Proceed to <link xlink:href="15613e0f-7337-4a90-b538-1c402b4f8ad7"/>.</para>
+    </introduction>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

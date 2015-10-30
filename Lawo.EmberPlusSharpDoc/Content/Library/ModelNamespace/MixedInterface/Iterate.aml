@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2015 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<topic id="56add6fd-a91e-4e3e-a02e-e3e70d4958aa" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        It is assumed that you've followed the steps from <link xlink:href="5b9afbff-f6fc-4870-892f-6d6b76f85c67"/> to
+        <link xlink:href="3d672617-cf26-40a0-bae0-9b3df394cf0e"/>, and thus have a runnable project open in
+        <application>Visual Studio 2015</application>.
+      </para>
+      <autoOutline/>
+    </introduction>
+    <section address="DatabaseClasses">
+      <title>Database Classes</title>
+      <content>
+        <para>
+          First we need to declare our expectations about the provider database with the following nested types:
+        </para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Mixed Database Types" language="c#"/>
+      </content>
+    </section>
+    <section address="MainMethod">
+      <title>Main Method</title>
+      <content>
+        <para>We can now iterate over the local database as follows ...</para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Mixed Iterate" language="c#"/>
+        <para>... and get the following output:</para>
+        <code>
+          Node Sapphire
+            Node identity
+              Parameter product: sapphire
+              Parameter company: (c) L-S-B Broadcast Technologies GmbH
+            Node Sources
+              Node FPGM 1
+                Parameter Audio Type: 2
+                Node Fader
+                  Parameter dB Value: -255.999999999998
+                  Parameter Position: 0
+                Node DSP
+                  Node Input
+                    Parameter Phase: True
+                    Parameter LR Mode: Stereo
+              Node FPGM 2
+                Parameter Audio Type: 2
+                Node Fader
+                  Parameter dB Value: 9
+                  Parameter Position: 255
+                Node DSP
+                  Node Input
+                    Parameter Phase: False
+                    Parameter LR Mode: Stereo
+        </code>
+        <para>
+          Note how the <codeInline>Audio Type</codeInline> parameters and the <codeInline>identity</codeInline> node
+          with all its children now appear although we have not declared properties for them. This is due to the fact
+          that their parents subclass
+          <codeEntityReference>T:Lawo.EmberPlusSharp.Model.DynamicFieldNode`1</codeEntityReference> rather than
+          <codeEntityReference>T:Lawo.EmberPlusSharp.Model.FieldNode`1</codeEntityReference>.
+        </para>
+        <para>Proceed to <link xlink:href="881824cc-edf4-4007-b30c-cb460d2dcf97"/>.</para>
+      </content>
+    </section>
+    <relatedTopics/>
+  </developerConceptualDocument>
+</topic>

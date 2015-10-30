@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" isSelected="true" title="Welcome to the Ember+ Sharp Project" />
+  <Topic id="915a270d-2a20-432f-9531-ce6aa3260566" visible="True" isExpanded="true" title="Ember+ Sharp Library">
+    <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" title="Lawo.EmberPlusSharp.Model Namespace Tutorial">
+      <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Page 1: Prerequisites" />
+      <Topic id="50028a38-6bef-4010-8e08-23fc3d5ae501" visible="True" title="Page 2: Introduction" />
+      <Topic id="c319e2c2-fa9a-4ad5-bc4f-74a85a91eb78" visible="True" isExpanded="true" title="Page 3: Dynamic Interface">
+        <Topic id="f6285c3c-ef54-453e-90ad-5546ec1a7a1d" visible="True" title="Page 4: Create a Local Copy of the Provider Database" />
+        <Topic id="e0972d29-96f3-4dea-936b-f77001d077b1" visible="True" title="Page 5: Iterate over the Local Database" />
+        <Topic id="7cdb703a-14dd-42d3-8ea2-28a9b8af6663" visible="True" title="Page 6: React to Changes" />
+        <Topic id="84d499e7-ec08-4311-8038-987c167eaa43" visible="True" title="Page 7: Send Local Changes to the Provider" />
+        <Topic id="df1c42d3-bc00-4786-88d6-2372b281043a" visible="True" title="Page 8: Handle Communication Errors" />
+      </Topic>
+      <Topic id="06184592-a364-4e11-9721-551b6316ffc1" visible="True" isExpanded="true" title="Page 9: Static Interface">
+        <Topic id="0957f1fa-abf4-4fb8-9430-1230ce2c6947" visible="True" title="Page 10: Iterate over the Local Database" />
+        <Topic id="945c7c21-060f-4fb9-9cbd-842f0e031472" visible="True" title="Page 11: React to Changes" />
+        <Topic id="e3a579ce-d73e-459b-ab70-48b79cc9e0c8" visible="True" title="Page 12: Send Local Changes to the Provider" />
+        <Topic id="86ad72ee-d788-4511-9608-c27e29445f96" visible="True" title="Page 13: Unbounded Nodes" />
+        <Topic id="15613e0f-7337-4a90-b538-1c402b4f8ad7" visible="True" title="Page 14: Optional Elements" />
+        <Topic id="3d672617-cf26-40a0-bae0-9b3df394cf0e" visible="True" title="Page 15: Nullable Parameters" />
+      </Topic>
+      <Topic id="100750a0-fa84-4a68-874d-5e313eb83c9b" visible="True" isExpanded="true" title="Page 16: Mixed Interface">
+        <Topic id="56add6fd-a91e-4e3e-a02e-e3e70d4958aa" visible="True" title="Page 17: Iterate over the Local Database" />
+        <Topic id="881824cc-edf4-4007-b30c-cb460d2dcf97" visible="True" title="Page 18: Send Local Changes to the Provider" />
+      </Topic>
+    </Topic>
+    <Topic id="57f78c21-7c7b-4c7f-9035-70774e053625" visible="True" title="Lawo.EmberPlusSharp.Ember Namespace Tutorial" />
+    <Topic id="aad74cef-7ff7-47c7-9086-76d8c3d9415c" visible="True" title="Lawo.EmberPlusSharp.S101 Namespace Tutorial" />
+    <Topic id="fa86e52c-0fb0-4acb-9b55-fb689eb5f17c" visible="True" isExpanded="true" apiParentMode="InsertAfter" title="Lawo.ComponentModel Namespace Tutorial">
+      <Topic id="1bb898de-b98c-4b38-958a-1368c2ffebd0" visible="True" title="Data Synchronization" />
+      <Topic id="d640f3f7-b516-4428-8ceb-d7a9a703babd" visible="True" isExpanded="true" title="Example">
+        <Topic id="bbf1edda-4568-4afa-b5c6-27bb3e76aa5e" visible="True" title="Model" />
+        <Topic id="a8575c94-9500-4717-b35b-cd2f5eff1a4e" visible="True" isExpanded="true" title="ViewModel">
+          <Topic id="48ea11d2-ae3a-4fb7-9baf-1612d57d3f97" visible="True" title="Members" />
+          <Topic id="76a6666d-9320-449b-8b85-1efbf4df4709" visible="True" title="Change Notification" />
+          <Topic id="5ab5798e-fc1a-4c8d-999c-d19329329614" visible="True" title="Binding to Model Data" />
+        </Topic>
+        <Topic id="3cb24140-51e8-496c-966c-e556f0418e85" visible="True" isExpanded="true" title="View">
+          <Topic id="f7165a59-bc56-4571-8dcb-79b4161ceb01" visible="True" title="Binding to ViewModel Data" />
+          <Topic id="ac9ad3f4-2105-45ee-8dbf-c60bcfe85227" visible="True" title="Calling ViewModel Methods" />
+        </Topic>
+      </Topic>
+    </Topic>
+    <Topic id="c17ed1f5-6b3d-40f5-af29-b1d031ae24cd" visible="True" isExpanded="true" title="Rationale">
+      <Topic id="2733eaf4-84f9-496d-afa2-bd6d3ab0f291" visible="True" title="Performance Comparison" />
+    </Topic>
+  </Topic>
+  <Topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" visible="True" title="Ember+ Sharp Tools" />
+</Topics>
