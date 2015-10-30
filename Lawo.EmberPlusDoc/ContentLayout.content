@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" title="Welcome to the Ember+ Sharp Project" />
+  <Topic id="046877b5-3e57-48ca-8868-7885de0e3842" visible="True" isDefault="true" isSelected="true" title="Welcome to the Ember+ Sharp Project" />
   <Topic id="915a270d-2a20-432f-9531-ce6aa3260566" visible="True" isExpanded="true" title="Ember+ Sharp Library">
     <Topic id="427fadff-8d32-472e-83d1-3ceaf705ae51" visible="True" title="Lawo.EmberPlus.Model Namespace Tutorial">
       <Topic id="5b9afbff-f6fc-4870-892f-6d6b76f85c67" visible="True" title="Page 1: Prerequisites" />
@@ -38,7 +38,7 @@
         </Topic>
         <Topic id="3cb24140-51e8-496c-966c-e556f0418e85" visible="True" isExpanded="true" title="View">
           <Topic id="f7165a59-bc56-4571-8dcb-79b4161ceb01" visible="True" title="Binding to ViewModel Data" />
-          <Topic id="ac9ad3f4-2105-45ee-8dbf-c60bcfe85227" visible="True" isSelected="true" title="Calling ViewModel Methods" />
+          <Topic id="ac9ad3f4-2105-45ee-8dbf-c60bcfe85227" visible="True" title="Calling ViewModel Methods" />
         </Topic>
       </Topic>
     </Topic>
@@ -47,6 +47,4 @@
     </Topic>
   </Topic>
   <Topic id="4afc50e6-0e92-4bf2-b7e2-4e8bb55dfc2d" visible="True" title="Ember+ Sharp Tools" />
-  <Topic id="b8313245-587c-4147-91e6-0accaccb2a77" visible="True" title="Future Directions" />
-  <Topic id="358ebb3d-e950-4b89-b711-0571c6fbc03f" visible="True" title="Known Issues and Limitations" />
 </Topics>

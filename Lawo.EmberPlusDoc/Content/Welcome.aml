@@ -69,8 +69,31 @@
         </list>
       </content>
     </section>
-    <section address="Feedback">
-      <title>Feedback</title>
+    <section address="FutureDirections">
+      <title>Future Directions</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Short to Medium Term</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/issues?q=is%3Aopen+is%3Aissue+milestone%3A*</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              <externalLink>
+                <linkText>Long Term</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/issues?q=is%3Aopen+is%3Aissue+no%3Amilestone</linkUri>
+              </externalLink>
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="KnownIssuesFeedback">
+      <title>Known Issues / Feedback</title>
       <content>
         <para>
           Please use the
@@ -78,7 +101,7 @@
             <linkText>issue tracker</linkText>
             <linkUri>https://github.com/Lawo/ember-plus-sharp/issues</linkUri>
           </externalLink>
-          to suggest a feature, file a bug or ask a question.
+          to browse the known issues, suggest a feature, file a bug or ask a question.
         </para>
       </content>
     </section>

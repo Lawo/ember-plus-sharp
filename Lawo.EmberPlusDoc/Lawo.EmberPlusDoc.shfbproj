@@ -134,8 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bibliography.xml" />
-    <None Include="Content\FutureDirections.aml" />
-    <None Include="Content\KnownIssues.aml" />
     <None Include="Content\Library\ComponentModelNamespace\ComponentModelNamespace.aml" />
     <None Include="Content\Library\ComponentModelNamespace\DataSynchronization.aml" />
     <None Include="Content\Library\ComponentModelNamespace\Example\Example.aml" />
