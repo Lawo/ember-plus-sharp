@@ -24,12 +24,21 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <!-- #region PrimitivePropertyBinding -->
-                <Label Grid.Row="0" Grid.Column="0">Connection Count:</Label>
-                <TextBox Grid.Row="0" Grid.Column="2" IsReadOnly="True" Text="{Binding ConnectionCount, Mode=OneWay}"/>
+                <Label Grid.Row="0" Grid.Column="0">Connection Attempts:</Label>
+                <TextBox
+                    Grid.Row="0" Grid.Column="2" IsReadOnly="True"
+                    ToolTip="The number of connection attempts made since the proxy was started."
+                    Text="{Binding ConnectionCount, Mode=OneWay}"/>
                 <Label Grid.Row="2" Grid.Column="0">Bytes Received:</Label>
-                <TextBox Grid.Row="2" Grid.Column="2" IsReadOnly="True" Text="{Binding BytesReceived, Mode=OneWay}"/>
+                <TextBox
+                    Grid.Row="2" Grid.Column="2" IsReadOnly="True"
+                    ToolTip="The number of bytes the proxy has received through the current connection."
+                    Text="{Binding BytesReceived, Mode=OneWay}"/>
                 <Label Grid.Row="4" Grid.Column="0">Seconds Since Last Byte:</Label>
-                <TextBox Grid.Row="4" Grid.Column="2" IsReadOnly="True" Text="{Binding SecondsSinceLastReceived, Mode=OneWay}"/>
+                <TextBox
+                    Grid.Row="4" Grid.Column="2" IsReadOnly="True"
+                    ToolTip="The number of seconds that have passed since the proxy has received the last byte."
+                    Text="{Binding SecondsSinceLastReceived, Mode=OneWay}"/>
                 <!-- #endregion -->
             </Grid>
         </GroupBox>

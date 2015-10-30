@@ -90,12 +90,12 @@
                 <Label Grid.Row="4" Grid.Column="0">Provider Port:</Label>
                 <TextBox
                     Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
-                    ToolTip="The port on which the Ember+ provider listens for consumer connection requests."
+                    ToolTip="The port on which the Ember+ provider listens for connection requests."
                     ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderPort, ValidatesOnDataErrors=True}"/>
                 <Label Grid.Row="6" Grid.Column="0">Log Folder:</Label>
                 <TextBox
                     Grid.Row="6" Grid.Column="2"
-                    ToolTip="The folder into which the log files are written.&#x0d;&#x0a;A new log file is created whenever the consumer successfully establishes a TCP/IP connection with this proxy."
+                    ToolTip="The folder into which the log files are written.&#x0d;&#x0a;A new log file is created whenever a consumer attempts to establish a TCP/IP connection with this proxy."
                     Text="{Binding LogFolder, ValidatesOnDataErrors=True}"/>
                 <Button
                     Grid.Row="6" Grid.Column="3" Style="{StaticResource TrippleDotButtonStyle}"
