@@ -49,24 +49,13 @@
     <section address="Releases">
       <title>Releases</title>
       <content>
-        <list class="bullet">
-          <listItem>
-            <para>
-              <externalLink>
-                <linkText>Latest</linkText>
-                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases/latest</linkUri>
-              </externalLink>
-            </para>
-          </listItem>
-          <listItem>
-            <para>
-              <externalLink>
-                <linkText>v0.0.0.1 (the release this documentation refers to)</linkText>
-                <linkUri>https://github.com/Lawo/ember-plus-sharp/releases/tag/v0.0.0.1</linkUri>
-              </externalLink>
-            </para>
-          </listItem>
-        </list>
+        <para>
+          Please refer to the
+          <externalLink>
+            <linkText>list of releases on GitHub</linkText>
+            <linkUri>https://github.com/Lawo/ember-plus-sharp/releases</linkUri>
+          </externalLink>.
+        </para>
       </content>
     </section>
     <section address="FutureDirections">
@@ -98,7 +87,7 @@
         <para>
           Please use the
           <externalLink>
-            <linkText>issue tracker</linkText>
+            <linkText>GitHub issue tracker</linkText>
             <linkUri>https://github.com/Lawo/ember-plus-sharp/issues</linkUri>
           </externalLink>
           to browse the known issues, suggest a feature, file a bug or ask a question.

@@ -248,7 +248,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <item>Client code has called <see cref="Dispose"/>.</item>
         /// </list>
         /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
-        /// For the the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
+        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
         /// </remarks>
         public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
 
