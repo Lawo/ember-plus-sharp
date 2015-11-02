@@ -58,6 +58,19 @@
         </para>
       </content>
     </section>
+    <section address="KnownIssuesFeedback">
+      <title>Known Issues / Feedback</title>
+      <content>
+        <para>
+          Please use the
+          <externalLink>
+            <linkText>GitHub issue tracker</linkText>
+            <linkUri>https://github.com/Lawo/ember-plus-sharp/issues</linkUri>
+          </externalLink>
+          to browse the known issues, suggest a feature, file a bug or ask a question.
+        </para>
+      </content>
+    </section>
     <section address="FutureDirections">
       <title>Future Directions</title>
       <content>
@@ -79,19 +92,6 @@
             </para>
           </listItem>
         </list>
-      </content>
-    </section>
-    <section address="KnownIssuesFeedback">
-      <title>Known Issues / Feedback</title>
-      <content>
-        <para>
-          Please use the
-          <externalLink>
-            <linkText>GitHub issue tracker</linkText>
-            <linkUri>https://github.com/Lawo/ember-plus-sharp/issues</linkUri>
-          </externalLink>
-          to browse the known issues, suggest a feature, file a bug or ask a question.
-        </para>
       </content>
     </section>
     <bibliography/>
