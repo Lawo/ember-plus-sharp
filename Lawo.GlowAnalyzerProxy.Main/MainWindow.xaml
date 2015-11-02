@@ -18,6 +18,8 @@
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+            <Setter Property="ToolTipService.ShowDuration" Value="10000"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="ToolTip">
@@ -32,6 +34,7 @@
         </Style>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="15,1,15,1"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
         </Style>
         <Style x:Key="TrippleDotButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="5,0,5,0"/>
@@ -79,19 +82,18 @@
                 <TextBox
                     Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
                     ToolTip="The port on which this proxy listens for a connection request from the Ember+ consumer."
-                    ToolTipService.ShowOnDisabled="True" Text="{Binding ListeningPort, ValidatesOnDataErrors=True}"/>
+                    Text="{Binding ListeningPort, ValidatesOnDataErrors=True}"/>
                 <Label Grid.Row="2" Grid.Column="0">Provider Host Name:</Label>
                 <!-- #region PrimitivePropertyBinding -->
                 <TextBox
                     Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
-                    ToolTip="The host name or IP address of the Ember+ provider."
-                    ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderHostName}"/>
+                    ToolTip="The host name or IP address of the Ember+ provider." Text="{Binding ProviderHostName}"/>
                 <!-- #endregion -->
                 <Label Grid.Row="4" Grid.Column="0">Provider Port:</Label>
                 <TextBox
                     Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="{Binding CanEditSettings}"
                     ToolTip="The port on which the Ember+ provider listens for connection requests."
-                    ToolTipService.ShowOnDisabled="True" Text="{Binding ProviderPort, ValidatesOnDataErrors=True}"/>
+                    Text="{Binding ProviderPort, ValidatesOnDataErrors=True}"/>
                 <Label Grid.Row="6" Grid.Column="0">Log Folder:</Label>
                 <TextBox
                     Grid.Row="6" Grid.Column="2" IsEnabled="{Binding CanEditSettings}"
@@ -114,8 +116,7 @@
             </Grid.ColumnDefinitions>
             <!-- #region CallViewModelMethod -->
             <Button
-                Grid.Column="0" IsEnabled="{Binding CanStart}" ToolTip="Start the proxy."
-                ToolTipService.ShowOnDisabled="True" Content="Start">
+                Grid.Column="0" IsEnabled="{Binding CanStart}" ToolTip="Start the proxy." Content="Start">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ie:CallMethodAction TargetObject="{Binding}" MethodName="Start"/>
@@ -123,9 +124,7 @@
                 </i:Interaction.Triggers>
             </Button>
             <!-- #endregion -->
-            <Button
-                Grid.Column="2" IsEnabled="{Binding CanStop}" ToolTip="Stop the proxy."
-                ToolTipService.ShowOnDisabled="True" Content="Stop">
+            <Button Grid.Column="2" IsEnabled="{Binding CanStop}" ToolTip="Stop the proxy." Content="Stop">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ie:CallMethodAction TargetObject="{Binding}" MethodName="Stop"/>
