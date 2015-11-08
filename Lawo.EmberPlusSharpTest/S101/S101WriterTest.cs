@@ -229,7 +229,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Task<byte> WaitForOutOfFrameByte(S101Reader reader)
+        private static Task<byte> WaitForOutOfFrameByte(S101Reader reader)
         {
             var resultSource = new TaskCompletionSource<byte>();
             EventHandler<OutOfFrameByteReceivedEventArgs> handler = null;
