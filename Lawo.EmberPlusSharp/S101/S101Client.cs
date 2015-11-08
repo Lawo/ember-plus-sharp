@@ -228,9 +228,9 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Sends <paramref name="value"/> as an out-of-frame byte.</summary>
         /// <param name="value">The byte to write.</param>
         /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
-        public Task SendOutOfFrameByte(byte value)
+        public Task SendOutOfFrameByteAsync(byte value)
         {
-            return this.writer.WriteOutOfFrameByte(value, this.source.Token);
+            return this.SendOutOfFrameByteAsyncCore(value);
         }
 
         /// <summary>See <see cref="IDisposable.Dispose"/>.</summary>
@@ -392,6 +392,11 @@ namespace Lawo.EmberPlusSharp.S101
                 });
         }
 
+        private Task SendOutOfFrameByteAsyncCore(byte value)
+        {
+            return this.writer.WriteOutOfFrameByteAsync(value, this.source.Token);
+        }
+
         private async Task<bool> ReadWithTimeoutAsync(
             IDisposable connection, S101Reader reader, Task cancellationFailed)
         {
@@ -472,7 +477,8 @@ namespace Lawo.EmberPlusSharp.S101
             if (message.Command is EmberData)
             {
                 this.OnEvent(
-                    this.EmberDataReceived, new MessageReceivedEventArgs(message, payload, reader.IsAnotherMessageAvailable));
+                    this.EmberDataReceived,
+                    new MessageReceivedEventArgs(message, payload, reader.IsAnotherMessageAvailable));
             }
             else if (message.Command is KeepAliveRequest)
             {

@@ -67,14 +67,14 @@ namespace Lawo.EmberPlusSharp.S101
 
                         try
                         {
-                            await writer.WriteOutOfFrameByte(first, CancellationToken.None);
+                            await writer.WriteOutOfFrameByteAsync(first, CancellationToken.None);
                             await writer.WriteMessageAsync(KeepAliveRequestMessage, CancellationToken.None);
-                            await writer.WriteOutOfFrameByte(second, CancellationToken.None);
+                            await writer.WriteOutOfFrameByteAsync(second, CancellationToken.None);
 
                             using (var encodingStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
                             {
                                 await encodingStream.WriteAsync(prefix, 0, prefix.Length, CancellationToken.None);
-                                await writer.WriteOutOfFrameByte(third, CancellationToken.None);
+                                await writer.WriteOutOfFrameByteAsync(third, CancellationToken.None);
                                 await encodingStream.WriteAsync(postfix, 0, postfix.Length, CancellationToken.None);
                                 await encodingStream.DisposeAsync(CancellationToken.None);
                             }

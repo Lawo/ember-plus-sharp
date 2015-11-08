@@ -95,9 +95,9 @@ namespace Lawo.EmberPlusSharp.S101
         /// <param name="value">The byte to write.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
-        public Task WriteOutOfFrameByte(byte value, CancellationToken cancellationToken)
+        public Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
         {
-            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteCore(value, cancellationToken));
+            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteAsyncCore(value, cancellationToken));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,7 +145,7 @@ namespace Lawo.EmberPlusSharp.S101
             return this.stream;
         }
 
-        private async Task WriteOutOfFrameByteCore(byte value, CancellationToken cancellationToken)
+        private async Task WriteOutOfFrameByteAsyncCore(byte value, CancellationToken cancellationToken)
         {
             this.AssertNotDisposed();
 

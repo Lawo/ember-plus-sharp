@@ -126,7 +126,7 @@ namespace Lawo.EmberPlusSharp.S101
                     provider.OutOfFrameByteReceived += outOfFrameByteHandler;
                     await consumer.SendMessageAsync(new S101Message(slot, EmberDataCommand), data);
                     await emberDataReceived.Task;
-                    await consumer.SendOutOfFrameByte(outOfFrameByte);
+                    await consumer.SendOutOfFrameByteAsync(outOfFrameByte);
                     await outOfFrameByteReceived.Task;
                     provider.OutOfFrameByteReceived -= outOfFrameByteHandler;
                     provider.EmberDataReceived -= emberDataHandler;
@@ -207,7 +207,7 @@ namespace Lawo.EmberPlusSharp.S101
                             await AssertThrowAsync<ArgumentNullException>(
                                 () => client.SendMessageAsync(null));
                             await AssertThrowAsync<ArgumentException>(() => client.SendMessageAsync(EmberDataMessage));
-                            await AssertThrowAsync<ArgumentException>(() => client.SendOutOfFrameByte(0xFE));
+                            await AssertThrowAsync<ArgumentException>(() => client.SendOutOfFrameByteAsync(0xFE));
 
                             client.Dispose();
                             await AssertThrowAsync<ObjectDisposedException>(
