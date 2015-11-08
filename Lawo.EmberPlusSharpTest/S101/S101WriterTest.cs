@@ -54,24 +54,27 @@ namespace Lawo.EmberPlusSharp.S101
             AsyncPump.Run(
                 async () =>
                 {
+                    var first = GetRandomByteExcept(0xFE);
+                    var second = GetRandomByteExcept(0xFE);
+
+                    var prefix = new[] { GetRandomByteExcept() };
+                    var third = GetRandomByteExcept(0xFE);
+                    var postfix = new[] { GetRandomByteExcept() };
+
                     using (var asyncStream = new MemoryStream())
                     {
                         var writer = new S101Writer(asyncStream.WriteAsync);
 
                         try
                         {
-                            await writer.WriteMessageAsync(
-                                new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None);
-                            await writer.WriteOutOfFrameByte((byte)this.Random.Next(0xFE), CancellationToken.None);
-                            await writer.WriteMessageAsync(
-                                new S101Message(0x00, new KeepAliveResponse()), CancellationToken.None);
+                            await writer.WriteOutOfFrameByte(first, CancellationToken.None);
+                            await writer.WriteMessageAsync(KeepAliveRequestMessage, CancellationToken.None);
+                            await writer.WriteOutOfFrameByte(second, CancellationToken.None);
 
                             using (var encodingStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
                             {
-                                var prefix = new byte[] { 0x42 };
-                                var postfix = new byte[] { 0x43 };
                                 await encodingStream.WriteAsync(prefix, 0, prefix.Length, CancellationToken.None);
-                                await writer.WriteOutOfFrameByte(0xEE, CancellationToken.None);
+                                await writer.WriteOutOfFrameByte(third, CancellationToken.None);
                                 await encodingStream.WriteAsync(postfix, 0, postfix.Length, CancellationToken.None);
                                 await encodingStream.DisposeAsync(CancellationToken.None);
                             }
@@ -81,9 +84,30 @@ namespace Lawo.EmberPlusSharp.S101
                             await writer.DisposeAsync(CancellationToken.None);
                         }
 
-                        var stringBytes =
-                            asyncStream.ToArray().Select(b => b.ToString("X2", CultureInfo.InvariantCulture));
-                        var result = string.Join(", ", stringBytes).ToUpperInvariant();
+                        asyncStream.Position = 0;
+                        var reader = new S101Reader(asyncStream.ReadAsync);
+                        var firstTask = WaitForOutOfFrameByte(reader);
+                        Assert.IsTrue(await reader.ReadAsync(CancellationToken.None));
+                        Assert.AreEqual(0x00, reader.Message.Slot);
+                        Assert.IsInstanceOfType(reader.Message.Command, typeof(KeepAliveRequest));
+                        Assert.AreEqual(first, await firstTask);
+                        var secondTask = WaitForOutOfFrameByte(reader);
+                        Assert.IsTrue(await reader.ReadAsync(CancellationToken.None));
+                        Assert.AreEqual(0x00, reader.Message.Slot);
+                        Assert.IsInstanceOfType(reader.Message.Command, typeof(EmberData));
+                        Assert.AreEqual(second, await secondTask);
+                        var thirdTask = WaitForOutOfFrameByte(reader);
+
+                        using (var payloadStream = new MemoryStream())
+                        {
+                            await reader.Payload.CopyToAsync(payloadStream);
+                            var payload = payloadStream.ToArray();
+                            Assert.AreEqual(2, payload.Length);
+                            Assert.AreEqual(prefix.Single(), payload[0]);
+                            Assert.AreEqual(postfix.Single(), payload[1]);
+                        }
+
+                        Assert.AreEqual(third, await thirdTask);
                     }
                 });
         }
@@ -190,20 +214,35 @@ namespace Lawo.EmberPlusSharp.S101
                             () => stream.Position = 0,
                             () => stream.Seek(0, SeekOrigin.Begin));
 
-                        await AssertThrowAsync<InvalidOperationException>(
-                            () => writer.WriteMessageAsync(new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
+                        await AssertThrowAsync<InvalidOperationException>(() => writer.WriteMessageAsync(
+                            new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
                         await stream.DisposeAsync(CancellationToken.None);
                         await AssertThrowAsync<ObjectDisposedException>(
                             () => stream.WriteAsync(new byte[] { 2 }, 0, 1, CancellationToken.None));
                     }
 
                     await writer.DisposeAsync(CancellationToken.None);
-                    await AssertThrowAsync<ObjectDisposedException>(
-                        () => writer.WriteMessageAsync(new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
+                    await AssertThrowAsync<ObjectDisposedException>(() => writer.WriteMessageAsync(
+                        new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
                 });
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private Task<byte> WaitForOutOfFrameByte(S101Reader reader)
+        {
+            var resultSource = new TaskCompletionSource<byte>();
+            EventHandler<OutOfFrameByteReceivedEventArgs> handler = null;
+
+            handler = (s, e) =>
+            {
+                reader.OutOfFrameByteReceived -= handler;
+                resultSource.SetResult(e.Value);
+            };
+
+            reader.OutOfFrameByteReceived += handler;
+            return resultSource.Task;
+        }
 
         private static async Task<byte[]> Encode(S101Message message, byte[] payload = null)
         {

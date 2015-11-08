@@ -238,18 +238,5 @@ namespace Lawo.EmberPlusSharp.S101
                 null,
                 null));
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private byte GetRandomByteExcept(params byte[] exceptions)
-        {
-            byte result;
-
-            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
-            {
-            }
-
-            return result;
-        }
     }
 }

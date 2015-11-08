@@ -9,6 +9,7 @@ namespace Lawo.EmberPlusSharp.S101
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Net.Sockets;
     using System.Reflection;
@@ -26,6 +27,8 @@ namespace Lawo.EmberPlusSharp.S101
     {
         private static readonly EmberData EmberDataCommandField = new EmberData(0x01, 0x0A, 0x02);
         private static readonly S101Message EmberDataMessageField = new S101Message(0x00, EmberDataCommandField);
+        private static readonly S101Message KeepAliveRequestMessageField = new S101Message(0x00, new KeepAliveRequest());
+        private static readonly S101Message KeepAliveResponseMessageField = new S101Message(0x00, new KeepAliveResponse());
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,6 +48,18 @@ namespace Lawo.EmberPlusSharp.S101
         protected static S101Message EmberDataMessage
         {
             get { return EmberDataMessageField; }
+        }
+
+        /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="KeepAliveRequest"/> command.</summary>
+        protected static S101Message KeepAliveRequestMessage
+        {
+            get { return KeepAliveRequestMessageField; }
+        }
+
+        /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="KeepAliveResponse"/> command.</summary>
+        protected static S101Message KeepAliveResponseMessage
+        {
+            get { return KeepAliveResponseMessageField; }
         }
 
         /// <summary>Uses <see cref="S101Robot"/> to simulate a provider communicating with the <see cref="S101Client"/>
@@ -230,6 +245,19 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             await waitForConnectionLost;
+        }
+
+        /// <summary>Gets a random byte that is guaranteed to not be equal to any of the elements in
+        /// <paramref name="exceptions"/>.</summary>
+        protected byte GetRandomByteExcept(params byte[] exceptions)
+        {
+            byte result;
+
+            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
+            {
+            }
+
+            return result;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
