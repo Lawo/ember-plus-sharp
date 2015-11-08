@@ -10,9 +10,10 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Globalization;
     using System.IO;
     using System.Xml;
-    using Lawo.EmberPlusSharp.Glow;
-    using Lawo.UnitTesting;
+    using Ember;
+    using Glow;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="S101Logger"/>.</summary>
     [TestClass]
@@ -28,7 +29,8 @@ namespace Lawo.EmberPlusSharp.S101
                 AssertThrow<ArgumentNullException>(
                     () => new S101Logger(null, writer).Dispose(),
                     () => new S101Logger(GlowTypes.Instance, (TextWriter)null).Dispose(),
-                    () => new S101Logger(GlowTypes.Instance, (XmlWriter)null).Dispose());
+                    () => new S101Logger(GlowTypes.Instance, (XmlWriter)null).Dispose(),
+                    () => new S101Logger((IEmberConverter)null, XmlWriter.Create(writer)).Dispose());
 
                 using (var logger = new S101Logger(GlowTypes.Instance, writer))
                 {

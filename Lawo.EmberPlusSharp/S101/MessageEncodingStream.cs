@@ -42,12 +42,11 @@ namespace Lawo.EmberPlusSharp.S101
                 {
                     if (this.message.CanHaveMultiplePackets)
                     {
-                        await this.CreateFramingStreamAsync(
+                        await this.DisposeAndCreateFramingStreamAsync(
                             PacketFlags.EmptyPacket | PacketFlags.LastPacket, cancellationToken);
                     }
 
-                    await this.unframedBuffer.FlushAsync(cancellationToken);
-                    await this.framingStream.DisposeAsync(cancellationToken);
+                    await this.DisposeFramingStream(cancellationToken);
                     await this.rawBuffer.FlushAsync(cancellationToken);
                     await base.DisposeAsync(cancellationToken);
                 }
@@ -73,7 +72,7 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 if (this.framingStream.TotalCount >= MaxFrameLength)
                 {
-                    await this.CreateFramingStreamAsync(PacketFlags.None, cancellationToken);
+                    await this.DisposeAndCreateFramingStreamAsync(PacketFlags.None, cancellationToken);
                 }
 
                 var countToWrite = Math.Min(count, MaxFrameLength - this.framingStream.TotalCount);
@@ -91,6 +90,14 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        internal async Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
+        {
+            await this.DisposeFramingStream(cancellationToken);
+            await this.rawBuffer.ReserveAsync(1, cancellationToken);
+            this.rawBuffer[this.rawBuffer.Count++] = value;
+            await this.CreateFramingStream(PacketFlags.None, cancellationToken);
+        }
 
         internal static async Task<MessageEncodingStream> CreateAsync(
             WriteBuffer rawBuffer, S101Message message, CancellationToken cancellationToken)
@@ -114,10 +121,20 @@ namespace Lawo.EmberPlusSharp.S101
             this.message = message;
         }
 
-        private async Task CreateFramingStreamAsync(PacketFlags packetFlags, CancellationToken cancellationToken)
+        private async Task DisposeAndCreateFramingStreamAsync(PacketFlags packetFlags, CancellationToken cancellationToken)
+        {
+            await DisposeFramingStream(cancellationToken);
+            await CreateFramingStream(packetFlags, cancellationToken);
+        }
+
+        private async Task DisposeFramingStream(CancellationToken cancellationToken)
         {
             await this.unframedBuffer.FlushAsync(cancellationToken);
             await this.framingStream.DisposeAsync(cancellationToken);
+        }
+
+        private async Task CreateFramingStream(PacketFlags packetFlags, CancellationToken cancellationToken)
+        {
             this.framingStream = await FramingStream.CreateAsync(this.rawBuffer, cancellationToken);
             this.message.PacketFlags = packetFlags;
             await this.message.WriteToAsync(this.unframedBuffer, cancellationToken);

@@ -7,6 +7,7 @@
 namespace Lawo.EmberPlusSharp.S101
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
@@ -90,6 +91,15 @@ namespace Lawo.EmberPlusSharp.S101
             return this.taskSingleton.Execute(() => this.WriteMessageCoreAsync(message, cancellationToken));
         }
 
+        /// <summary>Writes <paramref name="value"/> as an out-of-frame byte.</summary>
+        /// <param name="value">The byte to write.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+        /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
+        public Task WriteOutOfFrameByte(byte value, CancellationToken cancellationToken)
+        {
+            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteCore(value, cancellationToken));
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private async Task DisposeCoreAsync(CancellationToken cancellationToken)
@@ -133,6 +143,29 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             return this.stream;
+        }
+
+        private async Task WriteOutOfFrameByteCore(byte value, CancellationToken cancellationToken)
+        {
+            this.AssertNotDisposed();
+
+            if (value == Frame.BeginOfFrame)
+            {
+                var message = string.Format(
+                    CultureInfo.InvariantCulture, "A value not equal to {0:X2} is required.", Frame.BeginOfFrame);
+                throw new ArgumentException(message, "value");
+            }
+
+            if ((this.stream == null) || !this.stream.CanWrite)
+            {
+                await this.writeBuffer.ReserveAsync(1, cancellationToken);
+                this.writeBuffer[this.writeBuffer.Count++] = value;
+                await this.writeBuffer.FlushAsync(cancellationToken);
+            }
+            else
+            {
+                await this.stream.WriteOutOfFrameByteAsync(value, cancellationToken);
+            }
         }
 
         private void AssertNotDisposed()

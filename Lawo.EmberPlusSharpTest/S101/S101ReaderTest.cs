@@ -85,8 +85,6 @@ namespace Lawo.EmberPlusSharp.S101
                             () => reader.Message.ToString(), () => reader.Payload.ToString());
                     }
 
-                    await AssertS101Exception("Unexpected byte while looking for BOF.", GetRandomByteExcept(0xFE));
-
                     await AssertS101Exception("CRC failed.", 0xFE, 0xFF);
                     await AssertS101Exception("Invalid byte in frame.", 0xFE, 0xFE);
 
@@ -159,17 +157,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private byte GetRandomByteExcept(params byte[] exceptions)
-        {
-            byte result;
-
-            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
-            {
-            }
-
-            return result;
-        }
 
         private static async Task AssertDecode<TCommand>(byte[] bytes, byte[] expectedPayload = null, byte slot = 0x00)
             where TCommand : S101Command

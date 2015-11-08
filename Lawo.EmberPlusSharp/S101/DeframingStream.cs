@@ -6,6 +6,7 @@
 
 namespace Lawo.EmberPlusSharp.S101
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
@@ -19,6 +20,7 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class DeframingStream : BufferStream
     {
+        private readonly Action<byte> outOfFrameByteReceived;
         private State state;
         private ushort crc = 0xFFFF;
         private readonly Queue<byte> decodedQueue = new Queue<byte>();
@@ -55,8 +57,9 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="DeframingStream"/> class.</summary>
-        internal DeframingStream(ReadBuffer readBuffer) : base(readBuffer, null)
+        internal DeframingStream(ReadBuffer readBuffer, Action<byte> outOfFrameByteReceived) : base(readBuffer, null)
         {
+            this.outOfFrameByteReceived = outOfFrameByteReceived;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,13 +71,15 @@ namespace Lawo.EmberPlusSharp.S101
             switch (this.state)
             {
                 case State.BeforeFrame:
-                    if (currentByte != Frame.BeginOfFrame)
+                    if (currentByte == Frame.BeginOfFrame)
                     {
-                        this.state = State.AfterFrame;
-                        throw new S101Exception("Unexpected byte while looking for BOF.");
+                        this.state = State.InFrame;
+                    }
+                    else
+                    {
+                        this.outOfFrameByteReceived(currentByte);
                     }
 
-                    this.state = State.InFrame;
                     break;
                 case State.InFrame:
                     if (currentByte < Frame.InvalidStart)

@@ -29,7 +29,8 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="S101Reader"/> class by calling
-        /// <see cref="S101Reader(ReadAsyncCallback, int)">S101Reader(<paramref name="readAsync"/>, 8192)</see>.</summary>
+        /// <see cref="S101Reader(ReadAsyncCallback, int)">S101Reader(<paramref name="readAsync"/>, 8192)</see>.
+        /// </summary>
         [CLSCompliant(false)]
         public S101Reader(ReadAsyncCallback readAsync) : this(readAsync, Constants.PhysicalStreamBufferSize)
         {
@@ -143,6 +144,9 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
+        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
+        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private async Task DisposeCoreAsync(CancellationToken cancellationToken)
@@ -171,8 +175,18 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             this.stream = await MessageDecodingStream.CreateAsync(
-                this.readBuffer, this.discardBuffer, cancellationToken);
+                this.readBuffer, this.discardBuffer, this.OnOutOfFrameByteReceived, cancellationToken);
             return this.stream.Message != null;
+        }
+
+        private void OnOutOfFrameByteReceived(byte value)
+        {
+            var handler = this.OutOfFrameByteReceived;
+
+            if (handler != null)
+            {
+                handler(this, new OutOfFrameByteReceivedEventArgs(value));
+            }
         }
 
         private void AssertNotDisposed()

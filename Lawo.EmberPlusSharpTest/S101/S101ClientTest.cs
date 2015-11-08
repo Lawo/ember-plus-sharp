@@ -8,6 +8,7 @@ namespace Lawo.EmberPlusSharp.S101
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Net.Sockets;
     using System.Threading;
     using System.Threading.Tasks;
@@ -102,20 +103,33 @@ namespace Lawo.EmberPlusSharp.S101
                     var data = new byte[this.Random.Next(512, 16384)];
                     this.Random.NextBytes(data);
 
-                    var received = new TaskCompletionSource<bool>();
-                    EventHandler<MessageReceivedEventArgs> handler =
+                    var emberDataReceived = new TaskCompletionSource<bool>();
+                    EventHandler<MessageReceivedEventArgs> emberDataHandler =
                         (s, e) =>
                         {
                             Assert.AreEqual(slot, e.Message.Slot);
                             Assert.IsInstanceOfType(e.Message.Command, typeof(EmberData));
                             CollectionAssert.AreEqual(data, e.GetPayload());
-                            received.SetResult(true);
+                            emberDataReceived.SetResult(true);
                         };
 
-                    provider.EmberDataReceived += handler;
+                    var outOfFrameByte = GetRandomByteExcept(0xFE);
+                    var outOfFrameByteReceived = new TaskCompletionSource<bool>();
+                    EventHandler<OutOfFrameByteReceivedEventArgs> outOfFrameByteHandler =
+                        (s, e) =>
+                        {
+                            Assert.AreEqual(outOfFrameByte, e.Value);
+                            outOfFrameByteReceived.SetResult(true);
+                        };
+
+                    provider.EmberDataReceived += emberDataHandler;
+                    provider.OutOfFrameByteReceived += outOfFrameByteHandler;
                     await consumer.SendMessageAsync(new S101Message(slot, EmberDataCommand), data);
-                    await received.Task;
-                    provider.EmberDataReceived -= handler;
+                    await emberDataReceived.Task;
+                    await consumer.SendOutOfFrameByte(outOfFrameByte);
+                    await outOfFrameByteReceived.Task;
+                    provider.OutOfFrameByteReceived -= outOfFrameByteHandler;
+                    provider.EmberDataReceived -= emberDataHandler;
                 },
                 () => ConnectAsync(-1, null),
                 () => WaitForConnectionAsync(null)));
@@ -193,6 +207,7 @@ namespace Lawo.EmberPlusSharp.S101
                             await AssertThrowAsync<ArgumentNullException>(
                                 () => client.SendMessageAsync(null));
                             await AssertThrowAsync<ArgumentException>(() => client.SendMessageAsync(EmberDataMessage));
+                            await AssertThrowAsync<ArgumentException>(() => client.SendOutOfFrameByte(0xFE));
 
                             client.Dispose();
                             await AssertThrowAsync<ObjectDisposedException>(
@@ -222,6 +237,19 @@ namespace Lawo.EmberPlusSharp.S101
                 },
                 null,
                 null));
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private byte GetRandomByteExcept(params byte[] exceptions)
+        {
+            byte result;
+
+            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
+            {
+            }
+
+            return result;
         }
     }
 }

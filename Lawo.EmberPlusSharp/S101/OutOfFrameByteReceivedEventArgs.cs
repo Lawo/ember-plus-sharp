@@ -7,29 +7,27 @@
 namespace Lawo.EmberPlusSharp.S101
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>Provides information about a logged event.</summary>
+    /// <summary>Provides the data for the <see cref="S101Reader.OutOfFrameByteReceived"/> and
+    /// <see cref="S101Client.OutOfFrameByteReceived"/> events.</summary>
     /// <threadsafety static="true" instance="false"/>
-    [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "There's no point in comparing instances of this type.")]
-    public struct EventInfo
+    public sealed class OutOfFrameByteReceivedEventArgs : EventArgs
     {
-        /// <summary>Gets the time when the event was logged.</summary>
-        public DateTime? TimeUtc { get; }
-
-        /// <summary>Gets the number of the event.</summary>
-        public int? Number { get; }
+        private readonly byte value;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal EventInfo(DateTime? timeUtc) : this(timeUtc, null)
+        /// <summary>Gets the message.</summary>
+        public byte Value
         {
+            get { return this.value; }
         }
 
-        internal EventInfo(DateTime? timeUtc, int? number)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        internal OutOfFrameByteReceivedEventArgs(byte value)
         {
-            this.TimeUtc = timeUtc;
-            this.Number = number;
+            this.value = value;
         }
     }
 }

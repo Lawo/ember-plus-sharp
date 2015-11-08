@@ -179,6 +179,7 @@
     <Compile Include="S101\EventInfo.cs" />
     <Compile Include="S101\LogNames.cs" />
     <Compile Include="Glow\GlowLogConverter.cs" />
+    <Compile Include="S101\OutOfFrameByteReceivedEventArgs.cs" />
     <Compile Include="S101\S101Logger.cs" />
     <Compile Include="Model\Node.cs" />
     <Compile Include="Model\OctetstringParameter.cs" />

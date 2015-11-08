@@ -10,13 +10,13 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
-    using Lawo.Threading.Tasks;
-    using Lawo.UnitTesting;
+    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Threading.Tasks;
 
     /// <summary>Tests <see cref="MessageEncodingStream"/>.</summary>
     [TestClass]
@@ -43,6 +43,48 @@ namespace Lawo.EmberPlusSharp.S101
                             0xFE, 0x00, 0x0E, 0x00, 0x01, 0x60, 0x01, 0x02, 0x0a, 0x02, 0x13, 0x53, 0xFF
                         },
                         await Encode(EmberDataMessage, new byte[] { }));
+                });
+        }
+
+        /// <summary>Tests <see cref="S101Writer.WriteMessageAsync"/>.</summary>
+        [TestCategory("Unattended")]
+        [TestMethod]
+        public void OutOfFrameByteTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var asyncStream = new MemoryStream())
+                    {
+                        var writer = new S101Writer(asyncStream.WriteAsync);
+
+                        try
+                        {
+                            await writer.WriteMessageAsync(
+                                new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None);
+                            await writer.WriteOutOfFrameByte((byte)this.Random.Next(0xFE), CancellationToken.None);
+                            await writer.WriteMessageAsync(
+                                new S101Message(0x00, new KeepAliveResponse()), CancellationToken.None);
+
+                            using (var encodingStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
+                            {
+                                var prefix = new byte[] { 0x42 };
+                                var postfix = new byte[] { 0x43 };
+                                await encodingStream.WriteAsync(prefix, 0, prefix.Length, CancellationToken.None);
+                                await writer.WriteOutOfFrameByte(0xEE, CancellationToken.None);
+                                await encodingStream.WriteAsync(postfix, 0, postfix.Length, CancellationToken.None);
+                                await encodingStream.DisposeAsync(CancellationToken.None);
+                            }
+                        }
+                        finally
+                        {
+                            await writer.DisposeAsync(CancellationToken.None);
+                        }
+
+                        var stringBytes =
+                            asyncStream.ToArray().Select(b => b.ToString("X2", CultureInfo.InvariantCulture));
+                        var result = string.Join(", ", stringBytes).ToUpperInvariant();
+                    }
                 });
         }
 

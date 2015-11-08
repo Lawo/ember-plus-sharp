@@ -225,6 +225,14 @@ namespace Lawo.EmberPlusSharp.S101
             return this.SendMessageAsyncCore(message, payload);
         }
 
+        /// <summary>Sends <paramref name="value"/> as an out-of-frame byte.</summary>
+        /// <param name="value">The byte to write.</param>
+        /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
+        public Task SendOutOfFrameByte(byte value)
+        {
+            return this.writer.WriteOutOfFrameByte(value, this.source.Token);
+        }
+
         /// <summary>See <see cref="IDisposable.Dispose"/>.</summary>
         /// <remarks>Cancels all communication currently in progress and calls <see cref="IDisposable.Dispose"/> on the
         /// connection object passed to the constructor.</remarks>
@@ -237,6 +245,9 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Occurs when the client has received the full payload of a message with an <see cref="EmberData"/>
         /// command.</summary>
         public event EventHandler<MessageReceivedEventArgs> EmberDataReceived;
+
+        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
+        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
 
         /// <summary>Occurs when the connection to the provider has been lost.</summary>
         /// <remarks>
@@ -275,6 +286,7 @@ namespace Lawo.EmberPlusSharp.S101
             this.source.Token.Register(() => disposed.SetResult(true));
 
             await this.EnqueueLogOperation(() => this.logger.LogEvent("StartingReadLoop"));
+            reader.OutOfFrameByteReceived += this.OnOutOfFrameByteReceived;
             Exception exception;
             bool remote = false;
 
@@ -304,6 +316,7 @@ namespace Lawo.EmberPlusSharp.S101
             }
             finally
             {
+                reader.OutOfFrameByteReceived -= this.OnOutOfFrameByteReceived;
                 this.DisposeCore(false);
 
                 if (connection != null)
@@ -435,6 +448,11 @@ namespace Lawo.EmberPlusSharp.S101
                     throw;
                 }
             }
+        }
+
+        private void OnOutOfFrameByteReceived(object sender, OutOfFrameByteReceivedEventArgs e)
+        {
+            this.OnEvent(this.OutOfFrameByteReceived, e);
         }
 
         private void OnEvent<TEventArgs>(EventHandler<TEventArgs> handler, TEventArgs args) where TEventArgs : EventArgs

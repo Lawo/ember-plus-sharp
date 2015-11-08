@@ -6,11 +6,12 @@
 
 namespace Lawo.EmberPlusSharp.S101
 {
+    using System;
     using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Transparently decodes a single S101 message.</summary>
     /// <remarks>
@@ -29,6 +30,7 @@ namespace Lawo.EmberPlusSharp.S101
         private DeframingStream deframingStream;
         private readonly ReadBuffer deframedBuffer;
         private readonly byte[] discardBuffer;
+        private readonly Action<byte> outOfFrameByteReceived;
         private S101Message message;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,9 +72,12 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal static async Task<MessageDecodingStream> CreateAsync(
-            ReadBuffer rawBuffer, byte[] discardBuffer, CancellationToken cancellationToken)
+            ReadBuffer rawBuffer,
+            byte[] discardBuffer,
+            Action<byte> outOfFrameByteReceived,
+            CancellationToken cancellationToken)
         {
-            var result = new MessageDecodingStream(rawBuffer, discardBuffer);
+            var result = new MessageDecodingStream(rawBuffer, discardBuffer, outOfFrameByteReceived);
             var newMessage = await S101Message.ReadFromAsync(result.deframedBuffer, cancellationToken);
 
             if ((newMessage != null) && newMessage.CanHaveMultiplePackets &&
@@ -93,10 +98,10 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private MessageDecodingStream(ReadBuffer rawBuffer, byte[] discardBuffer)
+        private MessageDecodingStream(ReadBuffer rawBuffer, byte[] discardBuffer, Action<byte> outOfFrameByteReceived)
         {
             this.rawBuffer = rawBuffer;
-            this.deframingStream = new DeframingStream(this.rawBuffer);
+            this.deframingStream = new DeframingStream(this.rawBuffer, outOfFrameByteReceived);
 
             // This buffer is kept small in size, because a new one is allocated for each message.
             // This has the effect that only the bytes of reads <= MessageHeaderMaxLength bytes are actually copied into
@@ -109,6 +114,7 @@ namespace Lawo.EmberPlusSharp.S101
             this.deframedBuffer =
                 new ReadBuffer((ReadAsyncCallback)this.ReadDeframedAsync, Constants.MessageHeaderMaxLength);
             this.discardBuffer = discardBuffer;
+            this.outOfFrameByteReceived = outOfFrameByteReceived;
         }
 
         private async Task<int> ReadFromCurrentPacketAsync(
@@ -121,7 +127,7 @@ namespace Lawo.EmberPlusSharp.S101
                 this.message.CanHaveMultiplePackets && ((this.message.PacketFlags & PacketFlags.LastPacket) == 0))
             {
                 this.deframingStream.Dispose();
-                this.deframingStream = new DeframingStream(this.rawBuffer);
+                this.deframingStream = new DeframingStream(this.rawBuffer, this.outOfFrameByteReceived);
                 this.ValidateMessage(await S101Message.ReadFromAsync(this.deframedBuffer, cancellationToken));
             }
 
