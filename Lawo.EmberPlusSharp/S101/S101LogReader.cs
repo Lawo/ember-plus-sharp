@@ -58,14 +58,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             try
             {
-                var result = this.AdvanceToNextPayload();
-
-                if (result)
-                {
-                    this.payload = this.GetLogPayload();
-                }
-
-                return result;
+                return this.ReadCore();
             }
             catch
             {
@@ -155,7 +148,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private bool AdvanceToNextPayload()
+        private bool ReadCore()
         {
             while (this.logReader.IsStartElement(LogNames.Event))
             {
@@ -200,6 +193,7 @@ namespace Lawo.EmberPlusSharp.S101
                         throw new XmlException("The Payload element is missing.");
                     }
 
+                    this.payload = this.GetLogPayload();
                     return true;
                 }
             }
