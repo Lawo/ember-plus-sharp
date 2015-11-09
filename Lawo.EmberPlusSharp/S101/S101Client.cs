@@ -230,6 +230,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
         public Task SendOutOfFrameByteAsync(byte value)
         {
+            this.AssertPreconditions();
             return this.SendOutOfFrameByteAsyncCore(value);
         }
 
@@ -392,9 +393,10 @@ namespace Lawo.EmberPlusSharp.S101
                 });
         }
 
-        private Task SendOutOfFrameByteAsyncCore(byte value)
+        private async Task SendOutOfFrameByteAsyncCore(byte value)
         {
-            return this.writer.WriteOutOfFrameByteAsync(value, this.source.Token);
+            await this.EnqueueLogOperation(() => this.logger.LogData(LogNames.OutOfFrameByte, LogNames.Send, new[] { value }, 0, 1));
+            await this.sendQueue.Enqueue(() => this.writer.WriteOutOfFrameByteAsync(value, this.source.Token));
         }
 
         private async Task<bool> ReadWithTimeoutAsync(
@@ -455,8 +457,10 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        private void OnOutOfFrameByteReceived(object sender, OutOfFrameByteReceivedEventArgs e)
+        private async void OnOutOfFrameByteReceived(object sender, OutOfFrameByteReceivedEventArgs e)
         {
+            await this.EnqueueLogOperation(
+                () => this.logger.LogData(LogNames.OutOfFrameByte, LogNames.Receive, new[] { e.Value }, 0, 1));
             this.OnEvent(this.OutOfFrameByteReceived, e);
         }
 

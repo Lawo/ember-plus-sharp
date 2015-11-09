@@ -12,6 +12,7 @@ namespace Lawo.EmberPlusSharp.S101
         internal const string Event = "Event";
         internal const string Type = "type";
         internal const string Message = "Message";
+        internal const string OutOfFrameByte = "OutOfFrameByte";
         internal const string Exception = "Exception";
         internal const string Time = "timeUtc";
         internal const string Direction = "direction";

@@ -21,18 +21,19 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
+
+    using Ember;
     using EmberLib;
     using EmberLib.Framing;
     using EmberLib.Glow.Framing;
-    using Lawo.EmberPlusSharp.Ember;
-    using Lawo.EmberPlusSharp.Glow;
-    using Lawo.EmberPlusSharp.Model.Test;
-    using Lawo.EmberPlusSharp.Model.Test.EmberDataPayloads;
-    using Lawo.EmberPlusSharp.S101;
-    using Lawo.IO;
-    using Lawo.Reflection;
-    using Lawo.Threading.Tasks;
+    using Glow;
+    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Reflection;
+    using S101;
+    using Test;
+    using Test.EmberDataPayloads;
+    using Threading.Tasks;
 
     /// <summary>Tests <see cref="Consumer{T}"/>.</summary>
     [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Test code.")]
@@ -77,6 +78,7 @@ namespace Lawo.EmberPlusSharp.Model
                     var stringValue = GetRandomString();
 
                     var requestTask = WaitForRequest(providerClient, "MainRequest2.xml");
+                    await providerClient.SendOutOfFrameByteAsync(0x01);
                     await SendResponse(
                         providerClient,
                         "MainResponse1.xml",
