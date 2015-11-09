@@ -158,23 +158,7 @@ namespace Lawo.EmberPlusSharp.S101
                 }
                 else
                 {
-                    try
-                    {
-                        this.timeUtc = DateTime.ParseExact(
-                            this.logReader.GetAttribute(LogNames.Time),
-                            "HH':'mm':'ss'.'ff",
-                            CultureInfo.InvariantCulture,
-                            DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-                    }
-                    catch (ArgumentNullException)
-                    {
-                        this.timeUtc = DateTime.Today;
-                    }
-                    catch (FormatException)
-                    {
-                        this.timeUtc = DateTime.Today;
-                    }
-
+                    this.timeUtc = this.ReadTime();
                     this.direction = this.logReader.GetAttribute(LogNames.Direction);
                     this.number = int.Parse(
                         this.logReader.GetAttribute(LogNames.Number), NumberStyles.None, CultureInfo.InvariantCulture);
@@ -201,6 +185,26 @@ namespace Lawo.EmberPlusSharp.S101
             this.logReader.ReadEndElement();
             this.Clear();
             return false;
+        }
+
+        private DateTime ReadTime()
+        {
+            try
+            {
+                return DateTime.ParseExact(
+                    this.logReader.GetAttribute(LogNames.Time),
+                    "HH':'mm':'ss'.'ff",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+            }
+            catch (ArgumentNullException)
+            {
+                return DateTime.Today;
+            }
+            catch (FormatException)
+            {
+                return DateTime.Today;
+            }
         }
 
         private byte[] GetLogPayload()
