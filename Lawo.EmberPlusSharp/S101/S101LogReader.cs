@@ -152,33 +152,35 @@ namespace Lawo.EmberPlusSharp.S101
         {
             while (this.logReader.IsStartElement(LogNames.Event))
             {
-                if (this.logReader.GetAttribute(LogNames.Type) != LogNames.Message)
+                switch (this.logReader.GetAttribute(LogNames.Type))
                 {
-                    this.logReader.Skip();
-                }
-                else
-                {
-                    this.timeUtc = this.ReadTime();
-                    this.direction = this.logReader.GetAttribute(LogNames.Direction);
-                    this.number = int.Parse(
-                        this.logReader.GetAttribute(LogNames.Number), NumberStyles.None, CultureInfo.InvariantCulture);
-                    this.logReader.ReadStartElement(LogNames.Event);
-                    this.logReader.ReadStartElement(LogNames.Slot);
-                    var slotString = this.logReader.ReadContentAsString();
-                    var slot = byte.Parse(slotString, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
-                    this.logReader.ReadEndElement();
-                    this.logReader.ReadStartElement(LogNames.Command);
-                    var command = S101Command.Parse(this.logReader.ReadContentAsString());
-                    this.logReader.ReadEndElement();
-                    this.message = new S101Message(slot, command);
+                    case LogNames.Message:
+                        this.timeUtc = this.ReadTime();
+                        this.direction = this.logReader.GetAttribute(LogNames.Direction);
+                        this.number = int.Parse(
+                            this.logReader.GetAttribute(LogNames.Number),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture);
+                        this.logReader.ReadStartElement(LogNames.Event);
+                        this.logReader.ReadStartElement(LogNames.Slot);
+                        var slotString = this.logReader.ReadContentAsString();
+                        var slot = byte.Parse(slotString, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+                        this.logReader.ReadEndElement();
+                        this.logReader.ReadStartElement(LogNames.Command);
+                        var command = S101Command.Parse(this.logReader.ReadContentAsString());
+                        this.logReader.ReadEndElement();
+                        this.message = new S101Message(slot, command);
 
-                    if (!this.logReader.IsStartElement(LogNames.Payload))
-                    {
-                        throw new XmlException("The Payload element is missing.");
-                    }
+                        if (!this.logReader.IsStartElement(LogNames.Payload))
+                        {
+                            throw new XmlException("The Payload element is missing.");
+                        }
 
-                    this.payload = this.GetLogPayload();
-                    return true;
+                        this.payload = this.GetLogPayload();
+                        return true;
+                    default:
+                        this.logReader.Skip();
+                        break;
                 }
             }
 
