@@ -137,21 +137,33 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 while (this.logReader.Read())
                 {
-                    if (this.logReader.Message.Command is EmberData)
+                    switch (this.logReader.EventType)
                     {
-                        if (this.firstMessageDirection == null)
-                        {
-                            this.firstMessageDirection = this.logReader.Direction;
-                        }
+                        case "OutOfFrameByte":
+                            await this.client.SendOutOfFrameByteAsync(this.logReader.GetPayload()[0]);
+                            break;
+                        case "Message":
+                            if (this.logReader.Message.Command is EmberData)
+                            {
+                                if (this.firstMessageDirection == null)
+                                {
+                                    this.firstMessageDirection = this.logReader.Direction;
+                                }
 
-                        if (this.sendFirstMessage == (this.firstMessageDirection == this.logReader.Direction))
-                        {
-                            await this.client.SendMessageAsync(this.logReader.Message, this.logReader.GetPayload());
-                        }
-                        else
-                        {
-                            return;
-                        }
+                                if (this.sendFirstMessage == (this.firstMessageDirection == this.logReader.Direction))
+                                {
+                                    await this.client.SendMessageAsync(this.logReader.Message, this.logReader.GetPayload());
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+
+                            break;
+                        default:
+                            // All other event types are intentionally ignored
+                            break;
                     }
                 }
 

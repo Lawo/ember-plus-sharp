@@ -19,6 +19,7 @@ namespace Lawo.EmberPlusSharp.S101
         private static readonly byte[] NoPayload = new byte[0];
         private readonly EmberConverter converter;
         private readonly XmlReader logReader;
+        private string eventType;
         private DateTime timeUtc;
         private string direction;
         private int number;
@@ -30,7 +31,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Initializes a new instance of the <see cref="S101LogReader"/> class.</summary>
         /// <param name="types">The types to pass to the internal <see cref="EmberConverter"/>, which is used to convert
         /// between XML payload and EmBER payload.</param>
-        /// <param name="logReader">The <see cref="XmlReader"/> to read the messages from. The format needs to match the
+        /// <param name="logReader">The <see cref="XmlReader"/> to read the events from. The format needs to match the
         /// one written by <see cref="S101Logger"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="types"/> and/or <paramref name="logReader"/> equal
         /// <c>null</c>.</exception>
@@ -46,14 +47,14 @@ namespace Lawo.EmberPlusSharp.S101
             logReader.ReadStartElement(LogNames.Root);
         }
 
-        /// <summary>Reads the next message.</summary>
-        /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages
+        /// <summary>Reads the next event.</summary>
+        /// <returns><c>true</c> if the next event was read successfully; <c>false</c> if there are no more events
         /// to read.</returns>
         /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <remarks>
         /// <para>When a <see cref="S101LogReader"/> is first created and initialized, there is no information
-        /// available. You must call <see cref="Read"/> to read the first message.</para></remarks>
+        /// available. You must call <see cref="Read"/> to read the first event.</para></remarks>
         public bool Read()
         {
             try
@@ -67,7 +68,23 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        /// <summary>Gets the UTC time of the current message.</summary>
+        /// <summary>Gets the type of the current event.</summary>
+        /// <value>Either <c>Message</c> or <c>OutOfFrameByte</c>.</value>
+        /// <exception cref="InvalidOperationException">
+        /// <list type="bullet">
+        /// <item><see cref="Read"/> has never been called, or</item>
+        /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
+        /// </list></exception>
+        public string EventType
+        {
+            get
+            {
+                this.AssertRead();
+                return this.eventType;
+            }
+        }
+
+        /// <summary>Gets the UTC time of the current event.</summary>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
@@ -82,7 +99,7 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        /// <summary>Gets the direction of the current message.</summary>
+        /// <summary>Gets the direction of the current event.</summary>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
@@ -97,7 +114,7 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        /// <summary>Gets the number of the current message.</summary>
+        /// <summary>Gets the number of the current event.</summary>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
@@ -113,6 +130,7 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Gets the current message.</summary>
+        /// <value><c>null</c>, if <see cref="Type"/> is not equal to <c>"Message"</c>.</value>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
@@ -127,7 +145,7 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        /// <summary>Gets the payload of the current message.</summary>
+        /// <summary>Gets the payload of the current event.</summary>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
@@ -152,7 +170,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             while (this.logReader.IsStartElement(LogNames.Event))
             {
-                switch (this.logReader.GetAttribute(LogNames.Type))
+                switch (this.eventType = this.logReader.GetAttribute(LogNames.Type))
                 {
                     case LogNames.Message:
                         this.timeUtc = this.ReadTime();
@@ -163,8 +181,7 @@ namespace Lawo.EmberPlusSharp.S101
                             CultureInfo.InvariantCulture);
                         this.logReader.ReadStartElement(LogNames.Event);
                         this.logReader.ReadStartElement(LogNames.Slot);
-                        var slotString = this.logReader.ReadContentAsString();
-                        var slot = byte.Parse(slotString, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+                        var slot = ParseHex(this.logReader.ReadContentAsString());
                         this.logReader.ReadEndElement();
                         this.logReader.ReadStartElement(LogNames.Command);
                         var command = S101Command.Parse(this.logReader.ReadContentAsString());
@@ -177,6 +194,15 @@ namespace Lawo.EmberPlusSharp.S101
                         }
 
                         this.payload = this.GetLogPayload();
+                        return true;
+                    case LogNames.OutOfFrameByte:
+                        this.timeUtc = this.ReadTime();
+                        this.direction = this.logReader.GetAttribute(LogNames.Direction);
+                        this.number = 0;
+                        this.message = null;
+                        this.logReader.ReadStartElement(LogNames.Event);
+                        this.payload = new[] { ParseHex(this.logReader.ReadContentAsString()) };
+                        this.logReader.ReadEndElement();
                         return true;
                     default:
                         this.logReader.Skip();
@@ -245,20 +271,26 @@ namespace Lawo.EmberPlusSharp.S101
 
         private void AssertRead()
         {
-            if (this.direction == null)
+            if (this.eventType == null)
             {
                 throw new InvalidOperationException(
-                    "Read() has never been called, or the last call to Read() returned false or threw an exception.");
+                    "Read() has never been called, the last call to Read() returned false or threw an exception.");
             }
         }
 
         private void Clear()
         {
+            this.eventType = null;
             this.timeUtc = DateTime.Today;
             this.direction = null;
             this.number = 0;
             this.message = null;
             this.payload = null;
+        }
+
+        private static byte ParseHex(string str)
+        {
+            return byte.Parse(str, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
         }
     }
 }

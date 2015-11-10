@@ -25,6 +25,7 @@
     <Command>KeepAliveResponse</Command>
     <Payload />
   </Event>
+  <Event type="OutOfFrameByte" timeUtc="09:39:36.43" direction="Receive">5E</Event>
   <Event type="Message" timeUtc="09:39:36.43" direction="Receive" number="1">
     <Slot>01</Slot>
     <Command>EmberData 01 0A 02</Command>

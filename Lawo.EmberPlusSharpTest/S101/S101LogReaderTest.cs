@@ -30,6 +30,7 @@ namespace Lawo.EmberPlusSharp.S101
                 "SkipLog.xml",
                 reader =>
                 {
+                    int outOfFrameByteCount = 0;
                     int dataCount = 0;
                     int requestCount = 0;
                     int responseCount = 0;
@@ -39,26 +40,45 @@ namespace Lawo.EmberPlusSharp.S101
                         Assert.AreNotEqual(DateTime.Today, reader.TimeUtc);
                         Assert.AreEqual(DateTimeKind.Utc, reader.TimeUtc.Kind);
                         Assert.IsFalse(string.IsNullOrWhiteSpace(reader.Direction));
-                        Assert.IsFalse(reader.Number == 0);
 
-                        if (reader.Message.Command is EmberData)
+                        switch (reader.EventType)
                         {
-                            ++dataCount;
-                        }
-                        else if (reader.Message.Command is KeepAliveRequest)
-                        {
-                            ++requestCount;
-                        }
-                        else if (reader.Message.Command is KeepAliveResponse)
-                        {
-                            ++responseCount;
-                        }
-                        else
-                        {
-                            Assert.Fail("Unknown command.");
+                            case "Message":
+                                Assert.IsFalse(reader.Number == 0);
+                                Assert.IsNotNull(reader.Message);
+
+                                if (reader.Message.Command is EmberData)
+                                {
+                                    ++dataCount;
+                                }
+                                else if (reader.Message.Command is KeepAliveRequest)
+                                {
+                                    ++requestCount;
+                                }
+                                else if (reader.Message.Command is KeepAliveResponse)
+                                {
+                                    ++responseCount;
+                                }
+                                else
+                                {
+                                    Assert.Fail("Unknown command.");
+                                }
+
+                                break;
+                            case "OutOfFrameByte":
+                                Assert.AreEqual(0, reader.Number);
+                                Assert.IsNull(reader.Message);
+                                var payload = reader.GetPayload();
+                                Assert.AreEqual(1, payload.Length);
+                                ++outOfFrameByteCount;
+                                break;
+                            default:
+                                Assert.Fail("Unknown event type.");
+                                break;
                         }
                     }
 
+                    Assert.AreEqual(1, outOfFrameByteCount);
                     Assert.AreEqual(3, dataCount);
                     Assert.AreEqual(1, requestCount);
                     Assert.AreEqual(1, responseCount);
