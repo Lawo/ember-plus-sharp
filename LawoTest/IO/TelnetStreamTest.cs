@@ -21,6 +21,7 @@ namespace Lawo.IO
     {
         /// <summary>Tests the main use case.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Test method must be an instance method.")]
         public async Task MainTest()
         {

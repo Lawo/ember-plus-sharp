@@ -44,7 +44,7 @@ namespace Lawo.Diagnostics.Tracing
                     Assert.AreEqual(logMessage, logEvent.LogMessage);
                     Assert.AreEqual(NativeMethods.GetCurrentThreadId(), logEvent.ThreadId);
                     Assert.IsTrue(logEvent.FilePath.Contains("LogTest.cs"));
-                    Assert.AreEqual(38, logEvent.LineNumber);
+                    Assert.AreEqual(37, logEvent.LineNumber);
                     Assert.AreEqual(moduleName, logEvent.ModluleName);
                 });
         }
