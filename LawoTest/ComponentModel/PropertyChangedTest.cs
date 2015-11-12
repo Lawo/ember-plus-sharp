@@ -23,7 +23,6 @@ namespace Lawo.ComponentModel
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Tests the main <see cref="PropertyChangedRegistration"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void PropertyChangedRegistrationTest()
         {
@@ -42,7 +41,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests the exceptional <see cref="PropertyChangedRegistration"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {
@@ -55,7 +53,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="NotifyPropertyChanged"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void NotifyPropertyChangedTest()
         {
@@ -73,7 +70,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Exposes a NullReferenceException bug, see change history for details.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void NullReferenceExceptionBugTest()
         {

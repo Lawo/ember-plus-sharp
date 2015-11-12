@@ -15,7 +15,6 @@ namespace Lawo.Linq.Expressions
     public sealed class ExpressionHelperTest : TestBase
     {
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {

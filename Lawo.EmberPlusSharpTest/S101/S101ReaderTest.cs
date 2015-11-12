@@ -23,7 +23,6 @@ namespace Lawo.EmberPlusSharp.S101
     public class S101ReaderTest : TestBase
     {
         /// <summary>Tests <see cref="S101Reader.ReadAsync"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ReadTest()
         {
@@ -47,7 +46,6 @@ namespace Lawo.EmberPlusSharp.S101
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will never be localized.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1117:ParametersMustBeOnSameLineOrSeparateLines", Justification = "In this case readability is improved.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1115:ParameterMustFollowComma", Justification = "In this case readability is improved.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {
@@ -138,7 +136,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="S101Command"/> methods.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void CommandTest()
         {
@@ -149,7 +146,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="S101Message"/> methods.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MessageTest()
         {

@@ -20,7 +20,6 @@ namespace Lawo.IO
     public class BufferTest : TestBase
     {
         /// <summary>Tests less executed <see cref="ReadBuffer"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ReadTest()
         {
@@ -48,7 +47,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Tests less executed <see cref="ReadBuffer"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ReadAsyncTest()
         {
@@ -84,7 +82,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Tests <see cref="ReadBuffer.FillAsync(byte[], int, int, CancellationToken)"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void FillAsyncTest()
         {
@@ -105,7 +102,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Tests less executed <see cref="WriteBuffer"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void WriteTest()
         {
@@ -123,7 +119,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Tests less executed <see cref="WriteBuffer"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void WriteAsyncTest()
         {
@@ -145,7 +140,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Tests various exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

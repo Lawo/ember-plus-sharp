@@ -19,7 +19,6 @@ namespace Lawo
     public sealed class FastEnumTest : TestBase
     {
         /// <summary>Tests <see cref="FastEnum.GetValueNameMap"/> and <see cref="FastEnum.GetNameValueMap"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MapTest()
         {
@@ -31,7 +30,6 @@ namespace Lawo
         }
 
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void PerformanceTest()
         {
@@ -62,7 +60,6 @@ namespace Lawo
         }
 
         /// <summary>Tests exceptional paths.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

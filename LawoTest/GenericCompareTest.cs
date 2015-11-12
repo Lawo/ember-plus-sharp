@@ -18,7 +18,6 @@ namespace Lawo
     public sealed class GenericCompareTest : TestBase
     {
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {

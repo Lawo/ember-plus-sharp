@@ -18,7 +18,6 @@ namespace Lawo.ComponentModel
     public sealed class FlattenHelperTest : TestBase
     {
         /// <summary>Tests <see cref="FlattenHelper"/> by adding elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void AddTest()
         {
@@ -37,7 +36,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by inserting elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void InsertTest()
         {
@@ -57,7 +55,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by replacing elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ReplaceTest()
         {
@@ -83,7 +80,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by removing elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RemoveTest()
         {
@@ -109,7 +105,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by clearing elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ClearTest()
         {
@@ -128,7 +123,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by modifying a removed inner collection.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RemovedInnerModifyTest()
         {
@@ -150,7 +144,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

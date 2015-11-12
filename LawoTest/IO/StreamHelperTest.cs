@@ -18,7 +18,6 @@ namespace Lawo.IO
     public class StreamHelperTest : TestBase
     {
         /// <summary>Tests exceptional use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

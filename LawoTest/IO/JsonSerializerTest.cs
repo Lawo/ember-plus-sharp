@@ -52,7 +52,6 @@ namespace Lawo.IO
         /// Test the main use case. Serialize an object to string and deserialize it again.
         /// </summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestDataContract.set_Text(System.String)", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void SerializeAndDeserialize()
         {
@@ -70,7 +69,6 @@ namespace Lawo.IO
         /// Try to serialize an non serializable object.
         /// </summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestNoDataContract.set_Text(System.String)", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void NoSerialization()
         {
@@ -82,7 +80,6 @@ namespace Lawo.IO
         /// <summary>
         /// Try to deserialize a non de-serializable object.
         /// </summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void NoDeserialization()
         {

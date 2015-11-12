@@ -35,7 +35,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests the main <see cref="TwoWayBinding"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void TwoWayBindingTest()
         {
@@ -89,7 +88,6 @@ namespace Lawo.ComponentModel
 
         /// <summary>Tests the <see cref="OneWayBinding"/> use cases not yet tested with <see cref="TwoWayBinding"/>.
         /// </summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void OneWayBindingTest()
         {
@@ -116,7 +114,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="OneWayBinding"/> and <see cref="TwoWayBinding"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

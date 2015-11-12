@@ -22,7 +22,6 @@ namespace Lawo.ComponentModel
     public sealed class ObservableCollectionHelperTest : TestBase
     {
         /// <summary>Tests the main <see cref="ObservableCollectionHelper"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -38,7 +37,6 @@ namespace Lawo.ComponentModel
 
         /// <summary>Tests the exceptions thrown by <see cref="ObservableCollectionHelper"/>.</summary>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

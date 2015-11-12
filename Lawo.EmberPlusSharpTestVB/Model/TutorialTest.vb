@@ -18,11 +18,13 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 <TestClass>
 Public Class TutorialTestVB
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub DynamicConnectTest()
         Main()
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub DynamicIterateTest()
 #Region "Dynamic Iterate"
         AsyncPump.Run(
@@ -37,6 +39,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub DynamicModifyTest()
 #Region "Dynamic Modify"
         AsyncPump.Run(
@@ -70,6 +73,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub ConnectionLostTest()
 #Region "Connection Lost"
         AsyncPump.Run(
@@ -90,6 +94,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub StaticIterateTest()
 #Region "Static Iterate"
         AsyncPump.Run(
@@ -104,6 +109,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub ReactToChangesTest()
 #Region "React to Changes"
         AsyncPump.Run(
@@ -122,6 +128,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub StaticModifyTest()
 #Region "Static Modify"
         AsyncPump.Run(
@@ -139,6 +146,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub CollectionNodeTest()
 #Region "Collection Node"
         AsyncPump.Run(
@@ -155,6 +163,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub MixedIterateTest()
 #Region "Mixed Iterate"
         AsyncPump.Run(
@@ -169,6 +178,7 @@ Public Class TutorialTestVB
     End Sub
 
     <TestMethod>
+    <TestCategory("Manual")>
     Public Sub MixedModifyTest()
 #Region "Mixed Modify"
         AsyncPump.Run(

@@ -22,7 +22,6 @@ namespace Lawo.Threading.Tasks
     {
         /// <summary>Tests <see cref="AsyncPump"/> main use cases.</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -32,7 +31,6 @@ namespace Lawo.Threading.Tasks
         }
 
         /// <summary>Tests <see cref="AsyncPump"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

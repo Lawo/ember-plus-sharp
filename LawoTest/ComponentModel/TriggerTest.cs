@@ -16,7 +16,6 @@ namespace Lawo.ComponentModel
     public sealed class TriggerTest : TestBase
     {
         /// <summary>Tests the main <see cref="Trigger"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -36,7 +35,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests the exceptional <see cref="Trigger"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

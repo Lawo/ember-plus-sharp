@@ -19,7 +19,6 @@ namespace Lawo.EmberPlusSharp.Glow
     public class GlowLogConverterTest : CommunicationTestBase
     {
         /// <summary>Tests the main use cases of <see cref="GlowLogConverter"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -29,7 +28,6 @@ namespace Lawo.EmberPlusSharp.Glow
         }
 
         /// <summary>Tests <see cref="GlowLogConverter"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

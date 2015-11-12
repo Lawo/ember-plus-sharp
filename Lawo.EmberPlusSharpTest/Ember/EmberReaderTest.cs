@@ -24,7 +24,6 @@ namespace Lawo.EmberPlusSharp.Ember
     public class EmberReaderTest : TestBase
     {
         /// <summary>Tests with an empty stream.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void EmptyTest()
         {
@@ -36,7 +35,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests whether unread contents is skipped.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void SkipContentsTest()
         {
@@ -76,7 +74,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests Boolean contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void BooleanTest()
         {
@@ -86,7 +83,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests Integer contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1117:ParametersMustBeOnSameLineOrSeparateLines", Justification = "In this case readability is improved.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1115:ParameterMustFollowComma", Justification = "In this case readability is improved.")]
@@ -107,7 +103,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests Octetstring contents with lengths &lt; 126.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ShortOctetstringTest()
         {
@@ -117,7 +112,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests Octetstring contents with lengths &gt;= 128.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void LongOctetstringTest()
         {
@@ -134,7 +128,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests Real contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RealTest()
         {
@@ -152,7 +145,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests UTF8String contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Utf8StringTest()
         {
@@ -161,7 +153,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests Relative object identifier contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RelativeObjectIdentifierTest()
         {
@@ -178,7 +169,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests container contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ContainerTest()
         {
@@ -202,7 +192,6 @@ namespace Lawo.EmberPlusSharp.Ember
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1117:ParametersMustBeOnSameLineOrSeparateLines", Justification = "In this case readability is improved.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1115:ParameterMustFollowComma", Justification = "In this case readability is improved.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {
@@ -287,7 +276,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Reads a real world file.</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String,System.Object)", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ReadFileTest()
         {

@@ -20,7 +20,6 @@ namespace Lawo.EmberPlusSharp.S101
     {
         /// <summary>Tests whether random data written with <see cref="GlowOutput"/> is read back the same with
         /// <see cref="S101Reader"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {

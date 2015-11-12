@@ -42,7 +42,6 @@ namespace Lawo.EmberPlusSharp.Model
     {
         /// <summary>Measures <see cref="Consumer{T}.CreateAsync(S101Client)"/> performance with a message containing a
         /// big tree.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void BigTreeAssemblyTest()
         {
@@ -59,7 +58,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests the main <see cref="Consumer{T}"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -171,7 +169,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests the dynamic use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void DynamicTest()
         {
@@ -308,7 +305,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests whether interface-typed elements work correctly.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void InterfaceElementTest()
         {
@@ -318,7 +314,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests whether <see cref="INode.GetElement"/> works correctly.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void GetElementTest()
         {
@@ -332,7 +327,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests whether property values are transmitted correctly.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void PropertiesTest()
         {
@@ -437,7 +431,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests whether the provider access restrictions are enforced correctly.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void AccessTest()
         {
@@ -454,7 +447,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests nullable parameter variants.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void NullableTest()
         {
@@ -511,7 +503,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests trigger use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void TriggerTest()
         {
@@ -529,7 +520,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests sending/receiving with a broken connection.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void AutoSendWithBrokenS101ConnectionTest()
         {
@@ -560,7 +550,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Tests whether exceptions are reported appropriately after
         /// <see cref="Consumer{T}.CreateAsync(S101Client)"/> has returned.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ThrowAfterCreateTest()
         {
@@ -595,7 +584,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests whether messages with a different slot are ignored.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void SlotTest()
         {
@@ -611,7 +599,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests the various change notifications.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ChangeNotificationTest()
         {
@@ -664,7 +651,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests Ember+ functions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void FunctionTest()
         {
@@ -735,7 +721,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests dynamic Ember+ functions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void DynamicFunctionTest()
         {
@@ -825,7 +810,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests the behavior when <see cref="Element.IsOnline"/> changes.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void IsOnlineTest()
         {
@@ -863,7 +847,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {
@@ -1048,7 +1031,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1620">Bug 1620</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1620Test()
         {
@@ -1062,7 +1044,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1766Test()
         {
@@ -1070,7 +1051,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1834Test()
         {
@@ -1078,7 +1058,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1836Test()
         {
@@ -1111,7 +1090,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1866">Bug 1866</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug1866Test()
         {
@@ -1125,7 +1103,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug2755Test()
         {
@@ -1141,7 +1118,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/3345">Bug 3345</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug3345Test()
         {
@@ -1157,7 +1133,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug4424Test()
         {
@@ -1167,7 +1142,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4463">Bug 4463</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug4463Test()
         {
@@ -1176,7 +1150,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4815">Bug 4815</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug4815Test()
         {
@@ -1240,7 +1213,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5201">Bug 5201</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug5201Test()
         {
@@ -1282,7 +1254,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5639">Bug 5639</see>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Bug5639Test()
         {

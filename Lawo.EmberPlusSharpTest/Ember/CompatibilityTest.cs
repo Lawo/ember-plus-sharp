@@ -21,7 +21,6 @@ namespace Lawo.EmberPlusSharp.Ember
     public class CompatibilityTest : TestBase
     {
         /// <summary>Tests compatibility with Boolean contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void BooleanTest()
         {
@@ -31,7 +30,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests compatibility with Integer contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void IntegerTest()
         {
@@ -44,7 +42,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests compatibility with Octetstring contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void OctetstringTest()
         {
@@ -55,7 +52,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests compatibility with Real contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RealTest()
         {
@@ -65,7 +61,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Exposes the real decoding bug in EmberLib.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void EmberLibBugTest()
         {
@@ -75,7 +70,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests compatibility with UTF8String contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void Utf8StringTest()
         {
@@ -85,7 +79,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests compatibility with Relative object identifier contents.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RelativeObjectIdentifierTest()
         {
@@ -102,7 +95,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Tests compatibility with Sequence and Set.</summary>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ContainerTest()
         {

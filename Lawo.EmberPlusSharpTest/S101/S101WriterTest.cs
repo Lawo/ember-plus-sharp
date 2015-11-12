@@ -23,7 +23,6 @@ namespace Lawo.EmberPlusSharp.S101
     public class S101WriterTest : CommunicationTestBase
     {
         /// <summary>Tests <see cref="S101Writer.WriteMessageAsync"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void WriteTest()
         {
@@ -47,7 +46,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="S101Writer.WriteMessageAsync"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void OutOfFrameByteTest()
         {
@@ -113,7 +111,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests whether random written payload is read back the same.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void PayloadTest()
         {
@@ -172,7 +169,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Tests <see cref="S101Writer"/> exceptions.</summary>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

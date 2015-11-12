@@ -17,7 +17,6 @@ namespace Lawo.EmberPlusSharp.Ember
     public class IdentifierTest : TestBase
     {
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -52,7 +51,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests <see cref="EmberId"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

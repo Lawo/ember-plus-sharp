@@ -18,7 +18,6 @@ namespace Lawo.EmberPlusSharp.Ember
     public class EmberWriterTest : TestBase
     {
         /// <summary>Tests the main use cases of <see cref="EmberWriter"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1117:ParametersMustBeOnSameLineOrSeparateLines", Justification = "In this case readability is improved.")]
@@ -70,7 +69,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Tests <see cref="EmberWriter"/> exceptions.</summary>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The stream is disposed through the writer.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

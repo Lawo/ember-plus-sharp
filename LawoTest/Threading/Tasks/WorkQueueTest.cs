@@ -16,7 +16,6 @@ namespace Lawo.Threading.Tasks
     public sealed class WorkQueueTest : TestBase
     {
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -32,7 +31,6 @@ namespace Lawo.Threading.Tasks
         }
 
         /// <summary>Tests the exceptional cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

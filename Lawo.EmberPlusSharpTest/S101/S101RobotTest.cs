@@ -23,7 +23,6 @@ namespace Lawo.EmberPlusSharp.S101
         private static readonly EmberTypeBag Types = new EmberTypeBag();
 
         /// <summary>Tests the main use cases of <see cref="S101Robot"/>.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void SkipTest()
         {
@@ -51,7 +50,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="S101Robot"/> use cases for incoming messages.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void IncomingTest()
         {
@@ -76,7 +74,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests what happens when the S101 connection is lost prematurely.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ConnectionLostTest()
         {
@@ -94,7 +91,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="S101Robot"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

@@ -17,7 +17,6 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class StreamDescriptionTest : TestBase
     {
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {

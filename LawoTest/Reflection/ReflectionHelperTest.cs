@@ -26,7 +26,6 @@ namespace Lawo.Reflection
         }
 
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {
@@ -42,7 +41,6 @@ namespace Lawo.Reflection
         }
 
         /// <summary>Tests exceptional paths.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

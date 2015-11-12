@@ -20,7 +20,6 @@ namespace Lawo.ComponentModel
         private static readonly Predicate<int> Predicate = i => i < 5;
 
         /// <summary>Tests <see cref="FilterHelper"/> by adding elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void AddTest()
         {
@@ -28,7 +27,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FilterHelper"/> by inserting elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void InsertTest()
         {
@@ -37,7 +35,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FilterHelper"/> by replacing elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ReplaceTest()
         {
@@ -53,7 +50,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FilterHelper"/> by removing elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void RemoveTest()
         {
@@ -69,7 +65,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FilterHelper"/> by clearing elements.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ClearTest()
         {
@@ -77,7 +72,6 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Tests <see cref="FilterHelper"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {

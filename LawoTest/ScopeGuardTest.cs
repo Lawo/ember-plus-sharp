@@ -17,7 +17,6 @@ namespace Lawo
     public sealed class ScopeGuardTest : TestBase
     {
         /// <summary>Tests the normal course of events.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void NormalTest()
         {
@@ -33,7 +32,6 @@ namespace Lawo
         }
 
         /// <summary>Tests what happens in the event of a failure.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void FailureTest()
         {

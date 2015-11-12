@@ -16,7 +16,6 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class ElementAttributeTest : TestBase
     {
         /// <summary>Tests the main use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void MainTest()
         {

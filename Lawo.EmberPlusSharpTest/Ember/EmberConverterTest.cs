@@ -27,7 +27,6 @@ namespace Lawo.EmberPlusSharp.Ember
     public class EmberConverterTest : TestBase
     {
         /// <summary>Tests <see cref="EmberConverter"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {
@@ -76,7 +75,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests that <see cref="EmberConverter"/> can handle invalid XML characters.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void InvalidXmlCharactersTest()
         {
@@ -99,7 +97,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Tests <see cref="EmberConverter"/> performance.</summary>
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", Justification = "Test code.")]
-        [TestCategory("Unattended")]
         [TestMethod]
         public void PerformanceTest()
         {

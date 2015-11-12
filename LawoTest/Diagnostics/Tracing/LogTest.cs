@@ -23,7 +23,6 @@ namespace Lawo.Diagnostics.Tracing
     public sealed class LogTest : TestBase
     {
         /// <summary>Tests the content of a log event.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void LogEventTest()
         {
@@ -51,7 +50,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the debug level.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void DebugTest()
         {
@@ -59,7 +57,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the info level.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void InfoTest()
         {
@@ -67,7 +64,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the warn level.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void WarnTest()
         {
@@ -75,7 +71,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the error level.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ErrorTest()
         {
@@ -83,7 +78,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the critical level.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void CriticalTest()
         {
@@ -91,7 +85,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the debug level with specified module name.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void DebugTestModule()
         {
@@ -99,7 +92,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the info level with specified module name.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void InfoTestModule()
         {
@@ -107,7 +99,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the warn level with specified module name.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void WarnTestModule()
         {
@@ -115,7 +106,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the error level with specified module name.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ErrorTestModule()
         {
@@ -123,7 +113,6 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         /// <summary>Tests the critical level with specified module name.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void CriticalTestModule()
         {

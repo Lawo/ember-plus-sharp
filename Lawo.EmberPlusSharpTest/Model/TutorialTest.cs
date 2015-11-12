@@ -24,6 +24,7 @@ namespace Tutorial
     {
         /// <summary>Establishes a connection to a provider and creates a dynamic local copy of the database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void DynamicConnectTest()
         {
             Main();
@@ -31,6 +32,7 @@ namespace Tutorial
 
         /// <summary>Iterates over the dynamic local database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void DynamicIterateTest()
         {
             #region Dynamic Iterate
@@ -48,6 +50,7 @@ namespace Tutorial
 
         /// <summary>Modifies parameters in the dynamic local database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void DynamicModifyTest()
         {
             #region Dynamic Modify
@@ -84,6 +87,7 @@ namespace Tutorial
 
         /// <summary>Waits for the connection to be lost.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void ConnectionLostTest()
         {
             #region Connection Lost
@@ -107,6 +111,7 @@ namespace Tutorial
 
         /// <summary>Iterates over the static local database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void StaticIterateTest()
         {
             #region Static Iterate
@@ -124,6 +129,7 @@ namespace Tutorial
 
         /// <summary>Demonstrates how to react to changes.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void ReactToChangesTest()
         {
             #region React to Changes
@@ -145,6 +151,7 @@ namespace Tutorial
 
         /// <summary>Modifies parameters in the dynamic local database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void StaticModifyTest()
         {
             #region Static Modify
@@ -165,6 +172,7 @@ namespace Tutorial
 
         /// <summary>Tests <see cref="CollectionNode{T}"/>.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void CollectionNodeTest()
         {
             #region Collection Node
@@ -185,6 +193,7 @@ namespace Tutorial
 
         /// <summary>Iterates over the mixed local database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void MixedIterateTest()
         {
             #region Mixed Iterate
@@ -202,6 +211,7 @@ namespace Tutorial
 
         /// <summary>Modifies parameters in the mixed local database.</summary>
         [TestMethod]
+        [TestCategory("Manual")]
         public void MixedModifyTest()
         {
             #region Mixed Modify

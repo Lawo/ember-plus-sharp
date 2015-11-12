@@ -25,7 +25,6 @@ namespace Lawo.EmberPlusSharp.S101
     public class S101ClientTest : CommunicationTestBase
     {
         /// <summary>Tests automatic keep alive with a provider that responds.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void KeepAliveMainTest()
         {
@@ -64,7 +63,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests automatic keep alive with a provider that does not respond.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void KeepAliveExceptionTest()
         {
@@ -92,7 +90,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests sending/receiving messages with <see cref="EmberData"/> commands.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void EmberDataTest()
         {
@@ -136,7 +133,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests what happens when the connection is lost.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ConnectionLostTest()
         {
@@ -169,7 +165,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="S101Client"/> exceptions.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void ExceptionTest()
         {
@@ -218,7 +213,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Tests <see cref="EmberData"/> version handling.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void VersionTest()
         {

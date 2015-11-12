@@ -14,7 +14,6 @@ namespace Lawo.IO
     public class BufferStreamTest : TestBase
     {
         /// <summary>Tests less executed <see cref="WriteBuffer"/> use cases.</summary>
-        [TestCategory("Unattended")]
         [TestMethod]
         public void CanReadCanWriteTest()
         {
