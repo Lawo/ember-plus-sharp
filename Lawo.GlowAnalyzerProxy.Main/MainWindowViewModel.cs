@@ -42,6 +42,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private readonly Settings settings;
         private readonly ConnectionViewModel consumerConnection;
         private readonly ConnectionViewModel providerConnection;
+        private readonly List<Event> eventCache = new List<Event>();
         private readonly ObservableCollection<Event> events = new ObservableCollection<Event>();
         private readonly ReadOnlyObservableCollection<Event> readOnlyEvents;
         private string listeningPort;
@@ -124,7 +125,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             this.events.Clear();
             this.IsStarted = true;
-            this.UpdateTimeLoop();
+            this.UpdateLoop();
             this.ListenLoop();
         }
 
@@ -299,12 +300,29 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private async void UpdateTimeLoop()
+        private async void UpdateLoop()
         {
             while (this.IsStarted)
             {
                 this.Now = DateTime.UtcNow;
-                await Task.Delay(500);
+
+                // The following is necessary because adding events one by one did only scale to roughly 100 events
+                // per second, due to high CPU load, see #12.
+                foreach (var evt in eventCache)
+                {
+                    this.events.Add(evt);
+                }
+
+                eventCache.Clear();
+                var handler = this.ScrollEventIntoView;
+
+                if ((this.events.Count > 0) &&
+                    this.AutoScrollToMostRecentEvent.GetValueOrDefault() && (handler != null))
+                {
+                    handler(this, new ScrollEventIntoViewEventArgs(this.events[this.events.Count - 1]));
+                }
+
+                await Task.Delay(250);
             }
         }
 
@@ -506,14 +524,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                             logInfo.Path,
                             logStartPos,
                             logLength);
-                        this.events.Add(evt);
-
-                        var handler = this.ScrollEventIntoView;
-
-                        if (this.AutoScrollToMostRecentEvent.GetValueOrDefault() && (handler != null))
-                        {
-                            handler(this, new ScrollEventIntoViewEventArgs(evt));
-                        }
+                        this.eventCache.Add(evt);
                     }
                 });
         }
