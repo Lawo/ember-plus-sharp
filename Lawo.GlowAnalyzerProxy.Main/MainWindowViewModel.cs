@@ -455,11 +455,16 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             var payloadStream = new MemoryStream();
             var buffer = new byte[8192];
+            var s101Reader = new S101Reader(
+                (b, o, c, t) => ForwardBytesAsync(logInfo, direction, readConnection, writeConnection, b, o, c, t));
+            Func<LogInfo, OutOfFrameByteReceivedEventArgs, EventInfo> logOutOfFrame =
+                (i, e) => i.Logger.LogData("OutOfFrameByte", direction, new[] { e.Value }, 0, 1);
+            EventHandler<OutOfFrameByteReceivedEventArgs> handler = async (s, e) =>
+                await this.EnqueueLogOperationAsync(logInfo, "OOFB", shortDirection, null, i => logOutOfFrame(i, e));
 
             try
             {
-                var s101Reader = new S101Reader(
-                    (b, o, c, t) => ForwardBytesAsync(logInfo, direction, readConnection, writeConnection, b, o, c, t));
+                s101Reader.OutOfFrameByteReceived += handler;
 
                 while (await s101Reader.ReadAsync(CancellationToken.None))
                 {
@@ -492,6 +497,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
             finally
             {
+                s101Reader.OutOfFrameByteReceived -= handler;
                 payloadStream.Dispose();
                 writeConnection.Client.Close();
                 readConnection.Client.Close();

@@ -87,6 +87,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Ember\EmberDataPayloads\EmberPayloads.cs" />
+    <Compile Include="Model\GlowLoggerProxyTest.cs" />
     <Compile Include="Model\Test\EmptyRoot.cs" />
     <Compile Include="Model\Test\FunctionNode.cs" />
     <Compile Include="Model\Test\EmptyZoneNode.cs" />
@@ -571,6 +572,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug5639Log.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\SapphireLog.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

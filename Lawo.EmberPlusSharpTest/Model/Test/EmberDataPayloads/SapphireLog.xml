@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<S101Log>
+  <Event type="StartingReadLoop" timeUtc="11:37:44.37" />
+  <Event type="Message" timeUtc="11:37:44.47" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.53" direction="Send">FE000E00018001020A0260806B80A0806280A0030201200000000000000000EDFDDDFFFE000E00016001020A021353FF</Event>
+  <Event type="RawData" timeUtc="11:37:44.54" direction="Receive">FE000E0001C001021F02601F6B1DA01B6319A003020101A1123110A00A0C085361707068697265A1020C0085E5FF</Event>
+  <Event type="Message" timeUtc="11:37:44.55" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Node">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">Sapphire</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="11:37:44.61" direction="Send" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.61" direction="Receive">FE000E010194E4FF</Event>
+  <Event type="RawData" timeUtc="11:37:44.61" direction="Send">FE000E00018001020A0260806B80A0806A80A0030D0101A2806480A0806280A003020120000000000000000000000000000000008BD2FFFE000E00016001020A021353FF</Event>
+  <Event type="Message" timeUtc="11:37:44.61" direction="Receive" number="2">
+    <Slot>00</Slot>
+    <Command>KeepAliveRequest</Command>
+    <Payload />
+  </Event>
+  <Event type="Message" timeUtc="11:37:44.61" direction="Send" number="3">
+    <Slot>00</Slot>
+    <Command>KeepAliveResponse</Command>
+    <Payload />
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.62" direction="Send">FE000E0201FDDCCEFF</Event>
+  <Event type="RawData" timeUtc="11:37:44.62" direction="Receive">FE000E0001C001021F0260456B43A01B6A19A0040D020101A111310FA0090C07536F7572636573A1020C00A0246A22A0040D020102A11A3118A00A0C086964656E74697479A10A0C086964656E74697479FDDAFDD8FF</Event>
+  <Event type="Message" timeUtc="11:37:44.62" direction="Receive" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Sources</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">identity</identifier>
+            <description type="UTF8String">identity</description>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="11:37:44.62" direction="Send" number="4">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.62" direction="Send">FE000E00018001020A0260806B80A0806A80A0040D020101A2806480A0806280A003020120000000000000000000000000A0806A80A0040D020102A2806480A0806280A00302012000000000000000000000000000000000E832FFFE000E00016001020A021353FF</Event>
+  <Event type="RawData" timeUtc="11:37:44.62" direction="Receive">FE000E0001C001021F02608200C76B8200C3A01B6A19A0050D03010101A110310EA0080C064650474D2031A1020C00A01B6A19A0050D03010102A110310EA0080C064650474D2032A1020C00A0346932A0050D03010201A1293127A0090C0770726F64756374A1090C0770726F64756374A503020103A20A0C087361707068697265A051694FA0050D03010202A1463144A0090C07636F6D70616E79A1090C07636F6D70616E79A503020103A2270C25286329204C2D532D422042726F61646361737420546563686E6F6C6F6769657320476D6248EECAFF</Event>
+  <Event type="Message" timeUtc="11:37:44.62" direction="Receive" number="4">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">FPGM 1</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">FPGM 2</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.2.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">product</identifier>
+            <description type="UTF8String">product</description>
+            <access type="Integer">3</access>
+            <value type="UTF8String">sapphire</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.2.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">company</identifier>
+            <description type="UTF8String">company</description>
+            <access type="Integer">3</access>
+            <value type="UTF8String">(c) L-S-B Broadcast Technologies GmbH</value>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="11:37:44.65" direction="Send" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.65" direction="Send">FE000E00018001020A0260806B80A0806A80A0050D03010101A2806480A0806280A003020120000000000000000000000000A0806A80A0050D03010102A2806480A0806280A00302012000000000000000000000000000000000C091FFFE000E00016001020A021353FF</Event>
+  <Event type="RawData" timeUtc="11:37:44.65" direction="Receive">FE000E0001C001021F02608201246B820120A01B6A19A0060D0401010102A10F310DA0070C054661646572A1020C00A0196A17A0060D0401010103A10D310BA0050C03445350A1020C00A0566954A0060D0401010101A14A3148A00C0C0A417564696F2054797065A503020101A72E0C2C4E6F6E650A4D6F6E6F0A53746572656F0A537572726F756E6420352E310A537572726F756E6420352E312B32A203020102A01B6A19A0060D0401010202A10F310DA0070C054661646572A1020C00A0196A17A0060D0401010203A10D310BA0050C03445350A1020C00A0566954A0060D0401010201A14A3148A00C0C0A417564696F2054797065A503020101A72E0C2C4E6F6E650A4D6F6E6F0A53746572656F0A537572726F756E6420352E310A537572726F756E6420352E312B32A2030201022839FF</Event>
+  <Event type="Message" timeUtc="11:37:44.65" direction="Receive" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Fader</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">DSP</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Audio Type</identifier>
+            <access type="Integer">1</access>
+            <enumeration type="UTF8String">None
+Mono
+Stereo
+Surround 5.1
+Surround 5.1+2</enumeration>
+            <value type="Integer">2</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Fader</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">DSP</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Audio Type</identifier>
+            <access type="Integer">1</access>
+            <enumeration type="UTF8String">None
+Mono
+Stereo
+Surround 5.1
+Surround 5.1+2</enumeration>
+            <value type="Integer">2</value>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="11:37:44.65" direction="Send" number="6">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.3</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.3</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.65" direction="Send">FE000E00018001020A0260806B80A0806A80A0060D0401010102A2806480A0806280A003020120000000000000000000000000A0806A80A0060D0401010103A2806480A0806280A003020120000000000000000000000000A0806A80A0060D0401010202A2806480A0806280A003020120000000000000000000000000A0806A80A0060D0401010203A2806480A0806280A003020120000000000000000000000000000000000EA5FFFE000E00016001020A021353FF</Event>
+  <Event type="RawData" timeUtc="11:37:44.66" direction="Receive">FE000E0001C001021F02608201B36B8201AFA02D692BA0070D050101010201A120311EA0080C064E756D626572A503020101A403020178A303020100A203020101A03B6939A0070D050101010202A12E312CA00A0C0864422056616C7565A503020103A4050903800309A3050903C00801A20B0909C0071FFDDFFDDFFDDFFDDFFDDFBFA030692EA0070D050101010203A1233121A00A0C08506F736974696F6EA503020103A404020200FDDFA303020100A203020100A01C6A1AA0070D050101010301A10F310DA0070C05496E707574A1020C00A01C6A1AA0070D050101010302A10F310DA0070C0544656C6179A1020C00A02D692BA0070D050101020201A120311EA0080C064E756D626572A503020101A403020178A303020100A203020102A0356933A0070D050101020202A1283126A00A0C0864422056616C7565A503020103A4050903800309A3050903C00801A2050903800309A031692FA0070D050101020203A1243122A00A0C08506F736974696F6EA503020103A404020200FDDFA303020100A204020200FDDFA01C6A1AA0070D050101020301A10F310DA0070C05496E707574A1020C00A01C6A1AA0070D050101020302A10F310DA0070C0544656C6179A1020C001045FF</Event>
+  <Event type="Message" timeUtc="11:37:44.66" direction="Receive" number="6">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.2.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Number</identifier>
+            <access type="Integer">1</access>
+            <maximum type="Integer">120</maximum>
+            <minimum type="Integer">0</minimum>
+            <value type="Integer">1</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.2.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">dB Value</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Real">9</maximum>
+            <minimum type="Real">-256</minimum>
+            <value type="Real">-255.99999999999815</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.2.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Position</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Integer">255</maximum>
+            <minimum type="Integer">0</minimum>
+            <value type="Integer">0</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.3.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Input</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.3.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Delay</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.2.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Number</identifier>
+            <access type="Integer">1</access>
+            <maximum type="Integer">120</maximum>
+            <minimum type="Integer">0</minimum>
+            <value type="Integer">2</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.2.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">dB Value</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Real">9</maximum>
+            <minimum type="Real">-256</minimum>
+            <value type="Real">9</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.2.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Position</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Integer">255</maximum>
+            <minimum type="Integer">0</minimum>
+            <value type="Integer">255</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.3.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Input</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.3.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Delay</identifier>
+            <description type="UTF8String"></description>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="11:37:44.67" direction="Send" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.3.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.1.3.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.3.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.3.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="RawData" timeUtc="11:37:44.67" direction="Send">FE000E00018001020A0260806B80A0806A80A0070D050101010301A2806480A0806280A003020120000000000000000000000000A0806A80A0070D050101010302A2806480A0806280A003020120000000000000000000000000A0806A80A0070D050101020301A2806480A0806280A003020120000000000000000000000000A0806A80A0070D050101020302A2806480A0806280A00302012000000000000000000000000000000000D8BCFFFE000E00016001020A021353FF</Event>
+  <Event type="RawData" timeUtc="11:37:44.67" direction="Receive">FE000E0001C001021F02608201AE6B8201AAA02F692DA0080D06010101030101A121311FA0060C044761696EA503020103A4050903800409A3050903C0040FA2020900A0236921A0080D06010101030102A1153113A0070C055068617365A503020103A2030101FDDFA04A6948A0080D06010101030103A13C313AA0090C074C52204D6F6465A503020103A7230C2173746572656F0A722D3E620A736964650A6C2D3E620A6D6F6E6F0A6D732D3E7879A203020100A031692FA0080D06010101030201A1233121A00B0C0954696D6520286D7329A503020103A4050903800855A3020900A2020900A02F692DA0080D06010102030101A121311FA0060C044761696EA503020103A4050903800409A3050903C0040FA2020900A0236921A0080D06010102030102A1153113A0070C055068617365A503020103A203010100A04A6948A0080D06010102030103A13C313AA0090C074C52204D6F6465A503020103A7230C2173746572656F0A722D3E620A736964650A6C2D3E620A6D6F6E6F0A6D732D3E7879A203020100A031692FA0080D06010102030201A1233121A00B0C0954696D6520286D7329A503020103A4050903800855A3020900A20209009232FF</Event>
+  <Event type="Message" timeUtc="11:37:44.67" direction="Receive" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.3.1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Gain</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Real">18</maximum>
+            <minimum type="Real">-30</minimum>
+            <value type="Real">0</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.3.1.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Phase</identifier>
+            <access type="Integer">3</access>
+            <value type="Boolean">true</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.3.1.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">LR Mode</identifier>
+            <access type="Integer">3</access>
+            <enumeration type="UTF8String">stereo
+r-&gt;b
+side
+l-&gt;b
+mono
+ms-&gt;xy</enumeration>
+            <value type="Integer">0</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.1.3.2.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Time (ms)</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Real">340</maximum>
+            <minimum type="Real">0</minimum>
+            <value type="Real">0</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.3.1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Gain</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Real">18</maximum>
+            <minimum type="Real">-30</minimum>
+            <value type="Real">0</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.3.1.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Phase</identifier>
+            <access type="Integer">3</access>
+            <value type="Boolean">false</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.3.1.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">LR Mode</identifier>
+            <access type="Integer">3</access>
+            <enumeration type="UTF8String">stereo
+r-&gt;b
+side
+l-&gt;b
+mono
+ms-&gt;xy</enumeration>
+            <value type="Integer">0</value>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.3.2.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Time (ms)</identifier>
+            <access type="Integer">3</access>
+            <maximum type="Real">340</maximum>
+            <minimum type="Real">0</minimum>
+            <value type="Real">0</value>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="StoppingReadLoop" timeUtc="11:37:45.09" />
+  <Event type="LocalGracefulDisconnect" timeUtc="11:37:47.62" />
+</S101Log>

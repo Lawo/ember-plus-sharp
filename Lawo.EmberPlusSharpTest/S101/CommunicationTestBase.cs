@@ -149,9 +149,15 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Asynchronously waits for a TCP connection to port 8099.</summary>
-        protected static async Task<TcpClient> WaitForConnectionAsync()
+        protected static Task<TcpClient> WaitForConnectionAsync()
         {
-            var listener = new TcpListener(IPAddress.Any, 8099);
+            return WaitForConnectionAsync(8099);
+        }
+
+        /// <summary>Asynchronously waits for a TCP connection to port 8099.</summary>
+        protected static async Task<TcpClient> WaitForConnectionAsync(int port)
+        {
+            var listener = new TcpListener(IPAddress.Any, port);
             listener.Start();
             var tcpClient = await listener.AcceptTcpClientAsync();
             listener.Stop();
