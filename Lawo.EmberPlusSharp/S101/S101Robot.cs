@@ -122,7 +122,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         private async void OnClientEmberDataReceived(object sender, MessageReceivedEventArgs e)
         {
-            await this.taskQueue.Enqueue(() => this.ProcessIncoming(e));
+            await this.taskQueue.Enqueue(() => this.ProcessIncomingMessage(e));
         }
 
         private void OnClientConnectionLost(object sender, ConnectionLostEventArgs e)
@@ -140,21 +140,18 @@ namespace Lawo.EmberPlusSharp.S101
                     switch (this.logReader.EventType)
                     {
                         case "OutOfFrameByte":
-                            await this.client.SendOutOfFrameByteAsync(this.logReader.GetPayload()[0]);
+                            if (!await this.SendEvent(() => this.client.SendOutOfFrameByteAsync(
+                                this.logReader.GetPayload()[0])))
+                            {
+                                return;
+                            }
+
                             break;
                         case "Message":
                             if (this.logReader.Message.Command is EmberData)
                             {
-                                if (this.firstMessageDirection == null)
-                                {
-                                    this.firstMessageDirection = this.logReader.Direction;
-                                }
-
-                                if (this.sendFirstMessage == (this.firstMessageDirection == this.logReader.Direction))
-                                {
-                                    await this.client.SendMessageAsync(this.logReader.Message, this.logReader.GetPayload());
-                                }
-                                else
+                                if (!await this.SendEvent(() => this.client.SendMessageAsync(
+                                    this.logReader.Message, this.logReader.GetPayload())))
                                 {
                                     return;
                                 }
@@ -176,7 +173,7 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is forwarded.")]
-        private Task ProcessIncoming(MessageReceivedEventArgs e)
+        private Task ProcessIncomingMessage(MessageReceivedEventArgs e)
         {
             try
             {
@@ -201,6 +198,24 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             return this.SendMessagesAsync();
+        }
+
+        private async Task<bool> SendEvent(Func<Task> sendOperation)
+        {
+            if (this.firstMessageDirection == null)
+            {
+                this.firstMessageDirection = this.logReader.Direction;
+            }
+
+            if (this.sendFirstMessage == (this.firstMessageDirection == this.logReader.Direction))
+            {
+                await sendOperation();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private string ToXml(byte[] payload)
