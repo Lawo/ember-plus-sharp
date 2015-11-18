@@ -94,6 +94,7 @@ namespace Lawo.EmberPlusSharp.S101
             this.logReader = new S101LogReader(types, logReader);
             this.sendFirstMessage = sendFirstMessage;
 
+            this.client.OutOfFrameByteReceived += this.OnOutOfFrameByteReceived;
             this.client.EmberDataReceived += this.OnClientEmberDataReceived;
             this.client.ConnectionLost += this.OnClientConnectionLost;
             this.SendMessages();
@@ -111,6 +112,7 @@ namespace Lawo.EmberPlusSharp.S101
                 {
                     this.client.ConnectionLost -= this.OnClientConnectionLost;
                     this.client.EmberDataReceived -= this.OnClientEmberDataReceived;
+                    this.client.OutOfFrameByteReceived -= this.OnOutOfFrameByteReceived;
                     return Task.FromResult(false);
                 });
         }
@@ -118,6 +120,11 @@ namespace Lawo.EmberPlusSharp.S101
         private async void SendMessages()
         {
             await this.taskQueue.Enqueue(this.SendMessagesAsync);
+        }
+
+        private async void OnOutOfFrameByteReceived(object sender, OutOfFrameByteReceivedEventArgs e)
+        {
+            await this.taskQueue.Enqueue(() => this.ProcessIncomingOutOfFrameByte(e));
         }
 
         private async void OnClientEmberDataReceived(object sender, MessageReceivedEventArgs e)
@@ -170,6 +177,28 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 this.done.TrySetException(ex);
             }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is forwarded.")]
+        private Task ProcessIncomingOutOfFrameByte(OutOfFrameByteReceivedEventArgs e)
+        {
+            try
+            {
+                var expected = this.logReader.GetPayload()[0];
+
+                if (expected != e.Value)
+                {
+                    var msg = "The expected payload does not match the actual received payload, see Data for details.";
+                    throw new S101Exception(msg) { Data = { { "Expected", expected }, { "Actual", e.Value } } };
+                }
+            }
+            catch (Exception ex)
+            {
+                this.done.TrySetException(ex);
+                return Task.FromResult(false);
+            }
+
+            return this.SendMessagesAsync();
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is forwarded.")]
