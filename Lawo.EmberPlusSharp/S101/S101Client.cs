@@ -192,6 +192,15 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
+        /// <summary>Sends <paramref name="value"/> as an out-of-frame byte.</summary>
+        /// <param name="value">The byte to write.</param>
+        /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
+        public Task SendOutOfFrameByteAsync(byte value)
+        {
+            this.AssertPreconditions();
+            return this.SendOutOfFrameByteAsyncCore(value);
+        }
+
         /// <summary>Calls
         /// <see cref="SendMessageAsync(S101Message, byte[])">SendMessageAsync(<paramref name="message"/>, null)</see>.
         /// </summary>
@@ -225,15 +234,6 @@ namespace Lawo.EmberPlusSharp.S101
             return this.SendMessageAsyncCore(message, payload);
         }
 
-        /// <summary>Sends <paramref name="value"/> as an out-of-frame byte.</summary>
-        /// <param name="value">The byte to write.</param>
-        /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
-        public Task SendOutOfFrameByteAsync(byte value)
-        {
-            this.AssertPreconditions();
-            return this.SendOutOfFrameByteAsyncCore(value);
-        }
-
         /// <summary>See <see cref="IDisposable.Dispose"/>.</summary>
         /// <remarks>Cancels all communication currently in progress and calls <see cref="IDisposable.Dispose"/> on the
         /// connection object passed to the constructor.</remarks>
@@ -243,12 +243,12 @@ namespace Lawo.EmberPlusSharp.S101
             this.DisposeCore(true);
         }
 
+        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
+        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
+
         /// <summary>Occurs when the client has received the full payload of a message with an <see cref="EmberData"/>
         /// command.</summary>
         public event EventHandler<MessageReceivedEventArgs> EmberDataReceived;
-
-        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
-        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
 
         /// <summary>Occurs when the connection to the provider has been lost.</summary>
         /// <remarks>

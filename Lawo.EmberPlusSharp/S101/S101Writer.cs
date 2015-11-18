@@ -63,6 +63,15 @@ namespace Lawo.EmberPlusSharp.S101
             return this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
         }
 
+        /// <summary>Writes <paramref name="value"/> as an out-of-frame byte.</summary>
+        /// <param name="value">The byte to write.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+        /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
+        public Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
+        {
+            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteAsyncCore(value, cancellationToken));
+        }
+
         /// <summary>Asynchronously writes <paramref name="message"/>.</summary>
         /// <param name="message">The message to write.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
@@ -89,15 +98,6 @@ namespace Lawo.EmberPlusSharp.S101
         public Task<NonSeekableStream> WriteMessageAsync(S101Message message, CancellationToken cancellationToken)
         {
             return this.taskSingleton.Execute(() => this.WriteMessageCoreAsync(message, cancellationToken));
-        }
-
-        /// <summary>Writes <paramref name="value"/> as an out-of-frame byte.</summary>
-        /// <param name="value">The byte to write.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
-        public Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteAsyncCore(value, cancellationToken));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
