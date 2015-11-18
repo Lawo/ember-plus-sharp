@@ -607,6 +607,7 @@
   </HelpKINode>
   <HelpKINode Title="EventInfo.Number property" Url="html/53456680.htm" />
   <HelpKINode Title="EventInfo.TimeUtc property" Url="html/BB91F0C1.htm" />
+  <HelpKINode Title="EventType property" Url="html/6B289905.htm" />
   <HelpKINode Title="Exception property" Url="html/367D0C00.htm" />
   <HelpKINode Title="ExceptionMessages class">
     <HelpKINode Title="ExceptionMessages Class" Url="html/868DE99F.htm" />
@@ -1392,6 +1393,7 @@
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.KeepAliveRequest class" Url="html/D40A1754.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.KeepAliveResponse class" Url="html/32D54549.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.MessageReceivedEventArgs class" Url="html/1F9E1825.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.S101.OutOfFrameByteReceivedEventArgs class" Url="html/8C695ECB.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.S101Client class" Url="html/9F3D3A83.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.S101Command class" Url="html/70EE950A.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.S101Exception class" Url="html/18261EC6.htm" />
@@ -1824,6 +1826,17 @@
   <HelpKINode Title="OneWayBinding.Create method" Url="html/237EA76B.htm" />
   <HelpKINode Title="OnPropertyChanged method" Url="html/4F8BB65A.htm" />
   <HelpKINode Title="OuterId property" Url="html/7DA6AC87.htm" />
+  <HelpKINode Title="OutOfFrameByteReceived event">
+    <HelpKINode Title="S101Client.OutOfFrameByteReceived Event" Url="html/7AEB3045.htm" />
+    <HelpKINode Title="S101Reader.OutOfFrameByteReceived Event" Url="html/A673CAA0.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OutOfFrameByteReceivedEventArgs class">
+    <HelpKINode Title="OutOfFrameByteReceivedEventArgs Class" Url="html/8C695ECB.htm" />
+    <HelpKINode Title="about OutOfFrameByteReceivedEventArgs class" Url="html/8C695ECB.htm" />
+    <HelpKINode Title="methods" Url="html/E571CBB2.htm" />
+    <HelpKINode Title="properties" Url="html/2967D625.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OutOfFrameByteReceivedEventArgs.Value property" Url="html/AD0B38C4.htm" />
   <HelpKINode Title="Owner property" Url="html/E2984176.htm" />
   <HelpKINode Title="Parameter(Of TMostDerived, TValue) class">
     <HelpKINode Title="Parameter(TMostDerived, TValue) Class" Url="html/E6B71955.htm" />
@@ -2179,8 +2192,10 @@
   <HelpKINode Title="S101Client.Dispose method" Url="html/D8DEB115.htm" />
   <HelpKINode Title="S101Client.EmberDataReceived event" Url="html/DA7FAB4D.htm" />
   <HelpKINode Title="S101Client.KeepAliveRequestSlot property" Url="html/DC8E8508.htm" />
+  <HelpKINode Title="S101Client.OutOfFrameByteReceived event" Url="html/7AEB3045.htm" />
   <HelpKINode Title="S101Client.S101Client constructor" Url="html/C5DE158D.htm" />
   <HelpKINode Title="S101Client.SendMessageAsync method" Url="html/58885BD5.htm" />
+  <HelpKINode Title="S101Client.SendOutOfFrameByteAsync method" Url="html/C6061264.htm" />
   <HelpKINode Title="S101Command class">
     <HelpKINode Title="S101Command Class" Url="html/70EE950A.htm" />
     <HelpKINode Title="about S101Command class" Url="html/70EE950A.htm" />
@@ -2217,6 +2232,7 @@
     <HelpKINode Title="properties" Url="html/705F4DE3.htm" />
   </HelpKINode>
   <HelpKINode Title="S101LogReader.Direction property" Url="html/A3332E10.htm" />
+  <HelpKINode Title="S101LogReader.EventType property" Url="html/6B289905.htm" />
   <HelpKINode Title="S101LogReader.GetPayload method" Url="html/5D55AB3C.htm" />
   <HelpKINode Title="S101LogReader.Message property" Url="html/6729CCB2.htm" />
   <HelpKINode Title="S101LogReader.Number property" Url="html/495A7128.htm" />
@@ -2237,12 +2253,14 @@
     <HelpKINode Title="S101Reader Class" Url="html/E7DAAE4F.htm" />
     <HelpKINode Title="about S101Reader class" Url="html/E7DAAE4F.htm" />
     <HelpKINode Title="constructor" Url="html/722FEA54.htm" />
+    <HelpKINode Title="events" Url="html/18A2C8D9.htm" />
     <HelpKINode Title="methods" Url="html/694DACEC.htm" />
     <HelpKINode Title="properties" Url="html/C23786D1.htm" />
   </HelpKINode>
   <HelpKINode Title="S101Reader.DisposeAsync method" Url="html/5DF70EA3.htm" />
   <HelpKINode Title="S101Reader.IsAnotherMessageAvailable property" Url="html/B5C9007B.htm" />
   <HelpKINode Title="S101Reader.Message property" Url="html/3833429A.htm" />
+  <HelpKINode Title="S101Reader.OutOfFrameByteReceived event" Url="html/A673CAA0.htm" />
   <HelpKINode Title="S101Reader.Payload property" Url="html/E3FF1DA8.htm" />
   <HelpKINode Title="S101Reader.ReadAsync method" Url="html/940D0813.htm" />
   <HelpKINode Title="S101Reader.S101Reader constructor" Url="html/722FEA54.htm" />
@@ -2261,6 +2279,7 @@
   <HelpKINode Title="S101Writer.DisposeAsync method" Url="html/13ACF68F.htm" />
   <HelpKINode Title="S101Writer.S101Writer constructor" Url="html/8C204761.htm" />
   <HelpKINode Title="S101Writer.WriteMessageAsync method" Url="html/5D560F7B.htm" />
+  <HelpKINode Title="S101Writer.WriteOutOfFrameByteAsync method" Url="html/743FACDE.htm" />
   <HelpKINode Title="SByte enumeration member" Url="html/CD29B87D.htm" />
   <HelpKINode Title="SchemaIdentifiers property">
     <HelpKINode Title="ElementWithSchemas(TMostDerived).SchemaIdentifiers Property " Url="html/E74CBB6C.htm" />
@@ -2295,6 +2314,7 @@
   <HelpKINode Title="SendAsync method" Url="html/B5499501.htm" />
   <HelpKINode Title="SendChangesAsync method" Url="html/C7CBA772.htm" />
   <HelpKINode Title="SendMessageAsync method" Url="html/58885BD5.htm" />
+  <HelpKINode Title="SendOutOfFrameByteAsync method" Url="html/C6061264.htm" />
   <HelpKINode Title="Sequence field" Url="html/FCD1303C.htm" />
   <HelpKINode Title="Serialize(Of T) method" Url="html/37D57F07.htm" />
   <HelpKINode Title="Serialize&lt;T&gt; method" Url="html/37D57F07.htm" />
@@ -2460,6 +2480,7 @@
     <HelpKINode Title="IParameter.Value Property " Url="html/ED7FF041.htm" />
     <HelpKINode Title="IProperty(TOwner, TProperty).Value Property " Url="html/56CF06FF.htm" />
     <HelpKINode Title="NullableParameter(TMostDerived, TValue).Value Property " Url="html/B20172A5.htm" />
+    <HelpKINode Title="OutOfFrameByteReceivedEventArgs.Value Property " Url="html/AD0B38C4.htm" />
     <HelpKINode Title="ReferenceParameter(TMostDerived, TValue).Value Property " Url="html/3F78D6FB.htm" />
     <HelpKINode Title="ValueParameter(TMostDerived, TValue).Value Property " Url="html/9410ADF.htm" />
   </HelpKINode>
@@ -2519,6 +2540,7 @@
   <HelpKINode Title="WriteCallback delegate" Url="html/38CBBE2D.htm" />
   <HelpKINode Title="WriteEndContainer method" Url="html/40882D87.htm" />
   <HelpKINode Title="WriteMessageAsync method" Url="html/5D560F7B.htm" />
+  <HelpKINode Title="WriteOutOfFrameByteAsync method" Url="html/743FACDE.htm" />
   <HelpKINode Title="WriteStartApplicationDefinedType method" Url="html/28843FEA.htm" />
   <HelpKINode Title="WriteStartSequence method" Url="html/DFCC62FE.htm" />
   <HelpKINode Title="WriteStartSet method" Url="html/12FDF48B.htm" />
