@@ -101,7 +101,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="NewEventAddedEventArgs.cs" />
+    <Compile Include="ListenFailedEventArgs.cs" />
+    <Compile Include="ScrollEventIntoViewEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

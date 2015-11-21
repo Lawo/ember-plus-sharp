@@ -7,6 +7,7 @@
 namespace Lawo.GlowAnalyzerProxy.Main
 {
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -20,6 +21,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.InitializeComponent();
             this.DataContext = new MainWindowViewModel(Properties.Settings.Default);
             this.ViewModel.ScrollEventIntoView += this.OnScrollEventIntoView;
+            this.ViewModel.ListenFailed += this.OnListenFailed;
         }
         #endregion
 
@@ -33,6 +35,13 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private void OnScrollEventIntoView(object sender, ScrollEventIntoViewEventArgs e)
         {
             this.EventsDataGrid.ScrollIntoView(e.NewEvent);
+        }
+
+        private void OnListenFailed(object sender, ListenFailedEventArgs e)
+        {
+            var caption = string.Format(
+                CultureInfo.InvariantCulture, "Unable to listen on port {0}", this.ViewModel.ListeningPort);
+            MessageBox.Show(this, e.Exception.Message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void OnSelectLogFolderButton_Click(object sender, RoutedEventArgs e)

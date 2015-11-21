@@ -230,6 +230,8 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         public event EventHandler<ScrollEventIntoViewEventArgs> ScrollEventIntoView;
 
+        public event EventHandler<ListenFailedEventArgs> ListenFailed;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Permanent binding is intended.")]
@@ -331,12 +333,21 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.ConsumerConnection.ConnectionCountCore = 0;
             this.ProviderConnection.ConnectionCountCore = 0;
             var listener = new TcpListener(IPAddress.Any, int.Parse(this.ListeningPort));
-            listener.Start(1);
 
             try
             {
+                listener.Start(1);
                 this.IsStopped = false;
                 await ForwardLoop(listener);
+            }
+            catch (SocketException ex)
+            {
+                var handler = this.ListenFailed;
+
+                if (handler != null)
+                {
+                    handler(this, new ListenFailedEventArgs(ex));
+                }
             }
             finally
             {
