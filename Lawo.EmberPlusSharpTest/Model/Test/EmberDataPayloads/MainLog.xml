@@ -197,10 +197,10 @@ Three</enumeration>
           <contents type="Set">
             <identifier type="UTF8String">OctetstringParameter</identifier>
             <description type="UTF8String">This is the seventh element.</description>
-            <value type="Octetstring">3SX8f1tGPhFUBmoNn00ih9k7wlDGLcrIhOd/pFy2IzuoaUPLVU1NJCUKyDwEb1sMCiIR61JFu7BbM/p0xpm1nuMvZDYJVjKM7Z0qvGWNwxSLc5k5pDjoY62TcCFS2V2LVClZ1QslA7Twhf21Gv9KzW/l6FMAe/mrRgCIdeUQORQ/nmc7NO4JZm/lSR86M0iuSaOxbPEKi9kwro4KnI7O30vpdXyYDpmA3IHkGjLacBO42ixCX8wiNRONC4Zg/8nhFmnTUb7MFjoKMJBvJnCnVT16UsJijIB+xj9oCgMSIN23AgTIBh5V68TxNy48sw+i5rVI5awHf4npVIp+Yws39xCztyNs304eJWb9cFRRQhMwxiNNyjowr4N73rKU1oi4uUAeiPvrNgdmKb9GCg40lxJ2Tp3n6izVgweg8QCcik/eRbcUM7kYRJAc5qF66aV0RkefHYfr0M8TSAXzS0UHyp5waMRXIGRYXg==</value>
+            <value type="Octetstring">DD25FC7F5B463E1154066A0D9F4D2287D93BC250C62DCAC884E77FA45CB6233BA86943CB554D4D24250AC83C046F5B0C0A2211EB5245BBB05B33FA74C699B59EE32F64360956328CED9D2ABC658DC3148B739939A438E863AD93702152D95D8B542959D50B2503B4F085FDB51AFF4ACD6FE5E853007BF9AB46008875E51039143F9E673B34EE09666FE5491F3A3348AE49A3B16CF10A8BD930AE8E0A9C8ECEDF4BE9757C980E9980DC81E41A32DA7013B8DA2C425FCC2235138D0B8660FFC9E11669D351BECC163A0A30906F2670A7553D7A52C2628C807EC63F680A031220DDB70204C8061E55EBC4F1372E3CB30FA2E6B548E5AC077F89E9548A7E630B37F710B3B7236CDF4E1E2566FD705451421330C6234DCA3A30AF837BDEB294D688B8B9401E88FBEB36076629BF460A0E349712764E9DE7EA2CD58307A0F1009C8A4FDE45B71433B91844901CE6A17AE9A57446479F1D87EBD0CF134805F34B4507CA9E7068C4572064585E</value>
             <access type="Integer">3</access>
             <isOnline type="Boolean">true</isOnline>
-            <default type="Octetstring">+g==</default>
+            <default type="Octetstring">FA</default>
             <type type="Integer">7</type>
             <streamIdentifier type="Integer">2</streamIdentifier>
           </contents>
@@ -384,7 +384,7 @@ Three</enumeration>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">2</streamIdentifier>
-          <streamValue type="Octetstring">vNfExDztEw==</streamValue>
+          <streamValue type="Octetstring">BCD7C4C43CED13</streamValue>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">3</streamIdentifier>

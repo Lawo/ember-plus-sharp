@@ -189,7 +189,7 @@ namespace Lawo.EmberPlusSharp.Ember
                     case BerOctetstring.InnerNumber:
                         var bytes = reader.ReadContentsAsByteArray();
                         WriteValue(
-                            writer, fieldName, BerOctetstring.Name, bytes, (w, o) => w.WriteBase64(o, 0, o.Length));
+                            writer, fieldName, BerOctetstring.Name, bytes, (w, o) => w.WriteBinHex(o, 0, o.Length));
                         break;
                     case BerRelativeObjectIdentifier.InnerNumber:
                         var intOid = reader.ReadContentsAsInt32Array();
@@ -433,12 +433,12 @@ namespace Lawo.EmberPlusSharp.Ember
 
             using (var stream = new MemoryStream())
             {
-                var read = ReadValue(reader, r => (int?)r.ReadContentAsBase64(buffer, 0, buffer.Length), 0);
+                var read = ReadValue(reader, r => (int?)r.ReadContentAsBinHex(buffer, 0, buffer.Length), 0);
 
                 while (read > 0)
                 {
                     stream.Write(buffer, 0, read.Value);
-                    read = reader.ReadContentAsBase64(buffer, 0, buffer.Length);
+                    read = reader.ReadContentAsBinHex(buffer, 0, buffer.Length);
                 }
 
                 writer.WriteValue(fieldId, stream.ToArray());

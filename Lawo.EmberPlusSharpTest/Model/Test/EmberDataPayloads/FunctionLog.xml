@@ -372,7 +372,7 @@
                 <invocationId type="Integer">4</invocationId>
                 <arguments type="Sequence">
                   <Value type="Boolean">true</Value>
-                  <Value type="Octetstring">Kio=</Value>
+                  <Value type="Octetstring">2A2A</Value>
                   <Value type="Integer">13</Value>
                 </arguments>
               </invocation>
@@ -391,7 +391,7 @@
         <success type="Boolean">true</success>
         <result type="Sequence">
           <Value type="Boolean">true</Value>
-          <Value type="Octetstring">Kio=</Value>
+          <Value type="Octetstring">2A2A</Value>
           <Value type="Integer">13</Value>
         </result>
       </Root>

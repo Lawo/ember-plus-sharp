@@ -183,7 +183,7 @@ Three</enumeration>
       <value type="Octetstring">{6}</value>
       <access type="Integer">3</access>
       <isOnline type="Boolean">true</isOnline>
-      <default type="Octetstring">+l==</default>
+      <default type="Octetstring">FA</default>
       <type type="Integer">7</type>
       <streamIdentifier type="Integer">2</streamIdentifier>
     </contents>

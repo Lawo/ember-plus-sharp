@@ -86,7 +86,7 @@ namespace Lawo.EmberPlusSharp.Model
                         formulaInteger,
                         (int)enumeration,
                         (int)enumMap,
-                        Convert.ToBase64String(octetstring),
+                        new SoapHexBinary(octetstring).ToString(),
                         real,
                         stringValue);
                     await requestTask;
@@ -152,7 +152,7 @@ namespace Lawo.EmberPlusSharp.Model
                                 formulaInteger,
                                 (int)enumeration,
                                 (int)enumMap,
-                                Convert.ToBase64String(octetstring),
+                                new SoapHexBinary(octetstring).ToString(),
                                 real,
                                 stringValue,
                                 children[0].ToString().ToLowerInvariant(),
@@ -196,7 +196,7 @@ namespace Lawo.EmberPlusSharp.Model
                         formulaInteger,
                         enumeration,
                         enumMap,
-                        Convert.ToBase64String(octetstring),
+                        new SoapHexBinary(octetstring).ToString(),
                         real,
                         stringValue);
                     await requestTask;
@@ -290,7 +290,7 @@ namespace Lawo.EmberPlusSharp.Model
                                 formulaInteger,
                                 (int)enumeration,
                                 (int)enumMap,
-                                Convert.ToBase64String(octetstring),
+                                new SoapHexBinary(octetstring).ToString(),
                                 real,
                                 stringValue,
                                 children[0].ToString().ToLowerInvariant(),

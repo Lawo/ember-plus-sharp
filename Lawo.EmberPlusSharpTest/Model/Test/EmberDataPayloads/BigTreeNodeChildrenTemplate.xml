@@ -86,9 +86,9 @@
         <contents type="Set">
           <identifier type="UTF8String">OctetstringParameter</identifier>
           <description type="UTF8String">This is the sixth element.</description>
-          <value type="Octetstring">abcd</value>
+          <value type="Octetstring">69B71D</value>
           <access type="Integer">3</access>
-          <default type="Octetstring">+l==</default>
+          <default type="Octetstring">FA</default>
         </contents>
       </Element>
       <Element type="Parameter">
