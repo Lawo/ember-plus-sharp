@@ -48,6 +48,8 @@ namespace Lawo.EmberPlusSharp.Model
         object DefaultValue { get; }
 
         /// <summary>Gets <b>type</b>.</summary>
+        /// <exception cref="InvalidOperationException">The type is not available. This can only happen for a parameter
+        /// where <see cref="IElement.IsOnline"/> equals <c>false</c>.</exception>
         ParameterType Type { get; }
 
         /// <summary>Gets <b>streamIdentifier</b> (not yet supported).</summary>

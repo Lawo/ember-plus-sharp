@@ -375,14 +375,19 @@ namespace Lawo.EmberPlusSharp.Model
             var finalType =
                 this.type ?? (typeType == ParameterType.Trigger ? typeType : null) ?? enumType ?? valueType ?? typeType;
 
-            if (!finalType.HasValue)
+            if (finalType.HasValue)
             {
-                const string Format =
-                    "No enumeration, enumMap, value or type field is available for the parameter with the path {0}.";
-                throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
+                this.Type = finalType.Value;
             }
-
-            this.Type = finalType.Value;
+            else
+            {
+                if (this.IsOnline)
+                {
+                    const string Format =
+                        "No enumeration, enumMap, value or type field is available for the parameter with the path {0}.";
+                    throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
+                }
+            }
         }
 
         private static List<KeyValuePair<string, int>> ReadEnumeration(EmberReader reader)
