@@ -72,8 +72,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Official Glow name.")]
-        internal ChildrenState ReadContents(
-            Func<EmberReader, ElementType, ChildrenState> baseImpl, EmberReader reader, ElementType actualType)
+        internal RequestState ReadContents(
+            Func<EmberReader, ElementType, RequestState> baseImpl, EmberReader reader, ElementType actualType)
         {
             if (!IsEnum)
             {

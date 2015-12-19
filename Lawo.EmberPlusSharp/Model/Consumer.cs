@@ -229,7 +229,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             if ((await Task.WhenAny(queryChildrenTask, Task.Delay(this.queryChildrenTimeout))) != queryChildrenTask)
             {
-                this.root.UpdateChildrenState(this.root.ChildrenState.Equals(ChildrenState.Complete));
+                this.root.UpdateRequestState(this.root.RequestState.Equals(RequestState.Complete));
                 var firstIncompleteNode = this.root.GetFirstIncompleteChild();
                 var message = firstIncompleteNode == null ?
                     "The provider failed to send all requested elements within the specified timeout." :
@@ -353,23 +353,23 @@ namespace Lawo.EmberPlusSharp.Model
 
         private async Task<bool> SendChildrenQuery()
         {
-            var rootChildrenState = this.root.UpdateChildrenState(false);
+            var rootRequestState = this.root.UpdateRequestState(false);
 
-            if (rootChildrenState.Equals(ChildrenState.None))
+            if (rootRequestState.Equals(RequestState.None))
             {
                 // There is no guarantee that the response we received is actually an answer to the previously sent
-                // getDirectory request. It could just as well be a parameter value update. ChildrenState indicates
-                // whether the former or the latter happened. If ChildrenState == ChildrenState.None, we have
-                // received at least one new node. If ChildrenState != ChildrenState.None, no new node without
+                // getDirectory request. It could just as well be a parameter value update. RequestState indicates
+                // whether the former or the latter happened. If RequestState == RequestState.None, we have
+                // received at least one new node. If RequestState != RequestState.None, no new node without
                 // children has been received and consequently no new getDirectory request needs to be sent.
                 // Of course, in the latter case the assumption is that the provider will at some point send an
                 // answer to our previous getDirectory request. If it doesn't, the timeout will take care of things.
                 MemoryStream stream;
-                WriteChildrenQuery(this.root, out stream);
+                WriteRequest(this.root, out stream);
                 await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
             }
 
-            return !rootChildrenState.Equals(ChildrenState.Verified);
+            return !rootRequestState.Equals(RequestState.Verified);
         }
 
         private void ApplyChange(MessageReceivedEventArgs args)
@@ -410,13 +410,13 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static void WriteChildrenQuery(TRoot root, out MemoryStream stream)
+        private static void WriteRequest(TRoot root, out MemoryStream stream)
         {
             // TODO: Reuse MemoryStream and EmberWriter for all outgoing messages.
             using (stream = new MemoryStream())
             using (var writer = new EmberWriter(stream))
             {
-                root.WriteChildrenQuery(writer);
+                root.WriteRequest(writer);
             }
         }
 

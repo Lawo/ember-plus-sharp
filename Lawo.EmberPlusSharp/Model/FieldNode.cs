@@ -51,9 +51,9 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal virtual Element ReadNewDynamicChildContents(
-            EmberReader reader, ElementType actualType, Context context, out ChildrenState childChildrenState)
+            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState)
         {
-            return base.ReadNewChildContents(reader, actualType, context, out childChildrenState);
+            return base.ReadNewChildContents(reader, actualType, context, out childRequestState);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
@@ -73,12 +73,12 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override Element ReadNewChildContents(
-            EmberReader reader, ElementType actualType, Context context, out ChildrenState childChildrenState)
+            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState)
         {
             MetaElement metaChild;
             return MetaChildren.TryGetValue(context.Identifier, out metaChild) ?
-                metaChild.ReadContents(reader, actualType, context, out childChildrenState) :
-                this.ReadNewDynamicChildContents(reader, actualType, context, out childChildrenState);
+                metaChild.ReadContents(reader, actualType, context, out childRequestState) :
+                this.ReadNewDynamicChildContents(reader, actualType, context, out childRequestState);
         }
 
         internal sealed override bool AreRequiredChildrenAvailable(bool throwIfMissing)

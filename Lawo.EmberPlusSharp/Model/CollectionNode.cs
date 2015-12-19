@@ -48,7 +48,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "These are actual class names.")]
         internal sealed override Element ReadNewChildContents(
-            EmberReader reader, ElementType actualType, Context context, out ChildrenState childChildrenState)
+            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState)
         {
             if (ReadContentsCallback == null)
             {
@@ -57,7 +57,7 @@ namespace Lawo.EmberPlusSharp.Model
                 throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
             }
 
-            return ReadContentsCallback(reader, actualType, context, out childChildrenState);
+            return ReadContentsCallback(reader, actualType, context, out childRequestState);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
@@ -93,6 +93,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         private delegate Element ReadContentsMethod(
-            EmberReader reader, ElementType actualType, Context context, out ChildrenState childChildrenState);
+            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState);
     }
 }

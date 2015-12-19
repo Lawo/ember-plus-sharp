@@ -70,7 +70,7 @@ namespace Lawo.EmberPlusSharp.Model
             return invokeResult.Task;
         }
 
-        internal override ChildrenState ReadContents(EmberReader reader, ElementType actualType)
+        internal override RequestState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Function, actualType);
             var argumentsRead = false;
@@ -102,7 +102,7 @@ namespace Lawo.EmberPlusSharp.Model
                 throw this.CreateSignatureMismatchException();
             }
 
-            return ChildrenState.Complete;
+            return RequestState.Complete;
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)

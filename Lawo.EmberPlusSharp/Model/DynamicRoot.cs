@@ -36,9 +36,9 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal sealed override Element ReadNewDynamicChildContents(
-            EmberReader reader, ElementType actualType, Context context, out ChildrenState childChildrenState)
+            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState)
         {
-            return DynamicNodeHelper.ReadDynamicChildContents(reader, actualType, context, out childChildrenState);
+            return DynamicNodeHelper.ReadDynamicChildContents(reader, actualType, context, out childRequestState);
         }
 
         internal sealed override bool ChangeOnlineStatus(IElement child)

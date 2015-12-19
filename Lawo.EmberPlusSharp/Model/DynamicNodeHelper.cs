@@ -17,16 +17,16 @@ namespace Lawo.EmberPlusSharp.Model
             EmberReader reader,
             ElementType actualType,
             Context context,
-            out ChildrenState childChildrenState)
+            out RequestState childRequestState)
         {
             switch (actualType)
             {
                 case ElementType.Parameter:
-                    return DynamicParameter.ReadContents(reader, actualType, context, out childChildrenState);
+                    return DynamicParameter.ReadContents(reader, actualType, context, out childRequestState);
                 case ElementType.Node:
-                    return DynamicNode.ReadContents(reader, actualType, context, out childChildrenState);
+                    return DynamicNode.ReadContents(reader, actualType, context, out childRequestState);
                 default:
-                    return DynamicFunction.ReadContents(reader, actualType, context, out childChildrenState);
+                    return DynamicFunction.ReadContents(reader, actualType, context, out childRequestState);
             }
         }
 

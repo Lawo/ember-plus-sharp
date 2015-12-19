@@ -24,13 +24,13 @@ namespace Lawo.EmberPlusSharp.Model
     {
         private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
 
-        /// <summary>See <see cref="ChildrenState"/> for more information.</summary>
-        /// <remarks>This field and its sibling <see cref="offlineChildrenState"/> are modified by the following
+        /// <summary>See <see cref="RequestState"/> for more information.</summary>
+        /// <remarks>This field and its sibling <see cref="offlineRequestState"/> are modified by the following
         /// methods, which are directly or indirectly called from
         /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
         /// <list type="number">
-        /// <item><see cref="Element.UpdateChildrenState"/></item>
-        /// <item><see cref="Element.WriteChildrenQuery"/></item>
+        /// <item><see cref="Element.UpdateRequestState"/></item>
+        /// <item><see cref="Element.WriteRequest"/></item>
         /// <item><see cref="Element.ReadChildren"/></item>
         /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
         /// </list>
@@ -45,8 +45,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// are changed at once in a large tree.</item>
         /// </list>
         /// </remarks>
-        private ChildrenState onlineChildrenState;
-        private ChildrenState offlineChildrenState = ChildrenState.Complete;
+        private RequestState onlineRequestState;
+        private RequestState offlineRequestState = RequestState.Complete;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -74,22 +74,22 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
-        internal ChildrenState ChildrenState
+        internal RequestState RequestState
         {
             get
             {
-                return this.IsOnline ? this.onlineChildrenState : this.offlineChildrenState;
+                return this.IsOnline ? this.onlineRequestState : this.offlineRequestState;
             }
 
             private set
             {
                 if (this.IsOnline)
                 {
-                    this.onlineChildrenState = value;
+                    this.onlineRequestState = value;
                 }
                 else
                 {
-                    this.offlineChildrenState = value;
+                    this.offlineRequestState = value;
                 }
             }
         }
@@ -112,13 +112,13 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteStartApplicationDefinedType(GlowElementCollection.Element.OuterId, GlowCommand.InnerNumber);
                 writer.WriteValue(GlowCommand.Number.OuterId, 32);
                 writer.WriteEndContainer();
-                this.ChildrenState = ChildrenState.GetDirectorySent;
+                this.RequestState = RequestState.RequestSent;
             }
             else
             {
                 foreach (var child in this.children.Values)
                 {
-                    child.WriteChildrenQuery(writer);
+                    child.WriteRequest(writer);
                 }
             }
         }
@@ -132,10 +132,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         internal virtual Element ReadNewChildContents(
-            EmberReader reader, ElementType actualType, Context context, out ChildrenState childChildrenState)
+            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState)
         {
             reader.SkipToEndContainer();
-            childChildrenState = ChildrenState.Complete;
+            childRequestState = RequestState.Complete;
             return null;
         }
 
@@ -176,27 +176,27 @@ namespace Lawo.EmberPlusSharp.Model
             return false;
         }
 
-        internal sealed override void SetChildrenState(bool isEmpty, ref ChildrenState newChildrenState)
+        internal sealed override void SetRequestState(bool isEmpty, ref RequestState newRequestState)
         {
             if (isEmpty)
             {
-                base.SetChildrenState(isEmpty, ref newChildrenState);
+                base.SetRequestState(isEmpty, ref newRequestState);
             }
 
-            this.ChildrenState = newChildrenState;
+            this.RequestState = newRequestState;
         }
 
-        internal sealed override ChildrenState ReadChildren(EmberReader reader)
+        internal sealed override RequestState ReadChildren(EmberReader reader)
         {
             if (this.ReadChildrenCore(reader))
             {
-                this.ChildrenState = ChildrenState.Complete;
+                this.RequestState = RequestState.Complete;
             }
 
-            return this.ChildrenState;
+            return this.RequestState;
         }
 
-        internal sealed override ChildrenState ReadQualifiedChild(
+        internal sealed override RequestState ReadQualifiedChild(
             EmberReader reader, ElementType actualType, int[] path, int index)
         {
             if (index == path.Length - 1)
@@ -213,41 +213,41 @@ namespace Lawo.EmberPlusSharp.Model
                 }
                 else
                 {
-                    this.ChildrenState &= child.ReadQualifiedChild(reader, actualType, path, index + 1);
+                    this.RequestState &= child.ReadQualifiedChild(reader, actualType, path, index + 1);
                 }
             }
 
-            return this.ChildrenState;
+            return this.RequestState;
         }
 
-        internal sealed override ChildrenState UpdateChildrenState(bool throwForMissingRequiredChildren)
+        internal sealed override RequestState UpdateRequestState(bool throwForMissingRequiredChildren)
         {
             if (!this.IsOnline)
             {
-                this.ChildrenState = ChildrenState.Verified;
+                this.RequestState = RequestState.Verified;
             }
             else if (this.children.Count == 0)
             {
-                if (this.ChildrenState.Equals(ChildrenState.Complete) &&
+                if (this.RequestState.Equals(RequestState.Complete) &&
                     this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren))
                 {
-                    this.ChildrenState = ChildrenState.Verified;
+                    this.RequestState = RequestState.Verified;
                 }
             }
             else
             {
-                if (!this.ChildrenState.Equals(ChildrenState.Verified))
+                if (!this.RequestState.Equals(RequestState.Verified))
                 {
-                    var accumulatedChildChildrenState = ChildrenState.Verified;
+                    var accumulatedChildRequestState = RequestState.Verified;
 
                     foreach (var child in this.children.Values)
                     {
-                        var childChildrenState = child.UpdateChildrenState(throwForMissingRequiredChildren);
-                        accumulatedChildChildrenState &= childChildrenState;
+                        var childRequestState = child.UpdateRequestState(throwForMissingRequiredChildren);
+                        accumulatedChildRequestState &= childRequestState;
 
                         if (child.IsOnlineChangeStatus != IsOnlineChangeStatus.Unchanged)
                         {
-                            if ((child.IsOnline && childChildrenState.Equals(ChildrenState.Verified)) || !child.IsOnline)
+                            if ((child.IsOnline && childRequestState.Equals(RequestState.Verified)) || !child.IsOnline)
                             {
                                 child.IsOnlineChangeStatus = IsOnlineChangeStatus.Unchanged;
                                 this.ChangeOnlineStatus(child);
@@ -255,17 +255,17 @@ namespace Lawo.EmberPlusSharp.Model
                         }
                     }
 
-                    this.ChildrenState =
-                        this.GetChildrenState(throwForMissingRequiredChildren, accumulatedChildChildrenState);
+                    this.RequestState =
+                        this.GetRequestState(throwForMissingRequiredChildren, accumulatedChildRequestState);
                 }
             }
 
-            return this.ChildrenState;
+            return this.RequestState;
         }
 
-        internal override void WriteChildrenQuery(EmberWriter writer)
+        internal override void WriteRequest(EmberWriter writer)
         {
-            if (this.ChildrenState.Equals(ChildrenState.None))
+            if (this.RequestState.Equals(RequestState.None))
             {
                 var isEmpty = this.children.Count == 0;
 
@@ -295,12 +295,12 @@ namespace Lawo.EmberPlusSharp.Model
                 child.SetComplete();
             }
 
-            this.ChildrenState = ChildrenState.Complete;
+            this.RequestState = RequestState.Complete;
         }
 
         internal sealed override IParent GetFirstIncompleteChild()
         {
-            if (this.ChildrenState.Equals(ChildrenState.GetDirectorySent))
+            if (this.RequestState.Equals(RequestState.RequestSent))
             {
                 return this.children.Count == 0 ? this :
                     this.children.Values.Select(c => c.GetFirstIncompleteChild()).FirstOrDefault(c => c != null);
@@ -315,7 +315,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private void ReadChild(EmberReader reader, ElementType actualType, int number)
         {
-            var childChildrenState = ChildrenState.Complete;
+            var childRequestState = RequestState.Complete;
             Element child;
             this.children.TryGetValue(number, out child);
             var isEmpty = true;
@@ -327,7 +327,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                 if (contextSpecificOuterNumber == GlowNode.Contents.OuterNumber)
                 {
-                    this.ReadChildContents(reader, actualType, number, ref child, out childChildrenState);
+                    this.ReadChildContents(reader, actualType, number, ref child, out childRequestState);
                 }
                 else
                 {
@@ -340,7 +340,7 @@ namespace Lawo.EmberPlusSharp.Model
                         if (contextSpecificOuterNumber == GlowNode.Children.OuterNumber)
                         {
                             reader.AssertInnerNumber(GlowElementCollection.InnerNumber);
-                            childChildrenState = child.ReadChildren(reader);
+                            childRequestState = child.ReadChildren(reader);
                         }
                         else
                         {
@@ -352,11 +352,11 @@ namespace Lawo.EmberPlusSharp.Model
 
             if (child != null)
             {
-                child.SetChildrenState(isEmpty, ref childChildrenState);
+                child.SetRequestState(isEmpty, ref childRequestState);
             }
 
-            this.ChildrenState =
-                (this.children.Count == 0 ? ChildrenState.Complete : this.ChildrenState) & childChildrenState;
+            this.RequestState =
+                (this.children.Count == 0 ? RequestState.Complete : this.RequestState) & childRequestState;
         }
 
         private void ReadChildContents(
@@ -364,13 +364,13 @@ namespace Lawo.EmberPlusSharp.Model
             ElementType actualType,
             int number,
             ref Element child,
-            out ChildrenState childChildrenState)
+            out RequestState childRequestState)
         {
             reader.AssertInnerNumber(InnerNumber.Set);
 
             if (child != null)
             {
-                childChildrenState = child.ReadContents(reader, actualType);
+                childRequestState = child.ReadContents(reader, actualType);
             }
             else
             {
@@ -379,7 +379,7 @@ namespace Lawo.EmberPlusSharp.Model
                 if (reader.CanReadContents && (reader.OuterId == GlowNodeContents.Identifier.OuterId))
                 {
                     var context = new Context(this, number, reader.AssertAndReadContentsAsString());
-                    child = this.ReadNewChildContents(reader, actualType, context, out childChildrenState);
+                    child = this.ReadNewChildContents(reader, actualType, context, out childRequestState);
 
                     if (child != null)
                     {
@@ -389,23 +389,23 @@ namespace Lawo.EmberPlusSharp.Model
                 else
                 {
                     reader.SkipToEndContainer();
-                    childChildrenState = ChildrenState.Complete;
+                    childRequestState = RequestState.Complete;
                     child = null;
                 }
             }
         }
 
-        private ChildrenState GetChildrenState(
-            bool throwForMissingRequiredChildren, ChildrenState accumulatedChildChildrenState)
+        private RequestState GetRequestState(
+            bool throwForMissingRequiredChildren, RequestState accumulatedChildRequestState)
         {
-            if (accumulatedChildChildrenState.Equals(ChildrenState.Verified))
+            if (accumulatedChildRequestState.Equals(RequestState.Verified))
             {
                 return this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren) ?
-                    ChildrenState.Verified : ChildrenState.Complete;
+                    RequestState.Verified : RequestState.Complete;
             }
             else
             {
-                return accumulatedChildChildrenState;
+                return accumulatedChildRequestState;
             }
         }
     }

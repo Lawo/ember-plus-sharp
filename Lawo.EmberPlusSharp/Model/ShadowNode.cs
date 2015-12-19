@@ -20,7 +20,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Official Glow name.")]
-        internal sealed override ChildrenState ReadContents(EmberReader reader, ElementType actualType)
+        internal sealed override RequestState ReadContents(EmberReader reader, ElementType actualType)
         {
             throw new ModelException("Unexpected contents for intermediate node in basePath.");
         }

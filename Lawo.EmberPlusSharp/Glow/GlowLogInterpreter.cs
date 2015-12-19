@@ -72,7 +72,7 @@ namespace Lawo.EmberPlusSharp.Glow
                 {
                     this.root.Read(emberReader, this.pendingInvocations);
                     this.root.SetComplete();
-                    this.root.UpdateChildrenState(true);
+                    this.root.UpdateRequestState(true);
                 }
             }
         }

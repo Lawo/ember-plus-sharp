@@ -105,7 +105,7 @@
     <Compile Include="Model\Function6.cs" />
     <Compile Include="Model\Function4.cs" />
     <Compile Include="Model\Function2.cs" />
-    <Compile Include="Model\ChildrenState.cs" />
+    <Compile Include="Model\RequestState.cs" />
     <Compile Include="Model\DynamicRoot.cs" />
     <Compile Include="Model\DynamicNodeHelper.cs" />
     <Compile Include="Model\DynamicNode.cs" />
