@@ -69,7 +69,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
         public Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
         {
-            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteAsyncCore(value, cancellationToken));
+            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteCoreAsync(value, cancellationToken));
         }
 
         /// <summary>Asynchronously writes <paramref name="message"/>.</summary>
@@ -145,7 +145,7 @@ namespace Lawo.EmberPlusSharp.S101
             return this.stream;
         }
 
-        private async Task WriteOutOfFrameByteAsyncCore(byte value, CancellationToken cancellationToken)
+        private async Task WriteOutOfFrameByteCoreAsync(byte value, CancellationToken cancellationToken)
         {
             this.AssertNotDisposed();
 

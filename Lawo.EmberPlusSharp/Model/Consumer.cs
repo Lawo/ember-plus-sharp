@@ -225,7 +225,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private async Task QueryChildrenAsync()
         {
-            var queryChildrenTask = this.QueryChildrenAsyncCore();
+            var queryChildrenTask = this.QueryChildrenCoreAsync();
 
             if ((await Task.WhenAny(queryChildrenTask, Task.Delay(this.queryChildrenTimeout))) != queryChildrenTask)
             {
@@ -300,9 +300,9 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private async Task QueryChildrenAsyncCore()
+        private async Task QueryChildrenCoreAsync()
         {
-            while (await this.SendChildrenQuery())
+            while (await this.SendRequestAsync())
             {
                 await this.WaitForAndApplyChanges();
             }
@@ -351,7 +351,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private async Task<bool> SendChildrenQuery()
+        private async Task<bool> SendRequestAsync()
         {
             var rootRequestState = this.root.UpdateRequestState(false);
 

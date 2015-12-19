@@ -129,7 +129,7 @@ namespace Lawo.EmberPlusSharp.Model
         internal sealed override void WriteRequest(EmberWriter writer)
         {
             writer.WriteStartApplicationDefinedType(GlowGlobal.Root.OuterId, GlowRootElementCollection.InnerNumber);
-            this.WriteChildrenQueryCollection(writer);
+            this.WriteRequestCollection(writer);
             writer.WriteEndContainer();
         }
 

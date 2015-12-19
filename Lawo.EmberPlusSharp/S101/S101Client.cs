@@ -198,7 +198,7 @@ namespace Lawo.EmberPlusSharp.S101
         public Task SendOutOfFrameByteAsync(byte value)
         {
             this.AssertPreconditions();
-            return this.SendOutOfFrameByteAsyncCore(value);
+            return this.SendOutOfFrameByteCoreAsync(value);
         }
 
         /// <summary>Calls
@@ -231,7 +231,7 @@ namespace Lawo.EmberPlusSharp.S101
         public Task SendMessageAsync(S101Message message, byte[] payload)
         {
             this.AssertPreconditions();
-            return this.SendMessageAsyncCore(message, payload);
+            return this.SendMessageCoreAsync(message, payload);
         }
 
         /// <summary>See <see cref="IDisposable.Dispose"/>.</summary>
@@ -369,7 +369,7 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        private async Task SendMessageAsyncCore(S101Message message, byte[] payload)
+        private async Task SendMessageCoreAsync(S101Message message, byte[] payload)
         {
             await this.EnqueueLogOperation(() => this.logger.LogMessage(LogNames.Send, message, payload));
 
@@ -393,7 +393,7 @@ namespace Lawo.EmberPlusSharp.S101
                 });
         }
 
-        private async Task SendOutOfFrameByteAsyncCore(byte value)
+        private async Task SendOutOfFrameByteCoreAsync(byte value)
         {
             await this.EnqueueLogOperation(() => this.logger.LogData(LogNames.OutOfFrameByte, LogNames.Send, new[] { value }, 0, 1));
             await this.sendQueue.Enqueue(() => this.writer.WriteOutOfFrameByteAsync(value, this.source.Token));
@@ -417,7 +417,7 @@ namespace Lawo.EmberPlusSharp.S101
                 switch (++timeoutCount)
                 {
                     case 1:
-                        await this.SendMessageAsyncCore(
+                        await this.SendMessageCoreAsync(
                             new S101Message(this.keepAliveRequestSlot, new KeepAliveRequest()), null);
                         break;
                     case 2:

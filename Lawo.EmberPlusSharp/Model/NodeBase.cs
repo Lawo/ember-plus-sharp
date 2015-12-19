@@ -105,7 +105,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.ReadChild(reader, actualType, reader.AssertAndReadContentsAsInt32());
         }
 
-        internal void WriteChildrenQueryCollection(EmberWriter writer)
+        internal void WriteRequestCollection(EmberWriter writer)
         {
             if (this.children.Count == 0)
             {
@@ -278,7 +278,7 @@ namespace Lawo.EmberPlusSharp.Model
                         GlowQualifiedNode.Children.OuterId, GlowElementCollection.InnerNumber);
                 }
 
-                this.WriteChildrenQueryCollection(writer);
+                this.WriteRequestCollection(writer);
 
                 if (isEmpty)
                 {
