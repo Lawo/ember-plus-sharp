@@ -77,6 +77,7 @@
     <Compile Include="Ember\EmberConverter.cs" />
     <Compile Include="Crc.cs" />
     <Compile Include="Ember\EmberType.cs" />
+    <Compile Include="Glow\GlowCommandNumber.cs" />
     <Compile Include="Glow\GlowInvocationResult.cs" />
     <Compile Include="Glow\GlowInvocation.cs" />
     <Compile Include="Glow\GlowSource.cs" />

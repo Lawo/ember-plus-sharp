@@ -65,10 +65,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (this.children.Count == 0)
             {
-                writer.WriteStartApplicationDefinedType(GlowElementCollection.Element.OuterId, GlowCommand.InnerNumber);
-                writer.WriteValue(GlowCommand.Number.OuterId, 32);
-                writer.WriteEndContainer();
-                this.RequestState = RequestState.RequestSent;
+                this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RequestState.RequestSent);
             }
             else
             {

@@ -9,6 +9,7 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Collections.Generic;
 
     using Ember;
+    using Glow;
 
     /// <summary>This class is not intended to be referenced in your code.</summary>
     /// <remarks>Provides the common implementation for all elements with schemas in the object tree accessible through
@@ -81,6 +82,15 @@ namespace Lawo.EmberPlusSharp.Model
                     this.offlineRequestState = value;
                 }
             }
+        }
+
+        internal void WriteCommandCollection(
+            EmberWriter writer, GlowCommandNumber commandNumber, RequestState requestState)
+        {
+            writer.WriteStartApplicationDefinedType(GlowElementCollection.Element.OuterId, GlowCommand.InnerNumber);
+            writer.WriteValue(GlowCommand.Number.OuterId, (long)commandNumber);
+            writer.WriteEndContainer();
+            this.RequestState = requestState;
         }
 
         internal void ReadSchemaIdentifiers(EmberReader reader)
