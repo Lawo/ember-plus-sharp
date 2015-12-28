@@ -18,6 +18,30 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class ElementWithSchemas<TMostDerived> : Element<TMostDerived>, IElementWithSchemas
         where TMostDerived : ElementWithSchemas<TMostDerived>
     {
+        /// <summary>See <see cref="RequestState"/> for more information.</summary>
+        /// <remarks>This field and its sibling <see cref="offlineRequestState"/> are modified by the following
+        /// methods, which are directly or indirectly called from
+        /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
+        /// <list type="number">
+        /// <item><see cref="Element.UpdateRequestState"/></item>
+        /// <item><see cref="Element.WriteRequest"/></item>
+        /// <item><see cref="Element.ReadChildren"/></item>
+        /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
+        /// </list>
+        /// See individual method documentation for semantics. This rather complex system was implemented to make the
+        /// process of querying the provider as efficient as possible, namely:
+        /// <list type="bullet">
+        /// <item>As few as possible messages are sent to query for children and/or subscribe to streams.</item>
+        /// <item>The computational effort for tree traversal is kept as low as possible. This is necessary because all
+        /// code is always executed on the applications GUI thread. Without these optimizations, a full tree traversal
+        /// would be necessary after each processed message. Some providers send a new message for each updated
+        /// parameter, which would very quickly lead to significant CPU load and an unresponsive GUI if many parameters
+        /// are changed at once in a large tree.</item>
+        /// </list>
+        /// </remarks>
+        private RequestState onlineRequestState;
+        private RequestState offlineRequestState = RequestState.Complete;
+
         private IReadOnlyList<string> schemaIdentifiers;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +57,30 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal ElementWithSchemas()
         {
+        }
+
+        /// <summary>Gets or sets the request state.</summary>
+        /// <remarks>This property (along with its backing fields) has nothing to do with schemas. However, it so
+        /// happens that all subclasses (parameters and nodes) need this member. If this fact ever changes, it probably
+        /// makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
+        internal RequestState RequestState
+        {
+            get
+            {
+                return this.IsOnline ? this.onlineRequestState : this.offlineRequestState;
+            }
+
+            set
+            {
+                if (this.IsOnline)
+                {
+                    this.onlineRequestState = value;
+                }
+                else
+                {
+                    this.offlineRequestState = value;
+                }
+            }
         }
 
         internal void ReadSchemaIdentifiers(EmberReader reader)

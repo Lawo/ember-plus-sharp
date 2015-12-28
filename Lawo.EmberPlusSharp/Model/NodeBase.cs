@@ -24,30 +24,6 @@ namespace Lawo.EmberPlusSharp.Model
     {
         private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
 
-        /// <summary>See <see cref="RequestState"/> for more information.</summary>
-        /// <remarks>This field and its sibling <see cref="offlineRequestState"/> are modified by the following
-        /// methods, which are directly or indirectly called from
-        /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
-        /// <list type="number">
-        /// <item><see cref="Element.UpdateRequestState"/></item>
-        /// <item><see cref="Element.WriteRequest"/></item>
-        /// <item><see cref="Element.ReadChildren"/></item>
-        /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
-        /// </list>
-        /// See individual method documentation for semantics. This rather complex system was implemented to make the
-        /// process of querying the provider as efficient as possible, namely:
-        /// <list type="bullet">
-        /// <item>As few as possible messages are sent to query for children.</item>
-        /// <item>The computational effort for tree traversal is kept as low as possible. This is necessary because all
-        /// code is always executed on the applications GUI thread. Without these optimizations, a full tree traversal
-        /// would be necessary after each processed message. Some providers send a new message for each updated
-        /// parameter, which would very quickly lead to significant CPU load and an unresponsive GUI if many parameters
-        /// are changed at once in a large tree.</item>
-        /// </list>
-        /// </remarks>
-        private RequestState onlineRequestState;
-        private RequestState offlineRequestState = RequestState.Complete;
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         int[] IParent.NumberPath
@@ -72,26 +48,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal NodeBase()
         {
-        }
-
-        internal RequestState RequestState
-        {
-            get
-            {
-                return this.IsOnline ? this.onlineRequestState : this.offlineRequestState;
-            }
-
-            private set
-            {
-                if (this.IsOnline)
-                {
-                    this.onlineRequestState = value;
-                }
-                else
-                {
-                    this.offlineRequestState = value;
-                }
-            }
         }
 
         internal IElement GetChild(int number)
