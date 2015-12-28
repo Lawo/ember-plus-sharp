@@ -61,7 +61,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.ReadChild(reader, actualType, reader.AssertAndReadContentsAsInt32());
         }
 
-        internal void WriteRequestCollection(EmberWriter writer)
+        internal void WriteCommandCollection(EmberWriter writer)
         {
             if (this.children.Count == 0)
             {
@@ -127,16 +127,6 @@ namespace Lawo.EmberPlusSharp.Model
         internal virtual bool ChangeOnlineStatus(IElement child)
         {
             return false;
-        }
-
-        internal sealed override void SetRequestState(bool isEmpty, ref RequestState newRequestState)
-        {
-            if (isEmpty)
-            {
-                base.SetRequestState(isEmpty, ref newRequestState);
-            }
-
-            this.RequestState = newRequestState;
         }
 
         internal sealed override RequestState ReadChildren(EmberReader reader)
@@ -231,7 +221,7 @@ namespace Lawo.EmberPlusSharp.Model
                         GlowQualifiedNode.Children.OuterId, GlowElementCollection.InnerNumber);
                 }
 
-                this.WriteRequestCollection(writer);
+                this.WriteCommandCollection(writer);
 
                 if (isEmpty)
                 {

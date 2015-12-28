@@ -84,6 +84,16 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        internal sealed override void SetRequestState(bool isEmpty, ref RequestState newRequestState)
+        {
+            if (isEmpty)
+            {
+                base.SetRequestState(isEmpty, ref newRequestState);
+            }
+
+            this.RequestState = newRequestState;
+        }
+
         internal void WriteCommandCollection(
             EmberWriter writer, GlowCommandNumber commandNumber, RequestState requestState)
         {
