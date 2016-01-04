@@ -250,7 +250,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Writes the payload of a message that contains an appropriate requests for all elements that require
         /// one.</summary>
         /// <remarks>Recursively visits all children with a state equal to <see cref="RequestState.None"/>, writes
-        /// a getDirectory request for nodes that do not yet have children or a subscribe request for stream parameters
+        /// a getDirectory command for nodes that do not yet have children or a subscribe command for stream parameters
         /// and changes their state accordingly.</remarks>
         internal virtual void WriteRequest(EmberWriter writer)
         {
