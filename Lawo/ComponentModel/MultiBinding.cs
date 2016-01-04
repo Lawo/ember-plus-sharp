@@ -272,6 +272,42 @@ namespace Lawo.ComponentModel
         }
 
         /// <summary>Creates and returns a <see cref="MultiBinding{T}"/> instance.</summary>
+        /// <typeparam name="TS1">The type of the first source property.</typeparam>
+        /// <typeparam name="TS2">The type of the second source property.</typeparam>
+        /// <typeparam name="TS3">The type of the third source property.</typeparam>
+        /// <typeparam name="TS4">The type of the fourth source property.</typeparam>
+        /// <typeparam name="TS5">The type of the fifth source property.</typeparam>
+        /// <typeparam name="TS6">The type of the sixth source property.</typeparam>
+        /// <typeparam name="TS7">The type of the seventh source property.</typeparam>
+        /// <typeparam name="TS8">The type of the eighth source property.</typeparam>
+        /// <typeparam name="TS9">The type of the ninth source property.</typeparam>
+        /// <typeparam name="TS10">The type of the tenth source property.</typeparam>
+        /// <typeparam name="TS11">The type of the eleventh source property.</typeparam>
+        /// <typeparam name="TTarget">The type of the target property.</typeparam>
+        /// <exception cref="ArgumentNullException">At least one of the arguments is equal to <c>null</c>.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Longer names would lead to unwieldy code.")]
+        public static MultiBinding<TTarget> Create<TS1, TS2, TS3, TS4, TS5, TS6, TS7, TS8, TS9, TS10, TS11, TTarget>(
+            IProperty<INotifyPropertyChanged, TS1> s1,
+            IProperty<INotifyPropertyChanged, TS2> s2,
+            IProperty<INotifyPropertyChanged, TS3> s3,
+            IProperty<INotifyPropertyChanged, TS4> s4,
+            IProperty<INotifyPropertyChanged, TS5> s5,
+            IProperty<INotifyPropertyChanged, TS6> s6,
+            IProperty<INotifyPropertyChanged, TS7> s7,
+            IProperty<INotifyPropertyChanged, TS8> s8,
+            IProperty<INotifyPropertyChanged, TS9> s9,
+            IProperty<INotifyPropertyChanged, TS10> s10,
+            IProperty<INotifyPropertyChanged, TS11> s11,
+            Func<TS1, TS2, TS3, TS4, TS5, TS6, TS7, TS8, TS9, TS10, TS11, TTarget> toTarget,
+            IProperty<object, TTarget> target)
+        {
+            AssertNotNull(toTarget);
+            Func<TTarget> bound = () => toTarget(
+                s1.Value, s2.Value, s3.Value, s4.Value, s5.Value, s6.Value, s7.Value, s8.Value, s9.Value, s10.Value, s11.Value);
+            return new MultiBinding<TTarget>(Pack(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11), bound, target);
+        }
+
+        /// <summary>Creates and returns a <see cref="MultiBinding{T}"/> instance.</summary>
         /// <typeparam name="TSource">The type of the source properties.</typeparam>
         /// <typeparam name="TTarget">The type of the target property.</typeparam>
         /// <exception cref="ArgumentNullException">At least one of the arguments is equal to <c>null</c>.</exception>
