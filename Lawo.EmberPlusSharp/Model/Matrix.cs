@@ -185,7 +185,7 @@ namespace Lawo.EmberPlusSharp.Model
             ////}
 
             ////this.SetFinalTytpe(valueType, enumType, typeType);
-            return RequestState.Complete;
+            return this.RequestState;
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
@@ -216,7 +216,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Matrix()
+        private Matrix() : base(RequestState.Complete)
         {
         }
     }

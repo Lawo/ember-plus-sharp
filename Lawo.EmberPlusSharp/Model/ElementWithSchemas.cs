@@ -40,8 +40,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// are changed at once in a large tree.</item>
         /// </list>
         /// </remarks>
-        private RequestState onlineRequestState;
         private RequestState offlineRequestState = RequestState.Complete;
+        private RequestState onlineRequestState;
 
         private IReadOnlyList<string> schemaIdentifiers;
 
@@ -56,8 +56,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal ElementWithSchemas()
+        internal ElementWithSchemas(RequestState onlineRequestState)
         {
+            this.onlineRequestState = onlineRequestState;
         }
 
         /// <summary>Gets or sets the request state.</summary>

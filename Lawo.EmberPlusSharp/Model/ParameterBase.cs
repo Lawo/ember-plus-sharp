@@ -119,7 +119,7 @@ namespace Lawo.EmberPlusSharp.Model
             get { return this.EnumMapCore; }
         }
 
-        internal ParameterBase()
+        internal ParameterBase() : base(RequestState.Complete)
         {
         }
 
@@ -298,7 +298,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             this.SetFinalTytpe(valueType, enumType, typeType);
-            return RequestState.Complete;
+            return this.RequestState;
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
