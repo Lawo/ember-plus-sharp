@@ -94,6 +94,12 @@ namespace Lawo.EmberPlusSharp.Model
             this.RequestState = newRequestState;
         }
 
+        internal override void SetComplete()
+        {
+            this.RequestState = RequestState.Complete;
+            base.SetComplete();
+        }
+
         internal void WriteCommandCollection(
             EmberWriter writer, GlowCommandNumber commandNumber, RequestState requestState)
         {

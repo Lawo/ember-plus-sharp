@@ -238,7 +238,7 @@ namespace Lawo.EmberPlusSharp.Model
                 child.SetComplete();
             }
 
-            this.RequestState = RequestState.Complete;
+            base.SetComplete();
         }
 
         internal sealed override IParent GetFirstIncompleteChild()
