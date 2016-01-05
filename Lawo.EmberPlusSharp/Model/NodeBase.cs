@@ -61,18 +61,24 @@ namespace Lawo.EmberPlusSharp.Model
             this.ReadChild(reader, actualType, reader.AssertAndReadContentsAsInt32());
         }
 
-        internal void WriteCommandCollection(EmberWriter writer)
+        internal bool WriteCommandCollection(EmberWriter writer)
         {
             if (this.children.Count == 0)
             {
                 this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RequestState.RequestSent);
+                return true;
             }
             else
             {
+                var result = false;
+
                 foreach (var child in this.children.Values)
                 {
-                    child.WriteRequest(writer);
+                    // We want to avoid short-circuit logic, which is why we use | rather than ||.
+                    result |= child.WriteRequest(writer);
                 }
+
+                return result;
             }
         }
 
@@ -206,7 +212,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RequestState;
         }
 
-        internal override void WriteRequest(EmberWriter writer)
+        internal override bool WriteRequest(EmberWriter writer)
         {
             if (this.RequestState.Equals(RequestState.None))
             {
@@ -221,13 +227,19 @@ namespace Lawo.EmberPlusSharp.Model
                         GlowQualifiedNode.Children.OuterId, GlowElementCollection.InnerNumber);
                 }
 
-                this.WriteCommandCollection(writer);
+                var result = this.WriteCommandCollection(writer);
 
                 if (isEmpty)
                 {
                     writer.WriteEndContainer();
                     writer.WriteEndContainer();
                 }
+
+                return result;
+            }
+            else
+            {
+                return false;
             }
         }
 

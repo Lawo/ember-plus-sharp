@@ -126,11 +126,12 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
-        internal sealed override void WriteRequest(EmberWriter writer)
+        internal sealed override bool WriteRequest(EmberWriter writer)
         {
             writer.WriteStartApplicationDefinedType(GlowGlobal.Root.OuterId, GlowRootElementCollection.InnerNumber);
-            this.WriteCommandCollection(writer);
+            var result = this.WriteCommandCollection(writer);
             writer.WriteEndContainer();
+            return result;
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]

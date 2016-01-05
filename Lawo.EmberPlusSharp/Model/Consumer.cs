@@ -365,7 +365,14 @@ namespace Lawo.EmberPlusSharp.Model
                 // Of course, in the latter case the assumption is that the provider will at some point send an
                 // answer to our previous getDirectory request. If it doesn't, the timeout will take care of things.
                 MemoryStream stream;
-                WriteRequest(this.root, out stream);
+
+                if (!WriteRequest(this.root, out stream))
+                {
+                    // If no answer is expected from the provider due to the request, we need to update the request
+                    // state again to see whether there's still something missing.
+                    rootRequestState = this.root.UpdateRequestState(false);
+                }
+
                 await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
             }
 
@@ -410,13 +417,13 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static void WriteRequest(TRoot root, out MemoryStream stream)
+        private static bool WriteRequest(TRoot root, out MemoryStream stream)
         {
             // TODO: Reuse MemoryStream and EmberWriter for all outgoing messages.
             using (stream = new MemoryStream())
             using (var writer = new EmberWriter(stream))
             {
-                root.WriteRequest(writer);
+                return root.WriteRequest(writer);
             }
         }
 
