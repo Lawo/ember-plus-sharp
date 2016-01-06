@@ -101,8 +101,7 @@ namespace Lawo.EmberPlusSharp.Model
                         break;
                     case GlowNodeContents.IsOnline.OuterNumber:
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
-                        var newRequestState = this.RequestState & RequestState.Complete;
-                        this.SetRequestState(false, ref newRequestState);
+                        this.RequestState &= RequestState.Complete;
                         break;
                     case GlowNodeContents.SchemaIdentifiers.OuterNumber:
                         this.ReadSchemaIdentifiers(reader);

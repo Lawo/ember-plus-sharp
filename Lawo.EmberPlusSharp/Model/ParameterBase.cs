@@ -294,8 +294,7 @@ namespace Lawo.EmberPlusSharp.Model
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
                         var send = (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Changed) &&
                             this.IsOnline && this.StreamIdentifier.HasValue;
-                        var newRequestState = this.RequestState & (send ? RequestState.None : RequestState.Complete);
-                        this.SetRequestState(false, ref newRequestState);
+                        this.RequestState &= send ? RequestState.None : RequestState.Complete;
                         break;
                     case GlowParameterContents.Formula.OuterNumber:
                         this.FormulaCore = reader.AssertAndReadContentsAsString();
