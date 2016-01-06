@@ -64,8 +64,18 @@ namespace Lawo.EmberPlusSharp.Model
         /// <inheritdoc/>
         public int? StreamIdentifier
         {
-            get { return this.streamIdentifier; }
-            private set { this.SetValue(ref this.streamIdentifier, value); }
+            get
+            {
+                return this.streamIdentifier;
+            }
+
+            private set
+            {
+                if (this.SetValue(ref this.streamIdentifier, value) && value.HasValue && this.IsOnline)
+                {
+                    this.RequestState = RequestState.None;
+                }
+            }
         }
 
         /// <inheritdoc/>
@@ -220,6 +230,23 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        internal sealed override bool WriteRequest(EmberWriter writer)
+        {
+            if (this.RequestState.Equals(RequestState.None))
+            {
+                writer.WriteStartApplicationDefinedType(
+                    GlowElementCollection.Element.OuterId, GlowQualifiedParameter.InnerNumber);
+                writer.WriteValue(GlowQualifiedParameter.Path.OuterId, this.NumberPath);
+                writer.WriteStartApplicationDefinedType(
+                    GlowQualifiedParameter.Children.OuterId, GlowElementCollection.InnerNumber);
+                this.WriteCommandCollection(writer, GlowCommandNumber.Subscribe, RequestState.Complete);
+                writer.WriteEndContainer();
+                writer.WriteEndContainer();
+            }
+
+            return false;
+        }
+
         internal override RequestState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Parameter, actualType);
@@ -265,6 +292,10 @@ namespace Lawo.EmberPlusSharp.Model
                         break;
                     case GlowParameterContents.IsOnline.OuterNumber:
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
+                        var send = (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Changed) &&
+                            this.IsOnline && this.StreamIdentifier.HasValue;
+                        var newRequestState = this.RequestState & (send ? RequestState.None : RequestState.Complete);
+                        this.SetRequestState(false, ref newRequestState);
                         break;
                     case GlowParameterContents.Formula.OuterNumber:
                         this.FormulaCore = reader.AssertAndReadContentsAsString();

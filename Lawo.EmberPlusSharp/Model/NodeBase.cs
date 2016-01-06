@@ -171,17 +171,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal sealed override RequestState UpdateRequestState(bool throwForMissingRequiredChildren)
         {
-            if (!this.IsOnline)
+            if (!this.IsOnline || (this.children.Count == 0))
             {
-                this.RequestState = RequestState.Verified;
-            }
-            else if (this.children.Count == 0)
-            {
-                if (this.RequestState.Equals(RequestState.Complete) &&
-                    this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren))
-                {
-                    this.RequestState = RequestState.Verified;
-                }
+                return base.UpdateRequestState(throwForMissingRequiredChildren);
             }
             else
             {
@@ -207,9 +199,9 @@ namespace Lawo.EmberPlusSharp.Model
                     this.RequestState =
                         this.GetRequestState(throwForMissingRequiredChildren, accumulatedChildRequestState);
                 }
-            }
 
-            return this.RequestState;
+                return this.RequestState;
+            }
         }
 
         internal override bool WriteRequest(EmberWriter writer)

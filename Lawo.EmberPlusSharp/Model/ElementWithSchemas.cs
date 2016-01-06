@@ -63,8 +63,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Gets or sets the request state.</summary>
         /// <remarks>This property (along with its backing fields) has nothing to do with schemas. However, it so
-        /// happens that all subclasses (parameters and nodes) need this member. If this fact ever changes, it probably
-        /// makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
+        /// happens that all subclasses (parameters, nodes and matrices) need this member. If this fact ever changes, it
+        /// probably makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
         internal RequestState RequestState
         {
             get
@@ -93,6 +93,17 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             this.RequestState = newRequestState;
+        }
+
+        internal override RequestState UpdateRequestState(bool throwForMissingRequiredChildren)
+        {
+            if (!this.IsOnline || (this.RequestState.Equals(RequestState.Complete) &&
+                this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren)))
+            {
+                this.RequestState = base.UpdateRequestState(throwForMissingRequiredChildren);
+            }
+
+            return this.RequestState;
         }
 
         internal override void SetComplete()

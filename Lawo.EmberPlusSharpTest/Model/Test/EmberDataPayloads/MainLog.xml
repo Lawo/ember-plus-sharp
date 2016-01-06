@@ -286,6 +286,78 @@ Three</enumeration>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
       <Root type="RootElementCollection">
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">3</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">4</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">5</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">6</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">7</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">8</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">9</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">30</number>
+            </Element>
+          </children>
+        </RootElement>
         <RootElement type="QualifiedNode">
           <path type="RelativeObjectIdentifier">10</path>
           <children type="ElementCollection">
