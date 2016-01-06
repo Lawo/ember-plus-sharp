@@ -25,7 +25,8 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree published
     /// by the provider.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection where TRoot : Root<TRoot>
+    public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection, IStreamedParameterCollection
+        where TRoot : Root<TRoot>
     {
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
 
@@ -201,6 +202,11 @@ namespace Lawo.EmberPlusSharp.Model
             return this.lastInvocationId;
         }
 
+        void IStreamedParameterCollection.Add(IStreamedParameter parameter)
+        {
+            throw new NotImplementedException();
+        }
+
         private Consumer(S101Client client, int timeout, byte slot)
         {
             this.client = client;
@@ -366,7 +372,7 @@ namespace Lawo.EmberPlusSharp.Model
                 // answer to our previous getDirectory request. If it doesn't, the timeout will take care of things.
                 MemoryStream stream;
 
-                if (!WriteRequest(this.root, out stream))
+                if (!this.WriteRequest(out stream))
                 {
                     // If no answer is expected from the provider due to the request, we need to update the request
                     // state again to see whether there's still something missing.
@@ -417,13 +423,13 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static bool WriteRequest(TRoot root, out MemoryStream stream)
+        private bool WriteRequest(out MemoryStream stream)
         {
             // TODO: Reuse MemoryStream and EmberWriter for all outgoing messages.
             using (stream = new MemoryStream())
             using (var writer = new EmberWriter(stream))
             {
-                return root.WriteRequest(writer);
+                return this.root.WriteRequest(writer, this);
             }
         }
 

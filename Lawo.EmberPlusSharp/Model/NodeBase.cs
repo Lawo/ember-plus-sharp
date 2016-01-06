@@ -61,7 +61,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.ReadChild(reader, actualType, reader.AssertAndReadContentsAsInt32());
         }
 
-        internal bool WriteCommandCollection(EmberWriter writer)
+        internal bool WriteCommandCollection(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
             if (this.children.Count == 0)
             {
@@ -75,7 +75,7 @@ namespace Lawo.EmberPlusSharp.Model
                 foreach (var child in this.children.Values)
                 {
                     // We want to avoid short-circuit logic, which is why we use | rather than ||.
-                    result |= child.WriteRequest(writer);
+                    result |= child.WriteRequest(writer, streamedParameters);
                 }
 
                 return result;
@@ -204,7 +204,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal override bool WriteRequest(EmberWriter writer)
+        internal override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
             if (this.RequestState.Equals(RequestState.None))
             {
@@ -219,7 +219,7 @@ namespace Lawo.EmberPlusSharp.Model
                         GlowQualifiedNode.Children.OuterId, GlowElementCollection.InnerNumber);
                 }
 
-                var result = this.WriteCommandCollection(writer);
+                var result = this.WriteCommandCollection(writer, streamedParameters);
 
                 if (isEmpty)
                 {

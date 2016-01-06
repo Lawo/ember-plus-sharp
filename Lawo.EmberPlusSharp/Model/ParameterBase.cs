@@ -20,7 +20,7 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public abstract class ParameterBase<TMostDerived, TValue> : ElementWithSchemas<TMostDerived>, IParameter
+    public abstract class ParameterBase<TMostDerived, TValue> : ElementWithSchemas<TMostDerived>, IStreamedParameter
         where TMostDerived : ParameterBase<TMostDerived, TValue>
     {
         private TValue theValue;
@@ -230,7 +230,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal sealed override bool WriteRequest(EmberWriter writer)
+        internal sealed override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
             if (this.RequestState.Equals(RequestState.None))
             {
