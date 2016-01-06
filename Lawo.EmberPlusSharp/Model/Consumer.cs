@@ -35,6 +35,9 @@ namespace Lawo.EmberPlusSharp.Model
         private readonly Dictionary<int, IInvocationResult> pendingInvocations =
             new Dictionary<int, IInvocationResult>();
 
+        private readonly Dictionary<int, HashSet<IStreamedParameter>> streamedParameters =
+            new Dictionary<int, HashSet<IStreamedParameter>>();
+
         private readonly S101Client client;
         private readonly int queryChildrenTimeout;
         private readonly S101Message emberDataMessage;
@@ -190,7 +193,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <item>Client code has called <see cref="Dispose"/>.</item>
         /// </list>
         /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
-        /// For the the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
+        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
         /// </remarks>
         public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
 
@@ -204,7 +207,16 @@ namespace Lawo.EmberPlusSharp.Model
 
         void IStreamedParameterCollection.Add(IStreamedParameter parameter)
         {
-            throw new NotImplementedException();
+            var streamIdentifier = (int)parameter.StreamIdentifier;
+            HashSet<IStreamedParameter> group;
+
+            if (!this.streamedParameters.TryGetValue(streamIdentifier, out group))
+            {
+                group = new HashSet<IStreamedParameter>();
+                this.streamedParameters.Add(streamIdentifier, group);
+            }
+
+            group.Add(parameter);
         }
 
         private Consumer(S101Client client, int timeout, byte slot)

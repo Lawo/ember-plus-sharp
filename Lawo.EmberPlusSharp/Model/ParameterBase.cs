@@ -242,6 +242,7 @@ namespace Lawo.EmberPlusSharp.Model
                 this.WriteCommandCollection(writer, GlowCommandNumber.Subscribe, RequestState.Complete);
                 writer.WriteEndContainer();
                 writer.WriteEndContainer();
+                streamedParameters.Add(this);
             }
 
             return false;
