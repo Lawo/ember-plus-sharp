@@ -265,11 +265,9 @@ namespace Lawo.EmberPlusSharp.Model
             var childRequestState = RequestState.Complete;
             Element child;
             this.children.TryGetValue(number, out child);
-            var isEmpty = true;
 
             while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
             {
-                isEmpty = false;
                 var contextSpecificOuterNumber = reader.GetContextSpecificOuterNumber();
 
                 if (contextSpecificOuterNumber == GlowNode.Contents.OuterNumber)
@@ -299,11 +297,6 @@ namespace Lawo.EmberPlusSharp.Model
 
             if (child != null)
             {
-                if (isEmpty)
-                {
-                    childRequestState = RequestState.Complete;
-                }
-
                 child.RequestState = childRequestState;
             }
 
