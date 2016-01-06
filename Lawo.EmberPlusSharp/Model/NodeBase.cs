@@ -299,7 +299,12 @@ namespace Lawo.EmberPlusSharp.Model
 
             if (child != null)
             {
-                child.SetRequestState(isEmpty, ref childRequestState);
+                if (isEmpty)
+                {
+                    childRequestState = RequestState.Complete;
+                }
+
+                child.RequestState = childRequestState;
             }
 
             this.RequestState =

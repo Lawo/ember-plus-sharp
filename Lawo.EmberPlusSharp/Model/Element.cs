@@ -143,6 +143,12 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        internal virtual RequestState RequestState
+        {
+            get { return RequestState.Complete; }
+            set { } // Intentionally empty
+        }
+
         internal void SetContext(Context context)
         {
             this.parent = context.Parent;
@@ -191,11 +197,6 @@ namespace Lawo.EmberPlusSharp.Model
                 this.HasChanges = true;
                 this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
             }
-        }
-
-        internal virtual void SetRequestState(bool isEmpty, ref RequestState newRequestState)
-        {
-            newRequestState = RequestState.Complete;
         }
 
         internal abstract RequestState ReadContents(EmberReader reader, ElementType actualType);

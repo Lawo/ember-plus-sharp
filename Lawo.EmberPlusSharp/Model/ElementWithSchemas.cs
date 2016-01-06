@@ -62,10 +62,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Gets or sets the request state.</summary>
-        /// <remarks>This property (along with its backing fields) has nothing to do with schemas. However, it so
-        /// happens that all subclasses (parameters, nodes and matrices) need this member. If this fact ever changes, it
-        /// probably makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
-        internal RequestState RequestState
+        /// <remarks>This implementation has nothing to do with schemas. However, it so happens that this member has the
+        /// same behavior for all subclasses (parameters, nodes and matrices). If this fact ever changes, it probably
+        /// makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
+        internal override RequestState RequestState
         {
             get
             {
@@ -83,16 +83,6 @@ namespace Lawo.EmberPlusSharp.Model
                     this.offlineRequestState = value;
                 }
             }
-        }
-
-        internal sealed override void SetRequestState(bool isEmpty, ref RequestState newRequestState)
-        {
-            if (isEmpty)
-            {
-                base.SetRequestState(isEmpty, ref newRequestState);
-            }
-
-            this.RequestState = newRequestState;
         }
 
         internal override RequestState UpdateRequestState(bool throwForMissingRequiredChildren)
