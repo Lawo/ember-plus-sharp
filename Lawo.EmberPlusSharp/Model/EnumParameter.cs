@@ -47,6 +47,12 @@ namespace Lawo.EmberPlusSharp.Model
             writer.WriteValue(GlowParameterContents.Value.OuterId, FastEnum.ToInt64(value.Value));
         }
 
+        internal sealed override TEnum? AssertValueType(object value)
+        {
+            var integer = value as long?;
+            return integer.HasValue ? FastEnum.ToEnum<TEnum>(integer.Value) : base.AssertValueType(value);
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private EnumParameter()

@@ -8,7 +8,7 @@
   </StreamEntry>
   <StreamEntry type="StreamEntry">
     <streamIdentifier type="Integer">1</streamIdentifier>
-    <streamValue type="Integer">42</streamValue>
+    <streamValue type="Octetstring">2A2B2C0203</streamValue>
   </StreamEntry>
   <StreamEntry type="StreamEntry">
     <streamIdentifier type="Integer">2</streamIdentifier>

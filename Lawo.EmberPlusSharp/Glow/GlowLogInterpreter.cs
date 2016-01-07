@@ -25,6 +25,7 @@ namespace Lawo.EmberPlusSharp.Glow
         private readonly Dictionary<int, IInvocationResult> pendingInvocations =
             new Dictionary<int, IInvocationResult>();
 
+        private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
         private readonly S101LogReader reader;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +70,10 @@ namespace Lawo.EmberPlusSharp.Glow
             {
                 using (var stream = new MemoryStream(payload))
                 using (var emberReader = new EmberReader(stream))
+                using (var dummyWriter = new EmberWriter(Stream.Null))
                 {
-                    this.root.Read(emberReader, this.pendingInvocations);
+                    this.root.Read(emberReader, this.pendingInvocations, this.streamedParameters);
+                    this.root.WriteRequest(dummyWriter, this.streamedParameters);
                     this.root.SetComplete();
                     this.root.UpdateRequestState(true);
                 }

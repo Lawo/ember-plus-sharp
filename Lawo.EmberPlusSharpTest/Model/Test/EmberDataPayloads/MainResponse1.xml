@@ -204,10 +204,6 @@ Three</enumeration>
       <default type="Real">0.0</default>
       <type type="Integer">2</type>
       <streamIdentifier type="Integer">3</streamIdentifier>
-      <streamDescriptor type="StreamDescription">
-        <format type="Integer">21</format>
-        <offset type="Integer">0</offset>
-      </streamDescriptor>
     </contents>
   </RootElement>
   <RootElement type="Matrix">

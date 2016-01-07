@@ -104,8 +104,6 @@ namespace Lawo.EmberPlusSharp.Model
                         consumerTask,
                         async consumer =>
                         {
-                            await SendResponse(providerClient, "StreamEntriesResponse.xml");
-
                             unchecked
                             {
                                 boolean = !boolean;
@@ -162,6 +160,8 @@ namespace Lawo.EmberPlusSharp.Model
                             AssertNotified(root.StringParameter, o => o.Value, GetRandomString());
 
                             CheckNumbers(root);
+
+                            await SendResponse(providerClient, "StreamEntriesResponse.xml");
                         });
                 },
                 null,
@@ -214,8 +214,6 @@ namespace Lawo.EmberPlusSharp.Model
                         consumerTask,
                         async consumer =>
                         {
-                            await SendResponse(providerClient, "StreamEntriesResponse.xml");
-
                             unchecked
                             {
                                 boolean = !boolean;
@@ -298,6 +296,8 @@ namespace Lawo.EmberPlusSharp.Model
                                 children[2].ToString().ToLowerInvariant());
 
                             AssertNotified((IParameter)root.GetChild("StringParameter"), o => o.Value, GetRandomString());
+
+                            await SendResponse(providerClient, "StreamEntriesResponse.xml");
                         });
                 },
                 null,

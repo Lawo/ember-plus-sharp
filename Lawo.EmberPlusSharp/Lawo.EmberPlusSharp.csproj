@@ -152,6 +152,7 @@
     <Compile Include="Model\Result1.cs" />
     <Compile Include="Model\Result.cs" />
     <Compile Include="Model\ResultBase.cs" />
+    <Compile Include="Model\StreamedParameterCollection.cs" />
     <Compile Include="Model\ValueParameter.cs" />
     <Compile Include="Model\ReferenceParameter.cs" />
     <Compile Include="Model\NullableParameter.cs" />

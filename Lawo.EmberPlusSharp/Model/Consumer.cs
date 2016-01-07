@@ -25,7 +25,7 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree published
     /// by the provider.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection, IStreamedParameterCollection
+    public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection
         where TRoot : Root<TRoot>
     {
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
@@ -35,9 +35,7 @@ namespace Lawo.EmberPlusSharp.Model
         private readonly Dictionary<int, IInvocationResult> pendingInvocations =
             new Dictionary<int, IInvocationResult>();
 
-        private readonly Dictionary<int, HashSet<IStreamedParameter>> streamedParameters =
-            new Dictionary<int, HashSet<IStreamedParameter>>();
-
+        private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
         private readonly S101Client client;
         private readonly int queryChildrenTimeout;
         private readonly S101Message emberDataMessage;
@@ -203,20 +201,6 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.pendingInvocations.Add(++this.lastInvocationId, invocationResult);
             return this.lastInvocationId;
-        }
-
-        void IStreamedParameterCollection.Add(IStreamedParameter parameter)
-        {
-            var streamIdentifier = (int)parameter.StreamIdentifier;
-            HashSet<IStreamedParameter> group;
-
-            if (!this.streamedParameters.TryGetValue(streamIdentifier, out group))
-            {
-                group = new HashSet<IStreamedParameter>();
-                this.streamedParameters.Add(streamIdentifier, group);
-            }
-
-            group.Add(parameter);
         }
 
         private Consumer(S101Client client, int timeout, byte slot)
@@ -431,7 +415,7 @@ namespace Lawo.EmberPlusSharp.Model
             using (var stream = new MemoryStream(payload))
             using (var reader = new EmberReader(stream))
             {
-                this.root.Read(reader, this.pendingInvocations);
+                this.root.Read(reader, this.pendingInvocations, this.streamedParameters);
             }
         }
 
@@ -441,7 +425,7 @@ namespace Lawo.EmberPlusSharp.Model
             using (stream = new MemoryStream())
             using (var writer = new EmberWriter(stream))
             {
-                return this.root.WriteRequest(writer, this);
+                return this.root.WriteRequest(writer, this.streamedParameters);
             }
         }
 
