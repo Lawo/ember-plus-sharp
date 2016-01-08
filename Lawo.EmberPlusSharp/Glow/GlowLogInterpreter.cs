@@ -22,9 +22,7 @@ namespace Lawo.EmberPlusSharp.Glow
     public sealed class GlowLogInterpreter
     {
         private readonly MyDynamicRoot root = Root<MyDynamicRoot>.Construct(new Context(null, 0, string.Empty));
-        private readonly Dictionary<int, IInvocationResult> pendingInvocations =
-            new Dictionary<int, IInvocationResult>();
-
+        private readonly InvocationCollection pendingInvocations = new InvocationCollection();
         private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
         private readonly S101LogReader reader;
 
