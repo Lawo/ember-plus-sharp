@@ -8,6 +8,7 @@ namespace Lawo.EmberPlusSharp.S101
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -73,16 +74,18 @@ namespace Lawo.EmberPlusSharp.S101
             IS101Logger providerLogger,
             EmberTypeBag types,
             bool sendFirstMessage,
-            string logXmlName)
+            string logXmlName,
+            params object[] args)
         {
+            var xml = string.Format(CultureInfo.InvariantCulture, GetContent<TResourceNamespace>(logXmlName), args);
+
             return TestNoExceptionsAsync(
                 async (consumerClientTask, providerClient) =>
                 {
-                    using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                        typeof(TResourceNamespace), logXmlName))
-                    using (var reader = XmlReader.Create(resourceStream))
+                    using (var reader = new StringReader(xml))
+                    using (var xmlReader = XmlReader.Create(reader))
                     {
-                        var robotTask = S101Robot.RunAsync(providerClient, types, reader, sendFirstMessage);
+                        var robotTask = S101Robot.RunAsync(providerClient, types, xmlReader, sendFirstMessage);
 
                         using (var consumerClient = await consumerClientTask)
                         {
