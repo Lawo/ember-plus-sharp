@@ -443,7 +443,8 @@ namespace Lawo.EmberPlusSharp.Model
                     AssertAccess(consumer.Root.FieldNode.FieldNode.FieldNode);
                     AssertAccess(consumer.Root.FieldNode.FieldNode.FieldNode.FieldNode);
                     return Task.FromResult(false);
-                }));
+                },
+                false));
         }
 
         /// <summary>Tests nullable parameter variants.</summary>
@@ -516,7 +517,8 @@ namespace Lawo.EmberPlusSharp.Model
                     }
 
                     await Task.Delay(300);
-                }));
+                },
+                false));
         }
 
         /// <summary>Tests sending/receiving with a broken connection.</summary>
@@ -594,7 +596,8 @@ namespace Lawo.EmberPlusSharp.Model
 #pragma warning disable 0618
                     await consumer.SendChangesAsync();
 #pragma warning restore 0618
-                }));
+                },
+                false));
         }
 
         /// <summary>Tests the various change notifications.</summary>
@@ -804,7 +807,8 @@ namespace Lawo.EmberPlusSharp.Model
                                 Assert.AreEqual(42L, ex.Result.Items.First());
                                 Assert.AreEqual(1, ex.Result.Items.Count());
                             }
-                        });
+                        },
+                        false);
                 });
         }
 
@@ -854,7 +858,8 @@ namespace Lawo.EmberPlusSharp.Model
                 consumer =>
                 {
                     return Task.FromResult(false);
-                }));
+                },
+                false));
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
@@ -1012,7 +1017,8 @@ namespace Lawo.EmberPlusSharp.Model
                             {
                                 c.AutoSendInterval = 10;
                                 return c.Root.Function.InvokeAsync(42);
-                            }),
+                            },
+                            false),
                         "The received tuple length does not match the tuple description length of 1.");
                     await AssertThrowAsync<ModelException>(
                         () => TestWithRobot<FunctionResultMismatchRoot>(
@@ -1021,7 +1027,8 @@ namespace Lawo.EmberPlusSharp.Model
                             {
                                 c.AutoSendInterval = 10;
                                 return c.Root.Function.InvokeAsync(42);
-                            }),
+                            },
+                            false),
                         "The received tuple length does not match the tuple description length of 1.");
                     await AssertThrowInCreateAsync<ModelException, ZoneNodeRoot>(
                         "OfflineRequiredElementLog.xml",
@@ -1051,21 +1058,23 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     Assert.AreEqual(1, consumer.Root.FieldNode.SomeParameter.Value);
                     return Task.FromResult(false);
-                }));
+                },
+                false));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</see>.</summary>
         [TestMethod]
         public void Bug1766Test()
         {
-            AsyncPump.Run(() => TestWithRobot<EmptyNodeRoot>("Bug1766Log.xml", consumer => Task.FromResult(false)));
+            AsyncPump.Run(
+                () => TestWithRobot<EmptyNodeRoot>("Bug1766Log.xml", consumer => Task.FromResult(false), false));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</see>.</summary>
         [TestMethod]
         public void Bug1834Test()
         {
-            AsyncPump.Run(() => TestWithRobot<EmptyRoot>("Bug1834Log.xml", consumer => Task.FromResult(false)));
+            AsyncPump.Run(() => TestWithRobot<EmptyRoot>("Bug1834Log.xml", consumer => Task.FromResult(false), false));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</see>.</summary>
@@ -1110,7 +1119,8 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     Assert.AreEqual(Enumeration.Two, consumer.Root.Enum.Value);
                     return Task.FromResult(false);
-                }));
+                },
+                false));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</see>.</summary>
@@ -1140,7 +1150,8 @@ namespace Lawo.EmberPlusSharp.Model
                     consumer.Root.Parameter1.Value = true;
                     consumer.Root.Parameter2.Value = true;
                     await Task.Delay(1000);
-                }));
+                },
+                false));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</see>.</summary>
@@ -1440,7 +1451,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
         private static Task TestWithRobot<TRoot>(
-            string logXmlName, Func<Consumer<TRoot>, Task> testCallback, bool log = false) where TRoot : Root<TRoot>
+            string logXmlName, Func<Consumer<TRoot>, Task> testCallback, bool log) where TRoot : Root<TRoot>
         {
             return TestWithRobot<ModelPayloads>(
                 client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), c => testCallback(c)),
@@ -1642,11 +1653,13 @@ namespace Lawo.EmberPlusSharp.Model
         private static TRoot GetRoot<TRoot>(string logXmlName) where TRoot : Root<TRoot>
         {
             TRoot root = null;
-            AsyncPump.Run(() => TestWithRobot<TRoot>(logXmlName, consumer => Task.FromResult(root = consumer.Root)));
+            AsyncPump.Run(
+                () => TestWithRobot<TRoot>(logXmlName, consumer => Task.FromResult(root = consumer.Root), false));
             return root;
         }
 
-        private static void AssertEqual<TCollectionNode>(MainRoot mainRoot, InterfaceElementRoot<TCollectionNode> interfaceRoot) where TCollectionNode : INode
+        private static void AssertEqual<TCollectionNode>(
+            MainRoot mainRoot, InterfaceElementRoot<TCollectionNode> interfaceRoot) where TCollectionNode : INode
         {
             Assert.AreEqual(mainRoot.BooleanParameter.Value, interfaceRoot.BooleanParameter.Value);
             Assert.AreEqual(mainRoot.IntegerParameter.Value, interfaceRoot.IntegerParameter.Value);
