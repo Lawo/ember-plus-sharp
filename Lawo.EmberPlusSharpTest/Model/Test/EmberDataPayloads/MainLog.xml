@@ -14,7 +14,18 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="17:42:02.52" direction="Send" number="1">
+  <Event type="Message" timeUtc="17:42:02.66" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="A-42">
+        <C-99 type="A-137">
+          <C-0 type="Integer">0</C-0>
+        </C-99>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="17:42:02.52" direction="Send" number="2">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -373,7 +384,7 @@ Three</enumeration>
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="17:42:02.64" direction="Send" number="2">
+  <Event type="Message" timeUtc="17:42:02.64" direction="Send" number="3">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -437,14 +448,16 @@ Three</enumeration>
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="17:42:02.66" direction="Send" number="3">
+  <Event type="Message" timeUtc="17:42:02.66" direction="Send" number="4">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
       <Root type="StreamCollection">
+        <C-42 type="A-17"/>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">0</streamIdentifier>
           <streamValue type="Boolean">true</streamValue>
+          <C-27 type="UTF8String"></C-27>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">1</streamIdentifier>

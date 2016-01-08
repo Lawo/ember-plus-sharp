@@ -323,7 +323,7 @@ namespace Lawo.EmberPlusSharp.Model
                         return (long)BitConverter.ToUInt32(array, offset);
                     case StreamFormat.UInt64BigEndian:
                     case StreamFormat.UInt64LittleEndian:
-                        return (long)BitConverter.ToUInt64(array, offset);
+                        return unchecked((long)BitConverter.ToUInt64(array, offset));
                     case StreamFormat.SByte:
                         return (long)unchecked((sbyte)array[offset]);
                     case StreamFormat.Int16BigEndian:
