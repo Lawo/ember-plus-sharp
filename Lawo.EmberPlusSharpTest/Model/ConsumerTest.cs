@@ -1328,12 +1328,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private static string GetXml(string payloadXmlName)
         {
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                typeof(ModelPayloads), payloadXmlName))
-            using (var reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+            return GetContent<ModelPayloads>(payloadXmlName);
         }
 
         private static byte[] ToPayload(string xml)

@@ -64,8 +64,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Uses <see cref="S101Robot"/> to simulate a provider communicating with the <see cref="S101Client"/>
         /// object passed to <paramref name="testCallback"/>.</summary>
-        /// <typeparam name="TResourceNamespace">The type whose namespace is used to scope
-        /// <paramref name="logXmlName"/> in the manifest resources.</typeparam>
+        /// <typeparam name="TResourceNamespace">The type whose namespace is used to scope <paramref name="logXmlName"/>
+        /// in the manifest resources.</typeparam>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean alternative.")]
         protected static Task TestWithRobot<TResourceNamespace>(
             Func<S101Client, Task> testCallback,
@@ -264,6 +264,21 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             return result;
+        }
+
+        /// <summary>Reads and returns the contents of the resource text file identified by <paramref name="fileName"/>.
+        /// </summary>
+        /// <typeparam name="TResourceNamespace">The type whose namespace is used to scope <paramref name="fileName"/>
+        /// in the manifest resources.</typeparam>
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean alternative.")]
+        protected static string GetContent<TResourceNamespace>(string fileName)
+        {
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                typeof(TResourceNamespace), fileName))
+            using (var reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
