@@ -34,8 +34,8 @@
             <value type="Integer">0</value>
             <streamIdentifier type="Integer">1</streamIdentifier>
             <streamDescriptor type="StreamDescription">
-              <format type="Integer">0</format>
-              <offset type="Integer">0</offset>
+              <format type="Integer">{0}</format>
+              <offset type="Integer">{1}</offset>
             </streamDescriptor>
           </contents>
         </RootElement>
@@ -51,8 +51,8 @@ Three</enumeration>
             <type type="Integer">6</type>
             <streamIdentifier type="Integer">1</streamIdentifier>
             <streamDescriptor type="StreamDescription">
-              <format type="Integer">0</format>
-              <offset type="Integer">3</offset>
+              <format type="Integer">{2}</format>
+              <offset type="Integer">{3}</offset>
             </streamDescriptor>
           </contents>
         </RootElement>
@@ -70,6 +70,10 @@ Three</enumeration>
             <identifier type="UTF8String">RealParameter</identifier>
             <value type="Real">0</value>
             <streamIdentifier type="Integer">3</streamIdentifier>
+            <streamDescriptor type="StreamDescription">
+              <format type="Integer">{4}</format>
+              <offset type="Integer">{5}</offset>
+            </streamDescriptor>
           </contents>
         </RootElement>
         <RootElement type="Parameter">
@@ -146,23 +150,23 @@ Three</enumeration>
       <Root type="StreamCollection">
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">0</streamIdentifier>
-          <streamValue type="Boolean">true</streamValue>
+          <streamValue type="Boolean">{6}</streamValue>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">1</streamIdentifier>
-          <streamValue type="Octetstring">2A2B2C0203</streamValue>
+          <streamValue type="Octetstring">{7}</streamValue>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">2</streamIdentifier>
-          <streamValue type="Octetstring">BCD7C4C43CED13</streamValue>
+          <streamValue type="Octetstring">{8}</streamValue>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">3</streamIdentifier>
-          <streamValue type="Real">3.14159265359</streamValue>
+          <streamValue type="Octetstring">{9}</streamValue>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">4</streamIdentifier>
-          <streamValue type="UTF8String">Hello</streamValue>
+          <streamValue type="UTF8String">{10}</streamValue>
         </StreamEntry>
       </Root>
     </Payload>

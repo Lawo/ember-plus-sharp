@@ -853,13 +853,30 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void StreamTest()
         {
+            var args =
+                new object[]
+                {
+                    (int)StreamFormat.Byte,
+                    0,
+                    (int)StreamFormat.Byte,
+                    3,
+                    (int)StreamFormat.Float64LittleEndian,
+                    0,
+                    "true",
+                    "2A2B2C0203",
+                    "BCD7C4C43CED13",
+                    new SoapHexBinary(BitConverter.GetBytes(3.14159265359)).ToString(),
+                    "Hello"
+                };
+
             AsyncPump.Run(() => TestWithRobot<StreamRoot>(
                 consumer =>
                 {
                     return Task.FromResult(false);
                 },
                 false,
-                "StreamLog.xml"));
+                "StreamLog.xml",
+                args));
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
@@ -1451,7 +1468,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
         private static Task TestWithRobot<TRoot>(
-            Func<Consumer<TRoot>, Task> testCallback, bool log, string logXmlName) where TRoot : Root<TRoot>
+            Func<Consumer<TRoot>, Task> testCallback, bool log, string logXmlName, params object[] args) where TRoot : Root<TRoot>
         {
             return TestWithRobot<ModelPayloads>(
                 client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), c => testCallback(c)),
@@ -1459,7 +1476,8 @@ namespace Lawo.EmberPlusSharp.Model
                 CreateLogger(log, logXmlName, "provider.xml"),
                 GlowTypes.Instance,
                 false,
-                logXmlName);
+                logXmlName,
+                args);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
