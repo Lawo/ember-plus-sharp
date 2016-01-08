@@ -105,7 +105,7 @@ namespace Lawo.EmberPlusSharp.Model
             return RequestState.Complete;
         }
 
-        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
+        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
             {
@@ -115,7 +115,7 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteValue(GlowQualifiedFunction.Path.OuterId, this.NumberPath);
                 writer.WriteStartApplicationDefinedType(
                     GlowQualifiedFunction.Children.OuterId, GlowElementCollection.InnerNumber);
-                this.WriteInvocations(writer, invocationCollection);
+                this.WriteInvocations(writer, pendingInvocations);
                 writer.WriteEndContainer();
                 writer.WriteEndContainer();
                 this.HasChanges = false;
@@ -195,7 +195,7 @@ namespace Lawo.EmberPlusSharp.Model
                 this.arguments.Zip(actualArguments, (e, a) => CreateWriter(e, a)).ToArray());
         }
 
-        private void WriteInvocations(EmberWriter writer, IInvocationCollection invocationCollection)
+        private void WriteInvocations(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             while (this.invocations.Count > 0)
             {
@@ -203,7 +203,7 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteValue(GlowCommand.Number.OuterId, 33);
                 writer.WriteStartApplicationDefinedType(GlowCommand.Invocation.OuterId, GlowInvocation.InnerNumber);
                 var invocation = this.invocations.Dequeue();
-                var invocationId = invocationCollection.Add(invocation.Key);
+                var invocationId = pendingInvocations.Add(invocation.Key);
                 writer.WriteValue(GlowInvocation.InvocationId.OuterId, invocationId);
                 writer.WriteStartSequence(GlowInvocation.Arguments.OuterId);
 

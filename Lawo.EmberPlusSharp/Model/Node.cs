@@ -115,11 +115,11 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RequestState;
         }
 
-        internal override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
+        internal override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
             {
-                this.WriteChangesCollection(writer, invocationCollection);
+                this.WriteChangesCollection(writer, pendingInvocations);
                 this.HasChanges = false;
             }
         }

@@ -260,7 +260,7 @@ namespace Lawo.EmberPlusSharp.Model
             return false;
         }
 
-        internal abstract void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection);
+        internal abstract void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations);
 
         internal virtual void SetComplete()
         {

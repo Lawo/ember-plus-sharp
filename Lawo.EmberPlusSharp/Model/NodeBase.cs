@@ -82,11 +82,11 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal void WriteChangesCollection(EmberWriter writer, IInvocationCollection invocationCollection)
+        internal void WriteChangesCollection(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             foreach (var child in this.children.Values)
             {
-                child.WriteChanges(writer, invocationCollection);
+                child.WriteChanges(writer, pendingInvocations);
             }
         }
 

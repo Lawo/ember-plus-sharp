@@ -332,7 +332,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RequestState;
         }
 
-        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection invocationCollection)
+        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
             {
