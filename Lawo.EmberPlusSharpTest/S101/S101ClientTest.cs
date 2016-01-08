@@ -217,9 +217,6 @@ namespace Lawo.EmberPlusSharp.S101
         public void VersionTest()
         {
             AsyncPump.Run(() => TestWithRobot<S101Payloads>(
-                new EmberTypeBag(),
-                "VersionLog.xml",
-                true,
                 client =>
                 {
                     client.EmberDataReceived += (s, e) =>
@@ -230,7 +227,10 @@ namespace Lawo.EmberPlusSharp.S101
                     return Task.FromResult(false);
                 },
                 null,
-                null));
+                null,
+                new EmberTypeBag(),
+                true,
+                "VersionLog.xml"));
         }
     }
 }

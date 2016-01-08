@@ -523,11 +523,7 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void AutoSendWithBrokenS101ConnectionTest()
         {
-            AsyncPump.Run(
-                () => TestWithRobot<ModelPayloads>(
-                GlowTypes.Instance,
-                "SendReceiveWithBrokenConnectionLog.xml",
-                false,
+            AsyncPump.Run(() => TestWithRobot<ModelPayloads>(
                 async client =>
                 {
                     using (var consumer = await Consumer<EmptyDynamicRoot>.CreateAsync(client))
@@ -545,7 +541,10 @@ namespace Lawo.EmberPlusSharp.Model
                     }
                 },
                 null,
-                null));
+                null,
+                GlowTypes.Instance,
+                false,
+                "SendReceiveWithBrokenConnectionLog.xml"));
         }
 
         /// <summary>Tests whether exceptions are reported appropriately after
@@ -1449,12 +1448,12 @@ namespace Lawo.EmberPlusSharp.Model
             string logXmlName, Func<Consumer<TRoot>, Task> testCallback, bool log = false) where TRoot : Root<TRoot>
         {
             return TestWithRobot<ModelPayloads>(
-                GlowTypes.Instance,
-                logXmlName,
-                false,
                 client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), c => testCallback(c)),
                 CreateLogger(log, logXmlName, "consumer.xml"),
-                CreateLogger(log, logXmlName, "provider.xml"));
+                CreateLogger(log, logXmlName, "provider.xml"),
+                GlowTypes.Instance,
+                false,
+                logXmlName);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]

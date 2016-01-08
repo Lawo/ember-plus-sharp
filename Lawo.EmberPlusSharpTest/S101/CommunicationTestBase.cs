@@ -68,12 +68,12 @@ namespace Lawo.EmberPlusSharp.S101
         /// <paramref name="logXmlName"/> in the manifest resources.</typeparam>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean alternative.")]
         protected static Task TestWithRobot<TResourceNamespace>(
-            EmberTypeBag types,
-            string logXmlName,
-            bool sendFirstMessage,
             Func<S101Client, Task> testCallback,
             IS101Logger consumerLogger,
-            IS101Logger providerLogger)
+            IS101Logger providerLogger,
+            EmberTypeBag types,
+            bool sendFirstMessage,
+            string logXmlName)
         {
             return TestNoExceptionsAsync(
                 async (consumerClientTask, providerClient) =>

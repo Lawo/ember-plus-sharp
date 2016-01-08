@@ -27,9 +27,6 @@ namespace Lawo.EmberPlusSharp.S101
         public void SkipTest()
         {
             AsyncPump.Run(() => TestWithRobot<S101Payloads>(
-                Types,
-                "SkipLog.xml",
-                true,
                 async client =>
                 {
                     var done = new TaskCompletionSource<bool>();
@@ -46,7 +43,10 @@ namespace Lawo.EmberPlusSharp.S101
                     await done.Task;
                 },
                 null,
-                null));
+                null,
+                Types,
+                true,
+                "SkipLog.xml"));
         }
 
         /// <summary>Tests <see cref="S101Robot"/> use cases for incoming messages.</summary>
@@ -54,9 +54,6 @@ namespace Lawo.EmberPlusSharp.S101
         public void IncomingTest()
         {
             AsyncPump.Run(() => AssertThrowAsync<S101Exception>(() => TestWithRobot<S101Payloads>(
-                Types,
-                "IncomingLog.xml",
-                false,
                 async client =>
                 {
                     using (var stream = new MemoryStream())
@@ -70,7 +67,10 @@ namespace Lawo.EmberPlusSharp.S101
                     }
                 },
                 null,
-                null)));
+                null,
+                Types,
+                false,
+                "IncomingLog.xml")));
         }
 
         /// <summary>Tests what happens when the S101 connection is lost prematurely.</summary>
@@ -78,16 +78,16 @@ namespace Lawo.EmberPlusSharp.S101
         public void ConnectionLostTest()
         {
             AsyncPump.Run(() => AssertThrowAsync<S101Exception>(() => TestWithRobot<S101Payloads>(
-                Types,
-                "IncomingLog.xml",
-                false,
                 client =>
                 {
                     client.Dispose();
                     return Task.FromResult(false);
                 },
                 null,
-                null)));
+                null,
+                Types,
+                false,
+                "IncomingLog.xml")));
         }
 
         /// <summary>Tests <see cref="S101Robot"/> exceptions.</summary>
@@ -106,7 +106,7 @@ namespace Lawo.EmberPlusSharp.S101
                     }
 
                     await AssertThrowAsync<XmlException>(() => TestWithRobot<S101Payloads>(
-                        Types, "MissingPayloadLog.xml", true, client => Task.FromResult(false), null, null));
+                        client => Task.FromResult(false), null, null, Types, true, "MissingPayloadLog.xml"));
                 });
         }
     }
