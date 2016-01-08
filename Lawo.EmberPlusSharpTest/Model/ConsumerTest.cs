@@ -435,7 +435,6 @@ namespace Lawo.EmberPlusSharp.Model
         public void AccessTest()
         {
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
-                "AccessLog.xml",
                 consumer =>
                 {
                     AssertAccess(consumer.Root.FieldNode);
@@ -444,7 +443,8 @@ namespace Lawo.EmberPlusSharp.Model
                     AssertAccess(consumer.Root.FieldNode.FieldNode.FieldNode.FieldNode);
                     return Task.FromResult(false);
                 },
-                false));
+                false,
+                "AccessLog.xml"));
         }
 
         /// <summary>Tests nullable parameter variants.</summary>
@@ -508,7 +508,6 @@ namespace Lawo.EmberPlusSharp.Model
         public void TriggerTest()
         {
             AsyncPump.Run(() => TestWithRobot<EmptyDynamicRoot>(
-                "TriggerLog.xml",
                 async consumer =>
                 {
                     foreach (IParameter param in consumer.Root.DynamicChildren)
@@ -518,7 +517,8 @@ namespace Lawo.EmberPlusSharp.Model
 
                     await Task.Delay(300);
                 },
-                false));
+                false,
+                "TriggerLog.xml"));
         }
 
         /// <summary>Tests sending/receiving with a broken connection.</summary>
@@ -589,7 +589,6 @@ namespace Lawo.EmberPlusSharp.Model
         public void SlotTest()
         {
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
-                "SlotLog.xml",
                 async consumer =>
                 {
                     Assert.AreEqual(42, consumer.Root.FieldNode.SomeParameter.Value);
@@ -597,7 +596,8 @@ namespace Lawo.EmberPlusSharp.Model
                     await consumer.SendChangesAsync();
 #pragma warning restore 0618
                 },
-                false));
+                false,
+                "SlotLog.xml"));
         }
 
         /// <summary>Tests the various change notifications.</summary>
@@ -605,7 +605,6 @@ namespace Lawo.EmberPlusSharp.Model
         public void ChangeNotificationTest()
         {
             AsyncPump.Run(() => TestWithRobot<BooleanRoot>(
-                "ChangeNotificationLog.xml",
                 async consumer =>
                 {
                     Assert.AreEqual(1, ((INode)consumer.Root).Children.Count);
@@ -649,7 +648,8 @@ namespace Lawo.EmberPlusSharp.Model
                     var dynamicParameter = (IParameter)dynamicNode.Children[0];
                     Assert.AreEqual(true, dynamicParameter.Value);
                 },
-                true));
+                true,
+                "ChangeNotificationLog.xml"));
         }
 
         /// <summary>Tests Ember+ functions.</summary>
@@ -660,7 +660,6 @@ namespace Lawo.EmberPlusSharp.Model
                 async () =>
                 {
                     await TestWithRobot<FunctionRoot>(
-                        "FunctionLog.xml",
                         async consumer =>
                         {
                             var allInteger = Enumerable.Range(1, 6).Select(i => ParameterType.Integer).ToArray();
@@ -718,7 +717,8 @@ namespace Lawo.EmberPlusSharp.Model
                                 Assert.AreEqual(1, ex.Result.Items.Count());
                             }
                         },
-                        true);
+                        true,
+                        "FunctionLog.xml");
                 });
         }
 
@@ -730,7 +730,6 @@ namespace Lawo.EmberPlusSharp.Model
                 async () =>
                 {
                     await TestWithRobot<EmptyDynamicRoot>(
-                        "FunctionLog.xml",
                         async consumer =>
                         {
                             INode root = consumer.Root;
@@ -808,7 +807,8 @@ namespace Lawo.EmberPlusSharp.Model
                                 Assert.AreEqual(1, ex.Result.Items.Count());
                             }
                         },
-                        false);
+                        false,
+                        "FunctionLog.xml");
                 });
         }
 
@@ -820,7 +820,6 @@ namespace Lawo.EmberPlusSharp.Model
                 async () =>
                 {
                     await TestWithRobot<ZoneNodeRoot>(
-                        "IsOnlineLog.xml",
                         async consumer =>
                         {
                             var state = consumer.Root.ZoneNode.Ravenna.MediaSessions.Children[0].State;
@@ -845,7 +844,8 @@ namespace Lawo.EmberPlusSharp.Model
                             state.Value = 5;
                             await WaitForChangeAsync(receivers.Children[0].GetProperty(r => r.Sdp));
                         },
-                        true);
+                        true,
+                        "IsOnlineLog.xml");
                 });
         }
 
@@ -854,12 +854,12 @@ namespace Lawo.EmberPlusSharp.Model
         public void StreamTest()
         {
             AsyncPump.Run(() => TestWithRobot<StreamRoot>(
-                "StreamLog.xml",
                 consumer =>
                 {
                     return Task.FromResult(false);
                 },
-                false));
+                false,
+                "StreamLog.xml"));
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
@@ -1012,23 +1012,23 @@ namespace Lawo.EmberPlusSharp.Model
                         false);
                     await AssertThrowAsync<ModelException>(
                         () => TestWithRobot<FunctionResultMismatchRoot>(
-                            "FunctionResultValueMismatchLog1.xml",
                             c =>
                             {
                                 c.AutoSendInterval = 10;
                                 return c.Root.Function.InvokeAsync(42);
                             },
-                            false),
+                            false,
+                            "FunctionResultValueMismatchLog1.xml"),
                         "The received tuple length does not match the tuple description length of 1.");
                     await AssertThrowAsync<ModelException>(
                         () => TestWithRobot<FunctionResultMismatchRoot>(
-                            "FunctionResultValueMismatchLog2.xml",
                             c =>
                             {
                                 c.AutoSendInterval = 10;
                                 return c.Root.Function.InvokeAsync(42);
                             },
-                            false),
+                            false,
+                            "FunctionResultValueMismatchLog2.xml"),
                         "The received tuple length does not match the tuple description length of 1.");
                     await AssertThrowInCreateAsync<ModelException, ZoneNodeRoot>(
                         "OfflineRequiredElementLog.xml",
@@ -1053,13 +1053,13 @@ namespace Lawo.EmberPlusSharp.Model
         public void Bug1620Test()
         {
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
-                "Bug1620Log.xml",
                 consumer =>
                 {
                     Assert.AreEqual(1, consumer.Root.FieldNode.SomeParameter.Value);
                     return Task.FromResult(false);
                 },
-                false));
+                false,
+                "Bug1620Log.xml"));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</see>.</summary>
@@ -1067,14 +1067,14 @@ namespace Lawo.EmberPlusSharp.Model
         public void Bug1766Test()
         {
             AsyncPump.Run(
-                () => TestWithRobot<EmptyNodeRoot>("Bug1766Log.xml", consumer => Task.FromResult(false), false));
+                () => TestWithRobot<EmptyNodeRoot>(consumer => Task.FromResult(false), false, "Bug1766Log.xml"));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</see>.</summary>
         [TestMethod]
         public void Bug1834Test()
         {
-            AsyncPump.Run(() => TestWithRobot<EmptyRoot>("Bug1834Log.xml", consumer => Task.FromResult(false), false));
+            AsyncPump.Run(() => TestWithRobot<EmptyRoot>(consumer => Task.FromResult(false), false, "Bug1834Log.xml"));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</see>.</summary>
@@ -1114,13 +1114,13 @@ namespace Lawo.EmberPlusSharp.Model
         public void Bug1866Test()
         {
             AsyncPump.Run(() => TestWithRobot<EnumParameterRoot>(
-                "Bug1866Log.xml",
                 consumer =>
                 {
                     Assert.AreEqual(Enumeration.Two, consumer.Root.Enum.Value);
                     return Task.FromResult(false);
                 },
-                false));
+                false,
+                "Bug1866Log.xml"));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</see>.</summary>
@@ -1143,7 +1143,6 @@ namespace Lawo.EmberPlusSharp.Model
         public void Bug3345Test()
         {
             AsyncPump.Run(() => TestWithRobot<TwoParameterRoot>(
-                "Bug3345Log.xml",
                 async consumer =>
                 {
                     await Task.Delay(1000);
@@ -1151,7 +1150,8 @@ namespace Lawo.EmberPlusSharp.Model
                     consumer.Root.Parameter2.Value = true;
                     await Task.Delay(1000);
                 },
-                false));
+                false,
+                "Bug3345Log.xml"));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</see>.</summary>
@@ -1168,7 +1168,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void Bug4463Test()
         {
             AsyncPump.Run(
-                () => TestWithRobot<EmptyZoneNodeRoot>("Bug4463Log.xml", c => Task.FromResult(false), true));
+                () => TestWithRobot<EmptyZoneNodeRoot>(c => Task.FromResult(false), true, "Bug4463Log.xml"));
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4815">Bug 4815</see>.</summary>
@@ -1279,7 +1279,7 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void Bug5639Test()
         {
-            AsyncPump.Run(() => TestWithRobot<BooleanRoot>("Bug5639Log.xml", c => Task.FromResult(false), true));
+            AsyncPump.Run(() => TestWithRobot<BooleanRoot>(c => Task.FromResult(false), true, "Bug5639Log.xml"));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1451,7 +1451,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
         private static Task TestWithRobot<TRoot>(
-            string logXmlName, Func<Consumer<TRoot>, Task> testCallback, bool log) where TRoot : Root<TRoot>
+            Func<Consumer<TRoot>, Task> testCallback, bool log, string logXmlName) where TRoot : Root<TRoot>
         {
             return TestWithRobot<ModelPayloads>(
                 client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), c => testCallback(c)),
@@ -1468,7 +1468,7 @@ namespace Lawo.EmberPlusSharp.Model
             where TRoot : Root<TRoot>
         {
             return AssertThrowAsync<TException>(
-                () => TestWithRobot<TRoot>(logXmlName, c => Task.FromResult(false), log), expectedMessage);
+                () => TestWithRobot<TRoot>(c => Task.FromResult(false), log, logXmlName), expectedMessage);
         }
 
         private static async Task AssertThrowAfterFirstRequest<TException, TRoot>(
@@ -1654,7 +1654,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             TRoot root = null;
             AsyncPump.Run(
-                () => TestWithRobot<TRoot>(logXmlName, consumer => Task.FromResult(root = consumer.Root), false));
+                () => TestWithRobot<TRoot>(consumer => Task.FromResult(root = consumer.Root), false, logXmlName));
             return root;
         }
 
