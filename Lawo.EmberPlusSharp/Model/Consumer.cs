@@ -25,16 +25,14 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TRoot">The type of the root of the object tree that will mirror the state of the tree published
     /// by the provider.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public sealed class Consumer<TRoot> : IMonitoredConnection, IInvocationCollection
+    public sealed class Consumer<TRoot> : IMonitoredConnection
         where TRoot : Root<TRoot>
     {
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
 
         private readonly TRoot root = Root<TRoot>.Construct(new Context(null, 0, string.Empty));
         private readonly ReceiveQueue receiveQueue = new ReceiveQueue();
-        private readonly Dictionary<int, IInvocationResult> pendingInvocations =
-            new Dictionary<int, IInvocationResult>();
-
+        private readonly InvocationCollection pendingInvocations = new InvocationCollection();
         private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
         private readonly S101Client client;
         private readonly int queryChildrenTimeout;
@@ -42,7 +40,6 @@ namespace Lawo.EmberPlusSharp.Model
         private int autoSendInterval = 100;
         private CancellationTokenSource autoSendDelayCancellationSource;
         private TaskCompletionSource<bool> hasChangesSetSource;
-        private int lastInvocationId;
         private bool disposed;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +101,7 @@ namespace Lawo.EmberPlusSharp.Model
                 using (stream = new MemoryStream())
                 using (var writer = new EmberWriter(stream))
                 {
-                    this.root.WriteChanges(writer, this);
+                    this.root.WriteChanges(writer, this.pendingInvocations);
                 }
 
                 await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
@@ -196,12 +193,6 @@ namespace Lawo.EmberPlusSharp.Model
         public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        int IInvocationCollection.Add(IInvocationResult invocationResult)
-        {
-            this.pendingInvocations.Add(++this.lastInvocationId, invocationResult);
-            return this.lastInvocationId;
-        }
 
         private Consumer(S101Client client, int timeout, byte slot)
         {
