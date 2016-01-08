@@ -846,6 +846,18 @@ namespace Lawo.EmberPlusSharp.Model
                 });
         }
 
+        /// <summary>Tests various streaming scenarios.</summary>
+        [TestMethod]
+        public void StreamTest()
+        {
+            AsyncPump.Run(() => TestWithRobot<StreamRoot>(
+                "StreamLog.xml",
+                consumer =>
+                {
+                    return Task.FromResult(false);
+                }));
+        }
+
         /// <summary>Tests various exceptional conditions.</summary>
         [TestMethod]
         public void ExceptionTest()

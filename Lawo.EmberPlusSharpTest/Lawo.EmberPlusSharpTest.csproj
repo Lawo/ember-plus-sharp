@@ -93,6 +93,7 @@
     <Compile Include="Model\Test\EmptyZoneNode.cs" />
     <Compile Include="Model\Test\EmptyZoneNodeRoot.cs" />
     <Compile Include="Model\Test\InterfaceElementRoot.cs" />
+    <Compile Include="Model\Test\StreamRoot.cs" />
     <Compile Include="Model\Test\ZoneNodeRoot.cs" />
     <Compile Include="Model\Test\TwoParameterRoot.cs" />
     <Compile Include="Model\Test\FunctionRoot.cs" />
@@ -575,6 +576,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\SapphireLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\StreamLog.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
