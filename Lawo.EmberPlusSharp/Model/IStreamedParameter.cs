@@ -8,5 +8,6 @@ namespace Lawo.EmberPlusSharp.Model
 {
     internal interface IStreamedParameter : IParameter
     {
+        void SetProviderValue(object value);
     }
 }

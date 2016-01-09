@@ -870,9 +870,9 @@ namespace Lawo.EmberPlusSharp.Model
                 };
 
             AsyncPump.Run(() => TestWithRobot<StreamRoot>(
-                consumer =>
+                async consumer =>
                 {
-                    return Task.FromResult(false);
+                    await Task.Delay(1000);
                 },
                 false,
                 "StreamLog.xml",

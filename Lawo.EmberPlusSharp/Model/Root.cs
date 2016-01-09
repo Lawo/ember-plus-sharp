@@ -267,7 +267,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                     try
                     {
-                        parameter.Value = value;
+                        parameter.SetProviderValue(value);
                     }
                     catch (ArgumentException ex)
                     {

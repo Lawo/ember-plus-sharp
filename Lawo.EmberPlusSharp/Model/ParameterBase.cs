@@ -129,6 +129,11 @@ namespace Lawo.EmberPlusSharp.Model
             get { return this.EnumMapCore; }
         }
 
+        void IStreamedParameter.SetProviderValue(object value)
+        {
+            this.SetProviderValue(AssertValueType(value));
+        }
+
         internal ParameterBase() : base(RequestState.Complete)
         {
         }
@@ -266,11 +271,7 @@ namespace Lawo.EmberPlusSharp.Model
                         this.Description = reader.AssertAndReadContentsAsString();
                         break;
                     case GlowParameterContents.Value.OuterNumber:
-                        if (!this.HasChanges)
-                        {
-                            this.SetValue(ref this.theValue, this.ReadValue(reader, out valueType), "Value");
-                        }
-
+                        this.SetProviderValue(this.ReadValue(reader, out valueType));
                         break;
                     case GlowParameterContents.Minimum.OuterNumber:
                         this.SetMinimum(this.ReadValue(reader, out dummyType));
@@ -359,6 +360,14 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void SetProviderValue(TValue value)
+        {
+            if (!this.HasChanges)
+            {
+                this.SetValue(ref this.theValue, value, "Value");
+            }
+        }
 
         private List<KeyValuePair<string, int>> ReadEnumMap(EmberReader reader)
         {
