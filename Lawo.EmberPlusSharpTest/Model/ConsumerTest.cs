@@ -854,14 +854,16 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void StreamTest()
         {
-            var boolValue = true;
-            byte intValue = 42;
+            var boolValue = GetRandomBoolean();
+            byte intValue = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1);
             var intFormat = GetFormat(intValue);
-            byte enumValue = 2;
+            var enumValues = (Enumeration[])Enum.GetValues(typeof(Enumeration));
+            byte enumValue = (byte)(int)enumValues[this.Random.Next(enumValues.Length)];
             var enumFormat = GetFormat(enumValue);
-            var octetStringValue = new byte[] { 0xBD, 0xD7, 0xC4, 0xC4, 0x3C, 0xED, 0x13 };
-            var realValue = 3.14159265359;
-            var stringValue = "Hello";
+            var octetStringValue = new byte[this.Random.Next(0, 5)];
+            this.Random.NextBytes(octetStringValue);
+            var realValue = this.Random.NextDouble();
+            var stringValue = GetRandomString();
 
             var intBytes = BitConverter.GetBytes(intValue);
             var enumBytes = BitConverter.GetBytes(enumValue);
