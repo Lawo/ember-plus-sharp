@@ -349,11 +349,11 @@ namespace Lawo.EmberPlusSharp.Model
             }
             catch (ArgumentException ex)
             {
-                throw CreateOffsetException(descriptor, ex);
+                throw CreateStreamDescriptorException(descriptor, ex);
             }
             catch (IndexOutOfRangeException ex)
             {
-                throw CreateOffsetException(descriptor, ex);
+                throw CreateStreamDescriptorException(descriptor, ex);
             }
         }
 
@@ -388,10 +388,12 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static ModelException CreateOffsetException(StreamDescription descriptor, Exception ex)
+        private static ModelException CreateStreamDescriptorException(StreamDescription descriptor, Exception ex)
         {
-            const string Format = "Offset {0} is out of range.";
-            return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, descriptor.Offset), ex);
+            const string Format =
+                "The provider stream descriptor with format {0} and offset {1} is erroneous, see inner exception for more information.";
+            return new ModelException(
+                string.Format(CultureInfo.InvariantCulture, Format, descriptor.Format, descriptor.Offset), ex);
         }
     }
 }
