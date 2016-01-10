@@ -271,7 +271,7 @@ namespace Lawo.EmberPlusSharp.Model
                     }
                     catch (ArgumentException ex)
                     {
-                        throw CreateTypeMismatchException(value, parameter.Type, ex);
+                        throw CreateTypeMismatchException(value, parameter, ex);
                     }
                 }
             }
@@ -285,11 +285,11 @@ namespace Lawo.EmberPlusSharp.Model
 
                 if (rawArray == null)
                 {
-                    throw CreateTypeMismatchException(rawValue, ParameterType.Octets, null);
+                    throw CreateTypeMismatchException(rawValue, parameter, null);
                 }
                 else
                 {
-                    return BitConvert(parameter.StreamDescriptor.Value, rawArray);
+                    return BitConvert(parameter, rawArray);
                 }
             }
             else
@@ -298,14 +298,15 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static ModelException CreateTypeMismatchException(object value, ParameterType type, Exception ex)
+        private static ModelException CreateTypeMismatchException(object value, IStreamedParameter parameter, Exception ex)
         {
-            const string Format = "Read parameter value {0} while expecting to read a value of type {1}.";
-            return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, value, type), ex);
+            const string Format = "Read unexpected value {0} for the parameter with the path {1}.";
+            return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, value, parameter.GetPath()), ex);
         }
 
-        private static object BitConvert(StreamDescription descriptor, byte[] rawArray)
+        private static object BitConvert(IStreamedParameter parameter, byte[] rawArray)
         {
+            var descriptor = parameter.StreamDescriptor.Value;
             int offset;
             var array = GetArray(descriptor, rawArray, out offset);
 
@@ -338,22 +339,17 @@ namespace Lawo.EmberPlusSharp.Model
                     case StreamFormat.Float32BigEndian:
                     case StreamFormat.Float32LittleEndian:
                         return (double)BitConverter.ToSingle(array, offset);
-                    case StreamFormat.Float64BigEndian:
-                    case StreamFormat.Float64LittleEndian:
-                        return BitConverter.ToDouble(array, offset);
                     default:
-                        const string Format = "Unexpected stream format: {0}.";
-                        throw new ModelException(
-                            string.Format(CultureInfo.InvariantCulture, Format, descriptor.Format));
+                        return BitConverter.ToDouble(array, offset);
                 }
             }
             catch (ArgumentException ex)
             {
-                throw CreateStreamDescriptorException(descriptor, ex);
+                throw CreateStreamDescriptorException(parameter, ex);
             }
             catch (IndexOutOfRangeException ex)
             {
-                throw CreateStreamDescriptorException(descriptor, ex);
+                throw CreateStreamDescriptorException(parameter, ex);
             }
         }
 
@@ -388,12 +384,12 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static ModelException CreateStreamDescriptorException(StreamDescription descriptor, Exception ex)
+        private static ModelException CreateStreamDescriptorException(IStreamedParameter parameter, Exception ex)
         {
             const string Format =
-                "The provider stream descriptor with format {0} and offset {1} is erroneous, see inner exception for more information.";
-            return new ModelException(
-                string.Format(CultureInfo.InvariantCulture, Format, descriptor.Format, descriptor.Offset), ex);
+                "A stream entry for the parameter with the path {0} is incompatible, see inner exception for more information.";
+            var descriptor = parameter.StreamDescriptor.Value;
+            return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, parameter.GetPath()), ex);
         }
     }
 }

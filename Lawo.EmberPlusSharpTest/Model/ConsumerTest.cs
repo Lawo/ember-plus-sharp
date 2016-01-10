@@ -861,27 +861,33 @@ namespace Lawo.EmberPlusSharp.Model
                 async () =>
                 {
                     await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, OneByteMissing),
-                        "The provider stream descriptor with format Byte and offset 1 is erroneous, see inner exception for more information.");
+                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Invalid, Genuine),
+                        "The field format has an unexpected value for the element with the path /IntegerParameter.");
                     await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, OneByteMissing),
-                        "The provider stream descriptor with format Int64BigEndian and offset 8 is erroneous, see inner exception for more information.");
+                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Genuine, OneByteMissing),
+                        "A stream entry for the parameter with the path /EnumerationParameter is incompatible, see inner exception for more information.");
+                    await AssertThrowAsync<ModelException>(
+                        () => this.StreamTestCore((long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, Genuine, OneByteMissing),
+                        "A stream entry for the parameter with the path /EnumerationParameter is incompatible, see inner exception for more information.");
+                    await AssertThrowAsync<ModelException>(
+                        () => this.StreamTestCore(BitConverter.DoubleToInt64Bits(3.1415925359), (long)enumValue, realValue, Mismatch, Genuine),
+                        "Read unexpected value 3.1415925359 for the parameter with the path /IntegerParameter.");
                     await this.StreamTestCore(
-                        (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Genuine);
+                        (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (ushort)this.Random.Next(ushort.MinValue, ushort.MaxValue + 1), (ushort)enumValue, realValue, Genuine);
+                        (ushort)this.Random.Next(ushort.MinValue, ushort.MaxValue + 1), (ushort)enumValue, realValue);
                     await this.StreamTestCore(
-                        (uint)this.Random.Next((int)uint.MinValue, int.MaxValue), (uint)enumValue, (float)realValue, Genuine);
+                        (uint)this.Random.Next((int)uint.MinValue, int.MaxValue), (uint)enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (ulong)this.Random.Next((int)ulong.MinValue, int.MaxValue), (ulong)enumValue, realValue, Genuine);
+                        (ulong)this.Random.Next((int)ulong.MinValue, int.MaxValue), (ulong)enumValue, realValue);
                     await this.StreamTestCore(
-                        (sbyte)this.Random.Next(sbyte.MinValue, sbyte.MaxValue + 1), (sbyte)enumValue, (float)realValue, Genuine);
+                        (sbyte)this.Random.Next(sbyte.MinValue, sbyte.MaxValue + 1), (sbyte)enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (short)this.Random.Next(short.MinValue, short.MaxValue + 1), (short)enumValue, realValue, Genuine);
+                        (short)this.Random.Next(short.MinValue, short.MaxValue + 1), (short)enumValue, realValue);
                     await this.StreamTestCore(
-                        this.Random.Next(int.MinValue, int.MaxValue), enumValue, (float)realValue, Genuine);
+                        this.Random.Next(int.MinValue, int.MaxValue), enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, Genuine);
+                        (long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue);
                 });
         }
 
@@ -1307,16 +1313,30 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private async Task StreamTestCore(
-            object intValue, object enumValue, object realValue, Func<byte[], byte[]> failEncoding)
+        private Task StreamTestCore(object intValue, object enumValue, object realValue)
         {
-            await this.StreamTestCore(intValue, enumValue, realValue, false, failEncoding);
-            await this.StreamTestCore(intValue, enumValue, realValue, true, failEncoding);
+            return this.StreamTestCore(intValue, enumValue, realValue, false, Genuine, Genuine);
+        }
+
+        private async Task StreamTestCore(
+            object intValue,
+            object enumValue,
+            object realValue,
+            Func<int, int> failFormat,
+            Func<byte[], byte[]> failEncoding)
+        {
+            await this.StreamTestCore(intValue, enumValue, realValue, false, failFormat, failEncoding);
+            await this.StreamTestCore(intValue, enumValue, realValue, true, failFormat, failEncoding);
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
         private Task StreamTestCore(
-            object intValue, object enumValue, object realValue, bool isLittleEndian, Func<byte[], byte[]> failEncoding)
+            object intValue,
+            object enumValue,
+            object realValue,
+            bool isLittleEndian,
+            Func<int, int> failFormat,
+            Func<byte[], byte[]> failEncoding)
         {
             var boolValue = GetRandomBoolean();
             var intFormat = GetFormat(intValue);
@@ -1339,11 +1359,11 @@ namespace Lawo.EmberPlusSharp.Model
             var args =
                 new object[]
                 {
-                    GetFormat(intValue, isLittleEndian),
+                    failFormat(GetFormat(intValue, isLittleEndian)),
                     0,
-                    GetFormat(enumValue, isLittleEndian),
+                    failFormat(GetFormat(enumValue, isLittleEndian)),
                     intBytes.Length,
-                    GetFormat(realValue, isLittleEndian),
+                    failFormat(GetFormat(realValue, isLittleEndian)),
                     0,
                     boolValue.ToString().ToLowerInvariant(),
                     new SoapHexBinary(failEncoding(intBytes.Concat(enumBytes).ToArray())),
@@ -1795,6 +1815,37 @@ namespace Lawo.EmberPlusSharp.Model
             var result = new byte[bytes.Length > 0 ? bytes.Length - 1 : 0];
             Array.Copy(bytes, result, result.Length);
             return result;
+        }
+
+        private static int Genuine(int format)
+        {
+            return format;
+        }
+
+        private static int Invalid(int format)
+        {
+            return 4242;
+        }
+
+        private static int Mismatch(int format)
+        {
+            var endianBit = format & 1;
+
+            switch ((StreamFormat)(format & ~1))
+            {
+                case StreamFormat.UInt32BigEndian:
+                case StreamFormat.Int32BigEndian:
+                    return (int)(StreamFormat.Float32BigEndian + endianBit);
+                case StreamFormat.UInt64BigEndian:
+                case StreamFormat.Int64BigEndian:
+                    return (int)(StreamFormat.Float64BigEndian + endianBit);
+                case StreamFormat.Float32BigEndian:
+                    return (int)(StreamFormat.Int32BigEndian + endianBit);
+                case StreamFormat.Float64BigEndian:
+                    return (int)(StreamFormat.Int64BigEndian + endianBit);
+                default:
+                    throw new ArgumentException("No mismatch format available.");
+            }
         }
 
         private static int GetFormat(object value, bool isLittleEndian)
