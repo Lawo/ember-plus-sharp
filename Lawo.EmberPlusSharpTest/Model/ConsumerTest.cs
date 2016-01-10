@@ -855,18 +855,18 @@ namespace Lawo.EmberPlusSharp.Model
         public void StreamTest()
         {
             var boolValue = GetRandomBoolean();
-            byte intValue = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1);
+            object intValue = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1);
             var intFormat = GetFormat(intValue);
             var enumValues = (Enumeration[])Enum.GetValues(typeof(Enumeration));
-            byte enumValue = (byte)(int)enumValues[this.Random.Next(enumValues.Length)];
+            object enumValue = (byte)(int)enumValues[this.Random.Next(enumValues.Length)];
             var enumFormat = GetFormat(enumValue);
             var octetStringValue = new byte[this.Random.Next(0, 5)];
             this.Random.NextBytes(octetStringValue);
-            var realValue = this.Random.NextDouble();
+            object realValue = this.Random.NextDouble();
             var stringValue = GetRandomString();
 
-            var intBytes = BitConverter.GetBytes(intValue);
-            var enumBytes = BitConverter.GetBytes(enumValue);
+            var intBytes = GetBytes(intValue);
+            var enumBytes = GetBytes(enumValue);
 
             var args =
                 new object[]
@@ -880,7 +880,7 @@ namespace Lawo.EmberPlusSharp.Model
                     boolValue.ToString().ToLowerInvariant(),
                     new SoapHexBinary(intBytes.Concat(enumBytes).ToArray()),
                     new SoapHexBinary(octetStringValue),
-                    new SoapHexBinary(BitConverter.GetBytes(realValue)),
+                    new SoapHexBinary(GetBytes(realValue)),
                     stringValue
                 };
 
@@ -890,8 +890,11 @@ namespace Lawo.EmberPlusSharp.Model
                     await Task.Delay(1000);
                     var root = consumer.Root;
                     Assert.AreEqual(boolValue, root.BooleanParameter.Value);
-                    Assert.AreEqual(intValue, root.IntegerParameter.Value);
-                    Assert.AreEqual((Enumeration)enumValue, root.EnumerationParameter.Value);
+
+                    // Assert.AreEqual fails if types are different. At this point we don't know the original type of
+                    // intValue or enumValue so we need to resort to string comparison.
+                    Assert.AreEqual(intValue.ToString(), root.IntegerParameter.Value.ToString());
+                    Assert.AreEqual(enumValue.ToString(), ((int)root.EnumerationParameter.Value).ToString());
                     CollectionAssert.AreEqual(octetStringValue, root.OctetstringParameter.Value);
                     Assert.AreEqual(realValue, root.RealParameter.Value);
                     Assert.AreEqual(stringValue, root.StringParameter.Value);
@@ -1735,7 +1738,7 @@ namespace Lawo.EmberPlusSharp.Model
                 new XmlWriterSettings { Indent = true, CloseOutput = true });
         }
 
-        private static int GetFormat<T>(T value, bool isLittleEndian)
+        private static int GetFormat(object value, bool isLittleEndian)
         {
             var bigEndianFormat = GetFormat(value);
 
@@ -1749,53 +1752,61 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static StreamFormat GetFormat<T>(T value)
+        private static StreamFormat GetFormat(object value)
         {
-            var type = value.GetType();
+            switch (Type.GetTypeCode(value.GetType()))
+            {
+                case TypeCode.Byte:
+                    return StreamFormat.Byte;
+                case TypeCode.UInt16:
+                    return StreamFormat.UInt16BigEndian;
+                case TypeCode.UInt32:
+                    return StreamFormat.UInt32BigEndian;
+                case TypeCode.UInt64:
+                    return StreamFormat.UInt64BigEndian;
+                case TypeCode.SByte:
+                    return StreamFormat.SByte;
+                case TypeCode.Int16:
+                    return StreamFormat.Int16BigEndian;
+                case TypeCode.Int32:
+                    return StreamFormat.Int32BigEndian;
+                case TypeCode.Int64:
+                    return StreamFormat.Int64BigEndian;
+                case TypeCode.Single:
+                    return StreamFormat.Float32BigEndian;
+                case TypeCode.Double:
+                    return StreamFormat.Float64BigEndian;
+                default:
+                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unexpected type: {0}", value));
+            }
+        }
 
-            if (type == typeof(byte))
+        private static byte[] GetBytes(object value)
+        {
+            switch (Type.GetTypeCode(value.GetType()))
             {
-                return StreamFormat.Byte;
-            }
-            else if (type == typeof(ushort))
-            {
-                return StreamFormat.UInt16BigEndian;
-            }
-            else if (type == typeof(uint))
-            {
-                return StreamFormat.UInt32BigEndian;
-            }
-            else if (type == typeof(ulong))
-            {
-                return StreamFormat.UInt64BigEndian;
-            }
-            else if (type == typeof(sbyte))
-            {
-                return StreamFormat.SByte;
-            }
-            else if (type == typeof(short))
-            {
-                return StreamFormat.Int16BigEndian;
-            }
-            else if (type == typeof(int))
-            {
-                return StreamFormat.Int32BigEndian;
-            }
-            else if (type == typeof(long))
-            {
-                return StreamFormat.Int64BigEndian;
-            }
-            else if (type == typeof(float))
-            {
-                return StreamFormat.Float32BigEndian;
-            }
-            else if (type == typeof(double))
-            {
-                return StreamFormat.Float64BigEndian;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unknown type: {0}", value));
+                case TypeCode.Byte:
+                    return new[] { (byte)value };
+                case TypeCode.UInt16:
+                    return BitConverter.GetBytes((ushort)value);
+                case TypeCode.UInt32:
+                    return BitConverter.GetBytes((uint)value);
+                case TypeCode.UInt64:
+                    return BitConverter.GetBytes((ulong)value);
+                case TypeCode.SByte:
+                    return new[] { unchecked((byte)(sbyte)value) };
+                case TypeCode.Int16:
+                    return BitConverter.GetBytes((short)value);
+                case TypeCode.Int32:
+                    return BitConverter.GetBytes((int)value);
+                case TypeCode.Int64:
+                    return BitConverter.GetBytes((long)value);
+                case TypeCode.Single:
+                    return BitConverter.GetBytes((float)value);
+                case TypeCode.Double:
+                    return BitConverter.GetBytes((double)value);
+                default:
+                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unexpected type: {0}", value));
             }
         }
     }
