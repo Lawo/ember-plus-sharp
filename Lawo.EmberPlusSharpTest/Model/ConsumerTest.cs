@@ -850,6 +850,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests various streaming scenarios.</summary>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
         [TestMethod]
         public void StreamTest()
         {
@@ -874,7 +875,7 @@ namespace Lawo.EmberPlusSharp.Model
                     intBytes.Length,
                     GetFormat(realValue, true),
                     0,
-                    boolValue.ToString().ToLower(),
+                    boolValue.ToString().ToLowerInvariant(),
                     new SoapHexBinary(intBytes.Concat(enumBytes).ToArray()),
                     new SoapHexBinary(octetStringValue),
                     new SoapHexBinary(BitConverter.GetBytes(realValue)),
@@ -1725,7 +1726,7 @@ namespace Lawo.EmberPlusSharp.Model
                 new XmlWriterSettings { Indent = true, CloseOutput = true });
         }
 
-        private int GetFormat<T>(T value, bool isLittleEndian)
+        private static int GetFormat<T>(T value, bool isLittleEndian)
         {
             var bigEndianFormat = GetFormat(value);
 
@@ -1739,7 +1740,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private StreamFormat GetFormat<T>(T value)
+        private static StreamFormat GetFormat<T>(T value)
         {
             var type = value.GetType();
 
