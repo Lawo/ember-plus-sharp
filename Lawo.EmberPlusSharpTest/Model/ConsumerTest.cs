@@ -850,58 +850,28 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Tests various streaming scenarios.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
         [TestMethod]
         public void StreamTest()
         {
-            var boolValue = GetRandomBoolean();
-            object intValue = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1);
-            var intFormat = GetFormat(intValue);
             var enumValues = (Enumeration[])Enum.GetValues(typeof(Enumeration));
-            object enumValue = (byte)(int)enumValues[this.Random.Next(enumValues.Length)];
-            var enumFormat = GetFormat(enumValue);
-            var octetStringValue = new byte[this.Random.Next(0, 5)];
-            this.Random.NextBytes(octetStringValue);
-            object realValue = this.Random.NextDouble();
-            var stringValue = GetRandomString();
-
-            var intBytes = GetBytes(intValue);
-            var enumBytes = GetBytes(enumValue);
-
-            var args =
-                new object[]
-                {
-                    GetFormat(intValue, true),
-                    0,
-                    GetFormat(enumValue, true),
-                    intBytes.Length,
-                    GetFormat(realValue, true),
-                    0,
-                    boolValue.ToString().ToLowerInvariant(),
-                    new SoapHexBinary(intBytes.Concat(enumBytes).ToArray()),
-                    new SoapHexBinary(octetStringValue),
-                    new SoapHexBinary(GetBytes(realValue)),
-                    stringValue
-                };
-
-            AsyncPump.Run(() => TestWithRobot<StreamRoot>(
-                async consumer =>
-                {
-                    await Task.Delay(1000);
-                    var root = consumer.Root;
-                    Assert.AreEqual(boolValue, root.BooleanParameter.Value);
-
-                    // Assert.AreEqual fails if types are different. At this point we don't know the original type of
-                    // intValue or enumValue so we need to resort to string comparison.
-                    Assert.AreEqual(intValue.ToString(), root.IntegerParameter.Value.ToString());
-                    Assert.AreEqual(enumValue.ToString(), ((int)root.EnumerationParameter.Value).ToString());
-                    CollectionAssert.AreEqual(octetStringValue, root.OctetstringParameter.Value);
-                    Assert.AreEqual(realValue, root.RealParameter.Value);
-                    Assert.AreEqual(stringValue, root.StringParameter.Value);
-                },
-                false,
-                "StreamLog.xml",
-                args));
+            var enumValue = (int)enumValues[this.Random.Next(enumValues.Length)];
+            var realValue = this.Random.NextDouble();
+            this.StreamTestCore(
+                (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue);
+            this.StreamTestCore(
+                (ushort)this.Random.Next(ushort.MinValue, ushort.MaxValue + 1), (ushort)enumValue, realValue);
+            this.StreamTestCore(
+                (uint)this.Random.Next((int)uint.MinValue, int.MaxValue), (uint)enumValue, (float)realValue);
+            this.StreamTestCore(
+                (ulong)this.Random.Next((int)ulong.MinValue, int.MaxValue), (ulong)enumValue, realValue);
+            this.StreamTestCore(
+                (sbyte)this.Random.Next(sbyte.MinValue, sbyte.MaxValue + 1), (sbyte)enumValue, (float)realValue);
+            this.StreamTestCore(
+                (short)this.Random.Next(short.MinValue, short.MaxValue + 1), (short)enumValue, realValue);
+            this.StreamTestCore(
+                this.Random.Next(int.MinValue, int.MaxValue), enumValue, (float)realValue);
+            this.StreamTestCore(
+                (long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue);
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
@@ -1736,6 +1706,70 @@ namespace Lawo.EmberPlusSharp.Model
                 GlowTypes.Instance,
                 File.CreateText(Path.ChangeExtension(payloadXmlName, extension)),
                 new XmlWriterSettings { Indent = true, CloseOutput = true });
+        }
+
+        private void StreamTestCore(object intValue, object enumValue, object realValue)
+        {
+            this.StreamTestCore(intValue, enumValue, realValue, false);
+            this.StreamTestCore(intValue, enumValue, realValue, true);
+        }
+
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
+        private void StreamTestCore(object intValue, object enumValue, object realValue, bool isLittleEndian)
+        {
+            var boolValue = GetRandomBoolean();
+            var intFormat = GetFormat(intValue);
+            var enumFormat = GetFormat(enumValue);
+            var octetStringValue = new byte[this.Random.Next(0, 5)];
+            this.Random.NextBytes(octetStringValue);
+            var stringValue = GetRandomString();
+
+            var intBytes = GetBytes(intValue);
+            var enumBytes = GetBytes(enumValue);
+            var realBytes = GetBytes(realValue);
+
+            if (isLittleEndian != BitConverter.IsLittleEndian)
+            {
+                intBytes = intBytes.Reverse().ToArray();
+                enumBytes = enumBytes.Reverse().ToArray();
+                realBytes = realBytes.Reverse().ToArray();
+            }
+
+            var args =
+                new object[]
+                {
+                    GetFormat(intValue, isLittleEndian),
+                    0,
+                    GetFormat(enumValue, isLittleEndian),
+                    intBytes.Length,
+                    GetFormat(realValue, isLittleEndian),
+                    0,
+                    boolValue.ToString().ToLowerInvariant(),
+                    new SoapHexBinary(intBytes.Concat(enumBytes).ToArray()),
+                    new SoapHexBinary(octetStringValue),
+                    new SoapHexBinary(realBytes),
+                    stringValue
+                };
+
+            AsyncPump.Run(() => TestWithRobot<StreamRoot>(
+                async consumer =>
+                {
+                    await Task.Delay(1000);
+                    var root = consumer.Root;
+                    Assert.AreEqual(boolValue, root.BooleanParameter.Value);
+
+                    // Assert.AreEqual fails if types are different. At this point we don't know the original type of
+                    // intValue or enumValue and we cannot cast object to int if the object happens to be a byte, for
+                    // example. We therefore need to use Convert rather than a cast.
+                    Assert.AreEqual(Convert.ToInt64(intValue), root.IntegerParameter.Value);
+                    Assert.AreEqual((Enumeration)Convert.ToInt32(enumValue.ToString()), root.EnumerationParameter.Value);
+                    CollectionAssert.AreEqual(octetStringValue, root.OctetstringParameter.Value);
+                    Assert.AreEqual(Convert.ToDouble(realValue), root.RealParameter.Value);
+                    Assert.AreEqual(stringValue, root.StringParameter.Value);
+                },
+                false,
+                "StreamLog.xml",
+                args));
         }
 
         private static int GetFormat(object value, bool isLittleEndian)

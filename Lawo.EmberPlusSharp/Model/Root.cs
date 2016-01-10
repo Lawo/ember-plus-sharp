@@ -363,7 +363,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             if (AreBytesReverse(descriptor.Format))
             {
-                var count = Math.Min(1 << (int)descriptor.Format & 6, rawArray.Length - offset);
+                var count = Math.Min(1 << (((int)descriptor.Format & 6) >> 1), rawArray.Length - offset);
                 var result = new byte[count];
                 Array.Copy(rawArray, offset, result, 0, count);
                 Array.Reverse(result);
