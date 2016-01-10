@@ -853,20 +853,32 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void StreamTest()
         {
+            var boolValue = true;
+            byte intValue = 42;
+            var intFormat = GetFormat(intValue);
+            byte enumValue = 2;
+            var enumFormat = GetFormat(enumValue);
+            var octetStringValue = new byte[] { 0xBD, 0xD7, 0xC4, 0xC4, 0x3C, 0xED, 0x13 };
+            var realValue = 3.14159265359;
+            var stringValue = "Hello";
+
+            var intBytes = BitConverter.GetBytes(intValue);
+            var enumBytes = BitConverter.GetBytes(enumValue);
+
             var args =
                 new object[]
                 {
-                    (int)StreamFormat.Byte,
+                    GetFormat(intValue, true),
                     0,
-                    (int)StreamFormat.Byte,
-                    3,
-                    (int)StreamFormat.Float64LittleEndian,
+                    GetFormat(enumValue, true),
+                    intBytes.Length,
+                    GetFormat(realValue, true),
                     0,
-                    "true",
-                    "2A2B2C0203",
-                    "BCD7C4C43CED13",
-                    new SoapHexBinary(BitConverter.GetBytes(3.14159265359)).ToString(),
-                    "Hello"
+                    boolValue.ToString().ToLower(),
+                    new SoapHexBinary(intBytes.Concat(enumBytes).ToArray()),
+                    new SoapHexBinary(octetStringValue),
+                    new SoapHexBinary(BitConverter.GetBytes(realValue)),
+                    stringValue
                 };
 
             AsyncPump.Run(() => TestWithRobot<StreamRoot>(
@@ -1711,6 +1723,70 @@ namespace Lawo.EmberPlusSharp.Model
                 GlowTypes.Instance,
                 File.CreateText(Path.ChangeExtension(payloadXmlName, extension)),
                 new XmlWriterSettings { Indent = true, CloseOutput = true });
+        }
+
+        private int GetFormat<T>(T value, bool isLittleEndian)
+        {
+            var bigEndianFormat = GetFormat(value);
+
+            switch (bigEndianFormat)
+            {
+                case StreamFormat.Byte:
+                case StreamFormat.SByte:
+                    return (int)bigEndianFormat;
+                default:
+                    return (int)bigEndianFormat + (isLittleEndian ? 1 : 0);
+            }
+        }
+
+        private StreamFormat GetFormat<T>(T value)
+        {
+            var type = value.GetType();
+
+            if (type == typeof(byte))
+            {
+                return StreamFormat.Byte;
+            }
+            else if (type == typeof(ushort))
+            {
+                return StreamFormat.UInt16BigEndian;
+            }
+            else if (type == typeof(uint))
+            {
+                return StreamFormat.UInt32BigEndian;
+            }
+            else if (type == typeof(ulong))
+            {
+                return StreamFormat.UInt64BigEndian;
+            }
+            else if (type == typeof(sbyte))
+            {
+                return StreamFormat.SByte;
+            }
+            else if (type == typeof(short))
+            {
+                return StreamFormat.Int16BigEndian;
+            }
+            else if (type == typeof(int))
+            {
+                return StreamFormat.Int32BigEndian;
+            }
+            else if (type == typeof(long))
+            {
+                return StreamFormat.Int64BigEndian;
+            }
+            else if (type == typeof(float))
+            {
+                return StreamFormat.Float32BigEndian;
+            }
+            else if (type == typeof(double))
+            {
+                return StreamFormat.Float64BigEndian;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unknown type: {0}", value));
+            }
         }
     }
 }
