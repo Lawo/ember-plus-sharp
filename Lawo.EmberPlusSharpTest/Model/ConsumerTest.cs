@@ -886,6 +886,13 @@ namespace Lawo.EmberPlusSharp.Model
                 async consumer =>
                 {
                     await Task.Delay(1000);
+                    var root = consumer.Root;
+                    Assert.AreEqual(boolValue, root.BooleanParameter.Value);
+                    Assert.AreEqual(intValue, root.IntegerParameter.Value);
+                    Assert.AreEqual((Enumeration)enumValue, root.EnumerationParameter.Value);
+                    CollectionAssert.AreEqual(octetStringValue, root.OctetstringParameter.Value);
+                    Assert.AreEqual(realValue, root.RealParameter.Value);
+                    Assert.AreEqual(stringValue, root.StringParameter.Value);
                 },
                 false,
                 "StreamLog.xml",
