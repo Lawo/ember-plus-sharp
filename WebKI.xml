@@ -1100,8 +1100,6 @@
   <HelpKINode Title="IParameter.Formula property" Url="html/1D37FAEE.htm" />
   <HelpKINode Title="IParameter.Maximum property" Url="html/EB48CB23.htm" />
   <HelpKINode Title="IParameter.Minimum property" Url="html/E8FACC0B.htm" />
-  <HelpKINode Title="IParameter.StreamDescriptor property" Url="html/E88E789.htm" />
-  <HelpKINode Title="IParameter.StreamIdentifier property" Url="html/FB9EA4D4.htm" />
   <HelpKINode Title="IParameter.Type property" Url="html/26CA39E9.htm" />
   <HelpKINode Title="IParameter.Value property" Url="html/ED7FF041.htm" />
   <HelpKINode Title="IProperty(Of TOwner) interface">
@@ -1863,8 +1861,6 @@
   <HelpKINode Title="ParameterBase(Of TMostDerived, TValue).Access property" Url="html/F9C6C205.htm" />
   <HelpKINode Title="ParameterBase(Of TMostDerived, TValue).DefaultValue property" Url="html/4E6BDB9C.htm" />
   <HelpKINode Title="ParameterBase(Of TMostDerived, TValue).Format property" Url="html/164BEB7B.htm" />
-  <HelpKINode Title="ParameterBase(Of TMostDerived, TValue).StreamDescriptor property" Url="html/F54BD0C1.htm" />
-  <HelpKINode Title="ParameterBase(Of TMostDerived, TValue).StreamIdentifier property" Url="html/C468961A.htm" />
   <HelpKINode Title="ParameterBase(Of TMostDerived, TValue).Type property" Url="html/45D86ED3.htm" />
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt; class">
     <HelpKINode Title="ParameterBase(TMostDerived, TValue) Class" Url="html/FEFFFF1F.htm" />
@@ -1876,8 +1872,6 @@
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.Access property" Url="html/F9C6C205.htm" />
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.DefaultValue property" Url="html/4E6BDB9C.htm" />
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.Format property" Url="html/164BEB7B.htm" />
-  <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.StreamDescriptor property" Url="html/F54BD0C1.htm" />
-  <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.StreamIdentifier property" Url="html/C468961A.htm" />
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.Type property" Url="html/45D86ED3.htm" />
   <HelpKINode Title="Parameters property">
     <HelpKINode Title="IMatrix.Parameters Property " Url="html/4599BB8F.htm" />
@@ -2359,10 +2353,6 @@
   <HelpKINode Title="StreamDescription.GetHashCode method" Url="html/415B050A.htm" />
   <HelpKINode Title="StreamDescription.Inequality operator" Url="html/8B779A62.htm" />
   <HelpKINode Title="StreamDescription.Offset property" Url="html/9ECFCB7A.htm" />
-  <HelpKINode Title="StreamDescriptor property">
-    <HelpKINode Title="IParameter.StreamDescriptor Property " Url="html/E88E789.htm" />
-    <HelpKINode Title="ParameterBase(TMostDerived, TValue).StreamDescriptor Property " Url="html/F54BD0C1.htm" />
-  </HelpKINode>
   <HelpKINode Title="StreamFormat enumeration" Url="html/CD29B87D.htm" />
   <HelpKINode Title="StreamHelper class">
     <HelpKINode Title="StreamHelper Class" Url="html/13A6E520.htm" />
@@ -2373,10 +2363,6 @@
   <HelpKINode Title="StreamHelper.FillAsync method" Url="html/F48998CB.htm" />
   <HelpKINode Title="StreamHelper.TryFill method" Url="html/9A366DE.htm" />
   <HelpKINode Title="StreamHelper.TryFillAsync method" Url="html/DF2CEB9B.htm" />
-  <HelpKINode Title="StreamIdentifier property">
-    <HelpKINode Title="IParameter.StreamIdentifier Property " Url="html/FB9EA4D4.htm" />
-    <HelpKINode Title="ParameterBase(TMostDerived, TValue).StreamIdentifier Property " Url="html/C468961A.htm" />
-  </HelpKINode>
   <HelpKINode Title="String enumeration member" Url="html/E51F2BB2.htm" />
   <HelpKINode Title="StringParameter class">
     <HelpKINode Title="StringParameter Class" Url="html/8895790F.htm" />
