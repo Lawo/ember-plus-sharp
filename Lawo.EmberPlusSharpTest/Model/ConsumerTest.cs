@@ -414,9 +414,6 @@ namespace Lawo.EmberPlusSharp.Model
                             AssertAreEqual(defaultValue, (IParameter e) => e.DefaultValue, e1, e2, e3, e4);
                             AssertAreEqual(ParameterType.Integer, (IParameter e) => e.Type, e1, e2);
                             AssertAreEqual(ParameterType.Enum, (IParameter e) => e.Type, e3, e4);
-                            AssertAreEqual(streamIdentifier, (IParameter e) => e.StreamIdentifier, e1, e2, e3, e4);
-                            AssertAreEqual(streamFormat, (IParameter e) => e.StreamDescriptor.Value.Format, e1, e2, e3, e4);
-                            AssertAreEqual(streamOffset, (IParameter e) => e.StreamDescriptor.Value.Offset, e1, e2, e3, e4);
                             AssertAreEqual(formula, (IParameter e) => e.Formula, e2);
                             AssertEnumMapEquality(enumStrings, new[] { 0, 1, 3, 4 }, e3.EnumMap);
                             AssertEnumMapEquality(enumStrings, enumValues, ((IParameter)e4).EnumMap);

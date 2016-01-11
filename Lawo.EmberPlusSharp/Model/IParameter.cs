@@ -52,17 +52,11 @@ namespace Lawo.EmberPlusSharp.Model
         /// where <see cref="IElement.IsOnline"/> equals <c>false</c>.</exception>
         ParameterType Type { get; }
 
-        /// <summary>Gets <b>streamIdentifier</b> (not yet supported).</summary>
-        int? StreamIdentifier { get; }
-
         /// <summary>Gets <b>enumMap</b>.</summary>
         /// <remarks>The returned collection contains the entries of either the <b>enumeration</b> field or the
         /// <b>enumMap</b> field.
         /// If the provider sets both fields, the collection contains the entries of the field that appeared last in the
         /// EmBER-encoded data.</remarks>
         IReadOnlyList<KeyValuePair<string, int>> EnumMap { get; }
-
-        /// <summary>Gets <b>streamDescriptor</b>.</summary>
-        StreamDescription? StreamDescriptor { get; }
     }
 }

@@ -29,7 +29,6 @@ namespace Lawo.EmberPlusSharp.Model
         private TValue defaultValue;
         private ParameterType? type;
         private int? streamIdentifier;
-        private StreamDescription? streamDescriptor;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,30 +58,6 @@ namespace Lawo.EmberPlusSharp.Model
         {
             get { return this.type.Value; }
             private set { this.SetValue(ref this.type, value); }
-        }
-
-        /// <inheritdoc/>
-        public int? StreamIdentifier
-        {
-            get
-            {
-                return this.streamIdentifier;
-            }
-
-            private set
-            {
-                if (this.SetValue(ref this.streamIdentifier, value) && value.HasValue && this.IsOnline)
-                {
-                    this.RequestState = RequestState.None;
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public StreamDescription? StreamDescriptor
-        {
-            get { return this.streamDescriptor; }
-            private set { this.SetValue(ref this.streamDescriptor, value); }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +102,16 @@ namespace Lawo.EmberPlusSharp.Model
         IReadOnlyList<KeyValuePair<string, int>> IParameter.EnumMap
         {
             get { return this.EnumMapCore; }
+        }
+
+        int? IStreamedParameter.StreamIdentifier
+        {
+            get { return this.StreamIdentifier; }
+        }
+
+        StreamDescription? IStreamedParameter.StreamDescriptor
+        {
+            get { return this.StreamDescriptor; }
         }
 
         void IStreamedParameter.SetProviderValue(object value)
@@ -360,6 +345,29 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private int? StreamIdentifier
+        {
+            get
+            {
+                return this.streamIdentifier;
+            }
+
+            set
+            {
+                if (this.streamIdentifier != value)
+                {
+                    this.streamIdentifier = value;
+
+                    if (value.HasValue && this.IsOnline)
+                    {
+                        this.RequestState = RequestState.None;
+                    }
+                }
+            }
+        }
+
+        private StreamDescription? StreamDescriptor { get; set; }
 
         private void SetProviderValue(TValue value)
         {

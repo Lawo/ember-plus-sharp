@@ -270,11 +270,11 @@ namespace Lawo.EmberPlusSharp.Glow
                     case "Type":
                         return LowerFirst(((IParameter)element).Type.ToString());
                     case "StreamIdentifier":
-                        return ((IParameter)element).StreamIdentifier;
+                        return ((IStreamedParameter)element).StreamIdentifier;
                     case "EnumMap":
                         return ((IParameter)element).EnumMap;
                     case "StreamDescriptor":
-                        return ((IParameter)element).StreamDescriptor;
+                        return ((IStreamedParameter)element).StreamDescriptor;
                     case "Arguments":
                         return ((IFunction)element).Arguments;
                     case "Result":
