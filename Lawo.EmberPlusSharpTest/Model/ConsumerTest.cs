@@ -861,17 +861,20 @@ namespace Lawo.EmberPlusSharp.Model
                 async () =>
                 {
                     await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Invalid, Genuine),
+                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Invalid, Genuine, false),
                         "The field format has an unexpected value for the element with the path /IntegerParameter.");
                     await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Genuine, OneByteMissing),
+                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Genuine, OneByteMissing, false),
                         "A stream entry for the parameter with the path /EnumerationParameter is incompatible, see inner exception for more information.");
                     await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, Genuine, OneByteMissing),
+                        () => this.StreamTestCore((long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, Genuine, OneByteMissing, false),
                         "A stream entry for the parameter with the path /EnumerationParameter is incompatible, see inner exception for more information.");
                     await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore(BitConverter.DoubleToInt64Bits(3.1415925359), (long)enumValue, realValue, Mismatch, Genuine),
-                        "Read unexpected value 3.1415925359 for the parameter with the path /IntegerParameter.");
+                        () => this.StreamTestCore(BitConverter.DoubleToInt64Bits(3.1415925359), (long)enumValue, realValue, Mismatch, Genuine, false),
+                        "Read unexpected stream value 3.1415925359 for the parameter with the path /IntegerParameter.");
+                    await AssertThrowAsync<ModelException>(
+                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, 3.1415925359, Genuine, Genuine, true),
+                        "Read stream value 3.1415925359 while expecting to read an octetstring for the parameter with the path /RealParameter.");
                     await this.StreamTestCore(
                         (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue);
                     await this.StreamTestCore(
@@ -1315,7 +1318,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private Task StreamTestCore(object intValue, object enumValue, object realValue)
         {
-            return this.StreamTestCore(intValue, enumValue, realValue, false, Genuine, Genuine);
+            return this.StreamTestCore(intValue, enumValue, realValue, Genuine, Genuine, false);
         }
 
         private async Task StreamTestCore(
@@ -1323,10 +1326,11 @@ namespace Lawo.EmberPlusSharp.Model
             object enumValue,
             object realValue,
             Func<int, int> failFormat,
-            Func<byte[], byte[]> failEncoding)
+            Func<byte[], byte[]> failEncoding,
+            bool failType)
         {
-            await this.StreamTestCore(intValue, enumValue, realValue, false, failFormat, failEncoding);
-            await this.StreamTestCore(intValue, enumValue, realValue, true, failFormat, failEncoding);
+            await this.StreamTestCore(intValue, enumValue, realValue, false, failFormat, failEncoding, failType);
+            await this.StreamTestCore(intValue, enumValue, realValue, true, failFormat, failEncoding, failType);
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
@@ -1336,7 +1340,8 @@ namespace Lawo.EmberPlusSharp.Model
             object realValue,
             bool isLittleEndian,
             Func<int, int> failFormat,
-            Func<byte[], byte[]> failEncoding)
+            Func<byte[], byte[]> failEncoding,
+            bool failType)
         {
             var boolValue = GetRandomBoolean();
             var intFormat = GetFormat(intValue);
@@ -1368,7 +1373,8 @@ namespace Lawo.EmberPlusSharp.Model
                     boolValue.ToString().ToLowerInvariant(),
                     new SoapHexBinary(failEncoding(intBytes.Concat(enumBytes).ToArray())),
                     new SoapHexBinary(failEncoding(octetStringValue)),
-                    new SoapHexBinary(failEncoding(realBytes)),
+                    failType ? "Real" : "Octetstring",
+                    failType ? realValue : new SoapHexBinary(failEncoding(realBytes)),
                     stringValue
                 };
 

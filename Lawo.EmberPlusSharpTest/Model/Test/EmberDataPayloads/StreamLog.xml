@@ -162,11 +162,11 @@ Three</enumeration>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">3</streamIdentifier>
-          <streamValue type="Octetstring">{9}</streamValue>
+          <streamValue type="{9}">{10}</streamValue>
         </StreamEntry>
         <StreamEntry type="StreamEntry">
           <streamIdentifier type="Integer">4</streamIdentifier>
-          <streamValue type="UTF8String">{10}</streamValue>
+          <streamValue type="UTF8String">{11}</streamValue>
         </StreamEntry>
       </Root>
     </Payload>

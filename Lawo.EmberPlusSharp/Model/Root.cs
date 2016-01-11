@@ -271,7 +271,9 @@ namespace Lawo.EmberPlusSharp.Model
                     }
                     catch (ArgumentException ex)
                     {
-                        throw CreateTypeMismatchException(value, parameter, ex);
+                        const string Format = "Read unexpected stream value {0} for the parameter with the path {1}.";
+                        throw new ModelException(
+                            string.Format(CultureInfo.InvariantCulture, Format, value, parameter.GetPath()), ex);
                     }
                 }
             }
@@ -285,7 +287,10 @@ namespace Lawo.EmberPlusSharp.Model
 
                 if (rawArray == null)
                 {
-                    throw CreateTypeMismatchException(rawValue, parameter, null);
+                    const string Format =
+                        "Read stream value {0} while expecting to read an octetstring for the parameter with the path {1}.";
+                    throw new ModelException(
+                        string.Format(CultureInfo.InvariantCulture, Format, rawValue, parameter.GetPath()));
                 }
                 else
                 {
@@ -296,12 +301,6 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 return rawValue;
             }
-        }
-
-        private static ModelException CreateTypeMismatchException(object value, IStreamedParameter parameter, Exception ex)
-        {
-            const string Format = "Read unexpected value {0} for the parameter with the path {1}.";
-            return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, value, parameter.GetPath()), ex);
         }
 
         private static object BitConvert(IStreamedParameter parameter, byte[] rawArray)
