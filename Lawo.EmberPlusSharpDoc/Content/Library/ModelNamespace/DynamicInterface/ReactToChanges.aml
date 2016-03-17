@@ -27,6 +27,37 @@
           <codeEntityReference qualifyHint="true">P:Lawo.EmberPlusSharp.Model.IParameter.Value</codeEntityReference>
           (or one of its strongly typed variants) is modified locally.
         </para>
+        <para>
+          In a generic application like e.g. a viewer it would be straightforward to subscribe to
+          <codeEntityReference>E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged</codeEntityReference>. In
+          the code below however, for demonstration purposes we're going to subscribe to event of a specific parameter.
+          As mentioned earlier, the dynamic interface is not very well suited for tasks that make assumptions about the
+          contents of the database:
+        </para>
+        <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Dynamic React to Changes" language="c#"/>
+        <para>Specifically, the code above has the following problems:</para>
+        <list class="bullet">
+          <listItem>
+            <para>
+              No attempt is made to handle exceptions that might result from incorrect assumptions. Such exceptions
+              could be thrown when an expected element is not present (e.g. the parameter is named
+              <codeInline>Pos</codeInline> rather than <codeInline>Position</codeInline>), the actual element has a
+              different type (e.g. <codeInline>Position</codeInline> is of type
+              <codeEntityReference>T:Lawo.EmberPlusSharp.Model.INode</codeEntityReference> rather than
+              <codeEntityReference>T:Lawo.EmberPlusSharp.Model.IParameter</codeEntityReference>) or
+              <codeInline>Position</codeInline> is really a <codeInline>double</codeInline> rather than a
+              <codeInline>long</codeInline>. Robust code would have to handle these exceptions which would make the
+              process even more tedious than it already is.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              The interface offers no way of getting an element by name. The code above has to use
+              <application>LINQ</application> to search for the desired elements, which is cumbersome and inefficient.
+            </para>
+          </listItem>
+        </list>
+        <para>We will see later how the static interface is a much better fit for this scenario.</para>
       </content>
     </section>
     <section address="CollectionChanges">

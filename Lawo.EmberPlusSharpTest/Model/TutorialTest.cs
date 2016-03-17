@@ -48,6 +48,36 @@ namespace Tutorial
             #endregion
         }
 
+        /// <summary>Demonstrates how to react to changes with the dynamic interface.</summary>
+        [TestMethod]
+        [TestCategory("Manual")]
+        public void DynamicReactToChangesTest()
+        {
+            #region Dynamic React to Changes
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var client = await ConnectAsync("localhost", 9000))
+                    using (var consumer = await Consumer<MyRoot>.CreateAsync(client))
+                    {
+                        INode root = consumer.Root;
+
+                        // Navigate to the parameter we're interested in.
+                        var sapphire = (INode)root.Children.Where(c => c.Identifier == "Sapphire").First();
+                        var sources = (INode)sapphire.Children.Where(c => c.Identifier == "Sources").First();
+                        var fpgm1 = (INode)sources.Children.Where(c => c.Identifier == "FPGM 1").First();
+                        var fader = (INode)fpgm1.Children.Where(c => c.Identifier == "Fader").First();
+                        var positionParameter = fader.Children.Where(c => c.Identifier == "Position").First();
+
+                        var valueChanged = new TaskCompletionSource<string>();
+                        positionParameter.PropertyChanged += (s, e) => valueChanged.SetResult(((IElement)s).GetPath());
+                        Console.WriteLine("Waiting for the parameter to change...");
+                        Console.WriteLine("A value of the element with the path {0} has been changed.", await valueChanged.Task);
+                    }
+                });
+            #endregion
+        }
+
         /// <summary>Modifies parameters in the dynamic local database.</summary>
         [TestMethod]
         [TestCategory("Manual")]
@@ -127,12 +157,12 @@ namespace Tutorial
             #endregion
         }
 
-        /// <summary>Demonstrates how to react to changes.</summary>
+        /// <summary>Demonstrates how to react to changes with the static interface.</summary>
         [TestMethod]
         [TestCategory("Manual")]
-        public void ReactToChangesTest()
+        public void StaticReactToChangesTest()
         {
-            #region React to Changes
+            #region Static React to Changes
             AsyncPump.Run(
                 async () =>
                 {

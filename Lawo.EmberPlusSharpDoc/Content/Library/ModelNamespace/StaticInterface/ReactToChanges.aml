@@ -12,7 +12,7 @@
         <codeEntityReference qualifyHint="true">E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged</codeEntityReference>.
         We can use this event as follows:
       </para>
-      <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="React to Changes" language="c#"/>
+      <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="Static React to Changes" language="c#"/>
       <para>
         We can test this by running the above program and then modfiying a value of the parameter in
         <application>Tiny Ember+</application>.
