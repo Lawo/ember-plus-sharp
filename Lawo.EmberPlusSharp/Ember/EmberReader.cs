@@ -383,6 +383,64 @@ namespace Lawo.EmberPlusSharp.Ember
             }
         }
 
+        /// <summary>Reads the current data value and writes it to <paramref name="writer"/>.</summary>
+        /// <returns>The contents of the of the data value if it is primitive; otherwise, <c>null</c>.</returns>
+        /// <exception cref="InvalidOperationException">
+        /// <list type="bullet">
+        /// <item><see cref="Read"/> has never been called, or</item>
+        /// <item>The last <see cref="Read"/> call returned <c>false</c> or threw an exception.</item>
+        /// </list></exception>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
+        /// <remarks>
+        /// <para>If the <see cref="EmberReader"/> instance is currently placed on the start of a container, then skips
+        /// to the end of the container, such that calling <see cref="Read"/> afterwards will place the reader on either
+        /// a sibling of the container, the end of the parent container or the end of the stream.</para>
+        /// <para>This method has no effect, if the reader is currently placed on a data value with primitive encoding
+        /// (the next call to <see cref="Read"/> will skip possibly unread contents anyway).</para>
+        /// </remarks>
+        public object Copy(EmberWriter writer)
+        {
+            return this.CopyCore(writer, this.InnerNumber);
+        }
+
+        /// <summary>Reads data and writes it to <paramref name="writer"/> until the end of the current container is
+        /// reached.</summary>
+        /// <returns>The contents of the of the data value with the outer id <paramref name="outerId"/>, if such a
+        /// data value was found in the current container and its contents is primitive; otherwise, <c>null</c>.
+        /// </returns>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
+        /// <remarks>
+        /// <para>While <see cref="Read"/> returns <c>true</c> and <see cref="InnerNumber"/> is not equal to
+        /// <see cref="Ember.InnerNumber.EndContainer"/>, calls <see cref="Copy"/>.</para>
+        /// </remarks>
+        public object CopyToEndContainer(EmberWriter writer, EmberId? outerId)
+        {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+
+            object result = null;
+            var inner = -1;
+
+            while (this.Read() && ((inner = this.innerNumber.Value) != Ember.InnerNumber.EndContainer))
+            {
+                var candidate = this.CopyCore(writer, inner);
+
+                if (this.outer.HasValue && (this.outer.Value == outerId))
+                {
+                    result = candidate;
+                }
+            }
+
+            if (inner == Ember.InnerNumber.EndContainer)
+            {
+                writer.WriteEndContainer();
+            }
+
+            return result;
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private long? EndPosition
@@ -480,6 +538,40 @@ namespace Lawo.EmberPlusSharp.Ember
                 (inner == Ember.InnerNumber.Sequence) || (inner == Ember.InnerNumber.Set))
             {
                 this.SkipToEndContainer();
+            }
+        }
+
+        private object CopyCore(EmberWriter writer, int inner)
+        {
+            switch (inner)
+            {
+                case Ember.InnerNumber.Boolean:
+                    var boolean = this.ReadContentsAsBoolean();
+                    writer.WriteValue(this.outer.Value, boolean);
+                    return boolean;
+                case Ember.InnerNumber.Integer:
+                    var int64 = this.ReadContentsAsInt64();
+                    writer.WriteValue(this.outer.Value, int64);
+                    return int64;
+                case Ember.InnerNumber.Octetstring:
+                    var byteArray = this.ReadContentsAsByteArray();
+                    writer.WriteValue(this.outer.Value, byteArray);
+                    return byteArray;
+                case Ember.InnerNumber.Real:
+                    var dbl = this.ReadContentsAsDouble();
+                    writer.WriteValue(this.outer.Value, dbl);
+                    return dbl;
+                case Ember.InnerNumber.Utf8String:
+                    var str = this.ReadContentsAsString();
+                    writer.WriteValue(this.outer.Value, str);
+                    return str;
+                case Ember.InnerNumber.RelativeObjectIdentifier:
+                    var int32Array = this.ReadContentsAsInt32Array();
+                    writer.WriteValue(this.outer.Value, int32Array);
+                    return int32Array;
+                default:
+                    this.CopyToEndContainer(writer, null);
+                    return null;
             }
         }
 

@@ -58,6 +58,10 @@
           </listItem>
         </list>
         <para>We will see later how the static interface is a much better fit for this scenario.</para>
+        <para>
+          We can test this by running the above program and then modfiying a value of the parameter in
+          <application>Tiny Ember+</application>.
+        </para>
       </content>
     </section>
     <section address="CollectionChanges">
