@@ -184,11 +184,14 @@ namespace Lawo.IO
                             () => writeBuffer.WriteAsync(new byte[3], 0, 3, CancellationToken.None));
 
                         var asyncWriteBuffer = new WriteBuffer((WriteAsyncCallback)stream.WriteAsync, 1);
+                        asyncWriteBuffer[asyncWriteBuffer.Count++] = 42;
+                        AssertThrow<InvalidOperationException>(() => asyncWriteBuffer.Flush());
+                        asyncWriteBuffer[asyncWriteBuffer.Count++] = 42;
+                        AssertThrow<InvalidOperationException>(
+                            () => asyncWriteBuffer.Reserve(2), () => asyncWriteBuffer.Write(new byte[3], 0, 3));
+                        asyncWriteBuffer[asyncWriteBuffer.Count++] = 42;
                         var str = "Hello";
                         AssertThrow<InvalidOperationException>(
-                            () => asyncWriteBuffer.Flush(),
-                            () => asyncWriteBuffer.Reserve(2),
-                            () => asyncWriteBuffer.Write(new byte[3], 0, 3),
                             () => asyncWriteBuffer.WriteAsUtf8(str, Encoding.UTF8.GetByteCount(str)));
                     }
                 });

@@ -13,11 +13,6 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal static class EmberReaderExtensions
     {
-        internal static void AssertRead(this EmberReader reader)
-        {
-            AssertRead(reader, null);
-        }
-
         internal static bool AssertAndReadContentsAsBoolean(this EmberReader reader)
         {
             return AssertAndReadContents(reader, r => r.ReadContentsAsBoolean());

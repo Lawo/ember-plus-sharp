@@ -8,6 +8,7 @@ namespace Lawo.EmberPlusSharp.Model
 {
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -319,23 +320,36 @@ namespace Lawo.EmberPlusSharp.Model
             }
             else
             {
-                reader.AssertRead();
-
-                if (reader.CanReadContents && (reader.OuterId == GlowNodeContents.Identifier.OuterId))
+                using (var stream = new MemoryStream())
+                using (var writer = new EmberWriter(stream))
                 {
-                    var context = new Context(this, number, reader.AssertAndReadContentsAsString());
-                    child = this.ReadNewChildContents(reader, actualType, context, out childRequestState);
+                    // Since EmberReader checks that every end of a container is matched by a start, we need to write
+                    // this dummy here.
+                    writer.WriteStartSet(GlowNode.Contents.OuterId);
+                    var identifier = reader.CopyToEndContainer(writer, GlowNodeContents.Identifier.OuterId) as string;
 
-                    if (child != null)
+                    if (identifier != null)
                     {
-                        this.children.Add(number, child);
+                        writer.Flush();
+                        stream.Position = 0;
+
+                        using (var contentsReader = new EmberReader(stream))
+                        {
+                            contentsReader.Read(); // Read what we have written with WriteStartSet above
+                            var context = new Context(this, number, identifier);
+                            child = this.ReadNewChildContents(contentsReader, actualType, context, out childRequestState);
+
+                            if (child != null)
+                            {
+                                this.children.Add(number, child);
+                            }
+                        }
                     }
-                }
-                else
-                {
-                    reader.SkipToEndContainer();
-                    childRequestState = RequestState.Complete;
-                    child = null;
+                    else
+                    {
+                        childRequestState = RequestState.Complete;
+                        child = null;
+                    }
                 }
             }
         }

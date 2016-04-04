@@ -113,8 +113,15 @@ namespace Lawo.IO
         public bool Flush()
         {
             var count = this.Count;
-            this.Count = 0; // Make sure that the buffer is empty even if write throws
-            this.write(this.GetBuffer(), 0, count);
+
+            // Prevent call to this.write when buffer is empty so that there is no error when the underlying stream has
+            // already been disposed.
+            if (count > 0)
+            {
+                this.Count = 0; // Make sure that the buffer is empty even if write throws
+                this.write(this.GetBuffer(), 0, count);
+            }
+
             return true;
         }
 

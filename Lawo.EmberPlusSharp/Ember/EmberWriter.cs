@@ -264,6 +264,13 @@ namespace Lawo.EmberPlusSharp.Ember
             WriteLength(this.writeBuffer, 0, 0, 1);
         }
 
+        /// <summary>Flushes the internal buffer into the stream passed to the constructor.</summary>
+        public void Flush()
+        {
+            this.AssertNotDisposed();
+            this.writeBuffer.Flush();
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private void AssertNotDisposed()
