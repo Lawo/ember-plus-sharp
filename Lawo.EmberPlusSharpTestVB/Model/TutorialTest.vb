@@ -110,8 +110,8 @@ Public Class TutorialTestVB
 
     <TestMethod>
     <TestCategory("Manual")>
-    Public Sub ReactToChangesTest()
-#Region "React to Changes"
+    Public Sub StaticReactToChangesTest()
+#Region "Static React to Changes"
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
