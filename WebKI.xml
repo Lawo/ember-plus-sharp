@@ -271,6 +271,8 @@
   <HelpKINode Title="Consumer&lt;TRoot&gt;.SendAsync method" Url="html/B5499501.htm" />
   <HelpKINode Title="Consumer&lt;TRoot&gt;.SendChangesAsync method" Url="html/C7CBA772.htm" />
   <HelpKINode Title="Convert method" Url="html/AA88B75C.htm" />
+  <HelpKINode Title="Copy method" Url="html/67F5FE7F.htm" />
+  <HelpKINode Title="CopyToEndContainer method" Url="html/6BE2FD0E.htm" />
   <HelpKINode Title="Count property">
     <HelpKINode Title="ReadBuffer.Count Property " Url="html/A1A4C488.htm" />
     <HelpKINode Title="WriteBuffer.Count Property " Url="html/1584586E.htm" />
@@ -519,6 +521,8 @@
     <HelpKINode Title="properties" Url="html/2EC3CA5B.htm" />
   </HelpKINode>
   <HelpKINode Title="EmberReader.CanReadContents property" Url="html/EF3BFA0F.htm" />
+  <HelpKINode Title="EmberReader.Copy method" Url="html/67F5FE7F.htm" />
+  <HelpKINode Title="EmberReader.CopyToEndContainer method" Url="html/6BE2FD0E.htm" />
   <HelpKINode Title="EmberReader.Dispose method" Url="html/67310B9.htm" />
   <HelpKINode Title="EmberReader.EmberReader constructor" Url="html/2256FEEA.htm" />
   <HelpKINode Title="EmberReader.InnerNumber property" Url="html/CECBC2F2.htm" />
@@ -557,6 +561,7 @@
   </HelpKINode>
   <HelpKINode Title="EmberWriter.Dispose method" Url="html/DA200386.htm" />
   <HelpKINode Title="EmberWriter.EmberWriter constructor" Url="html/358962F9.htm" />
+  <HelpKINode Title="EmberWriter.Flush method" Url="html/ADBE2050.htm" />
   <HelpKINode Title="EmberWriter.WriteEndContainer method" Url="html/40882D87.htm" />
   <HelpKINode Title="EmberWriter.WriteStartApplicationDefinedType method" Url="html/28843FEA.htm" />
   <HelpKINode Title="EmberWriter.WriteStartSequence method" Url="html/DFCC62FE.htm" />
@@ -694,6 +699,7 @@
   <HelpKINode Title="Float64BigEndian enumeration member" Url="html/CD29B87D.htm" />
   <HelpKINode Title="Float64LittleEndian enumeration member" Url="html/CD29B87D.htm" />
   <HelpKINode Title="Flush method">
+    <HelpKINode Title="EmberWriter.Flush Method " Url="html/ADBE2050.htm" />
     <HelpKINode Title="NonSeekableStream.Flush Method " Url="html/F2D89BBF.htm" />
     <HelpKINode Title="WriteBuffer.Flush Method " Url="html/D3BC01E8.htm" />
   </HelpKINode>
