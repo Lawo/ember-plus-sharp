@@ -569,7 +569,16 @@ namespace Lawo.EmberPlusSharp.Ember
                     var int32Array = this.ReadContentsAsInt32Array();
                     writer.WriteValue(this.outer.Value, int32Array);
                     return int32Array;
+                case Ember.InnerNumber.Sequence:
+                    writer.WriteStartSequence(this.outer.Value);
+                    this.CopyToEndContainer(writer, null);
+                    return null;
+                case Ember.InnerNumber.Set:
+                    writer.WriteStartSet(this.outer.Value);
+                    this.CopyToEndContainer(writer, null);
+                    return null;
                 default:
+                    writer.WriteStartApplicationDefinedType(this.outer.Value, inner);
                     this.CopyToEndContainer(writer, null);
                     return null;
             }
