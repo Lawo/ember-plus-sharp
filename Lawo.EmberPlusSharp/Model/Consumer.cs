@@ -86,14 +86,14 @@ namespace Lawo.EmberPlusSharp.Model
         /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the
         /// <see cref="S101Client"/> constructor, see <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">This method was called from a thread other than the one that
-        /// executed <see cref="CreateAsync(S101Client, int, ChildrenRequestPolicy, byte)"/>.</exception>
+        /// executed <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)"/>.</exception>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called or the connection has been
         /// lost.</exception>
         /// <exception cref="OperationCanceledException"><see cref="Dispose"/> has been called or the connection has
         /// been lost.</exception>
         /// <remarks>Also retrieves the children of any objects implementing <see cref="INode"/> that have had their
-        /// <see cref="INode.ChildrenRequestPolicy"/> property set to a value other than
-        /// <see cref="ChildrenRequestPolicy.None"/>.</remarks>
+        /// <see cref="INode.ChildrenRetrievalPolicy"/> property set to a value other than
+        /// <see cref="ChildrenRetrievalPolicy.None"/>.</remarks>
         public async Task SendAsync()
         {
             if (this.root.HasChanges)
@@ -143,24 +143,25 @@ namespace Lawo.EmberPlusSharp.Model
             return CreateAsync(client, timeout, (byte)0x00);
         }
 
-        /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, ChildrenRequestPolicy, byte)">
-        /// CreateAsync(<paramref name="client"/>, <paramref name="timeout"/>, <paramref name="childrenRequestPolicy"/>,
+        /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)">
+        /// CreateAsync(<paramref name="client"/>, <paramref name="timeout"/>, <paramref name="childrenRetrievalPolicy"/>,
         /// 0x00)</see>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
-        public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout, ChildrenRequestPolicy childrenRequestPolicy)
+        public static Task<Consumer<TRoot>> CreateAsync(
+            S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy)
         {
-            return CreateAsync(client, timeout, childrenRequestPolicy, 0x00);
+            return CreateAsync(client, timeout, childrenRetrievalPolicy, 0x00);
         }
 
-        /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, ChildrenRequestPolicy, byte)">
+        /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)">
         /// CreateAsync(<paramref name="client"/>, <paramref name="timeout"/>,
-        /// <see cref="ChildrenRequestPolicy.All">ChildrenRequestPolicy.All</see>, <paramref name="slot"/>)</see>.
+        /// <see cref="ChildrenRetrievalPolicy.All">ChildrenRetrievalPolicy.All</see>, <paramref name="slot"/>)</see>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
         public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout, byte slot)
         {
-            return CreateAsync(client, timeout, ChildrenRequestPolicy.All, slot);
+            return CreateAsync(client, timeout, ChildrenRetrievalPolicy.All, slot);
         }
 
         /// <summary>Asynchronously uses <paramref name="client"/> to create a new <see cref="Consumer{T}"/> object.
@@ -168,7 +169,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <param name="client">The <see cref="S101Client"/> to use.</param>
         /// <param name="timeout">The total amount of time, in milliseconds, this method will wait for the provider to
         /// send all requested elements. Specify -1 to wait indefinitely.</param>
-        /// <param name="childrenRequestPolicy">The policy that defines whether direct and indirect children are
+        /// <param name="childrenRetrievalPolicy">The policy that defines whether direct and indirect children are
         /// retrieved from the provider before this method returns.</param>
         /// <param name="slot">The slot to communicate with. All outgoing <see cref="S101Message"/> objects will have
         /// their <see cref="S101Message.Slot"/> property set to this value. Incoming messages are ignored, if their
@@ -185,11 +186,11 @@ namespace Lawo.EmberPlusSharp.Model
         /// <exception cref="TimeoutException">The provider did not send all requested elements within the specified
         /// <paramref name="timeout"/>.</exception>
         /// <remarks>
-        /// <para>Sets the <see cref="INode.ChildrenRequestPolicy"/> property of the <see cref="Root"/> object to the
-        /// value passed for <paramref name="childrenRequestPolicy"/> and then retrieves a partial or full copy of the
+        /// <para>Sets the <see cref="INode.ChildrenRetrievalPolicy"/> property of the <see cref="Root"/> object to the
+        /// value passed for <paramref name="childrenRetrievalPolicy"/> and then retrieves a partial or full copy of the
         /// provider tree before returning the <see cref="Consumer{TRoot}"/> object. Exactly what elements are initially
-        /// requested from the provider depends on the type of <typeparamref name="TRoot"/> and the value of
-        /// <paramref name="childrenRequestPolicy"/>.</para>
+        /// retrieved from the provider depends on the type of <typeparamref name="TRoot"/> and the value of
+        /// <paramref name="childrenRetrievalPolicy"/>.</para>
         /// <para>Afterwards, all changes are continuously synchronized such that the state of the object tree
         /// accessible through the <see cref="Root"/> property mirrors the state of the tree held by the provider.
         /// </para>
@@ -198,9 +199,9 @@ namespace Lawo.EmberPlusSharp.Model
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
         public static async Task<Consumer<TRoot>> CreateAsync(
-            S101Client client, int timeout, ChildrenRequestPolicy childrenRequestPolicy, byte slot)
+            S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy, byte slot)
         {
-            var result = new Consumer<TRoot>(client, timeout, childrenRequestPolicy, slot);
+            var result = new Consumer<TRoot>(client, timeout, childrenRetrievalPolicy, slot);
             await result.RetrieveChildrenAsync();
             result.ReceiveLoop();
             result.AutoSendLoop();
@@ -223,9 +224,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Consumer(S101Client client, int timeout, ChildrenRequestPolicy childrenRequestPolicy, byte slot)
+        private Consumer(S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy, byte slot)
         {
-            this.root = Root<TRoot>.Construct(new Context(null, 0, string.Empty, childrenRequestPolicy));
+            this.root = Root<TRoot>.Construct(new Context(null, 0, string.Empty, childrenRetrievalPolicy));
             this.client = client;
             this.childrenRetrievalTimeout = timeout;
             this.emberDataMessage = new S101Message(slot, EmberDataCommand);

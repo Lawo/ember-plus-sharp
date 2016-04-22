@@ -19,13 +19,13 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Gets or sets the policy for this node.</summary>
         /// <exception cref="ArgumentException">Attempted to set a new value when the current value is not equal to
-        /// <see cref="ChildrenRequestPolicy.None"/>.</exception>
+        /// <see cref="ChildrenRetrievalPolicy.None"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Attempted to set a value that is not equal to one of the named
-        /// constants of <see cref="ChildrenRequestPolicy"/>.</exception>
-        /// <remarks>Setting this property prompts the consumer to automatically request children according to the new
+        /// constants of <see cref="ChildrenRetrievalPolicy"/>.</exception>
+        /// <remarks>Setting this property prompts the consumer to automatically retrieve children according to the new
         /// value. To wait for the children to be retrieved, <see langword="await"/> the result of a call to
         /// <see cref="Consumer{TRoot}.SendAsync"/>.</remarks>
-        ChildrenRequestPolicy ChildrenRequestPolicy { get; set; }
+        ChildrenRetrievalPolicy ChildrenRetrievalPolicy { get; set; }
 
         /// <summary>Gets the children of this node.</summary>
         ReadOnlyObservableCollection<IElement> Children { get; }

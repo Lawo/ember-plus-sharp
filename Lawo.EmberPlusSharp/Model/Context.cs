@@ -9,16 +9,16 @@ namespace Lawo.EmberPlusSharp.Model
     internal sealed class Context
     {
         internal Context(IParent parent, int number, string identifier) :
-            this(parent, number, identifier, ChildrenRequestPolicy.All)
+            this(parent, number, identifier, ChildrenRetrievalPolicy.All)
         {
         }
 
-        internal Context(IParent parent, int number, string identifier, ChildrenRequestPolicy childrenRequestPolicy)
+        internal Context(IParent parent, int number, string identifier, ChildrenRetrievalPolicy childrenRetrievalPolicy)
         {
             this.Parent = parent;
             this.Number = number;
             this.Identifier = identifier;
-            this.ChildrenRequestPolicy = childrenRequestPolicy;
+            this.ChildrenRetrievalPolicy = childrenRetrievalPolicy;
         }
 
         internal IParent Parent { get; }
@@ -27,6 +27,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal string Identifier { get; }
 
-        internal ChildrenRequestPolicy ChildrenRequestPolicy { get; }
+        internal ChildrenRetrievalPolicy ChildrenRetrievalPolicy { get; }
     }
 }

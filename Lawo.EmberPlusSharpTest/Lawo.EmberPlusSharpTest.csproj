@@ -581,7 +581,7 @@
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\StreamLog.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRequestStateLog.xml">
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRetrievalPolicyLog.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

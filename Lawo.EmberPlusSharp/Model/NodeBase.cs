@@ -25,35 +25,35 @@ namespace Lawo.EmberPlusSharp.Model
         where TMostDerived : NodeBase<TMostDerived>
     {
         private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
-        private ChildrenRequestPolicy childrenRequestPolicy;
+        private ChildrenRetrievalPolicy childrenRetrievalPolicy;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <inheritdoc/>
-        public ChildrenRequestPolicy ChildrenRequestPolicy
+        public ChildrenRetrievalPolicy ChildrenRetrievalPolicy
         {
             get
             {
-                return this.childrenRequestPolicy;
+                return this.childrenRetrievalPolicy;
             }
 
             set
             {
-                if ((value < ChildrenRequestPolicy.None) || (value > ChildrenRequestPolicy.All))
+                if ((value < ChildrenRetrievalPolicy.None) || (value > ChildrenRetrievalPolicy.All))
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
 
-                if (value != this.childrenRequestPolicy)
+                if (value != this.childrenRetrievalPolicy)
                 {
-                    if (this.childrenRequestPolicy != ChildrenRequestPolicy.None)
+                    if (this.childrenRetrievalPolicy != ChildrenRetrievalPolicy.None)
                     {
                         throw new ArgumentException(
-                            "A new value cannot be set if the current value is not equal to ChildrenRequestPolicy.None.",
+                            "A new value cannot be set if the current value is not equal to ChildrenRetrievalPolicy.None.",
                             "value");
                     }
 
-                    this.SetValue(ref this.childrenRequestPolicy, value);
+                    this.SetValue(ref this.childrenRetrievalPolicy, value);
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace Lawo.EmberPlusSharp.Model
         internal sealed override void SetContext(Context context)
         {
             base.SetContext(context);
-            this.childrenRequestPolicy = context.ChildrenRequestPolicy;
+            this.childrenRetrievalPolicy = context.ChildrenRetrievalPolicy;
         }
 
         internal IElement GetChild(int number)
@@ -376,8 +376,8 @@ namespace Lawo.EmberPlusSharp.Model
                         {
                             contentsReader.Read(); // Read what we have written with WriteStartSet above
 
-                            var newPolicy = this.childrenRequestPolicy == ChildrenRequestPolicy.All ?
-                                ChildrenRequestPolicy.All : ChildrenRequestPolicy.None;
+                            var newPolicy = this.childrenRetrievalPolicy == ChildrenRetrievalPolicy.All ?
+                                ChildrenRetrievalPolicy.All : ChildrenRetrievalPolicy.None;
                             var context = new Context(this, number, identifier, newPolicy);
                             child = this.ReadNewChildContents(contentsReader, actualType, context, out childRequestState);
 
