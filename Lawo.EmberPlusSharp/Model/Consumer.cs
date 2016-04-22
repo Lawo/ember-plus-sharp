@@ -35,7 +35,7 @@ namespace Lawo.EmberPlusSharp.Model
         private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
         private readonly TRoot root;
         private readonly S101Client client;
-        private readonly int queryChildrenTimeout;
+        private readonly int childrenRetrievalTimeout;
         private readonly S101Message emberDataMessage;
         private int autoSendInterval = 100;
         private CancellationTokenSource autoSendDelayCancellationSource;
@@ -201,7 +201,7 @@ namespace Lawo.EmberPlusSharp.Model
             S101Client client, int timeout, ChildrenRequestPolicy childrenRequestPolicy, byte slot)
         {
             var result = new Consumer<TRoot>(client, timeout, childrenRequestPolicy, slot);
-            await result.QueryChildrenAsync();
+            await result.RetrieveChildrenAsync();
             result.ReceiveLoop();
             result.AutoSendLoop();
             return result;
@@ -227,7 +227,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.root = Root<TRoot>.Construct(new Context(null, 0, string.Empty, childrenRequestPolicy));
             this.client = client;
-            this.queryChildrenTimeout = timeout;
+            this.childrenRetrievalTimeout = timeout;
             this.emberDataMessage = new S101Message(slot, EmberDataCommand);
             this.client.EmberDataReceived += this.receiveQueue.OnMessageReceived;
             this.client.ConnectionLost += this.receiveQueue.OnConnectionLost;
@@ -246,11 +246,12 @@ namespace Lawo.EmberPlusSharp.Model
             this.hasChangesSetSource.TrySetResult(true);
         }
 
-        private async Task QueryChildrenAsync()
+        private async Task RetrieveChildrenAsync()
         {
-            var queryChildrenTask = this.QueryChildrenCoreAsync();
+            var retrieveChildrenTask = this.RetrieveChildrenCoreAsync();
 
-            if ((await Task.WhenAny(queryChildrenTask, Task.Delay(this.queryChildrenTimeout))) != queryChildrenTask)
+            if ((await Task.WhenAny(retrieveChildrenTask, Task.Delay(this.childrenRetrievalTimeout))) !=
+                retrieveChildrenTask)
             {
                 this.root.UpdateRequestState(this.root.RequestState.Equals(RequestState.Complete));
                 var firstIncompleteNode = this.root.GetFirstIncompleteChild();
@@ -261,7 +262,7 @@ namespace Lawo.EmberPlusSharp.Model
                 throw new TimeoutException(message);
             }
 
-            await queryChildrenTask;
+            await retrieveChildrenTask;
         }
 
         private async void ReceiveLoop()
@@ -273,7 +274,7 @@ namespace Lawo.EmberPlusSharp.Model
                 while (true)
                 {
                     await this.WaitForAndApplyChanges();
-                    await this.QueryChildrenAsync();
+                    await this.RetrieveChildrenAsync();
                 }
             }
             catch (OperationCanceledException)
@@ -323,7 +324,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private async Task QueryChildrenCoreAsync()
+        private async Task RetrieveChildrenCoreAsync()
         {
             while (await this.SendRequestAsync())
             {

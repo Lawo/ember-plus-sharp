@@ -277,7 +277,7 @@ namespace Tutorial
                     // Establish S101 protocol
                     using (S101Client client = await ConnectAsync("localhost", 9000))
 
-                    // Query the provider database for *all* elements and store them in a local copy
+                    // Retrieve *all* elements in the provider database and store them in a local copy
                     using (Consumer<MyRoot> consumer = await Consumer<MyRoot>.CreateAsync(client))
                     {
                         // Get the root of the local database.

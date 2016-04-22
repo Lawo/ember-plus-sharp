@@ -208,7 +208,7 @@ Public Class TutorialTestVB
             Async Function()
                 ' Establish S101 protocol
                 Using client As S101Client = Await ConnectAsync("localhost", 9000)
-                    ' Query the provider database for *all* elements and store them in a local copy
+                    ' Retrieve *all* elements in the provider database and store them in a local copy
                     Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
                         ' Get the root of the local database.
                         Dim root As INode = con.Root

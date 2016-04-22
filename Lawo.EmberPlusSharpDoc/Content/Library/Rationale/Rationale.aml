@@ -35,7 +35,7 @@
             </list>
           </listItem>
           <listItem>
-            <para>Recursively query the provider for the parts of the tree the consumer is interested in.</para>
+            <para>Recursively retrieve from the provider the parts of the tree the consumer is interested in.</para>
           </listItem>
           <listItem>
             <para>

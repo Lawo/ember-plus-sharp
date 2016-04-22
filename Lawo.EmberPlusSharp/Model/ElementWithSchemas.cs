@@ -30,9 +30,9 @@ namespace Lawo.EmberPlusSharp.Model
         /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
         /// </list>
         /// See individual method documentation for semantics. This rather complex system was implemented to make the
-        /// process of querying the provider as efficient as possible, namely:
+        /// process of retrieving elements from the provider as efficient as possible, namely:
         /// <list type="bullet">
-        /// <item>As few as possible messages are sent to query for children and/or subscribe to streams.</item>
+        /// <item>As few as possible messages are sent to request children and/or subscribe to streams.</item>
         /// <item>The computational effort for tree traversal is kept as low as possible. This is necessary because all
         /// code is always executed on the applications GUI thread. Without these optimizations, a full tree traversal
         /// would be necessary after each processed message. Some providers send a new message for each updated

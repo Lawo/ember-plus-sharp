@@ -47,9 +47,9 @@
       <title>TCP Connection and S101</title>
       <content>
         <para>
-          Before we can query the provider we first need to create a connection and then establish the S101 protocol.
-          Since these first steps will be mostly the same whenever we'd like to connect to a provider, we'll put them
-          into a handy method:
+          Before we can retrieve data from the provider we first need to create a connection and then establish the S101
+          protocol. Since these first steps will be mostly the same whenever we'd like to connect to a provider, we'll
+          put them into a handy method:
         </para>
         <code source="..\Lawo.EmberPlusSharpTest\Model\TutorialTest.cs" region="S101 Connect Method" language="c#"/>
       </content>
