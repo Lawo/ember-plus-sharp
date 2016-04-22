@@ -580,6 +580,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\StreamLog.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRequestStateLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

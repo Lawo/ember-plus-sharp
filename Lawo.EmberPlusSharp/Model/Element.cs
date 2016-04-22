@@ -149,7 +149,7 @@ namespace Lawo.EmberPlusSharp.Model
             set { } // Intentionally empty
         }
 
-        internal void SetContext(Context context)
+        internal virtual void SetContext(Context context)
         {
             this.parent = context.Parent;
 

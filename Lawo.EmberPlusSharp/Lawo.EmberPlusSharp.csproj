@@ -98,6 +98,7 @@
     <Compile Include="Glow\GlowQualifiedFunction.cs" />
     <Compile Include="Glow\GlowTypes.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\ChildrenRequestPolicy.cs" />
     <Compile Include="Model\ElementWithSchemas.cs" />
     <Compile Include="Model\Function.cs" />
     <Compile Include="Model\Function1.cs" />

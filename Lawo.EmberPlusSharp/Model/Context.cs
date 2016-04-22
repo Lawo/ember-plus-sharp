@@ -8,32 +8,25 @@ namespace Lawo.EmberPlusSharp.Model
 {
     internal sealed class Context
     {
-        private readonly IParent parent;
-        private readonly int number;
-        private readonly string identifier;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        internal Context(IParent parent, int number, string identifier)
+        internal Context(IParent parent, int number, string identifier) :
+            this(parent, number, identifier, ChildrenRequestPolicy.All)
         {
-            this.parent = parent;
-            this.number = number;
-            this.identifier = identifier;
         }
 
-        internal IParent Parent
+        internal Context(IParent parent, int number, string identifier, ChildrenRequestPolicy childrenRequestPolicy)
         {
-            get { return this.parent; }
+            this.Parent = parent;
+            this.Number = number;
+            this.Identifier = identifier;
+            this.ChildrenRequestPolicy = childrenRequestPolicy;
         }
 
-        internal int Number
-        {
-            get { return this.number; }
-        }
+        internal IParent Parent { get; }
 
-        internal string Identifier
-        {
-            get { return this.identifier; }
-        }
+        internal int Number { get; }
+
+        internal string Identifier { get; }
+
+        internal ChildrenRequestPolicy ChildrenRequestPolicy { get; }
     }
 }

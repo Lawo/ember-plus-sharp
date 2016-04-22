@@ -444,6 +444,19 @@ namespace Lawo.EmberPlusSharp.Model
                 "AccessLog.xml"));
         }
 
+        /// <summary>Tests whether <see cref="INode.ChildrenRequestPolicy"/> works as expected.</summary>
+        [TestMethod]
+        public void ChildrenRequestPolicyTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    await ChildrenRequestPolicyTestCoreAsync(ChildrenRequestPolicy.None);
+                    await ChildrenRequestPolicyTestCoreAsync(ChildrenRequestPolicy.DirectOnly);
+                    await ChildrenRequestPolicyTestCoreAsync(ChildrenRequestPolicy.All);
+                });
+        }
+
         /// <summary>Tests nullable parameter variants.</summary>
         [TestMethod]
         public void NullableTest()
@@ -1559,6 +1572,45 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 parameter.Value = 42;
             }
+        }
+
+        private static Task ChildrenRequestPolicyTestCoreAsync(ChildrenRequestPolicy policy)
+        {
+            return TestWithRobot<ModelPayloads>(
+                async client =>
+                {
+                    using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(client, 4000, policy))
+                    {
+                        var root = consumer.Root;
+                        AssertThrow<ArgumentOutOfRangeException>(
+                            () => root.ChildrenRequestPolicy = (ChildrenRequestPolicy)(-1),
+                            () => root.ChildrenRequestPolicy = ChildrenRequestPolicy.All + 1);
+                        Assert.AreEqual(policy, root.ChildrenRequestPolicy);
+
+                        const string expectedMessage =
+                            "A new value cannot be set if the current value is not equal to ChildrenRequestPolicy.None.\r\nParameter name: value";
+
+                        if (root.ChildrenRequestPolicy == ChildrenRequestPolicy.None)
+                        {
+                            root.ChildrenRequestPolicy = ChildrenRequestPolicy.DirectOnly;
+                            AssertThrow<ArgumentException>(
+                                () => root.ChildrenRequestPolicy = ChildrenRequestPolicy.All, expectedMessage);
+                        }
+                        else
+                        {
+                            AssertThrow<ArgumentException>(() => root.ChildrenRequestPolicy -= 1, expectedMessage);
+                        }
+
+                        var childPolicy = policy == ChildrenRequestPolicy.All ?
+                            ChildrenRequestPolicy.All : ChildrenRequestPolicy.None;
+                        Assert.AreEqual(childPolicy, root.Node.ChildrenRequestPolicy);
+                    }
+                },
+                null,
+                null,
+                GlowTypes.Instance,
+                false,
+                "ChildrenRequestStateLog.xml");
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]

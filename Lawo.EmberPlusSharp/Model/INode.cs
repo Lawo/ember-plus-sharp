@@ -6,6 +6,7 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
@@ -15,6 +16,16 @@ namespace Lawo.EmberPlusSharp.Model
     {
         /// <summary>Gets a value indicating whether this is a root node.</summary>
         bool IsRoot { get; }
+
+        /// <summary>Gets or sets the policy for this node.</summary>
+        /// <exception cref="ArgumentException">Attempted to set a new value when the current value is not equal to
+        /// <see cref="ChildrenRequestPolicy.None"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Attempted to set a value that is not equal to one of the named
+        /// constants of <see cref="ChildrenRequestPolicy"/>.</exception>
+        /// <remarks>Setting this property prompts the consumer to automatically request children according to the new
+        /// value. To wait for the children to be retrieved, <see langword="await"/> the result of a call to
+        /// <see cref="Consumer{TRoot}.SendAsync"/>.</remarks>
+        ChildrenRequestPolicy ChildrenRequestPolicy { get; set; }
 
         /// <summary>Gets the children of this node.</summary>
         ReadOnlyObservableCollection<IElement> Children { get; }

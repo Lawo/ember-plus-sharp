@@ -6,6 +6,7 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
@@ -24,6 +25,38 @@ namespace Lawo.EmberPlusSharp.Model
         where TMostDerived : NodeBase<TMostDerived>
     {
         private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
+        private ChildrenRequestPolicy childrenRequestPolicy;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <inheritdoc/>
+        public ChildrenRequestPolicy ChildrenRequestPolicy
+        {
+            get
+            {
+                return this.childrenRequestPolicy;
+            }
+
+            set
+            {
+                if ((value < ChildrenRequestPolicy.None) || (value > ChildrenRequestPolicy.All))
+                {
+                    throw new ArgumentOutOfRangeException("value");
+                }
+
+                if (value != this.childrenRequestPolicy)
+                {
+                    if (this.childrenRequestPolicy != ChildrenRequestPolicy.None)
+                    {
+                        throw new ArgumentException(
+                            "A new value cannot be set if the current value is not equal to ChildrenRequestPolicy.None.",
+                            "value");
+                    }
+
+                    this.SetValue(ref this.childrenRequestPolicy, value);
+                }
+            }
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,6 +82,12 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal NodeBase() : base(RequestState.None)
         {
+        }
+
+        internal sealed override void SetContext(Context context)
+        {
+            base.SetContext(context);
+            this.childrenRequestPolicy = context.ChildrenRequestPolicy;
         }
 
         internal IElement GetChild(int number)
@@ -336,7 +375,10 @@ namespace Lawo.EmberPlusSharp.Model
                         using (var contentsReader = new EmberReader(stream))
                         {
                             contentsReader.Read(); // Read what we have written with WriteStartSet above
-                            var context = new Context(this, number, identifier);
+
+                            var newPolicy = this.childrenRequestPolicy == ChildrenRequestPolicy.All ?
+                                ChildrenRequestPolicy.All : ChildrenRequestPolicy.None;
+                            var context = new Context(this, number, identifier, newPolicy);
                             child = this.ReadNewChildContents(contentsReader, actualType, context, out childRequestState);
 
                             if (child != null)
