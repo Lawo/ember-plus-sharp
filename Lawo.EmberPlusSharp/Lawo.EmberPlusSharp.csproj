@@ -124,7 +124,7 @@
     <Compile Include="Model\IResult.cs" />
     <Compile Include="Model\IInvocationResult.cs" />
     <Compile Include="Model\InvocationFailedException.cs" />
-    <Compile Include="Model\IsOnlineChangeStatus.cs" />
+    <Compile Include="Model\RetrieveDetailsChangeStatus.cs" />
     <Compile Include="Model\IValueReader.cs" />
     <Compile Include="Model\MatrixAddressingMode.cs" />
     <Compile Include="Model\MatrixParameters.cs" />

@@ -57,15 +57,15 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
-        internal override bool ChangeOnlineStatus(IElement child)
+        internal override bool ChangeVisibility(Element child)
         {
-            base.ChangeOnlineStatus(child);
+            base.ChangeVisibility(child);
             MetaElement metaChild;
             var result = MetaChildren.TryGetValue(child.Identifier, out metaChild);
 
             if (result)
             {
-                metaChild.ChangeOnlineStatus(this, child);
+                metaChild.ChangeVisibility(this, child);
             }
 
             return result;

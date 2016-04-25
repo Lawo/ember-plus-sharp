@@ -27,6 +27,7 @@ namespace Lawo.EmberPlusSharp.Model
         private string identifier;
         private string description;
         private bool isOnline = true;
+        private object tag;
         private bool hasChanges;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,20 +76,24 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     // We're deliberately not simply setting this to Changed here, because we want to correctly handle
                     // the case when IsOnline is changed twice without being observed between the changes.
-                    if (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Unchanged)
+                    if (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Unchanged)
                     {
-                        this.IsOnlineChangeStatus = IsOnlineChangeStatus.Changed;
+                        this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Changed;
                     }
-                    else if (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Changed)
+                    else if (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Changed)
                     {
-                        this.IsOnlineChangeStatus = IsOnlineChangeStatus.Unchanged;
+                        this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Unchanged;
                     }
                 }
             }
         }
 
         /// <inheritdoc/>
-        public object Tag { get; set; }
+        public object Tag
+        {
+            get { return this.tag; }
+            set { this.SetValue(ref this.tag, value); }
+        }
 
         /// <inheritdoc/>
         public string GetPath()
@@ -115,8 +120,6 @@ namespace Lawo.EmberPlusSharp.Model
             get { return this.numberPath; }
         }
 
-        internal IsOnlineChangeStatus IsOnlineChangeStatus { get; set; }
-
         internal bool HasChanges
         {
             get
@@ -137,6 +140,13 @@ namespace Lawo.EmberPlusSharp.Model
                 }
             }
         }
+
+        internal virtual bool RetrieveDetails
+        {
+            get { return this.IsOnline; }
+        }
+
+        internal RetrieveDetailsChangeStatus RetrieveDetailsChangeStatus { get; set; }
 
         internal virtual RetrievalState RetrievalState
         {

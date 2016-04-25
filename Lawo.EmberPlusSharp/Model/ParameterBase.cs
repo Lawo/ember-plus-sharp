@@ -279,8 +279,8 @@ namespace Lawo.EmberPlusSharp.Model
                         break;
                     case GlowParameterContents.IsOnline.OuterNumber:
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
-                        var send = (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Changed) &&
-                            this.IsOnline && this.StreamIdentifier.HasValue;
+                        var send = (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Changed) &&
+                            this.RetrieveDetails && this.StreamIdentifier.HasValue;
                         this.RetrievalState &= send ? RetrievalState.None : RetrievalState.Complete;
                         break;
                     case GlowParameterContents.Formula.OuterNumber:
@@ -359,7 +359,7 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     this.streamIdentifier = value;
 
-                    if (value.HasValue && this.IsOnline)
+                    if (value.HasValue && this.RetrieveDetails)
                     {
                         this.RetrievalState = RetrievalState.None;
                     }
@@ -429,7 +429,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
             else
             {
-                if (this.IsOnline)
+                if (this.RetrieveDetails)
                 {
                     const string Format =
                         "No enumeration, enumMap, value or type field is available for the parameter with the path {0}.";

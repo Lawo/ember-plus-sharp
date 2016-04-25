@@ -16,7 +16,7 @@ namespace Lawo.EmberPlusSharp.Model
     {
         internal ShadowNode()
         {
-            this.IsOnlineChangeStatus = IsOnlineChangeStatus.Unchanged;
+            this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Unchanged;
         }
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Official Glow name.")]

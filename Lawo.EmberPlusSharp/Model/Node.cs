@@ -71,9 +71,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
-        internal override bool ChangeOnlineStatus(IElement child)
+        internal override bool ChangeVisibility(Element child)
         {
-            if (child.IsOnline)
+            if (child.RetrieveDetails)
             {
                 this.observableChildren.Add(child);
             }
@@ -82,7 +82,7 @@ namespace Lawo.EmberPlusSharp.Model
                 this.observableChildren.Remove(child);
             }
 
-            return base.ChangeOnlineStatus(child);
+            return base.ChangeVisibility(child);
         }
 
         internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)

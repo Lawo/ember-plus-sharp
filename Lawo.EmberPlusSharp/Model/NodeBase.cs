@@ -167,10 +167,10 @@ namespace Lawo.EmberPlusSharp.Model
             return isEmpty;
         }
 
-        /// <summary>Changes the online status of <paramref name="child"/>.</summary>
-        /// <param name="child">The child to change the online status for.</param>
-        /// <returns><c>true</c> if the online status has been changed; otherwise, <c>false</c>.</returns>
-        internal virtual bool ChangeOnlineStatus(IElement child)
+        /// <summary>Changes the visibility of <paramref name="child"/>.</summary>
+        /// <param name="child">The child to change the visibility for.</param>
+        /// <returns><c>true</c> if the visibility has been changed; otherwise, <c>false</c>.</returns>
+        internal virtual bool ChangeVisibility(Element child)
         {
             return false;
         }
@@ -211,7 +211,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal sealed override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {
-            if (!this.IsOnline || (this.children.Count == 0))
+            if (!this.RetrieveDetails || (this.children.Count == 0))
             {
                 return base.UpdateRetrievalState(throwForMissingRequiredChildren);
             }
@@ -226,12 +226,13 @@ namespace Lawo.EmberPlusSharp.Model
                         var childRetrievalState = child.UpdateRetrievalState(throwForMissingRequiredChildren);
                         accumulatedChildRetrievalState &= childRetrievalState;
 
-                        if (child.IsOnlineChangeStatus != IsOnlineChangeStatus.Unchanged)
+                        if (child.RetrieveDetailsChangeStatus != RetrieveDetailsChangeStatus.Unchanged)
                         {
-                            if ((child.IsOnline && childRetrievalState.Equals(RetrievalState.Verified)) || !child.IsOnline)
+                            if ((child.RetrieveDetails && childRetrievalState.Equals(RetrievalState.Verified)) ||
+                                !child.RetrieveDetails)
                             {
-                                child.IsOnlineChangeStatus = IsOnlineChangeStatus.Unchanged;
-                                this.ChangeOnlineStatus(child);
+                                child.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Unchanged;
+                                this.ChangeVisibility(child);
                             }
                         }
                     }

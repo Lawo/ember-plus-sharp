@@ -33,9 +33,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal sealed override bool ChangeOnlineStatus(IElement child)
+        internal sealed override bool ChangeVisibility(Element child)
         {
-            return DynamicNodeHelper.ChangeOnlineStatus(base.ChangeOnlineStatus, this.dynamicChildren, child);
+            return DynamicNodeHelper.ChangeVisibility(base.ChangeVisibility, this.dynamicChildren, child);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

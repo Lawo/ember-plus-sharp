@@ -46,7 +46,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             internal abstract bool IsAvailable(IParent parent, bool throwIfMissing);
 
-            internal abstract void ChangeOnlineStatus(IParent parent, IElement element);
+            internal abstract void ChangeVisibility(IParent parent, Element element);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

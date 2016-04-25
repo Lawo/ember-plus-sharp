@@ -20,7 +20,7 @@ namespace Lawo.EmberPlusSharp.Model
         where TMostDerived : ElementWithSchemas<TMostDerived>
     {
         /// <summary>See <see cref="RetrievalState"/> for more information.</summary>
-        /// <remarks>This field and its sibling <see cref="offlineRetrievalState"/> are modified by the following
+        /// <remarks>This field and its sibling <see cref="noDetailsRetrievalState"/> are modified by the following
         /// methods, which are directly or indirectly called from
         /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
         /// <list type="number">
@@ -40,8 +40,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// are changed at once in a large tree.</item>
         /// </list>
         /// </remarks>
-        private RetrievalState offlineRetrievalState = RetrievalState.Complete;
-        private RetrievalState onlineRetrievalState;
+        private RetrievalState noDetailsRetrievalState = RetrievalState.Complete;
+        private RetrievalState detailsRetrievalState;
 
         private IReadOnlyList<string> schemaIdentifiers;
 
@@ -56,38 +56,38 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal ElementWithSchemas(RetrievalState onlineRetrievalState)
+        internal ElementWithSchemas(RetrievalState detailsRetrievalState)
         {
-            this.onlineRetrievalState = onlineRetrievalState;
+            this.detailsRetrievalState = detailsRetrievalState;
         }
 
         /// <summary>Gets or sets the retrieval state.</summary>
         /// <remarks>This implementation has nothing to do with schemas. However, it so happens that this member has the
         /// same behavior for all subclasses (parameters, nodes and matrices). If this fact ever changes, it probably
         /// makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
-        internal override RetrievalState RetrievalState
+        internal sealed override RetrievalState RetrievalState
         {
             get
             {
-                return this.IsOnline ? this.onlineRetrievalState : this.offlineRetrievalState;
+                return this.RetrieveDetails ? this.detailsRetrievalState : this.noDetailsRetrievalState;
             }
 
             set
             {
-                if (this.IsOnline)
+                if (this.RetrieveDetails)
                 {
-                    this.onlineRetrievalState = value;
+                    this.detailsRetrievalState = value;
                 }
                 else
                 {
-                    this.offlineRetrievalState = value;
+                    this.noDetailsRetrievalState = value;
                 }
             }
         }
 
         internal override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {
-            if (!this.IsOnline || (this.RetrievalState.Equals(RetrievalState.Complete) &&
+            if (!this.RetrieveDetails || (this.RetrievalState.Equals(RetrievalState.Complete) &&
                 this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren)))
             {
                 this.RetrievalState = base.UpdateRetrievalState(throwForMissingRequiredChildren);

@@ -6,18 +6,18 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
-    internal enum IsOnlineChangeStatus
+    internal enum RetrieveDetailsChangeStatus
     {
-        /// <summary><see cref="Element.IsOnline"/> has the value set during initialization or first read operation.
+        /// <summary><see cref="Element.RetrieveDetails"/> has the value set during initialization or first read operation.
         /// </summary>
         Initialized,
 
-        /// <summary><see cref="Element.IsOnline"/> has not been changed since
-        /// <see cref="Element.IsOnlineChangeStatus"/> has been reset.</summary>
+        /// <summary><see cref="Element.RetrieveDetails"/> has not been changed since
+        /// <see cref="Element.RetrieveDetailsChangeStatus"/> has been reset.</summary>
         Unchanged,
 
-        /// <summary><see cref="Element.IsOnline"/> has been changed since
-        /// <see cref="Element.IsOnlineChangeStatus"/> has been reset.</summary>
+        /// <summary><see cref="Element.RetrieveDetails"/> has been changed since
+        /// <see cref="Element.RetrieveDetailsChangeStatus"/> has been reset.</summary>
         Changed
     }
 }

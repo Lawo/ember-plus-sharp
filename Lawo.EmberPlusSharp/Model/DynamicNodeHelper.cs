@@ -30,12 +30,12 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal static bool ChangeOnlineStatus(
-            Func<IElement, bool> baseImpl, ObservableCollection<IElement> dynamicChildren, IElement child)
+        internal static bool ChangeVisibility(
+            Func<Element, bool> baseImpl, ObservableCollection<IElement> dynamicChildren, Element child)
         {
             if (!baseImpl(child))
             {
-                if (child.IsOnline)
+                if (child.RetrieveDetails)
                 {
                     dynamicChildren.Add(child);
                 }
