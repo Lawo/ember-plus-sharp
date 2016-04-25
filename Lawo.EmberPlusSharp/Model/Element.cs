@@ -27,7 +27,6 @@ namespace Lawo.EmberPlusSharp.Model
         private string identifier;
         private string description;
         private bool isOnline = true;
-        private IsOnlineChangeStatus isOnlineChangedStatus;
         private bool hasChanges;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,11 +77,11 @@ namespace Lawo.EmberPlusSharp.Model
                     // the case when IsOnline is changed twice without being observed between the changes.
                     if (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Unchanged)
                     {
-                        this.isOnlineChangedStatus = IsOnlineChangeStatus.Changed;
+                        this.IsOnlineChangeStatus = IsOnlineChangeStatus.Changed;
                     }
-                    else if (this.isOnlineChangedStatus == IsOnlineChangeStatus.Changed)
+                    else if (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Changed)
                     {
-                        this.isOnlineChangedStatus = IsOnlineChangeStatus.Unchanged;
+                        this.IsOnlineChangeStatus = IsOnlineChangeStatus.Unchanged;
                     }
                 }
             }
@@ -116,11 +115,7 @@ namespace Lawo.EmberPlusSharp.Model
             get { return this.numberPath; }
         }
 
-        internal IsOnlineChangeStatus IsOnlineChangeStatus
-        {
-            get { return this.isOnlineChangedStatus; }
-            set { this.isOnlineChangedStatus = value; }
-        }
+        internal IsOnlineChangeStatus IsOnlineChangeStatus { get; set; }
 
         internal bool HasChanges
         {
