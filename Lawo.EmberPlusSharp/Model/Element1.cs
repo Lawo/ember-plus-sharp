@@ -81,10 +81,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         internal static TMostDerived ReadContents(
-            EmberReader reader, ElementType actualType, Context context, out RequestState requestState)
+            EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState)
         {
             var result = Construct(context);
-            requestState = result.ReadContents(reader, actualType);
+            retrievalState = result.ReadContents(reader, actualType);
             return result;
         }
 

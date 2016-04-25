@@ -254,7 +254,7 @@ namespace Lawo.EmberPlusSharp.Model
             if ((await Task.WhenAny(retrieveChildrenTask, Task.Delay(this.childrenRetrievalTimeout))) !=
                 retrieveChildrenTask)
             {
-                this.root.UpdateRequestState(this.root.RequestState.Equals(RequestState.Complete));
+                this.root.UpdateRetrievalState(this.root.RetrievalState.Equals(RetrievalState.Complete));
                 var firstIncompleteNode = this.root.GetFirstIncompleteChild();
                 var message = firstIncompleteNode == null ?
                     "The provider failed to send all requested elements within the specified timeout." :
@@ -378,14 +378,14 @@ namespace Lawo.EmberPlusSharp.Model
 
         private async Task<bool> SendRequestAsync()
         {
-            var rootRequestState = this.root.UpdateRequestState(false);
+            var rootRetrievalState = this.root.UpdateRetrievalState(false);
 
-            if (rootRequestState.Equals(RequestState.None))
+            if (rootRetrievalState.Equals(RetrievalState.None))
             {
                 // There is no guarantee that the response we received is actually an answer to the previously sent
-                // getDirectory request. It could just as well be a parameter value update. RequestState indicates
-                // whether the former or the latter happened. If RequestState == RequestState.None, we have
-                // received at least one new node. If RequestState != RequestState.None, no new node without
+                // getDirectory request. It could just as well be a parameter value update. RetrievalState indicates
+                // whether the former or the latter happened. If RetrievalState == RetrievalState.None, we have
+                // received at least one new node. If RetrievalState != RetrievalState.None, no new node without
                 // children has been received and consequently no new getDirectory request needs to be sent.
                 // Of course, in the latter case the assumption is that the provider will at some point send an
                 // answer to our previous getDirectory request. If it doesn't, the timeout will take care of things.
@@ -395,13 +395,13 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     // If no answer is expected from the provider due to the request, we need to update the request
                     // state again to see whether there's still something missing.
-                    rootRequestState = this.root.UpdateRequestState(false);
+                    rootRetrievalState = this.root.UpdateRetrievalState(false);
                 }
 
                 await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
             }
 
-            return !rootRequestState.Equals(RequestState.Verified);
+            return !rootRetrievalState.Equals(RetrievalState.Verified);
         }
 
         private void ApplyChange(MessageReceivedEventArgs args)

@@ -73,7 +73,7 @@ namespace Lawo.EmberPlusSharp.Glow
                     this.root.Read(emberReader, this.pendingInvocations, this.streamedParameters);
                     this.root.WriteRequest(dummyWriter, this.streamedParameters);
                     this.root.SetComplete();
-                    this.root.UpdateRequestState(true);
+                    this.root.UpdateRetrievalState(true);
                 }
             }
         }

@@ -119,7 +119,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.SetProviderValue(AssertValueType(value));
         }
 
-        internal ParameterBase() : base(RequestState.Complete)
+        internal ParameterBase() : base(RetrievalState.Complete)
         {
         }
 
@@ -222,14 +222,14 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal sealed override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
-            if (this.RequestState.Equals(RequestState.None))
+            if (this.RetrievalState.Equals(RetrievalState.None))
             {
                 writer.WriteStartApplicationDefinedType(
                     GlowElementCollection.Element.OuterId, GlowQualifiedParameter.InnerNumber);
                 writer.WriteValue(GlowQualifiedParameter.Path.OuterId, this.NumberPath);
                 writer.WriteStartApplicationDefinedType(
                     GlowQualifiedParameter.Children.OuterId, GlowElementCollection.InnerNumber);
-                this.WriteCommandCollection(writer, GlowCommandNumber.Subscribe, RequestState.Complete);
+                this.WriteCommandCollection(writer, GlowCommandNumber.Subscribe, RetrievalState.Complete);
                 writer.WriteEndContainer();
                 writer.WriteEndContainer();
                 streamedParameters.Add(this);
@@ -238,7 +238,7 @@ namespace Lawo.EmberPlusSharp.Model
             return false;
         }
 
-        internal override RequestState ReadContents(EmberReader reader, ElementType actualType)
+        internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Parameter, actualType);
 
@@ -281,7 +281,7 @@ namespace Lawo.EmberPlusSharp.Model
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
                         var send = (this.IsOnlineChangeStatus == IsOnlineChangeStatus.Changed) &&
                             this.IsOnline && this.StreamIdentifier.HasValue;
-                        this.RequestState &= send ? RequestState.None : RequestState.Complete;
+                        this.RetrievalState &= send ? RetrievalState.None : RetrievalState.Complete;
                         break;
                     case GlowParameterContents.Formula.OuterNumber:
                         this.FormulaCore = reader.AssertAndReadContentsAsString();
@@ -315,7 +315,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             this.SetFinalTytpe(valueType, enumType, typeType);
-            return this.RequestState;
+            return this.RetrievalState;
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
@@ -361,7 +361,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                     if (value.HasValue && this.IsOnline)
                     {
-                        this.RequestState = RequestState.None;
+                        this.RetrievalState = RetrievalState.None;
                     }
                 }
             }

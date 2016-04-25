@@ -19,12 +19,12 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class ElementWithSchemas<TMostDerived> : Element<TMostDerived>, IElementWithSchemas
         where TMostDerived : ElementWithSchemas<TMostDerived>
     {
-        /// <summary>See <see cref="RequestState"/> for more information.</summary>
-        /// <remarks>This field and its sibling <see cref="offlineRequestState"/> are modified by the following
+        /// <summary>See <see cref="RetrievalState"/> for more information.</summary>
+        /// <remarks>This field and its sibling <see cref="offlineRetrievalState"/> are modified by the following
         /// methods, which are directly or indirectly called from
         /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
         /// <list type="number">
-        /// <item><see cref="Element.UpdateRequestState"/></item>
+        /// <item><see cref="Element.UpdateRetrievalState"/></item>
         /// <item><see cref="Element.WriteRequest"/></item>
         /// <item><see cref="Element.ReadChildren"/></item>
         /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
@@ -40,8 +40,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// are changed at once in a large tree.</item>
         /// </list>
         /// </remarks>
-        private RequestState offlineRequestState = RequestState.Complete;
-        private RequestState onlineRequestState;
+        private RetrievalState offlineRetrievalState = RetrievalState.Complete;
+        private RetrievalState onlineRetrievalState;
 
         private IReadOnlyList<string> schemaIdentifiers;
 
@@ -56,59 +56,59 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal ElementWithSchemas(RequestState onlineRequestState)
+        internal ElementWithSchemas(RetrievalState onlineRetrievalState)
         {
-            this.onlineRequestState = onlineRequestState;
+            this.onlineRetrievalState = onlineRetrievalState;
         }
 
-        /// <summary>Gets or sets the request state.</summary>
+        /// <summary>Gets or sets the retrieval state.</summary>
         /// <remarks>This implementation has nothing to do with schemas. However, it so happens that this member has the
         /// same behavior for all subclasses (parameters, nodes and matrices). If this fact ever changes, it probably
         /// makes sense to move this member to its own base class (named e.g. RequestedElement).</remarks>
-        internal override RequestState RequestState
+        internal override RetrievalState RetrievalState
         {
             get
             {
-                return this.IsOnline ? this.onlineRequestState : this.offlineRequestState;
+                return this.IsOnline ? this.onlineRetrievalState : this.offlineRetrievalState;
             }
 
             set
             {
                 if (this.IsOnline)
                 {
-                    this.onlineRequestState = value;
+                    this.onlineRetrievalState = value;
                 }
                 else
                 {
-                    this.offlineRequestState = value;
+                    this.offlineRetrievalState = value;
                 }
             }
         }
 
-        internal override RequestState UpdateRequestState(bool throwForMissingRequiredChildren)
+        internal override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {
-            if (!this.IsOnline || (this.RequestState.Equals(RequestState.Complete) &&
+            if (!this.IsOnline || (this.RetrievalState.Equals(RetrievalState.Complete) &&
                 this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren)))
             {
-                this.RequestState = base.UpdateRequestState(throwForMissingRequiredChildren);
+                this.RetrievalState = base.UpdateRetrievalState(throwForMissingRequiredChildren);
             }
 
-            return this.RequestState;
+            return this.RetrievalState;
         }
 
         internal override void SetComplete()
         {
-            this.RequestState = RequestState.Complete;
+            this.RetrievalState = RetrievalState.Complete;
             base.SetComplete();
         }
 
         internal void WriteCommandCollection(
-            EmberWriter writer, GlowCommandNumber commandNumber, RequestState requestState)
+            EmberWriter writer, GlowCommandNumber commandNumber, RetrievalState retrievalState)
         {
             writer.WriteStartApplicationDefinedType(GlowElementCollection.Element.OuterId, GlowCommand.InnerNumber);
             writer.WriteValue(GlowCommand.Number.OuterId, (long)commandNumber);
             writer.WriteEndContainer();
-            this.RequestState = requestState;
+            this.RetrievalState = retrievalState;
         }
 
         internal void ReadSchemaIdentifiers(EmberReader reader)

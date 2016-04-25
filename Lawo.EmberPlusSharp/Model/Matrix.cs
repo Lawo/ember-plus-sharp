@@ -107,7 +107,7 @@ namespace Lawo.EmberPlusSharp.Model
             get { return this.Parameters; }
         }
 
-        internal override RequestState ReadContents(EmberReader reader, ElementType actualType)
+        internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             ////this.AssertElementType(ElementType.Parameter, actualType);
 
@@ -185,7 +185,7 @@ namespace Lawo.EmberPlusSharp.Model
             ////}
 
             ////this.SetFinalTytpe(valueType, enumType, typeType);
-            return this.RequestState;
+            return this.RetrievalState;
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
@@ -216,7 +216,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Matrix() : base(RequestState.Complete)
+        private Matrix() : base(RetrievalState.Complete)
         {
         }
     }

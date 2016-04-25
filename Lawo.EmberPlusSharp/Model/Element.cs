@@ -143,9 +143,9 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal virtual RequestState RequestState
+        internal virtual RetrievalState RetrievalState
         {
-            get { return RequestState.Complete; }
+            get { return RetrievalState.Complete; }
             set { } // Intentionally empty
         }
 
@@ -199,33 +199,33 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal abstract RequestState ReadContents(EmberReader reader, ElementType actualType);
+        internal abstract RetrievalState ReadContents(EmberReader reader, ElementType actualType);
 
         /// <summary>Recursively reads the children of an element as they appear in the message payload and returns
         /// the state of this element.</summary>
         /// <remarks>
         /// <para>Nodes for which an empty children collection is received are marked with
-        /// <see cref="RequestState.Complete"/>. The same happens if the collection only contains children we're not
+        /// <see cref="RetrievalState.Complete"/>. The same happens if the collection only contains children we're not
         /// interested in. In all other cases, the state of the node is lowered to the lowest state of the
         /// interesting children appearing in the payload.</para>
         /// <para>This approach ensures that any node for which incomplete interesting children have been received will
-        /// be visited by <see cref="UpdateRequestState"/>. This is necessary because some providers send messages with
+        /// be visited by <see cref="UpdateRetrievalState"/>. This is necessary because some providers send messages with
         /// payloads where the same node appears multiple times. For example, the first time the state of the node may
-        /// be set to <see cref="RequestState.None"/>, due to the fact that there are indirect children for which a
+        /// be set to <see cref="RetrievalState.None"/>, due to the fact that there are indirect children for which a
         /// <code>getDirectory</code> request needs to be sent. The second time the node appears only with direct and
-        /// indirect children that have the state <see cref="RequestState.Complete"/>. Now the state of the node cannot
-        /// be set to <see cref="RequestState.Complete"/> because then no <code>getDirectory</code> requests would be
+        /// indirect children that have the state <see cref="RetrievalState.Complete"/>. Now the state of the node cannot
+        /// be set to <see cref="RetrievalState.Complete"/> because then no <code>getDirectory</code> requests would be
         /// issued for the children that appeared the first time.</para>
         /// <para>It follows that the state of a node cannot be set to its definitive value while its children are read.
         /// Instead there needs to be a second step that visits all affected nodes and updates their state, which is
-        /// implemented by <see cref="UpdateRequestState"/>.</para></remarks>
-        internal virtual RequestState ReadChildren(EmberReader reader)
+        /// implemented by <see cref="UpdateRetrievalState"/>.</para></remarks>
+        internal virtual RetrievalState ReadChildren(EmberReader reader)
         {
             reader.Skip();
-            return RequestState.Complete;
+            return RetrievalState.Complete;
         }
 
-        internal virtual RequestState ReadQualifiedChild(
+        internal virtual RetrievalState ReadQualifiedChild(
             EmberReader reader, ElementType actualType, int[] path, int index)
         {
             const string Format =
@@ -239,20 +239,20 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Recursively updates the state of all children and returns the state of this element.</summary>
-        /// <remarks>Only the children with a state not equal to <see cref="RequestState.Verified"/> are visited.
+        /// <remarks>Only the children with a state not equal to <see cref="RetrievalState.Verified"/> are visited.
         /// The state of a node is set to the lowest state of its children. If a node without children has the state
-        /// <see cref="RequestState.Complete"/> and does not require children, the state is lifted to 
-        /// <see cref="RequestState.Verified"/>. In all other cases, the state is left as is.</remarks>
-        internal virtual RequestState UpdateRequestState(bool throwForMissingRequiredChildren)
+        /// <see cref="RetrievalState.Complete"/> and does not require children, the state is lifted to 
+        /// <see cref="RetrievalState.Verified"/>. In all other cases, the state is left as is.</remarks>
+        internal virtual RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {
-            return RequestState.Verified;
+            return RetrievalState.Verified;
         }
 
         /// <summary>Writes the payload of a message that contains appropriate requests for all elements that require
         /// one.</summary>
         /// <returns><c>true</c> if a provider response is expected due to the request; otherwise <c>false</c>.
         /// </returns>
-        /// <remarks>Recursively visits all children with a state equal to <see cref="RequestState.None"/>, writes
+        /// <remarks>Recursively visits all children with a state equal to <see cref="RetrievalState.None"/>, writes
         /// a getDirectory command for nodes that do not yet have children or a subscribe command for stream parameters
         /// and changes their state accordingly.</remarks>
         internal virtual bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)

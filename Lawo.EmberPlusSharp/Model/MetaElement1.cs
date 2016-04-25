@@ -38,9 +38,9 @@ namespace Lawo.EmberPlusSharp.Model
 
             [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
             internal sealed override Element ReadContents(
-                EmberReader reader, ElementType actualType, Context context, out RequestState requestState)
+                EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState)
             {
-                return Element<TProperty>.ReadContents(reader, actualType, context, out requestState);
+                return Element<TProperty>.ReadContents(reader, actualType, context, out retrievalState);
             }
 
             [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]

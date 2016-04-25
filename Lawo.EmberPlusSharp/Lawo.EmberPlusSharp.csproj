@@ -110,7 +110,7 @@
     <Compile Include="Model\InvocationCollection.cs" />
     <Compile Include="Model\IStreamedParameter.cs" />
     <Compile Include="Model\IStreamedParameterCollection.cs" />
-    <Compile Include="Model\RequestState.cs" />
+    <Compile Include="Model\RetrievalState.cs" />
     <Compile Include="Model\DynamicRoot.cs" />
     <Compile Include="Model\DynamicNodeHelper.cs" />
     <Compile Include="Model\DynamicNode.cs" />

@@ -85,7 +85,7 @@ namespace Lawo.EmberPlusSharp.Model
             return base.ChangeOnlineStatus(child);
         }
 
-        internal sealed override RequestState ReadContents(EmberReader reader, ElementType actualType)
+        internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Node, actualType);
 
@@ -101,7 +101,7 @@ namespace Lawo.EmberPlusSharp.Model
                         break;
                     case GlowNodeContents.IsOnline.OuterNumber:
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
-                        this.RequestState &= RequestState.Complete;
+                        this.RetrievalState &= RetrievalState.Complete;
                         break;
                     case GlowNodeContents.SchemaIdentifiers.OuterNumber:
                         this.ReadSchemaIdentifiers(reader);
@@ -112,7 +112,7 @@ namespace Lawo.EmberPlusSharp.Model
                 }
             }
 
-            return this.RequestState;
+            return this.RetrievalState;
         }
 
         internal override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)

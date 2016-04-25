@@ -25,9 +25,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override Element ReadNewDynamicChildContents(
-            EmberReader reader, ElementType actualType, Context context, out RequestState childRequestState)
+            EmberReader reader, ElementType actualType, Context context, out RetrievalState childRetrievalState)
         {
-            return DynamicNodeHelper.ReadDynamicChildContents(reader, actualType, context, out childRequestState);
+            return DynamicNodeHelper.ReadDynamicChildContents(reader, actualType, context, out childRetrievalState);
         }
     }
 }

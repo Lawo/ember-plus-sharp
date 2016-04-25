@@ -31,7 +31,7 @@ namespace Lawo.EmberPlusSharp.Model
             set { this.impl.EnumMapCore = value; }
         }
 
-        internal sealed override RequestState ReadContents(EmberReader reader, ElementType actualType)
+        internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             return this.impl.ReadContents(base.ReadContents, reader, actualType);
         }

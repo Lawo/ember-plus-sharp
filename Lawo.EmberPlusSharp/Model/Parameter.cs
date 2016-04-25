@@ -23,7 +23,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
-        internal override RequestState ReadContents(EmberReader reader, ElementType actualType)
+        internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             var result = base.ReadContents(reader, actualType);
 

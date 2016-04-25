@@ -42,7 +42,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             internal abstract Element ReadContents(
-                EmberReader reader, ElementType actualType, Context context, out RequestState requestState);
+                EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState);
 
             internal abstract bool IsAvailable(IParent parent, bool throwIfMissing);
 

@@ -12,12 +12,12 @@ namespace Lawo.EmberPlusSharp.Model
     /// and whether all expected information has been received.</summary>
     /// <remarks>The state of an element is always propagated up the chain of its direct and indirect parents such that
     /// a node always assumes the state of the child with the lowest state.</remarks>
-    internal struct RequestState : IEquatable<RequestState>
+    internal struct RetrievalState : IEquatable<RetrievalState>
     {
-        private static readonly RequestState NoneField = new RequestState();
-        private static readonly RequestState RequestSentField = new RequestState(1);
-        private static readonly RequestState CompleteField = new RequestState(2);
-        private static readonly RequestState VerifiedField = new RequestState(3);
+        private static readonly RetrievalState NoneField = new RetrievalState();
+        private static readonly RetrievalState RequestSentField = new RetrievalState(1);
+        private static readonly RetrievalState CompleteField = new RetrievalState(2);
+        private static readonly RetrievalState VerifiedField = new RetrievalState(3);
 
         private readonly int state;
 
@@ -26,12 +26,12 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Returns the lowest state of <paramref name="left"/> and <paramref name="right"/>.</summary>
         /// <remarks>Note that this is a generalization of the boolean &amp; operator to more than two states. Also
         /// known as <see href="http://en.wikipedia.org/wiki/Fuzzy_logic">Fuzzy Logic</see>.</remarks>
-        public static RequestState operator &(RequestState left, RequestState right)
+        public static RetrievalState operator &(RetrievalState left, RetrievalState right)
         {
-            return new RequestState(Math.Min(left.state, right.state));
+            return new RetrievalState(Math.Min(left.state, right.state));
         }
 
-        public bool Equals(RequestState other)
+        public bool Equals(RetrievalState other)
         {
             return this.state == other.state;
         }
@@ -40,14 +40,14 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Gets the state used when a request needs to be issued for an element.</summary>
         /// <remarks>This is the lowest state.</remarks>
-        internal static RequestState None
+        internal static RetrievalState None
         {
             get { return NoneField; }
         }
 
         /// <summary>Gets the state used when a request has been sent for a node.</summary>
         /// <remarks>This is the second lowest state.</remarks>
-        internal static RequestState RequestSent
+        internal static RetrievalState RequestSent
         {
             get { return RequestSentField; }
         }
@@ -63,7 +63,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// </list>
         /// <para>This is the second highest state.</para>
         /// </remarks>
-        internal static RequestState Complete
+        internal static RetrievalState Complete
         {
             get { return CompleteField; }
         }
@@ -71,14 +71,14 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Gets the state used when we have verified that all required children are present for a node.
         /// </summary>
         /// <remarks>This is the highest state.</remarks>
-        internal static RequestState Verified
+        internal static RetrievalState Verified
         {
             get { return VerifiedField; }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private RequestState(int state)
+        private RetrievalState(int state)
         {
             this.state = state;
         }
