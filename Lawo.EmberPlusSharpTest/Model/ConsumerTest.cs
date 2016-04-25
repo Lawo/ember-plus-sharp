@@ -911,6 +911,16 @@ namespace Lawo.EmberPlusSharp.Model
             AsyncPump.Run(
                 async () =>
                 {
+                    await AssertThrowAsync<ArgumentNullException>(() => Consumer<SingleNodeRoot>.CreateAsync(null));
+
+                    using (var dummy = new S101Client(Stream.Null, Stream.Null.ReadAsync, Stream.Null.WriteAsync))
+                    {
+                        await AssertThrowAsync<ArgumentOutOfRangeException>(
+                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, -2),
+                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, 10000, ChildrenRetrievalPolicy.None - 1),
+                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, 10000, ChildrenRetrievalPolicy.All + 1));
+                    }
+
                     TestStandardExceptionConstructors<ModelException>();
                     await AssertThrowInCreateAsync<TimeoutException, SingleNodeRoot>(
                         "IncompleteLog1.xml",
@@ -1761,6 +1771,7 @@ namespace Lawo.EmberPlusSharp.Model
         private static void CheckValues(MainRoot root)
         {
             Assert.IsNull(root.Parent);
+            Assert.AreEqual(0, root.Number);
             Assert.AreEqual(string.Empty, root.Identifier);
             Assert.IsNull(root.Description);
             Assert.IsTrue(root.GetPath() == "/");

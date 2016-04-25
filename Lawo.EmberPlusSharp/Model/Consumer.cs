@@ -174,7 +174,14 @@ namespace Lawo.EmberPlusSharp.Model
         /// <param name="slot">The slot to communicate with. All outgoing <see cref="S101Message"/> objects will have
         /// their <see cref="S101Message.Slot"/> property set to this value. Incoming messages are ignored, if their
         /// <see cref="S101Message.Slot"/> property does not match this value.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="timeout"/> is less than -1.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <list type="bullet">
+        /// <item><paramref name="timeout"/> is less than -1, and/or</item>
+        /// <item><paramref name="childrenRetrievalPolicy"/> is either less than
+        /// <see cref="ChildrenRetrievalPolicy.None"/> or greater than <see cref="ChildrenRetrievalPolicy.All"/>.
+        /// </item>
+        /// </list></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="client"/> equals <c>null</c>.</exception>
         /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the
         /// <see cref="S101Client"/> constructor, see <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="ModelException">The model does either not match the data sent by the provider, or the
@@ -201,6 +208,17 @@ namespace Lawo.EmberPlusSharp.Model
         public static async Task<Consumer<TRoot>> CreateAsync(
             S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy, byte slot)
         {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            if ((childrenRetrievalPolicy < ChildrenRetrievalPolicy.None) ||
+                (childrenRetrievalPolicy > ChildrenRetrievalPolicy.All))
+            {
+                throw new ArgumentOutOfRangeException("childrenRetrievalPolicy");
+            }
+
             var result = new Consumer<TRoot>(client, timeout, childrenRetrievalPolicy, slot);
             await result.RetrieveChildrenAsync();
             result.ReceiveLoop();
