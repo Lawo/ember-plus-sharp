@@ -265,7 +265,7 @@ namespace Lawo.EmberPlusSharp.Model
             return false;
         }
 
-        internal abstract void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations);
+        internal abstract RetrievalState WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations);
 
         internal virtual void SetComplete()
         {

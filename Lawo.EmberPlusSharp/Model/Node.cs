@@ -115,13 +115,16 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
-        internal override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
+        internal override RetrievalState WriteChanges(
+            EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
             {
                 this.WriteChangesCollection(writer, pendingInvocations);
                 this.HasChanges = false;
             }
+
+            return this.RetrievalState;
         }
 
         internal sealed override IElement GetElement(string[] pathElements, int index)

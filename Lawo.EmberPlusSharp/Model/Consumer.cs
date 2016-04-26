@@ -108,6 +108,7 @@ namespace Lawo.EmberPlusSharp.Model
                 }
 
                 await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
+                await this.RetrieveChildrenAsync();
             }
         }
 

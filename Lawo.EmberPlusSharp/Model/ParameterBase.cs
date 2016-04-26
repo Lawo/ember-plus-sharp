@@ -318,7 +318,8 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
-        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
+        internal sealed override RetrievalState WriteChanges(
+            EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
             {
@@ -342,6 +343,8 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteEndContainer();
                 this.HasChanges = false;
             }
+
+            return this.RetrievalState;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

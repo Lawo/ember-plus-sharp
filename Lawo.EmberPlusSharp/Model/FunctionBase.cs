@@ -105,7 +105,8 @@ namespace Lawo.EmberPlusSharp.Model
             return RetrievalState.Complete;
         }
 
-        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
+        internal sealed override RetrievalState WriteChanges(
+            EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
             {
@@ -120,6 +121,8 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteEndContainer();
                 this.HasChanges = false;
             }
+
+            return RetrievalState.Complete;
         }
 
         internal abstract KeyValuePair<string, ParameterType>[] ReadTupleDescription(

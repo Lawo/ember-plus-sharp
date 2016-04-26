@@ -132,9 +132,19 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal void WriteChangesCollection(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
-            foreach (var child in this.children.Values)
+            if (this.children.Count == 0)
             {
-                child.WriteChanges(writer, pendingInvocations);
+                if (this.RetrieveDetails && (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Changed))
+                {
+                    this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
+                }
+            }
+            else
+            {
+                foreach (var child in this.children.Values)
+                {
+                    this.RetrievalState &= child.WriteChanges(writer, pendingInvocations);
+                }
             }
         }
 
