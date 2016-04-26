@@ -53,9 +53,7 @@ namespace Lawo.EmberPlusSharp.Model
                             "value");
                     }
 
-                    var oldValue = this.RetrieveDetails;
-                    this.SetValue(ref this.childrenRetrievalPolicy, value);
-                    this.AdaptRetrieveDetailsChangeStatus(oldValue);
+                    this.SetRetrieveDetailsChangeStatus(() => this.SetValue(ref this.childrenRetrievalPolicy, value));
                 }
             }
         }

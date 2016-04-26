@@ -65,20 +65,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// <inheritdoc/>
         public bool IsOnline
         {
-            get
-            {
-                return this.isOnline;
-            }
-
-            internal set
-            {
-                var oldValue = this.RetrieveDetails;
-
-                if (this.SetValue(ref this.isOnline, value))
-                {
-                    this.AdaptRetrieveDetailsChangeStatus(oldValue);
-                }
-            }
+            get { return this.isOnline; }
+            internal set { this.SetRetrieveDetailsChangeStatus(() => this.SetValue(ref this.isOnline, value)); }
         }
 
         /// <inheritdoc/>
@@ -141,9 +129,11 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal RetrieveDetailsChangeStatus RetrieveDetailsChangeStatus { get; set; }
 
-        internal void AdaptRetrieveDetailsChangeStatus(bool oldValue)
+        internal void SetRetrieveDetailsChangeStatus(Func<bool> setValue)
         {
-            if (this.RetrieveDetails != oldValue)
+            var oldValue = this.RetrieveDetails;
+
+            if (setValue() && (this.RetrieveDetails != oldValue))
             {
                 // We're deliberately not simply setting this to Changed here, because we want to correctly handle
                 // the case when IsOnline is changed twice without being observed between the changes.
