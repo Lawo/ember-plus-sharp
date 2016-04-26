@@ -221,8 +221,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             var result = new Consumer<TRoot>(client, timeout, childrenRetrievalPolicy, slot);
             await result.RetrieveChildrenAsync();
-            result.ReceiveLoop();
-            result.AutoSendLoop();
+            result.SendReceiveLoop();
             return result;
         }
 
@@ -284,20 +283,39 @@ namespace Lawo.EmberPlusSharp.Model
             await retrieveChildrenTask;
         }
 
-        private async void ReceiveLoop()
+        private async void SendReceiveLoop()
         {
             Exception exception = null;
+            this.autoSendDelayCancellationSource = new CancellationTokenSource();
+            this.hasChangesSetSource = new TaskCompletionSource<bool>();
+            this.root.HasChangesSet += this.OnHasChangesSet;
 
             try
             {
+                var localTask = this.WaitForLocalChangesAsync();
+                var providerTask = this.WaitForProviderChangesAsync();
+
                 while (true)
                 {
-                    await this.WaitForProviderChangesAsync();
-                    this.ApplyProviderChanges();
-                    await this.RetrieveChildrenAsync();
+                    if (await Task.WhenAny(localTask, providerTask) == localTask)
+                    {
+                        await localTask;
+                        await this.SendAsync();
+                        localTask = this.WaitForLocalChangesAsync();
+                    }
+                    else
+                    {
+                        await providerTask;
+                        this.ApplyProviderChanges();
+                        await this.RetrieveChildrenAsync();
+                        providerTask = this.WaitForProviderChangesAsync();
+                    }
                 }
             }
             catch (OperationCanceledException)
+            {
+            }
+            catch (ObjectDisposedException)
             {
             }
             catch (Exception ex)
@@ -307,35 +325,6 @@ namespace Lawo.EmberPlusSharp.Model
             finally
             {
                 this.OnConnectionLost(this, new ConnectionLostEventArgs(exception));
-                this.Dispose();
-            }
-        }
-
-        private async void AutoSendLoop()
-        {
-            this.autoSendDelayCancellationSource = new CancellationTokenSource();
-            this.hasChangesSetSource = new TaskCompletionSource<bool>();
-            this.root.HasChangesSet += this.OnHasChangesSet;
-
-            try
-            {
-                while (true)
-                {
-                    await this.WaitForLocalChangesAsync();
-                    await this.SendAsync();
-                }
-
-                // TODO: Exceptions should be propagated to client code via an event similar to
-                // S101Client.ConnectionLost
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (ObjectDisposedException)
-            {
-            }
-            finally
-            {
                 this.CancelAutoSendDelay();
                 this.autoSendDelayCancellationSource.Dispose();
                 this.Dispose();
