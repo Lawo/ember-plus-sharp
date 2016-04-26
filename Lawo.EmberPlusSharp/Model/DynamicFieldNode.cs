@@ -33,7 +33,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal sealed override bool ChangeVisibility(Element child)
+        internal sealed override bool ChangeVisibility(IElement child)
         {
             return DynamicNodeHelper.ChangeVisibility(base.ChangeVisibility, this.dynamicChildren, child);
         }

@@ -8,8 +8,8 @@ namespace Lawo.EmberPlusSharp.Model
 {
     internal enum RetrieveDetailsChangeStatus
     {
-        /// <summary><see cref="Element.RetrieveDetails"/> has the value set during initialization or first read operation.
-        /// </summary>
+        /// <summary><see cref="Element.RetrieveDetails"/> has the value set during initialization or first read
+        /// operation.</summary>
         Initialized,
 
         /// <summary><see cref="Element.RetrieveDetails"/> has not been changed since

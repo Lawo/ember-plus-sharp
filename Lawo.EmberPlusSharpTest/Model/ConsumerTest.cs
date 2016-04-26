@@ -240,6 +240,10 @@ namespace Lawo.EmberPlusSharp.Model
                             Assert.IsTrue(root.GetPath() == "/");
                             Assert.AreEqual(true, root.IsRoot);
                             Assert.AreEqual(true, root.IsOnline);
+                            Assert.IsNull(root.Tag);
+                            var randomValue = new Random().Next();
+                            root.Tag = randomValue;
+                            Assert.AreEqual(randomValue, root.Tag);
 
                             Assert.AreEqual(null, ((IParameter)root.GetChild("OctetstringParameter")).Minimum);
                             Assert.AreEqual(null, ((IParameter)root.GetChild("OctetstringParameter")).Maximum);
@@ -451,9 +455,9 @@ namespace Lawo.EmberPlusSharp.Model
             AsyncPump.Run(
                 async () =>
                 {
-                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.None);
-                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.DirectOnly);
-                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.All);
+                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.None, "ChildrenRetrievalPolicyLog1.xml");
+                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.DirectOnly, "ChildrenRetrievalPolicyLog2.xml");
+                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
                 });
         }
 
@@ -1584,7 +1588,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static Task ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy policy)
+        private static Task ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy policy, string logName)
         {
             return TestWithRobot<ModelPayloads>(
                 async client =>
@@ -1611,16 +1615,23 @@ namespace Lawo.EmberPlusSharp.Model
                             AssertThrow<ArgumentException>(() => root.ChildrenRetrievalPolicy -= 1, expectedMessage);
                         }
 
-                        var childPolicy = policy == ChildrenRetrievalPolicy.All ?
-                            ChildrenRetrievalPolicy.All : ChildrenRetrievalPolicy.None;
-                        Assert.AreEqual(childPolicy, root.Node.ChildrenRetrievalPolicy);
+                        if (policy == ChildrenRetrievalPolicy.None)
+                        {
+                            Assert.IsNull(root.Node);
+                        }
+                        else
+                        {
+                            var childPolicy = policy == ChildrenRetrievalPolicy.All ?
+                                ChildrenRetrievalPolicy.All : ChildrenRetrievalPolicy.None;
+                            Assert.AreEqual(childPolicy, root.Node.ChildrenRetrievalPolicy);
+                        }
                     }
                 },
                 null,
                 null,
                 GlowTypes.Instance,
                 false,
-                "ChildrenRetrievalPolicyLog.xml");
+                logName);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]

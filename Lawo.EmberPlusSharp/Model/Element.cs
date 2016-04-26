@@ -72,18 +72,11 @@ namespace Lawo.EmberPlusSharp.Model
 
             internal set
             {
+                var oldValue = this.RetrieveDetails;
+
                 if (this.SetValue(ref this.isOnline, value))
                 {
-                    // We're deliberately not simply setting this to Changed here, because we want to correctly handle
-                    // the case when IsOnline is changed twice without being observed between the changes.
-                    if (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Unchanged)
-                    {
-                        this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Changed;
-                    }
-                    else if (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Changed)
-                    {
-                        this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Unchanged;
-                    }
+                    this.AdaptRetrieveDetailsChangeStatus(oldValue);
                 }
             }
         }
@@ -147,6 +140,23 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         internal RetrieveDetailsChangeStatus RetrieveDetailsChangeStatus { get; set; }
+
+        internal void AdaptRetrieveDetailsChangeStatus(bool oldValue)
+        {
+            if (this.RetrieveDetails != oldValue)
+            {
+                // We're deliberately not simply setting this to Changed here, because we want to correctly handle
+                // the case when IsOnline is changed twice without being observed between the changes.
+                if (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Unchanged)
+                {
+                    this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Changed;
+                }
+                else if (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Changed)
+                {
+                    this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Unchanged;
+                }
+            }
+        }
 
         internal virtual RetrievalState RetrievalState
         {
@@ -214,13 +224,13 @@ namespace Lawo.EmberPlusSharp.Model
         /// interested in. In all other cases, the state of the node is lowered to the lowest state of the
         /// interesting children appearing in the payload.</para>
         /// <para>This approach ensures that any node for which incomplete interesting children have been received will
-        /// be visited by <see cref="UpdateRetrievalState"/>. This is necessary because some providers send messages with
-        /// payloads where the same node appears multiple times. For example, the first time the state of the node may
-        /// be set to <see cref="RetrievalState.None"/>, due to the fact that there are indirect children for which a
-        /// <code>getDirectory</code> request needs to be sent. The second time the node appears only with direct and
-        /// indirect children that have the state <see cref="RetrievalState.Complete"/>. Now the state of the node cannot
-        /// be set to <see cref="RetrievalState.Complete"/> because then no <code>getDirectory</code> requests would be
-        /// issued for the children that appeared the first time.</para>
+        /// be visited by <see cref="UpdateRetrievalState"/>. This is necessary because some providers send messages
+        /// with payloads where the same node appears multiple times. For example, the first time the state of the node
+        /// may be set to <see cref="RetrievalState.None"/>, due to the fact that there are indirect children for which
+        /// a <code>getDirectory</code> request needs to be sent. The second time the node appears only with direct and
+        /// indirect children that have the state <see cref="RetrievalState.Complete"/>. Now the state of the node
+        /// cannot be set to <see cref="RetrievalState.Complete"/> because then no <code>getDirectory</code> requests
+        /// would be issued for the children that appeared the first time.</para>
         /// <para>It follows that the state of a node cannot be set to its definitive value while its children are read.
         /// Instead there needs to be a second step that visits all affected nodes and updates their state, which is
         /// implemented by <see cref="UpdateRetrievalState"/>.</para></remarks>

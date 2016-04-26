@@ -581,7 +581,17 @@
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\StreamLog.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRetrievalPolicyLog.xml">
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRetrievalPolicyLog1.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRetrievalPolicyLog2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\ChildrenRetrievalPolicyLog3.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

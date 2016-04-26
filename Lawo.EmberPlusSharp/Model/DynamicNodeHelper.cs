@@ -31,11 +31,11 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         internal static bool ChangeVisibility(
-            Func<Element, bool> baseImpl, ObservableCollection<IElement> dynamicChildren, Element child)
+            Func<IElement, bool> baseImpl, ObservableCollection<IElement> dynamicChildren, IElement child)
         {
             if (!baseImpl(child))
             {
-                if (child.RetrieveDetails)
+                if (child.IsOnline)
                 {
                     dynamicChildren.Add(child);
                 }

@@ -53,7 +53,9 @@ namespace Lawo.EmberPlusSharp.Model
                             "value");
                     }
 
+                    var oldValue = this.RetrieveDetails;
                     this.SetValue(ref this.childrenRetrievalPolicy, value);
+                    this.AdaptRetrieveDetailsChangeStatus(oldValue);
                 }
             }
         }
@@ -82,6 +84,14 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal NodeBase() : base(RetrievalState.None)
         {
+        }
+
+        internal sealed override bool RetrieveDetails
+        {
+            get
+            {
+                return (this.ChildrenRetrievalPolicy != ChildrenRetrievalPolicy.None) && base.RetrieveDetails;
+            }
         }
 
         internal sealed override void SetContext(Context context)
@@ -170,7 +180,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Changes the visibility of <paramref name="child"/>.</summary>
         /// <param name="child">The child to change the visibility for.</param>
         /// <returns><c>true</c> if the visibility has been changed; otherwise, <c>false</c>.</returns>
-        internal virtual bool ChangeVisibility(Element child)
+        internal virtual bool ChangeVisibility(IElement child)
         {
             return false;
         }
