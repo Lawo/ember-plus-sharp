@@ -292,7 +292,7 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 while (true)
                 {
-                    await this.WaitForAndApplyChanges();
+                    await this.WaitForAndApplyProviderChangesAsync();
                     await this.RetrieveChildrenAsync();
                 }
             }
@@ -320,9 +320,7 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 while (true)
                 {
-                    await this.hasChangesSetSource.Task;
-                    await this.DelayAutoSend();
-                    this.hasChangesSetSource = new TaskCompletionSource<bool>();
+                    await this.WaitForLocalChangesAsync();
                     await this.SendAsync();
                 }
 
@@ -343,15 +341,22 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        private async Task WaitForLocalChangesAsync()
+        {
+            await this.hasChangesSetSource.Task;
+            await this.DelayAutoSend();
+            this.hasChangesSetSource = new TaskCompletionSource<bool>();
+        }
+
         private async Task RetrieveChildrenCoreAsync()
         {
             while (await this.SendRequestAsync())
             {
-                await this.WaitForAndApplyChanges();
+                await this.WaitForAndApplyProviderChangesAsync();
             }
         }
 
-        private async Task WaitForAndApplyChanges()
+        private async Task WaitForAndApplyProviderChangesAsync()
         {
             await this.receiveQueue.WaitForMessageAsync();
 
