@@ -292,7 +292,8 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 while (true)
                 {
-                    await this.WaitForAndApplyProviderChangesAsync();
+                    await this.WaitForProviderChangesAsync();
+                    this.ApplyProviderChanges();
                     await this.RetrieveChildrenAsync();
                 }
             }
@@ -352,18 +353,22 @@ namespace Lawo.EmberPlusSharp.Model
         {
             while (await this.SendRequestAsync())
             {
-                await this.WaitForAndApplyProviderChangesAsync();
+                await this.WaitForProviderChangesAsync();
+                this.ApplyProviderChanges();
             }
         }
 
-        private async Task WaitForAndApplyProviderChangesAsync()
+        private void ApplyProviderChanges()
         {
-            await this.receiveQueue.WaitForMessageAsync();
-
             while (this.receiveQueue.MessageCount > 0)
             {
                 this.ApplyChange(this.receiveQueue.DequeueMessage());
             }
+        }
+
+        private Task WaitForProviderChangesAsync()
+        {
+            return this.receiveQueue.WaitForMessageAsync();
         }
 
         private void OnConnectionLost(object sender, ConnectionLostEventArgs e)
