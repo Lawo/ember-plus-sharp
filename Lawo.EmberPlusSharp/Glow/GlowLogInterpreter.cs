@@ -71,10 +71,7 @@ namespace Lawo.EmberPlusSharp.Glow
                 using (var dummyWriter = new EmberWriter(Stream.Null))
                 {
                     this.root.Read(emberReader, this.pendingInvocations, this.streamedParameters);
-                    dummyWriter.WriteStartApplicationDefinedType(
-                        GlowGlobal.Root.OuterId, GlowRootElementCollection.InnerNumber);
                     this.root.WriteRequest(dummyWriter, this.streamedParameters);
-                    dummyWriter.WriteEndContainer();
                     this.root.SetComplete();
                     this.root.UpdateRetrievalState(true);
                 }

@@ -17,7 +17,6 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Threading.Tasks;
 
     using Ember;
-    using Glow;
     using IO;
     using S101;
 
@@ -41,6 +40,7 @@ namespace Lawo.EmberPlusSharp.Model
         private int autoSendInterval = 100;
         private CancellationTokenSource autoSendDelayCancellationSource;
         private TaskCompletionSource<bool> hasChangesSetSource;
+        private TaskCompletionSource<bool> isVerifiedSource;
         private bool disposed;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +109,11 @@ namespace Lawo.EmberPlusSharp.Model
                 }
 
                 await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
-                await this.RetrieveChildrenAsync();
+            }
+
+            if (await this.SendRequestAsync())
+            {
+                await this.isVerifiedSource.Task;
             }
         }
 
@@ -290,6 +294,7 @@ namespace Lawo.EmberPlusSharp.Model
             Exception exception = null;
             this.autoSendDelayCancellationSource = new CancellationTokenSource();
             this.hasChangesSetSource = new TaskCompletionSource<bool>();
+            this.isVerifiedSource = new TaskCompletionSource<bool>();
             this.root.HasChangesSet += this.OnHasChangesSet;
 
             try
@@ -310,6 +315,8 @@ namespace Lawo.EmberPlusSharp.Model
                         await providerTask;
                         this.ApplyProviderChanges();
                         await this.RetrieveChildrenAsync();
+                        this.isVerifiedSource.SetResult(false);
+                        this.isVerifiedSource = new TaskCompletionSource<bool>();
                         providerTask = this.WaitForProviderChangesAsync();
                     }
                 }
@@ -467,10 +474,7 @@ namespace Lawo.EmberPlusSharp.Model
             using (stream = new MemoryStream())
             using (var writer = new EmberWriter(stream))
             {
-                writer.WriteStartApplicationDefinedType(GlowGlobal.Root.OuterId, GlowRootElementCollection.InnerNumber);
-                var result = this.root.WriteRequest(writer, this.streamedParameters);
-                writer.WriteEndContainer();
-                return result;
+                return this.root.WriteRequest(writer, this.streamedParameters);
             }
         }
 

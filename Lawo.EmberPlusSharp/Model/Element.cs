@@ -154,6 +154,16 @@ namespace Lawo.EmberPlusSharp.Model
             set { } // Intentionally empty
         }
 
+        internal void ResetRetrievalState()
+        {
+            this.RetrievalState = RetrievalState.None;
+
+            if (this.parent != null)
+            {
+                this.parent.ResetRetrievalState();
+            }
+        }
+
         internal virtual void SetContext(Context context)
         {
             this.parent = context.Parent;
@@ -265,7 +275,7 @@ namespace Lawo.EmberPlusSharp.Model
             return false;
         }
 
-        internal abstract RetrievalState WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations);
+        internal abstract void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations);
 
         internal virtual void SetComplete()
         {

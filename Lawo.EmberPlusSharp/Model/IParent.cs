@@ -15,6 +15,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         void SetHasChanges();
 
+        void ResetRetrievalState();
+
         string GetPath();
 
         void AppendPath(StringBuilder builder);

@@ -57,7 +57,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                     if (this.RetrieveDetailsChangeStatus != RetrieveDetailsChangeStatus.Unchanged)
                     {
-                        this.HasChanges = true;
+                        this.ResetRetrievalState();
                     }
                 }
             }
@@ -73,6 +73,11 @@ namespace Lawo.EmberPlusSharp.Model
         void IParent.SetHasChanges()
         {
             this.HasChanges = true;
+        }
+
+        void IParent.ResetRetrievalState()
+        {
+            this.ResetRetrievalState();
         }
 
         void IParent.AppendPath(StringBuilder builder)
@@ -137,19 +142,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal void WriteChangesCollection(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
-            if (this.children.Count == 0)
+            foreach (var child in this.children.Values)
             {
-                if (this.RetrieveDetails && (this.RetrieveDetailsChangeStatus != RetrieveDetailsChangeStatus.Unchanged))
-                {
-                    this.WriteRequest(writer, null);
-                }
-            }
-            else
-            {
-                foreach (var child in this.children.Values)
-                {
-                    this.RetrievalState &= child.WriteChanges(writer, pendingInvocations);
-                }
+                child.WriteChanges(writer, pendingInvocations);
             }
         }
 
