@@ -54,6 +54,11 @@ namespace Lawo.EmberPlusSharp.Model
                     }
 
                     this.SetRetrieveDetailsChangeStatus(() => this.SetValue(ref this.childrenRetrievalPolicy, value));
+
+                    if (this.RetrieveDetailsChangeStatus != RetrieveDetailsChangeStatus.Unchanged)
+                    {
+                        this.HasChanges = true;
+                    }
                 }
             }
         }
@@ -134,9 +139,9 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (this.children.Count == 0)
             {
-                if (this.RetrieveDetails && (this.RetrieveDetailsChangeStatus == RetrieveDetailsChangeStatus.Changed))
+                if (this.RetrieveDetails && (this.RetrieveDetailsChangeStatus != RetrieveDetailsChangeStatus.Unchanged))
                 {
-                    this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
+                    this.WriteRequest(writer, null);
                 }
             }
             else

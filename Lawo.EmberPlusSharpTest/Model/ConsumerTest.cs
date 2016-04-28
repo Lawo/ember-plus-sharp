@@ -455,9 +455,34 @@ namespace Lawo.EmberPlusSharp.Model
             AsyncPump.Run(
                 async () =>
                 {
-                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.None, "ChildrenRetrievalPolicyLog1.xml");
-                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.DirectOnly, "ChildrenRetrievalPolicyLog2.xml");
-                    await ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
+                    await ChildrenRetrievalPolicyTestCoreAsync(
+                        ChildrenRetrievalPolicy.None, "ChildrenRetrievalPolicyLog1.xml");
+                    await ChildrenRetrievalPolicyTestCoreAsync(
+                        ChildrenRetrievalPolicy.DirectOnly, "ChildrenRetrievalPolicyLog2.xml");
+                    await ChildrenRetrievalPolicyTestCoreAsync(
+                        ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
+                    await TestWithRobot<ModelPayloads>(
+                        async client =>
+                        {
+                            using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(
+                                client, Timeout.Infinite, ChildrenRetrievalPolicy.None))
+                            {
+                                var root = consumer.Root;
+                                Assert.IsNull(root.Node);
+                                Assert.AreEqual(ChildrenRetrievalPolicy.None, root.ChildrenRetrievalPolicy);
+                                root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
+                                await consumer.SendAsync();
+                                Assert.IsNotNull(root.Node);
+                                Assert.AreEqual(ChildrenRetrievalPolicy.None, root.Node.ChildrenRetrievalPolicy);
+                                root.Node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All;
+                                await consumer.SendAsync();
+                            }
+                        },
+                        null,
+                        null,
+                        GlowTypes.Instance,
+                        false,
+                        "ChildrenRetrievalPolicyLog3.xml");
                 });
         }
 

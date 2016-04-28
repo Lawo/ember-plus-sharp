@@ -17,6 +17,7 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Threading.Tasks;
 
     using Ember;
+    using Glow;
     using IO;
     using S101;
 
@@ -466,7 +467,10 @@ namespace Lawo.EmberPlusSharp.Model
             using (stream = new MemoryStream())
             using (var writer = new EmberWriter(stream))
             {
-                return this.root.WriteRequest(writer, this.streamedParameters);
+                writer.WriteStartApplicationDefinedType(GlowGlobal.Root.OuterId, GlowRootElementCollection.InnerNumber);
+                var result = this.root.WriteRequest(writer, this.streamedParameters);
+                writer.WriteEndContainer();
+                return result;
             }
         }
 
