@@ -6,6 +6,7 @@
   </HelpKINode>
   <HelpKINode Title="AddChangeHandlers(Of TCollection, TItem) method" Url="html/945953FA.htm" />
   <HelpKINode Title="AddChangeHandlers&lt;TCollection, TItem&gt; method" Url="html/945953FA.htm" />
+  <HelpKINode Title="All enumeration member" Url="html/B60F4F2.htm" />
   <HelpKINode Title="ApplicationBytes property" Url="html/9B86CBE0.htm" />
   <HelpKINode Title="ApplyPayload method" Url="html/2119DF99.htm" />
   <HelpKINode Title="Arguments property" Url="html/E8A95DF7.htm" />
@@ -197,6 +198,11 @@
     <HelpKINode Title="CollectionNode(TElement).Children Property " Url="html/B7B50036.htm" />
     <HelpKINode Title="INode.Children Property " Url="html/162F3ADE.htm" />
   </HelpKINode>
+  <HelpKINode Title="ChildrenRetrievalPolicy enumeration" Url="html/B60F4F2.htm" />
+  <HelpKINode Title="ChildrenRetrievalPolicy property">
+    <HelpKINode Title="INode.ChildrenRetrievalPolicy Property " Url="html/9C1A2E53.htm" />
+    <HelpKINode Title="NodeBase(TMostDerived).ChildrenRetrievalPolicy Property " Url="html/BE3CF2D1.htm" />
+  </HelpKINode>
   <HelpKINode Title="CollectionNode(Of TElement) class">
     <HelpKINode Title="CollectionNode(TElement) Class" Url="html/BD7E2B1D.htm" />
     <HelpKINode Title="about CollectionNode(Of TElement) class" Url="html/BD7E2B1D.htm" />
@@ -315,6 +321,7 @@
     <HelpKINode Title="GlowLogInterpreter.Direction Property " Url="html/FB4A75EC.htm" />
     <HelpKINode Title="S101LogReader.Direction Property " Url="html/A3332E10.htm" />
   </HelpKINode>
+  <HelpKINode Title="DirectOnly enumeration member" Url="html/B60F4F2.htm" />
   <HelpKINode Title="Dismiss method" Url="html/4215A3B0.htm" />
   <HelpKINode Title="DisposableReadOnlyObservableCollection(Of T) class">
     <HelpKINode Title="DisposableReadOnlyObservableCollection(T) Class" Url="html/766C487B.htm" />
@@ -1040,6 +1047,7 @@
     <HelpKINode Title="properties" Url="html/A2ABBBA3.htm" />
   </HelpKINode>
   <HelpKINode Title="INode.Children property" Url="html/162F3ADE.htm" />
+  <HelpKINode Title="INode.ChildrenRetrievalPolicy property" Url="html/9C1A2E53.htm" />
   <HelpKINode Title="INode.GetElement method" Url="html/1F96C1CE.htm" />
   <HelpKINode Title="INode.IsRoot property" Url="html/6326E931.htm" />
   <HelpKINode Title="INode.Item property" Url="html/A2B0B7FA.htm" />
@@ -1286,6 +1294,7 @@
   <HelpKINode Title="Lawo.EmberPlusSharp.Glow.GlowTypes class" Url="html/C3381549.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model namespace" Url="html/57365D5A.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.BooleanParameter class" Url="html/A3846A24.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.ChildrenRetrievalPolicy enumeration" Url="html/B60F4F2.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.CollectionNode(Of TElement) class" Url="html/BD7E2B1D.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.CollectionNode&lt;TElement&gt; class" Url="html/BD7E2B1D.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.Consumer(Of TRoot) class" Url="html/209188D0.htm" />
@@ -1647,6 +1656,7 @@
     <HelpKINode Title="methods" Url="html/6D5A3D69.htm" />
     <HelpKINode Title="properties" Url="html/45A70BEA.htm" />
   </HelpKINode>
+  <HelpKINode Title="NodeBase(Of TMostDerived).ChildrenRetrievalPolicy property" Url="html/BE3CF2D1.htm" />
   <HelpKINode Title="NodeBase&lt;TMostDerived&gt; class">
     <HelpKINode Title="NodeBase(TMostDerived) Class" Url="html/27A613A4.htm" />
     <HelpKINode Title="about NodeBase&lt;TMostDerived&gt; class" Url="html/27A613A4.htm" />
@@ -1654,7 +1664,11 @@
     <HelpKINode Title="methods" Url="html/6D5A3D69.htm" />
     <HelpKINode Title="properties" Url="html/45A70BEA.htm" />
   </HelpKINode>
-  <HelpKINode Title="None enumeration member" Url="html/44947CDC.htm" />
+  <HelpKINode Title="NodeBase&lt;TMostDerived&gt;.ChildrenRetrievalPolicy property" Url="html/BE3CF2D1.htm" />
+  <HelpKINode Title="None enumeration member">
+    <HelpKINode Title="ChildrenRetrievalPolicy Enumeration" Url="html/B60F4F2.htm" />
+    <HelpKINode Title="ParameterAccess Enumeration" Url="html/44947CDC.htm" />
+  </HelpKINode>
   <HelpKINode Title="Nonlinear enumeration member" Url="html/ABDD8C14.htm" />
   <HelpKINode Title="NonnegativeNumberRequired field" Url="html/2520F2B9.htm" />
   <HelpKINode Title="NonSeekableStream class">
