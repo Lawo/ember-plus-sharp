@@ -22,8 +22,10 @@ namespace Lawo.EmberPlusSharp.Model
         /// <see cref="ChildrenRetrievalPolicy.None"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Attempted to set a value that is not equal to one of the named
         /// constants of <see cref="ChildrenRetrievalPolicy"/>.</exception>
-        /// <remarks>Setting this property prompts the consumer to automatically retrieve children according to the new
-        /// value. To wait for the children to be retrieved, <see langword="await"/> the result of a call to
+        /// <remarks>Setting this property prompts the consumer to retrieve direct and indirect children according to
+        /// the new value. The retrieval starts automatically when
+        /// <see cref="Consumer{TRoot}.AutoSendInterval">Consumer&lt;TRoot&gt;.AutoSendInterval</see> elapses. To
+        /// explicitly wait for the children to be retrieved, <see langword="await"/> the result of a call to
         /// <see cref="Consumer{TRoot}.SendAsync"/>.</remarks>
         ChildrenRetrievalPolicy ChildrenRetrievalPolicy { get; set; }
 

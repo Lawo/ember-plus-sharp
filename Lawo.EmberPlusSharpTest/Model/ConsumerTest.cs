@@ -455,34 +455,14 @@ namespace Lawo.EmberPlusSharp.Model
             AsyncPump.Run(
                 async () =>
                 {
-                    await ChildrenRetrievalPolicyTestCoreAsync(
+                    await StaticChildrenRetrievalPolicyTestAsync(
                         ChildrenRetrievalPolicy.None, "ChildrenRetrievalPolicyLog1.xml");
-                    await ChildrenRetrievalPolicyTestCoreAsync(
+                    await StaticChildrenRetrievalPolicyTestAsync(
                         ChildrenRetrievalPolicy.DirectOnly, "ChildrenRetrievalPolicyLog2.xml");
-                    await ChildrenRetrievalPolicyTestCoreAsync(
+                    await StaticChildrenRetrievalPolicyTestAsync(
                         ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
-                    await TestWithRobot<ModelPayloads>(
-                        async client =>
-                        {
-                            using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(
-                                client, Timeout.Infinite, ChildrenRetrievalPolicy.None))
-                            {
-                                var root = consumer.Root;
-                                Assert.IsNull(root.Node);
-                                Assert.AreEqual(ChildrenRetrievalPolicy.None, root.ChildrenRetrievalPolicy);
-                                root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
-                                await consumer.SendAsync();
-                                Assert.IsNotNull(root.Node);
-                                Assert.AreEqual(ChildrenRetrievalPolicy.None, root.Node.ChildrenRetrievalPolicy);
-                                root.Node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All;
-                                await consumer.SendAsync();
-                            }
-                        },
-                        null,
-                        null,
-                        GlowTypes.Instance,
-                        false,
-                        "ChildrenRetrievalPolicyLog3.xml");
+                    await DynamicChildrenRetrievalPolicyTestAsync(false);
+                    await DynamicChildrenRetrievalPolicyTestAsync(true);
                 });
         }
 
@@ -1613,7 +1593,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static Task ChildrenRetrievalPolicyTestCoreAsync(ChildrenRetrievalPolicy policy, string logName)
+        private static Task StaticChildrenRetrievalPolicyTestAsync(ChildrenRetrievalPolicy policy, string logName)
         {
             return TestWithRobot<ModelPayloads>(
                 async client =>
@@ -1657,6 +1637,38 @@ namespace Lawo.EmberPlusSharp.Model
                 GlowTypes.Instance,
                 false,
                 logName);
+        }
+
+        private Task DynamicChildrenRetrievalPolicyTestAsync(bool delay)
+        {
+            return TestWithRobot<ModelPayloads>(
+                async client =>
+                {
+                    using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(
+                        client, Timeout.Infinite, ChildrenRetrievalPolicy.None))
+                    {
+                        consumer.AutoSendInterval = this.Random.Next(100, 5000);
+                        var root = consumer.Root;
+                        Assert.IsNull(root.Node);
+                        Assert.AreEqual(ChildrenRetrievalPolicy.None, root.ChildrenRetrievalPolicy);
+                        root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
+                        await WaitForCompletion(consumer, delay);
+                        Assert.IsNotNull(root.Node);
+                        Assert.AreEqual(ChildrenRetrievalPolicy.None, root.Node.ChildrenRetrievalPolicy);
+                        root.Node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All;
+                        await WaitForCompletion(consumer, delay);
+                    }
+                },
+                null,
+                null,
+                GlowTypes.Instance,
+                false,
+                "ChildrenRetrievalPolicyLog3.xml");
+        }
+
+        private static Task WaitForCompletion(Consumer<EmptyNodeRoot> consumer, bool delay)
+        {
+            return delay ? Task.Delay(consumer.AutoSendInterval + 500) : consumer.SendAsync();
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
