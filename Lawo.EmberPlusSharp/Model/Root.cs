@@ -43,13 +43,7 @@ namespace Lawo.EmberPlusSharp.Model
             if (!this.HasChanges)
             {
                 this.HasChanges = true;
-
-                var handler = this.HasChangesSet;
-
-                if (handler != null)
-                {
-                    handler(this, EventArgs.Empty);
-                }
+                this.RaiseHasChangesSet();
             }
         }
 
@@ -153,6 +147,12 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        internal sealed override void ResetRetrievalState()
+        {
+            this.RetrievalState = RetrievalState.None;
+            this.RaiseHasChangesSet();
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="Root{TMostDerived}"/> class.</summary>
@@ -165,6 +165,16 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void RaiseHasChangesSet()
+        {
+            var handler = this.HasChangesSet;
+
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
 
         private void ReadQualifiedChild(EmberReader reader, ElementType actualType)
         {

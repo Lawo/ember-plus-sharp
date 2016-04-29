@@ -154,14 +154,10 @@ namespace Lawo.EmberPlusSharp.Model
             set { } // Intentionally empty
         }
 
-        internal void ResetRetrievalState()
+        internal virtual void ResetRetrievalState()
         {
             this.RetrievalState = RetrievalState.None;
-
-            if (this.parent != null)
-            {
-                this.parent.ResetRetrievalState();
-            }
+            this.parent.ResetRetrievalState();
         }
 
         internal virtual void SetContext(Context context)

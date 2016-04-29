@@ -97,21 +97,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <see cref="ChildrenRetrievalPolicy.None"/>.</remarks>
         public async Task SendAsync()
         {
-            if (this.root.HasChanges)
-            {
-                MemoryStream stream;
-
-                // TODO: Reuse MemoryStream and EmberWriter for all outgoing messages.
-                using (stream = new MemoryStream())
-                using (var writer = new EmberWriter(stream))
-                {
-                    this.root.WriteChanges(writer, this.pendingInvocations);
-                }
-
-                await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
-            }
-
-            if (await this.SendRequestAsync())
+            if (await this.SendCoreAsync())
             {
                 await this.isVerifiedSource.Task;
             }
@@ -257,6 +243,25 @@ namespace Lawo.EmberPlusSharp.Model
             this.client.ConnectionLost += this.receiveQueue.OnConnectionLost;
         }
 
+        private async Task<bool> SendCoreAsync()
+        {
+            if (this.root.HasChanges)
+            {
+                MemoryStream stream;
+
+                // TODO: Reuse MemoryStream and EmberWriter for all outgoing messages.
+                using (stream = new MemoryStream())
+                using (var writer = new EmberWriter(stream))
+                {
+                    this.root.WriteChanges(writer, this.pendingInvocations);
+                }
+
+                await this.client.SendMessageAsync(this.emberDataMessage, stream.ToArray());
+            }
+
+            return await this.SendRequestAsync();
+        }
+
         private void CancelAutoSendDelay()
         {
             if (!this.autoSendDelayCancellationSource.IsCancellationRequested)
@@ -307,7 +312,7 @@ namespace Lawo.EmberPlusSharp.Model
                     if (await Task.WhenAny(localTask, providerTask) == localTask)
                     {
                         await localTask;
-                        await this.SendAsync();
+                        await this.SendCoreAsync();
                         localTask = this.WaitForLocalChangesAsync();
                     }
                     else
