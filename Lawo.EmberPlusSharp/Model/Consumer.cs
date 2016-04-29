@@ -113,6 +113,7 @@ namespace Lawo.EmberPlusSharp.Model
                 this.root.HasChangesSet -= this.OnHasChangesSet;
                 this.client.ConnectionLost -= this.receiveQueue.OnConnectionLost;
                 this.client.EmberDataReceived -= this.receiveQueue.OnMessageReceived;
+                this.isVerifiedSource.TrySetCanceled();
                 this.hasChangesSetSource.TrySetCanceled();
                 this.CancelAutoSendDelay();
                 this.receiveQueue.OnConnectionLost(this, new ConnectionLostEventArgs(null));
@@ -320,7 +321,7 @@ namespace Lawo.EmberPlusSharp.Model
                         await providerTask;
                         this.ApplyProviderChanges();
                         await this.RetrieveChildrenAsync();
-                        this.isVerifiedSource.SetResult(false);
+                        this.isVerifiedSource.TrySetResult(false);
                         this.isVerifiedSource = new TaskCompletionSource<bool>();
                         providerTask = this.WaitForProviderChangesAsync();
                     }
