@@ -26,7 +26,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// the new value. The retrieval starts automatically when
         /// <see cref="Consumer{TRoot}.AutoSendInterval">Consumer&lt;TRoot&gt;.AutoSendInterval</see> elapses. To
         /// explicitly wait for the children to be retrieved, <see langword="await"/> the result of a call to
-        /// <see cref="Consumer{TRoot}.SendAsync"/>.</remarks>
+        /// <see cref="Consumer{TRoot}.SendAsync">Consumer&lt;TRoot&gt;.SendAsync</see>.</remarks>
         ChildrenRetrievalPolicy ChildrenRetrievalPolicy { get; set; }
 
         /// <summary>Gets the children of this node.</summary>

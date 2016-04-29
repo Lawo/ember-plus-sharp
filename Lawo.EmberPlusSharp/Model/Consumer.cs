@@ -94,7 +94,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// been lost.</exception>
         /// <remarks>Also retrieves the children of any objects implementing <see cref="INode"/> that have had their
         /// <see cref="INode.ChildrenRetrievalPolicy"/> property set to a value other than
-        /// <see cref="ChildrenRetrievalPolicy.None"/>.</remarks>
+        /// <see cref="ChildrenRetrievalPolicy.None">ChildrenRetrievalPolicy.None</see>.</remarks>
         public async Task SendAsync()
         {
             if (await this.SendCoreAsync())
