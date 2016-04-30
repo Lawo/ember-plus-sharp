@@ -124,9 +124,9 @@ namespace Lawo.EmberPlusSharp.S101
                     break;
             }
 
-            if (decodedQueue.Count == 3)
+            if (this.decodedQueue.Count == 3)
             {
-                buffer[index++] = decodedQueue.Dequeue();
+                buffer[index++] = this.decodedQueue.Dequeue();
             }
 
             return true;

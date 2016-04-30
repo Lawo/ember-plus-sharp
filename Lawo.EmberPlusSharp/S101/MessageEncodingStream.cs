@@ -123,8 +123,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         private async Task DisposeAndCreateFramingStreamAsync(PacketFlags packetFlags, CancellationToken cancellationToken)
         {
-            await DisposeFramingStream(cancellationToken);
-            await CreateFramingStream(packetFlags, cancellationToken);
+            await this.DisposeFramingStream(cancellationToken);
+            await this.CreateFramingStream(packetFlags, cancellationToken);
         }
 
         private async Task DisposeFramingStream(CancellationToken cancellationToken)

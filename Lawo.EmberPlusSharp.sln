@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawo.EmberPlusSharp", "Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj", "{CD75460D-43D8-4602-8E78-4C6EA6DE9C87}"
 EndProject
@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Settings.StyleCop = Settings.StyleCop
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 		StrongNameKey.snk = StrongNameKey.snk
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawo.UnitTesting", "Lawo.UnitTesting\Lawo.UnitTesting.csproj", "{018D45FD-BC81-433E-9B90-788D4AE2D31C}"

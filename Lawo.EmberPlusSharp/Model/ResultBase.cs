@@ -35,6 +35,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <inheritdoc/>
         void IInvocationResult.Read(EmberReader reader, bool success)
         {
             this.ReadResult(reader);

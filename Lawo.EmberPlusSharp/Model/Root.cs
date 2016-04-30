@@ -38,6 +38,7 @@ namespace Lawo.EmberPlusSharp.Model
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract class Root<TMostDerived> : FieldNode<TMostDerived>, IParent where TMostDerived : Root<TMostDerived>
     {
+        /// <inheritdoc/>
         void IParent.SetHasChanges()
         {
             if (!this.HasChanges)
@@ -47,6 +48,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        /// <inheritdoc/>
         void IParent.AppendPath(StringBuilder builder)
         {
             this.AppendPath(builder);

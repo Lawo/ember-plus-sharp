@@ -252,7 +252,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Recursively updates the state of all children and returns the state of this element.</summary>
         /// <remarks>Only the children with a state not equal to <see cref="RetrievalState.Verified"/> are visited.
         /// The state of a node is set to the lowest state of its children. If a node without children has the state
-        /// <see cref="RetrievalState.Complete"/> and does not require children, the state is lifted to 
+        /// <see cref="RetrievalState.Complete"/> and does not require children, the state is lifted to
         /// <see cref="RetrievalState.Verified"/>. In all other cases, the state is left as is.</remarks>
         internal virtual RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {

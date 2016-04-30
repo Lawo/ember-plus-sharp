@@ -1,0 +1,19 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "orderingRules": {
+      "elementOrder": [
+        "accessibility",
+        "kind",
+        "constant",
+        "static",
+        "readonly"
+      ]
+    },
+    "documentationRules": {
+      "documentInterfaces": false,
+      "documentInternalElements": false,
+      "copyrightText": "Copyright 2012-2016 Lawo AG (http://www.lawo.com)."
+    }
+  }
+}

@@ -49,7 +49,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <inheritdoc/>
         public sealed override string ToString()
         {
-            return base.ToString() + ' ' + dtd.ToString("X2", CultureInfo.InvariantCulture) +
+            return base.ToString() + ' ' + this.dtd.ToString("X2", CultureInfo.InvariantCulture) +
                 (this.applicationBytes.Length > 0 ? " " : null) +
                 string.Join(" ", this.applicationBytes.Select(b => b.ToString("X2", CultureInfo.InvariantCulture)));
         }

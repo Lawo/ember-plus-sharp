@@ -31,28 +31,32 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
         IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Arguments
         {
             get { return this.arguments; }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
         IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Result
         {
             get { return this.result; }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
         Task<IResult> IFunction.InvokeAsync(params object[] actualArguments)
         {
-            return InvokeCoreAsync(actualArguments);
+            return this.InvokeCoreAsync(actualArguments);
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
         Task<IResult> IFunction.Invoke(params object[] actualArguments)
         {
-            return InvokeCoreAsync(actualArguments);
+            return this.InvokeCoreAsync(actualArguments);
         }
 
         internal FunctionBase(
@@ -190,7 +194,7 @@ namespace Lawo.EmberPlusSharp.Model
                     "The number of actual arguments is not equal to the number of expected arguments.");
             }
 
-            return await InvokeCoreAsync(
+            return await this.InvokeCoreAsync(
                 new DynamicResult(this.result),
                 this.arguments.Zip(actualArguments, (e, a) => CreateWriter(e, a)).ToArray());
         }

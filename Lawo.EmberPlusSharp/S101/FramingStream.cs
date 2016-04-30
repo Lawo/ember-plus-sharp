@@ -55,7 +55,7 @@ namespace Lawo.EmberPlusSharp.S101
             while ((offset < pastEnd) && ((writeBuffer.Count < writeBuffer.Capacity) ||
                 await writeBuffer.FlushAsync(cancellationToken)))
             {
-                offset = WriteByte(buffer, offset, writeBuffer);
+                offset = this.WriteByte(buffer, offset, writeBuffer);
             }
 
             this.TotalCount += count;

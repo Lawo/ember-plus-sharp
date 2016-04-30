@@ -29,7 +29,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="INode.ChildrenRetrievalPolicy"/>
         public ChildrenRetrievalPolicy ChildrenRetrievalPolicy
         {
             get
@@ -65,26 +65,31 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <inheritdoc/>
         int[] IParent.NumberPath
         {
             get { return this.NumberPath; }
         }
 
+        /// <inheritdoc/>
         void IParent.SetHasChanges()
         {
             this.HasChanges = true;
         }
 
+        /// <inheritdoc/>
         void IParent.ResetRetrievalState()
         {
             this.ResetRetrievalState();
         }
 
+        /// <inheritdoc/>
         void IParent.AppendPath(StringBuilder builder)
         {
             this.AppendPath(builder);
         }
 
+        /// <inheritdoc/>
         void IParent.OnPropertyChanged(PropertyChangedEventArgs e)
         {
             this.OnPropertyChanged(e);

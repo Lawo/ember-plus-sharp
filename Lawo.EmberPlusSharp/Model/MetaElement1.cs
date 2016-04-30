@@ -54,7 +54,7 @@ namespace Lawo.EmberPlusSharp.Model
                     {
                         const string Format =
                             "No data value available for the required property {0}.{1} in the node with the path {2}.";
-                        throw CreateRequiredPropertyException(parent, Format);
+                        throw this.CreateRequiredPropertyException(parent, Format);
                     }
 
                     return this.IsOptional;
@@ -72,7 +72,7 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     const string Format =
                         "The required property {0}.{1} in the node with the path {2} has been set offline by the provider.";
-                    throw CreateRequiredPropertyException(parent, Format);
+                    throw this.CreateRequiredPropertyException(parent, Format);
                 }
 
                 this.set((TMostDerived)parent, (TProperty)(element.IsOnline ? element : null));

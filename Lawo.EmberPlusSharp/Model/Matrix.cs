@@ -102,6 +102,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <inheritdoc/>
         INode IMatrix.Parameters
         {
             get { return this.Parameters; }

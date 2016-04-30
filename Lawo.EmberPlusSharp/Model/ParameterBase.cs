@@ -62,6 +62,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
         object IParameter.Value
         {
@@ -69,54 +70,63 @@ namespace Lawo.EmberPlusSharp.Model
             set { this.ValueCore = this.AssertValueType(value); }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "NumericParameter provides strongly-typed property, not relevant for all other parameters.")]
         object IParameter.Minimum
         {
             get { return this.GetMinimum(); }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "NumericParameter provides strongly-typed property, not relevant for all other parameters.")]
         object IParameter.Maximum
         {
             get { return this.GetMaximum(); }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "IntegerParameter provides strongly-typed property, not relevant for all other parameters.")]
         int? IParameter.Factor
         {
             get { return this.FactorCore; }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "NumericParameter provides strongly-typed property, not relevant for all other parameters.")]
         string IParameter.Formula
         {
             get { return this.FormulaCore; }
         }
 
+        /// <inheritdoc/>
         object IParameter.DefaultValue
         {
             get { return this.DefaultValue; }
         }
 
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "IntegerParameter and EnumParameter provide strongly-typed property, not relevant for all other parameters.")]
         IReadOnlyList<KeyValuePair<string, int>> IParameter.EnumMap
         {
             get { return this.EnumMapCore; }
         }
 
+        /// <inheritdoc/>
         int? IStreamedParameter.StreamIdentifier
         {
             get { return this.StreamIdentifier; }
         }
 
+        /// <inheritdoc/>
         StreamDescription? IStreamedParameter.StreamDescriptor
         {
             get { return this.StreamDescriptor; }
         }
 
+        /// <inheritdoc/>
         void IStreamedParameter.SetProviderValue(object value)
         {
-            this.SetProviderValue(AssertValueType(value));
+            this.SetProviderValue(this.AssertValueType(value));
         }
 
         internal ParameterBase() : base(RetrievalState.Complete)
@@ -275,7 +285,7 @@ namespace Lawo.EmberPlusSharp.Model
                         enumType = ParameterType.Enum;
                         break;
                     case GlowParameterContents.Factor.OuterNumber:
-                        this.FactorCore = ReadInt(reader, GlowParameterContents.Factor.Name);
+                        this.FactorCore = this.ReadInt(reader, GlowParameterContents.Factor.Name);
                         break;
                     case GlowParameterContents.IsOnline.OuterNumber:
                         this.IsOnline = reader.AssertAndReadContentsAsBoolean();
@@ -287,7 +297,7 @@ namespace Lawo.EmberPlusSharp.Model
                         this.FormulaCore = reader.AssertAndReadContentsAsString();
                         break;
                     case GlowParameterContents.Step.OuterNumber:
-                        ReadInt(reader, GlowParameterContents.Step.Name);
+                        this.ReadInt(reader, GlowParameterContents.Step.Name);
                         break;
                     case GlowParameterContents.Default.OuterNumber:
                         this.DefaultValue = this.ReadValue(reader, out dummyType);
@@ -296,7 +306,7 @@ namespace Lawo.EmberPlusSharp.Model
                         typeType = this.ReadEnum<ParameterType>(reader, GlowParameterContents.Type.Name);
                         break;
                     case GlowParameterContents.StreamIdentifier.OuterNumber:
-                        this.StreamIdentifier = ReadInt(reader, GlowParameterContents.StreamIdentifier.Name);
+                        this.StreamIdentifier = this.ReadInt(reader, GlowParameterContents.StreamIdentifier.Name);
                         break;
                     case GlowParameterContents.EnumMap.OuterNumber:
                         this.EnumMapCore = this.ReadEnumMap(reader);
@@ -388,7 +398,7 @@ namespace Lawo.EmberPlusSharp.Model
                 reader.ReadAndAssertOuter(GlowStringIntegerPair.EntryString.OuterId);
                 var entryString = reader.AssertAndReadContentsAsString();
                 reader.ReadAndAssertOuter(GlowStringIntegerPair.EntryInteger.OuterId);
-                var entryInteger = ReadInt(reader, GlowStringIntegerPair.EntryInteger.Name);
+                var entryInteger = this.ReadInt(reader, GlowStringIntegerPair.EntryInteger.Name);
 
                 while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
                 {
@@ -407,7 +417,7 @@ namespace Lawo.EmberPlusSharp.Model
             reader.ReadAndAssertOuter(GlowStreamDescription.Format.OuterId);
             var streamFormat = this.ReadEnum<StreamFormat>(reader, GlowStreamDescription.Format.Name);
             reader.ReadAndAssertOuter(GlowStreamDescription.Offset.OuterId);
-            var offset = ReadInt(reader, GlowStreamDescription.Offset.Name);
+            var offset = this.ReadInt(reader, GlowStreamDescription.Offset.Name);
 
             while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
             {
