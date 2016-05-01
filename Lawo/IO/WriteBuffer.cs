@@ -196,7 +196,7 @@ namespace Lawo.IO
         /// <remarks>The buffer is flushed as necessary.</remarks>
         public void Write(byte[] buffer, int offset, int count)
         {
-            var written = WriteToBuffer(buffer, offset, count);
+            var written = this.WriteToBuffer(buffer, offset, count);
             count -= written;
             offset += written;
 
@@ -229,7 +229,7 @@ namespace Lawo.IO
         [CLSCompliant(false)]
         public async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            var written = WriteToBuffer(buffer, offset, count);
+            var written = this.WriteToBuffer(buffer, offset, count);
             count -= written;
             offset += written;
 

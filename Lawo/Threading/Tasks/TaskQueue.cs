@@ -38,7 +38,12 @@ namespace Lawo.Threading.Tasks
                 throw new ArgumentNullException("function");
             }
 
-            return this.Enqueue(async () => { await function(); return false; });
+            return this.Enqueue(
+                async () =>
+                {
+                    await function();
+                    return false;
+                });
         }
 
         /// <summary>Enqueues <paramref name="function"/>.</summary>

@@ -110,18 +110,18 @@ namespace Lawo.ComponentModel
 
             private void AddedToInner(ReadOnlyObservableCollection<T> inner, int index, T item)
             {
-                this.Insert(GetBeforeCount(inner) + index, item);
+                this.Insert(this.GetBeforeCount(inner) + index, item);
             }
 
             private void RemovedFromInner(ReadOnlyObservableCollection<T> inner, int index)
             {
-                this.RemoveAt(GetBeforeCount(inner) + index);
+                this.RemoveAt(this.GetBeforeCount(inner) + index);
             }
 
             private void ClearedInner(ReadOnlyObservableCollection<T> inner)
             {
-                var startIndex = GetBeforeCount(inner);
-                var pastEndIndex = this.Count - GetAfterCount(inner);
+                var startIndex = this.GetBeforeCount(inner);
+                var pastEndIndex = this.Count - this.GetAfterCount(inner);
 
                 for (var index = startIndex; index < pastEndIndex; ++index)
                 {

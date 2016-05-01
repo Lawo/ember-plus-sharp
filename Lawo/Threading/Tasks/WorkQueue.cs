@@ -37,7 +37,12 @@ namespace Lawo.Threading.Tasks
                 throw new ArgumentNullException("action");
             }
 
-            return this.Enqueue(() => { action(); return false; });
+            return this.Enqueue(
+                () =>
+                {
+                    action();
+                    return false;
+                });
         }
 
         /// <summary>Enqueues <paramref name="function"/>.</summary>

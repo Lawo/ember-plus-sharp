@@ -25,7 +25,7 @@ namespace Lawo.Diagnostics.Tracing
         /// <param name="eventLevel">The event level.</param>
         public static void Initialize(EventLevel eventLevel)
         {
-            if (null == instance)
+            if (instance == null)
             {
                 instance = new ConsoleLogListener(eventLevel);
             }

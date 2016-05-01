@@ -96,7 +96,7 @@ namespace Lawo.IO
             while ((offset < pastEnd) && ((writeBuffer.Count < writeBuffer.Capacity) ||
                 await writeBuffer.FlushAsync(cancellationToken)))
             {
-                offset = WriteByte(buffer, offset, writeBuffer);
+                offset = this.WriteByte(buffer, offset, writeBuffer);
             }
         }
 
@@ -159,11 +159,11 @@ namespace Lawo.IO
 
                     if (currentByte == Option.SuppressGoAhead)
                     {
-                        response = readCommand == Command.Do ? Command.Will : Command.Do;
+                        response = this.readCommand == Command.Do ? Command.Will : Command.Do;
                     }
                     else
                     {
-                        response = readCommand == Command.Do ? Command.Wont : Command.Dont;
+                        response = this.readCommand == Command.Do ? Command.Wont : Command.Dont;
                     }
 
                     return new[] { Command.InterpretAsCommand, response, currentByte };

@@ -54,14 +54,14 @@ namespace Lawo.IO
             throw CreateNotSupportedException();
         }
 
-        /// <summary>See <see cref="Stream.CanSeek"/>.</summary>
+        /// <inheritdoc/>
         /// <value>Always <c>false</c>, even if the underlying stream supports seeking.</value>
         public sealed override bool CanSeek
         {
             get { return false; }
         }
 
-        /// <summary>See <see cref="Stream.Length"/>.</summary>
+        /// <inheritdoc/>
         /// <exception cref="NotSupportedException">Thrown with each call.</exception>
         public sealed override long Length
         {
@@ -75,7 +75,7 @@ namespace Lawo.IO
             throw CreateNotSupportedException();
         }
 
-        /// <summary>See <see cref="Stream.Position"/>.</summary>
+        /// <inheritdoc/>
         /// <exception cref="NotSupportedException">Thrown with each get or set operation.</exception>
         public sealed override long Position
         {

@@ -40,7 +40,7 @@ namespace Lawo.Threading.Tasks
             {
                 SynchronizationContext.SetSynchronizationContext(newContext);
                 newContext.OperationStarted();
-                var task  = asyncMethod();
+                var task = asyncMethod();
 
                 if (task == null)
                 {
@@ -98,7 +98,7 @@ namespace Lawo.Threading.Tasks
                     throw new ArgumentNullException("d");
                 }
 
-                queue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
+                this.queue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
             }
 
             public sealed override void Send(SendOrPostCallback d, object state)
@@ -110,7 +110,7 @@ namespace Lawo.Threading.Tasks
 
             internal void RunOnCurrentThread()
             {
-                foreach (var workItem in queue.GetConsumingEnumerable())
+                foreach (var workItem in this.queue.GetConsumingEnumerable())
                 {
                     workItem.Key(workItem.Value);
                 }

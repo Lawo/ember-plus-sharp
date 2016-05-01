@@ -34,7 +34,7 @@ namespace Lawo.Diagnostics.Tracing
         {
             var log = eventSource as Log;
 
-            if (null != log)
+            if (log != null)
             {
                 this.EnableEvents(log, this.eventLevel);
             }
