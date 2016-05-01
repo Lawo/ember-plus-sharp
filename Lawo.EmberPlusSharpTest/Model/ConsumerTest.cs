@@ -461,8 +461,8 @@ namespace Lawo.EmberPlusSharp.Model
                         ChildrenRetrievalPolicy.DirectOnly, "ChildrenRetrievalPolicyLog2.xml");
                     await StaticChildrenRetrievalPolicyTestAsync(
                         ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
-                    await DynamicChildrenRetrievalPolicyTestAsync(false);
-                    await DynamicChildrenRetrievalPolicyTestAsync(true);
+                    await this.DynamicChildrenRetrievalPolicyTestAsync(false);
+                    await this.DynamicChildrenRetrievalPolicyTestAsync(true);
                 });
         }
 
@@ -1372,7 +1372,7 @@ namespace Lawo.EmberPlusSharp.Model
             Func<byte[], byte[]> failEncoding,
             bool failType)
         {
-            var boolValue = GetRandomBoolean();
+            var boolValue = this.GetRandomBoolean();
             var intFormat = GetFormat(intValue);
             var enumFormat = GetFormat(enumValue);
             var octetStringValue = new byte[this.Random.Next(0, 5)];

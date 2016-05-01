@@ -107,8 +107,8 @@ namespace Lawo.EmberPlusSharp.Ember
         public void ShortOctetstringTest()
         {
             AssertDecode(new byte[0]);
-            AssertDecode(Randomize(new byte[1]));
-            AssertDecode(Randomize(new byte[this.Random.Next(126)]));
+            AssertDecode(this.Randomize(new byte[1]));
+            AssertDecode(this.Randomize(new byte[this.Random.Next(126)]));
         }
 
         /// <summary>Tests Octetstring contents with lengths &gt;= 128.</summary>

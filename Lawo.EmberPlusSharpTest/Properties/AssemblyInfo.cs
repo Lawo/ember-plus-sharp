@@ -8,7 +8,7 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-// General 
+// General
 [assembly: AssemblyTitle("Lawo.EmberPlusSharpTest")]
 [assembly: AssemblyDescription("")]
 

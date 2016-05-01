@@ -110,7 +110,7 @@ namespace Lawo.EmberPlusSharp.S101
                             emberDataReceived.SetResult(true);
                         };
 
-                    var outOfFrameByte = GetRandomByteExcept(0xFE);
+                    var outOfFrameByte = this.GetRandomByteExcept(0xFE);
                     var outOfFrameByteReceived = new TaskCompletionSource<bool>();
                     EventHandler<OutOfFrameByteReceivedEventArgs> outOfFrameByteHandler =
                         (s, e) =>

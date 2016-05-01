@@ -52,12 +52,12 @@ namespace Lawo.EmberPlusSharp.S101
             AsyncPump.Run(
                 async () =>
                 {
-                    var first = GetRandomByteExcept(0xFE);
-                    var second = GetRandomByteExcept(0xFE);
+                    var first = this.GetRandomByteExcept(0xFE);
+                    var second = this.GetRandomByteExcept(0xFE);
 
-                    var prefix = new[] { GetRandomByteExcept() };
-                    var third = GetRandomByteExcept(0xFE);
-                    var postfix = new[] { GetRandomByteExcept() };
+                    var prefix = new[] { this.GetRandomByteExcept() };
+                    var third = this.GetRandomByteExcept(0xFE);
+                    var postfix = new[] { this.GetRandomByteExcept() };
 
                     using (var asyncStream = new MemoryStream())
                     {
@@ -117,6 +117,7 @@ namespace Lawo.EmberPlusSharp.S101
             AsyncPump.Run(
                 async () =>
                 {
+#pragma warning disable SA1123 // Do not place regions within elements. Necessary so that tested code snippets can be included in the documentation.
                     #region Payload Test
                     var writtenMessage = new S101Message(0x00, new EmberData(0x01, 0x0A, 0x02));
                     var writtenPayload = new byte[8192];
@@ -164,6 +165,7 @@ namespace Lawo.EmberPlusSharp.S101
                         await reader.DisposeAsync(CancellationToken.None);
                     }
                     #endregion
+#pragma warning restore SA1123 // Do not place regions within elements
                 });
         }
 
