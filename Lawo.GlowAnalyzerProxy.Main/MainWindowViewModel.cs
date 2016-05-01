@@ -28,6 +28,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using Reflection;
     using Threading.Tasks;
 
+    // The following suppressions are necessary so that tested code snippets can be included in the documentation.
+#pragma warning disable SA1123 // Do not place regions within elements
+#pragma warning disable SA1124 // Do not use regions
     internal sealed class MainWindowViewModel : NotifyPropertyChanged, IDataErrorInfo
     {
         private const string ShortConsumerToProvider = "C to P";
@@ -310,12 +313,12 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
                 // The following is necessary because adding events one by one did only scale to roughly 100 events
                 // per second, due to high CPU load, see #12.
-                foreach (var evt in eventCache)
+                foreach (var evt in this.eventCache)
                 {
                     this.events.Add(evt);
                 }
 
-                eventCache.Clear();
+                this.eventCache.Clear();
                 var handler = this.ScrollEventIntoView;
 
                 if ((this.events.Count > 0) &&
@@ -338,7 +341,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             {
                 listener.Start(1);
                 this.IsStopped = false;
-                await ForwardLoop(listener);
+                await this.ForwardLoop(listener);
             }
             catch (SocketException ex)
             {
@@ -376,7 +379,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     ++this.ConsumerConnection.ConnectionCountCore;
                     string logPath;
 
-                    while (File.Exists(logPath = GetLogFilename()))
+                    while (File.Exists(logPath = this.GetLogFilename()))
                     {
                         await Task.Delay(1000);
                     }
@@ -386,7 +389,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     try
                     {
                         ++this.ProviderConnection.ConnectionCountCore;
-                        this.ProviderConnection.Client = await ConnectToProvider();
+                        this.ProviderConnection.Client = await this.ConnectToProvider();
 
                         try
                         {
@@ -398,7 +401,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                         catch (Exception ex)
                         {
                             listener.Stop();
-                            await EnqueueLogOperationAsync(
+                            await this.EnqueueLogOperationAsync(
                                 logInfo, "Exception", null, null, i => i.Logger.LogException("Consumer to Proxy", ex));
                         }
 
@@ -411,7 +414,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     catch (Exception ex)
                     {
                         listener.Stop();
-                        await EnqueueLogOperationAsync(
+                        await this.EnqueueLogOperationAsync(
                             logInfo, "Exception", null, null, i => i.Logger.LogException("Proxy to Provider", ex));
                     }
 
@@ -421,8 +424,14 @@ namespace Lawo.GlowAnalyzerProxy.Main
                         this.ProviderConnection.Client = null;
                     }
 
-                    await EnqueueLogOperationAsync(
-                        logInfo, null, null, null, i => { i.Dispose(); return new EventInfo(); });
+                    Func<LogInfo, EventInfo> operation =
+                        i =>
+                        {
+                            i.Dispose();
+                            return new EventInfo();
+                        };
+
+                    await this.EnqueueLogOperationAsync(logInfo, null, null, null, operation);
                     listener.Start(1);
                 }
                 else
@@ -467,7 +476,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             var payloadStream = new MemoryStream();
             var buffer = new byte[8192];
             var s101Reader = new S101Reader(
-                (b, o, c, t) => ForwardBytesAsync(logInfo, direction, readConnection, writeConnection, b, o, c, t));
+                (b, o, c, t) => this.ForwardBytesAsync(logInfo, direction, readConnection, writeConnection, b, o, c, t));
             Func<LogInfo, OutOfFrameByteReceivedEventArgs, EventInfo> logOutOfFrame =
                 (i, e) => i.Logger.LogData("OutOfFrameByte", direction, new[] { e.Value }, 0, 1);
             EventHandler<OutOfFrameByteReceivedEventArgs> handler = async (s, e) =>
@@ -503,7 +512,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
             catch (Exception ex)
             {
-                await EnqueueLogOperationAsync(
+                await this.EnqueueLogOperationAsync(
                     logInfo, "Exception", shortDirection, null, i => i.Logger.LogException(direction, ex));
             }
             finally
@@ -549,7 +558,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private async void LoadEventDetail(int maxBytesToLoad)
         {
             var evt = this.SelectedEvent;
-            SetSelectedEventDetail("Loading Event...");
+            this.SetSelectedEventDetail("Loading Event...");
 
             // Make sure we yield at least once, such that the GUI has a change to update to the previously set null
             // value
@@ -568,7 +577,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     eventText += " (TRUNCATED, click the button below to load the full event.)";
                 }
 
-                SetSelectedEventDetail(eventText.Replace("\r\n  ", "\r\n").Substring(2));
+                this.SetSelectedEventDetail(eventText.Replace("\r\n  ", "\r\n").Substring(2));
                 this.CanLoadFullEventDetail = isPartial;
             }
         }
@@ -646,4 +655,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
         }
     }
+#pragma warning restore SA1124 // Do not use regions
+#pragma warning restore SA1123 // Do not place regions within elements
 }

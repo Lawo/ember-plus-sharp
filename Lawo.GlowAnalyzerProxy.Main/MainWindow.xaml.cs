@@ -11,6 +11,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System.Windows;
     using System.Windows.Controls;
 
+#pragma warning disable SA1124 // Do not use regions. Necessary so that tested code snippets can be included in the documentation.
     /// <summary>Represents the main window of the application.</summary>
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
     internal sealed partial class MainWindow : Window
@@ -78,4 +79,5 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
         }
     }
+#pragma warning restore SA1124 // Do not use regions
 }
