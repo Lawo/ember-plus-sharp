@@ -25,7 +25,12 @@ namespace Lawo.Threading.Tasks
                 {
                     var counter = 0;
                     var queue = new TaskQueue();
-                    var task1 = queue.Enqueue(async () => { await Task.Delay(250); ++counter; });
+                    var task1 = queue.Enqueue(
+                        async () =>
+                        {
+                            await Task.Delay(250);
+                            ++counter;
+                        });
                     Assert.AreEqual(2, await queue.Enqueue(() => Task.FromResult(++counter)));
                     Assert.AreEqual(2, counter);
                 });

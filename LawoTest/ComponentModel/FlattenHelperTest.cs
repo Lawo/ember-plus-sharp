@@ -21,12 +21,12 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void AddTest()
         {
-            VerifyModification((parent, children) => parent.Add(MakeReadOnly(this.CreateRandomChild())));
+            this.VerifyModification((parent, children) => parent.Add(MakeReadOnly(this.CreateRandomChild())));
 
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
-                    var child = GetRandomChild(children);
+                    var child = this.GetRandomChild(children);
 
                     if (child != null)
                     {
@@ -39,13 +39,13 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void InsertTest()
         {
-            VerifyModification((parent, children) => parent.Insert(
+            this.VerifyModification((parent, children) => parent.Insert(
                 this.Random.Next(parent.Count + 1), MakeReadOnly(this.CreateRandomChild())));
 
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
-                    var child = GetRandomChild(children);
+                    var child = this.GetRandomChild(children);
 
                     if (child != null)
                     {
@@ -58,7 +58,7 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void ReplaceTest()
         {
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
                     if (parent.Count > 0)
@@ -67,10 +67,10 @@ namespace Lawo.ComponentModel
                     }
                 });
 
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
-                    var child = GetRandomChild(children);
+                    var child = this.GetRandomChild(children);
 
                     if ((child != null) && (child.Count > 0))
                     {
@@ -83,7 +83,7 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void RemoveTest()
         {
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
                     if (parent.Count > 0)
@@ -92,10 +92,10 @@ namespace Lawo.ComponentModel
                     }
                 });
 
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
-                    var child = GetRandomChild(children);
+                    var child = this.GetRandomChild(children);
 
                     if ((child != null) && (child.Count > 0))
                     {
@@ -108,12 +108,12 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void ClearTest()
         {
-            VerifyModification((parent, children) => parent.Clear());
+            this.VerifyModification((parent, children) => parent.Clear());
 
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
-                    var child = GetRandomChild(children);
+                    var child = this.GetRandomChild(children);
 
                     if (child != null)
                     {
@@ -126,7 +126,7 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void RemovedInnerModifyTest()
         {
-            VerifyModification(
+            this.VerifyModification(
                 (parent, children) =>
                 {
                     if (children.Count > 0)
@@ -137,7 +137,7 @@ namespace Lawo.ComponentModel
 
                         if (child != null)
                         {
-                            child.Add(CreateRandomItem());
+                            child.Add(this.CreateRandomItem());
                         }
                     }
                 });
@@ -158,7 +158,7 @@ namespace Lawo.ComponentModel
         {
             for (var round = 0; round < 10; ++round)
             {
-                var children = Enumerable.Range(0, this.Random.Next(10)).Select(i => CreateRandomChild()).ToList();
+                var children = Enumerable.Range(0, this.Random.Next(10)).Select(i => this.CreateRandomChild()).ToList();
                 var parent = new ObservableCollection<ReadOnlyObservableCollection<int>>(
                     children.Select(c => MakeReadOnly(c)));
 
@@ -175,7 +175,7 @@ namespace Lawo.ComponentModel
         private ObservableCollection<int> CreateRandomChild()
         {
             return this.Random.Next(5) == 0 ? null : new ObservableCollection<int>(
-                Enumerable.Range(0, this.Random.Next(10)).Select(i2 => CreateRandomItem()));
+                Enumerable.Range(0, this.Random.Next(10)).Select(i2 => this.CreateRandomItem()));
         }
 
         private int CreateRandomItem()

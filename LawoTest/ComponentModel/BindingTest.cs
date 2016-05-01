@@ -38,14 +38,14 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void TwoWayBindingTest()
         {
-            AssertValues(this.source.Property, 0, this.target.Property, 0);
+            this.AssertValues(this.source.Property, 0, this.target.Property, 0);
             Assert.AreNotEqual(this.source.Property, this.target.Property);
-            var value = source.Property;
+            var value = this.source.Property;
             int sourceOriginated = 0;
             int targetOriginated = 0;
 
-            using (var binding =
-                TwoWayBinding.Create(source.GetProperty(o => o.Property), target.GetProperty(o => o.Property)))
+            using (var binding = TwoWayBinding.Create(
+                this.source.GetProperty(o => o.Property), this.target.GetProperty(o => o.Property)))
             {
                 binding.ChangeOriginatedAtSource +=
                     (s, e) =>
@@ -63,26 +63,26 @@ namespace Lawo.ComponentModel
                         ++targetOriginated;
                     };
 
-                AssertValues(value, 0, value, 1);
+                this.AssertValues(value, 0, value, 1);
                 AssertOriginatedCounts(0, sourceOriginated, 0, targetOriginated);
-                source.Property = value = GetRandomString();
-                AssertValues(value, 1, value, 2);
+                this.source.Property = value = GetRandomString();
+                this.AssertValues(value, 1, value, 2);
                 AssertOriginatedCounts(1, sourceOriginated, 0, targetOriginated);
-                target.Property = value = GetRandomString();
-                AssertValues(value, 2, value, 3);
+                this.target.Property = value = GetRandomString();
+                this.AssertValues(value, 2, value, 3);
                 AssertOriginatedCounts(1, sourceOriginated, 1, targetOriginated);
             }
 
-            AssertValues(value, 2, value, 3);
+            this.AssertValues(value, 2, value, 3);
             AssertOriginatedCounts(1, sourceOriginated, 1, targetOriginated);
 
-            var sourceValue = source.Property;
-            var targetValue = target.Property;
-            source.Property = sourceValue = GetRandomString();
-            AssertValues(sourceValue, 3, targetValue, 3);
+            var sourceValue = this.source.Property;
+            var targetValue = this.target.Property;
+            this.source.Property = sourceValue = GetRandomString();
+            this.AssertValues(sourceValue, 3, targetValue, 3);
             AssertOriginatedCounts(1, sourceOriginated, 1, targetOriginated);
-            target.Property = targetValue = GetRandomString();
-            AssertValues(sourceValue, 3, targetValue, 4);
+            this.target.Property = targetValue = GetRandomString();
+            this.AssertValues(sourceValue, 3, targetValue, 4);
             AssertOriginatedCounts(1, sourceOriginated, 1, targetOriginated);
         }
 
@@ -91,24 +91,24 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void OneWayBindingTest()
         {
-            var value = source.Property;
+            var value = this.source.Property;
             int sourceOriginated = 0;
             int targetOriginated = 0;
 
-            using (var binding =
-                OneWayBinding.Create(source.GetProperty(o => o.Property), target.GetProperty(o => o.Property)))
+            using (var binding = OneWayBinding.Create(
+                this.source.GetProperty(o => o.Property), this.target.GetProperty(o => o.Property)))
             {
                 binding.ChangeOriginatedAtSource += (s, e) => ++sourceOriginated;
                 binding.ChangeOriginatedAtTarget += (s, e) => ++targetOriginated;
 
-                AssertValues(value, 0, value, 1);
+                this.AssertValues(value, 0, value, 1);
                 AssertOriginatedCounts(0, sourceOriginated, 0, targetOriginated);
-                source.Property = value = GetRandomString();
-                AssertValues(value, 1, value, 2);
+                this.source.Property = value = GetRandomString();
+                this.AssertValues(value, 1, value, 2);
                 AssertOriginatedCounts(1, sourceOriginated, 0, targetOriginated);
                 string targetValue = GetRandomString();
-                target.Property = targetValue;
-                AssertValues(value, 1, targetValue, 3);
+                this.target.Property = targetValue;
+                this.AssertValues(value, 1, targetValue, 3);
                 AssertOriginatedCounts(1, sourceOriginated, 0, targetOriginated);
             }
         }

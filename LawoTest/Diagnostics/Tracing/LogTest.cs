@@ -143,9 +143,7 @@ namespace Lawo.Diagnostics.Tracing
 
         private static string CreateLogMessage(string testName, EventLevel eventLevel)
         {
-            string logMessage = testName + "-" + eventLevel;
-            
-            return logMessage;
+            return testName + "-" + eventLevel;
         }
 
         private static async void TestLevel(EventLevel eventLevel, int expectedId, [CallerMemberName] string testName = null)

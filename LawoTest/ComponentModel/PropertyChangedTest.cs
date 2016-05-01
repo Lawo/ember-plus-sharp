@@ -92,7 +92,7 @@ namespace Lawo.ComponentModel
 
             using (var calculated = createCalculated(validate + ((s, e) => ++changedCount)))
             {
-                totalCount = IncrementAddends(0, addends) + (creationIsNotified ? 1 : 0);
+                totalCount = this.IncrementAddends(0, addends) + (creationIsNotified ? 1 : 0);
                 Assert.AreEqual(totalCount, changedCount);
             }
 
@@ -119,7 +119,7 @@ namespace Lawo.ComponentModel
                 for (var value = 1; value <= count; ++value)
                 {
                     addends[index].AddendValue = value;
-                    totalCount += IncrementAddends(index + 1, addends) + 1;
+                    totalCount += this.IncrementAddends(index + 1, addends) + 1;
                 }
             }
 
@@ -172,7 +172,7 @@ namespace Lawo.ComponentModel
                     {
                         Assert.AreEqual(this, s);
                         Assert.AreEqual("SumValue", e.PropertyName);
-                        Assert.AreEqual(addends.Aggregate(0, (sum, addend) => sum + addend.AddendValue), this.SumValue);
+                        Assert.AreEqual(this.addends.Aggregate(0, (sum, addend) => sum + addend.AddendValue), this.SumValue);
                     };
 
                 test.TestCore(createCalculated, false, validateHandler, this.addends);

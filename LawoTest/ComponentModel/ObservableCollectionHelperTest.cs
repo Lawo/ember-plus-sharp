@@ -25,14 +25,14 @@ namespace Lawo.ComponentModel
         [TestMethod]
         public void MainTest()
         {
-            AssertChange(c => { });
-            AssertChange(c => c.Add(42));
-            AssertChange(c => c.Insert(1, 42));
-            AssertChange(c => c.Remove(2));
-            AssertChange(c => c.RemoveAt(3));
-            AssertChange(c => c.Move(1, 3));
-            AssertChange(c => c[2] = 42);
-            AssertChange(c => c.Clear());
+            this.AssertChange(c => { });
+            this.AssertChange(c => c.Add(42));
+            this.AssertChange(c => c.Insert(1, 42));
+            this.AssertChange(c => c.Remove(2));
+            this.AssertChange(c => c.RemoveAt(3));
+            this.AssertChange(c => c.Move(1, 3));
+            this.AssertChange(c => c[2] = 42);
+            this.AssertChange(c => c.Clear());
         }
 
         /// <summary>Tests the exceptions thrown by <see cref="ObservableCollectionHelper"/>.</summary>
