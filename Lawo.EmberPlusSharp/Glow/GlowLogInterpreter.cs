@@ -39,45 +39,6 @@ namespace Lawo.EmberPlusSharp.Glow
             this.reader = new S101LogReader(types, logReader);
         }
 
-        /// <summary>Reads the next message.</summary>
-        /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages
-        /// to read.</returns>
-        /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
-        /// <see cref="Exception.Message"/> for more information.</exception>
-        /// <remarks>
-        /// <para>When a <see cref="GlowLogInterpreter"/> is first created and initialized, there is no information
-        /// available. You must call <see cref="Read"/> to read the first message.</para></remarks>
-        public bool Read()
-        {
-            return this.reader.Read();
-        }
-
-        /// <summary>Applies the payload of the current message to the tree rooted in <see cref="Root"/>.</summary>
-        /// <exception cref="InvalidOperationException">
-        /// <list type="bullet">
-        /// <item><see cref="Read"/> has never been called, or</item>
-        /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
-        /// </list></exception>
-        /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
-        /// <see cref="Exception.Message"/> for more information.</exception>
-        public void ApplyPayload()
-        {
-            var payload = this.reader.GetPayload();
-
-            if (payload.Length > 0)
-            {
-                using (var stream = new MemoryStream(payload))
-                using (var emberReader = new EmberReader(stream))
-                using (var dummyWriter = new EmberWriter(Stream.Null))
-                {
-                    this.root.Read(emberReader, this.pendingInvocations, this.streamedParameters);
-                    this.root.WriteRequest(dummyWriter, this.streamedParameters);
-                    this.root.SetComplete();
-                    this.root.UpdateRetrievalState(true);
-                }
-            }
-        }
-
         /// <summary>Gets the UTC time of the current message.</summary>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
@@ -126,6 +87,45 @@ namespace Lawo.EmberPlusSharp.Glow
         public INode Root
         {
             get { return this.root; }
+        }
+
+        /// <summary>Reads the next message.</summary>
+        /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages
+        /// to read.</returns>
+        /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
+        /// <see cref="Exception.Message"/> for more information.</exception>
+        /// <remarks>
+        /// <para>When a <see cref="GlowLogInterpreter"/> is first created and initialized, there is no information
+        /// available. You must call <see cref="Read"/> to read the first message.</para></remarks>
+        public bool Read()
+        {
+            return this.reader.Read();
+        }
+
+        /// <summary>Applies the payload of the current message to the tree rooted in <see cref="Root"/>.</summary>
+        /// <exception cref="InvalidOperationException">
+        /// <list type="bullet">
+        /// <item><see cref="Read"/> has never been called, or</item>
+        /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
+        /// </list></exception>
+        /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
+        /// <see cref="Exception.Message"/> for more information.</exception>
+        public void ApplyPayload()
+        {
+            var payload = this.reader.GetPayload();
+
+            if (payload.Length > 0)
+            {
+                using (var stream = new MemoryStream(payload))
+                using (var emberReader = new EmberReader(stream))
+                using (var dummyWriter = new EmberWriter(Stream.Null))
+                {
+                    this.root.Read(emberReader, this.pendingInvocations, this.streamedParameters);
+                    this.root.WriteRequest(dummyWriter, this.streamedParameters);
+                    this.root.SetComplete();
+                    this.root.UpdateRetrievalState(true);
+                }
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

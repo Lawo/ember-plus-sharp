@@ -129,6 +129,12 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal RetrieveDetailsChangeStatus RetrieveDetailsChangeStatus { get; set; }
 
+        internal virtual RetrievalState RetrievalState
+        {
+            get { return RetrievalState.Complete; }
+            set { } // Intentionally empty
+        }
+
         internal void SetRetrieveDetailsChangeStatus(Func<bool> setValue)
         {
             var oldValue = this.RetrieveDetails;
@@ -146,12 +152,6 @@ namespace Lawo.EmberPlusSharp.Model
                     this.RetrieveDetailsChangeStatus = RetrieveDetailsChangeStatus.Unchanged;
                 }
             }
-        }
-
-        internal virtual RetrievalState RetrievalState
-        {
-            get { return RetrievalState.Complete; }
-            set { } // Intentionally empty
         }
 
         internal virtual void ResetRetrievalState()

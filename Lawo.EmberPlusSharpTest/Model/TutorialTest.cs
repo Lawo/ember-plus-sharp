@@ -4,12 +4,12 @@
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+namespace Tutorial
+{
 // The following suppressions are necessary so that tested code snippets can be included in the documentation.
 #pragma warning disable SA1123 // Do not place regions within elements
 #pragma warning disable SA1124 // Do not use regions
 #pragma warning disable SA1515 // Single-line comment must be preceded by blank line
-namespace Tutorial
-{
     #region Using Declarations
     using System;
     using System.Linq;
@@ -343,6 +343,7 @@ namespace Tutorial
         }
         #endregion
 
+#pragma warning disable SA1201 // Elements must appear in the correct order. Enumeration must appear last to be consistent with order of other types.
         #region Static Database Types
         private sealed class SapphireRoot : Root<SapphireRoot>
         {
@@ -408,6 +409,7 @@ namespace Tutorial
             MidSideToXY
         }
         #endregion
+#pragma warning restore SA1201 // Elements must appear in the correct order
 
         #region Unbounded Database Types
         private sealed class UnboundedSapphireRoot : Root<UnboundedSapphireRoot>
@@ -462,7 +464,7 @@ namespace Tutorial
         }
         #endregion
     }
-}
 #pragma warning restore SA1515 // Single-line comment must be preceded by blank line
 #pragma warning restore SA1124 // Do not use regions
 #pragma warning restore SA1123 // Do not place regions within elements
+}

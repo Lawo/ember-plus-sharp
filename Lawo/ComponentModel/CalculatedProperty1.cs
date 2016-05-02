@@ -24,14 +24,6 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Stops updating <see cref="Value"/> whenever one of the source properties changes.</summary>
-        /// <remarks>If the dependency is intended to be permanent it is permissible to to never call
-        /// <see cref="Dispose"/>.</remarks>
-        public void Dispose()
-        {
-            this.binding.Dispose();
-        }
-
         /// <summary>Gets the value of the calculated property.</summary>
         public T Value
         {
@@ -48,6 +40,14 @@ namespace Lawo.ComponentModel
                     this.owner.OnPropertyChanged(this.args);
                 }
             }
+        }
+
+        /// <summary>Stops updating <see cref="Value"/> whenever one of the source properties changes.</summary>
+        /// <remarks>If the dependency is intended to be permanent it is permissible to to never call
+        /// <see cref="Dispose"/>.</remarks>
+        public void Dispose()
+        {
+            this.binding.Dispose();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

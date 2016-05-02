@@ -34,6 +34,18 @@ namespace Lawo.IO
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <inheritdoc/>
+        public sealed override bool CanRead
+        {
+            get { return this.readBuffer != null; }
+        }
+
+        /// <inheritdoc/>
+        public override bool CanWrite
+        {
+            get { return this.writeBuffer != null; }
+        }
+
         /// <summary>Asynchronously flushes the write buffer and then disposes the underlying stream.</summary>
         [CLSCompliant(false)]
         public override async Task DisposeAsync(CancellationToken cancellationToken)
@@ -53,18 +65,6 @@ namespace Lawo.IO
             }
         }
 
-        /// <inheritdoc/>
-        public sealed override bool CanRead
-        {
-            get { return this.readBuffer != null; }
-        }
-
-        /// <inheritdoc/>
-        public override bool CanWrite
-        {
-            get { return this.writeBuffer != null; }
-        }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="BufferStream"/> class.</summary>
@@ -79,6 +79,18 @@ namespace Lawo.IO
         protected bool IsDisposed
         {
             get { return (this.readBuffer == null) && (this.writeBuffer == null); }
+        }
+
+        /// <summary>Gets a reference to the read buffer.</summary>
+        protected ReadBuffer ReadBuffer
+        {
+            get { return this.readBuffer; }
+        }
+
+        /// <summary>Gets a reference to the write buffer.</summary>
+        protected WriteBuffer WriteBuffer
+        {
+            get { return this.writeBuffer; }
         }
 
         /// <summary>Flushes the write buffer and then disposes the underlying stream.</summary>
@@ -101,18 +113,6 @@ namespace Lawo.IO
                 this.writeBuffer = null;
                 base.Dispose(disposing);
             }
-        }
-
-        /// <summary>Gets a reference to the read buffer.</summary>
-        protected ReadBuffer ReadBuffer
-        {
-            get { return this.readBuffer; }
-        }
-
-        /// <summary>Gets a reference to the write buffer.</summary>
-        protected WriteBuffer WriteBuffer
-        {
-            get { return this.writeBuffer; }
         }
     }
 }

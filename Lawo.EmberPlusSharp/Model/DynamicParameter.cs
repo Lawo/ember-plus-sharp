@@ -30,6 +30,24 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
+        internal sealed override int? FactorCore
+        {
+            get { return this.factor; }
+            set { this.SetValue(ref this.factor, value, "Factor"); }
+        }
+
+        internal sealed override string FormulaCore
+        {
+            get { return this.formula; }
+            set { this.SetValue(ref this.formula, value, "Formula"); }
+        }
+
+        internal sealed override IReadOnlyList<KeyValuePair<string, int>> EnumMapCore
+        {
+            get { return this.enumMap; }
+            set { this.SetValue(ref this.enumMap, value, "EnumMap"); }
+        }
+
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override object ReadValue(EmberReader reader, out ParameterType? parameterType)
         {
@@ -95,24 +113,6 @@ namespace Lawo.EmberPlusSharp.Model
         internal sealed override void SetMaximum(object value)
         {
             this.SetValue(ref this.maximum, value, "Maximum");
-        }
-
-        internal sealed override int? FactorCore
-        {
-            get { return this.factor; }
-            set { this.SetValue(ref this.factor, value, "Factor"); }
-        }
-
-        internal sealed override string FormulaCore
-        {
-            get { return this.formula; }
-            set { this.SetValue(ref this.formula, value, "Formula"); }
-        }
-
-        internal sealed override IReadOnlyList<KeyValuePair<string, int>> EnumMapCore
-        {
-            get { return this.enumMap; }
-            set { this.SetValue(ref this.enumMap, value, "EnumMap"); }
         }
 
         internal sealed override object AssertValueType(object value)

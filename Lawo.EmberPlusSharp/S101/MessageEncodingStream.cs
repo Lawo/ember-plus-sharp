@@ -34,6 +34,11 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        public sealed override bool CanWrite
+        {
+            get { return this.framingStream != null; }
+        }
+
         public sealed override async Task DisposeAsync(CancellationToken cancellationToken)
         {
             try
@@ -55,11 +60,6 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 this.framingStream = null;
             }
-        }
-
-        public sealed override bool CanWrite
-        {
-            get { return this.framingStream != null; }
         }
 
         public sealed override async Task WriteAsync(

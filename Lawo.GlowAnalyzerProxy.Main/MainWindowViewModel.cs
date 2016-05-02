@@ -67,6 +67,10 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        public event EventHandler<ScrollEventIntoViewEventArgs> ScrollEventIntoView;
+
+        public event EventHandler<ListenFailedEventArgs> ListenFailed;
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Must be accessible from XAML.")]
         #region ReadOnlyProperty
@@ -124,31 +128,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
         }
         #endregion
 
-        public void Start()
-        {
-            this.events.Clear();
-            this.IsStarted = true;
-            this.UpdateLoop();
-            this.ListenLoop();
-        }
-
         public bool CanStop
         {
             get { return this.canStop.Value; }
-        }
-
-        public void Stop()
-        {
-            using (this.ConsumerConnection.Client)
-            using (this.ProviderConnection.Client)
-            {
-                this.IsStopped = true;
-            }
-        }
-
-        public void SaveSettings()
-        {
-            this.settings.Save();
         }
 
         #region CompositeProperty
@@ -206,17 +188,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
             private set { this.SetValue(ref this.canLoadFullEventDetail, value); }
         }
 
-        public void LoadFullEventDetail()
-        {
-            if (!this.CanLoadFullEventDetail)
-            {
-                throw new InvalidOperationException("Full event detail has already been loaded.");
-            }
-
-            this.CanLoadFullEventDetail = false;
-            this.LoadEventDetail(int.MaxValue);
-        }
-
         public string Error
         {
             get { throw new NotImplementedException(); }
@@ -231,9 +202,38 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
         }
 
-        public event EventHandler<ScrollEventIntoViewEventArgs> ScrollEventIntoView;
+        public void Start()
+        {
+            this.events.Clear();
+            this.IsStarted = true;
+            this.UpdateLoop();
+            this.ListenLoop();
+        }
 
-        public event EventHandler<ListenFailedEventArgs> ListenFailed;
+        public void Stop()
+        {
+            using (this.ConsumerConnection.Client)
+            using (this.ProviderConnection.Client)
+            {
+                this.IsStopped = true;
+            }
+        }
+
+        public void SaveSettings()
+        {
+            this.settings.Save();
+        }
+
+        public void LoadFullEventDetail()
+        {
+            if (!this.CanLoadFullEventDetail)
+            {
+                throw new InvalidOperationException("Full event detail has already been loaded.");
+            }
+
+            this.CanLoadFullEventDetail = false;
+            this.LoadEventDetail(int.MaxValue);
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

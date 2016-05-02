@@ -56,28 +56,6 @@ namespace Lawo.EmberPlusSharp.Ember
             this.readBuffer = new ReadBuffer((ReadCallback)this.stream.Read, bufferSize);
         }
 
-        /// <summary>Releases all resources used by the current instance of the <see cref="EmberWriter"/> class.</summary>
-        /// <remarks>Calls <see cref="Stream.Dispose()"/> on the stream passed to the constructor.</remarks>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Dispose() must never throw.")]
-        public void Dispose()
-        {
-            try
-            {
-                if (this.stream != null)
-                {
-                    this.stream.Dispose();
-                }
-            }
-            catch
-            {
-            }
-            finally
-            {
-                this.stream = null;
-                this.CanReadContents = false;
-            }
-        }
-
         /// <summary>Gets the number of the inner identifier of the data value that was read with <see cref="Read"/>.
         /// </summary>
         /// <exception cref="InvalidOperationException">
@@ -133,6 +111,28 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <item>None of the ReadContents methods have yet been called for the current data value.</item>
         /// </list></value>
         public bool CanReadContents { get; private set; }
+
+        /// <summary>Releases all resources used by the current instance of the <see cref="EmberWriter"/> class.</summary>
+        /// <remarks>Calls <see cref="Stream.Dispose()"/> on the stream passed to the constructor.</remarks>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Dispose() must never throw.")]
+        public void Dispose()
+        {
+            try
+            {
+                if (this.stream != null)
+                {
+                    this.stream.Dispose();
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                this.stream = null;
+                this.CanReadContents = false;
+            }
+        }
 
         /// <summary>Advances the reader to the next data value in the stream.</summary>
         /// <returns><c>true</c> if the operation completed successfully; <c>false</c> if the end of the stream has

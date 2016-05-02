@@ -23,13 +23,6 @@ namespace Lawo.IO
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Asynchronously disposes resources.</summary>
-        [CLSCompliant(false)]
-        public virtual Task DisposeAsync(CancellationToken cancellationToken)
-        {
-            return Completed;
-        }
-
         /// <inheritdoc/>
         public override bool CanRead
         {
@@ -37,21 +30,9 @@ namespace Lawo.IO
         }
 
         /// <inheritdoc/>
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            throw CreateNotSupportedException();
-        }
-
-        /// <inheritdoc/>
         public override bool CanWrite
         {
             get { return false; }
-        }
-
-        /// <inheritdoc/>
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            throw CreateNotSupportedException();
         }
 
         /// <inheritdoc/>
@@ -68,19 +49,38 @@ namespace Lawo.IO
             get { throw CreateNotSupportedException(); }
         }
 
-        /// <summary>See <see cref="Stream.SetLength"/>.</summary>
-        /// <exception cref="NotSupportedException">Thrown with each call.</exception>
-        public sealed override void SetLength(long value)
-        {
-            throw CreateNotSupportedException();
-        }
-
         /// <inheritdoc/>
         /// <exception cref="NotSupportedException">Thrown with each get or set operation.</exception>
         public sealed override long Position
         {
             get { throw CreateNotSupportedException(); }
             set { throw CreateNotSupportedException(); }
+        }
+
+        /// <summary>Asynchronously disposes resources.</summary>
+        [CLSCompliant(false)]
+        public virtual Task DisposeAsync(CancellationToken cancellationToken)
+        {
+            return Completed;
+        }
+
+        /// <inheritdoc/>
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            throw CreateNotSupportedException();
+        }
+
+        /// <inheritdoc/>
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw CreateNotSupportedException();
+        }
+
+        /// <summary>See <see cref="Stream.SetLength"/>.</summary>
+        /// <exception cref="NotSupportedException">Thrown with each call.</exception>
+        public sealed override void SetLength(long value)
+        {
+            throw CreateNotSupportedException();
         }
 
         /// <summary>See <see cref="Stream.Seek"/>..</summary>

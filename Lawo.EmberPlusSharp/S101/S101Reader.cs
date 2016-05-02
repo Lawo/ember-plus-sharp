@@ -52,37 +52,8 @@ namespace Lawo.EmberPlusSharp.S101
             this.readBuffer = new ReadBuffer(readAsync, bufferSize);
         }
 
-        /// <summary>Asynchronously releases all resources used by the current instance of the <see cref="S101Reader"/>
-        /// class.</summary>
-        /// <exception cref="Exception">An exception was thrown from the callback passed to the constructor, see
-        /// <see cref="Exception.Message"/> for more information.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Task.IsCompleted"/> property is <c>false</c> for
-        /// the <see cref="Task"/> object returned by a previously called async method.</exception>
-        [CLSCompliant(false)]
-        public Task DisposeAsync(CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
-        }
-
-        /// <summary>Asynchronously reads the next message.</summary>
-        /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages
-        /// to read.</returns>
-        /// <exception cref="Exception">An exception was thrown from the callback passed to the constructor, see
-        /// <see cref="Exception.Message"/> for more information.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Task.IsCompleted"/> property is <c>false</c> for
-        /// the <see cref="Task"/> object returned by a previously called async method.</exception>
-        /// <exception cref="ObjectDisposedException"><see cref="DisposeAsync"/> has been called.</exception>
-        /// <exception cref="S101Exception">An error occurred while parsing the S101-encoded data, see
-        /// <see cref="Exception.Message"/> for more information.</exception>
-        /// <remarks>
-        /// <para>When a <see cref="S101Reader"/> is first created and initialized, there is no information available.
-        /// You must call <see cref="ReadAsync"/> to read the first message.</para>
-        /// <para>Possibly unread payload of the previous message is automatically skipped.</para></remarks>
-        [CLSCompliant(false)]
-        public Task<bool> ReadAsync(CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.ReadCoreAsync(cancellationToken));
-        }
+        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
+        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
 
         /// <summary>Gets the current message.</summary>
         /// <exception cref="InvalidOperationException">
@@ -145,8 +116,37 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
-        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
+        /// <summary>Asynchronously releases all resources used by the current instance of the <see cref="S101Reader"/>
+        /// class.</summary>
+        /// <exception cref="Exception">An exception was thrown from the callback passed to the constructor, see
+        /// <see cref="Exception.Message"/> for more information.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Task.IsCompleted"/> property is <c>false</c> for
+        /// the <see cref="Task"/> object returned by a previously called async method.</exception>
+        [CLSCompliant(false)]
+        public Task DisposeAsync(CancellationToken cancellationToken)
+        {
+            return this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
+        }
+
+        /// <summary>Asynchronously reads the next message.</summary>
+        /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages
+        /// to read.</returns>
+        /// <exception cref="Exception">An exception was thrown from the callback passed to the constructor, see
+        /// <see cref="Exception.Message"/> for more information.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Task.IsCompleted"/> property is <c>false</c> for
+        /// the <see cref="Task"/> object returned by a previously called async method.</exception>
+        /// <exception cref="ObjectDisposedException"><see cref="DisposeAsync"/> has been called.</exception>
+        /// <exception cref="S101Exception">An error occurred while parsing the S101-encoded data, see
+        /// <see cref="Exception.Message"/> for more information.</exception>
+        /// <remarks>
+        /// <para>When a <see cref="S101Reader"/> is first created and initialized, there is no information available.
+        /// You must call <see cref="ReadAsync"/> to read the first message.</para>
+        /// <para>Possibly unread payload of the previous message is automatically skipped.</para></remarks>
+        [CLSCompliant(false)]
+        public Task<bool> ReadAsync(CancellationToken cancellationToken)
+        {
+            return this.taskSingleton.Execute(() => this.ReadCoreAsync(cancellationToken));
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

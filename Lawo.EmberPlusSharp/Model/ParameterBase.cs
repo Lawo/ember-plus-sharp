@@ -173,6 +173,24 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        internal virtual int? FactorCore
+        {
+            get { return null; }
+            set { }
+        }
+
+        internal virtual string FormulaCore
+        {
+            get { return null; }
+            set { }
+        }
+
+        internal virtual IReadOnlyList<KeyValuePair<string, int>> EnumMapCore
+        {
+            get { return null; }
+            set { }
+        }
+
         internal TValue GetValue()
         {
             return this.theValue;
@@ -198,24 +216,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal virtual void SetMaximum(TValue value)
         {
-        }
-
-        internal virtual int? FactorCore
-        {
-            get { return null; }
-            set { }
-        }
-
-        internal virtual string FormulaCore
-        {
-            get { return null; }
-            set { }
-        }
-
-        internal virtual IReadOnlyList<KeyValuePair<string, int>> EnumMapCore
-        {
-            get { return null; }
-            set { }
         }
 
         internal virtual TValue AssertValueType(object value)

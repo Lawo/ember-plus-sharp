@@ -85,6 +85,9 @@ namespace Lawo.EmberPlusSharp.Model
             this.readOnlyChildren = new ReadOnlyObservableCollection<TElement>(this.children);
         }
 
+        private delegate Element ReadContentsMethod(
+            EmberReader reader, ElementType actualType, Context context, out RetrievalState childRetrievalState);
+
         private static ReadContentsMethod GetReadContentsMethod()
         {
             var implementationType = Element.GetImplementationType(typeof(TElement));
@@ -92,8 +95,5 @@ namespace Lawo.EmberPlusSharp.Model
                 (ReadContentsMethod)typeof(Element<>).MakeGenericType(implementationType).GetRuntimeMethods().First(
                     m => m.Name == "ReadContents").CreateDelegate(typeof(ReadContentsMethod));
         }
-
-        private delegate Element ReadContentsMethod(
-            EmberReader reader, ElementType actualType, Context context, out RetrievalState childRetrievalState);
     }
 }

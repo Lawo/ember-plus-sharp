@@ -21,6 +21,18 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Tests whether two <see cref="EmberId"/> structures are equal.</summary>
+        public static bool operator ==(EmberId left, EmberId right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>Tests whether two <see cref="EmberId"/> structures differ.</summary>
+        public static bool operator !=(EmberId left, EmberId right)
+        {
+            return !left.Equals(right);
+        }
+
         /// <summary>Creates a constructed identifier of the Application class with the specified number.</summary>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="number"/> is negative.</exception>
         public static EmberId CreateApplication(int number)
@@ -59,18 +71,6 @@ namespace Lawo.EmberPlusSharp.Ember
         public override string ToString()
         {
             return ToChar(this.theClass) + "-" + this.number.ToString(CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>Tests whether two <see cref="EmberId"/> structures are equal.</summary>
-        public static bool operator ==(EmberId left, EmberId right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary>Tests whether two <see cref="EmberId"/> structures differ.</summary>
-        public static bool operator !=(EmberId left, EmberId right)
-        {
-            return !left.Equals(right);
         }
 
         /// <summary>Converts the string representation of an identifier <paramref name="input"/> into its

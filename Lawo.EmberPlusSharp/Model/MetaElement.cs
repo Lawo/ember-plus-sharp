@@ -26,6 +26,11 @@ namespace Lawo.EmberPlusSharp.Model
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            internal string Identifier
+            {
+                get { return this.identifier; }
+            }
+
             /// <summary>Creates and returns a <see cref="MetaElement"/> subclass object representing
             /// <paramref name="property"/>.</summary>
             internal static MetaElement Create(PropertyInfo property)
@@ -35,11 +40,6 @@ namespace Lawo.EmberPlusSharp.Model
                 var info = metaPropertyType.GetTypeInfo().DeclaredConstructors.FirstOrDefault(
                     c => c.GetParameters().Select(p => p.ParameterType).SequenceEqual(ctorParameters));
                 return (MetaElement)info.Invoke(new[] { property });
-            }
-
-            internal string Identifier
-            {
-                get { return this.identifier; }
             }
 
             internal abstract Element ReadContents(

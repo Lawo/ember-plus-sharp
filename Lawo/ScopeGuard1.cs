@@ -52,6 +52,17 @@ namespace Lawo
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Gets the resource object passed to <see cref="ScopeGuard.Create"/>.</summary>
+        /// <exception cref="ObjectDisposedException">The scope guard has already been disposed.</exception>
+        public T Resource
+        {
+            get
+            {
+                this.AssertNotDisposed();
+                return this.resource;
+            }
+        }
+
         /// <summary>Calls <see cref="IDisposable.Dispose"/> on the resource object passed to the constructor <b>if and
         /// only if </b><see cref="Dismiss"/> and <see cref="Dispose"/> have never been called before.</summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Dispose() must never throw.")]
@@ -75,17 +86,6 @@ namespace Lawo
             finally
             {
                 this.disposed = true;
-            }
-        }
-
-        /// <summary>Gets the resource object passed to <see cref="ScopeGuard.Create"/>.</summary>
-        /// <exception cref="ObjectDisposedException">The scope guard has already been disposed.</exception>
-        public T Resource
-        {
-            get
-            {
-                this.AssertNotDisposed();
-                return this.resource;
             }
         }
 

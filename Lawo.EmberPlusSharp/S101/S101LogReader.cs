@@ -47,27 +47,6 @@ namespace Lawo.EmberPlusSharp.S101
             logReader.ReadStartElement(LogNames.Root);
         }
 
-        /// <summary>Reads the next event.</summary>
-        /// <returns><c>true</c> if the next event was read successfully; <c>false</c> if there are no more events
-        /// to read.</returns>
-        /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
-        /// <see cref="Exception.Message"/> for more information.</exception>
-        /// <remarks>
-        /// <para>When a <see cref="S101LogReader"/> is first created and initialized, there is no information
-        /// available. You must call <see cref="Read"/> to read the first event.</para></remarks>
-        public bool Read()
-        {
-            try
-            {
-                return this.ReadCore();
-            }
-            catch
-            {
-                this.Clear();
-                throw;
-            }
-        }
-
         /// <summary>Gets the type of the current event.</summary>
         /// <value>Either <c>Message</c> or <c>OutOfFrameByte</c>.</value>
         /// <exception cref="InvalidOperationException">
@@ -142,6 +121,27 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 this.AssertRead();
                 return this.message;
+            }
+        }
+
+        /// <summary>Reads the next event.</summary>
+        /// <returns><c>true</c> if the next event was read successfully; <c>false</c> if there are no more events
+        /// to read.</returns>
+        /// <exception cref="XmlException">An error occurred while parsing the XML-encoded data, see
+        /// <see cref="Exception.Message"/> for more information.</exception>
+        /// <remarks>
+        /// <para>When a <see cref="S101LogReader"/> is first created and initialized, there is no information
+        /// available. You must call <see cref="Read"/> to read the first event.</para></remarks>
+        public bool Read()
+        {
+            try
+            {
+                return this.ReadCore();
+            }
+            catch
+            {
+                this.Clear();
+                throw;
             }
         }
 

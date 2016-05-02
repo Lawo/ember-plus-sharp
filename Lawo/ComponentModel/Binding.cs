@@ -31,14 +31,11 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Stops forwarding changes and altering the properties.</summary>
-        /// <remarks>If the binding is intended to be permanent it is permissible to to never call
-        /// <see cref="Dispose"/>.</remarks>
-        public void Dispose()
-        {
-            this.sourceEventArgs.Property.Owner.PropertyChanged -= this.OnSourceChanged;
-            this.targetEventArgs.Property.Owner.PropertyChanged -= this.OnTargetChanged;
-        }
+        /// <summary>Occurs when a change has originated at the source.</summary>
+        public event EventHandler<ChangeOriginatedAtEventArgs<TSourceOwner, TSource>> ChangeOriginatedAtSource;
+
+        /// <summary>Occurs when a change has originated at the target.</summary>
+        public event EventHandler<ChangeOriginatedAtEventArgs<TTargetOwner, TTarget>> ChangeOriginatedAtTarget;
 
         /// <summary>Gets the source property.</summary>
         public IProperty<TSourceOwner, TSource> Source
@@ -52,11 +49,14 @@ namespace Lawo.ComponentModel
             get { return this.targetEventArgs.Property; }
         }
 
-        /// <summary>Occurs when a change has originated at the source.</summary>
-        public event EventHandler<ChangeOriginatedAtEventArgs<TSourceOwner, TSource>> ChangeOriginatedAtSource;
-
-        /// <summary>Occurs when a change has originated at the target.</summary>
-        public event EventHandler<ChangeOriginatedAtEventArgs<TTargetOwner, TTarget>> ChangeOriginatedAtTarget;
+        /// <summary>Stops forwarding changes and altering the properties.</summary>
+        /// <remarks>If the binding is intended to be permanent it is permissible to to never call
+        /// <see cref="Dispose"/>.</remarks>
+        public void Dispose()
+        {
+            this.sourceEventArgs.Property.Owner.PropertyChanged -= this.OnSourceChanged;
+            this.targetEventArgs.Property.Owner.PropertyChanged -= this.OnTargetChanged;
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

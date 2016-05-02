@@ -65,6 +65,22 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Enumerates the decoding states.</summary>
+        private enum State
+        {
+            /// <summary>The start state.</summary>
+            BeforeFrame,
+
+            /// <summary>The previous byte was either a BOF or a normal byte.</summary>
+            InFrame,
+
+            /// <summary>The previous byte was the escape byte.</summary>
+            InFrameEscaped,
+
+            /// <summary>The previous byte was either the EOF or unexpected (an exception was thrown).</summary>
+            AfterFrame
+        }
+
         private bool ReadByte(ReadBuffer readBuffer, byte[] buffer, ref int index)
         {
             var currentByte = readBuffer[readBuffer.Index++];
@@ -131,22 +147,6 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             return true;
-        }
-
-        /// <summary>Enumerates the decoding states.</summary>
-        private enum State
-        {
-            /// <summary>The start state.</summary>
-            BeforeFrame,
-
-            /// <summary>The previous byte was either a BOF or a normal byte.</summary>
-            InFrame,
-
-            /// <summary>The previous byte was the escape byte.</summary>
-            InFrameEscaped,
-
-            /// <summary>The previous byte was either the EOF or unexpected (an exception was thrown).</summary>
-            AfterFrame
         }
     }
 }

@@ -35,6 +35,11 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        public sealed override bool CanRead
+        {
+            get { return this.deframingStream != null; }
+        }
+
         public sealed override async Task DisposeAsync(CancellationToken cancellationToken)
         {
             try
@@ -56,11 +61,6 @@ namespace Lawo.EmberPlusSharp.S101
             }
         }
 
-        public sealed override bool CanRead
-        {
-            get { return this.deframingStream != null; }
-        }
-
         public sealed override Task<int> ReadAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
@@ -70,6 +70,11 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        internal S101Message Message
+        {
+            get { return this.message; }
+        }
 
         internal static async Task<MessageDecodingStream> CreateAsync(
             ReadBuffer rawBuffer,
@@ -89,11 +94,6 @@ namespace Lawo.EmberPlusSharp.S101
 
             result.message = newMessage;
             return result;
-        }
-
-        internal S101Message Message
-        {
-            get { return this.message; }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

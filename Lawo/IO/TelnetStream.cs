@@ -58,6 +58,13 @@ namespace Lawo.IO
             this.dataAvailable = dataAvailable;
         }
 
+        /// <summary>Gets a value indicating whether data is available on the <see cref="TelnetStream"/> to be
+        /// read.</summary>
+        public bool DataAvailable
+        {
+            get { return (this.ReadBuffer.Index < this.ReadBuffer.Count) || this.dataAvailable(); }
+        }
+
         /// <inheritdoc/>
         public sealed override async Task<int> ReadAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)
@@ -107,14 +114,20 @@ namespace Lawo.IO
             await base.FlushAsync(cancellationToken);
         }
 
-        /// <summary>Gets a value indicating whether data is available on the <see cref="TelnetStream"/> to be
-        /// read.</summary>
-        public bool DataAvailable
-        {
-            get { return (this.ReadBuffer.Index < this.ReadBuffer.Count) || this.dataAvailable(); }
-        }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>Enumerates the read states.</summary>
+        private enum ReadState
+        {
+            /// <summary>The previous byte was a data byte or the last byte of a command.</summary>
+            Data,
+
+            /// <summary>The previous byte was a IAC byte.</summary>
+            Command,
+
+            /// <summary>The previous byte was a command that requires an option code.</summary>
+            OptionCode
+        }
 
         private byte[] ReadByte(ReadBuffer readBuffer, byte[] buffer, ref int index)
         {
@@ -209,19 +222,6 @@ namespace Lawo.IO
         private static class Option
         {
             internal const byte SuppressGoAhead = 3;
-        }
-
-        /// <summary>Enumerates the read states.</summary>
-        private enum ReadState
-        {
-            /// <summary>The previous byte was a data byte or the last byte of a command.</summary>
-            Data,
-
-            /// <summary>The previous byte was a IAC byte.</summary>
-            Command,
-
-            /// <summary>The previous byte was a command that requires an option code.</summary>
-            OptionCode
         }
     }
 }

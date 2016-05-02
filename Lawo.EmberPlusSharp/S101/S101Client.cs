@@ -170,6 +170,27 @@ namespace Lawo.EmberPlusSharp.S101
             this.ReadLoop(connection, new S101Reader(readAsyncWithLog, bufferSize));
         }
 
+        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
+        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
+
+        /// <summary>Occurs when the client has received the full payload of a message with an <see cref="EmberData"/>
+        /// command.</summary>
+        public event EventHandler<MessageReceivedEventArgs> EmberDataReceived;
+
+        /// <summary>Occurs when the connection to the provider has been lost.</summary>
+        /// <remarks>
+        /// <para>This event is raised in the following situations:
+        /// <list type="bullet">
+        /// <item>There was a communication error, or</item>
+        /// <item>The remote host has failed to answer a <see cref="KeepAliveRequest"/>, or</item>
+        /// <item>The remote host has gracefully shutdown its connection, or</item>
+        /// <item>Client code has called <see cref="Dispose"/>.</item>
+        /// </list>
+        /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
+        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
+        /// </remarks>
+        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
+
         /// <summary>Gets or sets the value to set the <see cref="S101Message.Slot"/> property to for a message
         /// containing a <see cref="KeepAliveRequest"/> command.</summary>
         /// <value>The slot to set. The default is <c>0x00</c>.</value>
@@ -242,27 +263,6 @@ namespace Lawo.EmberPlusSharp.S101
         {
             this.DisposeCore(true);
         }
-
-        /// <summary>Occurs when an out-of-frame byte has been received.</summary>
-        public event EventHandler<OutOfFrameByteReceivedEventArgs> OutOfFrameByteReceived;
-
-        /// <summary>Occurs when the client has received the full payload of a message with an <see cref="EmberData"/>
-        /// command.</summary>
-        public event EventHandler<MessageReceivedEventArgs> EmberDataReceived;
-
-        /// <summary>Occurs when the connection to the provider has been lost.</summary>
-        /// <remarks>
-        /// <para>This event is raised in the following situations:
-        /// <list type="bullet">
-        /// <item>There was a communication error, or</item>
-        /// <item>The remote host has failed to answer a <see cref="KeepAliveRequest"/>, or</item>
-        /// <item>The remote host has gracefully shutdown its connection, or</item>
-        /// <item>Client code has called <see cref="Dispose"/>.</item>
-        /// </list>
-        /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
-        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
-        /// </remarks>
-        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

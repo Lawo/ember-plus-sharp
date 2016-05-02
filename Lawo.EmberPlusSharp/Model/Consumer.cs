@@ -45,6 +45,20 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Occurs when the connection to the provider has been lost.</summary>
+        /// <remarks>
+        /// <para>This event is raised in the following situations:
+        /// <list type="bullet">
+        /// <item>There was a communication error, or</item>
+        /// <item>The remote host has failed to answer a <see cref="KeepAliveRequest"/>, or</item>
+        /// <item>The remote host has gracefully shutdown its connection, or</item>
+        /// <item>Client code has called <see cref="Dispose"/>.</item>
+        /// </list>
+        /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
+        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
+        /// </remarks>
+        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
+
         /// <summary>Gets the root of the object tree that mirrors the state of the tree published by the provider.
         /// </summary>
         public TRoot Root
@@ -217,20 +231,6 @@ namespace Lawo.EmberPlusSharp.Model
             result.SendReceiveLoop();
             return result;
         }
-
-        /// <summary>Occurs when the connection to the provider has been lost.</summary>
-        /// <remarks>
-        /// <para>This event is raised in the following situations:
-        /// <list type="bullet">
-        /// <item>There was a communication error, or</item>
-        /// <item>The remote host has failed to answer a <see cref="KeepAliveRequest"/>, or</item>
-        /// <item>The remote host has gracefully shutdown its connection, or</item>
-        /// <item>Client code has called <see cref="Dispose"/>.</item>
-        /// </list>
-        /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
-        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
-        /// </remarks>
-        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -499,6 +499,11 @@ namespace Lawo.EmberPlusSharp.Model
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            internal int MessageCount
+            {
+                get { return this.queue.Count; }
+            }
+
             internal void OnMessageReceived(object sender, MessageReceivedEventArgs e)
             {
                 this.queue.Enqueue(e);
@@ -525,11 +530,6 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 await await Task.WhenAny(this.connectionLost.Task, this.nonEmpty.Task);
                 this.nonEmpty = new TaskCompletionSource<bool>();
-            }
-
-            internal int MessageCount
-            {
-                get { return this.queue.Count; }
             }
 
             internal MessageReceivedEventArgs DequeueMessage()

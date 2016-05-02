@@ -29,6 +29,19 @@ namespace Lawo.EmberPlusSharp.Model
             get { return this.offset; }
         }
 
+        /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are equal.</summary>
+        public static bool operator ==(StreamDescription left, StreamDescription right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are not equal.
+        /// </summary>
+        public static bool operator !=(StreamDescription left, StreamDescription right)
+        {
+            return !left.Equals(right);
+        }
+
         /// <inheritdoc/>
         public bool Equals(StreamDescription other)
         {
@@ -46,19 +59,6 @@ namespace Lawo.EmberPlusSharp.Model
         public override int GetHashCode()
         {
             return HashCode.Combine((int)this.format, this.offset);
-        }
-
-        /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are equal.</summary>
-        public static bool operator ==(StreamDescription left, StreamDescription right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are not equal.
-        /// </summary>
-        public static bool operator !=(StreamDescription left, StreamDescription right)
-        {
-            return !left.Equals(right);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
