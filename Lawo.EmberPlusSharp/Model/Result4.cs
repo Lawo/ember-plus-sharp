@@ -60,8 +60,8 @@ namespace Lawo.EmberPlusSharp.Model
             ValueReader<T1> item1Reader,
             ValueReader<T2> item2Reader,
             ValueReader<T3> item3Reader,
-            ValueReader<T4> item4Reader) :
-            base(item1Reader, item2Reader, item3Reader, item4Reader)
+            ValueReader<T4> item4Reader)
+            : base(item1Reader, item2Reader, item3Reader, item4Reader)
         {
             this.component1Reader = item1Reader;
             this.component2Reader = item2Reader;

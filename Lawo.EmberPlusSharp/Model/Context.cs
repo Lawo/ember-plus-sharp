@@ -8,8 +8,8 @@ namespace Lawo.EmberPlusSharp.Model
 {
     internal sealed class Context
     {
-        internal Context(IParent parent, int number, string identifier) :
-            this(parent, number, identifier, ChildrenRetrievalPolicy.All)
+        internal Context(IParent parent, int number, string identifier)
+            : this(parent, number, identifier, ChildrenRetrievalPolicy.All)
         {
         }
 

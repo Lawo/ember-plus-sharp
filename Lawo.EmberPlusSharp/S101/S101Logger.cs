@@ -29,8 +29,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <see cref="S101Logger(EmberTypeBag, TextWriter, XmlWriterSettings)">S101Logger(
         /// <paramref name="types"/>, <paramref name="logWriter"/>, new XmlWriterSettings { Indent = true })</see>.
         /// </summary>
-        public S101Logger(EmberTypeBag types, TextWriter logWriter) :
-            this(types, logWriter, new XmlWriterSettings { Indent = true })
+        public S101Logger(EmberTypeBag types, TextWriter logWriter)
+            : this(types, logWriter, new XmlWriterSettings { Indent = true })
         {
         }
 
@@ -43,8 +43,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <see cref="XmlWriter.Create(TextWriter, XmlWriterSettings)"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="types"/>, <paramref name="logWriter"/> and/or
         /// <paramref name="settings"/> equal <c>null</c>.</exception>
-        public S101Logger(EmberTypeBag types, TextWriter logWriter, XmlWriterSettings settings) :
-            this(types, XmlWriter.Create(ValidateLogWriter(logWriter), settings))
+        public S101Logger(EmberTypeBag types, TextWriter logWriter, XmlWriterSettings settings)
+            : this(types, XmlWriter.Create(ValidateLogWriter(logWriter), settings))
         {
         }
 

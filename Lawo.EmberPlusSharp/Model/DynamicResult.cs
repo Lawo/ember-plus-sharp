@@ -11,8 +11,8 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class DynamicResult : ResultBase<DynamicResult>
     {
-        internal DynamicResult(IReadOnlyList<KeyValuePair<string, ParameterType>> expectedTypes) :
-            base(expectedTypes.Select(t => CreateReader(t)).ToArray())
+        internal DynamicResult(IReadOnlyList<KeyValuePair<string, ParameterType>> expectedTypes)
+            : base(expectedTypes.Select(t => CreateReader(t)).ToArray())
         {
         }
 

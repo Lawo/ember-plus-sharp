@@ -47,8 +47,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Result(ValueReader<T1> item1Reader, ValueReader<T2> item2Reader, ValueReader<T3> item3Reader) :
-            base(item1Reader, item2Reader, item3Reader)
+        private Result(ValueReader<T1> item1Reader, ValueReader<T2> item2Reader, ValueReader<T3> item3Reader)
+            : base(item1Reader, item2Reader, item3Reader)
         {
             this.component1Reader = item1Reader;
             this.component2Reader = item2Reader;

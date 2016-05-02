@@ -54,8 +54,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger)">S101Client(<paramref name="connection"/>,
         /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, null)</see>.</summary>
         [CLSCompliant(false)]
-        public S101Client(IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync) :
-            this(connection, readAsync, writeAsync, null)
+        public S101Client(IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync)
+            : this(connection, readAsync, writeAsync, null)
         {
         }
 
@@ -65,8 +65,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// </summary>
         [CLSCompliant(false)]
         public S101Client(
-            IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync, IS101Logger logger) :
-            this(connection, readAsync, writeAsync, logger, 3000, 8192)
+            IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync, IS101Logger logger)
+            : this(connection, readAsync, writeAsync, logger, 3000, 8192)
         {
         }
 

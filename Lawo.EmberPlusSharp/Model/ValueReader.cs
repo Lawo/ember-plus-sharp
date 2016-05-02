@@ -12,7 +12,7 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class ValueReader<T> : IValueReader
     {
-        private static readonly Func<EmberReader, T> ReadValueCore = GetReadValueCore();
+        private static readonly Func<EmberReader, T> ReadValueCore = (Func<EmberReader, T>)GetReadValueCore();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,34 +30,29 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static Func<EmberReader, T> GetReadValueCore()
+        private static Delegate GetReadValueCore()
         {
             var valueType = typeof(T);
 
             if (valueType == typeof(long))
             {
-                return (Func<EmberReader, T>)(Delegate)(Func<EmberReader, long>)
-                    EmberReaderExtensions.AssertAndReadContentsAsInt64;
+                return (Func<EmberReader, long>)EmberReaderExtensions.AssertAndReadContentsAsInt64;
             }
             else if (valueType == typeof(double))
             {
-                return (Func<EmberReader, T>)(Delegate)(Func<EmberReader, double>)
-                    EmberReaderExtensions.AssertAndReadContentsAsDouble;
+                return (Func<EmberReader, double>)EmberReaderExtensions.AssertAndReadContentsAsDouble;
             }
             else if (valueType == typeof(string))
             {
-                return (Func<EmberReader, T>)(Delegate)(Func<EmberReader, string>)
-                    EmberReaderExtensions.AssertAndReadContentsAsString;
+                return (Func<EmberReader, string>)EmberReaderExtensions.AssertAndReadContentsAsString;
             }
             else if (valueType == typeof(bool))
             {
-                return (Func<EmberReader, T>)(Delegate)(Func<EmberReader, bool>)
-                    EmberReaderExtensions.AssertAndReadContentsAsBoolean;
+                return (Func<EmberReader, bool>)EmberReaderExtensions.AssertAndReadContentsAsBoolean;
             }
             else
             {
-                return (Func<EmberReader, T>)(Delegate)(Func<EmberReader, byte[]>)
-                    EmberReaderExtensions.AssertAndReadContentsAsByteArray;
+                return (Func<EmberReader, byte[]>)EmberReaderExtensions.AssertAndReadContentsAsByteArray;
             }
         }
     }
