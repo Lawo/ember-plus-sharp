@@ -19,7 +19,8 @@ namespace Lawo.EmberPlusSharp.Model
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public abstract class Element<TMostDerived> : Element where TMostDerived : Element<TMostDerived>
+    public abstract class Element<TMostDerived> : Element
+        where TMostDerived : Element<TMostDerived>
     {
         private static readonly Func<TMostDerived> Constructor = GetConstructor();
 
@@ -44,7 +45,8 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal T ReadEnum<T>(EmberReader reader, string fieldName) where T : struct
+        internal T ReadEnum<T>(EmberReader reader, string fieldName)
+            where T : struct
         {
             Exception exception = null;
 

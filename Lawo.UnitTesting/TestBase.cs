@@ -37,7 +37,8 @@ namespace Lawo.UnitTesting
         /// expected exception. Note: this exception is deliberately inaccessible to client code, so that it cannot be
         /// caught.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean way around a type parameter here.")]
-        public static void AssertThrow<TException>(params Action[] actions) where TException : Exception
+        public static void AssertThrow<TException>(params Action[] actions)
+            where TException : Exception
         {
             AssertThrowCore<TException>(actions, null);
         }
@@ -54,7 +55,8 @@ namespace Lawo.UnitTesting
         /// expected exception. Note: this exception is deliberately inaccessible to client code, so that it cannot be
         /// caught.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean way around a type parameter here.")]
-        public static void AssertThrow<TException>(Action action, string expectedMessage) where TException : Exception
+        public static void AssertThrow<TException>(Action action, string expectedMessage)
+            where TException : Exception
         {
             AssertThrowCore<TException>(new[] { action }, expectedMessage);
         }
@@ -68,7 +70,8 @@ namespace Lawo.UnitTesting
         /// expected exception. Note: this exception is deliberately inaccessible to client code, so that it cannot be
         /// caught.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean way around a type parameter here.")]
-        public static Task AssertThrowAsync<TException>(params Func<Task>[] actions) where TException : Exception
+        public static Task AssertThrowAsync<TException>(params Func<Task>[] actions)
+            where TException : Exception
         {
             return AssertThrowCoreAsync<TException>(actions, null);
         }
@@ -98,7 +101,8 @@ namespace Lawo.UnitTesting
         /// <exception cref="Exception">Some of the expected methods are not present. See message for more information.
         /// </exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "There's no clean way around a type parameter here.")]
-        public static void TestStandardExceptionConstructors<T>() where T : Exception, new()
+        public static void TestStandardExceptionConstructors<T>()
+            where T : Exception, new()
         {
             T innerException = new T();
             CheckPropagation(innerException, null, null);
@@ -116,7 +120,8 @@ namespace Lawo.UnitTesting
         /// <param name="equal">References the equality operator.</param>
         /// <param name="notEqual">References the inequality operator.</param>
         public static void TestStructEquality<T>(
-            T obj1, T obj2, Func<T, T, bool> equal, Func<T, T, bool> notEqual) where T : struct, IEquatable<T>
+            T obj1, T obj2, Func<T, T, bool> equal, Func<T, T, bool> notEqual)
+            where T : struct, IEquatable<T>
         {
             if (equal == null)
             {
@@ -153,7 +158,8 @@ namespace Lawo.UnitTesting
         /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <returns>The new value of the property.</returns>
         public static async Task<TProperty> WaitForChangeAsync<TOwner, TProperty>(
-            IProperty<TOwner, TProperty> property, TProperty expected) where TOwner : INotifyPropertyChanged
+            IProperty<TOwner, TProperty> property, TProperty expected)
+            where TOwner : INotifyPropertyChanged
         {
             Predicate<TProperty> predicate = v => GenericCompare.Equals(expected, v);
 

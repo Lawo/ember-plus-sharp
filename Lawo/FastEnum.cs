@@ -19,7 +19,8 @@ namespace Lawo
         /// </summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        public static bool IsDefined<TEnum>(TEnum value) where TEnum : struct
+        public static bool IsDefined<TEnum>(TEnum value)
+            where TEnum : struct
         {
             return EnumCache<TEnum>.IsDefined(value);
         }
@@ -28,7 +29,8 @@ namespace Lawo
         /// </summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        public static TEnum ToEnum<TEnum>(long value) where TEnum : struct
+        public static TEnum ToEnum<TEnum>(long value)
+            where TEnum : struct
         {
             return EnumCache<TEnum>.ToEnum(value);
         }
@@ -38,7 +40,8 @@ namespace Lawo
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
         [CLSCompliant(false)]
-        public static TEnum ToEnum<TEnum>(ulong value) where TEnum : struct
+        public static TEnum ToEnum<TEnum>(ulong value)
+            where TEnum : struct
         {
             return EnumCache<TEnum>.ToEnum(unchecked((long)value));
         }
@@ -46,7 +49,8 @@ namespace Lawo
         /// <summary>Returns the integer represented by <paramref name="value"/>.</summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        public static long ToInt64<TEnum>(TEnum value) where TEnum : struct
+        public static long ToInt64<TEnum>(TEnum value)
+            where TEnum : struct
         {
             return EnumCache<TEnum>.ToInt64(value);
         }
@@ -55,7 +59,8 @@ namespace Lawo
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
         [CLSCompliant(false)]
-        public static ulong ToUInt64<TEnum>(TEnum value) where TEnum : struct
+        public static ulong ToUInt64<TEnum>(TEnum value)
+            where TEnum : struct
         {
             return unchecked((ulong)EnumCache<TEnum>.ToInt64(value));
         }
@@ -64,7 +69,8 @@ namespace Lawo
         /// string representation.</summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        public static IReadOnlyDictionary<TEnum, string> GetValueNameMap<TEnum>() where TEnum : struct
+        public static IReadOnlyDictionary<TEnum, string> GetValueNameMap<TEnum>()
+            where TEnum : struct
         {
             return EnumCache<TEnum>.GetValueNameMap();
         }
@@ -73,14 +79,16 @@ namespace Lawo
         /// <typeparamref name="TEnum"/> to its named constant.</summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        public static IReadOnlyDictionary<string, TEnum> GetNameValueMap<TEnum>() where TEnum : struct
+        public static IReadOnlyDictionary<string, TEnum> GetNameValueMap<TEnum>()
+            where TEnum : struct
         {
             return EnumCache<TEnum>.GetNameValueMap();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static class EnumCache<TEnum> where TEnum : struct
+        private static class EnumCache<TEnum>
+            where TEnum : struct
         {
             private static readonly Dictionary<TEnum, string> ValueNameMap;
             private static readonly Dictionary<string, TEnum> NameValueMap;

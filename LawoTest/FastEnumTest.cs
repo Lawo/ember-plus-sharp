@@ -75,20 +75,23 @@ namespace Lawo
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static void ToObjectPerformanceTest<T>(T value) where T : struct
+        private static void ToObjectPerformanceTest<T>(T value)
+            where T : struct
         {
             PerformanceTest(ToObjectTest, value);
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
-        private static void PerformanceTest<T>(Func<T, int, double> test, T value) where T : struct
+        private static void PerformanceTest<T>(Func<T, int, double> test, T value)
+            where T : struct
         {
             test(value, 1); // Make sure everything is JITed.
             Console.WriteLine("{0} Ratio: {1}", typeof(T).Name, test(value, 100000));
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", Justification = "Test code.")]
-        private static double IsDefinedTest<T>(T value, int count) where T : struct
+        private static double IsDefinedTest<T>(T value, int count)
+            where T : struct
         {
             var conventionalCount = 0;
             Stopwatch conventional = new Stopwatch();
@@ -125,7 +128,8 @@ namespace Lawo
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", Justification = "Test code.")]
-        private static double ToObjectTest<T>(T value, int count) where T : struct
+        private static double ToObjectTest<T>(T value, int count)
+            where T : struct
         {
             var numericValue = FastEnum.ToInt64(value);
             Assert.AreEqual(numericValue, unchecked((long)FastEnum.ToUInt64(value)));

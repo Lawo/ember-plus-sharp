@@ -1431,7 +1431,8 @@ namespace Lawo.EmberPlusSharp.Model
         private static Task TestConsumerAfterFirstRequest<TRoot>(
             Func<Task<Consumer<TRoot>>, S101Client, Task> testCallback,
             IS101Logger consumerLogger,
-            IS101Logger providerLogger) where TRoot : Root<TRoot>
+            IS101Logger providerLogger)
+            where TRoot : Root<TRoot>
         {
             return TestNoExceptionsAsync(
                 async (consumerClient, providerClient) =>
@@ -1538,7 +1539,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         private static void AssertNotified<TType, TProperty>(
-            TType obj, Expression<Func<TType, TProperty>> getValue, TProperty value) where TType : INotifyPropertyChanged
+            TType obj, Expression<Func<TType, TProperty>> getValue, TProperty value)
+            where TType : INotifyPropertyChanged
         {
             var propertyInfo = (PropertyInfo)((MemberExpression)getValue.Body).Member;
             Assert.AreNotEqual(value, propertyInfo.GetValue(obj));
@@ -1673,7 +1675,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
         private static Task TestWithRobot<TRoot>(
-            Func<Consumer<TRoot>, Task> testCallback, bool log, string logXmlName, params object[] args) where TRoot : Root<TRoot>
+            Func<Consumer<TRoot>, Task> testCallback, bool log, string logXmlName, params object[] args)
+            where TRoot : Root<TRoot>
         {
             return TestWithRobot<ModelPayloads>(
                 client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), c => testCallback(c)),
@@ -1714,7 +1717,8 @@ namespace Lawo.EmberPlusSharp.Model
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Test code.")]
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", Justification = "Test code.")]
-        private static async Task BigTreeAssemblyTestCore<TRoot>(int magnitude, bool writeLog) where TRoot : Root<TRoot>
+        private static async Task BigTreeAssemblyTestCore<TRoot>(int magnitude, bool writeLog)
+            where TRoot : Root<TRoot>
         {
             var encodedPayloadStream = await GetS101MessageStreamAsync(GetBigTreePayload(magnitude));
             var encodedPayload = encodedPayloadStream.ToArray();
@@ -1874,7 +1878,8 @@ namespace Lawo.EmberPlusSharp.Model
                 root.CollectionNode[root.CollectionNode.Children[2].Number], root.CollectionNode.Children[2]);
         }
 
-        private static TRoot GetRoot<TRoot>(string logXmlName) where TRoot : Root<TRoot>
+        private static TRoot GetRoot<TRoot>(string logXmlName)
+            where TRoot : Root<TRoot>
         {
             TRoot root = null;
             AsyncPump.Run(
@@ -1883,7 +1888,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         private static void AssertEqual<TCollectionNode>(
-            MainRoot mainRoot, InterfaceElementRoot<TCollectionNode> interfaceRoot) where TCollectionNode : INode
+            MainRoot mainRoot, InterfaceElementRoot<TCollectionNode> interfaceRoot)
+            where TCollectionNode : INode
         {
             Assert.AreEqual(mainRoot.BooleanParameter.Value, interfaceRoot.BooleanParameter.Value);
             Assert.AreEqual(mainRoot.IntegerParameter.Value, interfaceRoot.IntegerParameter.Value);

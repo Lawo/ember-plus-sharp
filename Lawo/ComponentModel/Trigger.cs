@@ -45,7 +45,8 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private sealed class Forwarder<TOwner, TProperty> : IDisposable where TOwner : INotifyPropertyChanged
+        private sealed class Forwarder<TOwner, TProperty> : IDisposable
+            where TOwner : INotifyPropertyChanged
         {
             private readonly IProperty<TOwner, TProperty> property;
             private readonly Action<IProperty<TOwner, TProperty>> handler;

@@ -464,7 +464,8 @@ namespace Lawo.EmberPlusSharp.S101
             this.OnEvent(this.OutOfFrameByteReceived, e);
         }
 
-        private void OnEvent<TEventArgs>(EventHandler<TEventArgs> handler, TEventArgs args) where TEventArgs : EventArgs
+        private void OnEvent<TEventArgs>(EventHandler<TEventArgs> handler, TEventArgs args)
+            where TEventArgs : EventArgs
         {
             if (handler != null)
             {

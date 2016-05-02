@@ -111,7 +111,8 @@ namespace Lawo.EmberPlusSharp.S101
         protected static Task TestNoExceptionsAsync<TConsumer>(
             Func<TConsumer, S101Client, Task> testCallback,
             Func<Task<TConsumer>> createConsumer,
-            Func<Task<S101Client>> createProvider) where TConsumer : IMonitoredConnection
+            Func<Task<S101Client>> createProvider)
+            where TConsumer : IMonitoredConnection
         {
             return TestNoExceptionsAsync(
                 (ct, p) => MonitorConnection(ct, c => testCallback(c, p)), createConsumer, createProvider);
@@ -126,7 +127,8 @@ namespace Lawo.EmberPlusSharp.S101
         protected static Task TestNoExceptionsAsync<TConsumer>(
             Func<Task<TConsumer>, S101Client, Task> testCallback,
             Func<Task<TConsumer>> createConsumer,
-            Func<Task<S101Client>> createProvider) where TConsumer : IMonitoredConnection
+            Func<Task<S101Client>> createProvider)
+            where TConsumer : IMonitoredConnection
         {
             var providerTask = createProvider();
             var consumerTask = createConsumer();
@@ -234,7 +236,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <typeparam name="TConnection">The type of the connection.</typeparam>
         protected static async Task MonitorConnection<TConnection>(
             Task<TConnection> connectionTask,
-            Func<TConnection, Task> callback) where TConnection : IMonitoredConnection
+            Func<TConnection, Task> callback)
+            where TConnection : IMonitoredConnection
         {
             Task waitForConnectionLost;
 

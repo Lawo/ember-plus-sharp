@@ -18,7 +18,8 @@ namespace Lawo
         /// <param name="resource">The resource object that should be disposed in the event of failure. Can be
         /// <c>null</c>.</param>
         /// <seealso cref="ScopeGuard{T}"/>
-        public static ScopeGuard<T> Create<T>(T resource) where T : IDisposable
+        public static ScopeGuard<T> Create<T>(T resource)
+            where T : IDisposable
         {
             return new ScopeGuard<T>(resource);
         }

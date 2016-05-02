@@ -17,7 +17,8 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TEnum">The enumeration type.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
-    public sealed class EnumParameter<TEnum> : ValueParameter<EnumParameter<TEnum>, TEnum> where TEnum : struct
+    public sealed class EnumParameter<TEnum> : ValueParameter<EnumParameter<TEnum>, TEnum>
+        where TEnum : struct
     {
         private readonly EnumParameterImpl<TEnum> impl;
 

@@ -15,7 +15,8 @@ namespace Lawo.EmberPlusSharp.Model
     using Ember;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:PartialElementsMustBeDocumented", Justification = "Temporary, TODO")]
-    public abstract partial class FieldNode<TMostDerived> where TMostDerived : FieldNode<TMostDerived>
+    public abstract partial class FieldNode<TMostDerived>
+        where TMostDerived : FieldNode<TMostDerived>
     {
         private abstract class MetaElement
         {

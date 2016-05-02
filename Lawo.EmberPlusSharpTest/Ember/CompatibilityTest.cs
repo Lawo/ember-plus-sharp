@@ -117,7 +117,8 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         private void CollectionAssertEqual<T>(
-            Action<EmberWriter, EmberId, T> write, Func<EmberLib.EmberReader, T> read, T value) where T : ICollection
+            Action<EmberWriter, EmberId, T> write, Func<EmberLib.EmberReader, T> read, T value)
+            where T : ICollection
         {
             this.AssertEqual(write, read, value, (l, r) => CollectionAssert.AreEqual(l, r));
         }
@@ -128,7 +129,8 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         private void CollectionAssertEqual<T>(
-            Action<EmberLib.EmberWriter, BerTag, T> write, Func<EmberReader, T> read, T value) where T : ICollection
+            Action<EmberLib.EmberWriter, BerTag, T> write, Func<EmberReader, T> read, T value)
+            where T : ICollection
         {
             this.AssertEqual(write, read, value, (l, r) => CollectionAssert.AreEqual(l, r));
         }

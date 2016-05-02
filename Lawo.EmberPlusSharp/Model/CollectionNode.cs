@@ -22,7 +22,8 @@ namespace Lawo.EmberPlusSharp.Model
     /// </typeparam>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
-    public sealed class CollectionNode<TElement> : Node<CollectionNode<TElement>> where TElement : IElement
+    public sealed class CollectionNode<TElement> : Node<CollectionNode<TElement>>
+        where TElement : IElement
     {
         private static readonly ReadContentsMethod ReadContentsCallback = GetReadContentsMethod();
         private readonly ObservableCollection<TElement> children = new ObservableCollection<TElement>();

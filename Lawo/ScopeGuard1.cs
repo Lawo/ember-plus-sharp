@@ -43,7 +43,8 @@ namespace Lawo
     /// </example>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "These operations do not make sense on this type.")]
-    public sealed class ScopeGuard<T> : IDisposable where T : IDisposable
+    public sealed class ScopeGuard<T> : IDisposable
+        where T : IDisposable
     {
         private readonly T resource;
         private bool dismissed;

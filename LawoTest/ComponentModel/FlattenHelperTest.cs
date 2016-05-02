@@ -183,7 +183,8 @@ namespace Lawo.ComponentModel
             return this.Random.Next(100);
         }
 
-        private T GetRandomChild<T>(IList<T> children) where T : class
+        private T GetRandomChild<T>(IList<T> children)
+            where T : class
         {
             return children.Count > 0 ? children[this.Random.Next(children.Count)] : null;
         }

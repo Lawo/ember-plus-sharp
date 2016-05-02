@@ -66,8 +66,8 @@ namespace Lawo.EmberPlusSharp.Model
             this.result = result;
         }
 
-        internal Task<TResult> InvokeCoreAsync<TResult>(
-            TResult invokeResult, params Action<EmberWriter>[] writers) where TResult : ResultBase<TResult>
+        internal Task<TResult> InvokeCoreAsync<TResult>(TResult invokeResult, params Action<EmberWriter>[] writers)
+            where TResult : ResultBase<TResult>
         {
             this.invocations.Enqueue(new KeyValuePair<IInvocationResult, Action<EmberWriter>[]>(invokeResult, writers));
             this.HasChanges = true;

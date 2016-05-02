@@ -15,7 +15,8 @@ namespace Lawo.EmberPlusSharp.Model
 
     using Ember;
 
-    internal sealed class EnumParameterImpl<TEnum> where TEnum : struct
+    internal sealed class EnumParameterImpl<TEnum>
+        where TEnum : struct
     {
         private static readonly bool IsEnum = typeof(TEnum).GetTypeInfo().IsEnum;
         private readonly IParameter parent;

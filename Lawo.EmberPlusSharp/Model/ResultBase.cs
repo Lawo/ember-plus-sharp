@@ -19,7 +19,8 @@ namespace Lawo.EmberPlusSharp.Model
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public abstract class ResultBase<TMostDerived> : IInvocationResult where TMostDerived : ResultBase<TMostDerived>
+    public abstract class ResultBase<TMostDerived> : IInvocationResult
+        where TMostDerived : ResultBase<TMostDerived>
     {
         private readonly IValueReader[] valueReaders;
         private readonly TaskCompletionSource<TMostDerived> taskCompletionSource =

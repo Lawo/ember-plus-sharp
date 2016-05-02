@@ -16,7 +16,8 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Function", Justification = "Intentional, usability from other languages is not a priority.")]
-    public sealed class Function<TResult> : StaticFunction<Function<TResult>> where TResult : ResultBase<TResult>, new()
+    public sealed class Function<TResult> : StaticFunction<Function<TResult>>
+        where TResult : ResultBase<TResult>, new()
     {
         /// <summary>Schedules an invocation of this function.</summary>
         /// <exception cref="InvocationFailedException">The provider reported that the invocation failed.</exception>
