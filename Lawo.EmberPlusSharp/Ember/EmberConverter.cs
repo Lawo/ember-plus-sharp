@@ -79,7 +79,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw new ArgumentNullException("writer");
             }
 
-            this.ToXmlCore(reader, writer, new FieldPath<int, EmberId>(), EmberGlobal.InnerNumber);
+            this.ToXmlCore(reader, writer, default(FieldPath<int, EmberId>), EmberGlobal.InnerNumber);
         }
 
         /// <summary>Reads XML with <paramref name="reader"/> and returns the equivalent EmBER representation.</summary>
@@ -117,7 +117,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw new ArgumentNullException("writer");
             }
 
-            this.FromXmlCore(reader, writer, new FieldPath<string, string>(), EmberGlobal.Name);
+            this.FromXmlCore(reader, writer, default(FieldPath<string, string>), EmberGlobal.Name);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

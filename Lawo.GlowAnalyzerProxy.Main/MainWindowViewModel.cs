@@ -428,7 +428,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
                         i =>
                         {
                             i.Dispose();
-                            return new EventInfo();
+                            return default(EventInfo);
                         };
 
                     await this.EnqueueLogOperationAsync(logInfo, null, null, null, operation);

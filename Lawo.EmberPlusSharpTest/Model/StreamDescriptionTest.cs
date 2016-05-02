@@ -22,7 +22,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             var descr1 = (StreamDescription)typeof(StreamDescription).GetTypeInfo().DeclaredConstructors.First().Invoke(
                 new object[] { StreamFormat.Int16BigEndian, 10 });
-            TestStructEquality(descr1, new StreamDescription(), (l, r) => l == r, (l, r) => l != r);
+            TestStructEquality(descr1, default(StreamDescription), (l, r) => l == r, (l, r) => l != r);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Lawo.EmberPlusSharp.Model
     /// a node always assumes the state of the child with the lowest state.</remarks>
     internal struct RetrievalState : IEquatable<RetrievalState>
     {
-        private static readonly RetrievalState NoneField = new RetrievalState();
+        private static readonly RetrievalState NoneField = default(RetrievalState);
         private static readonly RetrievalState RequestSentField = new RetrievalState(1);
         private static readonly RetrievalState CompleteField = new RetrievalState(2);
         private static readonly RetrievalState VerifiedField = new RetrievalState(3);

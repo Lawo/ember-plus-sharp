@@ -20,7 +20,7 @@ namespace Lawo.EmberPlusSharp.Ember
         [TestMethod]
         public void MainTest()
         {
-            var u1 = new EmberId();
+            var u1 = default(EmberId);
             var n1 = this.Random.Next();
             var n2 = n1 + 1;
             var a1 = EmberId.CreateApplication(n1);

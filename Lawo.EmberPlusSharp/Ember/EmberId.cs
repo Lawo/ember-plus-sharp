@@ -92,7 +92,7 @@ namespace Lawo.EmberPlusSharp.Ember
             }
             else
             {
-                emberId = new EmberId();
+                emberId = default(EmberId);
                 return false;
             }
         }

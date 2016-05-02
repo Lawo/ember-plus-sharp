@@ -123,7 +123,7 @@ namespace Lawo.EmberPlusSharp.Ember
         private static FieldPath<int, EmberId> GetOuterFieldsIds(IEnumerable<Type> outerFields)
         {
             return outerFields.Aggregate(
-                new FieldPath<int, EmberId>(), (p, f) => FieldPath<int, EmberId>.Append(p, GetFieldIds(f)));
+                default(FieldPath<int, EmberId>), (p, f) => FieldPath<int, EmberId>.Append(p, GetFieldIds(f)));
         }
 
         private static Field<int, EmberId> GetFieldIds(Type outerField)
@@ -137,7 +137,7 @@ namespace Lawo.EmberPlusSharp.Ember
             Dictionary<int, string> typeNames, IEnumerable<Type> outerFields)
         {
             return outerFields.Aggregate(
-                new FieldPath<string, string>(), (p, f) => FieldPath<string, string>.Append(p, GetFieldNames(typeNames, f)));
+                default(FieldPath<string, string>), (p, f) => FieldPath<string, string>.Append(p, GetFieldNames(typeNames, f)));
         }
 
         private static Field<string, string> GetFieldNames(Dictionary<int, string> typeNames, Type outerField)
