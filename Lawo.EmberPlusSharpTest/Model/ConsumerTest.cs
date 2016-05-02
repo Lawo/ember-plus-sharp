@@ -1345,89 +1345,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Task StreamTestCore(object intValue, object enumValue, object realValue)
-        {
-            return this.StreamTestCore(intValue, enumValue, realValue, Genuine, Genuine, false);
-        }
-
-        private async Task StreamTestCore(
-            object intValue,
-            object enumValue,
-            object realValue,
-            Func<int, int> failFormat,
-            Func<byte[], byte[]> failEncoding,
-            bool failType)
-        {
-            await this.StreamTestCore(intValue, enumValue, realValue, false, failFormat, failEncoding, failType);
-            await this.StreamTestCore(intValue, enumValue, realValue, true, failFormat, failEncoding, failType);
-        }
-
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
-        private Task StreamTestCore(
-            object intValue,
-            object enumValue,
-            object realValue,
-            bool isLittleEndian,
-            Func<int, int> failFormat,
-            Func<byte[], byte[]> failEncoding,
-            bool failType)
-        {
-            var boolValue = this.GetRandomBoolean();
-            var intFormat = GetFormat(intValue);
-            var enumFormat = GetFormat(enumValue);
-            var octetStringValue = new byte[this.Random.Next(0, 5)];
-            this.Random.NextBytes(octetStringValue);
-            var stringValue = GetRandomString();
-
-            var intBytes = GetBytes(intValue);
-            var enumBytes = GetBytes(enumValue);
-            var realBytes = GetBytes(realValue);
-
-            if (isLittleEndian != BitConverter.IsLittleEndian)
-            {
-                intBytes = intBytes.Reverse().ToArray();
-                enumBytes = enumBytes.Reverse().ToArray();
-                realBytes = realBytes.Reverse().ToArray();
-            }
-
-            var args =
-                new object[]
-                {
-                    failFormat(GetFormat(intValue, isLittleEndian)),
-                    0,
-                    failFormat(GetFormat(enumValue, isLittleEndian)),
-                    intBytes.Length,
-                    failFormat(GetFormat(realValue, isLittleEndian)),
-                    0,
-                    boolValue.ToString().ToLowerInvariant(),
-                    new SoapHexBinary(failEncoding(intBytes.Concat(enumBytes).ToArray())),
-                    new SoapHexBinary(failEncoding(octetStringValue)),
-                    failType ? "Real" : "Octetstring",
-                    failType ? realValue : new SoapHexBinary(failEncoding(realBytes)),
-                    stringValue
-                };
-
-            return TestWithRobot<StreamRoot>(
-                async consumer =>
-                {
-                    await Task.Delay(1000);
-                    var root = consumer.Root;
-                    Assert.AreEqual(boolValue, root.BooleanParameter.Value);
-
-                    // Assert.AreEqual fails if types are different. At this point we don't know the original type of
-                    // intValue or enumValue and we cannot cast object to int if the object happens to be a byte, for
-                    // example. We therefore need to use Convert rather than a cast.
-                    Assert.AreEqual(Convert.ToInt64(intValue), root.IntegerParameter.Value);
-                    Assert.AreEqual((Enumeration)Convert.ToInt32(enumValue.ToString()), root.EnumerationParameter.Value);
-                    CollectionAssert.AreEqual(octetStringValue, root.OctetstringParameter.Value);
-                    Assert.AreEqual(Convert.ToDouble(realValue), root.RealParameter.Value);
-                    Assert.AreEqual(stringValue, root.StringParameter.Value);
-                },
-                false,
-                "StreamLog.xml",
-                args);
-        }
-
         private static Task TestConsumerAfterFirstRequest<TRoot>(
             Func<Task<Consumer<TRoot>>, S101Client, Task> testCallback,
             IS101Logger consumerLogger,
@@ -1639,33 +1556,6 @@ namespace Lawo.EmberPlusSharp.Model
                 GlowTypes.Instance,
                 false,
                 logName);
-        }
-
-        private Task DynamicChildrenRetrievalPolicyTestAsync(bool delay)
-        {
-            return TestWithRobot<ModelPayloads>(
-                async client =>
-                {
-                    using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(
-                        client, Timeout.Infinite, ChildrenRetrievalPolicy.None))
-                    {
-                        consumer.AutoSendInterval = this.Random.Next(100, 5000);
-                        var root = consumer.Root;
-                        Assert.IsNull(root.Node);
-                        Assert.AreEqual(ChildrenRetrievalPolicy.None, root.ChildrenRetrievalPolicy);
-                        root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
-                        await WaitForCompletion(consumer, delay);
-                        Assert.IsNotNull(root.Node);
-                        Assert.AreEqual(ChildrenRetrievalPolicy.None, root.Node.ChildrenRetrievalPolicy);
-                        root.Node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All;
-                        await WaitForCompletion(consumer, delay);
-                    }
-                },
-                null,
-                null,
-                GlowTypes.Instance,
-                false,
-                "ChildrenRetrievalPolicyLog3.xml");
         }
 
         private static Task WaitForCompletion(Consumer<EmptyNodeRoot> consumer, bool delay)
@@ -2038,6 +1928,116 @@ namespace Lawo.EmberPlusSharp.Model
                 default:
                     throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unexpected type: {0}", value));
             }
+        }
+
+        private Task DynamicChildrenRetrievalPolicyTestAsync(bool delay)
+        {
+            return TestWithRobot<ModelPayloads>(
+                async client =>
+                {
+                    using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(
+                        client, Timeout.Infinite, ChildrenRetrievalPolicy.None))
+                    {
+                        consumer.AutoSendInterval = this.Random.Next(100, 5000);
+                        var root = consumer.Root;
+                        Assert.IsNull(root.Node);
+                        Assert.AreEqual(ChildrenRetrievalPolicy.None, root.ChildrenRetrievalPolicy);
+                        root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
+                        await WaitForCompletion(consumer, delay);
+                        Assert.IsNotNull(root.Node);
+                        Assert.AreEqual(ChildrenRetrievalPolicy.None, root.Node.ChildrenRetrievalPolicy);
+                        root.Node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All;
+                        await WaitForCompletion(consumer, delay);
+                    }
+                },
+                null,
+                null,
+                GlowTypes.Instance,
+                false,
+                "ChildrenRetrievalPolicyLog3.xml");
+        }
+
+        private Task StreamTestCore(object intValue, object enumValue, object realValue)
+        {
+            return this.StreamTestCore(intValue, enumValue, realValue, Genuine, Genuine, false);
+        }
+
+        private async Task StreamTestCore(
+            object intValue,
+            object enumValue,
+            object realValue,
+            Func<int, int> failFormat,
+            Func<byte[], byte[]> failEncoding,
+            bool failType)
+        {
+            await this.StreamTestCore(intValue, enumValue, realValue, false, failFormat, failEncoding, failType);
+            await this.StreamTestCore(intValue, enumValue, realValue, true, failFormat, failEncoding, failType);
+        }
+
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We need lowercase.")]
+        private Task StreamTestCore(
+            object intValue,
+            object enumValue,
+            object realValue,
+            bool isLittleEndian,
+            Func<int, int> failFormat,
+            Func<byte[], byte[]> failEncoding,
+            bool failType)
+        {
+            var boolValue = this.GetRandomBoolean();
+            var intFormat = GetFormat(intValue);
+            var enumFormat = GetFormat(enumValue);
+            var octetStringValue = new byte[this.Random.Next(0, 5)];
+            this.Random.NextBytes(octetStringValue);
+            var stringValue = GetRandomString();
+
+            var intBytes = GetBytes(intValue);
+            var enumBytes = GetBytes(enumValue);
+            var realBytes = GetBytes(realValue);
+
+            if (isLittleEndian != BitConverter.IsLittleEndian)
+            {
+                intBytes = intBytes.Reverse().ToArray();
+                enumBytes = enumBytes.Reverse().ToArray();
+                realBytes = realBytes.Reverse().ToArray();
+            }
+
+            var args =
+                new object[]
+                {
+                    failFormat(GetFormat(intValue, isLittleEndian)),
+                    0,
+                    failFormat(GetFormat(enumValue, isLittleEndian)),
+                    intBytes.Length,
+                    failFormat(GetFormat(realValue, isLittleEndian)),
+                    0,
+                    boolValue.ToString().ToLowerInvariant(),
+                    new SoapHexBinary(failEncoding(intBytes.Concat(enumBytes).ToArray())),
+                    new SoapHexBinary(failEncoding(octetStringValue)),
+                    failType ? "Real" : "Octetstring",
+                    failType ? realValue : new SoapHexBinary(failEncoding(realBytes)),
+                    stringValue
+                };
+
+            return TestWithRobot<StreamRoot>(
+                async consumer =>
+                {
+                    await Task.Delay(1000);
+                    var root = consumer.Root;
+                    Assert.AreEqual(boolValue, root.BooleanParameter.Value);
+
+                    // Assert.AreEqual fails if types are different. At this point we don't know the original type of
+                    // intValue or enumValue and we cannot cast object to int if the object happens to be a byte, for
+                    // example. We therefore need to use Convert rather than a cast.
+                    Assert.AreEqual(Convert.ToInt64(intValue), root.IntegerParameter.Value);
+                    Assert.AreEqual((Enumeration)Convert.ToInt32(enumValue.ToString()), root.EnumerationParameter.Value);
+                    CollectionAssert.AreEqual(octetStringValue, root.OctetstringParameter.Value);
+                    Assert.AreEqual(Convert.ToDouble(realValue), root.RealParameter.Value);
+                    Assert.AreEqual(stringValue, root.StringParameter.Value);
+                },
+                false,
+                "StreamLog.xml",
+                args);
         }
     }
 }

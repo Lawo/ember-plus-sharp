@@ -124,6 +124,13 @@ namespace Lawo.ComponentModel
         private Target target;
         private int targetNotifyCount;
 
+        private static void AssertOriginatedCounts(
+            int expectedSourceOriginated, int sourceOriginated, int expectedTargetOriginated, int targetOriginated)
+        {
+            Assert.AreEqual(expectedSourceOriginated, sourceOriginated);
+            Assert.AreEqual(expectedTargetOriginated, targetOriginated);
+        }
+
         private void AssertValues(
             string expectedSourceValue,
             int expectedSourceNotifyCount,
@@ -134,13 +141,6 @@ namespace Lawo.ComponentModel
             Assert.AreEqual(expectedSourceNotifyCount, this.sourceNotifyCount);
             Assert.AreEqual(expectedTargetValue, this.target.Property);
             Assert.AreEqual(expectedTargetNotifyCount, this.targetNotifyCount);
-        }
-
-        private static void AssertOriginatedCounts(
-            int expectedSourceOriginated, int sourceOriginated, int expectedTargetOriginated, int targetOriginated)
-        {
-            Assert.AreEqual(expectedSourceOriginated, sourceOriginated);
-            Assert.AreEqual(expectedTargetOriginated, targetOriginated);
         }
 
         private sealed class Source : NotifyPropertyChanged

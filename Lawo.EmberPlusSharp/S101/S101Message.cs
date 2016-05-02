@@ -56,14 +56,6 @@ namespace Lawo.EmberPlusSharp.S101
             set { this.Command.PacketFlags = value; }
         }
 
-        internal async Task WriteToAsync(WriteBuffer writerBuffer, CancellationToken cancellationToken)
-        {
-            await writerBuffer.ReserveAsync(2, cancellationToken);
-            writerBuffer[writerBuffer.Count++] = this.Slot;
-            writerBuffer[writerBuffer.Count++] = this.messageType;
-            await this.Command.WriteToAsync(writerBuffer, cancellationToken);
-        }
-
         internal static async Task<S101Message> ReadFromAsync(
             ReadBuffer readBuffer, CancellationToken cancellationToken)
         {
@@ -88,6 +80,14 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             return new S101Message(slot, messageType, command);
+        }
+
+        internal async Task WriteToAsync(WriteBuffer writerBuffer, CancellationToken cancellationToken)
+        {
+            await writerBuffer.ReserveAsync(2, cancellationToken);
+            writerBuffer[writerBuffer.Count++] = this.Slot;
+            writerBuffer[writerBuffer.Count++] = this.messageType;
+            await this.Command.WriteToAsync(writerBuffer, cancellationToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

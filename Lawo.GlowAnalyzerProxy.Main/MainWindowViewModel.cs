@@ -303,6 +303,55 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private bool isStopped = true;
         private DateTime now;
 
+        private static string GetCount(bool isValid, long count)
+        {
+            return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
+        }
+
+        private static string ValidatePort(string value)
+        {
+            int intValue;
+
+            if (!int.TryParse(value, out intValue))
+            {
+                return "Value is not an integer.";
+            }
+
+            if ((intValue < IPEndPoint.MinPort) || (intValue > IPEndPoint.MaxPort))
+            {
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Values lies outside of the interval [{0}, {1}].",
+                    IPEndPoint.MinPort,
+                    IPEndPoint.MaxPort);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static string ValidateFolder(string folder)
+        {
+            return Directory.Exists(folder) ? null : "Folder does not exist.";
+        }
+
+        private static string GetShortType(string type)
+        {
+            if (type == KeepAliveRequestString)
+            {
+                return "KA REQ";
+            }
+            else if (type == KeepAliveResponseString)
+            {
+                return "KA RSP";
+            }
+            else
+            {
+                return "Data";
+            }
+        }
+
         private async void UpdateLoop()
         {
             while (this.IsStarted)
@@ -602,55 +651,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             var paragraph = new Paragraph(new Run(text)) { FontFamily = new FontFamily("Courier"), FontSize = 12 };
             this.SelectedEventDetail = new FlowDocument() { PageWidth = 3000, Blocks = { paragraph } };
-        }
-
-        private static string GetCount(bool isValid, long count)
-        {
-            return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
-        }
-
-        private static string ValidatePort(string value)
-        {
-            int intValue;
-
-            if (!int.TryParse(value, out intValue))
-            {
-                return "Value is not an integer.";
-            }
-
-            if ((intValue < IPEndPoint.MinPort) || (intValue > IPEndPoint.MaxPort))
-            {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Values lies outside of the interval [{0}, {1}].",
-                    IPEndPoint.MinPort,
-                    IPEndPoint.MaxPort);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private static string ValidateFolder(string folder)
-        {
-            return Directory.Exists(folder) ? null : "Folder does not exist.";
-        }
-
-        private static string GetShortType(string type)
-        {
-            if (type == KeepAliveRequestString)
-            {
-                return "KA REQ";
-            }
-            else if (type == KeepAliveResponseString)
-            {
-                return "KA RSP";
-            }
-            else
-            {
-                return "Data";
-            }
         }
     }
 #pragma warning restore SA1124 // Do not use regions

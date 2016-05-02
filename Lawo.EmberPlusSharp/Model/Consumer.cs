@@ -73,50 +73,6 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        /// <summary>Calls <see cref="SendAsync"/>.</summary>
-        [Obsolete("Call SendAsync instead.")]
-        public Task SendChangesAsync()
-        {
-            return this.SendAsync();
-        }
-
-        /// <summary>Asynchronously sends the locally applied changes and invocations to the provider.</summary>
-        /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the
-        /// <see cref="S101Client"/> constructor, see <see cref="Exception.Message"/> for more information.</exception>
-        /// <exception cref="InvalidOperationException">This method was called from a thread other than the one that
-        /// executed <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)"/>.</exception>
-        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called or the connection has been
-        /// lost.</exception>
-        /// <exception cref="OperationCanceledException"><see cref="Dispose"/> has been called or the connection has
-        /// been lost.</exception>
-        /// <remarks>Also retrieves the children of any objects implementing <see cref="INode"/> that have had their
-        /// <see cref="INode.ChildrenRetrievalPolicy"/> property set to a value other than
-        /// <see cref="ChildrenRetrievalPolicy.None">ChildrenRetrievalPolicy.None</see>.</remarks>
-        public async Task SendAsync()
-        {
-            if (await this.SendCoreAsync())
-            {
-                await this.isVerifiedSource.Task;
-            }
-        }
-
-        /// <summary>Stops synchronizing changes to the object tree accessible through the <see cref="Root"/> property
-        /// and raises the <see cref="ConnectionLost"/> event.</summary>
-        public void Dispose()
-        {
-            if (!this.disposed)
-            {
-                this.disposed = true;
-                this.root.HasChangesSet -= this.OnHasChangesSet;
-                this.client.ConnectionLost -= this.receiveQueue.OnConnectionLost;
-                this.client.EmberDataReceived -= this.receiveQueue.OnMessageReceived;
-                this.isVerifiedSource.TrySetCanceled();
-                this.hasChangesSetSource.TrySetCanceled();
-                this.CancelAutoSendDelay();
-                this.receiveQueue.OnConnectionLost(this, new ConnectionLostEventArgs(null));
-            }
-        }
-
         /// <summary>Returns the return value of
         /// <see cref="CreateAsync(S101Client, int)">CreateAsync(<paramref name="client"/>, 10000)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
@@ -215,6 +171,50 @@ namespace Lawo.EmberPlusSharp.Model
             return result;
         }
 
+        /// <summary>Calls <see cref="SendAsync"/>.</summary>
+        [Obsolete("Call SendAsync instead.")]
+        public Task SendChangesAsync()
+        {
+            return this.SendAsync();
+        }
+
+        /// <summary>Asynchronously sends the locally applied changes and invocations to the provider.</summary>
+        /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the
+        /// <see cref="S101Client"/> constructor, see <see cref="Exception.Message"/> for more information.</exception>
+        /// <exception cref="InvalidOperationException">This method was called from a thread other than the one that
+        /// executed <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)"/>.</exception>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called or the connection has been
+        /// lost.</exception>
+        /// <exception cref="OperationCanceledException"><see cref="Dispose"/> has been called or the connection has
+        /// been lost.</exception>
+        /// <remarks>Also retrieves the children of any objects implementing <see cref="INode"/> that have had their
+        /// <see cref="INode.ChildrenRetrievalPolicy"/> property set to a value other than
+        /// <see cref="ChildrenRetrievalPolicy.None">ChildrenRetrievalPolicy.None</see>.</remarks>
+        public async Task SendAsync()
+        {
+            if (await this.SendCoreAsync())
+            {
+                await this.isVerifiedSource.Task;
+            }
+        }
+
+        /// <summary>Stops synchronizing changes to the object tree accessible through the <see cref="Root"/> property
+        /// and raises the <see cref="ConnectionLost"/> event.</summary>
+        public void Dispose()
+        {
+            if (!this.disposed)
+            {
+                this.disposed = true;
+                this.root.HasChangesSet -= this.OnHasChangesSet;
+                this.client.ConnectionLost -= this.receiveQueue.OnConnectionLost;
+                this.client.EmberDataReceived -= this.receiveQueue.OnMessageReceived;
+                this.isVerifiedSource.TrySetCanceled();
+                this.hasChangesSetSource.TrySetCanceled();
+                this.CancelAutoSendDelay();
+                this.receiveQueue.OnConnectionLost(this, new ConnectionLostEventArgs(null));
+            }
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
@@ -240,6 +240,11 @@ namespace Lawo.EmberPlusSharp.Model
             this.emberDataMessage = new S101Message(slot, EmberDataCommand);
             this.client.EmberDataReceived += this.receiveQueue.OnMessageReceived;
             this.client.ConnectionLost += this.receiveQueue.OnConnectionLost;
+        }
+
+        private static string GetVersion(IReadOnlyCollection<byte> applicationBytes)
+        {
+            return string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
         }
 
         private async Task<bool> SendCoreAsync()
@@ -480,11 +485,6 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 return this.root.WriteRequest(writer, this.streamedParameters);
             }
-        }
-
-        private static string GetVersion(IReadOnlyCollection<byte> applicationBytes)
-        {
-            return string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

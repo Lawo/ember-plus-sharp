@@ -241,6 +241,13 @@ namespace Lawo.UnitTesting
             }
         }
 
+        /// <summary>Gets a random <see cref="string"/> value.</summary>
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
+        protected static string GetRandomString()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
         /// <summary>Gets a random <see cref="bool"/> value.</summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
         protected bool GetRandomBoolean()
@@ -254,13 +261,6 @@ namespace Lawo.UnitTesting
         {
             var values = (TEnum[])Enum.GetValues(typeof(TEnum));
             return values[this.Random.Next(values.Length)];
-        }
-
-        /// <summary>Gets a random <see cref="string"/> value.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
-        protected static string GetRandomString()
-        {
-            return Guid.NewGuid().ToString();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

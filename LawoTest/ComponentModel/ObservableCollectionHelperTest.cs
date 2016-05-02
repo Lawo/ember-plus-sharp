@@ -52,20 +52,6 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private void AssertChange(Action<ObservableCollection<int>> change)
-        {
-            var o = new ObservableCollection<int>(Enumerable.Range(0, this.Random.Next(4, 10)));
-            var c = new List<int>();
-            var handler = o.AddChangeHandlers(
-                (int index, int item) => c.Insert(index, item), (index, item) => c.RemoveAt(index), c.Clear);
-            AssertChange(o, change, c, handler);
-
-            using (var projection = o.Project((int i) => i))
-            {
-                AssertChange(o, change, projection);
-            }
-        }
-
         private static void AssertChange(
             ObservableCollection<int> original,
             Action<ObservableCollection<int>> change,
@@ -91,6 +77,20 @@ namespace Lawo.ComponentModel
         {
             change(original);
             CollectionAssert.AreEqual(original, copy);
+        }
+
+        private void AssertChange(Action<ObservableCollection<int>> change)
+        {
+            var o = new ObservableCollection<int>(Enumerable.Range(0, this.Random.Next(4, 10)));
+            var c = new List<int>();
+            var handler = o.AddChangeHandlers(
+                (int index, int item) => c.Insert(index, item), (index, item) => c.RemoveAt(index), c.Clear);
+            AssertChange(o, change, c, handler);
+
+            using (var projection = o.Project((int i) => i))
+            {
+                AssertChange(o, change, projection);
+            }
         }
     }
 }

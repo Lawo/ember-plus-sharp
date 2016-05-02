@@ -26,6 +26,27 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
+        internal static TMostDerived Construct(Context context)
+        {
+            if (Constructor == null)
+            {
+                const string Format = "The type {0} does not have a default constructor.";
+                throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, typeof(TMostDerived)));
+            }
+
+            var result = Constructor();
+            result.SetContext(context);
+            return result;
+        }
+
+        internal static TMostDerived ReadContents(
+            EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState)
+        {
+            var result = Construct(context);
+            retrievalState = result.ReadContents(reader, actualType);
+            return result;
+        }
+
         internal int ReadInt(EmberReader reader, string fieldName)
         {
             try
@@ -63,27 +84,6 @@ namespace Lawo.EmberPlusSharp.Model
             const string Format = "The field {0} has an unexpected value for the element with the path {1}.";
             throw new ModelException(
                 string.Format(CultureInfo.InvariantCulture, Format, fieldName, this.GetPath()), exception);
-        }
-
-        internal static TMostDerived Construct(Context context)
-        {
-            if (Constructor == null)
-            {
-                const string Format = "The type {0} does not have a default constructor.";
-                throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, typeof(TMostDerived)));
-            }
-
-            var result = Constructor();
-            result.SetContext(context);
-            return result;
-        }
-
-        internal static TMostDerived ReadContents(
-            EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState)
-        {
-            var result = Construct(context);
-            retrievalState = result.ReadContents(reader, actualType);
-            return result;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

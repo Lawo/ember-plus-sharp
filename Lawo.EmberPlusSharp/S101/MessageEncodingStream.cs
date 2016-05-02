@@ -83,14 +83,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal async Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
-        {
-            await this.DisposeFramingStream(cancellationToken);
-            await this.rawBuffer.ReserveAsync(1, cancellationToken);
-            this.rawBuffer[this.rawBuffer.Count++] = value;
-            await this.CreateFramingStream(PacketFlags.None, cancellationToken);
-        }
-
         internal static async Task<MessageEncodingStream> CreateAsync(
             WriteBuffer rawBuffer, S101Message message, CancellationToken cancellationToken)
         {
@@ -100,6 +92,14 @@ namespace Lawo.EmberPlusSharp.S101
             var result = new MessageEncodingStream(rawBuffer, framingStream, message);
             await message.WriteToAsync(result.unframedBuffer, cancellationToken);
             return result;
+        }
+
+        internal async Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
+        {
+            await this.DisposeFramingStream(cancellationToken);
+            await this.rawBuffer.ReserveAsync(1, cancellationToken);
+            this.rawBuffer[this.rawBuffer.Count++] = value;
+            await this.CreateFramingStream(PacketFlags.None, cancellationToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

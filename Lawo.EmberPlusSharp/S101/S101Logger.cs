@@ -173,6 +173,16 @@ namespace Lawo.EmberPlusSharp.S101
         private readonly XmlWriter xmlLogWriter;
         private readonly Dictionary<string, int> messageCounts = new Dictionary<string, int>();
 
+        private static TextWriter ValidateLogWriter(TextWriter logWriter)
+        {
+            if (logWriter == null)
+            {
+                throw new ArgumentNullException("logWriter");
+            }
+
+            return logWriter;
+        }
+
         private DateTime WriteStartEvent(string type)
         {
             var timeUtc = DateTime.UtcNow;
@@ -192,16 +202,6 @@ namespace Lawo.EmberPlusSharp.S101
         {
             this.xmlLogWriter.WriteEndElement();
             this.xmlLogWriter.Flush();
-        }
-
-        private static TextWriter ValidateLogWriter(TextWriter logWriter)
-        {
-            if (logWriter == null)
-            {
-                throw new ArgumentNullException("logWriter");
-            }
-
-            return logWriter;
         }
     }
 }

@@ -264,6 +264,37 @@ namespace Lawo.EmberPlusSharp.S101
         private readonly int timeout;
         private byte keepAliveRequestSlot;
 
+        private static async Task Delay(Task task, int milliseconds)
+        {
+            await task;
+            await Task.Delay(milliseconds);
+        }
+
+        private static async Task<byte[]> GetPayload(S101Reader reader, byte[] buffer, CancellationToken token)
+        {
+            if (reader.Message.Command is EmberData)
+            {
+                var source = reader.Payload;
+
+                using (var destination = new MemoryStream())
+                {
+                    int read;
+
+                    while ((read = await source.ReadAsync(buffer, 0, buffer.Length, token)) > 0)
+                    {
+                        destination.Write(buffer, 0, read);
+                    }
+
+                    await source.DisposeAsync(token);
+                    return destination.ToArray();
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private void AssertPreconditions()
         {
             if (this.source.IsCancellationRequested)
@@ -501,37 +532,6 @@ namespace Lawo.EmberPlusSharp.S101
             else
             {
                 return this.logQueue.Enqueue(logOperation);
-            }
-        }
-
-        private static async Task Delay(Task task, int milliseconds)
-        {
-            await task;
-            await Task.Delay(milliseconds);
-        }
-
-        private static async Task<byte[]> GetPayload(S101Reader reader, byte[] buffer, CancellationToken token)
-        {
-            if (reader.Message.Command is EmberData)
-            {
-                var source = reader.Payload;
-
-                using (var destination = new MemoryStream())
-                {
-                    int read;
-
-                    while ((read = await source.ReadAsync(buffer, 0, buffer.Length, token)) > 0)
-                    {
-                        destination.Write(buffer, 0, read);
-                    }
-
-                    await source.DisposeAsync(token);
-                    return destination.ToArray();
-                }
-            }
-            else
-            {
-                return null;
             }
         }
     }

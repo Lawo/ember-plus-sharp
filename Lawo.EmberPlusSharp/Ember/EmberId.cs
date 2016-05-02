@@ -41,6 +41,30 @@ namespace Lawo.EmberPlusSharp.Ember
             return new EmberId(Class.ContextSpecific, true, number);
         }
 
+        /// <summary>Converts the string representation of an identifier <paramref name="input"/> into its
+        /// <see cref="EmberId"/> equivalent and returns a value whether the conversion succeeded.</summary>
+        /// <returns><c>true</c> if <paramref name="input"/> was converted successfully; otherwise <c>false</c>.</returns>
+        public static bool TryParse(string input, out EmberId emberId)
+        {
+            Class? theClass;
+            int number;
+
+            if ((input != null) && (input.Length >= 3) && ((theClass = FromChar(input[0])) != null) &&
+                (input[1] == '-') &&
+                int.TryParse(input.Substring(2), NumberStyles.None, CultureInfo.InvariantCulture, out number))
+            {
+                var constructed = (theClass.Value != Class.Universal) ||
+                    (number == InnerNumber.Sequence) || (number == InnerNumber.Set);
+                emberId = new EmberId(theClass.Value, constructed, number);
+                return true;
+            }
+            else
+            {
+                emberId = default(EmberId);
+                return false;
+            }
+        }
+
         /// <inheritdoc/>
         public bool Equals(EmberId other)
         {
@@ -65,30 +89,6 @@ namespace Lawo.EmberPlusSharp.Ember
         public override string ToString()
         {
             return ToChar(this.theClass) + "-" + this.number.ToString(CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>Converts the string representation of an identifier <paramref name="input"/> into its
-        /// <see cref="EmberId"/> equivalent and returns a value whether the conversion succeeded.</summary>
-        /// <returns><c>true</c> if <paramref name="input"/> was converted successfully; otherwise <c>false</c>.</returns>
-        public static bool TryParse(string input, out EmberId emberId)
-        {
-            Class? theClass;
-            int number;
-
-            if ((input != null) && (input.Length >= 3) && ((theClass = FromChar(input[0])) != null) &&
-                (input[1] == '-') &&
-                int.TryParse(input.Substring(2), NumberStyles.None, CultureInfo.InvariantCulture, out number))
-            {
-                var constructed = (theClass.Value != Class.Universal) ||
-                    (number == InnerNumber.Sequence) || (number == InnerNumber.Set);
-                emberId = new EmberId(theClass.Value, constructed, number);
-                return true;
-            }
-            else
-            {
-                emberId = default(EmberId);
-                return false;
-            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,6 +120,18 @@ namespace Lawo.EmberPlusSharp.Ember
             get { return this.number; }
         }
 
+        internal static EmberId CreateUniversal(int number)
+        {
+            return new EmberId(
+                Class.Universal, (number == InnerNumber.Sequence) || (number == InnerNumber.Set), number);
+        }
+
+        internal static EmberId FromInnerNumber(int innerNumber)
+        {
+            return innerNumber < InnerNumber.FirstApplication ?
+                CreateUniversal(innerNumber) : CreateApplication(innerNumber - InnerNumber.FirstApplication);
+        }
+
         internal int? ToInnerNumber()
         {
             switch (this.theClass)
@@ -131,18 +143,6 @@ namespace Lawo.EmberPlusSharp.Ember
                 default:
                     return null;
             }
-        }
-
-        internal static EmberId CreateUniversal(int number)
-        {
-            return new EmberId(
-                Class.Universal, (number == InnerNumber.Sequence) || (number == InnerNumber.Set), number);
-        }
-
-        internal static EmberId FromInnerNumber(int innerNumber)
-        {
-            return innerNumber < InnerNumber.FirstApplication ?
-                CreateUniversal(innerNumber) : CreateApplication(innerNumber - InnerNumber.FirstApplication);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

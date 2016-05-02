@@ -452,245 +452,6 @@ namespace Lawo.EmberPlusSharp.Ember
             get { return (int?)(this.EndPosition - this.readBuffer.Position); }
         }
 
-        private void AssertNotDisposed()
-        {
-            if (this.stream == null)
-            {
-                throw new ObjectDisposedException(this.GetType().Name);
-            }
-        }
-
-        private void AssertRead()
-        {
-            this.AssertNotDisposed();
-
-            if (!this.innerNumber.HasValue)
-            {
-                throw new InvalidOperationException("Read() has either never been called or " +
-                    "the last call to Read() returned false or threw an exception.");
-            }
-        }
-
-        private void AssertCanReadContents(int expectedInnerNumber)
-        {
-            this.AssertNotDisposed();
-
-            if (!this.innerNumber.HasValue || (this.innerNumber.Value != expectedInnerNumber))
-            {
-                throw new InvalidOperationException("The current data value does not have contents of the requested type.");
-            }
-
-            if (!this.CanReadContents)
-            {
-                throw new InvalidOperationException("The contents of the current data value has already been read.");
-            }
-
-            this.CanReadContents = false;
-        }
-
-        private bool ReadCore()
-        {
-            try
-            {
-                while ((this.readBuffer.Index < this.readBuffer.Count) || this.readBuffer.Read())
-                {
-                    var outerIdentifierPosition = this.readBuffer.Position;
-                    var outerIdentifier = ReadIdentifier(this.readBuffer);
-
-                    if (this.ProcessOuter(outerIdentifier, outerIdentifierPosition))
-                    {
-                        if (outerIdentifier == EndContainer)
-                        {
-                            this.innerNumber = Ember.InnerNumber.EndContainer;
-                            return true;
-                        }
-
-                        if (outerIdentifier.Class == Class.Universal)
-                        {
-                            throw CreateEmberException(
-                                "Unexpected Universal class for outer identifier at position {0}.",
-                                outerIdentifierPosition);
-                        }
-
-                        this.ReadAndProcessInner();
-                        this.outer = outerIdentifier;
-                        return true;
-                    }
-                }
-            }
-            catch (EndOfStreamException ex)
-            {
-                throw CreateEmberException(ex);
-            }
-
-            if (this.endPositions.Count > 0)
-            {
-                throw CreateEmberException("Unexpected end of stream at position {0}.", this.readBuffer.Position);
-            }
-
-            return false;
-        }
-
-        private void SkipCore(int inner)
-        {
-            if ((inner >= Ember.InnerNumber.FirstApplication) ||
-                (inner == Ember.InnerNumber.Sequence) || (inner == Ember.InnerNumber.Set))
-            {
-                this.SkipToEndContainer();
-            }
-        }
-
-        private object CopyCore(EmberWriter writer, int inner)
-        {
-            switch (inner)
-            {
-                case Ember.InnerNumber.Boolean:
-                    var boolean = this.ReadContentsAsBoolean();
-                    writer.WriteValue(this.outer.Value, boolean);
-                    return boolean;
-                case Ember.InnerNumber.Integer:
-                    var int64 = this.ReadContentsAsInt64();
-                    writer.WriteValue(this.outer.Value, int64);
-                    return int64;
-                case Ember.InnerNumber.Octetstring:
-                    var byteArray = this.ReadContentsAsByteArray();
-                    writer.WriteValue(this.outer.Value, byteArray);
-                    return byteArray;
-                case Ember.InnerNumber.Real:
-                    var dbl = this.ReadContentsAsDouble();
-                    writer.WriteValue(this.outer.Value, dbl);
-                    return dbl;
-                case Ember.InnerNumber.Utf8String:
-                    var str = this.ReadContentsAsString();
-                    writer.WriteValue(this.outer.Value, str);
-                    return str;
-                case Ember.InnerNumber.RelativeObjectIdentifier:
-                    var int32Array = this.ReadContentsAsInt32Array();
-                    writer.WriteValue(this.outer.Value, int32Array);
-                    return int32Array;
-                case Ember.InnerNumber.Sequence:
-                    writer.WriteStartSequence(this.outer.Value);
-                    this.CopyToEndContainer(writer, null);
-                    return null;
-                case Ember.InnerNumber.Set:
-                    writer.WriteStartSet(this.outer.Value);
-                    this.CopyToEndContainer(writer, null);
-                    return null;
-                default:
-                    writer.WriteStartApplicationDefinedType(this.outer.Value, inner);
-                    this.CopyToEndContainer(writer, null);
-                    return null;
-            }
-        }
-
-        private bool ProcessOuter(EmberId id, long idPosition)
-        {
-            if (id == EndContainer)
-            {
-                if (ReadLength(this.readBuffer) != 0)
-                {
-                    throw CreateEmberException(
-                        "Unexpected length for End-of-contents identifier at position {0}.", idPosition);
-                }
-
-                if (this.endPositions.Count == 0)
-                {
-                    throw CreateEmberException(
-                        "Unexpected excess End-of-contents identifier at position {0}.", idPosition);
-                }
-
-                var endPosition = this.endPositions.Pop();
-
-                if (endPosition.EndPosition.HasValue)
-                {
-                    throw CreateEmberException(
-                        "Unexpected End-of-contents identifier at position {0} for definite length at position {1}.",
-                        idPosition,
-                        endPosition.LengthPosition);
-                }
-
-                return IsContainer(endPosition);
-            }
-            else
-            {
-                this.ReadAndProcessLength(id, false);
-                return true;
-            }
-        }
-
-        private void ReadAndProcessInner()
-        {
-            var innerIdentifierPosition = this.readBuffer.Position;
-            var innerIdentifier = ReadIdentifier(this.readBuffer);
-
-            if (innerIdentifier == EndContainer)
-            {
-                throw CreateEmberException(
-                    "Unexpected End-of-contents identifier at position {0}.", innerIdentifierPosition);
-            }
-
-            this.ReadAndProcessLength(innerIdentifier, true);
-            this.innerNumber = innerIdentifier.ToInnerNumber();
-
-            if (!this.innerNumber.HasValue)
-            {
-                throw CreateEmberException(
-                    "Unexpected context-specific or private identifier at position {0}.", innerIdentifierPosition);
-            }
-
-            if (this.innerNumber.Value < Ember.InnerNumber.FirstApplication)
-            {
-                switch (this.innerNumber.Value)
-                {
-                    case Ember.InnerNumber.Boolean:
-                    case Ember.InnerNumber.Integer:
-                    case Ember.InnerNumber.Real:
-                    case Ember.InnerNumber.Utf8String:
-                    case Ember.InnerNumber.RelativeObjectIdentifier:
-                        this.readBuffer.Fill(
-                            this.ValidateIdentifierAndLength(innerIdentifier, innerIdentifierPosition));
-                        break;
-                    case Ember.InnerNumber.Octetstring:
-                        this.ValidateIdentifierAndLength(innerIdentifier, innerIdentifierPosition);
-                        break;
-                    case Ember.InnerNumber.Sequence:
-                    case Ember.InnerNumber.Set:
-                        break;
-                    default:
-                        throw CreateEmberException(
-                            "Unexpected number in universal identifier at position {0}.", innerIdentifierPosition);
-                }
-            }
-        }
-
-        private void ReadAndProcessLength(EmberId id, bool isInner)
-        {
-            var lengthPosition = this.readBuffer.Position;
-            var length = ReadLength(this.readBuffer);
-            this.endPositions.Push(new PositionInfo(id, isInner, lengthPosition, this.readBuffer.Position + length));
-        }
-
-        private int ValidateIdentifierAndLength(EmberId innerIdentifier, long innerIdentifierPosition)
-        {
-            if (innerIdentifier.IsConstructed)
-            {
-                throw CreateEmberException(
-                    "Unexpected constructed encoding at position {0}.", innerIdentifierPosition);
-            }
-
-            var length = this.ContentsLength;
-
-            if (!length.HasValue)
-            {
-                throw CreateEmberException(
-                    "Unexpected indefinite length for primitive data value at position {0}.",
-                    innerIdentifierPosition);
-            }
-
-            this.CanReadContents = true;
-            return length.Value;
-        }
-
         private static bool IsContainer(PositionInfo position)
         {
             var emberId = position.EmberId;
@@ -943,6 +704,245 @@ namespace Lawo.EmberPlusSharp.Ember
         private static EmberException CreateEmberException(EndOfStreamException ex)
         {
             return new EmberException("Unexpected end of stream.", ex);
+        }
+
+        private void AssertNotDisposed()
+        {
+            if (this.stream == null)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+        }
+
+        private void AssertRead()
+        {
+            this.AssertNotDisposed();
+
+            if (!this.innerNumber.HasValue)
+            {
+                throw new InvalidOperationException("Read() has either never been called or " +
+                    "the last call to Read() returned false or threw an exception.");
+            }
+        }
+
+        private void AssertCanReadContents(int expectedInnerNumber)
+        {
+            this.AssertNotDisposed();
+
+            if (!this.innerNumber.HasValue || (this.innerNumber.Value != expectedInnerNumber))
+            {
+                throw new InvalidOperationException("The current data value does not have contents of the requested type.");
+            }
+
+            if (!this.CanReadContents)
+            {
+                throw new InvalidOperationException("The contents of the current data value has already been read.");
+            }
+
+            this.CanReadContents = false;
+        }
+
+        private bool ReadCore()
+        {
+            try
+            {
+                while ((this.readBuffer.Index < this.readBuffer.Count) || this.readBuffer.Read())
+                {
+                    var outerIdentifierPosition = this.readBuffer.Position;
+                    var outerIdentifier = ReadIdentifier(this.readBuffer);
+
+                    if (this.ProcessOuter(outerIdentifier, outerIdentifierPosition))
+                    {
+                        if (outerIdentifier == EndContainer)
+                        {
+                            this.innerNumber = Ember.InnerNumber.EndContainer;
+                            return true;
+                        }
+
+                        if (outerIdentifier.Class == Class.Universal)
+                        {
+                            throw CreateEmberException(
+                                "Unexpected Universal class for outer identifier at position {0}.",
+                                outerIdentifierPosition);
+                        }
+
+                        this.ReadAndProcessInner();
+                        this.outer = outerIdentifier;
+                        return true;
+                    }
+                }
+            }
+            catch (EndOfStreamException ex)
+            {
+                throw CreateEmberException(ex);
+            }
+
+            if (this.endPositions.Count > 0)
+            {
+                throw CreateEmberException("Unexpected end of stream at position {0}.", this.readBuffer.Position);
+            }
+
+            return false;
+        }
+
+        private void SkipCore(int inner)
+        {
+            if ((inner >= Ember.InnerNumber.FirstApplication) ||
+                (inner == Ember.InnerNumber.Sequence) || (inner == Ember.InnerNumber.Set))
+            {
+                this.SkipToEndContainer();
+            }
+        }
+
+        private object CopyCore(EmberWriter writer, int inner)
+        {
+            switch (inner)
+            {
+                case Ember.InnerNumber.Boolean:
+                    var boolean = this.ReadContentsAsBoolean();
+                    writer.WriteValue(this.outer.Value, boolean);
+                    return boolean;
+                case Ember.InnerNumber.Integer:
+                    var int64 = this.ReadContentsAsInt64();
+                    writer.WriteValue(this.outer.Value, int64);
+                    return int64;
+                case Ember.InnerNumber.Octetstring:
+                    var byteArray = this.ReadContentsAsByteArray();
+                    writer.WriteValue(this.outer.Value, byteArray);
+                    return byteArray;
+                case Ember.InnerNumber.Real:
+                    var dbl = this.ReadContentsAsDouble();
+                    writer.WriteValue(this.outer.Value, dbl);
+                    return dbl;
+                case Ember.InnerNumber.Utf8String:
+                    var str = this.ReadContentsAsString();
+                    writer.WriteValue(this.outer.Value, str);
+                    return str;
+                case Ember.InnerNumber.RelativeObjectIdentifier:
+                    var int32Array = this.ReadContentsAsInt32Array();
+                    writer.WriteValue(this.outer.Value, int32Array);
+                    return int32Array;
+                case Ember.InnerNumber.Sequence:
+                    writer.WriteStartSequence(this.outer.Value);
+                    this.CopyToEndContainer(writer, null);
+                    return null;
+                case Ember.InnerNumber.Set:
+                    writer.WriteStartSet(this.outer.Value);
+                    this.CopyToEndContainer(writer, null);
+                    return null;
+                default:
+                    writer.WriteStartApplicationDefinedType(this.outer.Value, inner);
+                    this.CopyToEndContainer(writer, null);
+                    return null;
+            }
+        }
+
+        private bool ProcessOuter(EmberId id, long idPosition)
+        {
+            if (id == EndContainer)
+            {
+                if (ReadLength(this.readBuffer) != 0)
+                {
+                    throw CreateEmberException(
+                        "Unexpected length for End-of-contents identifier at position {0}.", idPosition);
+                }
+
+                if (this.endPositions.Count == 0)
+                {
+                    throw CreateEmberException(
+                        "Unexpected excess End-of-contents identifier at position {0}.", idPosition);
+                }
+
+                var endPosition = this.endPositions.Pop();
+
+                if (endPosition.EndPosition.HasValue)
+                {
+                    throw CreateEmberException(
+                        "Unexpected End-of-contents identifier at position {0} for definite length at position {1}.",
+                        idPosition,
+                        endPosition.LengthPosition);
+                }
+
+                return IsContainer(endPosition);
+            }
+            else
+            {
+                this.ReadAndProcessLength(id, false);
+                return true;
+            }
+        }
+
+        private void ReadAndProcessInner()
+        {
+            var innerIdentifierPosition = this.readBuffer.Position;
+            var innerIdentifier = ReadIdentifier(this.readBuffer);
+
+            if (innerIdentifier == EndContainer)
+            {
+                throw CreateEmberException(
+                    "Unexpected End-of-contents identifier at position {0}.", innerIdentifierPosition);
+            }
+
+            this.ReadAndProcessLength(innerIdentifier, true);
+            this.innerNumber = innerIdentifier.ToInnerNumber();
+
+            if (!this.innerNumber.HasValue)
+            {
+                throw CreateEmberException(
+                    "Unexpected context-specific or private identifier at position {0}.", innerIdentifierPosition);
+            }
+
+            if (this.innerNumber.Value < Ember.InnerNumber.FirstApplication)
+            {
+                switch (this.innerNumber.Value)
+                {
+                    case Ember.InnerNumber.Boolean:
+                    case Ember.InnerNumber.Integer:
+                    case Ember.InnerNumber.Real:
+                    case Ember.InnerNumber.Utf8String:
+                    case Ember.InnerNumber.RelativeObjectIdentifier:
+                        this.readBuffer.Fill(
+                            this.ValidateIdentifierAndLength(innerIdentifier, innerIdentifierPosition));
+                        break;
+                    case Ember.InnerNumber.Octetstring:
+                        this.ValidateIdentifierAndLength(innerIdentifier, innerIdentifierPosition);
+                        break;
+                    case Ember.InnerNumber.Sequence:
+                    case Ember.InnerNumber.Set:
+                        break;
+                    default:
+                        throw CreateEmberException(
+                            "Unexpected number in universal identifier at position {0}.", innerIdentifierPosition);
+                }
+            }
+        }
+
+        private void ReadAndProcessLength(EmberId id, bool isInner)
+        {
+            var lengthPosition = this.readBuffer.Position;
+            var length = ReadLength(this.readBuffer);
+            this.endPositions.Push(new PositionInfo(id, isInner, lengthPosition, this.readBuffer.Position + length));
+        }
+
+        private int ValidateIdentifierAndLength(EmberId innerIdentifier, long innerIdentifierPosition)
+        {
+            if (innerIdentifier.IsConstructed)
+            {
+                throw CreateEmberException(
+                    "Unexpected constructed encoding at position {0}.", innerIdentifierPosition);
+            }
+
+            var length = this.ContentsLength;
+
+            if (!length.HasValue)
+            {
+                throw CreateEmberException(
+                    "Unexpected indefinite length for primitive data value at position {0}.",
+                    innerIdentifierPosition);
+            }
+
+            this.CanReadContents = true;
+            return length.Value;
         }
 
         private struct PositionInfo

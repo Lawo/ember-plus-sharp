@@ -164,6 +164,11 @@ namespace Lawo.EmberPlusSharp.S101
         private S101Message message;
         private byte[] payload;
 
+        private static byte ParseHex(string str)
+        {
+            return byte.Parse(str, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+        }
+
         private bool ReadCore()
         {
             while (this.logReader.IsStartElement(LogNames.Event))
@@ -284,11 +289,6 @@ namespace Lawo.EmberPlusSharp.S101
             this.number = 0;
             this.message = null;
             this.payload = null;
-        }
-
-        private static byte ParseHex(string str)
-        {
-            return byte.Parse(str, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
         }
     }
 }

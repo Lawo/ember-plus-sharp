@@ -271,6 +271,14 @@ namespace Lawo.IO
         private readonly WriteCallback write;
         private readonly WriteAsyncCallback writeAsync;
 
+        private static void AssertNotNull(string value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value");
+            }
+        }
+
         private int WriteToBuffer(byte[] buffer, int offset, int count)
         {
             BufferHelper.AssertValidRange(buffer, "buffer", offset, "offset", count, "count");
@@ -278,14 +286,6 @@ namespace Lawo.IO
             System.Buffer.BlockCopy(buffer, offset, this.GetBuffer(), this.Count, written);
             this.Count += written;
             return written;
-        }
-
-        private static void AssertNotNull(string value)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value");
-            }
         }
     }
 }

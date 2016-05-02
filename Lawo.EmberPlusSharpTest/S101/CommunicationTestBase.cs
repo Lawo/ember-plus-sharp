@@ -252,19 +252,6 @@ namespace Lawo.EmberPlusSharp.S101
             await waitForConnectionLost;
         }
 
-        /// <summary>Gets a random byte that is guaranteed to not be equal to any of the elements in
-        /// <paramref name="exceptions"/>.</summary>
-        protected byte GetRandomByteExcept(params byte[] exceptions)
-        {
-            byte result;
-
-            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
-            {
-            }
-
-            return result;
-        }
-
         /// <summary>Reads and returns the contents of the resource text file identified by <paramref name="fileName"/>.
         /// </summary>
         /// <typeparam name="TResourceNamespace">The type whose namespace is used to scope <paramref name="fileName"/>
@@ -278,6 +265,19 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 return reader.ReadToEnd();
             }
+        }
+
+        /// <summary>Gets a random byte that is guaranteed to not be equal to any of the elements in
+        /// <paramref name="exceptions"/>.</summary>
+        protected byte GetRandomByteExcept(params byte[] exceptions)
+        {
+            byte result;
+
+            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
+            {
+            }
+
+            return result;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -84,6 +84,18 @@ namespace Lawo.ComponentModel
 
         private static readonly Predicate<int> Predicate = i => i < 5;
 
+        private static List<int> GetExpected(ObservableCollection<int> original, Predicate<int> filter, bool isSorted)
+        {
+            var result = original.Where(i => filter(i));
+
+            if (isSorted)
+            {
+                result = result.OrderBy(i => i);
+            }
+
+            return result.ToList();
+        }
+
         private void VerifyModification(Action<ObservableCollection<int>> modification, Predicate<int> filter)
         {
             for (var round = 0; round < 10; ++round)
@@ -114,18 +126,6 @@ namespace Lawo.ComponentModel
         private int CreateRandomItem()
         {
             return this.Random.Next(10);
-        }
-
-        private static List<int> GetExpected(ObservableCollection<int> original, Predicate<int> filter, bool isSorted)
-        {
-            var result = original.Where(i => filter(i));
-
-            if (isSorted)
-            {
-                result = result.OrderBy(i => i);
-            }
-
-            return result.ToList();
         }
     }
 }

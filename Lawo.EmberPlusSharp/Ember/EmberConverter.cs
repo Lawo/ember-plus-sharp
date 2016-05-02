@@ -121,6 +121,108 @@ namespace Lawo.EmberPlusSharp.Ember
         private readonly Dictionary<string, int> innerNumbers;
         private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
 
+        private static FieldPath<int, EmberId> Combine(FieldPath<int, EmberId> path, Field<int, EmberId> field)
+        {
+            if ((field.TypeId == BerSequence.InnerNumber) || (field.TypeId == BerSet.InnerNumber))
+            {
+                return FieldPath<int, EmberId>.Append(path, field);
+            }
+            else
+            {
+                return new FieldPath<int, EmberId>(field);
+            }
+        }
+
+        private static FieldPath<string, string> Combine(FieldPath<string, string> path, Field<string, string> field)
+        {
+            if ((field.TypeId == BerSequence.Name) || (field.TypeId == BerSet.Name))
+            {
+                return FieldPath<string, string>.Append(path, field);
+            }
+            else
+            {
+                return new FieldPath<string, string>(field);
+            }
+        }
+
+        private static void WriteValue<T>(
+            XmlWriter writer, string fieldName, string type, T value, Action<XmlWriter, T> writeValue)
+        {
+            writer.WriteStartElement(fieldName);
+            WriteType(writer, type);
+            writeValue(writer, value);
+            writer.WriteEndElement();
+        }
+
+        private static void WriteStartContainer(XmlWriter writer, string fieldName, string type)
+        {
+            writer.WriteStartElement(fieldName);
+            WriteType(writer, type);
+        }
+
+        private static void WriteType(XmlWriter writer, string type)
+        {
+            writer.WriteStartAttribute("type");
+            writer.WriteString(type);
+            writer.WriteEndAttribute();
+        }
+
+        private static bool ReadNext(XmlReader reader)
+        {
+            return reader.Read() && (reader.MoveToContent() != XmlNodeType.None);
+        }
+
+        private static TValue ReadValue<TValue>(
+            XmlReader reader, Func<XmlReader, TValue> read, TValue emptyValue = default(TValue))
+        {
+            if (reader.IsEmptyElement)
+            {
+                if (emptyValue.Equals(default(TValue)))
+                {
+                    const string Format = "Unexpected empty element for a field of type {0}.";
+                    throw new XmlException(string.Format(CultureInfo.InvariantCulture, Format, typeof(TValue).Name));
+                }
+                else
+                {
+                    return emptyValue;
+                }
+            }
+
+            reader.ReadStartElement();
+            return read(reader);
+        }
+
+        private static void WriteOctetstring(XmlReader reader, EmberWriter writer, EmberId fieldId)
+        {
+            var buffer = new byte[1024];
+
+            using (var stream = new MemoryStream())
+            {
+                var read = ReadValue(reader, r => (int?)r.ReadContentAsBinHex(buffer, 0, buffer.Length), 0);
+
+                while (read > 0)
+                {
+                    stream.Write(buffer, 0, read.Value);
+                    read = reader.ReadContentAsBinHex(buffer, 0, buffer.Length);
+                }
+
+                writer.WriteValue(fieldId, stream.ToArray());
+            }
+        }
+
+        private static void WriteRelativeObjectIdentifier(XmlReader reader, EmberWriter writer, EmberId fieldId)
+        {
+            var pathElements = ReadValue(reader, r => r.ReadContentAsString()).Split('.');
+            var value = (pathElements.Length == 1) && string.IsNullOrEmpty(pathElements[0]) ?
+                new int[0] : pathElements.Select(s => int.Parse(s, CultureInfo.InvariantCulture)).ToArray();
+            writer.WriteValue(fieldId, value);
+        }
+
+        private static string GetFallbackName(int innerNumber)
+        {
+            return EmberId.FromInnerNumber(innerNumber).ToString();
+        }
+
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "There's no meaningful way to reduce the complexity.")]
         private void ToXmlCore(
             EmberReader reader, XmlWriter writer, FieldPath<int, EmberId> previousPath, int currentType)
@@ -330,18 +432,6 @@ namespace Lawo.EmberPlusSharp.Ember
             throw new XmlException(string.Format(CultureInfo.InvariantCulture, "Unknown type: {0}.", type));
         }
 
-        private static FieldPath<int, EmberId> Combine(FieldPath<int, EmberId> path, Field<int, EmberId> field)
-        {
-            if ((field.TypeId == BerSequence.InnerNumber) || (field.TypeId == BerSet.InnerNumber))
-            {
-                return FieldPath<int, EmberId>.Append(path, field);
-            }
-            else
-            {
-                return new FieldPath<int, EmberId>(field);
-            }
-        }
-
         private string GetFieldName(FieldPath<int, EmberId> fieldPath)
         {
             string name;
@@ -352,18 +442,6 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             return fieldPath.Tail.GetValueOrDefault().FieldId.ToString();
-        }
-
-        private static FieldPath<string, string> Combine(FieldPath<string, string> path, Field<string, string> field)
-        {
-            if ((field.TypeId == BerSequence.Name) || (field.TypeId == BerSet.Name))
-            {
-                return FieldPath<string, string>.Append(path, field);
-            }
-            else
-            {
-                return new FieldPath<string, string>(field);
-            }
         }
 
         private EmberId GetFieldId(FieldPath<string, string> fieldPath)
@@ -377,84 +455,6 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             throw new XmlException(string.Format(CultureInfo.InvariantCulture, "Unknown field path: {0}.", fieldPath));
-        }
-
-        private static void WriteValue<T>(
-            XmlWriter writer, string fieldName, string type, T value, Action<XmlWriter, T> writeValue)
-        {
-            writer.WriteStartElement(fieldName);
-            WriteType(writer, type);
-            writeValue(writer, value);
-            writer.WriteEndElement();
-        }
-
-        private static void WriteStartContainer(XmlWriter writer, string fieldName, string type)
-        {
-            writer.WriteStartElement(fieldName);
-            WriteType(writer, type);
-        }
-
-        private static void WriteType(XmlWriter writer, string type)
-        {
-            writer.WriteStartAttribute("type");
-            writer.WriteString(type);
-            writer.WriteEndAttribute();
-        }
-
-        private static bool ReadNext(XmlReader reader)
-        {
-            return reader.Read() && (reader.MoveToContent() != XmlNodeType.None);
-        }
-
-        private static TValue ReadValue<TValue>(
-            XmlReader reader, Func<XmlReader, TValue> read, TValue emptyValue = default(TValue))
-        {
-            if (reader.IsEmptyElement)
-            {
-                if (emptyValue.Equals(default(TValue)))
-                {
-                    const string Format = "Unexpected empty element for a field of type {0}.";
-                    throw new XmlException(string.Format(CultureInfo.InvariantCulture, Format, typeof(TValue).Name));
-                }
-                else
-                {
-                    return emptyValue;
-                }
-            }
-
-            reader.ReadStartElement();
-            return read(reader);
-        }
-
-        private static void WriteOctetstring(XmlReader reader, EmberWriter writer, EmberId fieldId)
-        {
-            var buffer = new byte[1024];
-
-            using (var stream = new MemoryStream())
-            {
-                var read = ReadValue(reader, r => (int?)r.ReadContentAsBinHex(buffer, 0, buffer.Length), 0);
-
-                while (read > 0)
-                {
-                    stream.Write(buffer, 0, read.Value);
-                    read = reader.ReadContentAsBinHex(buffer, 0, buffer.Length);
-                }
-
-                writer.WriteValue(fieldId, stream.ToArray());
-            }
-        }
-
-        private static void WriteRelativeObjectIdentifier(XmlReader reader, EmberWriter writer, EmberId fieldId)
-        {
-            var pathElements = ReadValue(reader, r => r.ReadContentAsString()).Split('.');
-            var value = (pathElements.Length == 1) && string.IsNullOrEmpty(pathElements[0]) ?
-                new int[0] : pathElements.Select(s => int.Parse(s, CultureInfo.InvariantCulture)).ToArray();
-            writer.WriteValue(fieldId, value);
-        }
-
-        private static string GetFallbackName(int innerNumber)
-        {
-            return EmberId.FromInnerNumber(innerNumber).ToString();
         }
     }
 }

@@ -64,6 +64,23 @@ namespace Lawo.EmberPlusSharp.S101
 
         internal PacketFlags PacketFlags { get; set; }
 
+        internal static async Task<S101Command> ReadFromAsync(ReadBuffer readBuffer, CancellationToken cancellationToken)
+        {
+            await readBuffer.FillAsync(2, cancellationToken);
+            var result = GetCommandAndVersion(readBuffer);
+            await result.ReadFromCoreAsync(readBuffer, cancellationToken);
+            return result;
+        }
+
+        internal static S101Command Parse(string str)
+        {
+            var components = str.Split();
+            var commandType = (CommandType)Enum.Parse(typeof(CommandType), components[0]);
+            var result = CreateCommand(commandType);
+            result.ParseCore(components);
+            return result;
+        }
+
         internal async Task WriteToAsync(WriteBuffer writeBuffer, CancellationToken cancellationToken)
         {
             await writeBuffer.ReserveAsync(2, cancellationToken);
@@ -84,23 +101,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         internal virtual void ParseCore(string[] components)
         {
-        }
-
-        internal static async Task<S101Command> ReadFromAsync(ReadBuffer readBuffer, CancellationToken cancellationToken)
-        {
-            await readBuffer.FillAsync(2, cancellationToken);
-            var result = GetCommandAndVersion(readBuffer);
-            await result.ReadFromCoreAsync(readBuffer, cancellationToken);
-            return result;
-        }
-
-        internal static S101Command Parse(string str)
-        {
-            var components = str.Split();
-            var commandType = (CommandType)Enum.Parse(typeof(CommandType), components[0]);
-            var result = CreateCommand(commandType);
-            result.ParseCore(components);
-            return result;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

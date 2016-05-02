@@ -184,6 +184,32 @@ namespace Lawo.EmberPlusSharp.Model
         private KeyValuePair<string, ParameterType>[] arguments;
         private KeyValuePair<string, ParameterType>[] result;
 
+        private static Action<EmberWriter> CreateWriter(
+            KeyValuePair<string, ParameterType> expectedType, object argument)
+        {
+            try
+            {
+                switch (expectedType.Value)
+                {
+                    case ParameterType.Integer:
+                        return new ValueWriter<long>((long)argument).WriteValue;
+                    case ParameterType.Real:
+                        return new ValueWriter<double>((double)argument).WriteValue;
+                    case ParameterType.String:
+                        return new ValueWriter<string>((string)argument).WriteValue;
+                    case ParameterType.Boolean:
+                        return new ValueWriter<bool>((bool)argument).WriteValue;
+                    default:
+                        return new ValueWriter<byte[]>((byte[])argument).WriteValue;
+                }
+            }
+            catch (InvalidCastException ex)
+            {
+                throw new ArgumentException(
+                    "The type of at least one actual argument is not equal to the expected type.", ex);
+            }
+        }
+
         private async Task<IResult> InvokeCoreAsync(object[] actualArguments)
         {
             if (actualArguments.Length != this.arguments.Length)
@@ -217,32 +243,6 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteEndContainer();
                 writer.WriteEndContainer();
                 writer.WriteEndContainer();
-            }
-        }
-
-        private static Action<EmberWriter> CreateWriter(
-            KeyValuePair<string, ParameterType> expectedType, object argument)
-        {
-            try
-            {
-                switch (expectedType.Value)
-                {
-                    case ParameterType.Integer:
-                        return new ValueWriter<long>((long)argument).WriteValue;
-                    case ParameterType.Real:
-                        return new ValueWriter<double>((double)argument).WriteValue;
-                    case ParameterType.String:
-                        return new ValueWriter<string>((string)argument).WriteValue;
-                    case ParameterType.Boolean:
-                        return new ValueWriter<bool>((bool)argument).WriteValue;
-                    default:
-                        return new ValueWriter<byte[]>((byte[])argument).WriteValue;
-                }
-            }
-            catch (InvalidCastException ex)
-            {
-                throw new ArgumentException(
-                    "The type of at least one actual argument is not equal to the expected type.", ex);
             }
         }
     }

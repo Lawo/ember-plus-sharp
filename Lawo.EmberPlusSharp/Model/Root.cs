@@ -168,30 +168,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void RaiseHasChangesSet()
-        {
-            var handler = this.HasChangesSet;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
-        private void ReadQualifiedChild(EmberReader reader, ElementType actualType)
-        {
-            reader.ReadAndAssertOuter(GlowQualifiedNode.Path.OuterId);
-            var path = reader.AssertAndReadContentsAsInt32Array();
-
-            if (path.Length == 0)
-            {
-                throw new ModelException("Invalid path for a qualified element.");
-            }
-
-            this.ReadQualifiedChild(reader, actualType, path, 0);
-        }
-
         private static void ReadInvocationResult(
             EmberReader reader, IDictionary<int, IInvocationResult> pendingInvocations)
         {
@@ -402,6 +378,29 @@ namespace Lawo.EmberPlusSharp.Model
                 "A stream entry for the parameter with the path {0} is incompatible, see inner exception for more information.";
             var descriptor = parameter.StreamDescriptor.Value;
             return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, parameter.GetPath()), ex);
+        }
+
+        private void RaiseHasChangesSet()
+        {
+            var handler = this.HasChangesSet;
+
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        private void ReadQualifiedChild(EmberReader reader, ElementType actualType)
+        {
+            reader.ReadAndAssertOuter(GlowQualifiedNode.Path.OuterId);
+            var path = reader.AssertAndReadContentsAsInt32Array();
+
+            if (path.Length == 0)
+            {
+                throw new ModelException("Invalid path for a qualified element.");
+            }
+
+            this.ReadQualifiedChild(reader, actualType, path, 0);
         }
     }
 }

@@ -272,29 +272,6 @@ namespace Lawo.EmberPlusSharp.Ember
         private readonly WriteBuffer writeBuffer;
         private readonly WriteBuffer tempBuffer;
 
-        private void AssertNotDisposed()
-        {
-            if (this.stream == null)
-            {
-                throw new ObjectDisposedException(this.GetType().Name);
-            }
-        }
-
-        private void WriteIdentifiersAndLengths(EmberId outer, EmberId inner, int? innerLength)
-        {
-            // The outer length is the inner length + the length of the inner length field + the length of the inner
-            // token (for definite lengths the inner token is always universal and therefore one byte).
-            int innerShift;
-            var innerLengthLength = GetLengthLength(innerLength, out innerShift);
-            var outerLength = innerLength + innerLengthLength + 1;
-            int outerShift;
-            var outerLengthLength = GetLengthLength(outerLength, out outerShift);
-            WriteIdentifier(this.writeBuffer, outer);
-            WriteLength(this.writeBuffer, outerLength, outerShift, outerLengthLength);
-            WriteIdentifier(this.writeBuffer, inner);
-            WriteLength(this.writeBuffer, innerLength, innerShift, innerLengthLength);
-        }
-
         private static int Get8BitStartShift(long value, bool isSigned)
         {
             if ((value >= sbyte.MinValue) && (value <= sbyte.MaxValue))
@@ -472,6 +449,29 @@ namespace Lawo.EmberPlusSharp.Ember
                 shift = Get8BitStartShift(length.Value, false);
                 return GetLengthFromShift8Bit(shift) + 1;
             }
+        }
+
+        private void AssertNotDisposed()
+        {
+            if (this.stream == null)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+        }
+
+        private void WriteIdentifiersAndLengths(EmberId outer, EmberId inner, int? innerLength)
+        {
+            // The outer length is the inner length + the length of the inner length field + the length of the inner
+            // token (for definite lengths the inner token is always universal and therefore one byte).
+            int innerShift;
+            var innerLengthLength = GetLengthLength(innerLength, out innerShift);
+            var outerLength = innerLength + innerLengthLength + 1;
+            int outerShift;
+            var outerLengthLength = GetLengthLength(outerLength, out outerShift);
+            WriteIdentifier(this.writeBuffer, outer);
+            WriteLength(this.writeBuffer, outerLength, outerShift, outerLengthLength);
+            WriteIdentifier(this.writeBuffer, inner);
+            WriteLength(this.writeBuffer, innerLength, innerShift, innerLengthLength);
         }
     }
 }

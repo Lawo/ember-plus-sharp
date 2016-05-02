@@ -345,12 +345,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private byte[] Randomize(byte[] bytes)
-        {
-            this.Random.NextBytes(bytes);
-            return bytes;
-        }
-
         private static void AssertDecode(byte[] contents)
         {
             AssertDecodeContents(InnerNumber.Octetstring, contents, contents);
@@ -496,6 +490,12 @@ namespace Lawo.EmberPlusSharp.Ember
                     }
                 }
             }
+        }
+
+        private byte[] Randomize(byte[] bytes)
+        {
+            this.Random.NextBytes(bytes);
+            return bytes;
         }
     }
 }

@@ -125,6 +125,28 @@ namespace Lawo.EmberPlusSharp.Model
             set { } // Intentionally empty
         }
 
+        internal static Type GetImplementationType(Type type)
+        {
+            if (type == typeof(IParameter))
+            {
+                return typeof(DynamicParameter);
+            }
+            else if (type == typeof(INode))
+            {
+                return typeof(DynamicNode);
+            }
+            else if (type == typeof(IFunction))
+            {
+                return typeof(DynamicFunction);
+            }
+            else if (IsElement(type))
+            {
+                return type;
+            }
+
+            return null;
+        }
+
         internal void SetRetrieveDetailsChangeStatus(Func<bool> setValue)
         {
             var oldValue = this.RetrieveDetails;
@@ -281,28 +303,6 @@ namespace Lawo.EmberPlusSharp.Model
         internal virtual IElement GetElement(string[] pathElements, int index)
         {
             return index == pathElements.Length ? this : null;
-        }
-
-        internal static Type GetImplementationType(Type type)
-        {
-            if (type == typeof(IParameter))
-            {
-                return typeof(DynamicParameter);
-            }
-            else if (type == typeof(INode))
-            {
-                return typeof(DynamicNode);
-            }
-            else if (type == typeof(IFunction))
-            {
-                return typeof(DynamicFunction);
-            }
-            else if (IsElement(type))
-            {
-                return type;
-            }
-
-            return null;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

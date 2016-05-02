@@ -153,6 +153,26 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private static ReadOnlyObservableCollection<int> MakeReadOnly(ObservableCollection<int> child)
+        {
+            return child == null ? null : new ReadOnlyObservableCollection<int>(child);
+        }
+
+        private static List<int> GetExpected(ObservableCollection<ReadOnlyObservableCollection<int>> parent)
+        {
+            var expected = new List<int>();
+
+            foreach (var child in parent)
+            {
+                if (child != null)
+                {
+                    expected.AddRange(child);
+                }
+            }
+
+            return expected;
+        }
+
         private void VerifyModification(Action<ObservableCollection<ReadOnlyObservableCollection<int>>,
             List<ObservableCollection<int>>> modification)
         {
@@ -187,26 +207,6 @@ namespace Lawo.ComponentModel
             where T : class
         {
             return children.Count > 0 ? children[this.Random.Next(children.Count)] : null;
-        }
-
-        private static ReadOnlyObservableCollection<int> MakeReadOnly(ObservableCollection<int> child)
-        {
-            return child == null ? null : new ReadOnlyObservableCollection<int>(child);
-        }
-
-        private static List<int> GetExpected(ObservableCollection<ReadOnlyObservableCollection<int>> parent)
-        {
-            var expected = new List<int>();
-
-            foreach (var child in parent)
-            {
-                if (child != null)
-                {
-                    expected.AddRange(child);
-                }
-            }
-
-            return expected;
         }
     }
 }

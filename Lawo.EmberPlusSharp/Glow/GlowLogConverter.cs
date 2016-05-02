@@ -72,6 +72,59 @@ namespace Lawo.EmberPlusSharp.Glow
             private readonly GlowLogInterpreter interpreter;
             private readonly XmlWriter writer;
 
+            private static string LowerFirst(string str)
+            {
+                return char.ToLowerInvariant(str[0]) + str.Substring(1);
+            }
+
+            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "There's no meaningful way to reduce the complexity.")]
+            [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "There is only one cast per method call, CA bug?")]
+            private static object GetValue(IElement element, string name)
+            {
+                switch (name)
+                {
+                    case "Description":
+                        return element.Description;
+                    case "IsOnline":
+                        return element.IsOnline;
+                    case "SchemaIdentifiers":
+                        return ((IElementWithSchemas)element).SchemaIdentifiers;
+                    case "Value":
+                        var parameter = (IParameter)element;
+                        return (parameter.Access & ParameterAccess.Read) == 0 ? null : parameter.Value;
+                    case "Minimum":
+                        return ((IParameter)element).Minimum;
+                    case "Maximum":
+                        return ((IParameter)element).Maximum;
+                    case "Access":
+                        return LowerFirst(((IParameter)element).Access.ToString());
+                    case "Format":
+                        return ((IParameter)element).Format;
+                    case "Factor":
+                        return ((IParameter)element).Factor;
+                    case "Formula":
+                        return ((IParameter)element).Formula;
+                    case "DefaultValue":
+                        return ((IParameter)element).DefaultValue;
+                    case "Type":
+                        return LowerFirst(((IParameter)element).Type.ToString());
+                    case "StreamIdentifier":
+                        return ((IStreamedParameter)element).StreamIdentifier;
+                    case "EnumMap":
+                        return ((IParameter)element).EnumMap;
+                    case "StreamDescriptor":
+                        return ((IStreamedParameter)element).StreamDescriptor;
+                    case "Arguments":
+                        return ((IFunction)element).Arguments;
+                    case "Result":
+                        return ((IFunction)element).Result;
+                    case "IsRoot":
+                        return ((INode)element).IsRoot;
+                    default:
+                        throw new ArgumentException("Unknown element or field name.");
+                }
+            }
+
             private void Add(IElement element)
             {
                 if (this.subscribedElements.Add(element))
@@ -229,59 +282,6 @@ namespace Lawo.EmberPlusSharp.Glow
                 }
 
                 this.writer.WriteEndElement();
-            }
-
-            private static string LowerFirst(string str)
-            {
-                return char.ToLowerInvariant(str[0]) + str.Substring(1);
-            }
-
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "There's no meaningful way to reduce the complexity.")]
-            [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "There is only one cast per method call, CA bug?")]
-            private static object GetValue(IElement element, string name)
-            {
-                switch (name)
-                {
-                    case "Description":
-                        return element.Description;
-                    case "IsOnline":
-                        return element.IsOnline;
-                    case "SchemaIdentifiers":
-                        return ((IElementWithSchemas)element).SchemaIdentifiers;
-                    case "Value":
-                        var parameter = (IParameter)element;
-                        return (parameter.Access & ParameterAccess.Read) == 0 ? null : parameter.Value;
-                    case "Minimum":
-                        return ((IParameter)element).Minimum;
-                    case "Maximum":
-                        return ((IParameter)element).Maximum;
-                    case "Access":
-                        return LowerFirst(((IParameter)element).Access.ToString());
-                    case "Format":
-                        return ((IParameter)element).Format;
-                    case "Factor":
-                        return ((IParameter)element).Factor;
-                    case "Formula":
-                        return ((IParameter)element).Formula;
-                    case "DefaultValue":
-                        return ((IParameter)element).DefaultValue;
-                    case "Type":
-                        return LowerFirst(((IParameter)element).Type.ToString());
-                    case "StreamIdentifier":
-                        return ((IStreamedParameter)element).StreamIdentifier;
-                    case "EnumMap":
-                        return ((IParameter)element).EnumMap;
-                    case "StreamDescriptor":
-                        return ((IStreamedParameter)element).StreamDescriptor;
-                    case "Arguments":
-                        return ((IFunction)element).Arguments;
-                    case "Result":
-                        return ((IFunction)element).Result;
-                    case "IsRoot":
-                        return ((INode)element).IsRoot;
-                    default:
-                        throw new ArgumentException("Unknown element or field name.");
-                }
             }
         }
     }

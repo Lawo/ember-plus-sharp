@@ -242,7 +242,6 @@
     <Rule Id="SA1649" Action="None" />
     <Rule Id="SA1611" Action="None" />
     <Rule Id="SA1648" Action="None" />
-    <Rule Id="SA1204" Action="None" />
     <Rule Id="SA1214" Action="None" />
     <Rule Id="SA1640" Action="None" />
   </Rules>

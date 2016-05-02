@@ -378,6 +378,24 @@ namespace Lawo.EmberPlusSharp.Model
 
         private StreamDescription? StreamDescriptor { get; set; }
 
+        private static List<KeyValuePair<string, int>> ReadEnumeration(EmberReader reader)
+        {
+            var entries = reader.AssertAndReadContentsAsString().Split('\n');
+            var result = new List<KeyValuePair<string, int>>();
+
+            for (int index = 0; index < entries.Length; ++index)
+            {
+                var entryString = entries[index];
+
+                if (!entryString.StartsWith("~", StringComparison.Ordinal))
+                {
+                    result.Add(new KeyValuePair<string, int>(entryString, index));
+                }
+            }
+
+            return result;
+        }
+
         private void SetProviderValue(TValue value)
         {
             if (!this.HasChanges)
@@ -445,24 +463,6 @@ namespace Lawo.EmberPlusSharp.Model
                     throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
                 }
             }
-        }
-
-        private static List<KeyValuePair<string, int>> ReadEnumeration(EmberReader reader)
-        {
-            var entries = reader.AssertAndReadContentsAsString().Split('\n');
-            var result = new List<KeyValuePair<string, int>>();
-
-            for (int index = 0; index < entries.Length; ++index)
-            {
-                var entryString = entries[index];
-
-                if (!entryString.StartsWith("~", StringComparison.Ordinal))
-                {
-                    result.Add(new KeyValuePair<string, int>(entryString, index));
-                }
-            }
-
-            return result;
         }
     }
 }
