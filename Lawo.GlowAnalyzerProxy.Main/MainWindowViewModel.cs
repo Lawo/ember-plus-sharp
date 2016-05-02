@@ -207,27 +207,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
         internal MainWindowViewModel(Settings settings)
         {
-            this.settings = settings;
+            this.readOnlyEvents = new ReadOnlyObservableCollection<Event>(this.events);
             this.consumerConnection = new ConnectionViewModel(this);
             this.providerConnection = new ConnectionViewModel(this);
-            this.readOnlyEvents = new ReadOnlyObservableCollection<Event>(this.events);
-
-            #region TwoWayBinding
-            TwoWayBinding.Create(
-                this.settings.GetProperty(o => o.ListeningPort), this.GetProperty(o => o.ListeningPort));
-            TwoWayBinding.Create(
-                this.settings.GetProperty(o => o.ProviderHostName), this.GetProperty(o => o.ProviderHostName));
-            TwoWayBinding.Create(
-                this.settings.GetProperty(o => o.ProviderPort), this.GetProperty(o => o.ProviderPort));
-            TwoWayBinding.Create(
-                this.settings.GetProperty(o => o.LogFolder), this.GetProperty(o => o.LogFolder));
-            TwoWayBinding.Create(
-                this.settings.GetProperty(o => o.AutoScrollToMostRecentEvent),
-                a => a,
-                this.GetProperty(o => o.AutoScrollToMostRecentEvent),
-                a => a.GetValueOrDefault());
-            #endregion
-
             this.canEditSettings = CalculatedProperty.Create(
                 this.GetProperty(o => o.IsStarted),
                 this.GetProperty(o => o.IsStopped),
@@ -245,6 +227,23 @@ namespace Lawo.GlowAnalyzerProxy.Main
             #endregion
             this.canStop = CalculatedProperty.Create(
                 this.GetProperty(o => o.IsStopped), s => !s, this.GetProperty(o => o.CanStop));
+            this.settings = settings;
+
+            #region TwoWayBinding
+            TwoWayBinding.Create(
+                this.settings.GetProperty(o => o.ListeningPort), this.GetProperty(o => o.ListeningPort));
+            TwoWayBinding.Create(
+                this.settings.GetProperty(o => o.ProviderHostName), this.GetProperty(o => o.ProviderHostName));
+            TwoWayBinding.Create(
+                this.settings.GetProperty(o => o.ProviderPort), this.GetProperty(o => o.ProviderPort));
+            TwoWayBinding.Create(
+                this.settings.GetProperty(o => o.LogFolder), this.GetProperty(o => o.LogFolder));
+            TwoWayBinding.Create(
+                this.settings.GetProperty(o => o.AutoScrollToMostRecentEvent),
+                a => a,
+                this.GetProperty(o => o.AutoScrollToMostRecentEvent),
+                a => a.GetValueOrDefault());
+            #endregion
 
             this.AddValidationRule(this.GetProperty(o => o.ProviderPort), p => ValidatePort(p));
             this.AddValidationRule(this.GetProperty(o => o.ListeningPort), p => ValidatePort(p));
@@ -280,22 +279,22 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         private readonly TaskQueue logQueue = new TaskQueue();
         private readonly Dictionary<string, Func<string>> validationRules = new Dictionary<string, Func<string>>();
-        private readonly Settings settings;
-        private readonly ConnectionViewModel consumerConnection;
-        private readonly ConnectionViewModel providerConnection;
         private readonly List<Event> eventCache = new List<Event>();
         private readonly ObservableCollection<Event> events = new ObservableCollection<Event>();
         private readonly ReadOnlyObservableCollection<Event> readOnlyEvents;
-        private string listeningPort;
-        private string providerHostName;
-        private string providerPort;
-        private string logFolder;
-        private bool? autoScrollToMostRecentEvent;
+        private readonly ConnectionViewModel consumerConnection;
+        private readonly ConnectionViewModel providerConnection;
+        private readonly Settings settings;
         private readonly CalculatedProperty<bool> canEditSettings;
         #region  CalculatedProperty1
         private readonly CalculatedProperty<bool> canStart;
         #endregion
         private readonly CalculatedProperty<bool> canStop;
+        private string listeningPort;
+        private string providerHostName;
+        private string providerPort;
+        private string logFolder;
+        private bool? autoScrollToMostRecentEvent;
         private Event selectedEvent;
         private FlowDocument selectedEventDetail;
         private bool canLoadFullEventDetail;

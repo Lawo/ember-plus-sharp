@@ -58,10 +58,10 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private readonly Queue<byte> decodedQueue = new Queue<byte>();
         private readonly Action<byte> outOfFrameByteReceived;
         private State state;
         private ushort crc = 0xFFFF;
-        private readonly Queue<byte> decodedQueue = new Queue<byte>();
 
         /// <summary>Enumerates the decoding states.</summary>
         private enum State

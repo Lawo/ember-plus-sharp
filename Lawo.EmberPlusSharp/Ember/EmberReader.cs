@@ -40,8 +40,8 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw new ArgumentNullException("stream");
             }
 
+            this.readBuffer = new ReadBuffer(stream.Read, bufferSize);
             this.stream = stream;
-            this.readBuffer = new ReadBuffer((ReadCallback)this.stream.Read, bufferSize);
         }
 
         /// <summary>Gets the number of the inner identifier of the data value that was read with <see cref="Read"/>.
@@ -437,8 +437,8 @@ namespace Lawo.EmberPlusSharp.Ember
         private static readonly EmberId Set = EmberId.CreateUniversal(Ember.InnerNumber.Set);
 
         private readonly Stack<PositionInfo> endPositions = new Stack<PositionInfo>(32);
-        private Stream stream;
         private readonly ReadBuffer readBuffer;
+        private Stream stream;
         private int? innerNumber;
         private EmberId? outer;
 

@@ -90,16 +90,17 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private readonly ReadBuffer rawBuffer;
-        private DeframingStream deframingStream;
-        private readonly ReadBuffer deframedBuffer;
         private readonly byte[] discardBuffer;
         private readonly Action<byte> outOfFrameByteReceived;
+        private readonly ReadBuffer deframedBuffer;
+        private DeframingStream deframingStream;
         private S101Message message;
 
         private MessageDecodingStream(ReadBuffer rawBuffer, byte[] discardBuffer, Action<byte> outOfFrameByteReceived)
         {
             this.rawBuffer = rawBuffer;
-            this.deframingStream = new DeframingStream(this.rawBuffer, outOfFrameByteReceived);
+            this.discardBuffer = discardBuffer;
+            this.outOfFrameByteReceived = outOfFrameByteReceived;
 
             // This buffer is kept small in size, because a new one is allocated for each message.
             // This has the effect that only the bytes of reads <= MessageHeaderMaxLength bytes are actually copied into
@@ -109,10 +110,8 @@ namespace Lawo.EmberPlusSharp.S101
             // >= 1024 bytes).
             // This approach minimizes the allocations per message, while guaranteeing the best possible performance for
             // header *and* payload reading.
-            this.deframedBuffer =
-                new ReadBuffer((ReadAsyncCallback)this.ReadDeframedAsync, Constants.MessageHeaderMaxLength);
-            this.discardBuffer = discardBuffer;
-            this.outOfFrameByteReceived = outOfFrameByteReceived;
+            this.deframedBuffer = new ReadBuffer(this.ReadDeframedAsync, Constants.MessageHeaderMaxLength);
+            this.deframingStream = new DeframingStream(this.rawBuffer, this.outOfFrameByteReceived);
         }
 
         private async Task<int> ReadFromCurrentPacketAsync(

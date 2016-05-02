@@ -39,9 +39,9 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw new ArgumentNullException("stream");
             }
 
+            this.writeBuffer = new WriteBuffer(stream.Write, bufferSize);
+            this.tempBuffer = new WriteBuffer(this.writeBuffer.Write, SubidentifierMaxLength * 16);
             this.stream = stream;
-            this.writeBuffer = new WriteBuffer((WriteCallback)this.stream.Write, bufferSize);
-            this.tempBuffer = new WriteBuffer((WriteCallback)this.writeBuffer.Write, SubidentifierMaxLength * 16);
         }
 
         /// <summary>Releases all resources used by the current instance of the <see cref="EmberWriter"/> class.</summary>
@@ -268,9 +268,9 @@ namespace Lawo.EmberPlusSharp.Ember
         private static readonly EmberId Sequence = EmberId.CreateUniversal(InnerNumber.Sequence);
         private static readonly EmberId Set = EmberId.CreateUniversal(InnerNumber.Set);
 
-        private Stream stream;
         private readonly WriteBuffer writeBuffer;
         private readonly WriteBuffer tempBuffer;
+        private Stream stream;
 
         private static int Get8BitStartShift(long value, bool isSigned)
         {

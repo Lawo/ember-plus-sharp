@@ -89,7 +89,7 @@ namespace Lawo.EmberPlusSharp.S101
             message.PacketFlags =
                 PacketFlags.FirstPacket | (message.CanHaveMultiplePackets ? PacketFlags.None : PacketFlags.LastPacket);
             var framingStream = await FramingStream.CreateAsync(rawBuffer, cancellationToken);
-            var result = new MessageEncodingStream(rawBuffer, framingStream, message);
+            var result = new MessageEncodingStream(message, rawBuffer, framingStream);
             await message.WriteToAsync(result.unframedBuffer, cancellationToken);
             return result;
         }
@@ -105,18 +105,17 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private const int MaxFrameLength = 1024;
-        private readonly WriteBuffer rawBuffer;
-        private FramingStream framingStream;
         private readonly WriteBuffer unframedBuffer;
         private readonly S101Message message;
+        private readonly WriteBuffer rawBuffer;
+        private FramingStream framingStream;
 
-        private MessageEncodingStream(WriteBuffer rawBuffer, FramingStream framingStream, S101Message message)
+        private MessageEncodingStream(S101Message message, WriteBuffer rawBuffer, FramingStream framingStream)
         {
+            this.unframedBuffer = new WriteBuffer(this.WriteUnframedAsync, Constants.MessageHeaderMaxLength);
+            this.message = message;
             this.rawBuffer = rawBuffer;
             this.framingStream = framingStream;
-            this.unframedBuffer =
-                new WriteBuffer((WriteAsyncCallback)this.WriteUnframedAsync, Constants.MessageHeaderMaxLength);
-            this.message = message;
         }
 
         private async Task DisposeAndCreateFramingStreamAsync(PacketFlags packetFlags, CancellationToken cancellationToken)
