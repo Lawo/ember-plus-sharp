@@ -12,6 +12,14 @@ namespace Lawo.EmberPlusSharp.Glow
     /// <threadsafety static="true" instance="false"/>
     public static class GlowTypes
     {
+        /// <summary>Gets the singleton <see cref="EmberTypeBag"/> instance containing all Glow types.</summary>
+        public static EmberTypeBag Instance
+        {
+            get { return TheInstance; }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         private static readonly EmberTypeBag TheInstance = new EmberTypeBag(
             typeof(GlowGlobal),
             typeof(GlowParameter),
@@ -59,13 +67,5 @@ namespace Lawo.EmberPlusSharp.Glow
             new EmberType(typeof(GlowInvocation.Arguments), typeof(GlowTuple)),
             typeof(GlowInvocationResult),
             new EmberType(typeof(GlowInvocationResult.Result), typeof(GlowTuple)));
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /// <summary>Gets the singleton <see cref="EmberTypeBag"/> instance containing all Glow types.</summary>
-        public static EmberTypeBag Instance
-        {
-            get { return TheInstance; }
-        }
     }
 }

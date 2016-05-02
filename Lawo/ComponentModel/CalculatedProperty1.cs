@@ -17,13 +17,6 @@ namespace Lawo.ComponentModel
     /// <threadsafety static="true" instance="false"/>
     public sealed class CalculatedProperty<T> : IDisposable
     {
-        private readonly MultiBinding<T> binding;
-        private readonly NotifyPropertyChanged owner;
-        private readonly PropertyChangedEventArgs args;
-        private T targetValue;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the value of the calculated property.</summary>
         public T Value
         {
@@ -65,5 +58,12 @@ namespace Lawo.ComponentModel
             this.args = new PropertyChangedEventArgs(target.PropertyInfo.Name);
             this.binding = createBinding(this.GetProperty(o => o.Value));
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly MultiBinding<T> binding;
+        private readonly NotifyPropertyChanged owner;
+        private readonly PropertyChangedEventArgs args;
+        private T targetValue;
     }
 }

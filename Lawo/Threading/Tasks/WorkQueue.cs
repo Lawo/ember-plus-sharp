@@ -17,10 +17,6 @@ namespace Lawo.Threading.Tasks
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class WorkQueue
     {
-        private Task previousWork = Task.FromResult(false);
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="WorkQueue"/> class.</summary>
         public WorkQueue()
         {
@@ -62,5 +58,9 @@ namespace Lawo.Threading.Tasks
             this.previousWork = result;
             return result;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private Task previousWork = Task.FromResult(false);
     }
 }

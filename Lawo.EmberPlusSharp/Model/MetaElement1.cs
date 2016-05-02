@@ -22,11 +22,6 @@ namespace Lawo.EmberPlusSharp.Model
         private sealed class MetaElement<TProperty> : MetaElement
             where TProperty : Element<TProperty>
         {
-            private readonly Func<TMostDerived, TProperty> get;
-            private readonly Action<TMostDerived, TProperty> set;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal MetaElement(PropertyInfo property)
                 : base(property)
             {
@@ -83,6 +78,9 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly Func<TMostDerived, TProperty> get;
+            private readonly Action<TMostDerived, TProperty> set;
 
             private ModelException CreateRequiredPropertyException(IParent parent, string format)
             {

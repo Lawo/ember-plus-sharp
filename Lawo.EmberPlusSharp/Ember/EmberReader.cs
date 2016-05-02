@@ -21,18 +21,6 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberReader : IDisposable
     {
-        private static readonly EmberId EndContainer = EmberId.CreateUniversal(Ember.InnerNumber.EndContainer);
-        private static readonly EmberId Sequence = EmberId.CreateUniversal(Ember.InnerNumber.Sequence);
-        private static readonly EmberId Set = EmberId.CreateUniversal(Ember.InnerNumber.Set);
-
-        private readonly Stack<PositionInfo> endPositions = new Stack<PositionInfo>(32);
-        private Stream stream;
-        private readonly ReadBuffer readBuffer;
-        private int? innerNumber;
-        private EmberId? outer;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="EmberReader"/> class by calling
         /// <see cref="EmberReader(Stream, int)">EmberReader(<paramref name="stream"/>, 1024)</see>.</summary>
         public EmberReader(Stream stream)
@@ -443,6 +431,16 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly EmberId EndContainer = EmberId.CreateUniversal(Ember.InnerNumber.EndContainer);
+        private static readonly EmberId Sequence = EmberId.CreateUniversal(Ember.InnerNumber.Sequence);
+        private static readonly EmberId Set = EmberId.CreateUniversal(Ember.InnerNumber.Set);
+
+        private readonly Stack<PositionInfo> endPositions = new Stack<PositionInfo>(32);
+        private Stream stream;
+        private readonly ReadBuffer readBuffer;
+        private int? innerNumber;
+        private EmberId? outer;
 
         private long? EndPosition
         {
@@ -949,13 +947,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         private struct PositionInfo
         {
-            private readonly EmberId emberId;
-            private readonly bool isInner;
-            private readonly long lengthPosition;
-            private readonly long? endPosition;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal PositionInfo(EmberId emberId, bool isInner, long lengthPosition, long? endPosition)
             {
                 this.emberId = emberId;
@@ -983,6 +974,13 @@ namespace Lawo.EmberPlusSharp.Ember
             {
                 get { return this.endPosition; }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly EmberId emberId;
+            private readonly bool isInner;
+            private readonly long lengthPosition;
+            private readonly long? endPosition;
         }
     }
 }

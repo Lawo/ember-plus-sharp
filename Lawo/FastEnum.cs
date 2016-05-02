@@ -90,13 +90,6 @@ namespace Lawo
         private static class EnumCache<TEnum>
             where TEnum : struct
         {
-            private static readonly Dictionary<TEnum, string> ValueNameMap;
-            private static readonly Dictionary<string, TEnum> NameValueMap;
-            private static readonly Func<long, TEnum> ConvertToEnum;
-            private static readonly Func<TEnum, long> ConvertToInt64;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal static bool IsDefined(TEnum value)
             {
                 AssertIsEnum();
@@ -129,8 +122,14 @@ namespace Lawo
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            private static readonly Dictionary<TEnum, string> ValueNameMap;
+            private static readonly Dictionary<string, TEnum> NameValueMap;
+            private static readonly Func<long, TEnum> ConvertToEnum;
+            private static readonly Func<TEnum, long> ConvertToInt64;
+
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Inline initialization would be less efficient.")]
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Complexity cannot be reduced in a meaningful way.")]
+#pragma warning disable SA1202 // Elements must be ordered by access. Incorrectly identified as public, TODO: File bug.
             static EnumCache()
             {
                 var values = GetValues();
@@ -187,6 +186,7 @@ namespace Lawo
                         break;
                 }
             }
+#pragma warning restore SA1202 // Elements must be ordered by access
 
             private static TEnum[] GetValues()
             {

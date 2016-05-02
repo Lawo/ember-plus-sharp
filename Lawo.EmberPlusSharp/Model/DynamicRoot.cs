@@ -22,11 +22,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class DynamicRoot<TMostDerived> : Root<TMostDerived>
         where TMostDerived : DynamicRoot<TMostDerived>
     {
-        private readonly ObservableCollection<IElement> dynamicChildren = new ObservableCollection<IElement>();
-        private readonly ReadOnlyObservableCollection<IElement> readOnlyDynamicChildren;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the dynamic children of this node.</summary>
         public ReadOnlyObservableCollection<IElement> DynamicChildren
         {
@@ -57,5 +52,10 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.readOnlyDynamicChildren = new ReadOnlyObservableCollection<IElement>(this.dynamicChildren);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ObservableCollection<IElement> dynamicChildren = new ObservableCollection<IElement>();
+        private readonly ReadOnlyObservableCollection<IElement> readOnlyDynamicChildren;
     }
 }

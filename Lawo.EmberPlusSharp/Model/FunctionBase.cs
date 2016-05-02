@@ -23,14 +23,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class FunctionBase<TMostDerived> : Element<TMostDerived>, IFunction
         where TMostDerived : FunctionBase<TMostDerived>
     {
-        private readonly Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>> invocations =
-            new Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>>();
-
-        private KeyValuePair<string, ParameterType>[] arguments;
-        private KeyValuePair<string, ParameterType>[] result;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
         IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Arguments
@@ -185,6 +177,12 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>> invocations =
+            new Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>>();
+
+        private KeyValuePair<string, ParameterType>[] arguments;
+        private KeyValuePair<string, ParameterType>[] result;
 
         private async Task<IResult> InvokeCoreAsync(object[] actualArguments)
         {

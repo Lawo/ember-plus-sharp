@@ -20,12 +20,6 @@ namespace Lawo.ComponentModel
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Somehow the CA dictionary does not seem to work here.")]
     public sealed class MultiBinding<T> : IDisposable
     {
-        private readonly IProperty<object, T> target;
-        private readonly Func<T> calculate;
-        private readonly PropertyChangedRegistration propertyChangedRegistration;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Stops setting the target property whenever one of the source properties changes.</summary>
         /// <remarks>If the binding is intended to be permanent it is permissible to to never call
         /// <see cref="Dispose"/>.</remarks>
@@ -59,6 +53,10 @@ namespace Lawo.ComponentModel
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly IProperty<object, T> target;
+        private readonly Func<T> calculate;
+        private readonly PropertyChangedRegistration propertyChangedRegistration;
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

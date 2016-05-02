@@ -61,13 +61,6 @@ namespace Lawo.Threading.Tasks
 
         private sealed class SingleThreadSynchronizationContext : SynchronizationContext, IDisposable
         {
-            private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> queue =
-                new BlockingCollection<KeyValuePair<SendOrPostCallback, object>>();
-
-            private int operationCount;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             public void Dispose()
             {
                 this.queue.Dispose();
@@ -115,6 +108,13 @@ namespace Lawo.Threading.Tasks
                     workItem.Key(workItem.Value);
                 }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> queue =
+                new BlockingCollection<KeyValuePair<SendOrPostCallback, object>>();
+
+            private int operationCount;
         }
     }
 }

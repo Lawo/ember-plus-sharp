@@ -43,11 +43,6 @@ namespace Lawo.ComponentModel
 
         private sealed class FilterCollection<T> : SubscribedObservableCollection<T>
         {
-            private readonly Predicate<T> predicate;
-            private readonly IComparer<T> comparer;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal FilterCollection(
                 ReadOnlyObservableCollection<T> originalItems, Predicate<T> predicate, IComparer<T> comparer)
             {
@@ -64,6 +59,9 @@ namespace Lawo.ComponentModel
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly Predicate<T> predicate;
+            private readonly IComparer<T> comparer;
 
             private void InsertIfMatch(int index, T original)
             {

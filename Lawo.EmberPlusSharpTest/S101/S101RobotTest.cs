@@ -20,8 +20,6 @@ namespace Lawo.EmberPlusSharp.S101
     [TestClass]
     public class S101RobotTest : CommunicationTestBase
     {
-        private static readonly EmberTypeBag Types = new EmberTypeBag();
-
         /// <summary>Tests the main use cases of <see cref="S101Robot"/>.</summary>
         [TestMethod]
         public void SkipTest()
@@ -109,5 +107,9 @@ namespace Lawo.EmberPlusSharp.S101
                         client => Task.FromResult(false), null, null, Types, true, "MissingPayloadLog.xml"));
                 });
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly EmberTypeBag Types = new EmberTypeBag();
     }
 }

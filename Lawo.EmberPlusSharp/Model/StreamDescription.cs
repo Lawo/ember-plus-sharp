@@ -12,11 +12,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <threadsafety static="true" instance="false"/>
     public struct StreamDescription : IEquatable<StreamDescription>
     {
-        private readonly StreamFormat format;
-        private readonly int offset;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the format.</summary>
         public StreamFormat Format
         {
@@ -68,5 +63,10 @@ namespace Lawo.EmberPlusSharp.Model
             this.format = format;
             this.offset = offset;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly StreamFormat format;
+        private readonly int offset;
     }
 }

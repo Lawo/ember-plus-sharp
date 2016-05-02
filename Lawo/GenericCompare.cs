@@ -25,14 +25,14 @@ namespace Lawo
 
         private static class ComparerHolder<T>
         {
-            private static readonly EqualityComparer<T> Comparer = EqualityComparer<T>.Default;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal static bool Equals(T obj1, T obj2)
             {
                 return Comparer.Equals(obj1, obj2);
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private static readonly EqualityComparer<T> Comparer = EqualityComparer<T>.Default;
         }
     }
 }

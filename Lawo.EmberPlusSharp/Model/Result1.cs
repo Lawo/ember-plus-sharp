@@ -11,10 +11,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <threadsafety static="true" instance="false"/>
     public sealed class Result<T1> : ResultBase<Result<T1>>
     {
-        private readonly ValueReader<T1> component1Reader;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="Result{T1}"/> class.</summary>
         public Result()
             : this(new ValueReader<T1>())
@@ -28,6 +24,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ValueReader<T1> component1Reader;
 
         private Result(ValueReader<T1> item1Reader)
             : base(item1Reader)

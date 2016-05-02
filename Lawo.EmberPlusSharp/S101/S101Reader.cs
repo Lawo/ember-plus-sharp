@@ -20,14 +20,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Reader
     {
-        private readonly TaskSingleton taskSingleton = new TaskSingleton();
-        private readonly ReadBuffer readBuffer;
-        private readonly byte[] discardBuffer = new byte[Defaults.InMemoryStreamBufferSize];
-        private MessageDecodingStream stream;
-        private bool disposed;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="S101Reader"/> class by calling
         /// <see cref="S101Reader(ReadAsyncCallback, int)">S101Reader(<paramref name="readAsync"/>, 8192)</see>.
         /// </summary>
@@ -149,6 +141,12 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly TaskSingleton taskSingleton = new TaskSingleton();
+        private readonly ReadBuffer readBuffer;
+        private readonly byte[] discardBuffer = new byte[Defaults.InMemoryStreamBufferSize];
+        private MessageDecodingStream stream;
+        private bool disposed;
 
         private async Task DisposeCoreAsync(CancellationToken cancellationToken)
         {

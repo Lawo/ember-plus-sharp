@@ -46,12 +46,6 @@ namespace Lawo
     public sealed class ScopeGuard<T> : IDisposable
         where T : IDisposable
     {
-        private readonly T resource;
-        private bool dismissed;
-        private bool disposed;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the resource object passed to <see cref="ScopeGuard.Create"/>.</summary>
         /// <exception cref="ObjectDisposedException">The scope guard has already been disposed.</exception>
         public T Resource
@@ -107,6 +101,10 @@ namespace Lawo
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly T resource;
+        private bool dismissed;
+        private bool disposed;
 
         private void AssertNotDisposed()
         {

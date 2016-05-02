@@ -17,8 +17,6 @@ namespace Lawo.ComponentModel
     [TestClass]
     public sealed class FilterHelperTest : TestBase
     {
-        private static readonly Predicate<int> Predicate = i => i < 5;
-
         /// <summary>Tests <see cref="FilterHelper"/> by adding elements.</summary>
         [TestMethod]
         public void AddTest()
@@ -83,6 +81,8 @@ namespace Lawo.ComponentModel
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly Predicate<int> Predicate = i => i < 5;
 
         private void VerifyModification(Action<ObservableCollection<int>> modification, Predicate<int> filter)
         {

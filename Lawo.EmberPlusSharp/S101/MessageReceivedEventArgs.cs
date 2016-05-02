@@ -12,12 +12,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class MessageReceivedEventArgs : EventArgs
     {
-        private readonly S101Message message;
-        private readonly byte[] payload;
-        private readonly bool isAnotherMessageAvailable;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the message.</summary>
         public S101Message Message
         {
@@ -45,5 +39,11 @@ namespace Lawo.EmberPlusSharp.S101
             this.payload = payload;
             this.isAnotherMessageAvailable = isAnotherMessageAvailable;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly S101Message message;
+        private readonly byte[] payload;
+        private readonly bool isAnotherMessageAvailable;
     }
 }

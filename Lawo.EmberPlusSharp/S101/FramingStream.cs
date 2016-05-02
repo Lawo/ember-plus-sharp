@@ -23,11 +23,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class FramingStream : BufferStream
     {
-        private ushort crc = 0xFFFF;
-        private bool previousWasEscapeByte;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public sealed override async Task DisposeAsync(CancellationToken cancellationToken)
         {
             if (!this.IsDisposed)
@@ -73,6 +68,9 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private ushort crc = 0xFFFF;
+        private bool previousWasEscapeByte;
 
         private FramingStream(WriteBuffer writeBuffer)
             : base(null, writeBuffer)

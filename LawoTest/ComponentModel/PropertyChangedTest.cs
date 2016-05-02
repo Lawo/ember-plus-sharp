@@ -18,10 +18,6 @@ namespace Lawo.ComponentModel
     [TestClass]
     public sealed class PropertyChangedTest : TestBase
     {
-        private const IProperty<INotifyPropertyChanged> NullProperty = (IProperty<INotifyPropertyChanged>)null;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Tests the main <see cref="PropertyChangedRegistration"/> use cases.</summary>
         [TestMethod]
         public void PropertyChangedRegistrationTest()
@@ -81,6 +77,8 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private const IProperty<INotifyPropertyChanged> NullProperty = null;
+
         private void TestCore(
             Func<PropertyChangedEventHandler, IDisposable> createCalculated,
             bool creationIsNotified,
@@ -104,8 +102,6 @@ namespace Lawo.ComponentModel
             Assert.AreEqual(totalCount, changedCount);
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         private int IncrementAddends(int index, params Addend[] addends)
         {
             var totalCount = 0;
@@ -128,10 +124,6 @@ namespace Lawo.ComponentModel
 
         private sealed class Addend : NotifyPropertyChanged
         {
-            private int addendValue;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal Addend()
             {
             }
@@ -146,15 +138,14 @@ namespace Lawo.ComponentModel
                 get { return this.addendValue; }
                 set { this.SetValue(ref this.addendValue, value); }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private int addendValue;
         }
 
         private sealed class CalculatedSum : NotifyPropertyChanged
         {
-            private readonly Addend[] addends;
-            private readonly CalculatedProperty<int> sum;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal CalculatedSum(PropertyChangedTest test, int propertyCount)
             {
                 this.addends = Enumerable.Range(1, propertyCount).Select(i => new Addend()).ToArray();
@@ -184,6 +175,9 @@ namespace Lawo.ComponentModel
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly Addend[] addends;
+            private readonly CalculatedProperty<int> sum;
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
             private static CalculatedProperty<int> CreateSum(
@@ -279,10 +273,6 @@ namespace Lawo.ComponentModel
 
         private sealed class Exceptional : NotifyPropertyChanged
         {
-            private int valueField;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal Exceptional()
             {
                 AssertThrow<ArgumentNullException>(
@@ -292,6 +282,10 @@ namespace Lawo.ComponentModel
 
                 AssertThrow<ArgumentNullException>(() => MultiBinding.Create(this.GetProperty(o => o.Value), null).Dispose());
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private int valueField;
 
             private int Calculated
             {
@@ -307,15 +301,15 @@ namespace Lawo.ComponentModel
 
         private sealed class NullReferenceExceptionBug : NotifyPropertyChanged
         {
-            private int theValue;
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             public int Value
             {
                 get { return this.theValue; }
                 set { this.SetValue(ref this.theValue, value); }
             }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private int theValue;
         }
     }
 }

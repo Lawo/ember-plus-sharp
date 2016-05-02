@@ -17,10 +17,6 @@ namespace Lawo.Threading.Tasks
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class TaskQueue
     {
-        private Task previousTask = Task.FromResult(false);
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="TaskQueue"/> class.</summary>
         public TaskQueue()
         {
@@ -66,6 +62,8 @@ namespace Lawo.Threading.Tasks
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private Task previousTask = Task.FromResult(false);
 
         private static async Task<TResult> EnqueueCore<TResult>(Task previousTask, Func<Task<TResult>> func)
         {

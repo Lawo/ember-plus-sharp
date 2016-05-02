@@ -15,13 +15,6 @@ namespace Lawo.ComponentModel
     [TestClass]
     public sealed class BindingTest : TestBase
     {
-        private Source source;
-        private int sourceNotifyCount;
-        private Target target;
-        private int targetNotifyCount;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes the members for testing.</summary>
         [TestInitialize]
         public void Initialize()
@@ -126,6 +119,11 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private Source source;
+        private int sourceNotifyCount;
+        private Target target;
+        private int targetNotifyCount;
+
         private void AssertValues(
             string expectedSourceValue,
             int expectedSourceNotifyCount,
@@ -147,24 +145,28 @@ namespace Lawo.ComponentModel
 
         private sealed class Source : NotifyPropertyChanged
         {
-            private string property = Guid.NewGuid().ToString();
-
             internal string Property
             {
                 get { return this.property; }
                 set { this.SetValue(ref this.property, value); }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private string property = Guid.NewGuid().ToString();
         }
 
         private sealed class Target : NotifyPropertyChanged
         {
-            private string property = Guid.NewGuid().ToString();
-
             internal string Property
             {
                 get { return this.property; }
                 set { this.SetValue(ref this.property, value); }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private string property = Guid.NewGuid().ToString();
         }
     }
 }

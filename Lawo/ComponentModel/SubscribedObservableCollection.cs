@@ -16,11 +16,6 @@ namespace Lawo.ComponentModel
     /// <threadsafety static="true" instance="false"/>
     internal abstract class SubscribedObservableCollection<T> : ObservableCollection<T>, IDisposable
     {
-        private INotifyCollectionChanged original;
-        private NotifyCollectionChangedEventHandler handler;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Calls <see cref="Dispose(bool)">Dispose(true)</see>.</summary>
         public void Dispose()
         {
@@ -92,5 +87,10 @@ namespace Lawo.ComponentModel
             this.original = theOriginal;
             this.handler = theHandler;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private INotifyCollectionChanged original;
+        private NotifyCollectionChangedEventHandler handler;
     }
 }

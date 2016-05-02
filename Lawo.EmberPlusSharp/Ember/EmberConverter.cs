@@ -18,13 +18,6 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberConverter : IEmberConverter
     {
-        private readonly Dictionary<int, string> typeNames;
-        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
-        private readonly Dictionary<string, int> innerNumbers;
-        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="EmberConverter"/> class.</summary>
         public EmberConverter()
             : this(new EmberTypeBag())
@@ -122,6 +115,11 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Dictionary<int, string> typeNames;
+        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
+        private readonly Dictionary<string, int> innerNumbers;
+        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "There's no meaningful way to reduce the complexity.")]
         private void ToXmlCore(

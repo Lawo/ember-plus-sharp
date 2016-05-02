@@ -20,12 +20,6 @@ namespace Lawo.EmberPlusSharp.Model
     {
         private abstract class MetaElement
         {
-            private readonly PropertyInfo property;
-            private readonly string identifier;
-            private readonly bool isOptional;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal string Identifier
             {
                 get { return this.identifier; }
@@ -70,7 +64,11 @@ namespace Lawo.EmberPlusSharp.Model
                 get { return this.isOptional; }
             }
 
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly PropertyInfo property;
+            private readonly string identifier;
+            private readonly bool isOptional;
 
             private static Type GetMetaPropertyType(PropertyInfo property)
             {

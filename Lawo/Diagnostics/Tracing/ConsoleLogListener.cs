@@ -15,10 +15,6 @@ namespace Lawo.Diagnostics.Tracing
     /// <threadsafety static="true" instance="false"/>
     public sealed class ConsoleLogListener : LogListener
     {
-        private static ConsoleLogListener instance;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>
         /// Initializes the ConsoleLogListener.
         /// </summary>
@@ -52,6 +48,8 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static ConsoleLogListener instance;
 
         private ConsoleLogListener(EventLevel eventLevel)
             : base(eventLevel)

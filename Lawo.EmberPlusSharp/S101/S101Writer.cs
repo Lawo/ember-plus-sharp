@@ -21,13 +21,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Writer
     {
-        private readonly TaskSingleton taskSingleton = new TaskSingleton();
-        private readonly WriteBuffer writeBuffer;
-        private MessageEncodingStream stream;
-        private bool disposed;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="S101Writer"/> class by calling
         /// <see cref="S101Writer(WriteAsyncCallback, int)">S101Writer(<paramref name="writeAsync"/>, 8192)</see>.</summary>
         [CLSCompliant(false)]
@@ -102,6 +95,11 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly TaskSingleton taskSingleton = new TaskSingleton();
+        private readonly WriteBuffer writeBuffer;
+        private MessageEncodingStream stream;
+        private bool disposed;
 
         private async Task DisposeCoreAsync(CancellationToken cancellationToken)
         {

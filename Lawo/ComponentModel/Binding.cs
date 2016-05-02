@@ -22,15 +22,6 @@ namespace Lawo.ComponentModel
         where TSourceOwner : INotifyPropertyChanged
         where TTargetOwner : INotifyPropertyChanged
     {
-        private readonly ChangeOriginatedAtEventArgs<TSourceOwner, TSource> sourceEventArgs;
-        private readonly Func<TSource, TTarget> toTarget;
-        private readonly ChangeOriginatedAtEventArgs<TTargetOwner, TTarget> targetEventArgs;
-        private readonly Func<TTarget, TSource> toSource;
-        private byte sourceUpdating;
-        private byte targetUpdating;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Occurs when a change has originated at the source.</summary>
         public event EventHandler<ChangeOriginatedAtEventArgs<TSourceOwner, TSource>> ChangeOriginatedAtSource;
 
@@ -96,6 +87,13 @@ namespace Lawo.ComponentModel
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ChangeOriginatedAtEventArgs<TSourceOwner, TSource> sourceEventArgs;
+        private readonly Func<TSource, TTarget> toTarget;
+        private readonly ChangeOriginatedAtEventArgs<TTargetOwner, TTarget> targetEventArgs;
+        private readonly Func<TTarget, TSource> toSource;
+        private byte sourceUpdating;
+        private byte targetUpdating;
 
         private void OnSourceChanged(object sender, PropertyChangedEventArgs e)
         {

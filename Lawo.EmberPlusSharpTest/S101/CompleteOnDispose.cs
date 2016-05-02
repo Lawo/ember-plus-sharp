@@ -11,10 +11,6 @@ namespace Lawo.EmberPlusSharp.S101
 
     internal sealed class CompleteOnDispose : IDisposable
     {
-        private readonly TaskCompletionSource<int> source = new TaskCompletionSource<int>();
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public void Dispose()
         {
             this.source.TrySetException(new OperationCanceledException());
@@ -26,5 +22,9 @@ namespace Lawo.EmberPlusSharp.S101
         {
             get { return this.source.Task; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly TaskCompletionSource<int> source = new TaskCompletionSource<int>();
     }
 }

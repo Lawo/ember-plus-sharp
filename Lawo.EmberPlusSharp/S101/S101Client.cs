@@ -39,17 +39,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Client : IMonitoredConnection
     {
-        private readonly WorkQueue logQueue = new WorkQueue();
-        private readonly TaskQueue sendQueue = new TaskQueue();
-        private readonly CancellationTokenSource source = new CancellationTokenSource();
-        private readonly uint threadId;
-        private readonly S101Writer writer;
-        private readonly IS101Logger logger;
-        private readonly int timeout;
-        private byte keepAliveRequestSlot;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="S101Client"/> class by calling
         /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger)">S101Client(<paramref name="connection"/>,
         /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, null)</see>.</summary>
@@ -265,6 +254,15 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly WorkQueue logQueue = new WorkQueue();
+        private readonly TaskQueue sendQueue = new TaskQueue();
+        private readonly CancellationTokenSource source = new CancellationTokenSource();
+        private readonly uint threadId;
+        private readonly S101Writer writer;
+        private readonly IS101Logger logger;
+        private readonly int timeout;
+        private byte keepAliveRequestSlot;
 
         private void AssertPreconditions()
         {

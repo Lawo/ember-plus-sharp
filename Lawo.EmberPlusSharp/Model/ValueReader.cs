@@ -12,10 +12,6 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class ValueReader<T> : IValueReader
     {
-        private static readonly Func<EmberReader, T> ReadValueCore = (Func<EmberReader, T>)GetReadValueCore();
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         object IValueReader.Value
         {
             get { return this.Value; }
@@ -29,6 +25,8 @@ namespace Lawo.EmberPlusSharp.Model
         internal T Value { get; private set; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly Func<EmberReader, T> ReadValueCore = (Func<EmberReader, T>)GetReadValueCore();
 
         private static Delegate GetReadValueCore()
         {

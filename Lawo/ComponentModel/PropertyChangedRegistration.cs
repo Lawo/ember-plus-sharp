@@ -15,11 +15,6 @@ namespace Lawo.ComponentModel
     /// <threadsafety static="true" instance="false"/>
     public sealed class PropertyChangedRegistration : IDisposable
     {
-        private readonly PropertyChangedEventHandler handler;
-        private readonly ILookup<INotifyPropertyChanged, string> propertyNames;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="PropertyChangedRegistration"/> class.</summary>
         /// <param name="handler">The handler to which all change notifications are forwarded.</param>
         /// <param name="properties">The properties for which change notifications should be forwarded.</param>
@@ -68,6 +63,9 @@ namespace Lawo.ComponentModel
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly PropertyChangedEventHandler handler;
+        private readonly ILookup<INotifyPropertyChanged, string> propertyNames;
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

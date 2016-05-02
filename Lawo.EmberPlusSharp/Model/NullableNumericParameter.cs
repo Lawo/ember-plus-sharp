@@ -19,11 +19,6 @@ namespace Lawo.EmberPlusSharp.Model
         where TMostDerived : NullableNumericParameter<TMostDerived, TValue>
         where TValue : struct
     {
-        private TValue? minimum;
-        private TValue? maximum;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets minimum.</summary>
         public TValue? Minimum
         {
@@ -63,5 +58,10 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.Maximum = value;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private TValue? minimum;
+        private TValue? maximum;
     }
 }

@@ -22,12 +22,6 @@ namespace Lawo.EmberPlusSharp.S101
     [TestClass]
     public class PerformanceComparison : CommunicationTestBase
     {
-        private const int BlockSize = 4096;
-        private const int BlockCount = 4096;
-        private const int LoopCount = 3;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Measures <see cref="S101Reader"/> asynchronous performance.</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will not be localized.")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Text references code elements.")]
@@ -90,6 +84,10 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private const int BlockSize = 4096;
+        private const int BlockCount = 4096;
+        private const int LoopCount = 3;
 
         private static async Task TestS101ReaderAsync(byte[] message, int messageCount)
         {

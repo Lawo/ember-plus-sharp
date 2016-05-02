@@ -19,34 +19,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class ElementWithSchemas<TMostDerived> : Element<TMostDerived>, IElementWithSchemas
         where TMostDerived : ElementWithSchemas<TMostDerived>
     {
-        /// <summary>See <see cref="RetrievalState"/> for more information.</summary>
-        /// <remarks>This field and its sibling <see cref="noDetailsRetrievalState"/> are modified by the following
-        /// methods, which are directly or indirectly called from
-        /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
-        /// <list type="number">
-        /// <item><see cref="Element.UpdateRetrievalState"/></item>
-        /// <item><see cref="Element.WriteRequest"/></item>
-        /// <item><see cref="Element.ReadChildren"/></item>
-        /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
-        /// </list>
-        /// See individual method documentation for semantics. This rather complex system was implemented to make the
-        /// process of retrieving elements from the provider as efficient as possible, namely:
-        /// <list type="bullet">
-        /// <item>As few as possible messages are sent to request children and/or subscribe to streams.</item>
-        /// <item>The computational effort for tree traversal is kept as low as possible. This is necessary because all
-        /// code is always executed on the applications GUI thread. Without these optimizations, a full tree traversal
-        /// would be necessary after each processed message. Some providers send a new message for each updated
-        /// parameter, which would very quickly lead to significant CPU load and an unresponsive GUI if many parameters
-        /// are changed at once in a large tree.</item>
-        /// </list>
-        /// </remarks>
-        private RetrievalState noDetailsRetrievalState = RetrievalState.Complete;
-        private RetrievalState detailsRetrievalState;
-
-        private IReadOnlyList<string> schemaIdentifiers;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets <b>schemaIdentifiers</b>.</summary>
         public IReadOnlyList<string> SchemaIdentifiers
         {
@@ -115,5 +87,33 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.SchemaIdentifiers = reader.AssertAndReadContentsAsString().Split('\n');
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>See <see cref="RetrievalState"/> for more information.</summary>
+        /// <remarks>This field and its sibling <see cref="noDetailsRetrievalState"/> are modified by the following
+        /// methods, which are directly or indirectly called from
+        /// <see cref="Consumer{T}.CreateAsync(Lawo.EmberPlusSharp.S101.S101Client)"/>:
+        /// <list type="number">
+        /// <item><see cref="Element.UpdateRetrievalState"/></item>
+        /// <item><see cref="Element.WriteRequest"/></item>
+        /// <item><see cref="Element.ReadChildren"/></item>
+        /// <item><see cref="Element.AreRequiredChildrenAvailable"/></item>
+        /// </list>
+        /// See individual method documentation for semantics. This rather complex system was implemented to make the
+        /// process of retrieving elements from the provider as efficient as possible, namely:
+        /// <list type="bullet">
+        /// <item>As few as possible messages are sent to request children and/or subscribe to streams.</item>
+        /// <item>The computational effort for tree traversal is kept as low as possible. This is necessary because all
+        /// code is always executed on the applications GUI thread. Without these optimizations, a full tree traversal
+        /// would be necessary after each processed message. Some providers send a new message for each updated
+        /// parameter, which would very quickly lead to significant CPU load and an unresponsive GUI if many parameters
+        /// are changed at once in a large tree.</item>
+        /// </list>
+        /// </remarks>
+        private RetrievalState noDetailsRetrievalState = RetrievalState.Complete;
+        private RetrievalState detailsRetrievalState;
+
+        private IReadOnlyList<string> schemaIdentifiers;
     }
 }

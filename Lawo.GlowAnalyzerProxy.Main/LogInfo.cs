@@ -15,15 +15,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     internal sealed class LogInfo : IDisposable
     {
-        private readonly DateTime startTimeUtc = DateTime.UtcNow;
-        private readonly string path;
-        private readonly Stream stream;
-        private readonly StreamWriter writer;
-        private readonly XmlWriter xmlWriter;
-        private readonly S101Logger logger;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public void Dispose()
         {
             this.logger.Dispose();
@@ -73,5 +64,14 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             get { return this.logger; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly DateTime startTimeUtc = DateTime.UtcNow;
+        private readonly string path;
+        private readonly Stream stream;
+        private readonly StreamWriter writer;
+        private readonly XmlWriter xmlWriter;
+        private readonly S101Logger logger;
     }
 }

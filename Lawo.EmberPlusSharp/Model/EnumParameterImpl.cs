@@ -18,13 +18,6 @@ namespace Lawo.EmberPlusSharp.Model
     internal sealed class EnumParameterImpl<TEnum>
         where TEnum : struct
     {
-        private static readonly bool IsEnum = typeof(TEnum).GetTypeInfo().IsEnum;
-        private readonly IParameter parent;
-        private bool providerHasSentEnum;
-        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal EnumParameterImpl(IParameter parent)
         {
             this.parent = parent;
@@ -92,5 +85,12 @@ namespace Lawo.EmberPlusSharp.Model
 
             return result;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly bool IsEnum = typeof(TEnum).GetTypeInfo().IsEnum;
+        private readonly IParameter parent;
+        private bool providerHasSentEnum;
+        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
     }
 }

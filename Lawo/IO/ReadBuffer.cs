@@ -67,12 +67,6 @@ namespace Lawo.IO
     /// <threadsafety static="true" instance="false"/>
     public sealed class ReadBuffer : Buffer
     {
-        private readonly ReadCallback read;
-        private readonly ReadAsyncCallback readAsync;
-        private long previousPosition;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="ReadBuffer"/> class.</summary>
         /// <param name="read">The method that is called when the buffer needs to be filled.</param>
         /// <param name="bufferSize">The size of the buffer in bytes.</param>
@@ -368,6 +362,10 @@ namespace Lawo.IO
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ReadCallback read;
+        private readonly ReadAsyncCallback readAsync;
+        private long previousPosition;
 
         private int ReadFromBuffer(byte[] buffer, int offset, int count)
         {

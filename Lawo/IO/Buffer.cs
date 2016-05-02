@@ -14,10 +14,6 @@ namespace Lawo.IO
     /// <threadsafety static="true" instance="false"/>
     public abstract class Buffer
     {
-        private byte[] buffer;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the number of bytes the buffer can contain.</summary>
         public int Capacity
         {
@@ -73,5 +69,9 @@ namespace Lawo.IO
                 Array.Resize(ref this.buffer, size);
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private byte[] buffer;
     }
 }

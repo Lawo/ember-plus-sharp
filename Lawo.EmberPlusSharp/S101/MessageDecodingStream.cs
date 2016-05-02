@@ -26,15 +26,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class MessageDecodingStream : NonSeekableStream
     {
-        private readonly ReadBuffer rawBuffer;
-        private DeframingStream deframingStream;
-        private readonly ReadBuffer deframedBuffer;
-        private readonly byte[] discardBuffer;
-        private readonly Action<byte> outOfFrameByteReceived;
-        private S101Message message;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public sealed override bool CanRead
         {
             get { return this.deframingStream != null; }
@@ -97,6 +88,13 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ReadBuffer rawBuffer;
+        private DeframingStream deframingStream;
+        private readonly ReadBuffer deframedBuffer;
+        private readonly byte[] discardBuffer;
+        private readonly Action<byte> outOfFrameByteReceived;
+        private S101Message message;
 
         private MessageDecodingStream(ReadBuffer rawBuffer, byte[] discardBuffer, Action<byte> outOfFrameByteReceived)
         {

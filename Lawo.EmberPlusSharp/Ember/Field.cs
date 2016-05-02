@@ -10,11 +10,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
     internal struct Field<TTypeId, TFieldId> : IEquatable<Field<TTypeId, TFieldId>>
     {
-        private readonly TTypeId typeId;
-        private readonly TFieldId fieldId;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public bool Equals(Field<TTypeId, TFieldId> other)
         {
             return GenericCompare.Equals(this.typeId, other.typeId) &&
@@ -49,5 +44,10 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             get { return this.fieldId; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly TTypeId typeId;
+        private readonly TFieldId fieldId;
     }
 }

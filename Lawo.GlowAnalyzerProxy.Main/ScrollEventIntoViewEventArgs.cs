@@ -10,10 +10,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     internal sealed class ScrollEventIntoViewEventArgs : EventArgs
     {
-        private readonly Event evt;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal ScrollEventIntoViewEventArgs(Event evt)
         {
             this.evt = evt;
@@ -23,5 +19,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             get { return this.evt; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Event evt;
     }
 }

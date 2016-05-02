@@ -12,18 +12,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     internal sealed class Event
     {
-        private readonly int conn;
-        private readonly double time;
-        private readonly string type;
-        private readonly string direction;
-        private readonly int? number;
-        private readonly int? length;
-        private readonly string logPath;
-        private readonly long logPosition;
-        private readonly long logLength;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
         public int Conn
         {
@@ -98,5 +86,17 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             get { return this.logLength; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly int conn;
+        private readonly double time;
+        private readonly string type;
+        private readonly string direction;
+        private readonly int? number;
+        private readonly int? length;
+        private readonly string logPath;
+        private readonly long logPosition;
+        private readonly long logLength;
     }
 }

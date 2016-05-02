@@ -18,14 +18,6 @@ namespace Lawo.EmberPlusSharp.Model
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     public sealed class Result<T1, T2, T3, T4, T5> : ResultBase<Result<T1, T2, T3, T4, T5>>
     {
-        private readonly ValueReader<T1> component1Reader;
-        private readonly ValueReader<T2> component2Reader;
-        private readonly ValueReader<T3> component3Reader;
-        private readonly ValueReader<T4> component4Reader;
-        private readonly ValueReader<T5> component5Reader;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="Result{T1,T2,T3,T4,T5}"/> class.</summary>
         public Result()
             : this(
@@ -68,6 +60,12 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ValueReader<T1> component1Reader;
+        private readonly ValueReader<T2> component2Reader;
+        private readonly ValueReader<T3> component3Reader;
+        private readonly ValueReader<T4> component4Reader;
+        private readonly ValueReader<T5> component5Reader;
 
         private Result(
             ValueReader<T1> item1Reader,

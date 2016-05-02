@@ -45,13 +45,15 @@ namespace Lawo.ComponentModel
 
         private sealed class Source : NotifyPropertyChanged
         {
-            private int val;
-
             internal int Value
             {
                 get { return this.val; }
                 set { this.SetValue(ref this.val, value); }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private int val;
         }
     }
 }

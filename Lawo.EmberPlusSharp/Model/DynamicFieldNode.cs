@@ -20,11 +20,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class DynamicFieldNode<TMostDerived> : DynamicNodeBase<TMostDerived>
         where TMostDerived : DynamicFieldNode<TMostDerived>
     {
-        private readonly ObservableCollection<IElement> dynamicChildren = new ObservableCollection<IElement>();
-        private readonly ReadOnlyObservableCollection<IElement> readOnlyDynamicChildren;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the dynamic children of this node.</summary>
         public ReadOnlyObservableCollection<IElement> DynamicChildren
         {
@@ -49,5 +44,10 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.readOnlyDynamicChildren = new ReadOnlyObservableCollection<IElement>(this.dynamicChildren);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ObservableCollection<IElement> dynamicChildren = new ObservableCollection<IElement>();
+        private readonly ReadOnlyObservableCollection<IElement> readOnlyDynamicChildren;
     }
 }

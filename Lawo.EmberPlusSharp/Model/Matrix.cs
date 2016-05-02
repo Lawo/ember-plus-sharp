@@ -25,18 +25,6 @@ namespace Lawo.EmberPlusSharp.Model
         where TSource : Node<TSource>
         where TConnection : Node<TConnection>
     {
-        private MatrixType type;
-        private int maximumTotalConnects;
-        private int maximumConnectsPerTarget;
-        private MatrixParameters<TTarget, TSource, TConnection> parameters;
-        private int? gainParameterNumber;
-        private IReadOnlyList<KeyValuePair<string, MatrixLabels>> labels;
-        private IReadOnlyList<int> targets;
-        private IReadOnlyList<int> sources;
-        private IReadOnlyDictionary<int, ObservableCollection<int>> connections;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public MatrixType Type
         {
@@ -216,6 +204,16 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private MatrixType type;
+        private int maximumTotalConnects;
+        private int maximumConnectsPerTarget;
+        private MatrixParameters<TTarget, TSource, TConnection> parameters;
+        private int? gainParameterNumber;
+        private IReadOnlyList<KeyValuePair<string, MatrixLabels>> labels;
+        private IReadOnlyList<int> targets;
+        private IReadOnlyList<int> sources;
+        private IReadOnlyDictionary<int, ObservableCollection<int>> connections;
 
         private Matrix()
             : base(RetrievalState.Complete)

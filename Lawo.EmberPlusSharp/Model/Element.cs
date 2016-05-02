@@ -22,16 +22,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <threadsafety static="true" instance="false"/>
     public abstract class Element : NotifyPropertyChanged, IElement
     {
-        private IParent parent;
-        private int[] numberPath;
-        private string identifier;
-        private string description;
-        private bool isOnline = true;
-        private object tag;
-        private bool hasChanges;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public INode Parent
         {
@@ -316,6 +306,14 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private IParent parent;
+        private int[] numberPath;
+        private string identifier;
+        private string description;
+        private bool isOnline = true;
+        private object tag;
+        private bool hasChanges;
 
         private static bool IsElement(Type type)
         {

@@ -64,11 +64,6 @@ namespace Lawo.IO
     /// <threadsafety static="true" instance="false"/>
     public sealed class WriteBuffer : Buffer
     {
-        private readonly WriteCallback write;
-        private readonly WriteAsyncCallback writeAsync;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="WriteBuffer"/> class.</summary>
         /// <param name="write">The method that is called when the buffer needs to be emptied.</param>
         /// <param name="bufferSize">The size of the buffer in bytes.</param>
@@ -272,6 +267,9 @@ namespace Lawo.IO
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly WriteCallback write;
+        private readonly WriteAsyncCallback writeAsync;
 
         private int WriteToBuffer(byte[] buffer, int offset, int count)
         {

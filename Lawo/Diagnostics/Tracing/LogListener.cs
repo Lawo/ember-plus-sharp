@@ -12,23 +12,15 @@ namespace Lawo.Diagnostics.Tracing
     /// <threadsafety static="true" instance="false"/>
     public abstract class LogListener : EventListener
     {
-        private EventLevel eventLevel;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LogListener" /> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="LogListener" /> class.</summary>
         /// <param name="eventLevel">The event level.</param>
         protected LogListener(EventLevel eventLevel)
         {
             this.eventLevel = eventLevel;
         }
 
-        /// <summary>
-        /// Called for all existing event sources when the event listener is created and when a new event source is attached to the listener.
-        /// Enables log sources to the appropriate event level.
-        /// </summary>
+        /// <summary>Called for all existing event sources when the event listener is created and when a new event
+        /// source is attached to the listener. Enables log sources to the appropriate event level.</summary>
         /// <param name="eventSource">The event source.</param>
         protected override void OnEventSourceCreated(EventSource eventSource)
         {
@@ -39,5 +31,9 @@ namespace Lawo.Diagnostics.Tracing
                 this.EnableEvents(log, this.eventLevel);
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private EventLevel eventLevel;
     }
 }

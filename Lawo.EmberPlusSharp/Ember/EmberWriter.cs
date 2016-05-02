@@ -20,33 +20,6 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberWriter : IDisposable
     {
-        private const int StartShift8Bit = Constants.BitsPerLong - Constants.BitsPerByte;
-        private const int StartShift7Bit =
-            Constants.BitsPerInt / Constants.BitsPerEncodedByte * Constants.BitsPerEncodedByte;
-
-        private const int LengthMaxLength = (StartShift8Bit / Constants.BitsPerByte) + 1 + 1;
-        private const int SubidentifierMaxLength = (Constants.BitsPerInt / Constants.BitsPerEncodedByte) + 1;
-        private const int IdentifierMaxLength = SubidentifierMaxLength + 1;
-        private const int IdentifiersAndLengthsMaxLength = (2 * IdentifierMaxLength) + (2 * LengthMaxLength);
-
-        private static readonly EmberId EndContainer = EmberId.CreateUniversal(InnerNumber.EndContainer);
-        private static readonly EmberId Boolean = EmberId.CreateUniversal(InnerNumber.Boolean);
-        private static readonly EmberId Integer = EmberId.CreateUniversal(InnerNumber.Integer);
-        private static readonly EmberId Octetstring = EmberId.CreateUniversal(InnerNumber.Octetstring);
-        private static readonly EmberId Real = EmberId.CreateUniversal(InnerNumber.Real);
-        private static readonly EmberId Utf8String = EmberId.CreateUniversal(InnerNumber.Utf8String);
-        private static readonly EmberId RelativeObjectIdentifier =
-            EmberId.CreateUniversal(InnerNumber.RelativeObjectIdentifier);
-
-        private static readonly EmberId Sequence = EmberId.CreateUniversal(InnerNumber.Sequence);
-        private static readonly EmberId Set = EmberId.CreateUniversal(InnerNumber.Set);
-
-        private Stream stream;
-        private readonly WriteBuffer writeBuffer;
-        private readonly WriteBuffer tempBuffer;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="EmberWriter"/> class by calling
         /// <see cref="EmberWriter(Stream, int)">EmberWriter(<paramref name="stream"/>, 1024)</see>.</summary>
         public EmberWriter(Stream stream)
@@ -273,6 +246,31 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private const int StartShift8Bit = Constants.BitsPerLong - Constants.BitsPerByte;
+        private const int StartShift7Bit =
+            Constants.BitsPerInt / Constants.BitsPerEncodedByte * Constants.BitsPerEncodedByte;
+
+        private const int LengthMaxLength = (StartShift8Bit / Constants.BitsPerByte) + 1 + 1;
+        private const int SubidentifierMaxLength = (Constants.BitsPerInt / Constants.BitsPerEncodedByte) + 1;
+        private const int IdentifierMaxLength = SubidentifierMaxLength + 1;
+        private const int IdentifiersAndLengthsMaxLength = (2 * IdentifierMaxLength) + (2 * LengthMaxLength);
+
+        private static readonly EmberId EndContainer = EmberId.CreateUniversal(InnerNumber.EndContainer);
+        private static readonly EmberId Boolean = EmberId.CreateUniversal(InnerNumber.Boolean);
+        private static readonly EmberId Integer = EmberId.CreateUniversal(InnerNumber.Integer);
+        private static readonly EmberId Octetstring = EmberId.CreateUniversal(InnerNumber.Octetstring);
+        private static readonly EmberId Real = EmberId.CreateUniversal(InnerNumber.Real);
+        private static readonly EmberId Utf8String = EmberId.CreateUniversal(InnerNumber.Utf8String);
+        private static readonly EmberId RelativeObjectIdentifier =
+            EmberId.CreateUniversal(InnerNumber.RelativeObjectIdentifier);
+
+        private static readonly EmberId Sequence = EmberId.CreateUniversal(InnerNumber.Sequence);
+        private static readonly EmberId Set = EmberId.CreateUniversal(InnerNumber.Set);
+
+        private Stream stream;
+        private readonly WriteBuffer writeBuffer;
+        private readonly WriteBuffer tempBuffer;
 
         private void AssertNotDisposed()
         {

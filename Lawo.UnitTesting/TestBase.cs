@@ -23,11 +23,6 @@ namespace Lawo.UnitTesting
     /// <threadsafety static="true" instance="false"/>
     public abstract class TestBase
     {
-        private readonly Random random;
-        private int seed;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Executes each action in <paramref name="actions"/> and checks that each of them throws an exception
         /// of type <typeparamref name="TException"/>.</summary>
         /// <typeparam name="TException">The type of exception to check for.</typeparam>
@@ -269,6 +264,9 @@ namespace Lawo.UnitTesting
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Random random;
+        private int seed;
 
         private static void AssertThrowCore<TException>(Action[] actions, string expectedMessage)
             where TException : Exception

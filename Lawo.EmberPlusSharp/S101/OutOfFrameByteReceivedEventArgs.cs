@@ -13,10 +13,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class OutOfFrameByteReceivedEventArgs : EventArgs
     {
-        private readonly byte value;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the message.</summary>
         public byte Value
         {
@@ -29,5 +25,9 @@ namespace Lawo.EmberPlusSharp.S101
         {
             this.value = value;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly byte value;
     }
 }

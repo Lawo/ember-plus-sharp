@@ -15,10 +15,6 @@ namespace Lawo.Threading.Tasks
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class TaskSingleton
     {
-        private Task previousTask = Task.FromResult(false);
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="TaskSingleton"/> class.</summary>
         public TaskSingleton()
         {
@@ -77,5 +73,9 @@ namespace Lawo.Threading.Tasks
                 throw new InvalidOperationException("The object is currently in use by a previous async operation.");
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private Task previousTask = Task.FromResult(false);
     }
 }

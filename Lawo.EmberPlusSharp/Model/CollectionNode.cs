@@ -25,12 +25,6 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class CollectionNode<TElement> : Node<CollectionNode<TElement>>
         where TElement : IElement
     {
-        private static readonly ReadContentsMethod ReadContentsCallback = GetReadContentsMethod();
-        private readonly ObservableCollection<TElement> children = new ObservableCollection<TElement>();
-        private readonly ReadOnlyObservableCollection<TElement> readOnlyChildren;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the children of this node.</summary>
         public ReadOnlyObservableCollection<TElement> Children
         {
@@ -79,6 +73,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly ReadContentsMethod ReadContentsCallback = GetReadContentsMethod();
+        private readonly ObservableCollection<TElement> children = new ObservableCollection<TElement>();
+        private readonly ReadOnlyObservableCollection<TElement> readOnlyChildren;
 
         private CollectionNode()
         {

@@ -21,13 +21,6 @@ namespace Lawo.EmberPlusSharp.Glow
     /// <threadsafety static="true" instance="false"/>
     public sealed class GlowLogInterpreter
     {
-        private readonly MyDynamicRoot root = Root<MyDynamicRoot>.Construct(new Context(null, 0, string.Empty));
-        private readonly InvocationCollection pendingInvocations = new InvocationCollection();
-        private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
-        private readonly S101LogReader reader;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="GlowLogInterpreter"/> class.</summary>
         /// <param name="types">The types to pass to the internal <see cref="S101LogReader"/>.</param>
         /// <param name="logReader">The <see cref="XmlReader"/> to read the messages from. The format needs to match the
@@ -129,6 +122,11 @@ namespace Lawo.EmberPlusSharp.Glow
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly MyDynamicRoot root = Root<MyDynamicRoot>.Construct(new Context(null, 0, string.Empty));
+        private readonly InvocationCollection pendingInvocations = new InvocationCollection();
+        private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
+        private readonly S101LogReader reader;
 
         [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
         private sealed class MyDynamicRoot : DynamicRoot<MyDynamicRoot>

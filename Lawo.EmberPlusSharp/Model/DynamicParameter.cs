@@ -18,14 +18,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// of a parameter in any order, such that the type only becomes clear when the very last field is read.</remarks>
     internal sealed class DynamicParameter : ParameterBase<DynamicParameter, object>
     {
-        private object minimum;
-        private object maximum;
-        private int? factor;
-        private string formula;
-        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal DynamicParameter()
         {
         }
@@ -144,6 +136,12 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private object minimum;
+        private object maximum;
+        private int? factor;
+        private string formula;
+        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
 
         private static ParameterType GetTypeToWrite(ParameterType parameterType, object value)
         {

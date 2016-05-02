@@ -54,13 +54,6 @@ namespace Lawo.ComponentModel
             SubscribedObservableCollection<TProjected>
             where TOriginalCollection : IEnumerable<TOriginal>, IList, INotifyCollectionChanged
         {
-            private readonly Dictionary<TOriginal, TProjected> projectedDictionary =
-                new Dictionary<TOriginal, TProjected>();
-
-            private readonly Func<TOriginal, TProjected> projectionFunction;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal ProjectionCollection(
                 TOriginalCollection originalItems, Func<TOriginal, TProjected> projectionFunction)
             {
@@ -76,6 +69,11 @@ namespace Lawo.ComponentModel
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly Dictionary<TOriginal, TProjected> projectedDictionary =
+                new Dictionary<TOriginal, TProjected>();
+
+            private readonly Func<TOriginal, TProjected> projectionFunction;
 
             private void Insert(int index, TOriginal original)
             {

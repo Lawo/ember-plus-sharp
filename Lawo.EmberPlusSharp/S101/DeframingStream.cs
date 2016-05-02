@@ -20,13 +20,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class DeframingStream : BufferStream
     {
-        private readonly Action<byte> outOfFrameByteReceived;
-        private State state;
-        private ushort crc = 0xFFFF;
-        private readonly Queue<byte> decodedQueue = new Queue<byte>();
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Validated with call to BufferHelper.AssertValidRange.")]
         public sealed override async Task<int> ReadAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)
@@ -64,6 +57,11 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Action<byte> outOfFrameByteReceived;
+        private State state;
+        private ushort crc = 0xFFFF;
+        private readonly Queue<byte> decodedQueue = new Queue<byte>();
 
         /// <summary>Enumerates the decoding states.</summary>
         private enum State

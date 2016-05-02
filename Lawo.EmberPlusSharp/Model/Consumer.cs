@@ -28,23 +28,6 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class Consumer<TRoot> : IMonitoredConnection
         where TRoot : Root<TRoot>
     {
-        private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
-
-        private readonly ReceiveQueue receiveQueue = new ReceiveQueue();
-        private readonly InvocationCollection pendingInvocations = new InvocationCollection();
-        private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
-        private readonly TRoot root;
-        private readonly S101Client client;
-        private readonly int childrenRetrievalTimeout;
-        private readonly S101Message emberDataMessage;
-        private int autoSendInterval = 100;
-        private CancellationTokenSource autoSendDelayCancellationSource;
-        private TaskCompletionSource<bool> hasChangesSetSource;
-        private TaskCompletionSource<bool> isVerifiedSource;
-        private bool disposed;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Occurs when the connection to the provider has been lost.</summary>
         /// <remarks>
         /// <para>This event is raised in the following situations:
@@ -233,6 +216,21 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
+
+        private readonly ReceiveQueue receiveQueue = new ReceiveQueue();
+        private readonly InvocationCollection pendingInvocations = new InvocationCollection();
+        private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
+        private readonly TRoot root;
+        private readonly S101Client client;
+        private readonly int childrenRetrievalTimeout;
+        private readonly S101Message emberDataMessage;
+        private int autoSendInterval = 100;
+        private CancellationTokenSource autoSendDelayCancellationSource;
+        private TaskCompletionSource<bool> hasChangesSetSource;
+        private TaskCompletionSource<bool> isVerifiedSource;
+        private bool disposed;
 
         private Consumer(S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy, byte slot)
         {
@@ -493,12 +491,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         private sealed class ReceiveQueue
         {
-            private readonly Queue<MessageReceivedEventArgs> queue = new Queue<MessageReceivedEventArgs>();
-            private readonly TaskCompletionSource<bool> connectionLost = new TaskCompletionSource<bool>();
-            private TaskCompletionSource<bool> nonEmpty = new TaskCompletionSource<bool>();
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal int MessageCount
             {
                 get { return this.queue.Count; }
@@ -536,6 +528,12 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 return this.queue.Dequeue();
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly Queue<MessageReceivedEventArgs> queue = new Queue<MessageReceivedEventArgs>();
+            private readonly TaskCompletionSource<bool> connectionLost = new TaskCompletionSource<bool>();
+            private TaskCompletionSource<bool> nonEmpty = new TaskCompletionSource<bool>();
         }
     }
 }

@@ -29,11 +29,6 @@ namespace Lawo.IO
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public abstract class BufferStream : NonSeekableStream
     {
-        private ReadBuffer readBuffer;
-        private WriteBuffer writeBuffer;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public sealed override bool CanRead
         {
@@ -114,5 +109,10 @@ namespace Lawo.IO
                 base.Dispose(disposing);
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private ReadBuffer readBuffer;
+        private WriteBuffer writeBuffer;
     }
 }

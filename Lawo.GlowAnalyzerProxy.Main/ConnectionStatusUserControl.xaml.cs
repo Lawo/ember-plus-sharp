@@ -9,16 +9,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System.Windows;
     using System.Windows.Controls;
 
-    using Lawo.Reflection;
-
     /// <summary>Represents a control that displays the status of a connection.</summary>
     internal sealed partial class ConnectionStatusUserControl : UserControl
     {
-        private static readonly DependencyProperty HeaderProperty =
-            DependencyProperty.Register("Header", typeof(string), typeof(ConnectionStatusUserControl));
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public ConnectionStatusUserControl()
         {
             this.InitializeComponent();
@@ -29,5 +22,10 @@ namespace Lawo.GlowAnalyzerProxy.Main
             get { return (string)this.GetValue(HeaderProperty); }
             set { this.SetValue(HeaderProperty, value); }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register("Header", typeof(string), typeof(ConnectionStatusUserControl));
     }
 }

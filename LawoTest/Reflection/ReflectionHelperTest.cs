@@ -15,10 +15,6 @@ namespace Lawo.Reflection
     [TestClass]
     public sealed class ReflectionHelperTest : TestBase
     {
-        private int someField;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="ReflectionHelperTest"/> class.</summary>
         public ReflectionHelperTest()
         {
@@ -57,6 +53,8 @@ namespace Lawo.Reflection
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private int someField;
 
         private int SomeProperty { get; set; }
 

@@ -21,10 +21,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Message
     {
-        private readonly byte messageType;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="S101Message"/> class.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="command"/> equals <c>null</c>.</exception>
         public S101Message(byte slot, S101Command command)
@@ -95,6 +91,8 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly byte messageType;
 
         private S101Message(byte slot, byte messageType, S101Command command)
         {

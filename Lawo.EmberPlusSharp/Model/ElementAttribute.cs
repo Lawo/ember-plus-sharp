@@ -16,10 +16,6 @@ namespace Lawo.EmberPlusSharp.Model
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class ElementAttribute : Attribute
     {
-        private string identifier;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="ElementAttribute"/> class.</summary>
         public ElementAttribute()
         {
@@ -50,5 +46,9 @@ namespace Lawo.EmberPlusSharp.Model
         /// attribute is optional.</summary>
         /// <value>The value <c>true</c> if the element is optional; otherwise <c>false</c>.</value>
         public bool IsOptional { get; set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private string identifier;
     }
 }

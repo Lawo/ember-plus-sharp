@@ -13,11 +13,6 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class DynamicFunction : FunctionBase<DynamicFunction>
     {
-        private static readonly KeyValuePair<string, ParameterType>[] EmptyDescription =
-            new KeyValuePair<string, ParameterType>[0];
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal DynamicFunction()
             : base(EmptyDescription, EmptyDescription)
         {
@@ -31,5 +26,10 @@ namespace Lawo.EmberPlusSharp.Model
             this.ReadTupleDescription(reader, expectedTypes, (i, d) => descriptions.Add(d));
             return descriptions.ToArray();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly KeyValuePair<string, ParameterType>[] EmptyDescription =
+            new KeyValuePair<string, ParameterType>[0];
     }
 }

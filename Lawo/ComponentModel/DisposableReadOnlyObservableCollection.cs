@@ -14,10 +14,6 @@ namespace Lawo.ComponentModel
     /// <threadsafety static="true" instance="false"/>
     public sealed class DisposableReadOnlyObservableCollection<T> : ReadOnlyObservableCollection<T>, IDisposable
     {
-        private readonly Action dispose;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Unsubscribes the underlying collection from change notifications.</summary>
         /// <remarks>If the subscription is intended to be permanent it is permissible to never call
         /// <see cref="Dispose"/>.</remarks>
@@ -33,5 +29,9 @@ namespace Lawo.ComponentModel
         {
             this.dispose = list.Dispose;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Action dispose;
     }
 }

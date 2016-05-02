@@ -23,15 +23,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class ParameterBase<TMostDerived, TValue> : ElementWithSchemas<TMostDerived>, IStreamedParameter
         where TMostDerived : ParameterBase<TMostDerived, TValue>
     {
-        private TValue theValue;
-        private ParameterAccess access = ParameterAccess.Read;
-        private string format;
-        private TValue defaultValue;
-        private ParameterType? type;
-        private int? streamIdentifier;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public ParameterAccess Access
         {
@@ -356,6 +347,13 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private TValue theValue;
+        private ParameterAccess access = ParameterAccess.Read;
+        private string format;
+        private TValue defaultValue;
+        private ParameterType? type;
+        private int? streamIdentifier;
 
         private int? StreamIdentifier
         {

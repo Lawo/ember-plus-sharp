@@ -19,12 +19,6 @@ namespace Lawo.EmberPlusSharp.Model
         where TMostDerived : NumericParameter<TMostDerived, TValue>
         where TValue : struct
     {
-        private TValue? minimum;
-        private TValue? maximum;
-        private string formula;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc cref="IParameter.Minimum"/>
         public TValue? Minimum
         {
@@ -77,5 +71,11 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.Maximum = value;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private TValue? minimum;
+        private TValue? maximum;
+        private string formula;
     }
 }

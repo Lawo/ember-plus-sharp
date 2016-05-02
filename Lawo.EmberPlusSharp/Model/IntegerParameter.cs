@@ -18,11 +18,6 @@ namespace Lawo.EmberPlusSharp.Model
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public sealed class IntegerParameter : NumericParameter<IntegerParameter, long>
     {
-        private int? factor;
-        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc cref="IParameter.Factor"/>
         public int? Factor
         {
@@ -64,6 +59,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private int? factor;
+        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
 
         private IntegerParameter()
         {

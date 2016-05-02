@@ -52,12 +52,6 @@ namespace Lawo.EmberPlusSharp.Glow
 
         private sealed class Converter : IEmberConverter
         {
-            private readonly HashSet<IElement> subscribedElements = new HashSet<IElement>();
-            private readonly GlowLogInterpreter interpreter;
-            private readonly XmlWriter writer;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             public void ToXml(byte[] dummyBuffer, XmlWriter dummyWriter)
             {
                 this.interpreter.ApplyPayload();
@@ -73,6 +67,10 @@ namespace Lawo.EmberPlusSharp.Glow
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly HashSet<IElement> subscribedElements = new HashSet<IElement>();
+            private readonly GlowLogInterpreter interpreter;
+            private readonly XmlWriter writer;
 
             private void Add(IElement element)
             {

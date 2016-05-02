@@ -59,8 +59,6 @@ namespace Lawo
         /// <summary>Mock used for testing <see cref="ScopeGuard"/>.</summary>
         private sealed class Disposable : IDisposable
         {
-            private bool disposeCalled;
-
             /// <inheritdoc/>
             public void Dispose()
             {
@@ -71,6 +69,10 @@ namespace Lawo
             {
                 get { return this.disposeCalled; }
             }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private bool disposeCalled;
         }
     }
 }

@@ -17,29 +17,6 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberTypeBag
     {
-        private const string InnerNumberFieldName = "InnerNumber";
-        private const string NameFieldName = "Name";
-        private const string OuterIdFieldName = "OuterId";
-
-        private static readonly EmberType[] BerTypes =
-        {
-            typeof(BerBoolean),
-            typeof(BerInteger),
-            typeof(BerOctetstring),
-            typeof(BerReal),
-            typeof(BerUtf8String),
-            typeof(BerRelativeObjectIdentifier),
-            typeof(BerSequence),
-            typeof(BerSet)
-        };
-
-        private readonly Dictionary<int, string> typeNames;
-        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
-        private readonly Dictionary<string, int> innerNumbers;
-        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="EmberTypeBag"/> class.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="types"/> equals <c>null</c>.</exception>
         /// <remarks>Besides <paramref name="types"/> the resulting collection will also contain
@@ -119,6 +96,27 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private const string InnerNumberFieldName = "InnerNumber";
+        private const string NameFieldName = "Name";
+        private const string OuterIdFieldName = "OuterId";
+
+        private static readonly EmberType[] BerTypes =
+        {
+            typeof(BerBoolean),
+            typeof(BerInteger),
+            typeof(BerOctetstring),
+            typeof(BerReal),
+            typeof(BerUtf8String),
+            typeof(BerRelativeObjectIdentifier),
+            typeof(BerSequence),
+            typeof(BerSet)
+        };
+
+        private readonly Dictionary<int, string> typeNames;
+        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
+        private readonly Dictionary<string, int> innerNumbers;
+        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
 
         private static FieldPath<int, EmberId> GetOuterFieldsIds(IEnumerable<Type> outerFields)
         {

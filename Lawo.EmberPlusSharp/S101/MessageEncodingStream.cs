@@ -26,14 +26,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class MessageEncodingStream : NonSeekableStream
     {
-        private const int MaxFrameLength = 1024;
-        private readonly WriteBuffer rawBuffer;
-        private FramingStream framingStream;
-        private readonly WriteBuffer unframedBuffer;
-        private readonly S101Message message;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public sealed override bool CanWrite
         {
             get { return this.framingStream != null; }
@@ -111,6 +103,12 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private const int MaxFrameLength = 1024;
+        private readonly WriteBuffer rawBuffer;
+        private FramingStream framingStream;
+        private readonly WriteBuffer unframedBuffer;
+        private readonly S101Message message;
 
         private MessageEncodingStream(WriteBuffer rawBuffer, FramingStream framingStream, S101Message message)
         {

@@ -24,11 +24,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class NodeBase<TMostDerived> : ElementWithSchemas<TMostDerived>, IParent
         where TMostDerived : NodeBase<TMostDerived>
     {
-        private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
-        private ChildrenRetrievalPolicy childrenRetrievalPolicy;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc cref="INode.ChildrenRetrievalPolicy"/>
         public ChildrenRetrievalPolicy ChildrenRetrievalPolicy
         {
@@ -324,6 +319,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
+        private ChildrenRetrievalPolicy childrenRetrievalPolicy;
 
         private void ReadChild(EmberReader reader, ElementType actualType, int number)
         {

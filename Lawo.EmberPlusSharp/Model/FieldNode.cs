@@ -46,10 +46,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract partial class FieldNode<TMostDerived> : Node<TMostDerived>
         where TMostDerived : FieldNode<TMostDerived>
     {
-        private static Dictionary<string, MetaElement> metaChildren;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal virtual Element ReadNewDynamicChildContents(
             EmberReader reader, ElementType actualType, Context context, out RetrievalState childRetrievalState)
         {
@@ -106,6 +102,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static Dictionary<string, MetaElement> metaChildren;
 
         private static Dictionary<string, MetaElement> MetaChildren
         {

@@ -15,14 +15,7 @@ namespace Lawo.Diagnostics.Tracing
     /// <threadsafety static="true" instance="false"/>
     public sealed class Log : EventSource
     {
-        private static Log instance = new Log();
-        private static string moduleNameDefault = string.Empty;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /// <summary>
-        /// Gets the instance.
-        /// </summary>
+        /// <summary>Gets the instance.</summary>
         public static Log Instance
         {
             get { return instance; }
@@ -189,6 +182,9 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static Log instance = new Log();
+        private static string moduleNameDefault = string.Empty;
 
         private Log()
         {

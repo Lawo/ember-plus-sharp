@@ -10,12 +10,14 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class InvocationCollection : Dictionary<int, IInvocationResult>, IInvocationCollection
     {
-        private int lastInvocationId;
-
         int IInvocationCollection.Add(IInvocationResult invocationResult)
         {
             this.Add(++this.lastInvocationId, invocationResult);
             return this.lastInvocationId;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private int lastInvocationId;
     }
 }

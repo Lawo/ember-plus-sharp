@@ -22,12 +22,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class ResultBase<TMostDerived> : IInvocationResult
         where TMostDerived : ResultBase<TMostDerived>
     {
-        private readonly IValueReader[] valueReaders;
-        private readonly TaskCompletionSource<TMostDerived> taskCompletionSource =
-            new TaskCompletionSource<TMostDerived>();
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public IEnumerable<object> Items
         {
@@ -63,6 +57,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly IValueReader[] valueReaders;
+        private readonly TaskCompletionSource<TMostDerived> taskCompletionSource =
+            new TaskCompletionSource<TMostDerived>();
 
         private void ReadResult(EmberReader reader)
         {

@@ -14,15 +14,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// a node always assumes the state of the child with the lowest state.</remarks>
     internal struct RetrievalState : IEquatable<RetrievalState>
     {
-        private static readonly RetrievalState NoneField = default(RetrievalState);
-        private static readonly RetrievalState RequestSentField = new RetrievalState(1);
-        private static readonly RetrievalState CompleteField = new RetrievalState(2);
-        private static readonly RetrievalState VerifiedField = new RetrievalState(3);
-
-        private readonly int state;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Returns the lowest state of <paramref name="left"/> and <paramref name="right"/>.</summary>
         /// <remarks>Note that this is a generalization of the boolean &amp; operator to more than two states. Also
         /// known as <see href="http://en.wikipedia.org/wiki/Fuzzy_logic">Fuzzy Logic</see>.</remarks>
@@ -77,6 +68,13 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly RetrievalState NoneField = default(RetrievalState);
+        private static readonly RetrievalState RequestSentField = new RetrievalState(1);
+        private static readonly RetrievalState CompleteField = new RetrievalState(2);
+        private static readonly RetrievalState VerifiedField = new RetrievalState(3);
+
+        private readonly int state;
 
         private RetrievalState(int state)
         {

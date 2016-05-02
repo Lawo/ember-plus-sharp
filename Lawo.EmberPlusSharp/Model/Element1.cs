@@ -22,10 +22,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class Element<TMostDerived> : Element
         where TMostDerived : Element<TMostDerived>
     {
-        private static readonly Func<TMostDerived> Constructor = GetConstructor();
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal Element()
         {
         }
@@ -91,6 +87,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly Func<TMostDerived> Constructor = GetConstructor();
 
         private static Func<TMostDerived> GetConstructor()
         {

@@ -32,11 +32,6 @@ namespace Lawo.ComponentModel
 
         private sealed class FlattenCollection<T> : SubscribedObservableCollection<T>
         {
-            private readonly ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>> original;
-            private readonly List<Action> unsubscribeCallbacks = new List<Action>();
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             internal FlattenCollection(ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>> original)
             {
                 if (original == null)
@@ -66,6 +61,9 @@ namespace Lawo.ComponentModel
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            private readonly ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>> original;
+            private readonly List<Action> unsubscribeCallbacks = new List<Action>();
 
             private void AddedToOuter(int outerIndex, ReadOnlyObservableCollection<T> inner)
             {

@@ -8,11 +8,19 @@ namespace Lawo.Diagnostics.Tracing
 {
     using System.Collections.ObjectModel;
     using System.Diagnostics.Tracing;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     internal sealed class TestLogListener : LogListener
     {
+        public TestLogListener(EventLevel eventLevel)
+            : base(eventLevel)
+        {
+            this.LogEvents = new ObservableCollection<LogEvent>();
+        }
+
+        public ObservableCollection<LogEvent> LogEvents { get; private set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         internal class LogEvent
         {
             internal EventLevel EventLevel { get; set; }
@@ -29,16 +37,6 @@ namespace Lawo.Diagnostics.Tracing
 
             internal string ModluleName { get; set; }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public TestLogListener(EventLevel eventLevel)
-            : base(eventLevel)
-        {
-            this.LogEvents = new ObservableCollection<LogEvent>();
-        }
-
-        public ObservableCollection<LogEvent> LogEvents { get; private set; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

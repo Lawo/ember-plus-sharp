@@ -16,18 +16,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101LogReader
     {
-        private static readonly byte[] NoPayload = new byte[0];
-        private readonly EmberConverter converter;
-        private readonly XmlReader logReader;
-        private string eventType;
-        private DateTime timeUtc;
-        private string direction;
-        private int number;
-        private S101Message message;
-        private byte[] payload;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="S101LogReader"/> class.</summary>
         /// <param name="types">The types to pass to the internal <see cref="EmberConverter"/>, which is used to convert
         /// between XML payload and EmBER payload.</param>
@@ -165,6 +153,16 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly byte[] NoPayload = new byte[0];
+        private readonly EmberConverter converter;
+        private readonly XmlReader logReader;
+        private string eventType;
+        private DateTime timeUtc;
+        private string direction;
+        private int number;
+        private S101Message message;
+        private byte[] payload;
 
         private bool ReadCore()
         {

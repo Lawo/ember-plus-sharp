@@ -12,10 +12,44 @@ namespace Lawo.IO
     using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    /// <summary>Tests <see cref="JsonSerializerTest"/>.</summary>
+    /// <summary>Tests <see cref="JsonSerializer"/>.</summary>
     [TestClass]
     public class JsonSerializerTest : TestBase
     {
+        /// <summary>Test the main use case. Serialize an object to string and deserialize it again.</summary>
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestDataContract.set_Text(System.String)", Justification = "Test code.")]
+        [TestMethod]
+        public void SerializeAndDeserialize()
+        {
+            var original = new TestDataContract { Text = "Hello", Number = 4 };
+
+            var message = JsonSerializer.Serialize(original);
+            var result = JsonSerializer.Deserialize<TestDataContract>(message);
+
+            Assert.AreEqual(original.Number, result.Number);
+            Assert.AreEqual(original.Text, result.Text);
+            Assert.AreEqual(message, JsonSerializer.Serialize(result));
+        }
+
+        /// <summary>Try to serialize an non serializable object.</summary>
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestNoDataContract.set_Text(System.String)", Justification = "Test code.")]
+        [TestMethod]
+        public void NoSerialization()
+        {
+            var original = new TestNoDataContract { Text = "Hello." };
+
+            AssertThrow<InvalidDataContractException>(() => JsonSerializer.Serialize(original));
+        }
+
+        /// <summary>Try to deserialize a non de-serializable object.</summary>
+        [TestMethod]
+        public void NoDeserialization()
+        {
+            string message = "{\"Number\":4,\"Text\":\"Hello\"}";
+
+            AssertThrow<InvalidDataContractException>(() => JsonSerializer.Deserialize<TestNoDataContract>(message));
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [DataContract]
@@ -38,54 +72,12 @@ namespace Lawo.IO
 
         private class TestNoDataContract
         {
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used by Data Contract Serialializer")]
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used by Data Contract Serialializer")]
             public string Text
             {
                 get;
                 set;
             }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /// <summary>
-        /// Test the main use case. Serialize an object to string and deserialize it again.
-        /// </summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestDataContract.set_Text(System.String)", Justification = "Test code.")]
-        [TestMethod]
-        public void SerializeAndDeserialize()
-        {
-            var original = new TestDataContract { Text = "Hello", Number = 4 };
-
-            var message = JsonSerializer.Serialize(original);
-            var result = JsonSerializer.Deserialize<TestDataContract>(message);
-
-            Assert.AreEqual(original.Number, result.Number);
-            Assert.AreEqual(original.Text, result.Text);
-            Assert.AreEqual(message, JsonSerializer.Serialize(result));
-        }
-
-        /// <summary>
-        /// Try to serialize an non serializable object.
-        /// </summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestNoDataContract.set_Text(System.String)", Justification = "Test code.")]
-        [TestMethod]
-        public void NoSerialization()
-        {
-            var original = new TestNoDataContract { Text = "Hello." };
-
-            AssertThrow<InvalidDataContractException>(() => JsonSerializer.Serialize(original));
-        }
-
-        /// <summary>
-        /// Try to deserialize a non de-serializable object.
-        /// </summary>
-        [TestMethod]
-        public void NoDeserialization()
-        {
-            string message = "{\"Number\":4,\"Text\":\"Hello\"}";
-
-            AssertThrow<InvalidDataContractException>(() => JsonSerializer.Deserialize<TestNoDataContract>(message));
         }
     }
 }

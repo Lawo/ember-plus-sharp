@@ -12,11 +12,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <threadsafety static="true" instance="false"/>
     public sealed class Result<T1, T2> : ResultBase<Result<T1, T2>>
     {
-        private readonly ValueReader<T1> component1Reader;
-        private readonly ValueReader<T2> component2Reader;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="Result{T1,T2}"/> class.</summary>
         public Result()
             : this(new ValueReader<T1>(), new ValueReader<T2>())
@@ -36,6 +31,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly ValueReader<T1> component1Reader;
+        private readonly ValueReader<T2> component2Reader;
 
         private Result(ValueReader<T1> item1Reader, ValueReader<T2> item2Reader)
             : base(item1Reader, item2Reader)

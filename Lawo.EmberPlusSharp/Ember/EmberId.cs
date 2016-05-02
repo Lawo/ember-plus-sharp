@@ -15,12 +15,6 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public struct EmberId : IEquatable<EmberId>
     {
-        private readonly Class theClass;
-        private readonly bool isConstructed;
-        private readonly int number;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Tests whether two <see cref="EmberId"/> structures are equal.</summary>
         public static bool operator ==(EmberId left, EmberId right)
         {
@@ -152,6 +146,10 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Class theClass;
+        private readonly bool isConstructed;
+        private readonly int number;
 
         private static char ToChar(Class theClass)
         {

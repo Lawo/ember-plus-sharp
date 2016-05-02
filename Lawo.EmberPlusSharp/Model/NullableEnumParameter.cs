@@ -20,10 +20,6 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class NullableEnumParameter<TEnum> : NullableParameter<NullableEnumParameter<TEnum>, TEnum?>
         where TEnum : struct
     {
-        private readonly EnumParameterImpl<TEnum> impl;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override IReadOnlyList<KeyValuePair<string, int>> EnumMapCore
         {
@@ -49,6 +45,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly EnumParameterImpl<TEnum> impl;
 
         private NullableEnumParameter()
         {

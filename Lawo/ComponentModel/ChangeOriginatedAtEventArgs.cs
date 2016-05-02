@@ -16,10 +16,6 @@ namespace Lawo.ComponentModel
     /// <threadsafety static="true" instance="false"/>
     public sealed class ChangeOriginatedAtEventArgs<TOwner, TProperty> : EventArgs
     {
-        private readonly IProperty<TOwner, TProperty> property;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the property where the change originated at.</summary>
         public IProperty<TOwner, TProperty> Property
         {
@@ -32,5 +28,9 @@ namespace Lawo.ComponentModel
         {
             this.property = property;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly IProperty<TOwner, TProperty> property;
     }
 }

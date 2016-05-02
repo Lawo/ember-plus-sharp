@@ -19,8 +19,6 @@ namespace Lawo.EmberPlusSharp.S101
     [TestClass]
     public class S101LogReaderTest : CommunicationTestBase
     {
-        private static readonly EmberTypeBag Types = new EmberTypeBag();
-
         /// <summary>Tests the main use cases of <see cref="S101LogReader"/>.</summary>
         [TestMethod]
         public void SkipTest()
@@ -96,6 +94,8 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly EmberTypeBag Types = new EmberTypeBag();
 
         private static void TestS101LogReader(string logXmlName, Action<S101LogReader> testCallback)
         {

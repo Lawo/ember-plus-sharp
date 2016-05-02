@@ -14,10 +14,6 @@ namespace Lawo.EmberPlusSharp.Model
     [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "These ctors do not make much sense here.")]
     public sealed class InvocationFailedException : Exception
     {
-        private readonly IResult result;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Gets the function result.</summary>
         public IResult Result
         {
@@ -31,5 +27,9 @@ namespace Lawo.EmberPlusSharp.Model
         {
             this.result = result;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly IResult result;
     }
 }

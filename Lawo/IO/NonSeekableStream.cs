@@ -19,10 +19,6 @@ namespace Lawo.IO
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public abstract class NonSeekableStream : Stream
     {
-        private static readonly Task Completed = Task.FromResult(false);
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public override bool CanRead
         {
@@ -125,5 +121,9 @@ namespace Lawo.IO
         {
             return new NotSupportedException("This operation is not supported.");
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly Task Completed = Task.FromResult(false);
     }
 }

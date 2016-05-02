@@ -19,12 +19,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Logger : IS101Logger
     {
-        private readonly IEmberConverter converter;
-        private readonly XmlWriter xmlLogWriter;
-        private readonly Dictionary<string, int> messageCounts = new Dictionary<string, int>();
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="S101Logger"/> class by calling
         /// <see cref="S101Logger(EmberTypeBag, TextWriter, XmlWriterSettings)">S101Logger(
         /// <paramref name="types"/>, <paramref name="logWriter"/>, new XmlWriterSettings { Indent = true })</see>.
@@ -174,6 +168,10 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly IEmberConverter converter;
+        private readonly XmlWriter xmlLogWriter;
+        private readonly Dictionary<string, int> messageCounts = new Dictionary<string, int>();
 
         private DateTime WriteStartEvent(string type)
         {

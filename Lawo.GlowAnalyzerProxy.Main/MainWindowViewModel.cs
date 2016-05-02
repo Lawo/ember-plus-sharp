@@ -33,40 +33,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 #pragma warning disable SA1124 // Do not use regions
     internal sealed class MainWindowViewModel : NotifyPropertyChanged, IDataErrorInfo
     {
-        private const string ShortConsumerToProvider = "C to P";
-        private const string ConsumerToProvider = "Consumer to Provider";
-        private const string ShortProviderToConsumer = "P to C";
-        private const string ProviderToConsumer = "Provider to Consumer";
-        private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
-        private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
-
-        private readonly TaskQueue logQueue = new TaskQueue();
-        private readonly Dictionary<string, Func<string>> validationRules = new Dictionary<string, Func<string>>();
-        private readonly Settings settings;
-        private readonly ConnectionViewModel consumerConnection;
-        private readonly ConnectionViewModel providerConnection;
-        private readonly List<Event> eventCache = new List<Event>();
-        private readonly ObservableCollection<Event> events = new ObservableCollection<Event>();
-        private readonly ReadOnlyObservableCollection<Event> readOnlyEvents;
-        private string listeningPort;
-        private string providerHostName;
-        private string providerPort;
-        private string logFolder;
-        private bool? autoScrollToMostRecentEvent;
-        private readonly CalculatedProperty<bool> canEditSettings;
-        #region  CalculatedProperty1
-        private readonly CalculatedProperty<bool> canStart;
-        #endregion
-        private readonly CalculatedProperty<bool> canStop;
-        private Event selectedEvent;
-        private FlowDocument selectedEventDetail;
-        private bool canLoadFullEventDetail;
-        private bool isStarted;
-        private bool isStopped = true;
-        private DateTime now;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public event EventHandler<ScrollEventIntoViewEventArgs> ScrollEventIntoView;
 
         public event EventHandler<ListenFailedEventArgs> ListenFailed;
@@ -304,6 +270,38 @@ namespace Lawo.GlowAnalyzerProxy.Main
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private const string ShortConsumerToProvider = "C to P";
+        private const string ConsumerToProvider = "Consumer to Provider";
+        private const string ShortProviderToConsumer = "P to C";
+        private const string ProviderToConsumer = "Provider to Consumer";
+        private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
+        private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
+
+        private readonly TaskQueue logQueue = new TaskQueue();
+        private readonly Dictionary<string, Func<string>> validationRules = new Dictionary<string, Func<string>>();
+        private readonly Settings settings;
+        private readonly ConnectionViewModel consumerConnection;
+        private readonly ConnectionViewModel providerConnection;
+        private readonly List<Event> eventCache = new List<Event>();
+        private readonly ObservableCollection<Event> events = new ObservableCollection<Event>();
+        private readonly ReadOnlyObservableCollection<Event> readOnlyEvents;
+        private string listeningPort;
+        private string providerHostName;
+        private string providerPort;
+        private string logFolder;
+        private bool? autoScrollToMostRecentEvent;
+        private readonly CalculatedProperty<bool> canEditSettings;
+        #region  CalculatedProperty1
+        private readonly CalculatedProperty<bool> canStart;
+        #endregion
+        private readonly CalculatedProperty<bool> canStop;
+        private Event selectedEvent;
+        private FlowDocument selectedEventDetail;
+        private bool canLoadFullEventDetail;
+        private bool isStarted;
+        private bool isStopped = true;
+        private DateTime now;
 
         private async void UpdateLoop()
         {

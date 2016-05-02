@@ -22,15 +22,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class S101Robot
     {
-        private readonly TaskQueue taskQueue = new TaskQueue();
-        private readonly TaskCompletionSource<bool> done = new TaskCompletionSource<bool>();
-        private readonly S101Client client;
-        private readonly S101LogReader logReader;
-        private readonly bool sendFirstMessage;
-        private string firstMessageDirection;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Asynchronously simulates S101 communication.</summary>
         /// <param name="client">The <see cref="S101Client"/> to use.</param>
         /// <param name="types">The types to pass to the internal <see cref="EmberConverter"/>, which is used to convert
@@ -82,6 +73,13 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly TaskQueue taskQueue = new TaskQueue();
+        private readonly TaskCompletionSource<bool> done = new TaskCompletionSource<bool>();
+        private readonly S101Client client;
+        private readonly S101LogReader logReader;
+        private readonly bool sendFirstMessage;
+        private string firstMessageDirection;
 
         private S101Robot(S101Client client, EmberTypeBag types, XmlReader logReader, bool sendFirstMessage)
         {

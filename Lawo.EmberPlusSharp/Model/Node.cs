@@ -22,17 +22,25 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class Node<TMostDerived> : NodeBase<TMostDerived>, INode
         where TMostDerived : Node<TMostDerived>
     {
-        private readonly ObservableCollection<IElement> observableChildren = new ObservableCollection<IElement>();
-        private readonly ReadOnlyObservableCollection<IElement> readOnlyObservableChildren;
-        private bool isRoot;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public bool IsRoot
         {
             get { return this.GetIsRoot(); }
             private set { this.SetValue(ref this.isRoot, value); }
+        }
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
+        ReadOnlyObservableCollection<IElement> INode.Children
+        {
+            get { return this.readOnlyObservableChildren; }
+        }
+
+        /// <inheritdoc/>
+        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
+        IElement INode.this[int number]
+        {
+            get { return this.GetChild(number); }
         }
 
         /// <inheritdoc/>
@@ -125,18 +133,10 @@ namespace Lawo.EmberPlusSharp.Model
             return child == null ? child : child.GetElement(pathElements, index + 1);
         }
 
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
-        ReadOnlyObservableCollection<IElement> INode.Children
-        {
-            get { return this.readOnlyObservableChildren; }
-        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
-        IElement INode.this[int number]
-        {
-            get { return this.GetChild(number); }
-        }
+        private readonly ObservableCollection<IElement> observableChildren = new ObservableCollection<IElement>();
+        private readonly ReadOnlyObservableCollection<IElement> readOnlyObservableChildren;
+        private bool isRoot;
     }
 }

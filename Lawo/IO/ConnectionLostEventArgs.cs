@@ -12,10 +12,6 @@ namespace Lawo.IO
     /// <threadsafety static="true" instance="false"/>
     public sealed class ConnectionLostEventArgs : EventArgs
     {
-        private readonly Exception exception;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="ConnectionLostEventArgs"/> class.</summary>
         public ConnectionLostEventArgs(Exception exception)
         {
@@ -27,5 +23,9 @@ namespace Lawo.IO
         {
             get { return this.exception; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Exception exception;
     }
 }

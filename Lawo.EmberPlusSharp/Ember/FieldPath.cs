@@ -10,12 +10,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
     internal struct FieldPath<TTypeId, TFieldId> : IEquatable<FieldPath<TTypeId, TFieldId>>
     {
-        private readonly Field<TTypeId, TFieldId>? field1;
-        private readonly Field<TTypeId, TFieldId>? field2;
-        private readonly Field<TTypeId, TFieldId>? field3;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public bool Equals(FieldPath<TTypeId, TFieldId> other)
         {
             return this.field1.Equals(other.field1) &&
@@ -68,6 +62,10 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Field<TTypeId, TFieldId>? field1;
+        private readonly Field<TTypeId, TFieldId>? field2;
+        private readonly Field<TTypeId, TFieldId>? field3;
 
         private FieldPath(
             Field<TTypeId, TFieldId>? field1, Field<TTypeId, TFieldId>? field2, Field<TTypeId, TFieldId>? field3)

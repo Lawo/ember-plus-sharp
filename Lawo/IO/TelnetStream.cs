@@ -25,13 +25,6 @@ namespace Lawo.IO
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public sealed class TelnetStream : BufferStream
     {
-        private readonly Func<bool> dataAvailable;
-        private ReadState readState;
-        private byte readCommand;
-        private bool previousWasEscapeByte;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="TelnetStream"/> class.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="readAsync"/>, <paramref name="writeAsync"/> and/or
         /// <paramref name="dataAvailable"/> equal <c>null</c>.</exception>
@@ -115,6 +108,11 @@ namespace Lawo.IO
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Func<bool> dataAvailable;
+        private ReadState readState;
+        private byte readCommand;
+        private bool previousWasEscapeByte;
 
         /// <summary>Enumerates the read states.</summary>
         private enum ReadState

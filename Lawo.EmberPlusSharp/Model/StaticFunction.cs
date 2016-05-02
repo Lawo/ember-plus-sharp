@@ -23,11 +23,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class StaticFunction<TMostDerived> : FunctionBase<TMostDerived>
         where TMostDerived : StaticFunction<TMostDerived>
     {
-        private static KeyValuePair<string, ParameterType>[] argumentsTemplate;
-        private static KeyValuePair<string, ParameterType>[] resultTemplate;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal StaticFunction()
             : base(
                 (KeyValuePair<string, ParameterType>[])ArgumentsTemplate.Clone(),
@@ -69,6 +64,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static KeyValuePair<string, ParameterType>[] argumentsTemplate;
+        private static KeyValuePair<string, ParameterType>[] resultTemplate;
 
         private static KeyValuePair<string, ParameterType>[] ArgumentsTemplate
         {

@@ -26,13 +26,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public abstract class CommunicationTestBase : TestBase
     {
-        private static readonly EmberData EmberDataCommandField = new EmberData(0x01, 0x0A, 0x02);
-        private static readonly S101Message EmberDataMessageField = new S101Message(0x00, EmberDataCommandField);
-        private static readonly S101Message KeepAliveRequestMessageField = new S101Message(0x00, new KeepAliveRequest());
-        private static readonly S101Message KeepAliveResponseMessageField = new S101Message(0x00, new KeepAliveResponse());
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="CommunicationTestBase"/> class.</summary>
         protected CommunicationTestBase()
         {
@@ -288,6 +281,14 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly EmberData EmberDataCommandField = new EmberData(0x01, 0x0A, 0x02);
+        private static readonly S101Message EmberDataMessageField = new S101Message(0x00, EmberDataCommandField);
+        private static readonly S101Message KeepAliveRequestMessageField =
+            new S101Message(0x00, new KeepAliveRequest());
+
+        private static readonly S101Message KeepAliveResponseMessageField =
+            new S101Message(0x00, new KeepAliveResponse());
 
         private static Task<int> Read(
             Stream stream,

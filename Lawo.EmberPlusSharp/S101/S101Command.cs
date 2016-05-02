@@ -19,13 +19,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public abstract class S101Command : IEquatable<S101Command>
     {
-        private const byte DefaultVersion = 0x01;
-        private static readonly Task Completed = Task.FromResult(false);
-
-        private readonly CommandType commandType;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <inheritdoc/>
         public bool Equals(S101Command other)
         {
@@ -111,6 +104,11 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private const byte DefaultVersion = 0x01;
+        private static readonly Task Completed = Task.FromResult(false);
+
+        private readonly CommandType commandType;
 
         private static S101Command GetCommandAndVersion(ReadBuffer readBuffer)
         {

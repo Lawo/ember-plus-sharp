@@ -11,10 +11,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     internal sealed class ListenFailedEventArgs : EventArgs
     {
-        private readonly SocketException exception;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal ListenFailedEventArgs(SocketException exception)
         {
             this.exception = exception;
@@ -24,5 +20,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             get { return this.exception; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly SocketException exception;
     }
 }

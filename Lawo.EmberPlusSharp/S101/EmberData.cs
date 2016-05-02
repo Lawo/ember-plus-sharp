@@ -21,11 +21,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberData : S101Command
     {
-        private byte dtd;
-        private byte[] applicationBytes;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="EmberData"/> class.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", Justification = "Official EmBER name.")]
         public EmberData(byte dtd, params byte[] applicationBytes)
@@ -102,6 +97,9 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private byte dtd;
+        private byte[] applicationBytes;
 
         private void GetPacketFlagsDtdAndAppBytesLength(ReadBuffer readBuffer)
         {

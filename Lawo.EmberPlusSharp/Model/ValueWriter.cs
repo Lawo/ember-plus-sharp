@@ -15,11 +15,6 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class ValueWriter<T>
     {
-        private static readonly Action<EmberWriter, EmberId, T> WriteValueCore = GetWriteValueCore();
-        private readonly T value;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         internal ValueWriter(T value)
         {
             this.value = value;
@@ -31,6 +26,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static readonly Action<EmberWriter, EmberId, T> WriteValueCore = GetWriteValueCore();
+        private readonly T value;
 
         private static Action<EmberWriter, EmberId, T> GetWriteValueCore()
         {

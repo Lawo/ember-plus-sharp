@@ -14,17 +14,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     internal sealed class ConnectionViewModel : NotifyPropertyChanged
     {
-        private readonly MainWindowViewModel parent;
-        private readonly CalculatedProperty<string> connectionCount;
-        private readonly CalculatedProperty<string> bytesReceived;
-        private readonly CalculatedProperty<string> secondsSinceLastReceived;
-        private TcpClient client;
-        private int connectionCountCore;
-        private long bytesReceivedCore;
-        private DateTime lastReceived;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public string ConnectionCount
         {
             get { return this.connectionCount.Value; }
@@ -95,6 +84,15 @@ namespace Lawo.GlowAnalyzerProxy.Main
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly MainWindowViewModel parent;
+        private readonly CalculatedProperty<string> connectionCount;
+        private readonly CalculatedProperty<string> bytesReceived;
+        private readonly CalculatedProperty<string> secondsSinceLastReceived;
+        private TcpClient client;
+        private int connectionCountCore;
+        private long bytesReceivedCore;
+        private DateTime lastReceived;
 
         private long BytesReceivedCore
         {

@@ -55,10 +55,6 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberType
     {
-        private readonly Type[] types;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /// <summary>Initializes a new instance of the <see cref="EmberType"/> class.</summary>
         /// <param name="types">The parent fields followed by the actual type, in descending order.</param>
         /// <exception cref="ArgumentNullException"><paramref name="types"/> equals <c>null</c>.</exception>
@@ -102,5 +98,9 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             get { return this.types[this.types.Length - 1]; }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private readonly Type[] types;
     }
 }
