@@ -27,7 +27,8 @@ namespace Lawo.EmberPlusSharp.Model
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            internal MetaElement(PropertyInfo property) : base(property)
+            internal MetaElement(PropertyInfo property)
+                : base(property)
             {
                 var objParam = Expression.Parameter(typeof(TMostDerived));
                 this.get = Expression.Lambda<Func<TMostDerived, TProperty>>(

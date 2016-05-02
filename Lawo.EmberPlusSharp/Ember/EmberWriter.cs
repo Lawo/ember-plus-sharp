@@ -49,7 +49,8 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Initializes a new instance of the <see cref="EmberWriter"/> class by calling
         /// <see cref="EmberWriter(Stream, int)">EmberWriter(<paramref name="stream"/>, 1024)</see>.</summary>
-        public EmberWriter(Stream stream) : this(stream, Constants.MemoryStreamBufferSize)
+        public EmberWriter(Stream stream)
+            : this(stream, Constants.MemoryStreamBufferSize)
         {
         }
 

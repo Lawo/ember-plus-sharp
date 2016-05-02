@@ -28,7 +28,8 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal DisposableReadOnlyObservableCollection(SubscribedObservableCollection<T> list) : base(list)
+        internal DisposableReadOnlyObservableCollection(SubscribedObservableCollection<T> list)
+            : base(list)
         {
             this.dispose = list.Dispose;
         }

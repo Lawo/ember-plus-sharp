@@ -13,17 +13,20 @@ namespace Lawo.EmberPlusSharp.Ember
     public sealed class EmberException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="EmberException"/> class.</summary>
-        public EmberException() : this(null)
+        public EmberException()
+            : this(null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="EmberException"/> class.</summary>
-        public EmberException(string message) : this(message, null)
+        public EmberException(string message)
+            : this(message, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="EmberException"/> class.</summary>
-        public EmberException(string message, Exception innerException) : base(message, innerException)
+        public EmberException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

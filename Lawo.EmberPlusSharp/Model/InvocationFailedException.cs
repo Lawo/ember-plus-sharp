@@ -26,7 +26,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal InvocationFailedException(string message, IResult result) : base(message)
+        internal InvocationFailedException(string message, IResult result)
+            : base(message)
         {
             this.result = result;
         }

@@ -18,7 +18,8 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="Result{T1,T2}"/> class.</summary>
-        public Result() : this(new ValueReader<T1>(), new ValueReader<T2>())
+        public Result()
+            : this(new ValueReader<T1>(), new ValueReader<T2>())
         {
         }
 
@@ -36,7 +37,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Result(ValueReader<T1> item1Reader, ValueReader<T2> item2Reader) : base(item1Reader, item2Reader)
+        private Result(ValueReader<T1> item1Reader, ValueReader<T2> item2Reader)
+            : base(item1Reader, item2Reader)
         {
             this.component1Reader = item1Reader;
             this.component2Reader = item2Reader;

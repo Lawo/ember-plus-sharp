@@ -78,7 +78,8 @@ namespace Lawo.IO
         /// <param name="bufferSize">The size of the buffer in bytes.</param>
         /// <exception cref="ArgumentNullException"><paramref name="read"/> equals <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
-        public ReadBuffer(ReadCallback read, int bufferSize) : base(bufferSize)
+        public ReadBuffer(ReadCallback read, int bufferSize)
+            : base(bufferSize)
         {
             if (read == null)
             {
@@ -95,7 +96,8 @@ namespace Lawo.IO
         /// <exception cref="ArgumentNullException"><paramref name="readAsync"/> equals <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
         [CLSCompliant(false)]
-        public ReadBuffer(ReadAsyncCallback readAsync, int bufferSize) : base(bufferSize)
+        public ReadBuffer(ReadAsyncCallback readAsync, int bufferSize)
+            : base(bufferSize)
         {
             if (readAsync == null)
             {

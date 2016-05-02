@@ -32,7 +32,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <see cref="S101Reader(ReadAsyncCallback, int)">S101Reader(<paramref name="readAsync"/>, 8192)</see>.
         /// </summary>
         [CLSCompliant(false)]
-        public S101Reader(ReadAsyncCallback readAsync) : this(readAsync, Constants.PhysicalStreamBufferSize)
+        public S101Reader(ReadAsyncCallback readAsync)
+            : this(readAsync, Constants.PhysicalStreamBufferSize)
         {
         }
 

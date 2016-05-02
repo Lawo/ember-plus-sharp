@@ -46,7 +46,8 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal FieldPath(Field<TTypeId, TFieldId> field) : this(null, null, field)
+        internal FieldPath(Field<TTypeId, TFieldId> field)
+            : this(null, null, field)
         {
         }
 

@@ -13,17 +13,20 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class ModelException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="ModelException"/> class.</summary>
-        public ModelException() : this(null)
+        public ModelException()
+            : this(null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="ModelException"/> class.</summary>
-        public ModelException(string message) : this(message, null)
+        public ModelException(string message)
+            : this(message, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="ModelException"/> class.</summary>
-        public ModelException(string message, Exception innerException) : base(message, innerException)
+        public ModelException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

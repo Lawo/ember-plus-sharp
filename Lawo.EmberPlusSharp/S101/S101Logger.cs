@@ -54,7 +54,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <param name="xmlLogWriter">The <see cref="XmlWriter"/> to write log messages to.</param>
         /// <exception cref="ArgumentNullException"><paramref name="types"/> and/or <paramref name="xmlLogWriter"/>
         /// equal <c>null</c>.</exception>
-        public S101Logger(EmberTypeBag types, XmlWriter xmlLogWriter) : this(new EmberConverter(types), xmlLogWriter)
+        public S101Logger(EmberTypeBag types, XmlWriter xmlLogWriter)
+            : this(new EmberConverter(types), xmlLogWriter)
         {
         }
 

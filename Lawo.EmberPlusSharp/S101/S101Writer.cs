@@ -31,7 +31,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Initializes a new instance of the <see cref="S101Writer"/> class by calling
         /// <see cref="S101Writer(WriteAsyncCallback, int)">S101Writer(<paramref name="writeAsync"/>, 8192)</see>.</summary>
         [CLSCompliant(false)]
-        public S101Writer(WriteAsyncCallback writeAsync) : this(writeAsync, Constants.PhysicalStreamBufferSize)
+        public S101Writer(WriteAsyncCallback writeAsync)
+            : this(writeAsync, Constants.PhysicalStreamBufferSize)
         {
         }
 

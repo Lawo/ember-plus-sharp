@@ -217,7 +217,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Matrix() : base(RetrievalState.Complete)
+        private Matrix()
+            : base(RetrievalState.Complete)
         {
         }
     }

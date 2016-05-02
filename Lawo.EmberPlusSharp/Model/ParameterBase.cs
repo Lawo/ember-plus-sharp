@@ -129,7 +129,8 @@ namespace Lawo.EmberPlusSharp.Model
             this.SetProviderValue(this.AssertValueType(value));
         }
 
-        internal ParameterBase() : base(RetrievalState.Complete)
+        internal ParameterBase()
+            : base(RetrievalState.Complete)
         {
         }
 

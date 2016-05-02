@@ -13,17 +13,20 @@ namespace Lawo.EmberPlusSharp.S101
     public sealed class S101Exception : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="S101Exception"/> class.</summary>
-        public S101Exception() : this(null)
+        public S101Exception()
+            : this(null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="S101Exception"/> class.</summary>
-        public S101Exception(string message) : this(message, null)
+        public S101Exception(string message)
+            : this(message, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="S101Exception"/> class.</summary>
-        public S101Exception(string message, Exception innerException) : base(message, innerException)
+        public S101Exception(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

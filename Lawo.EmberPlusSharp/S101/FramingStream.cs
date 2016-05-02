@@ -74,7 +74,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private FramingStream(WriteBuffer writeBuffer) : base(null, writeBuffer)
+        private FramingStream(WriteBuffer writeBuffer)
+            : base(null, writeBuffer)
         {
             writeBuffer[writeBuffer.Count++] = Frame.BeginOfFrame;
         }

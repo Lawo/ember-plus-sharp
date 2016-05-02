@@ -18,7 +18,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal DynamicFunction() : base(EmptyDescription, EmptyDescription)
+        internal DynamicFunction()
+            : base(EmptyDescription, EmptyDescription)
         {
         }
 

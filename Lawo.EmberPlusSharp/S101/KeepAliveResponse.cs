@@ -13,7 +13,8 @@ namespace Lawo.EmberPlusSharp.S101
     public sealed class KeepAliveResponse : S101Command
     {
         /// <summary>Initializes a new instance of the <see cref="KeepAliveResponse"/> class.</summary>
-        public KeepAliveResponse() : base(CommandType.KeepAliveResponse)
+        public KeepAliveResponse()
+            : base(CommandType.KeepAliveResponse)
         {
         }
     }

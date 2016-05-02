@@ -74,7 +74,8 @@ namespace Lawo.IO
         /// <param name="bufferSize">The size of the buffer in bytes.</param>
         /// <exception cref="ArgumentNullException"><paramref name="write"/> equals <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
-        public WriteBuffer(WriteCallback write, int bufferSize) : base(bufferSize)
+        public WriteBuffer(WriteCallback write, int bufferSize)
+            : base(bufferSize)
         {
             if (write == null)
             {
@@ -91,7 +92,8 @@ namespace Lawo.IO
         /// <exception cref="ArgumentNullException"><paramref name="writeAsync"/> equals <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
         [CLSCompliant(false)]
-        public WriteBuffer(WriteAsyncCallback writeAsync, int bufferSize) : base(bufferSize)
+        public WriteBuffer(WriteAsyncCallback writeAsync, int bufferSize)
+            : base(bufferSize)
         {
             if (writeAsync == null)
             {

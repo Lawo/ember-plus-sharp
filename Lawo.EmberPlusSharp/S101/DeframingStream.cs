@@ -57,7 +57,8 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="DeframingStream"/> class.</summary>
-        internal DeframingStream(ReadBuffer readBuffer, Action<byte> outOfFrameByteReceived) : base(readBuffer, null)
+        internal DeframingStream(ReadBuffer readBuffer, Action<byte> outOfFrameByteReceived)
+            : base(readBuffer, null)
         {
             this.outOfFrameByteReceived = outOfFrameByteReceived;
         }

@@ -28,7 +28,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Initializes a new instance of the <see cref="EmberData"/> class.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", Justification = "Official EmBER name.")]
-        public EmberData(byte dtd, params byte[] applicationBytes) : this()
+        public EmberData(byte dtd, params byte[] applicationBytes)
+            : this()
         {
             this.dtd = dtd;
             this.applicationBytes = applicationBytes;
@@ -56,7 +57,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal EmberData() : base(CommandType.EmberData)
+        internal EmberData()
+            : base(CommandType.EmberData)
         {
         }
 

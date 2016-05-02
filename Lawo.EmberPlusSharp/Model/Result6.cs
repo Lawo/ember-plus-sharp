@@ -29,13 +29,14 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="Result{T1,T2,T3,T4,T5,T6}"/> class.</summary>
-        public Result() : this(
-            new ValueReader<T1>(),
-            new ValueReader<T2>(),
-            new ValueReader<T3>(),
-            new ValueReader<T4>(),
-            new ValueReader<T5>(),
-            new ValueReader<T6>())
+        public Result()
+            : this(
+                new ValueReader<T1>(),
+                new ValueReader<T2>(),
+                new ValueReader<T3>(),
+                new ValueReader<T4>(),
+                new ValueReader<T5>(),
+                new ValueReader<T6>())
         {
         }
 

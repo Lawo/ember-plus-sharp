@@ -34,7 +34,8 @@ namespace Lawo.IO
 
         private sealed class MyBufferStream : BufferStream
         {
-            internal MyBufferStream(ReadBuffer readBuffer, WriteBuffer writeBuffer) : base(readBuffer, writeBuffer)
+            internal MyBufferStream(ReadBuffer readBuffer, WriteBuffer writeBuffer)
+                : base(readBuffer, writeBuffer)
             {
             }
         }

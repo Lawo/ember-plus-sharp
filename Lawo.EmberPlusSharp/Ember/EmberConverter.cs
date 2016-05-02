@@ -26,7 +26,8 @@ namespace Lawo.EmberPlusSharp.Ember
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Initializes a new instance of the <see cref="EmberConverter"/> class.</summary>
-        public EmberConverter() : this(new EmberTypeBag())
+        public EmberConverter()
+            : this(new EmberTypeBag())
         {
         }
 

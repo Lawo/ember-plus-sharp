@@ -95,7 +95,8 @@ namespace Lawo.EmberPlusSharp.Model
             this.OnPropertyChanged(e);
         }
 
-        internal NodeBase() : base(RetrievalState.None)
+        internal NodeBase()
+            : base(RetrievalState.None)
         {
         }
 

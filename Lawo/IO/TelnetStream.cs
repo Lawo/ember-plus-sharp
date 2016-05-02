@@ -35,10 +35,10 @@ namespace Lawo.IO
         /// <summary>Initializes a new instance of the <see cref="TelnetStream"/> class.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="readAsync"/>, <paramref name="writeAsync"/> and/or
         /// <paramref name="dataAvailable"/> equal <c>null</c>.</exception>
-        public TelnetStream(
-            ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync, Func<bool> dataAvailable) : base(
-            new ReadBuffer(readAsync, Defaults.PhysicalStreamBufferSize),
-            new WriteBuffer(writeAsync, Defaults.PhysicalStreamBufferSize))
+        public TelnetStream(ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync, Func<bool> dataAvailable)
+            : base(
+                new ReadBuffer(readAsync, Defaults.PhysicalStreamBufferSize),
+                new WriteBuffer(writeAsync, Defaults.PhysicalStreamBufferSize))
         {
             if (readAsync == null)
             {

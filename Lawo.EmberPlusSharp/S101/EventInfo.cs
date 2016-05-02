@@ -22,7 +22,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal EventInfo(DateTime? timeUtc) : this(timeUtc, null)
+        internal EventInfo(DateTime? timeUtc)
+            : this(timeUtc, null)
         {
         }
 

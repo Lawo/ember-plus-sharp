@@ -28,9 +28,10 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal StaticFunction() : base(
-            (KeyValuePair<string, ParameterType>[])ArgumentsTemplate.Clone(),
-            (KeyValuePair<string, ParameterType>[])ResultTemplate.Clone())
+        internal StaticFunction()
+            : base(
+                (KeyValuePair<string, ParameterType>[])ArgumentsTemplate.Clone(),
+                (KeyValuePair<string, ParameterType>[])ResultTemplate.Clone())
         {
         }
 
