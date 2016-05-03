@@ -82,40 +82,25 @@ namespace Lawo.GlowAnalyzerProxy.Main
             set { this.SetValue(ref this.autoScrollToMostRecentEvent, value); }
         }
 
-        public bool CanEditSettings
-        {
-            get { return this.canEditSettings.Value; }
-        }
+        public bool CanEditSettings => this.canEditSettings.Value;
 
         #region CalculatedProperty3
-        public bool CanStart
-        {
-            get { return this.canStart.Value; }
-        }
+        public bool CanStart => this.canStart.Value;
+
         #endregion
 
-        public bool CanStop
-        {
-            get { return this.canStop.Value; }
-        }
+        public bool CanStop => this.canStop.Value;
 
         #region CompositeProperty
-        public ConnectionViewModel ConsumerConnection
-        {
-            get { return this.consumerConnection; }
-        }
+        public ConnectionViewModel ConsumerConnection => this.consumerConnection;
+
         #endregion
 
-        public ConnectionViewModel ProviderConnection
-        {
-            get { return this.providerConnection; }
-        }
+        public ConnectionViewModel ProviderConnection => this.providerConnection;
 
         #region CollectionProperty
-        public ReadOnlyObservableCollection<Event> Events
-        {
-            get { return this.readOnlyEvents; }
-        }
+        public ReadOnlyObservableCollection<Event> Events => this.readOnlyEvents;
+
         #endregion
 
         public Event SelectedEvent

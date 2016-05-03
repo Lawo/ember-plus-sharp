@@ -31,17 +31,11 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
-        ReadOnlyObservableCollection<IElement> INode.Children
-        {
-            get { return this.readOnlyObservableChildren; }
-        }
+        ReadOnlyObservableCollection<IElement> INode.Children => this.readOnlyObservableChildren;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
-        IElement INode.this[int number]
-        {
-            get { return this.GetChild(number); }
-        }
+        IElement INode.this[int number] => this.GetChild(number);
 
         /// <inheritdoc/>
         public IElement GetElement(string path)

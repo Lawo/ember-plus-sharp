@@ -65,10 +65,7 @@ namespace Lawo
                 this.disposeCalled = true;
             }
 
-            internal bool DisposeCalled
-            {
-                get { return this.disposeCalled; }
-            }
+            internal bool DisposeCalled => this.disposeCalled;
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

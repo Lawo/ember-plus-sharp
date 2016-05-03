@@ -58,9 +58,6 @@ namespace Lawo.Reflection
 
         private int SomeProperty { get; set; }
 
-        private int SomeReadOnlyProperty
-        {
-            get { return this.someField; }
-        }
+        private int SomeReadOnlyProperty => this.someField;
     }
 }

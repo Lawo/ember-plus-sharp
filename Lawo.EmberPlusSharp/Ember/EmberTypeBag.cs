@@ -75,25 +75,13 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal Dictionary<int, string> TypeNames
-        {
-            get { return this.typeNames; }
-        }
+        internal Dictionary<int, string> TypeNames => this.typeNames;
 
-        internal Dictionary<FieldPath<int, EmberId>, string> FieldNames
-        {
-            get { return this.fieldNames; }
-        }
+        internal Dictionary<FieldPath<int, EmberId>, string> FieldNames => this.fieldNames;
 
-        internal Dictionary<string, int> InnerNumbers
-        {
-            get { return this.innerNumbers; }
-        }
+        internal Dictionary<string, int> InnerNumbers => this.innerNumbers;
 
-        internal Dictionary<FieldPath<string, string>, EmberId> FieldIds
-        {
-            get { return this.fieldIds; }
-        }
+        internal Dictionary<FieldPath<string, string>, EmberId> FieldIds => this.fieldIds;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

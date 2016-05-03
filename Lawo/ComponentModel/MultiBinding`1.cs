@@ -10,7 +10,8 @@ namespace Lawo.ComponentModel
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using Lawo.Reflection;
+
+    using Reflection;
 
     /// <summary>Represents a one-way binding between a single target property and one or more source properties.
     /// </summary>
@@ -23,10 +24,7 @@ namespace Lawo.ComponentModel
         /// <summary>Stops setting the target property whenever one of the source properties changes.</summary>
         /// <remarks>If the binding is intended to be permanent it is permissible to to never call
         /// <see cref="Dispose"/>.</remarks>
-        public void Dispose()
-        {
-            this.propertyChangedRegistration.Dispose();
-        }
+        public void Dispose() => this.propertyChangedRegistration.Dispose();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,9 +56,7 @@ namespace Lawo.ComponentModel
         private readonly Func<T> calculate;
         private readonly PropertyChangedRegistration propertyChangedRegistration;
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) =>
             this.target.Value = this.calculate();
-        }
     }
 }

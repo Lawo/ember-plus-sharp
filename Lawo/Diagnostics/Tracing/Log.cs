@@ -16,10 +16,7 @@ namespace Lawo.Diagnostics.Tracing
     public sealed class Log : EventSource
     {
         /// <summary>Gets the instance.</summary>
-        public static Log Instance
-        {
-            get { return instance; }
-        }
+        public static Log Instance => instance;
 
         /// <summary>
         /// Logs on debug level.
@@ -29,9 +26,7 @@ namespace Lawo.Diagnostics.Tracing
         /// <param name="filePath">The source file that contains the caller. Set by compiler services.</param>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Default values set by CompilerServices.")]
         public static void Debug(
-            string logMessage,
-            [CallerLineNumber] int lineNumber = 0,
-            [CallerFilePath] string filePath = null)
+            string logMessage, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = null)
         {
             Instance.LogDebug(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, moduleNameDefault);
         }
@@ -191,28 +186,20 @@ namespace Lawo.Diagnostics.Tracing
         }
 
         [Event(1, Level = EventLevel.Verbose)]
-        private void LogDebug(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName)
-        {
+        private void LogDebug(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName) =>
             this.WriteEvent(1, logMessage, threadId, filePath, lineNumber, moduleName);
-        }
 
         [Event(2, Level = EventLevel.Informational)]
-        private void LogInfo(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName)
-        {
+        private void LogInfo(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName) =>
             this.WriteEvent(2, logMessage, threadId, filePath, lineNumber, moduleName);
-        }
 
         [Event(3, Level = EventLevel.Warning)]
-        private void LogWarn(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName)
-        {
+        private void LogWarn(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName) =>
             this.WriteEvent(3, logMessage, threadId, filePath, lineNumber, moduleName);
-        }
 
         [Event(4, Level = EventLevel.Error)]
-        private void LogError(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName)
-        {
+        private void LogError(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName) =>
             this.WriteEvent(4, logMessage, threadId, filePath, lineNumber, moduleName);
-        }
 
         [Event(5, Level = EventLevel.Critical)]
         private void LogCritical(string logMessage, uint threadId, string filePath, int lineNumber, string moduleName)

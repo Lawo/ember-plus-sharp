@@ -15,10 +15,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.evt = evt;
         }
 
-        internal Event NewEvent
-        {
-            get { return this.evt; }
-        }
+        internal Event NewEvent => this.evt;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

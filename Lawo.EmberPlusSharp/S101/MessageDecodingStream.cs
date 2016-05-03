@@ -26,10 +26,7 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class MessageDecodingStream : NonSeekableStream
     {
-        public sealed override bool CanRead
-        {
-            get { return this.deframingStream != null; }
-        }
+        public sealed override bool CanRead => this.deframingStream != null;
 
         public sealed override async Task DisposeAsync(CancellationToken cancellationToken)
         {
@@ -82,10 +79,7 @@ namespace Lawo.EmberPlusSharp.S101
             return result;
         }
 
-        internal S101Message Message
-        {
-            get { return this.message; }
-        }
+        internal S101Message Message => this.message;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

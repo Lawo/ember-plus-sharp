@@ -56,10 +56,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
         }
 
-        internal Field<TTypeId, TFieldId>? Tail
-        {
-            get { return this.field3; }
-        }
+        internal Field<TTypeId, TFieldId>? Tail => this.field3;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

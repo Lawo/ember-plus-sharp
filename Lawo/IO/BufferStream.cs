@@ -30,16 +30,10 @@ namespace Lawo.IO
     public abstract class BufferStream : NonSeekableStream
     {
         /// <inheritdoc/>
-        public sealed override bool CanRead
-        {
-            get { return this.readBuffer != null; }
-        }
+        public sealed override bool CanRead => this.readBuffer != null;
 
         /// <inheritdoc/>
-        public override bool CanWrite
-        {
-            get { return this.writeBuffer != null; }
-        }
+        public override bool CanWrite => this.writeBuffer != null;
 
         /// <summary>Asynchronously flushes the write buffer and then disposes the underlying stream.</summary>
         [CLSCompliant(false)]
@@ -71,22 +65,13 @@ namespace Lawo.IO
         }
 
         /// <summary>Gets a value indicating whether <see cref="Stream.Dispose()"/> has been called.</summary>
-        protected bool IsDisposed
-        {
-            get { return (this.readBuffer == null) && (this.writeBuffer == null); }
-        }
+        protected bool IsDisposed => (this.readBuffer == null) && (this.writeBuffer == null);
 
         /// <summary>Gets a reference to the read buffer.</summary>
-        protected ReadBuffer ReadBuffer
-        {
-            get { return this.readBuffer; }
-        }
+        protected ReadBuffer ReadBuffer => this.readBuffer;
 
         /// <summary>Gets a reference to the write buffer.</summary>
-        protected WriteBuffer WriteBuffer
-        {
-            get { return this.writeBuffer; }
-        }
+        protected WriteBuffer WriteBuffer => this.writeBuffer;
 
         /// <summary>Flushes the write buffer and then disposes the underlying stream.</summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Dispose() must never throw.")]

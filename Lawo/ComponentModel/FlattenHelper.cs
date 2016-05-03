@@ -62,10 +62,8 @@ namespace Lawo.ComponentModel
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private static int GetTotalCount(IEnumerable<ReadOnlyObservableCollection<T>> inners)
-            {
-                return inners.Aggregate(0, (c, i) => c + (i == null ? 0 : i.Count));
-            }
+            private static int GetTotalCount(IEnumerable<ReadOnlyObservableCollection<T>> inners) =>
+                inners.Aggregate(0, (c, i) => c + (i == null ? 0 : i.Count));
 
             private static void Unsubscribe(INotifyCollectionChanged inner, NotifyCollectionChangedEventHandler handler)
             {
@@ -119,15 +117,11 @@ namespace Lawo.ComponentModel
                 }
             }
 
-            private void AddedToInner(ReadOnlyObservableCollection<T> inner, int index, T item)
-            {
+            private void AddedToInner(ReadOnlyObservableCollection<T> inner, int index, T item) =>
                 this.Insert(this.GetBeforeCount(inner) + index, item);
-            }
 
-            private void RemovedFromInner(ReadOnlyObservableCollection<T> inner, int index)
-            {
+            private void RemovedFromInner(ReadOnlyObservableCollection<T> inner, int index) =>
                 this.RemoveAt(this.GetBeforeCount(inner) + index);
-            }
 
             private void ClearedInner(ReadOnlyObservableCollection<T> inner)
             {
@@ -140,15 +134,11 @@ namespace Lawo.ComponentModel
                 }
             }
 
-            private int GetBeforeCount(ReadOnlyObservableCollection<T> inner)
-            {
-                return GetTotalCount(this.original.Take(this.original.IndexOf(inner)));
-            }
+            private int GetBeforeCount(ReadOnlyObservableCollection<T> inner) =>
+                GetTotalCount(this.original.Take(this.original.IndexOf(inner)));
 
-            private int GetAfterCount(ReadOnlyObservableCollection<T> inner)
-            {
-                return GetTotalCount(this.original.Skip(this.original.IndexOf(inner) + 1));
-            }
+            private int GetAfterCount(ReadOnlyObservableCollection<T> inner) =>
+                GetTotalCount(this.original.Skip(this.original.IndexOf(inner) + 1));
         }
     }
 }

@@ -36,15 +36,9 @@ namespace Lawo.Reflection
 
         private sealed class PropertyImpl<TOwner, TProperty> : IProperty<TOwner, TProperty>
         {
-            public TOwner Owner
-            {
-                get { return this.owner; }
-            }
+            public TOwner Owner => this.owner;
 
-            public PropertyInfo PropertyInfo
-            {
-                get { return this.propertyInfo; }
-            }
+            public PropertyInfo PropertyInfo => this.propertyInfo;
 
             public TProperty Value
             {

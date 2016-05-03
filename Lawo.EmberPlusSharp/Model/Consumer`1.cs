@@ -143,10 +143,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Gets the root of the object tree that mirrors the state of the tree published by the provider.
         /// </summary>
-        public TRoot Root
-        {
-            get { return this.root; }
-        }
+        public TRoot Root => this.root;
 
         /// <summary>Gets or sets the minimal amount of time, in milliseconds, the consumer will wait after
         /// automatically calling <see cref="SendAsync"/> before it will automatically call it again.</summary>
@@ -493,10 +490,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private sealed class ReceiveQueue
         {
-            internal int MessageCount
-            {
-                get { return this.queue.Count; }
-            }
+            internal int MessageCount => this.queue.Count;
 
             internal void OnMessageReceived(object sender, MessageReceivedEventArgs e)
             {

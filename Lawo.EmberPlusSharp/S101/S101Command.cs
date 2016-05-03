@@ -69,15 +69,9 @@ namespace Lawo.EmberPlusSharp.S101
             this.commandType = commandType;
         }
 
-        internal virtual bool CanHavePayload
-        {
-            get { return false; }
-        }
+        internal virtual bool CanHavePayload => false;
 
-        internal virtual bool CanHaveMultiplePackets
-        {
-            get { return false; }
-        }
+        internal virtual bool CanHaveMultiplePackets => false;
 
         internal PacketFlags PacketFlags { get; set; }
 

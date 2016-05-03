@@ -21,10 +21,7 @@ namespace Lawo.EmberPlusSharp.Model
         where TMostDerived : DynamicFieldNode<TMostDerived>
     {
         /// <summary>Gets the dynamic children of this node.</summary>
-        public ReadOnlyObservableCollection<IElement> DynamicChildren
-        {
-            get { return this.readOnlyDynamicChildren; }
-        }
+        public ReadOnlyObservableCollection<IElement> DynamicChildren => this.readOnlyDynamicChildren;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -15,10 +15,7 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class InvocationFailedException : Exception
     {
         /// <summary>Gets the function result.</summary>
-        public IResult Result
-        {
-            get { return this.result; }
-        }
+        public IResult Result => this.result;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

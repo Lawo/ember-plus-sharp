@@ -117,20 +117,11 @@ namespace Lawo.EmberPlusSharp.Ember
             this.number = number;
         }
 
-        internal Class Class
-        {
-            get { return this.theClass; }
-        }
+        internal Class Class => this.theClass;
 
-        internal bool IsConstructed
-        {
-            get { return this.isConstructed; }
-        }
+        internal bool IsConstructed => this.isConstructed;
 
-        internal int Number
-        {
-            get { return this.number; }
-        }
+        internal int Number => this.number;
 
         internal int? ToInnerNumber()
         {

@@ -105,10 +105,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         private static Dictionary<string, MetaElement> metaChildren;
 
-        private static Dictionary<string, MetaElement> MetaChildren
-        {
-            get { return LazyInitializer.EnsureInitialized(ref metaChildren, GetMetaChildren); }
-        }
+        private static Dictionary<string, MetaElement> MetaChildren =>
+		    LazyInitializer.EnsureInitialized(ref metaChildren, GetMetaChildren);
 
         private static Dictionary<string, MetaElement> GetMetaChildren()
         {

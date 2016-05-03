@@ -27,29 +27,17 @@ namespace Lawo.EmberPlusSharp.S101
     public abstract class CommunicationTestBase : TestBase
     {
         /// <summary>Gets the <see cref="EmberData"/> instance for the current version.</summary>
-        protected static EmberData EmberDataCommand
-        {
-            get { return EmberDataCommandField; }
-        }
+        protected static EmberData EmberDataCommand => EmberDataCommandField;
 
         /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="EmberData"/> command for the current
         /// version.</summary>
-        protected static S101Message EmberDataMessage
-        {
-            get { return EmberDataMessageField; }
-        }
+        protected static S101Message EmberDataMessage => EmberDataMessageField;
 
         /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="KeepAliveRequest"/> command.</summary>
-        protected static S101Message KeepAliveRequestMessage
-        {
-            get { return KeepAliveRequestMessageField; }
-        }
+        protected static S101Message KeepAliveRequestMessage => KeepAliveRequestMessageField;
 
         /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="KeepAliveResponse"/> command.</summary>
-        protected static S101Message KeepAliveResponseMessage
-        {
-            get { return KeepAliveResponseMessageField; }
-        }
+        protected static S101Message KeepAliveResponseMessage => KeepAliveResponseMessageField;
 
         /// <summary>Uses <see cref="S101Robot"/> to simulate a provider communicating with the <see cref="S101Client"/>
         /// object passed to <paramref name="testCallback"/>.</summary>

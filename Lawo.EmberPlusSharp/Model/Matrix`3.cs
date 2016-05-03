@@ -91,10 +91,7 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <inheritdoc/>
-        INode IMatrix.Parameters
-        {
-            get { return this.Parameters; }
-        }
+        INode IMatrix.Parameters => this.Parameters;
 
         internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {

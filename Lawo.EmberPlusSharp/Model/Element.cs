@@ -23,27 +23,15 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class Element : NotifyPropertyChanged, IElement
     {
         /// <inheritdoc/>
-        public INode Parent
-        {
-            get
-            {
-                // IParent cannot derive from INode, because some *internal* IParent implementations (e.g. ShadowNode)
-                // cannot implement all INode members. This property getter is only called by client code.
-                return this.parent as INode;
-            }
-        }
+        // IParent cannot derive from INode, because some *internal* IParent implementations (e.g. ShadowNode)
+        // cannot implement all INode members. This property getter is only called by client code.
+        public INode Parent => this.parent as INode;
 
         /// <inheritdoc/>
-        public int Number
-        {
-            get { return this.numberPath.Length == 0 ? 0 : this.numberPath[this.numberPath.Length - 1]; }
-        }
+        public int Number => this.numberPath.Length == 0 ? 0 : this.numberPath[this.numberPath.Length - 1];
 
         /// <inheritdoc/>
-        public string Identifier
-        {
-            get { return this.identifier; }
-        }
+        public string Identifier => this.identifier;
 
         /// <inheritdoc/>
         public string Description
@@ -108,10 +96,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
-        internal int[] NumberPath
-        {
-            get { return this.numberPath; }
-        }
+        internal int[] NumberPath => this.numberPath;
 
         internal bool HasChanges
         {
@@ -134,10 +119,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal virtual bool RetrieveDetails
-        {
-            get { return this.IsOnline; }
-        }
+        internal virtual bool RetrieveDetails => this.IsOnline;
 
         internal RetrieveDetailsChangeStatus RetrieveDetailsChangeStatus { get; set; }
 

@@ -26,18 +26,12 @@ namespace Lawo.EmberPlusSharp.Model
         where TElement : IElement
     {
         /// <summary>Gets the children of this node.</summary>
-        public ReadOnlyObservableCollection<TElement> Children
-        {
-            get { return this.readOnlyChildren; }
-        }
+        public ReadOnlyObservableCollection<TElement> Children => this.readOnlyChildren;
 
         /// <summary>Gets the child where <see cref="Element.Number"/> equals <paramref name="number"/>.</summary>
         /// <exception cref="KeyNotFoundException">No child exists where <see cref="Element.Number"/> equals
         /// <paramref name="number"/>.</exception>
-        public TElement this[int number]
-        {
-            get { return (TElement)this.GetChild(number); }
-        }
+        public TElement this[int number] => (TElement)this.GetChild(number);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

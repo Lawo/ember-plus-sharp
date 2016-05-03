@@ -13,40 +13,22 @@ namespace Lawo.GlowAnalyzerProxy.Main
     internal sealed class Event
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public int Conn
-        {
-            get { return this.conn; }
-        }
+        public int Conn => this.conn;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public double Time
-        {
-            get { return this.time; }
-        }
+        public double Time => this.time;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public string Type
-        {
-            get { return this.type; }
-        }
+        public string Type => this.type;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public string Dir
-        {
-            get { return this.direction; }
-        }
+        public string Dir => this.direction;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public int? No
-        {
-            get { return this.number; }
-        }
+        public int? No => this.number;
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public int? Payload
-        {
-            get { return this.length; }
-        }
+        public int? Payload => this.length;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -72,20 +54,11 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.logLength = logLength;
         }
 
-        internal string LogPath
-        {
-            get { return this.logPath; }
-        }
+        internal string LogPath => this.logPath;
 
-        internal long LogPosition
-        {
-            get { return this.logPosition; }
-        }
+        internal long LogPosition => this.logPosition;
 
-        internal long LogLength
-        {
-            get { return this.logLength; }
-        }
+        internal long LogLength => this.logLength;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

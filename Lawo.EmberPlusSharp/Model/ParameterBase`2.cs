@@ -63,56 +63,32 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "NumericParameter provides strongly-typed property, not relevant for all other parameters.")]
-        object IParameter.Minimum
-        {
-            get { return this.GetMinimum(); }
-        }
+        object IParameter.Minimum => this.GetMinimum();
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "NumericParameter provides strongly-typed property, not relevant for all other parameters.")]
-        object IParameter.Maximum
-        {
-            get { return this.GetMaximum(); }
-        }
+        object IParameter.Maximum => this.GetMaximum();
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "IntegerParameter provides strongly-typed property, not relevant for all other parameters.")]
-        int? IParameter.Factor
-        {
-            get { return this.FactorCore; }
-        }
+        int? IParameter.Factor => this.FactorCore;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "NumericParameter provides strongly-typed property, not relevant for all other parameters.")]
-        string IParameter.Formula
-        {
-            get { return this.FormulaCore; }
-        }
+        string IParameter.Formula => this.FormulaCore;
 
         /// <inheritdoc/>
-        object IParameter.DefaultValue
-        {
-            get { return this.DefaultValue; }
-        }
+        object IParameter.DefaultValue => this.DefaultValue;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "IntegerParameter and EnumParameter provide strongly-typed property, not relevant for all other parameters.")]
-        IReadOnlyList<KeyValuePair<string, int>> IParameter.EnumMap
-        {
-            get { return this.EnumMapCore; }
-        }
+        IReadOnlyList<KeyValuePair<string, int>> IParameter.EnumMap => this.EnumMapCore;
 
         /// <inheritdoc/>
-        int? IStreamedParameter.StreamIdentifier
-        {
-            get { return this.StreamIdentifier; }
-        }
+        int? IStreamedParameter.StreamIdentifier => this.StreamIdentifier;
 
         /// <inheritdoc/>
-        StreamDescription? IStreamedParameter.StreamDescriptor
-        {
-            get { return this.StreamDescriptor; }
-        }
+        StreamDescription? IStreamedParameter.StreamDescriptor => this.StreamDescriptor;
 
         /// <inheritdoc/>
         void IStreamedParameter.SetProviderValue(object value)

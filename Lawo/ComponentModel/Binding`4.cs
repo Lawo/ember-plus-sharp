@@ -29,16 +29,10 @@ namespace Lawo.ComponentModel
         public event EventHandler<ChangeOriginatedAtEventArgs<TTargetOwner, TTarget>> ChangeOriginatedAtTarget;
 
         /// <summary>Gets the source property.</summary>
-        public IProperty<TSourceOwner, TSource> Source
-        {
-            get { return this.sourceEventArgs.Property; }
-        }
+        public IProperty<TSourceOwner, TSource> Source => this.sourceEventArgs.Property;
 
         /// <summary>Gets the target property.</summary>
-        public IProperty<TTargetOwner, TTarget> Target
-        {
-            get { return this.targetEventArgs.Property; }
-        }
+        public IProperty<TTargetOwner, TTarget> Target => this.targetEventArgs.Property;
 
         /// <summary>Stops forwarding changes and altering the properties.</summary>
         /// <remarks>If the binding is intended to be permanent it is permissible to to never call
@@ -95,8 +89,7 @@ namespace Lawo.ComponentModel
         private byte sourceUpdating;
         private byte targetUpdating;
 
-        private void OnSourceChanged(object sender, PropertyChangedEventArgs e)
-        {
+        private void OnSourceChanged(object sender, PropertyChangedEventArgs e) =>
             this.OnChanged(
                 e,
                 this.sourceEventArgs,
@@ -105,10 +98,8 @@ namespace Lawo.ComponentModel
                 ref this.targetUpdating,
                 this.toTarget,
                 this.ChangeOriginatedAtSource);
-        }
 
-        private void OnTargetChanged(object sender, PropertyChangedEventArgs e)
-        {
+        private void OnTargetChanged(object sender, PropertyChangedEventArgs e) =>
             this.OnChanged(
                 e,
                 this.targetEventArgs,
@@ -117,7 +108,6 @@ namespace Lawo.ComponentModel
                 ref this.sourceUpdating,
                 this.toSource,
                 this.ChangeOriginatedAtTarget);
-        }
 
         private void OnChanged<TLeaderOwner, TLeader, TFollowerOwner, TFollower>(
             PropertyChangedEventArgs e,

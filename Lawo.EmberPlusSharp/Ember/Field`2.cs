@@ -35,15 +35,9 @@ namespace Lawo.EmberPlusSharp.Ember
             this.fieldId = fieldId;
         }
 
-        internal TTypeId TypeId
-        {
-            get { return this.typeId; }
-        }
+        internal TTypeId TypeId => this.typeId;
 
-        internal TFieldId FieldId
-        {
-            get { return this.fieldId; }
-        }
+        internal TFieldId FieldId => this.fieldId;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -20,23 +20,14 @@ namespace Lawo.IO
     public abstract class NonSeekableStream : Stream
     {
         /// <inheritdoc/>
-        public override bool CanRead
-        {
-            get { return false; }
-        }
+        public override bool CanRead => false;
 
         /// <inheritdoc/>
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite => false;
 
         /// <inheritdoc/>
         /// <value>Always <c>false</c>, even if the underlying stream supports seeking.</value>
-        public sealed override bool CanSeek
-        {
-            get { return false; }
-        }
+        public sealed override bool CanSeek => false;
 
         /// <inheritdoc/>
         /// <exception cref="NotSupportedException">Thrown with each call.</exception>

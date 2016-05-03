@@ -14,21 +14,15 @@ namespace Lawo
     {
         /// <summary>Determines whether the specified object instances are considered equal.</summary>
         /// <typeparam name="T">The type of the objects to compare.</typeparam>
-        /// <remarks>Returns the return value of <see cref="EqualityComparer{T}.Equals"/> called on
+        /// <remarks>Returns the return value of <see cref="EqualityComparer{T}.Equals(T, T)"/> called on
         /// <see cref="EqualityComparer{T}.Default"/>.</remarks>
-        public static bool Equals<T>(T obj1, T obj2)
-        {
-            return ComparerHolder<T>.Equals(obj1, obj2);
-        }
+        public static bool Equals<T>(T obj1, T obj2) => ComparerHolder<T>.Equals(obj1, obj2);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static class ComparerHolder<T>
         {
-            internal static bool Equals(T obj1, T obj2)
-            {
-                return Comparer.Equals(obj1, obj2);
-            }
+            internal static bool Equals(T obj1, T obj2) => Comparer.Equals(obj1, obj2);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

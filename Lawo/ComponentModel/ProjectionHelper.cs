@@ -75,15 +75,9 @@ namespace Lawo.ComponentModel
 
             private readonly Func<TOriginal, TProjected> projectionFunction;
 
-            private void Insert(int index, TOriginal original)
-            {
-                this.Insert(index, this.Project(original));
-            }
+            private void Insert(int index, TOriginal original) => this.Insert(index, this.Project(original));
 
-            private void Remove(int index, TOriginal original)
-            {
-                this.RemoveAt(index);
-            }
+            private void Remove(int index, TOriginal original) => this.RemoveAt(index);
 
             private TProjected Project(TOriginal original)
             {

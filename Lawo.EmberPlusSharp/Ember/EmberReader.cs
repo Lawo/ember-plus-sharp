@@ -696,15 +696,9 @@ namespace Lawo.EmberPlusSharp.Ember
         private int? innerNumber;
         private EmberId? outer;
 
-        private long? EndPosition
-        {
-            get { return this.endPositions.Peek().EndPosition; }
-        }
+        private long? EndPosition => this.endPositions.Peek().EndPosition;
 
-        private int? ContentsLength
-        {
-            get { return (int?)(this.EndPosition - this.readBuffer.Position); }
-        }
+        private int? ContentsLength => (int?)(this.EndPosition - this.readBuffer.Position);
 
         private void AssertNotDisposed()
         {
@@ -955,25 +949,13 @@ namespace Lawo.EmberPlusSharp.Ember
                 this.endPosition = endPosition;
             }
 
-            internal EmberId EmberId
-            {
-                get { return this.emberId; }
-            }
+            internal EmberId EmberId => this.emberId;
 
-            internal bool IsInner
-            {
-                get { return this.isInner; }
-            }
+            internal bool IsInner => this.isInner;
 
-            internal long LengthPosition
-            {
-                get { return this.lengthPosition; }
-            }
+            internal long LengthPosition => this.lengthPosition;
 
-            internal long? EndPosition
-            {
-                get { return this.endPosition; }
-            }
+            internal long? EndPosition => this.endPosition;
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -19,10 +19,7 @@ namespace Lawo.IO
         }
 
         /// <summary>Gets the exception that was thrown when the connection was lost.</summary>
-        public Exception Exception
-        {
-            get { return this.exception; }
-        }
+        public Exception Exception => this.exception;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

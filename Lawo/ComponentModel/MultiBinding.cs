@@ -11,7 +11,8 @@ namespace Lawo.ComponentModel
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Lawo.Reflection;
+
+    using Reflection;
 
     /// <summary>Provides methods to create <see cref="MultiBinding{T}"/> instances.</summary>
     /// <remarks>
@@ -27,11 +28,8 @@ namespace Lawo.ComponentModel
         /// <typeparam name="T">The type of the source and target property.</typeparam>
         /// <exception cref="ArgumentNullException">At least one of the arguments is equal to <c>null</c>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Longer names would lead to unwieldy code.")]
-        public static MultiBinding<T> Create<T>(
-            IProperty<INotifyPropertyChanged, T> s1, IProperty<object, T> target)
-        {
-            return Create(s1, v => v, target);
-        }
+        public static MultiBinding<T> Create<T>(IProperty<INotifyPropertyChanged, T> s1, IProperty<object, T> target) =>
+            Create(s1, v => v, target);
 
         /// <summary>Creates and returns a <see cref="MultiBinding{T}"/> instance.</summary>
         /// <typeparam name="TS1">The type of the first source property.</typeparam>

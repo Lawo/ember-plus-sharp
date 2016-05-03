@@ -12,10 +12,7 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal sealed class ValueReader<T> : IValueReader
     {
-        object IValueReader.Value
-        {
-            get { return this.Value; }
-        }
+        object IValueReader.Value => this.Value;
 
         void IValueReader.ReadValue(EmberReader reader)
         {

@@ -31,16 +31,10 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Gets the DTD.</summary>
-        public byte Dtd
-        {
-            get { return this.dtd; }
-        }
+        public byte Dtd => this.dtd;
 
         /// <summary>Gets the application bytes.</summary>
-        public IReadOnlyCollection<byte> ApplicationBytes
-        {
-            get { return this.applicationBytes; }
-        }
+        public IReadOnlyCollection<byte> ApplicationBytes => this.applicationBytes;
 
         /// <inheritdoc/>
         public sealed override string ToString()
@@ -57,15 +51,9 @@ namespace Lawo.EmberPlusSharp.S101
         {
         }
 
-        internal sealed override bool CanHavePayload
-        {
-            get { return true; }
-        }
+        internal sealed override bool CanHavePayload => true;
 
-        internal sealed override bool CanHaveMultiplePackets
-        {
-            get { return true; }
-        }
+        internal sealed override bool CanHaveMultiplePackets => true;
 
         internal sealed override async Task ReadFromCoreAsync(ReadBuffer readBuffer, CancellationToken cancellationToken)
         {

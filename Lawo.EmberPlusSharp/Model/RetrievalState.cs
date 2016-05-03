@@ -31,17 +31,11 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Gets the state used when a request needs to be issued for an element.</summary>
         /// <remarks>This is the lowest state.</remarks>
-        internal static RetrievalState None
-        {
-            get { return NoneField; }
-        }
+        internal static RetrievalState None => NoneField;
 
         /// <summary>Gets the state used when a request has been sent for a node.</summary>
         /// <remarks>This is the second lowest state.</remarks>
-        internal static RetrievalState RequestSent
-        {
-            get { return RequestSentField; }
-        }
+        internal static RetrievalState RequestSent => RequestSentField;
 
         /// <summary>Gets the state used for subscribed stream parameters and nodes for which the provider has sent a
         /// response.</summary>
@@ -54,18 +48,12 @@ namespace Lawo.EmberPlusSharp.Model
         /// </list>
         /// <para>This is the second highest state.</para>
         /// </remarks>
-        internal static RetrievalState Complete
-        {
-            get { return CompleteField; }
-        }
+        internal static RetrievalState Complete => CompleteField;
 
         /// <summary>Gets the state used when we have verified that all required children are present for a node.
         /// </summary>
         /// <remarks>This is the highest state.</remarks>
-        internal static RetrievalState Verified
-        {
-            get { return VerifiedField; }
-        }
+        internal static RetrievalState Verified => VerifiedField;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

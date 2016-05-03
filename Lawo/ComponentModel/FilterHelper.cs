@@ -86,10 +86,7 @@ namespace Lawo.ComponentModel
                 }
             }
 
-            private void Remove(int index, T original)
-            {
-                this.Remove(original);
-            }
+            private void Remove(int index, T original) => this.Remove(original);
         }
     }
 }

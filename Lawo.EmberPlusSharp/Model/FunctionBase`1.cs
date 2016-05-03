@@ -25,17 +25,11 @@ namespace Lawo.EmberPlusSharp.Model
     {
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
-        IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Arguments
-        {
-            get { return this.arguments; }
-        }
+        IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Arguments => this.arguments;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Information is only relevant for interface client code.")]
-        IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Result
-        {
-            get { return this.result; }
-        }
+        IReadOnlyList<KeyValuePair<string, ParameterType>> IFunction.Result => this.result;
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]

@@ -18,10 +18,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Gets the value of the only component.</summary>
-        public T1 Item1
-        {
-            get { return this.component1Reader.Value; }
-        }
+        public T1 Item1 => this.component1Reader.Value;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

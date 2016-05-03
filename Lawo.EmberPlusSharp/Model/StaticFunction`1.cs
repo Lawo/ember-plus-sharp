@@ -67,15 +67,11 @@ namespace Lawo.EmberPlusSharp.Model
         private static KeyValuePair<string, ParameterType>[] argumentsTemplate;
         private static KeyValuePair<string, ParameterType>[] resultTemplate;
 
-        private static KeyValuePair<string, ParameterType>[] ArgumentsTemplate
-        {
-            get { return LazyInitializer.EnsureInitialized(ref argumentsTemplate, CreateArgumentsTemplate); }
-        }
+        private static KeyValuePair<string, ParameterType>[] ArgumentsTemplate =>
+		    LazyInitializer.EnsureInitialized(ref argumentsTemplate, CreateArgumentsTemplate);
 
-        private static KeyValuePair<string, ParameterType>[] ResultTemplate
-        {
-            get { return LazyInitializer.EnsureInitialized(ref resultTemplate, CreateResultTemplate); }
-        }
+        private static KeyValuePair<string, ParameterType>[] ResultTemplate =>
+		    LazyInitializer.EnsureInitialized(ref resultTemplate, CreateResultTemplate);
 
         private static KeyValuePair<string, ParameterType>[] CreateArgumentsTemplate()
         {

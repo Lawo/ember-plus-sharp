@@ -34,36 +34,19 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.logger = new S101Logger(GlowTypes.Instance, this.xmlWriter);
         }
 
-        internal DateTime StartTimeUtc
-        {
-            get { return this.startTimeUtc; }
-        }
+        internal DateTime StartTimeUtc => this.startTimeUtc;
 
-        internal string Path
-        {
-            get { return this.path; }
-        }
+        internal string Path => this.path;
 
-        internal long StartPosition
-        {
-            get
-            {
-                // The > of the <S101Log> tag is only written when the first element of its content is written.
-                // For subsequent elements the full closing tag of the previous element has already been written.
-                // For both cases, the CRLF before the next tag has not been written yet.
-                return this.writer.BaseStream.Position + (this.xmlWriter.WriteState == WriteState.Element ? 3 : 2);
-            }
-        }
+        // The > of the <S101Log> tag is only written when the first element of its content is written.
+        // For subsequent elements the full closing tag of the previous element has already been written.
+        // For both cases, the CRLF before the next tag has not been written yet.
+        internal long StartPosition =>
+		    this.writer.BaseStream.Position + (this.xmlWriter.WriteState == WriteState.Element ? 3 : 2);
 
-        internal long? EndPosition
-        {
-            get { return this.writer.BaseStream == null ? (long?)null : this.writer.BaseStream.Position; }
-        }
+        internal long? EndPosition => this.writer.BaseStream == null ? (long?)null : this.writer.BaseStream.Position;
 
-        internal S101Logger Logger
-        {
-            get { return this.logger; }
-        }
+        internal S101Logger Logger => this.logger;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -89,15 +89,9 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal IEnumerable<Type> OuterFields
-        {
-            get { return this.types.Take(this.types.Length - 1); }
-        }
+        internal IEnumerable<Type> OuterFields => this.types.Take(this.types.Length - 1);
 
-        internal Type Type
-        {
-            get { return this.types[this.types.Length - 1]; }
-        }
+        internal Type Type => this.types[this.types.Length - 1];
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -17,10 +17,7 @@ namespace Lawo.ComponentModel
     public sealed class ChangeOriginatedAtEventArgs<TOwner, TProperty> : EventArgs
     {
         /// <summary>Gets the property where the change originated at.</summary>
-        public IProperty<TOwner, TProperty> Property
-        {
-            get { return this.property; }
-        }
+        public IProperty<TOwner, TProperty> Property => this.property;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

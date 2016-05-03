@@ -48,10 +48,7 @@ namespace Lawo.ComponentModel
         private sealed class Forwarder<TOwner, TProperty> : IDisposable
             where TOwner : INotifyPropertyChanged
         {
-            public void Dispose()
-            {
-                this.property.Owner.PropertyChanged -= this.OnPropertyChanged;
-            }
+            public void Dispose() => this.property.Owner.PropertyChanged -= this.OnPropertyChanged;
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

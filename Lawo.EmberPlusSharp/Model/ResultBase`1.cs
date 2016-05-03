@@ -51,10 +51,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.valueReaders = valueReaders;
         }
 
-        internal Task<TMostDerived> Task
-        {
-            get { return this.taskCompletionSource.Task; }
-        }
+        internal Task<TMostDerived> Task => this.taskCompletionSource.Task;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -53,10 +53,7 @@ namespace Lawo.IO
 
         /// <summary>Gets a value indicating whether data is available on the <see cref="TelnetStream"/> to be
         /// read.</summary>
-        public bool DataAvailable
-        {
-            get { return (this.ReadBuffer.Index < this.ReadBuffer.Count) || this.dataAvailable(); }
-        }
+        public bool DataAvailable => (this.ReadBuffer.Index < this.ReadBuffer.Count) || this.dataAvailable();
 
         /// <inheritdoc/>
         public sealed override async Task<int> ReadAsync(

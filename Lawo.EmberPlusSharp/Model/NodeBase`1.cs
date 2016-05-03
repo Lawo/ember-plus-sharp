@@ -61,10 +61,7 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <inheritdoc/>
-        int[] IParent.NumberPath
-        {
-            get { return this.NumberPath; }
-        }
+        int[] IParent.NumberPath => this.NumberPath;
 
         /// <inheritdoc/>
         void IParent.SetHasChanges()
@@ -95,13 +92,8 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
-        internal sealed override bool RetrieveDetails
-        {
-            get
-            {
-                return (this.ChildrenRetrievalPolicy != ChildrenRetrievalPolicy.None) && base.RetrieveDetails;
-            }
-        }
+        internal sealed override bool RetrieveDetails =>
+		    (this.ChildrenRetrievalPolicy != ChildrenRetrievalPolicy.None) && base.RetrieveDetails;
 
         internal sealed override void SetContext(Context context)
         {

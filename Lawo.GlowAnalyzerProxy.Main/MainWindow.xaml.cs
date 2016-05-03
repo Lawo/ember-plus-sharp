@@ -28,10 +28,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private MainWindowViewModel ViewModel
-        {
-            get { return (MainWindowViewModel)this.DataContext; }
-        }
+        private MainWindowViewModel ViewModel => (MainWindowViewModel)this.DataContext;
 
         private void OnScrollEventIntoView(object sender, ScrollEventIntoViewEventArgs e)
         {

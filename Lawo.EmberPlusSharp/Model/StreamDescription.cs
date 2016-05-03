@@ -26,16 +26,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Gets the format.</summary>
-        public StreamFormat Format
-        {
-            get { return this.format; }
-        }
+        public StreamFormat Format => this.format;
 
         /// <summary>Gets the offset in bytes.</summary>
-        public int Offset
-        {
-            get { return this.offset; }
-        }
+        public int Offset => this.offset;
 
         /// <inheritdoc/>
         public bool Equals(StreamDescription other)

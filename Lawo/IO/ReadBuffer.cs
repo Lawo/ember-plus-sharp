@@ -112,10 +112,7 @@ namespace Lawo.IO
         public int Index { get; set; }
 
         /// <summary>Gets the current position within the stream.</summary>
-        public long Position
-        {
-            get { return this.previousPosition + this.Index; }
-        }
+        public long Position => this.previousPosition + this.Index;
 
         /// <summary>Reads bytes into the buffer by calling the callback specified during construction exactly once.
         /// </summary>

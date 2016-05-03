@@ -38,10 +38,7 @@ namespace Lawo.EmberPlusSharp.Glow
         /// <item><see cref="Read"/> has never been called, or</item>
         /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
         /// </list></exception>
-        public DateTime TimeUtc
-        {
-            get { return this.reader.TimeUtc; }
-        }
+        public DateTime TimeUtc => this.reader.TimeUtc;
 
         /// <summary>Gets the direction of the current message.</summary>
         /// <exception cref="InvalidOperationException">
@@ -49,10 +46,7 @@ namespace Lawo.EmberPlusSharp.Glow
         /// <item><see cref="Read"/> has never been called, or</item>
         /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
         /// </list></exception>
-        public string Direction
-        {
-            get { return this.reader.Direction; }
-        }
+        public string Direction => this.reader.Direction;
 
         /// <summary>Gets the number of the current message.</summary>
         /// <exception cref="InvalidOperationException">
@@ -60,10 +54,7 @@ namespace Lawo.EmberPlusSharp.Glow
         /// <item><see cref="Read"/> has never been called, or</item>
         /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
         /// </list></exception>
-        public int Number
-        {
-            get { return this.reader.Number; }
-        }
+        public int Number => this.reader.Number;
 
         /// <summary>Gets the current message.</summary>
         /// <exception cref="InvalidOperationException">
@@ -71,16 +62,10 @@ namespace Lawo.EmberPlusSharp.Glow
         /// <item><see cref="Read"/> has never been called, or</item>
         /// <item>the last call to <see cref="Read"/> returned <c>false</c> or threw an exception.</item>
         /// </list></exception>
-        public S101Message Message
-        {
-            get { return this.reader.Message; }
-        }
+        public S101Message Message => this.reader.Message;
 
         /// <summary>Gets the root node.</summary>
-        public INode Root
-        {
-            get { return this.root; }
-        }
+        public INode Root => this.root;
 
         /// <summary>Reads the next message.</summary>
         /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages

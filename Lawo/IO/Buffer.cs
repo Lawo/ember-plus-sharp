@@ -15,10 +15,7 @@ namespace Lawo.IO
     public abstract class Buffer
     {
         /// <summary>Gets the number of bytes the buffer can contain.</summary>
-        public int Capacity
-        {
-            get { return this.buffer.Length; }
-        }
+        public int Capacity => this.buffer.Length;
 
         /// <summary>Gets or sets the byte in the buffer at <paramref name="index"/>.</summary>
         /// <exception cref="IndexOutOfRangeException"><paramref name="index"/> >= <see cref="Capacity"/>.</exception>

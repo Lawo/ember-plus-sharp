@@ -17,10 +17,7 @@ namespace Lawo.ComponentModel
         /// <summary>Unsubscribes the underlying collection from change notifications.</summary>
         /// <remarks>If the subscription is intended to be permanent it is permissible to never call
         /// <see cref="Dispose"/>.</remarks>
-        public void Dispose()
-        {
-            this.dispose();
-        }
+        public void Dispose() => this.dispose();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

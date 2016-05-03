@@ -13,16 +13,10 @@ namespace Lawo.EmberPlusSharp.S101
     public sealed class MessageReceivedEventArgs : EventArgs
     {
         /// <summary>Gets the message.</summary>
-        public S101Message Message
-        {
-            get { return this.message; }
-        }
+        public S101Message Message => this.message;
 
         /// <summary>Gets a value indicating whether another message is available.</summary>
-        public bool IsAnotherMessageAvailable
-        {
-            get { return this.isAnotherMessageAvailable; }
-        }
+        public bool IsAnotherMessageAvailable => this.isAnotherMessageAvailable;
 
         /// <summary>Gets the payload of the message.</summary>
         /// <returns>The payload of the message if the message has a payload; otherwise <c>null</c>.</returns>

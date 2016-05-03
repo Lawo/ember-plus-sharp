@@ -169,10 +169,7 @@ namespace Lawo.ComponentModel
                 test.TestCore(createCalculated, false, validateHandler, this.addends);
             }
 
-            internal int SumValue
-            {
-                get { return this.sum.Value; }
-            }
+            internal int SumValue => this.sum.Value;
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -287,10 +284,7 @@ namespace Lawo.ComponentModel
 
             private int valueField;
 
-            private int Calculated
-            {
-                get { return this.Value; }
-            }
+            private int Calculated => this.Value;
 
             private int Value
             {

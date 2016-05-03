@@ -13,10 +13,7 @@ namespace Lawo.EmberPlusSharp.Glow
     public static class GlowTypes
     {
         /// <summary>Gets the singleton <see cref="EmberTypeBag"/> instance containing all Glow types.</summary>
-        public static EmberTypeBag Instance
-        {
-            get { return TheInstance; }
-        }
+        public static EmberTypeBag Instance => TheInstance;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

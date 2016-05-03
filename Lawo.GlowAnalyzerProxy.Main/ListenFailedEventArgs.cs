@@ -16,10 +16,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             this.exception = exception;
         }
 
-        internal SocketException Exception
-        {
-            get { return this.exception; }
-        }
+        internal SocketException Exception => this.exception;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

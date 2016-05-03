@@ -26,10 +26,7 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     internal sealed class MessageEncodingStream : NonSeekableStream
     {
-        public sealed override bool CanWrite
-        {
-            get { return this.framingStream != null; }
-        }
+        public sealed override bool CanWrite => this.framingStream != null;
 
         public sealed override async Task DisposeAsync(CancellationToken cancellationToken)
         {

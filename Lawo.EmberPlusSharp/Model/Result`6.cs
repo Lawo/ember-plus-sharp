@@ -32,40 +32,22 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Gets the value of the first component.</summary>
-        public T1 Item1
-        {
-            get { return this.component1Reader.Value; }
-        }
+        public T1 Item1 => this.component1Reader.Value;
 
         /// <summary>Gets the value of the second component.</summary>
-        public T2 Item2
-        {
-            get { return this.component2Reader.Value; }
-        }
+        public T2 Item2 => this.component2Reader.Value;
 
         /// <summary>Gets the value of the third component.</summary>
-        public T3 Item3
-        {
-            get { return this.component3Reader.Value; }
-        }
+        public T3 Item3 => this.component3Reader.Value;
 
         /// <summary>Gets the value of the fourth component.</summary>
-        public T4 Item4
-        {
-            get { return this.component4Reader.Value; }
-        }
+        public T4 Item4 => this.component4Reader.Value;
 
         /// <summary>Gets the value of the fifth component.</summary>
-        public T5 Item5
-        {
-            get { return this.component5Reader.Value; }
-        }
+        public T5 Item5 => this.component5Reader.Value;
 
         /// <summary>Gets the value of the sixth component.</summary>
-        public T6 Item6
-        {
-            get { return this.component6Reader.Value; }
-        }
+        public T6 Item6 => this.component6Reader.Value;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -31,10 +31,7 @@ namespace Lawo.EmberPlusSharp.Model
                 return (MetaElement)info.Invoke(new[] { property });
             }
 
-            internal string Identifier
-            {
-                get { return this.identifier; }
-            }
+            internal string Identifier => this.identifier;
 
             internal abstract Element ReadContents(
                 EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState);
@@ -54,15 +51,9 @@ namespace Lawo.EmberPlusSharp.Model
                 this.isOptional = (attribute != null) && attribute.IsOptional;
             }
 
-            protected PropertyInfo Property
-            {
-                get { return this.property; }
-            }
+            protected PropertyInfo Property => this.property;
 
-            protected bool IsOptional
-            {
-                get { return this.isOptional; }
-            }
+            protected bool IsOptional => this.isOptional;
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

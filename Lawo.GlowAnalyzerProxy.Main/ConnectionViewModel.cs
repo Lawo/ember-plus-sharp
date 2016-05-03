@@ -14,20 +14,11 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
     internal sealed class ConnectionViewModel : NotifyPropertyChanged
     {
-        public string ConnectionCount
-        {
-            get { return this.connectionCount.Value; }
-        }
+        public string ConnectionCount => this.connectionCount.Value;
 
-        public string BytesReceived
-        {
-            get { return this.bytesReceived.Value; }
-        }
+        public string BytesReceived => this.bytesReceived.Value;
 
-        public string SecondsSinceLastReceived
-        {
-            get { return this.secondsSinceLastReceived.Value; }
-        }
+        public string SecondsSinceLastReceived => this.secondsSinceLastReceived.Value;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
