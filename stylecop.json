@@ -11,9 +11,10 @@
       ]
     },
     "documentationRules": {
+      "fileNamingConvention": "metadata",
+      "copyrightText": "Copyright 2012-2016 Lawo AG (http://www.lawo.com).",
       "documentInterfaces": false,
-      "documentInternalElements": false,
-      "copyrightText": "Copyright 2012-2016 Lawo AG (http://www.lawo.com)."
+      "documentInternalElements": false
     }
   }
 }

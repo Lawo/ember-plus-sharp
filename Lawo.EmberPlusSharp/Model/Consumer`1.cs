@@ -150,6 +150,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <para>All changes to the object tree are reported by raising the
         /// <see cref="INotifyPropertyChanged.PropertyChanged"/> event of the affected objects.</para>
         /// </remarks>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1625:Element documentation must not be copied and pasted", Justification = "Intended, both exceptions can be thrown under the same circumstances.")]
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
         public static async Task<Consumer<TRoot>> CreateAsync(
             S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy, byte slot)
@@ -190,6 +191,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <remarks>Also retrieves the children of any objects implementing <see cref="INode"/> that have had their
         /// <see cref="INode.ChildrenRetrievalPolicy"/> property set to a value other than
         /// <see cref="ChildrenRetrievalPolicy.None">ChildrenRetrievalPolicy.None</see>.</remarks>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1625:Element documentation must not be copied and pasted", Justification = "Intended, both exceptions can be thrown under the same circumstances.")]
         public async Task SendAsync()
         {
             if (await this.SendCoreAsync())

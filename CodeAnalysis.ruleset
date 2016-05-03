@@ -236,12 +236,10 @@
     <Rule Id="CA5122" Action="Error" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
-    <Rule Id="SA1625" Action="None" />
+    <Rule Id="SA1611" Action="None" />
     <Rule Id="SA1615" Action="None" />
     <Rule Id="SA1637" Action="None" />
-    <Rule Id="SA1649" Action="None" />
-    <Rule Id="SA1611" Action="None" />
-    <Rule Id="SA1648" Action="None" />
     <Rule Id="SA1640" Action="None" />
+    <Rule Id="SA1648" Action="None" />
   </Rules>
 </RuleSet>

@@ -55,20 +55,20 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BufferHelper.cs" />
-    <Compile Include="ComponentModel\SubscribedObservableCollection.cs" />
-    <Compile Include="ComponentModel\DisposableReadOnlyObservableCollection.cs" />
+    <Compile Include="ComponentModel\SubscribedObservableCollection`1.cs" />
+    <Compile Include="ComponentModel\DisposableReadOnlyObservableCollection`1.cs" />
     <Compile Include="ComponentModel\FilterHelper.cs" />
     <Compile Include="ComponentModel\Trigger.cs" />
     <Compile Include="ComponentModel\MultiBinding.cs" />
     <Compile Include="ComponentModel\CalculatedProperty.cs" />
-    <Compile Include="ComponentModel\MultiBinding1.cs" />
-    <Compile Include="ComponentModel\CalculatedProperty1.cs" />
-    <Compile Include="ComponentModel\ChangeOriginatedAtEventArgs.cs" />
+    <Compile Include="ComponentModel\MultiBinding`1.cs" />
+    <Compile Include="ComponentModel\CalculatedProperty`1.cs" />
+    <Compile Include="ComponentModel\ChangeOriginatedAtEventArgs`2.cs" />
     <Compile Include="ComponentModel\FlattenHelper.cs" />
     <Compile Include="ComponentModel\ProjectionHelper.cs" />
     <Compile Include="ComponentModel\OneWayBinding.cs" />
     <Compile Include="ComponentModel\TwoWayBinding.cs" />
-    <Compile Include="ComponentModel\Binding.cs" />
+    <Compile Include="ComponentModel\Binding`4.cs" />
     <Compile Include="ComponentModel\ObservableCollectionHelper.cs" />
     <Compile Include="ComponentModel\PropertyChangedRegistration.cs" />
     <Compile Include="ComponentModel\NotifyPropertyChanged.cs" />
@@ -93,11 +93,11 @@
     <Compile Include="IO\WriteBuffer.cs" />
     <Compile Include="IO\JsonSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\IProperty2.cs" />
-    <Compile Include="Reflection\IProperty.cs" />
+    <Compile Include="Reflection\IProperty`2.cs" />
+    <Compile Include="Reflection\IProperty`1.cs" />
     <Compile Include="Reflection\ReflectionHelper.cs" />
     <Compile Include="ScopeGuard.cs" />
-    <Compile Include="ScopeGuard1.cs" />
+    <Compile Include="ScopeGuard`1.cs" />
     <Compile Include="Threading\NativeMethods.cs" />
     <Compile Include="Threading\Tasks\AsyncPump.cs" />
     <Compile Include="Threading\Tasks\TaskSingleton.cs" />
@@ -110,7 +110,7 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\stylecop.json" >
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\stylecop.json">
       <Link>stylecop.json</Link>
     </AdditionalFiles>
     <None Include="packages.config" />

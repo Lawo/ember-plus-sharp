@@ -51,7 +51,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Activator.cs" />
+    <Compile Include="Activator`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>
@@ -67,7 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\stylecop.json" >
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\stylecop.json">
       <Link>stylecop.json</Link>
     </AdditionalFiles>
     <None Include="packages.config" />

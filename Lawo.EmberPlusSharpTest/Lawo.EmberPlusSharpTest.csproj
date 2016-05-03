@@ -91,14 +91,14 @@
     <Compile Include="Model\Test\FunctionNode.cs" />
     <Compile Include="Model\Test\EmptyZoneNode.cs" />
     <Compile Include="Model\Test\EmptyZoneNodeRoot.cs" />
-    <Compile Include="Model\Test\InterfaceElementRoot.cs" />
+    <Compile Include="Model\Test\InterfaceElementRoot`1.cs" />
     <Compile Include="Model\Test\StreamRoot.cs" />
     <Compile Include="Model\Test\ZoneNodeRoot.cs" />
     <Compile Include="Model\Test\TwoParameterRoot.cs" />
     <Compile Include="Model\Test\FunctionRoot.cs" />
     <Compile Include="Model\Test\EmptyNode.cs" />
     <Compile Include="Model\Test\EmptyNodeRoot.cs" />
-    <Compile Include="Model\Test\ChangeNotificationRoot.cs" />
+    <Compile Include="Model\Test\BooleanRoot.cs" />
     <Compile Include="Model\Test\FunctionSignatureMismatchRoot4.cs" />
     <Compile Include="Model\Test\FunctionSignatureMismatchRoot5.cs" />
     <Compile Include="Model\Test\FunctionResultMismatchRoot.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Model\Test\MediaSessionReceiver.cs" />
     <Compile Include="Model\Test\ZoneNode.cs" />
     <Compile Include="Model\TutorialTest.cs" />
-    <Compile Include="Model\DynamicNodeHelper.cs" />
+    <Compile Include="Model\DynamicHelper.cs" />
     <Compile Include="Model\Test\EmptyDynamicRoot.cs" />
     <Compile Include="Model\Test\BigTreeStaticRoot.cs" />
     <Compile Include="Model\Test\BigTreeNode.cs" />

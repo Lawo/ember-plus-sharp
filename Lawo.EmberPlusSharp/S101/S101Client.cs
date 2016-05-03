@@ -238,6 +238,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <see cref="ConnectionLost"/> event has been raised.</exception>
         /// <exception cref="OperationCanceledException"><see cref="Dispose"/> has been called or the
         /// <see cref="ConnectionLost"/> event has been raised.</exception>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1625:Element documentation must not be copied and pasted", Justification = "Intended, both exceptions can be thrown under the same circumstances.")]
         public Task SendMessageAsync(S101Message message, byte[] payload)
         {
             this.AssertPreconditions();
