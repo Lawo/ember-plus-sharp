@@ -277,31 +277,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
         private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
 
-        private readonly TaskQueue logQueue = new TaskQueue();
-        private readonly Dictionary<string, Func<string>> validationRules = new Dictionary<string, Func<string>>();
-        private readonly List<Event> eventCache = new List<Event>();
-        private readonly ObservableCollection<Event> events = new ObservableCollection<Event>();
-        private readonly ReadOnlyObservableCollection<Event> readOnlyEvents;
-        private readonly ConnectionViewModel consumerConnection;
-        private readonly ConnectionViewModel providerConnection;
-        private readonly Settings settings;
-        private readonly CalculatedProperty<bool> canEditSettings;
-        #region  CalculatedProperty1
-        private readonly CalculatedProperty<bool> canStart;
-        #endregion
-        private readonly CalculatedProperty<bool> canStop;
-        private string listeningPort;
-        private string providerHostName;
-        private string providerPort;
-        private string logFolder;
-        private bool? autoScrollToMostRecentEvent;
-        private Event selectedEvent;
-        private FlowDocument selectedEventDetail;
-        private bool canLoadFullEventDetail;
-        private bool isStarted;
-        private bool isStopped = true;
-        private DateTime now;
-
         private static string GetCount(bool isValid, long count)
         {
             return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
@@ -350,6 +325,31 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 return "Data";
             }
         }
+
+        private readonly TaskQueue logQueue = new TaskQueue();
+        private readonly Dictionary<string, Func<string>> validationRules = new Dictionary<string, Func<string>>();
+        private readonly List<Event> eventCache = new List<Event>();
+        private readonly ObservableCollection<Event> events = new ObservableCollection<Event>();
+        private readonly ReadOnlyObservableCollection<Event> readOnlyEvents;
+        private readonly ConnectionViewModel consumerConnection;
+        private readonly ConnectionViewModel providerConnection;
+        private readonly Settings settings;
+        private readonly CalculatedProperty<bool> canEditSettings;
+        #region  CalculatedProperty1
+        private readonly CalculatedProperty<bool> canStart;
+        #endregion
+        private readonly CalculatedProperty<bool> canStop;
+        private string listeningPort;
+        private string providerHostName;
+        private string providerPort;
+        private string logFolder;
+        private bool? autoScrollToMostRecentEvent;
+        private Event selectedEvent;
+        private FlowDocument selectedEventDetail;
+        private bool canLoadFullEventDetail;
+        private bool isStarted;
+        private bool isStopped = true;
+        private DateTime now;
 
         private async void UpdateLoop()
         {

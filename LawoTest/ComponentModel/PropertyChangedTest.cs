@@ -176,9 +176,6 @@ namespace Lawo.ComponentModel
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private readonly Addend[] addends;
-            private readonly CalculatedProperty<int> sum;
-
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
             private static CalculatedProperty<int> CreateSum(
                 IProperty<NotifyPropertyChanged, int> calculated, params Addend[] addends)
@@ -269,6 +266,9 @@ namespace Lawo.ComponentModel
                         return CalculatedProperty.Create(ps, vs => vs.Aggregate((a, r) => a + r), calculated);
                 }
             }
+
+            private readonly Addend[] addends;
+            private readonly CalculatedProperty<int> sum;
         }
 
         private sealed class Exceptional : NotifyPropertyChanged

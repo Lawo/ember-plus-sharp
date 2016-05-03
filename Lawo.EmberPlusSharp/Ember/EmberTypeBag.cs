@@ -113,11 +113,6 @@ namespace Lawo.EmberPlusSharp.Ember
             typeof(BerSet)
         };
 
-        private readonly Dictionary<int, string> typeNames;
-        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
-        private readonly Dictionary<string, int> innerNumbers;
-        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
-
         private static FieldPath<int, EmberId> GetOuterFieldsIds(IEnumerable<Type> outerFields)
         {
             return outerFields.Aggregate(
@@ -145,5 +140,10 @@ namespace Lawo.EmberPlusSharp.Ember
             return new Field<string, string>(
                 typeName, (string)outerField.GetTypeInfo().GetDeclaredField(NameFieldName).GetValue(null));
         }
+
+        private readonly Dictionary<int, string> typeNames;
+        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
+        private readonly Dictionary<string, int> innerNumbers;
+        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
     }
 }

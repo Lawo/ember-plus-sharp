@@ -58,14 +58,14 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal int TotalCount { get; private set; }
-
         internal static async Task<FramingStream> CreateAsync(
             WriteBuffer writeBuffer, CancellationToken cancellationToken)
         {
             await writeBuffer.ReserveAsync(1, cancellationToken);
             return new FramingStream(writeBuffer);
         }
+
+        internal int TotalCount { get; private set; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

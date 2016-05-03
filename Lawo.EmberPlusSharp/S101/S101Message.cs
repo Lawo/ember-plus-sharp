@@ -40,22 +40,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal bool CanHavePayload
-        {
-            get { return this.Command.CanHavePayload; }
-        }
-
-        internal bool CanHaveMultiplePackets
-        {
-            get { return this.Command.CanHaveMultiplePackets; }
-        }
-
-        internal PacketFlags PacketFlags
-        {
-            get { return this.Command.PacketFlags; }
-            set { this.Command.PacketFlags = value; }
-        }
-
         internal static async Task<S101Message> ReadFromAsync(
             ReadBuffer readBuffer, CancellationToken cancellationToken)
         {
@@ -82,6 +66,22 @@ namespace Lawo.EmberPlusSharp.S101
             return new S101Message(slot, messageType, command);
         }
 
+        internal bool CanHavePayload
+        {
+            get { return this.Command.CanHavePayload; }
+        }
+
+        internal bool CanHaveMultiplePackets
+        {
+            get { return this.Command.CanHaveMultiplePackets; }
+        }
+
+        internal PacketFlags PacketFlags
+        {
+            get { return this.Command.PacketFlags; }
+            set { this.Command.PacketFlags = value; }
+        }
+
         internal async Task WriteToAsync(WriteBuffer writerBuffer, CancellationToken cancellationToken)
         {
             await writerBuffer.ReserveAsync(2, cancellationToken);
@@ -91,15 +91,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly byte messageType;
-
-        private S101Message(byte slot, byte messageType, S101Command command)
-        {
-            this.Slot = slot;
-            this.messageType = messageType;
-            this.Command = command;
-        }
 
         private static byte GetMessageType(ReadBuffer readBuffer)
         {
@@ -111,6 +102,15 @@ namespace Lawo.EmberPlusSharp.S101
             }
 
             return messageType;
+        }
+
+        private readonly byte messageType;
+
+        private S101Message(byte slot, byte messageType, S101Command command)
+        {
+            this.Slot = slot;
+            this.messageType = messageType;
+            this.Command = command;
         }
     }
 }

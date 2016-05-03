@@ -68,10 +68,6 @@ namespace Lawo.EmberPlusSharp.Glow
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private readonly HashSet<IElement> subscribedElements = new HashSet<IElement>();
-            private readonly GlowLogInterpreter interpreter;
-            private readonly XmlWriter writer;
-
             private static string LowerFirst(string str)
             {
                 return char.ToLowerInvariant(str[0]) + str.Substring(1);
@@ -124,6 +120,10 @@ namespace Lawo.EmberPlusSharp.Glow
                         throw new ArgumentException("Unknown element or field name.");
                 }
             }
+
+            private readonly HashSet<IElement> subscribedElements = new HashSet<IElement>();
+            private readonly GlowLogInterpreter interpreter;
+            private readonly XmlWriter writer;
 
             private void Add(IElement element)
             {

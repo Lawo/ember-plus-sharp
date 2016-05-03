@@ -93,6 +93,18 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        internal static EmberId CreateUniversal(int number)
+        {
+            return new EmberId(
+                Class.Universal, (number == InnerNumber.Sequence) || (number == InnerNumber.Set), number);
+        }
+
+        internal static EmberId FromInnerNumber(int innerNumber)
+        {
+            return innerNumber < InnerNumber.FirstApplication ?
+                CreateUniversal(innerNumber) : CreateApplication(innerNumber - InnerNumber.FirstApplication);
+        }
+
         internal EmberId(Class theClass, bool isConstructed, int number)
         {
             if (number < 0)
@@ -120,18 +132,6 @@ namespace Lawo.EmberPlusSharp.Ember
             get { return this.number; }
         }
 
-        internal static EmberId CreateUniversal(int number)
-        {
-            return new EmberId(
-                Class.Universal, (number == InnerNumber.Sequence) || (number == InnerNumber.Set), number);
-        }
-
-        internal static EmberId FromInnerNumber(int innerNumber)
-        {
-            return innerNumber < InnerNumber.FirstApplication ?
-                CreateUniversal(innerNumber) : CreateApplication(innerNumber - InnerNumber.FirstApplication);
-        }
-
         internal int? ToInnerNumber()
         {
             switch (this.theClass)
@@ -146,10 +146,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly Class theClass;
-        private readonly bool isConstructed;
-        private readonly int number;
 
         private static char ToChar(Class theClass)
         {
@@ -182,5 +178,9 @@ namespace Lawo.EmberPlusSharp.Ember
                     return null;
             }
         }
+
+        private readonly Class theClass;
+        private readonly bool isConstructed;
+        private readonly int number;
     }
 }

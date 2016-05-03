@@ -268,10 +268,6 @@ namespace Lawo.EmberPlusSharp.Ember
         private static readonly EmberId Sequence = EmberId.CreateUniversal(InnerNumber.Sequence);
         private static readonly EmberId Set = EmberId.CreateUniversal(InnerNumber.Set);
 
-        private readonly WriteBuffer writeBuffer;
-        private readonly WriteBuffer tempBuffer;
-        private Stream stream;
-
         private static int Get8BitStartShift(long value, bool isSigned)
         {
             if ((value >= sbyte.MinValue) && (value <= sbyte.MaxValue))
@@ -450,6 +446,10 @@ namespace Lawo.EmberPlusSharp.Ember
                 return GetLengthFromShift8Bit(shift) + 1;
             }
         }
+
+        private readonly WriteBuffer writeBuffer;
+        private readonly WriteBuffer tempBuffer;
+        private Stream stream;
 
         private void AssertNotDisposed()
         {

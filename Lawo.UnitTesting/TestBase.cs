@@ -201,6 +201,13 @@ namespace Lawo.UnitTesting
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Gets a random <see cref="string"/> value.</summary>
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
+        protected static string GetRandomString()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
         /// <summary>Initializes a new instance of the <see cref="TestBase"/> class by calling
         /// <see cref="TestBase(int)">TestBase((int)DateTime.Now.TimeOfDay.TotalMilliseconds)</see>.</summary>
         /// <remarks>Deriving test classes should normally call this constructor.</remarks>
@@ -241,13 +248,6 @@ namespace Lawo.UnitTesting
             }
         }
 
-        /// <summary>Gets a random <see cref="string"/> value.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
-        protected static string GetRandomString()
-        {
-            return Guid.NewGuid().ToString();
-        }
-
         /// <summary>Gets a random <see cref="bool"/> value.</summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
         protected bool GetRandomBoolean()
@@ -264,9 +264,6 @@ namespace Lawo.UnitTesting
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly Random random;
-        private int seed;
 
         private static void AssertThrowCore<TException>(Action[] actions, string expectedMessage)
             where TException : Exception
@@ -353,6 +350,9 @@ namespace Lawo.UnitTesting
                 throw new ArgumentException("Struct equality methods are not implemented correctly.");
             }
         }
+
+        private readonly Random random;
+        private int seed;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

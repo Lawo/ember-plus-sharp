@@ -137,12 +137,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private object minimum;
-        private object maximum;
-        private int? factor;
-        private string formula;
-        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
-
         private static ParameterType GetTypeToWrite(ParameterType parameterType, object value)
         {
             if (parameterType != ParameterType.Trigger)
@@ -173,5 +167,11 @@ namespace Lawo.EmberPlusSharp.Model
                 return ParameterType.Octets;
             }
         }
+
+        private object minimum;
+        private object maximum;
+        private int? factor;
+        private string formula;
+        private IReadOnlyList<KeyValuePair<string, int>> enumMap;
     }
 }

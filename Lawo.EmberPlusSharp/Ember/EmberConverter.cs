@@ -116,11 +116,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly Dictionary<int, string> typeNames;
-        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
-        private readonly Dictionary<string, int> innerNumbers;
-        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
-
         private static FieldPath<int, EmberId> Combine(FieldPath<int, EmberId> path, Field<int, EmberId> field)
         {
             if ((field.TypeId == BerSequence.InnerNumber) || (field.TypeId == BerSet.InnerNumber))
@@ -222,6 +217,11 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             return EmberId.FromInnerNumber(innerNumber).ToString();
         }
+
+        private readonly Dictionary<int, string> typeNames;
+        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
+        private readonly Dictionary<string, int> innerNumbers;
+        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "There's no meaningful way to reduce the complexity.")]
         private void ToXmlCore(

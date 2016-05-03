@@ -109,6 +109,22 @@ namespace Lawo.IO
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>Enumerates the supported Telnet commands. TODO: File bug.</summary>
+        private static class Command
+        {
+            internal const byte Will = 251;
+            internal const byte Wont = 252;
+            internal const byte Do = 253;
+            internal const byte Dont = 254;
+            internal const byte InterpretAsCommand = 255;
+        }
+
+        /// <summary>Enumerates the supported options.</summary>
+        private static class Option
+        {
+            internal const byte SuppressGoAhead = 3;
+        }
+
         private readonly Func<bool> dataAvailable;
         private ReadState readState;
         private byte readCommand;
@@ -204,22 +220,6 @@ namespace Lawo.IO
 
             writeBuffer[writeBuffer.Count++] = currentByte;
             return offset;
-        }
-
-        /// <summary>Enumerates the supported Telnet commands.</summary>
-        private static class Command
-        {
-            internal const byte Will = 251;
-            internal const byte Wont = 252;
-            internal const byte Do = 253;
-            internal const byte Dont = 254;
-            internal const byte InterpretAsCommand = 255;
-        }
-
-        /// <summary>Enumerates the supported options.</summary>
-        private static class Option
-        {
-            internal const byte SuppressGoAhead = 3;
         }
     }
 }

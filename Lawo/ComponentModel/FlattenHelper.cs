@@ -62,9 +62,6 @@ namespace Lawo.ComponentModel
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private readonly ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>> original;
-            private readonly List<Action> unsubscribeCallbacks = new List<Action>();
-
             private static int GetTotalCount(IEnumerable<ReadOnlyObservableCollection<T>> inners)
             {
                 return inners.Aggregate(0, (c, i) => c + (i == null ? 0 : i.Count));
@@ -77,6 +74,9 @@ namespace Lawo.ComponentModel
                     inner.CollectionChanged -= handler;
                 }
             }
+
+            private readonly ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>> original;
+            private readonly List<Action> unsubscribeCallbacks = new List<Action>();
 
             private void AddedToOuter(int outerIndex, ReadOnlyObservableCollection<T> inner)
             {

@@ -268,9 +268,6 @@ namespace Lawo.IO
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly WriteCallback write;
-        private readonly WriteAsyncCallback writeAsync;
-
         private static void AssertNotNull(string value)
         {
             if (value == null)
@@ -278,6 +275,9 @@ namespace Lawo.IO
                 throw new ArgumentNullException("value");
             }
         }
+
+        private readonly WriteCallback write;
+        private readonly WriteAsyncCallback writeAsync;
 
         private int WriteToBuffer(byte[] buffer, int offset, int count)
         {

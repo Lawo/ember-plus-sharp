@@ -119,17 +119,17 @@ namespace Lawo.ComponentModel
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Source source;
-        private int sourceNotifyCount;
-        private Target target;
-        private int targetNotifyCount;
-
         private static void AssertOriginatedCounts(
             int expectedSourceOriginated, int sourceOriginated, int expectedTargetOriginated, int targetOriginated)
         {
             Assert.AreEqual(expectedSourceOriginated, sourceOriginated);
             Assert.AreEqual(expectedTargetOriginated, targetOriginated);
         }
+
+        private Source source;
+        private int sourceNotifyCount;
+        private Target target;
+        private int targetNotifyCount;
 
         private void AssertValues(
             string expectedSourceValue,

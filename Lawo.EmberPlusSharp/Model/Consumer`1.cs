@@ -28,51 +28,6 @@ namespace Lawo.EmberPlusSharp.Model
     public sealed class Consumer<TRoot> : IMonitoredConnection
         where TRoot : Root<TRoot>
     {
-        /// <summary>Occurs when the connection to the provider has been lost.</summary>
-        /// <remarks>
-        /// <para>This event is raised in the following situations:
-        /// <list type="bullet">
-        /// <item>There was a communication error, or</item>
-        /// <item>The remote host has failed to answer a <see cref="KeepAliveRequest"/>, or</item>
-        /// <item>The remote host has gracefully shutdown its connection, or</item>
-        /// <item>Client code has called <see cref="Dispose"/>.</item>
-        /// </list>
-        /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
-        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
-        /// </remarks>
-        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
-
-        /// <summary>Gets the root of the object tree that mirrors the state of the tree published by the provider.
-        /// </summary>
-        public TRoot Root
-        {
-            get { return this.root; }
-        }
-
-        /// <summary>Gets or sets the minimal amount of time, in milliseconds, the consumer will wait after
-        /// automatically calling <see cref="SendAsync"/> before it will automatically call it again.</summary>
-        /// <value>The interval in milliseconds. Default is 100. Set to <see cref="Timeout.Infinite"/> to never send
-        /// changes automatically.</value>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is less than -1.</exception>
-        public int AutoSendInterval
-        {
-            get
-            {
-                return this.autoSendInterval;
-            }
-
-            set
-            {
-                if (value < Timeout.Infinite)
-                {
-                    throw new ArgumentOutOfRangeException("value", "Must be >= -1.");
-                }
-
-                this.autoSendInterval = value;
-                this.CancelAutoSendDelay();
-            }
-        }
-
         /// <summary>Returns the return value of
         /// <see cref="CreateAsync(S101Client, int)">CreateAsync(<paramref name="client"/>, 10000)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
@@ -172,6 +127,51 @@ namespace Lawo.EmberPlusSharp.Model
             return result;
         }
 
+        /// <summary>Occurs when the connection to the provider has been lost.</summary>
+        /// <remarks>
+        /// <para>This event is raised in the following situations:
+        /// <list type="bullet">
+        /// <item>There was a communication error, or</item>
+        /// <item>The remote host has failed to answer a <see cref="KeepAliveRequest"/>, or</item>
+        /// <item>The remote host has gracefully shutdown its connection, or</item>
+        /// <item>Client code has called <see cref="Dispose"/>.</item>
+        /// </list>
+        /// For the first two cases <see cref="ConnectionLostEventArgs.Exception"/> indicates the source of the error.
+        /// For the last two cases <see cref="ConnectionLostEventArgs.Exception"/> is <c>null</c>.</para>
+        /// </remarks>
+        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
+
+        /// <summary>Gets the root of the object tree that mirrors the state of the tree published by the provider.
+        /// </summary>
+        public TRoot Root
+        {
+            get { return this.root; }
+        }
+
+        /// <summary>Gets or sets the minimal amount of time, in milliseconds, the consumer will wait after
+        /// automatically calling <see cref="SendAsync"/> before it will automatically call it again.</summary>
+        /// <value>The interval in milliseconds. Default is 100. Set to <see cref="Timeout.Infinite"/> to never send
+        /// changes automatically.</value>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is less than -1.</exception>
+        public int AutoSendInterval
+        {
+            get
+            {
+                return this.autoSendInterval;
+            }
+
+            set
+            {
+                if (value < Timeout.Infinite)
+                {
+                    throw new ArgumentOutOfRangeException("value", "Must be >= -1.");
+                }
+
+                this.autoSendInterval = value;
+                this.CancelAutoSendDelay();
+            }
+        }
+
         /// <summary>Calls <see cref="SendAsync"/>.</summary>
         [Obsolete("Call SendAsync instead.")]
         public Task SendChangesAsync()
@@ -221,6 +221,11 @@ namespace Lawo.EmberPlusSharp.Model
 
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
 
+        private static string GetVersion(IReadOnlyCollection<byte> applicationBytes)
+        {
+            return string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
+        }
+
         private readonly ReceiveQueue receiveQueue = new ReceiveQueue();
         private readonly InvocationCollection pendingInvocations = new InvocationCollection();
         private readonly StreamedParameterCollection streamedParameters = new StreamedParameterCollection();
@@ -242,11 +247,6 @@ namespace Lawo.EmberPlusSharp.Model
             this.emberDataMessage = new S101Message(slot, EmberDataCommand);
             this.client.EmberDataReceived += this.receiveQueue.OnMessageReceived;
             this.client.ConnectionLost += this.receiveQueue.OnConnectionLost;
-        }
-
-        private static string GetVersion(IReadOnlyCollection<byte> applicationBytes)
-        {
-            return string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
         }
 
         private async Task<bool> SendCoreAsync()

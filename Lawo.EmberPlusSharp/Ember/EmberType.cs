@@ -55,6 +55,20 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <threadsafety static="true" instance="false"/>
     public sealed class EmberType
     {
+        /// <summary>Implicitly converts <paramref name="type"/> to a <see cref="EmberType"/>.</summary>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> equals <c>null</c>.</exception>
+        public static implicit operator EmberType(Type type)
+        {
+            return FromType(type);
+        }
+
+        /// <summary>Creates a <see cref="EmberType"/> from <paramref name="type"/>.</summary>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> equals <c>null</c>.</exception>
+        public static EmberType FromType(Type type)
+        {
+            return new EmberType(type);
+        }
+
         /// <summary>Initializes a new instance of the <see cref="EmberType"/> class.</summary>
         /// <param name="types">The parent fields followed by the actual type, in descending order.</param>
         /// <exception cref="ArgumentNullException"><paramref name="types"/> equals <c>null</c>.</exception>
@@ -71,20 +85,6 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             this.types = types;
-        }
-
-        /// <summary>Implicitly converts <paramref name="type"/> to a <see cref="EmberType"/>.</summary>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> equals <c>null</c>.</exception>
-        public static implicit operator EmberType(Type type)
-        {
-            return FromType(type);
-        }
-
-        /// <summary>Creates a <see cref="EmberType"/> from <paramref name="type"/>.</summary>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> equals <c>null</c>.</exception>
-        public static EmberType FromType(Type type)
-        {
-            return new EmberType(type);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

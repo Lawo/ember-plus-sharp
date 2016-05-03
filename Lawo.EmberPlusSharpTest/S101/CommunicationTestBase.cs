@@ -26,11 +26,6 @@ namespace Lawo.EmberPlusSharp.S101
     /// <threadsafety static="true" instance="false"/>
     public abstract class CommunicationTestBase : TestBase
     {
-        /// <summary>Initializes a new instance of the <see cref="CommunicationTestBase"/> class.</summary>
-        protected CommunicationTestBase()
-        {
-        }
-
         /// <summary>Gets the <see cref="EmberData"/> instance for the current version.</summary>
         protected static EmberData EmberDataCommand
         {
@@ -265,6 +260,11 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 return reader.ReadToEnd();
             }
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="CommunicationTestBase"/> class.</summary>
+        protected CommunicationTestBase()
+        {
         }
 
         /// <summary>Gets a random byte that is guaranteed to not be equal to any of the elements in

@@ -101,15 +101,15 @@ namespace Lawo.IO
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <summary>Initializes a new instance of the <see cref="NonSeekableStream"/> class.</summary>
-        protected NonSeekableStream()
-        {
-        }
-
         /// <summary>Creates the exception thrown by all unsupported members.</summary>
         protected static Exception CreateNotSupportedException()
         {
             return new NotSupportedException("This operation is not supported.");
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="NonSeekableStream"/> class.</summary>
+        protected NonSeekableStream()
+        {
         }
 
         /// <summary>Initializes a new instance of the <see cref="NonSeekableStream"/> class.</summary>

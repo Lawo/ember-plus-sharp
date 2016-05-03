@@ -12,18 +12,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <threadsafety static="true" instance="false"/>
     public struct StreamDescription : IEquatable<StreamDescription>
     {
-        /// <summary>Gets the format.</summary>
-        public StreamFormat Format
-        {
-            get { return this.format; }
-        }
-
-        /// <summary>Gets the offset in bytes.</summary>
-        public int Offset
-        {
-            get { return this.offset; }
-        }
-
         /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are equal.</summary>
         public static bool operator ==(StreamDescription left, StreamDescription right)
         {
@@ -35,6 +23,18 @@ namespace Lawo.EmberPlusSharp.Model
         public static bool operator !=(StreamDescription left, StreamDescription right)
         {
             return !left.Equals(right);
+        }
+
+        /// <summary>Gets the format.</summary>
+        public StreamFormat Format
+        {
+            get { return this.format; }
+        }
+
+        /// <summary>Gets the offset in bytes.</summary>
+        public int Offset
+        {
+            get { return this.offset; }
         }
 
         /// <inheritdoc/>

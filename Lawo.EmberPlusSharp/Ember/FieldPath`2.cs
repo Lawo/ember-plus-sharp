@@ -40,16 +40,6 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal FieldPath(Field<TTypeId, TFieldId> field)
-            : this(null, null, field)
-        {
-        }
-
-        internal Field<TTypeId, TFieldId>? Tail
-        {
-            get { return this.field3; }
-        }
-
         internal static FieldPath<TTypeId, TFieldId> Append(
             FieldPath<TTypeId, TFieldId> path, Field<TTypeId, TFieldId> field)
         {
@@ -59,6 +49,16 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             return new FieldPath<TTypeId, TFieldId>(path.field2, path.field3, field);
+        }
+
+        internal FieldPath(Field<TTypeId, TFieldId> field)
+            : this(null, null, field)
+        {
+        }
+
+        internal Field<TTypeId, TFieldId>? Tail
+        {
+            get { return this.field3; }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

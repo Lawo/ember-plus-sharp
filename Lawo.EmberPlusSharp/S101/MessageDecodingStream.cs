@@ -62,11 +62,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal S101Message Message
-        {
-            get { return this.message; }
-        }
-
         internal static async Task<MessageDecodingStream> CreateAsync(
             ReadBuffer rawBuffer,
             byte[] discardBuffer,
@@ -85,6 +80,11 @@ namespace Lawo.EmberPlusSharp.S101
 
             result.message = newMessage;
             return result;
+        }
+
+        internal S101Message Message
+        {
+            get { return this.message; }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

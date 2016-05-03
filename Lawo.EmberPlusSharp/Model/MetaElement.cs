@@ -20,11 +20,6 @@ namespace Lawo.EmberPlusSharp.Model
     {
         private abstract class MetaElement
         {
-            internal string Identifier
-            {
-                get { return this.identifier; }
-            }
-
             /// <summary>Creates and returns a <see cref="MetaElement"/> subclass object representing
             /// <paramref name="property"/>.</summary>
             internal static MetaElement Create(PropertyInfo property)
@@ -34,6 +29,11 @@ namespace Lawo.EmberPlusSharp.Model
                 var info = metaPropertyType.GetTypeInfo().DeclaredConstructors.FirstOrDefault(
                     c => c.GetParameters().Select(p => p.ParameterType).SequenceEqual(ctorParameters));
                 return (MetaElement)info.Invoke(new[] { property });
+            }
+
+            internal string Identifier
+            {
+                get { return this.identifier; }
             }
 
             internal abstract Element ReadContents(
@@ -66,10 +66,6 @@ namespace Lawo.EmberPlusSharp.Model
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private readonly PropertyInfo property;
-            private readonly string identifier;
-            private readonly bool isOptional;
-
             private static Type GetMetaPropertyType(PropertyInfo property)
             {
                 var implementationType = Element.GetImplementationType(property.PropertyType);
@@ -83,6 +79,10 @@ namespace Lawo.EmberPlusSharp.Model
                 throw new ModelException(
                     string.Format(CultureInfo.InvariantCulture, Format, property.Name, property.DeclaringType));
             }
+
+            private readonly PropertyInfo property;
+            private readonly string identifier;
+            private readonly bool isOptional;
         }
     }
 }

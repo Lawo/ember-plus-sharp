@@ -169,10 +169,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly IEmberConverter converter;
-        private readonly XmlWriter xmlLogWriter;
-        private readonly Dictionary<string, int> messageCounts = new Dictionary<string, int>();
-
         private static TextWriter ValidateLogWriter(TextWriter logWriter)
         {
             if (logWriter == null)
@@ -182,6 +178,10 @@ namespace Lawo.EmberPlusSharp.S101
 
             return logWriter;
         }
+
+        private readonly IEmberConverter converter;
+        private readonly XmlWriter xmlLogWriter;
+        private readonly Dictionary<string, int> messageCounts = new Dictionary<string, int>();
 
         private DateTime WriteStartEvent(string type)
         {

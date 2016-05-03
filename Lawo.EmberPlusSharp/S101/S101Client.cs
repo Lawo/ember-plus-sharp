@@ -256,15 +256,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly WorkQueue logQueue = new WorkQueue();
-        private readonly TaskQueue sendQueue = new TaskQueue();
-        private readonly CancellationTokenSource source = new CancellationTokenSource();
-        private readonly uint threadId;
-        private readonly S101Writer writer;
-        private readonly IS101Logger logger;
-        private readonly int timeout;
-        private byte keepAliveRequestSlot;
-
         private static async Task Delay(Task task, int milliseconds)
         {
             await task;
@@ -295,6 +286,15 @@ namespace Lawo.EmberPlusSharp.S101
                 return null;
             }
         }
+
+        private readonly WorkQueue logQueue = new WorkQueue();
+        private readonly TaskQueue sendQueue = new TaskQueue();
+        private readonly CancellationTokenSource source = new CancellationTokenSource();
+        private readonly uint threadId;
+        private readonly S101Writer writer;
+        private readonly IS101Logger logger;
+        private readonly int timeout;
+        private byte keepAliveRequestSlot;
 
         private void AssertPreconditions()
         {

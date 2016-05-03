@@ -436,22 +436,6 @@ namespace Lawo.EmberPlusSharp.Ember
         private static readonly EmberId Sequence = EmberId.CreateUniversal(Ember.InnerNumber.Sequence);
         private static readonly EmberId Set = EmberId.CreateUniversal(Ember.InnerNumber.Set);
 
-        private readonly Stack<PositionInfo> endPositions = new Stack<PositionInfo>(32);
-        private readonly ReadBuffer readBuffer;
-        private Stream stream;
-        private int? innerNumber;
-        private EmberId? outer;
-
-        private long? EndPosition
-        {
-            get { return this.endPositions.Peek().EndPosition; }
-        }
-
-        private int? ContentsLength
-        {
-            get { return (int?)(this.EndPosition - this.readBuffer.Position); }
-        }
-
         private static bool IsContainer(PositionInfo position)
         {
             var emberId = position.EmberId;
@@ -704,6 +688,22 @@ namespace Lawo.EmberPlusSharp.Ember
         private static EmberException CreateEmberException(EndOfStreamException ex)
         {
             return new EmberException("Unexpected end of stream.", ex);
+        }
+
+        private readonly Stack<PositionInfo> endPositions = new Stack<PositionInfo>(32);
+        private readonly ReadBuffer readBuffer;
+        private Stream stream;
+        private int? innerNumber;
+        private EmberId? outer;
+
+        private long? EndPosition
+        {
+            get { return this.endPositions.Peek().EndPosition; }
+        }
+
+        private int? ContentsLength
+        {
+            get { return (int?)(this.EndPosition - this.readBuffer.Position); }
         }
 
         private void AssertNotDisposed()

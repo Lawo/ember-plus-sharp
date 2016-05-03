@@ -47,23 +47,6 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal S101Command(CommandType commandType)
-        {
-            this.commandType = commandType;
-        }
-
-        internal virtual bool CanHavePayload
-        {
-            get { return false; }
-        }
-
-        internal virtual bool CanHaveMultiplePackets
-        {
-            get { return false; }
-        }
-
-        internal PacketFlags PacketFlags { get; set; }
-
         internal static async Task<S101Command> ReadFromAsync(ReadBuffer readBuffer, CancellationToken cancellationToken)
         {
             await readBuffer.FillAsync(2, cancellationToken);
@@ -80,6 +63,23 @@ namespace Lawo.EmberPlusSharp.S101
             result.ParseCore(components);
             return result;
         }
+
+        internal S101Command(CommandType commandType)
+        {
+            this.commandType = commandType;
+        }
+
+        internal virtual bool CanHavePayload
+        {
+            get { return false; }
+        }
+
+        internal virtual bool CanHaveMultiplePackets
+        {
+            get { return false; }
+        }
+
+        internal PacketFlags PacketFlags { get; set; }
 
         internal async Task WriteToAsync(WriteBuffer writeBuffer, CancellationToken cancellationToken)
         {
@@ -104,11 +104,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private const byte DefaultVersion = 0x01;
-        private static readonly Task Completed = Task.FromResult(false);
-
-        private readonly CommandType commandType;
 
         private static S101Command GetCommandAndVersion(ReadBuffer readBuffer)
         {
@@ -136,5 +131,10 @@ namespace Lawo.EmberPlusSharp.S101
                     throw new S101Exception("Unexpected Command.");
             }
         }
+
+        private const byte DefaultVersion = 0x01;
+        private static readonly Task Completed = Task.FromResult(false);
+
+        private readonly CommandType commandType;
     }
 }

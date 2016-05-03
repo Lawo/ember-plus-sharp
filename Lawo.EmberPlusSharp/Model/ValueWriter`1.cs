@@ -28,7 +28,6 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static readonly Action<EmberWriter, EmberId, T> WriteValueCore = GetWriteValueCore();
-        private readonly T value;
 
         private static Action<EmberWriter, EmberId, T> GetWriteValueCore()
         {
@@ -36,5 +35,7 @@ namespace Lawo.EmberPlusSharp.Model
                 i => i.GetParameters()[1].ParameterType == typeof(T));
             return (Action<EmberWriter, EmberId, T>)method.CreateDelegate(typeof(Action<EmberWriter, EmberId, T>));
         }
+
+        private readonly T value;
     }
 }

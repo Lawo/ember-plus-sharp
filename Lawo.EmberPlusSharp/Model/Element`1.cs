@@ -22,10 +22,6 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class Element<TMostDerived> : Element
         where TMostDerived : Element<TMostDerived>
     {
-        internal Element()
-        {
-        }
-
         internal static TMostDerived Construct(Context context)
         {
             if (Constructor == null)
@@ -45,6 +41,10 @@ namespace Lawo.EmberPlusSharp.Model
             var result = Construct(context);
             retrievalState = result.ReadContents(reader, actualType);
             return result;
+        }
+
+        internal Element()
+        {
         }
 
         internal int ReadInt(EmberReader reader, string fieldName)

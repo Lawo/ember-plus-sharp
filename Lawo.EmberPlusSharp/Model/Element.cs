@@ -82,6 +82,28 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        internal static Type GetImplementationType(Type type)
+        {
+            if (type == typeof(IParameter))
+            {
+                return typeof(DynamicParameter);
+            }
+            else if (type == typeof(INode))
+            {
+                return typeof(DynamicNode);
+            }
+            else if (type == typeof(IFunction))
+            {
+                return typeof(DynamicFunction);
+            }
+            else if (IsElement(type))
+            {
+                return type;
+            }
+
+            return null;
+        }
+
         internal Element()
         {
         }
@@ -123,28 +145,6 @@ namespace Lawo.EmberPlusSharp.Model
         {
             get { return RetrievalState.Complete; }
             set { } // Intentionally empty
-        }
-
-        internal static Type GetImplementationType(Type type)
-        {
-            if (type == typeof(IParameter))
-            {
-                return typeof(DynamicParameter);
-            }
-            else if (type == typeof(INode))
-            {
-                return typeof(DynamicNode);
-            }
-            else if (type == typeof(IFunction))
-            {
-                return typeof(DynamicFunction);
-            }
-            else if (IsElement(type))
-            {
-                return type;
-            }
-
-            return null;
         }
 
         internal void SetRetrieveDetailsChangeStatus(Func<bool> setValue)
@@ -307,14 +307,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private IParent parent;
-        private int[] numberPath;
-        private string identifier;
-        private string description;
-        private bool isOnline = true;
-        private object tag;
-        private bool hasChanges;
-
         private static bool IsElement(Type type)
         {
             try
@@ -326,5 +318,13 @@ namespace Lawo.EmberPlusSharp.Model
                 return false;
             }
         }
+
+        private IParent parent;
+        private int[] numberPath;
+        private string identifier;
+        private string description;
+        private bool isOnline = true;
+        private object tag;
+        private bool hasChanges;
     }
 }

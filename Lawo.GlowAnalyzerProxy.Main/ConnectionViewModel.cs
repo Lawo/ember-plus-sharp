@@ -85,6 +85,11 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private static string GetCount(bool isValid, long count)
+        {
+            return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
+        }
+
         private readonly MainWindowViewModel parent;
         private readonly CalculatedProperty<string> connectionCount;
         private readonly CalculatedProperty<string> bytesReceived;
@@ -104,11 +109,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
         {
             get { return this.lastReceived; }
             set { this.SetValue(ref this.lastReceived, value); }
-        }
-
-        private static string GetCount(bool isValid, long count)
-        {
-            return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
         }
     }
 }

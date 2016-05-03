@@ -178,12 +178,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>> invocations =
-            new Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>>();
-
-        private KeyValuePair<string, ParameterType>[] arguments;
-        private KeyValuePair<string, ParameterType>[] result;
-
         private static Action<EmberWriter> CreateWriter(
             KeyValuePair<string, ParameterType> expectedType, object argument)
         {
@@ -209,6 +203,12 @@ namespace Lawo.EmberPlusSharp.Model
                     "The type of at least one actual argument is not equal to the expected type.", ex);
             }
         }
+
+        private readonly Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>> invocations =
+            new Queue<KeyValuePair<IInvocationResult, Action<EmberWriter>[]>>();
+
+        private KeyValuePair<string, ParameterType>[] arguments;
+        private KeyValuePair<string, ParameterType>[] result;
 
         private async Task<IResult> InvokeCoreAsync(object[] actualArguments)
         {

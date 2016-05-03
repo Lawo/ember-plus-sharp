@@ -155,6 +155,12 @@ namespace Lawo.EmberPlusSharp.S101
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static readonly byte[] NoPayload = new byte[0];
+
+        private static byte ParseHex(string str)
+        {
+            return byte.Parse(str, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+        }
+
         private readonly EmberConverter converter;
         private readonly XmlReader logReader;
         private string eventType;
@@ -163,11 +169,6 @@ namespace Lawo.EmberPlusSharp.S101
         private int number;
         private S101Message message;
         private byte[] payload;
-
-        private static byte ParseHex(string str)
-        {
-            return byte.Parse(str, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
-        }
 
         private bool ReadCore()
         {

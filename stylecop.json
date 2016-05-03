@@ -4,10 +4,10 @@
     "orderingRules": {
       "elementOrder": [
         "accessibility",
-        "kind",
         "constant",
         "static",
-        "readonly"
+        "readonly",
+        "kind"
       ]
     },
     "documentationRules": {

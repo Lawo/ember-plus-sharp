@@ -63,12 +63,12 @@ namespace Lawo.Threading.Tasks
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Task previousTask = Task.FromResult(false);
-
         private static async Task<TResult> EnqueueCore<TResult>(Task previousTask, Func<Task<TResult>> func)
         {
             await previousTask;
             return await func();
         }
+
+        private Task previousTask = Task.FromResult(false);
     }
 }
