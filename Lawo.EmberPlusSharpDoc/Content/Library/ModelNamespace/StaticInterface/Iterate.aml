@@ -39,13 +39,6 @@
           </listItem>
           <listItem>
             <para>
-              The <codeEntityReference>T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute</codeEntityReference>
-              is only present to suppress a <application>StyleCop</application> warning. If you do not use
-              <application>StyleCop</application>, the attribute is unnecessary.
-            </para>
-          </listItem>
-          <listItem>
-            <para>
               The constants in the <codeInline>enum</codeInline> and <codeInline>LRMode</codeInline> have names that
               differ from the ones presented by the provider. This is possible because the library only checks that the
               provider enumeration and the local <codeInline>enum</codeInline> have an equal number of constants and

@@ -393,7 +393,6 @@ namespace Tutorial
             internal EnumParameter<LRMode> LRMode { get; private set; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Demo Code.")]
         private enum LRMode
         {
             Stereo,
