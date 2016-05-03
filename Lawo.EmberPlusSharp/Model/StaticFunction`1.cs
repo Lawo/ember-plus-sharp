@@ -30,7 +30,6 @@ namespace Lawo.EmberPlusSharp.Model
         {
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override KeyValuePair<string, ParameterType>[] ReadTupleDescription(
             EmberReader reader, KeyValuePair<string, ParameterType>[] expectedTypes)
         {

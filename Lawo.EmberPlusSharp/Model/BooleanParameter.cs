@@ -23,7 +23,6 @@ namespace Lawo.EmberPlusSharp.Model
             return reader.AssertAndReadContentsAsBoolean();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override void WriteValue(EmberWriter writer, bool? value)
         {
             writer.WriteValue(GlowParameterContents.Value.OuterId, value.Value);

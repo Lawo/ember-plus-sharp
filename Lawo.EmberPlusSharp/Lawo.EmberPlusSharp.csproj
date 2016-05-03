@@ -200,7 +200,7 @@
     <Compile Include="Model\INode.cs" />
     <Compile Include="Model\Context.cs" />
     <Compile Include="Model\MetaElement.cs" />
-    <Compile Include="Model\MetaElement1.cs" />
+    <Compile Include="Model\MetaElement`1.cs" />
     <Compile Include="Model\NumericParameter`2.cs" />
     <Compile Include="Model\Parameter`2.cs" />
     <Compile Include="Model\ParameterAccess.cs" />
