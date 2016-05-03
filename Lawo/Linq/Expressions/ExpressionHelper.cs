@@ -49,7 +49,7 @@ namespace Lawo.Linq.Expressions
         {
             if (getPropertyExpression == null)
             {
-                throw new ArgumentNullException("getPropertyExpression");
+                throw new ArgumentNullException(nameof(getPropertyExpression));
             }
 
             var memberExpression = getPropertyExpression.Body as MemberExpression;
@@ -57,7 +57,7 @@ namespace Lawo.Linq.Expressions
 
             if ((memberExpression == null) || ((propertyInfo = memberExpression.Member as PropertyInfo) == null))
             {
-                throw new ArgumentException("Does not return the value of a property.", "getPropertyExpression");
+                throw new ArgumentException("Does not return the value of a property.", nameof(getPropertyExpression));
             }
 
             return propertyInfo;

@@ -30,7 +30,7 @@ namespace Lawo.Threading.Tasks
         {
             if (asyncMethod == null)
             {
-                throw new ArgumentNullException("asyncMethod");
+                throw new ArgumentNullException(nameof(asyncMethod));
             }
 
             var previousContext = SynchronizationContext.Current;
@@ -45,7 +45,7 @@ namespace Lawo.Threading.Tasks
                 if (task == null)
                 {
                     newContext.OperationCompleted();
-                    throw new ArgumentException("The method returned null.", "asyncMethod");
+                    throw new ArgumentException("The method returned null.", nameof(asyncMethod));
                 }
 
                 task.ContinueWith(t => newContext.OperationCompleted(), TaskScheduler.Default);
@@ -88,7 +88,7 @@ namespace Lawo.Threading.Tasks
             {
                 if (d == null)
                 {
-                    throw new ArgumentNullException("d");
+                    throw new ArgumentNullException(nameof(d));
                 }
 
                 this.queue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));

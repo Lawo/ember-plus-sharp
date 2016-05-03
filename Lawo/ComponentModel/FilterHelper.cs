@@ -48,7 +48,7 @@ namespace Lawo.ComponentModel
             {
                 if (predicate == null)
                 {
-                    throw new ArgumentNullException("predicate");
+                    throw new ArgumentNullException(nameof(predicate));
                 }
 
                 this.predicate = predicate;

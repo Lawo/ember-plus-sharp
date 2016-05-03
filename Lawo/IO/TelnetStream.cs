@@ -35,17 +35,17 @@ namespace Lawo.IO
         {
             if (readAsync == null)
             {
-                throw new ArgumentNullException("readAsync");
+                throw new ArgumentNullException(nameof(readAsync));
             }
 
             if (writeAsync == null)
             {
-                throw new ArgumentNullException("writeAsync");
+                throw new ArgumentNullException(nameof(writeAsync));
             }
 
             if (dataAvailable == null)
             {
-                throw new ArgumentNullException("dataAvailable");
+                throw new ArgumentNullException(nameof(dataAvailable));
             }
 
             this.dataAvailable = dataAvailable;

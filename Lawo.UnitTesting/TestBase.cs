@@ -120,12 +120,12 @@ namespace Lawo.UnitTesting
         {
             if (equal == null)
             {
-                throw new ArgumentNullException("equal");
+                throw new ArgumentNullException(nameof(equal));
             }
 
             if (notEqual == null)
             {
-                throw new ArgumentNullException("notEqual");
+                throw new ArgumentNullException(nameof(notEqual));
             }
 
             AssertIsTrue(!obj1.Equals(obj2));
@@ -270,7 +270,7 @@ namespace Lawo.UnitTesting
         {
             if (actions == null)
             {
-                throw new ArgumentNullException("actions");
+                throw new ArgumentNullException(nameof(actions));
             }
 
             foreach (Action action in actions)
@@ -301,7 +301,7 @@ namespace Lawo.UnitTesting
         {
             if (actions == null)
             {
-                throw new ArgumentNullException("actions");
+                throw new ArgumentNullException(nameof(actions));
             }
 
             foreach (Func<Task> action in actions)

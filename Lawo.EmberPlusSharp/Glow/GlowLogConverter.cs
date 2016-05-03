@@ -31,7 +31,7 @@ namespace Lawo.EmberPlusSharp.Glow
         {
             if (logWriter == null)
             {
-                throw new ArgumentNullException("logWriter");
+                throw new ArgumentNullException(nameof(logWriter));
             }
 
             var interpreter = new GlowLogInterpreter(GlowTypes.Instance, logReader);

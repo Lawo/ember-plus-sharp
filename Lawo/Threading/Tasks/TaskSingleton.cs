@@ -31,7 +31,7 @@ namespace Lawo.Threading.Tasks
         {
             if (function == null)
             {
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException(nameof(function));
             }
 
             return this.Execute(
@@ -54,7 +54,7 @@ namespace Lawo.Threading.Tasks
         {
             if (function == null)
             {
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException(nameof(function));
             }
 
             this.AssertTaskIsCompleted();

@@ -37,7 +37,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
 
             this.readBuffer = new ReadBuffer(stream.Read, bufferSize);
@@ -406,7 +406,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
 
             object result = null;

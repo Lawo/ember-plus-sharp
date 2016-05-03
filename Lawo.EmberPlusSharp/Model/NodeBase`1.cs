@@ -36,7 +36,7 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 if ((value < ChildrenRetrievalPolicy.None) || (value > ChildrenRetrievalPolicy.All))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
                 if (value != this.childrenRetrievalPolicy)
@@ -45,7 +45,7 @@ namespace Lawo.EmberPlusSharp.Model
                     {
                         throw new ArgumentException(
                             "A new value cannot be set if the current value is not equal to ChildrenRetrievalPolicy.None.",
-                            "value");
+                            nameof(value));
                     }
 
                     this.SetRetrieveDetailsChangeStatus(() => this.SetValue(ref this.childrenRetrievalPolicy, value));
@@ -93,7 +93,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         internal sealed override bool RetrieveDetails =>
-		    (this.ChildrenRetrievalPolicy != ChildrenRetrievalPolicy.None) && base.RetrieveDetails;
+            (this.ChildrenRetrievalPolicy != ChildrenRetrievalPolicy.None) && base.RetrieveDetails;
 
         internal sealed override void SetContext(Context context)
         {

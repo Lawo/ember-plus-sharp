@@ -51,7 +51,7 @@ namespace Lawo.ComponentModel
         {
             if (toSource == null)
             {
-                throw new ArgumentNullException("toSource");
+                throw new ArgumentNullException(nameof(toSource));
             }
 
             return new Binding<TSourceOwner, TSource, TTargetOwner, TTarget>(source, toTarget, target, toSource);

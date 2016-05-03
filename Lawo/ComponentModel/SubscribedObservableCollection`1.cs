@@ -71,12 +71,12 @@ namespace Lawo.ComponentModel
         {
             if (theOriginal == null)
             {
-                throw new ArgumentNullException("theOriginal");
+                throw new ArgumentNullException(nameof(theOriginal));
             }
 
             if (theHandler == null)
             {
-                throw new ArgumentNullException("theHandler");
+                throw new ArgumentNullException(nameof(theHandler));
             }
 
             if ((this.original != null) || (this.handler != null))

@@ -85,7 +85,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
 
             this.client = client;

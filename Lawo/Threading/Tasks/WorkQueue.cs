@@ -30,7 +30,7 @@ namespace Lawo.Threading.Tasks
         {
             if (action == null)
             {
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             }
 
             return this.Enqueue(
@@ -50,7 +50,7 @@ namespace Lawo.Threading.Tasks
         {
             if (function == null)
             {
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException(nameof(function));
             }
 
             var result = this.previousWork.IsCompleted ?

@@ -124,7 +124,7 @@ namespace Lawo.EmberPlusSharp.S101
 
             if (message == null)
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             if ((this.stream != null) && this.stream.CanWrite)
@@ -152,7 +152,7 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 var message = string.Format(
                     CultureInfo.InvariantCulture, "A value not equal to {0:X2} is required.", Frame.BeginOfFrame);
-                throw new ArgumentException(message, "value");
+                throw new ArgumentException(message, nameof(value));
             }
 
             if ((this.stream == null) || !this.stream.CanWrite)

@@ -28,7 +28,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (command == null)
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
         }
 

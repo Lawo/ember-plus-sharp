@@ -62,12 +62,12 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (converter == null)
             {
-                throw new ArgumentNullException("converter");
+                throw new ArgumentNullException(nameof(converter));
             }
 
             if (xmlLogWriter == null)
             {
-                throw new ArgumentNullException("xmlLogWriter");
+                throw new ArgumentNullException(nameof(xmlLogWriter));
             }
 
             this.converter = converter;
@@ -114,7 +114,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (exception == null)
             {
-                throw new ArgumentNullException("exception");
+                throw new ArgumentNullException(nameof(exception));
             }
 
             var info = new EventInfo(this.WriteStartEvent(LogNames.Exception));
@@ -137,12 +137,12 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (message == null)
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             if (direction == null)
             {
-                throw new ArgumentNullException("direction");
+                throw new ArgumentNullException(nameof(direction));
             }
 
             this.WriteStartEvent(LogNames.Message, timeUtc);
@@ -173,7 +173,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (logWriter == null)
             {
-                throw new ArgumentNullException("logWriter");
+                throw new ArgumentNullException(nameof(logWriter));
             }
 
             return logWriter;

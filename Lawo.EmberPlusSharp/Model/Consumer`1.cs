@@ -112,13 +112,13 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
 
             if ((childrenRetrievalPolicy < ChildrenRetrievalPolicy.None) ||
                 (childrenRetrievalPolicy > ChildrenRetrievalPolicy.All))
             {
-                throw new ArgumentOutOfRangeException("childrenRetrievalPolicy");
+                throw new ArgumentOutOfRangeException(nameof(childrenRetrievalPolicy));
             }
 
             var result = new Consumer<TRoot>(client, timeout, childrenRetrievalPolicy, slot);
@@ -161,7 +161,7 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 if (value < Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException("value", "Must be >= -1.");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Must be >= -1.");
                 }
 
                 this.autoSendInterval = value;

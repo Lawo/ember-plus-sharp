@@ -44,22 +44,22 @@ namespace Lawo.ComponentModel
         {
             if (collection == null)
             {
-                throw new ArgumentNullException("collection");
+                throw new ArgumentNullException(nameof(collection));
             }
 
             if (added == null)
             {
-                throw new ArgumentNullException("added");
+                throw new ArgumentNullException(nameof(added));
             }
 
             if (removed == null)
             {
-                throw new ArgumentNullException("removed");
+                throw new ArgumentNullException(nameof(removed));
             }
 
             if (cleared == null)
             {
-                throw new ArgumentNullException("cleared");
+                throw new ArgumentNullException(nameof(cleared));
             }
 
             Add(0, collection, added);

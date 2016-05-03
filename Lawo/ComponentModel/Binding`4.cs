@@ -53,17 +53,17 @@ namespace Lawo.ComponentModel
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             if (toTarget == null)
             {
-                throw new ArgumentNullException("toTarget");
+                throw new ArgumentNullException(nameof(toTarget));
             }
 
             if (target == null)
             {
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
             }
 
             this.sourceEventArgs = new ChangeOriginatedAtEventArgs<TSourceOwner, TSource>(source);

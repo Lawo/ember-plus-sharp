@@ -109,7 +109,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (number < 0)
             {
-                throw new ArgumentOutOfRangeException("number", ExceptionMessages.NonnegativeNumberRequired);
+                throw new ArgumentOutOfRangeException(nameof(number), ExceptionMessages.NonnegativeNumberRequired);
             }
 
             this.theClass = theClass;

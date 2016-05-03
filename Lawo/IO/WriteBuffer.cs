@@ -74,7 +74,7 @@ namespace Lawo.IO
         {
             if (write == null)
             {
-                throw new ArgumentNullException("write");
+                throw new ArgumentNullException(nameof(write));
             }
 
             this.write = write;
@@ -92,7 +92,7 @@ namespace Lawo.IO
         {
             if (writeAsync == null)
             {
-                throw new ArgumentNullException("writeAsync");
+                throw new ArgumentNullException(nameof(writeAsync));
             }
 
             this.writeAsync = writeAsync;
@@ -272,7 +272,7 @@ namespace Lawo.IO
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
         }
 

@@ -31,7 +31,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (types == null)
             {
-                throw new ArgumentNullException("types");
+                throw new ArgumentNullException(nameof(types));
             }
 
             this.typeNames = types.TypeNames;
@@ -65,12 +65,12 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (reader == null)
             {
-                throw new ArgumentNullException("reader");
+                throw new ArgumentNullException(nameof(reader));
             }
 
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
 
             this.ToXmlCore(reader, writer, default(FieldPath<int, EmberId>), EmberGlobal.InnerNumber);
@@ -103,12 +103,12 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (reader == null)
             {
-                throw new ArgumentNullException("reader");
+                throw new ArgumentNullException(nameof(reader));
             }
 
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
 
             this.FromXmlCore(reader, writer, default(FieldPath<string, string>), EmberGlobal.Name);

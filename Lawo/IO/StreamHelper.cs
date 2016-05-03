@@ -38,7 +38,7 @@ namespace Lawo.IO
         {
             if (read == null)
             {
-                throw new ArgumentNullException("read");
+                throw new ArgumentNullException(nameof(read));
             }
 
             int index = offset;
@@ -81,7 +81,7 @@ namespace Lawo.IO
         {
             if (read == null)
             {
-                throw new ArgumentNullException("read");
+                throw new ArgumentNullException(nameof(read));
             }
 
             int index = offset;

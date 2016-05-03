@@ -31,7 +31,7 @@ namespace Lawo.Threading.Tasks
         {
             if (function == null)
             {
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException(nameof(function));
             }
 
             return this.Enqueue(
@@ -53,7 +53,7 @@ namespace Lawo.Threading.Tasks
         {
             if (function == null)
             {
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException(nameof(function));
             }
 
             var result = this.previousTask.IsCompleted ? function() : EnqueueCore(this.previousTask, function);

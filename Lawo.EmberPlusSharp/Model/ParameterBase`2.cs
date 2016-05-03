@@ -132,7 +132,7 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     if (value == null)
                     {
-                        throw new ArgumentNullException("value");
+                        throw new ArgumentNullException(nameof(value));
                     }
 
                     this.SetConsumerValue(ref this.theValue, value, "Value");
@@ -194,7 +194,7 @@ namespace Lawo.EmberPlusSharp.Model
             catch (InvalidCastException ex)
             {
                 throw new ArgumentException(
-                    "The type of value does not match the type of the parameter.", "value", ex);
+                    "The type of value does not match the type of the parameter.", nameof(value), ex);
             }
         }
 

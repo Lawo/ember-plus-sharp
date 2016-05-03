@@ -131,7 +131,7 @@ namespace Lawo.EmberPlusSharp.Model
             catch (InvalidCastException ex)
             {
                 throw new ArgumentException(
-                    "The type of value does not match the type of the parameter.", "value", ex);
+                    "The type of value does not match the type of the parameter.", nameof(value), ex);
             }
         }
 

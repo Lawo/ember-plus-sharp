@@ -36,7 +36,7 @@ namespace Lawo.ComponentModel
             {
                 if (original == null)
                 {
-                    throw new ArgumentNullException("original");
+                    throw new ArgumentNullException(nameof(original));
                 }
 
                 this.original = original;

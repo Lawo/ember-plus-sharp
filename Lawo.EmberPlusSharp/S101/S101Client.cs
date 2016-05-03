@@ -103,22 +103,22 @@ namespace Lawo.EmberPlusSharp.S101
 
                 if (connection == null)
                 {
-                    throw new ArgumentNullException("connection");
+                    throw new ArgumentNullException(nameof(connection));
                 }
 
                 if (readAsync == null)
                 {
-                    throw new ArgumentNullException("readAsync");
+                    throw new ArgumentNullException(nameof(readAsync));
                 }
 
                 if (writeAsync == null)
                 {
-                    throw new ArgumentNullException("writeAsync");
+                    throw new ArgumentNullException(nameof(writeAsync));
                 }
 
                 if (timeout < -1)
                 {
-                    throw new ArgumentOutOfRangeException("timeout", "A number >= -1 is required.");
+                    throw new ArgumentOutOfRangeException(nameof(timeout), "A number >= -1 is required.");
                 }
 
                 WriteAsyncCallback writeAsyncWithLog;
@@ -412,7 +412,7 @@ namespace Lawo.EmberPlusSharp.S101
                     {
                         throw new ArgumentException(
                             "The payload requirements of the command of the passed message do not match the passed payload.",
-                            "payload");
+                            nameof(payload));
                     }
 
                     if (payload != null)

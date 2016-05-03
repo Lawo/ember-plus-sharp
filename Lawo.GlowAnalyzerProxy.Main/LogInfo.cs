@@ -42,7 +42,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
         // For subsequent elements the full closing tag of the previous element has already been written.
         // For both cases, the CRLF before the next tag has not been written yet.
         internal long StartPosition =>
-		    this.writer.BaseStream.Position + (this.xmlWriter.WriteState == WriteState.Element ? 3 : 2);
+            this.writer.BaseStream.Position + (this.xmlWriter.WriteState == WriteState.Element ? 3 : 2);
 
         internal long? EndPosition => this.writer.BaseStream == null ? (long?)null : this.writer.BaseStream.Position;
 

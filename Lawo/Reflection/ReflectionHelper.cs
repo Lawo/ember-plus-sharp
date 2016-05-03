@@ -52,7 +52,7 @@ namespace Lawo.Reflection
             {
                 if (owner == null)
                 {
-                    throw new ArgumentNullException("owner");
+                    throw new ArgumentNullException(nameof(owner));
                 }
 
                 this.owner = owner;

@@ -77,7 +77,7 @@ namespace Lawo.IO
         {
             if (read == null)
             {
-                throw new ArgumentNullException("read");
+                throw new ArgumentNullException(nameof(read));
             }
 
             this.read = read;
@@ -95,7 +95,7 @@ namespace Lawo.IO
         {
             if (readAsync == null)
             {
-                throw new ArgumentNullException("readAsync");
+                throw new ArgumentNullException(nameof(readAsync));
             }
 
             this.readAsync = readAsync;

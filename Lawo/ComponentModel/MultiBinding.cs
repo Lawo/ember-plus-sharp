@@ -317,7 +317,7 @@ namespace Lawo.ComponentModel
         {
             if (sources == null)
             {
-                throw new ArgumentNullException("sources");
+                throw new ArgumentNullException(nameof(sources));
             }
 
             AssertNotNull(toTarget);
@@ -331,7 +331,7 @@ namespace Lawo.ComponentModel
         {
             if (toTarget == null)
             {
-                throw new ArgumentNullException("toTarget");
+                throw new ArgumentNullException(nameof(toTarget));
             }
         }
 

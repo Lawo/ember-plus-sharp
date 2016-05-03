@@ -27,7 +27,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (types == null)
             {
-                throw new ArgumentNullException("types");
+                throw new ArgumentNullException(nameof(types));
             }
 
             var allTypes = BerTypes.Concat(types).ToArray();

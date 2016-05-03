@@ -42,7 +42,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (path == null)
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             }
 
             return this.GetElement(path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries), 0);

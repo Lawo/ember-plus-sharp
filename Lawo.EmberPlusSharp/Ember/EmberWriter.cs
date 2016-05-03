@@ -36,7 +36,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
 
             this.writeBuffer = new WriteBuffer(stream.Write, bufferSize);
@@ -99,7 +99,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             // For byte[] values, the buffer size does not matter
@@ -143,7 +143,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             var byteCount = Encoding.UTF8.GetByteCount(value);
@@ -162,7 +162,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             // For byte[] values, the buffer size does not matter
@@ -219,7 +219,7 @@ namespace Lawo.EmberPlusSharp.Ember
             if (innerNumber < InnerNumber.FirstApplication)
             {
                 throw new ArgumentOutOfRangeException(
-                    "innerNumber", "Must be greater than or equal to InnerNumber.StartFirstApplication");
+                    nameof(innerNumber), "Must be greater than or equal to InnerNumber.StartFirstApplication");
             }
 
             this.writeBuffer.Reserve(IdentifiersAndLengthsMaxLength);

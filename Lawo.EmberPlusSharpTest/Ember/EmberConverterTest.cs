@@ -155,7 +155,8 @@ namespace Lawo.EmberPlusSharp.Ember
                 {
                     converter.FromXml(reader);
                     throw new ArgumentException(
-                        string.Format(CultureInfo.InvariantCulture, "Unexpected success with xml {0}.", xml), "xml");
+                        string.Format(CultureInfo.InvariantCulture, "Unexpected success with xml {0}.", xml),
+                        nameof(xml));
                 }
                 catch (XmlException ex)
                 {

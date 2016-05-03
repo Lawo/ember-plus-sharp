@@ -35,7 +35,7 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.identifier = value;

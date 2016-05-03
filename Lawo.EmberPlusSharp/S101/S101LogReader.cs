@@ -27,7 +27,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             if (logReader == null)
             {
-                throw new ArgumentNullException("logReader");
+                throw new ArgumentNullException(nameof(logReader));
             }
 
             this.converter = new EmberConverter(types);

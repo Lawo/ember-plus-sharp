@@ -45,7 +45,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (path.field1.HasValue)
             {
-                throw new ArgumentException("Cannot be appended.", "path");
+                throw new ArgumentException("Cannot be appended.", nameof(path));
             }
 
             return new FieldPath<TTypeId, TFieldId>(path.field2, path.field3, field);

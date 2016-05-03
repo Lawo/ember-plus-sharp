@@ -59,7 +59,7 @@ namespace Lawo.ComponentModel
             {
                 if (projectionFunction == null)
                 {
-                    throw new ArgumentNullException("projectionFunction");
+                    throw new ArgumentNullException(nameof(projectionFunction));
                 }
 
                 this.projectionFunction = projectionFunction;

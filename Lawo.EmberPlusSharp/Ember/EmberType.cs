@@ -76,12 +76,12 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (types == null)
             {
-                throw new ArgumentNullException("types");
+                throw new ArgumentNullException(nameof(types));
             }
 
             if (types.Length == 0)
             {
-                throw new ArgumentException("Length must not be 0.", "types");
+                throw new ArgumentException("Length must not be 0.", nameof(types));
             }
 
             this.types = types;

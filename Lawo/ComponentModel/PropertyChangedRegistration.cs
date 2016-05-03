@@ -29,17 +29,17 @@ namespace Lawo.ComponentModel
         {
             if (handler == null)
             {
-                throw new ArgumentNullException("handler");
+                throw new ArgumentNullException(nameof(handler));
             }
 
             if (properties == null)
             {
-                throw new ArgumentNullException("properties");
+                throw new ArgumentNullException(nameof(properties));
             }
 
             if (Array.IndexOf(properties, null) >= 0)
             {
-                throw new ArgumentException("Array elements cannot be null.", "properties");
+                throw new ArgumentException("Array elements cannot be null.", nameof(properties));
             }
 
             this.handler = handler;

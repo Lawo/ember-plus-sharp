@@ -46,7 +46,7 @@ namespace Lawo.IO
         {
             if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException("bufferSize", ExceptionMessages.PositiveNumberRequired);
+                throw new ArgumentOutOfRangeException(nameof(bufferSize), ExceptionMessages.PositiveNumberRequired);
             }
 
             this.buffer = new byte[bufferSize];

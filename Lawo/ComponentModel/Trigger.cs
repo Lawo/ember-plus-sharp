@@ -32,12 +32,12 @@ namespace Lawo.ComponentModel
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             if (handler == null)
             {
-                throw new ArgumentNullException("handler");
+                throw new ArgumentNullException(nameof(handler));
             }
 
             return new Forwarder<TOwner, TProperty>(property, handler);
