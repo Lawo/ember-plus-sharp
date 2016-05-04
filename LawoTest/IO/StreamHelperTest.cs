@@ -24,9 +24,9 @@ namespace Lawo.IO
             AsyncPump.Run(
                 async () =>
                 {
-                    AssertThrow<ArgumentNullException>(() => StreamHelper.Fill((ReadCallback)null, new byte[1], 0, 1));
+                    AssertThrow<ArgumentNullException>(() => StreamHelper.Fill(null, new byte[1], 0, 1));
                     await AssertThrowAsync<ArgumentNullException>(
-                        () => StreamHelper.FillAsync((ReadAsyncCallback)null, new byte[1], 0, 1, CancellationToken.None));
+                        () => StreamHelper.FillAsync(null, new byte[1], 0, 1, CancellationToken.None));
                 });
         }
     }

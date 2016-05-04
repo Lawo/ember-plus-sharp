@@ -111,7 +111,7 @@ namespace Lawo.IO
             // This covers the case where the written bytes are copied into the buffer in two chunks
             using (var stream = new MemoryStream())
             {
-                var writeBuffer = new WriteBuffer((WriteCallback)stream.Write, 1);
+                var writeBuffer = new WriteBuffer(stream.Write, 1);
                 writeBuffer.Write(originalBytes, 0, originalBytes.Length);
                 writeBuffer.Flush();
                 CollectionAssert.AreEqual(originalBytes, stream.ToArray());
@@ -131,7 +131,7 @@ namespace Lawo.IO
                     // This covers the case where the written bytes are copied into the buffer in two chunks
                     using (var stream = new MemoryStream())
                     {
-                        var writeBuffer = new WriteBuffer((WriteAsyncCallback)stream.WriteAsync, 1);
+                        var writeBuffer = new WriteBuffer(stream.WriteAsync, 1);
                         await writeBuffer.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None);
                         await writeBuffer.FlushAsync(CancellationToken.None);
                         CollectionAssert.AreEqual(bytes, stream.ToArray());
@@ -183,7 +183,7 @@ namespace Lawo.IO
                             () => writeBuffer.ReserveAsync(2, CancellationToken.None),
                             () => writeBuffer.WriteAsync(new byte[3], 0, 3, CancellationToken.None));
 
-                        var asyncWriteBuffer = new WriteBuffer((WriteAsyncCallback)stream.WriteAsync, 1);
+                        var asyncWriteBuffer = new WriteBuffer(stream.WriteAsync, 1);
                         asyncWriteBuffer[asyncWriteBuffer.Count++] = 42;
                         AssertThrow<InvalidOperationException>(() => asyncWriteBuffer.Flush());
                         asyncWriteBuffer[asyncWriteBuffer.Count++] = 42;

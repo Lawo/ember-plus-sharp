@@ -114,8 +114,8 @@ namespace Lawo.ComponentModel
             AssertThrow<ArgumentNullException>(
                 () => TwoWayBinding.Create((IProperty<Source, string>)null, this.target.GetProperty(o => o.Property)).Dispose(),
                 () => TwoWayBinding.Create(this.source.GetProperty(o => o.Property), (IProperty<Target, string>)null).Dispose(),
-                () => TwoWayBinding.Create(this.source.GetProperty(o => o.Property), (Func<string, string>)null, this.target.GetProperty(o => o.Property), v => v).Dispose(),
-                () => TwoWayBinding.Create(this.source.GetProperty(o => o.Property), v => v, this.target.GetProperty(o => o.Property), (Func<string, string>)null).Dispose());
+                () => TwoWayBinding.Create(this.source.GetProperty(o => o.Property), null, this.target.GetProperty(o => o.Property), v => v).Dispose(),
+                () => TwoWayBinding.Create(this.source.GetProperty(o => o.Property), v => v, this.target.GetProperty(o => o.Property), null).Dispose());
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

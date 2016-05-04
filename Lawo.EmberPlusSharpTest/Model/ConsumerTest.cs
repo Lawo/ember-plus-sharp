@@ -1156,7 +1156,7 @@ namespace Lawo.EmberPlusSharp.Model
                     using (var providerClient = await providerClientTask)
                     using (var providerStream = providerClient.GetStream())
                     {
-                        var providerReader = new S101Reader((ReadAsyncCallback)providerStream.ReadAsync);
+                        var providerReader = new S101Reader(providerStream.ReadAsync);
                         var consumerTask = Consumer<SingleParameterRoot>.CreateAsync(consumerClient);
 
                         if (await providerReader.ReadAsync(CancellationToken.None))
@@ -1246,7 +1246,7 @@ namespace Lawo.EmberPlusSharp.Model
                     using (var providerClient = await providerClientTask)
                     using (var providerStream = providerClient.GetStream())
                     {
-                        var providerReader = new S101Reader((ReadAsyncCallback)providerStream.ReadAsync);
+                        var providerReader = new S101Reader(providerStream.ReadAsync);
                         var consumerTask = Consumer<EmptyZoneNodeRoot>.CreateAsync(consumerClient);
                         await ReadAndAssertEqualAsync(providerReader, "Request1.xml");
 
@@ -1309,7 +1309,7 @@ namespace Lawo.EmberPlusSharp.Model
                     using (var providerClient = await providerClientTask)
                     using (var providerStream = providerClient.GetStream())
                     {
-                        var providerReader = new S101Reader((ReadAsyncCallback)providerStream.ReadAsync);
+                        var providerReader = new S101Reader(providerStream.ReadAsync);
                         var consumerTask = Consumer<EmptyZoneNodeRoot>.CreateAsync(consumerClient);
                         await ReadAndAssertEqualAsync(providerReader, "Request1.xml");
 
@@ -2003,7 +2003,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             var args =
-                new object[]
+                new[]
                 {
                     failFormat(GetFormat(intValue, isLittleEndian)),
                     0,

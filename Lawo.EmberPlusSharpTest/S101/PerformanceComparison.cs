@@ -35,7 +35,7 @@ namespace Lawo.EmberPlusSharp.S101
 
                     using (var stream = new MemoryStream())
                     {
-                        var writer = new S101Writer((WriteAsyncCallback)stream.WriteAsync, 1024);
+                        var writer = new S101Writer(stream.WriteAsync, 1024);
 
                         using (var payloadStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
                         {
@@ -95,7 +95,7 @@ namespace Lawo.EmberPlusSharp.S101
 
             using (var stream = new MemoryStream(message))
             {
-                var reader = new S101Reader((ReadAsyncCallback)stream.ReadAsync, 1024);
+                var reader = new S101Reader(stream.ReadAsync, 1024);
 
                 for (int index = 0; index < messageCount; ++index)
                 {
@@ -132,7 +132,7 @@ namespace Lawo.EmberPlusSharp.S101
         private static async Task TestS101WriterAsync(byte[] block, int blockCount)
         {
             var completed = Task.FromResult(false);
-            var writer = new S101Writer((WriteAsyncCallback)((b, o, c, t) => completed), 1024);
+            var writer = new S101Writer((b, o, c, t) => completed, 1024);
 
             using (var payloadStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
             {

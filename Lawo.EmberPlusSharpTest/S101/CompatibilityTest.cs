@@ -39,7 +39,7 @@ namespace Lawo.EmberPlusSharp.S101
                         }
 
                         output.Position = 0;
-                        var reader = new S101Reader((ReadAsyncCallback)output.ReadAsync, 1024);
+                        var reader = new S101Reader(output.ReadAsync, 1024);
                         Assert.IsTrue(await reader.ReadAsync(CancellationToken.None));
                         Assert.IsInstanceOfType(reader.Message.Command, typeof(EmberData));
 

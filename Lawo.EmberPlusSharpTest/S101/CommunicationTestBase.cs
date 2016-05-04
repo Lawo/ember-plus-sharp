@@ -190,7 +190,7 @@ namespace Lawo.EmberPlusSharp.S101
         protected static async Task<MemoryStream> GetS101MessageStreamAsync(byte[] payload)
         {
             var stream = new MemoryStream();
-            var writer = new S101Writer((WriteAsyncCallback)stream.WriteAsync);
+            var writer = new S101Writer(stream.WriteAsync);
 
             using (var messageStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
             {

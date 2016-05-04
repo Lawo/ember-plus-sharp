@@ -128,7 +128,7 @@ namespace Lawo.EmberPlusSharp.S101
                         // First we create a writer, which can be used to write multiple messages.
                         // We specify which methods are used to write encoded output and flush it plus the size the internal
                         // buffer should have.
-                        var writer = new S101Writer((WriteAsyncCallback)encodedStream.WriteAsync);
+                        var writer = new S101Writer(encodedStream.WriteAsync);
 
                         // Next we write the message. In return we get a Stream object for the payload.
                         using (var payloadStream =
@@ -146,7 +146,7 @@ namespace Lawo.EmberPlusSharp.S101
 
                         // First we create a reader, which can be used to read multiple messages.
                         // We specify which methods are used to read encoded input.
-                        var reader = new S101Reader((ReadAsyncCallback)encodedStream.ReadAsync);
+                        var reader = new S101Reader(encodedStream.ReadAsync);
                         Assert.IsTrue(await reader.ReadAsync(CancellationToken.None)); // Read the first message
                         var readMessage = reader.Message;
 
@@ -179,7 +179,7 @@ namespace Lawo.EmberPlusSharp.S101
                 {
                     new S101Writer((b, o, c, t) => Task.FromResult(false));
 
-                    AssertThrow<ArgumentNullException>(() => new S101Writer((WriteAsyncCallback)null, 1));
+                    AssertThrow<ArgumentNullException>(() => new S101Writer(null, 1));
                     AssertThrow<ArgumentOutOfRangeException>(
                         () => new S101Writer((b, o, c, t) => Task.FromResult(false), 0));
 

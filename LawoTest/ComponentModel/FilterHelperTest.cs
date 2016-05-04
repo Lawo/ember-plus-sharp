@@ -78,7 +78,7 @@ namespace Lawo.ComponentModel
 
             AssertThrow<ArgumentNullException>(
                 () => ((ReadOnlyObservableCollection<int>)null).Filter(i => true, null),
-                () => empty.Filter((Predicate<int>)null, null));
+                () => empty.Filter(null, null));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

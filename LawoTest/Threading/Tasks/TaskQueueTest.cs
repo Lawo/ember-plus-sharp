@@ -43,7 +43,7 @@ namespace Lawo.Threading.Tasks
             var queue = new TaskQueue();
 
             AssertThrow<ArgumentNullException>(
-                () => queue.Enqueue((Func<Task>)null),
+                () => queue.Enqueue(null),
                 () => queue.Enqueue((Func<Task<string>>)null));
         }
     }

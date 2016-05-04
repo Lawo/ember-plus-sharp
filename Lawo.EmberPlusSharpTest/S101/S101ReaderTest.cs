@@ -55,13 +55,13 @@ namespace Lawo.EmberPlusSharp.S101
                 {
                     new S101Reader((b, o, c, t) => Task.FromResult(0));
 
-                    AssertThrow<ArgumentNullException>(() => new S101Reader((ReadAsyncCallback)null, 1));
+                    AssertThrow<ArgumentNullException>(() => new S101Reader(null, 1));
                     AssertThrow<ArgumentOutOfRangeException>(() => new S101Reader((b, o, c, t) => Task.FromResult(0), 0));
 
                     using (var input = new MemoryStream(
                         new byte[] { 0xFE, 0x00, 0x0E, 0x01, 0x01, 0x94, 0xE4, 0xFF, 0xFE, 0x00, 0x0E, 0x02, 0x01, 0xFD, 0xDC, 0xCE, 0xFF }))
                     {
-                        var reader = new S101Reader((ReadAsyncCallback)input.ReadAsync, 1);
+                        var reader = new S101Reader(input.ReadAsync, 1);
                         AssertThrow<InvalidOperationException>(() => reader.Message.ToString());
                         AssertThrow<InvalidOperationException>(() => reader.Payload.ToString());
                         Assert.IsTrue(await reader.ReadAsync(CancellationToken.None));

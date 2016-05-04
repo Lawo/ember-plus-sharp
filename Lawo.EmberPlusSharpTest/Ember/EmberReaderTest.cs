@@ -122,7 +122,7 @@ namespace Lawo.EmberPlusSharp.Ember
             var header =
                 new byte[]
                 {
-                    0x60, 0x81, (byte)(contents.Length + 3), (byte)InnerNumber.Octetstring, 0x81, (byte)contents.Length
+                    0x60, 0x81, (byte)(contents.Length + 3), InnerNumber.Octetstring, 0x81, (byte)contents.Length
                 };
 
             AssertDecodeContents(InnerNumber.Octetstring, contents, header, contents);
