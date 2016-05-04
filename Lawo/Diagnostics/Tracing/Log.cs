@@ -16,7 +16,7 @@ namespace Lawo.Diagnostics.Tracing
     public sealed class Log : EventSource
     {
         /// <summary>Gets the instance.</summary>
-        public static Log Instance => instance;
+        public static Log Instance { get; } = new Log();
 
         /// <summary>
         /// Logs on debug level.
@@ -28,7 +28,7 @@ namespace Lawo.Diagnostics.Tracing
         public static void Debug(
             string logMessage, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = null)
         {
-            Instance.LogDebug(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, moduleNameDefault);
+            Instance.LogDebug(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, ModuleNameDefault);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Lawo.Diagnostics.Tracing
             [CallerLineNumber] int lineNumber = 0,
             [CallerFilePath] string filePath = null)
         {
-            Instance.LogInfo(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, moduleNameDefault);
+            Instance.LogInfo(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, ModuleNameDefault);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Lawo.Diagnostics.Tracing
             [CallerLineNumber] int lineNumber = 0,
             [CallerFilePath] string filePath = null)
         {
-            Instance.LogWarn(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, moduleNameDefault);
+            Instance.LogWarn(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, ModuleNameDefault);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Lawo.Diagnostics.Tracing
             [CallerLineNumber] int lineNumber = 0,
             [CallerFilePath] string filePath = null)
         {
-            Instance.LogError(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, moduleNameDefault);
+            Instance.LogError(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, ModuleNameDefault);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Lawo.Diagnostics.Tracing
             [CallerLineNumber] int lineNumber = 0,
             [CallerFilePath] string filePath = null)
         {
-            Instance.LogCritical(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, moduleNameDefault);
+            Instance.LogCritical(logMessage, NativeMethods.GetCurrentThreadId(), filePath, lineNumber, ModuleNameDefault);
         }
 
         /// <summary>
@@ -178,8 +178,7 @@ namespace Lawo.Diagnostics.Tracing
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static readonly Log instance = new Log();
-        private static readonly string moduleNameDefault = string.Empty;
+        private static readonly string ModuleNameDefault = string.Empty;
 
         private Log()
         {
