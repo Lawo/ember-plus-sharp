@@ -150,8 +150,7 @@ namespace Lawo.ComponentModel
             for (var round = 0; round < 10; ++round)
             {
                 var children = Enumerable.Range(0, this.Random.Next(10)).Select(i => this.CreateRandomChild()).ToList();
-                var parent = new ObservableCollection<ReadOnlyObservableCollection<int>>(
-                    children.Select(c => MakeReadOnly(c)));
+                var parent = new ObservableCollection<ReadOnlyObservableCollection<int>>(children.Select(MakeReadOnly));
 
                 using (var flattened =
                     new ReadOnlyObservableCollection<ReadOnlyObservableCollection<int>>(parent).Flatten())

@@ -230,9 +230,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 a => a.GetValueOrDefault());
             #endregion
 
-            this.AddValidationRule(this.GetProperty(o => o.ProviderPort), p => ValidatePort(p));
-            this.AddValidationRule(this.GetProperty(o => o.ListeningPort), p => ValidatePort(p));
-            this.AddValidationRule(this.GetProperty(o => o.LogFolder), f => ValidateFolder(f));
+            this.AddValidationRule(this.GetProperty(o => o.ProviderPort), ValidatePort);
+            this.AddValidationRule(this.GetProperty(o => o.ListeningPort), ValidatePort);
+            this.AddValidationRule(this.GetProperty(o => o.LogFolder), ValidateFolder);
         }
 
         internal bool IsStarted

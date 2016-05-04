@@ -213,8 +213,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             return await this.InvokeCoreAsync(
-                new DynamicResult(this.result),
-                this.arguments.Zip(actualArguments, (e, a) => CreateWriter(e, a)).ToArray());
+                new DynamicResult(this.result), this.arguments.Zip(actualArguments, CreateWriter).ToArray());
         }
 
         private void WriteInvocations(EmberWriter writer, IInvocationCollection pendingInvocations)

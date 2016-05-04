@@ -25,7 +25,7 @@ namespace Lawo.Threading.Tasks
         public void MainTest()
         {
             LogMethodPosition("Begin");
-            AsyncPump.Run(() => DoEverything());
+            AsyncPump.Run(DoEverything);
             LogMethodPosition("End");
         }
 

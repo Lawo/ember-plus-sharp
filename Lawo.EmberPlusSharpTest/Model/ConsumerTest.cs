@@ -1569,7 +1569,7 @@ namespace Lawo.EmberPlusSharp.Model
             where TRoot : Root<TRoot>
         {
             return TestWithRobot<ModelPayloads>(
-                client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), c => testCallback(c)),
+                client => MonitorConnection(Consumer<TRoot>.CreateAsync(client, 4000), testCallback),
                 CreateLogger(log, logXmlName, "consumer.xml"),
                 CreateLogger(log, logXmlName, "provider.xml"),
                 GlowTypes.Instance,
