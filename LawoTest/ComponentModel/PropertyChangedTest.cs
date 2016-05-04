@@ -276,7 +276,7 @@ namespace Lawo.ComponentModel
                 AssertThrow<ArgumentNullException>(
                     () => CalculatedProperty.Create((IProperty<NotifyPropertyChanged, int>)null, v => v, this.GetProperty(o => o.Calculated)).Dispose(),
                     () => CalculatedProperty.Create(this.GetProperty(o => o.Value), null, this.GetProperty(o => o.Calculated)).Dispose(),
-                    () => CalculatedProperty.Create<int, int>(this.GetProperty(o => o.Value), v => v, null).Dispose());
+                    () => CalculatedProperty.Create(this.GetProperty(o => o.Value), v => v, null).Dispose());
 
                 AssertThrow<ArgumentNullException>(() => MultiBinding.Create(this.GetProperty(o => o.Value), null).Dispose());
             }

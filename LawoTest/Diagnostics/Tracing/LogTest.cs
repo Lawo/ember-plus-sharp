@@ -186,12 +186,13 @@ namespace Lawo.Diagnostics.Tracing
             });
         }
 
-        private static async Task<TestLogListener.LogEvent> WaitForLogEventAsync(ObservableCollection<TestLogListener.LogEvent> collection, string logMessage)
+        private static async Task<TestLogListener.LogEvent> WaitForLogEventAsync(
+            ObservableCollection<TestLogListener.LogEvent> collection, string logMessage)
         {
-            TestLogListener.LogEvent foundLogEvent = null;
+            TestLogListener.LogEvent foundLogEvent;
 
             while (((foundLogEvent = collection.FirstOrDefault(n => n.LogMessage == logMessage)) == null) &&
-                   await WaitForChangeAsync(collection.GetProperty(c => c.Count)) > 0)
+                await WaitForChangeAsync(collection.GetProperty(c => c.Count)) > 0)
             {
             }
 
