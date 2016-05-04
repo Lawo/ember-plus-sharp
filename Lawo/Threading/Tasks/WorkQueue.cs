@@ -17,11 +17,6 @@ namespace Lawo.Threading.Tasks
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class WorkQueue
     {
-        /// <summary>Initializes a new instance of the <see cref="WorkQueue"/> class.</summary>
-        public WorkQueue()
-        {
-        }
-
         /// <summary>Enqueues <paramref name="action"/>.</summary>
         /// <returns>A task that represents the execution of <paramref name="action"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="action"/> equals <c>null</c>.</exception>

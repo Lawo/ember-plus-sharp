@@ -262,11 +262,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
         private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
 
-        private static string GetCount(bool isValid, long count)
-        {
-            return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
-        }
-
         private static string ValidatePort(string value)
         {
             int intValue;
@@ -382,12 +377,6 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 listener.Stop();
                 this.IsStarted = false;
             }
-        }
-
-        private string GetSecondsSinceLastReceived(TcpClient client, DateTime lastReceived)
-        {
-            return client == null ?
-                string.Empty : ((long)(this.Now - lastReceived).TotalSeconds).ToString(CultureInfo.InvariantCulture);
         }
 
         private void AddValidationRule<T>(IProperty<MainWindowViewModel, T> property, Func<T, string> rule)

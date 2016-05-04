@@ -376,7 +376,6 @@ namespace Lawo.EmberPlusSharp.Model
         {
             const string Format =
                 "A stream entry for the parameter with the path {0} is incompatible, see inner exception for more information.";
-            var descriptor = parameter.StreamDescriptor.Value;
             return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, parameter.GetPath()), ex);
         }
 

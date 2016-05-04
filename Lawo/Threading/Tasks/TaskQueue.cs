@@ -17,11 +17,6 @@ namespace Lawo.Threading.Tasks
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This is a queue and we want the name to express that fact.")]
     public sealed class TaskQueue
     {
-        /// <summary>Initializes a new instance of the <see cref="TaskQueue"/> class.</summary>
-        public TaskQueue()
-        {
-        }
-
         /// <summary>Enqueues <paramref name="function"/>.</summary>
         /// <returns>A <see cref="Task"/> object that represents a proxy for the <see cref="Task"/> returned by
         /// <paramref name="function"/>.</returns>

@@ -10,9 +10,5 @@ namespace Lawo.EmberPlusSharp.Model
     /// <threadsafety static="true" instance="false"/>
     public sealed class Result : ResultBase<Result>
     {
-        /// <summary>Initializes a new instance of the <see cref="Result"/> class.</summary>
-        public Result()
-        {
-        }
     }
 }

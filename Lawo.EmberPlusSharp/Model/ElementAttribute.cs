@@ -16,11 +16,6 @@ namespace Lawo.EmberPlusSharp.Model
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class ElementAttribute : Attribute
     {
-        /// <summary>Initializes a new instance of the <see cref="ElementAttribute"/> class.</summary>
-        public ElementAttribute()
-        {
-        }
-
         /// <summary>Gets or sets the identifier of the element represented by the property carrying this attribute.
         /// </summary>
         /// <exception cref="ArgumentNullException">Attempted to set the value <c>null</c>.</exception>

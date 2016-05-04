@@ -232,7 +232,7 @@ namespace Lawo
             Max = short.MaxValue
         }
 
-        private enum IntEnum : int
+        private enum IntEnum
         {
             /// <summary>Min value.</summary>
             Min = int.MinValue,
