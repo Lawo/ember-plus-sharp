@@ -33,10 +33,10 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Gets the Slot.</summary>
-        public byte Slot { get; private set; }
+        public byte Slot { get; }
 
         /// <summary>Gets the Command.</summary>
-        public S101Command Command { get; private set; }
+        public S101Command Command { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

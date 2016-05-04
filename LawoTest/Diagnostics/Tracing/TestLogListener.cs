@@ -17,7 +17,7 @@ namespace Lawo.Diagnostics.Tracing
             this.LogEvents = new ObservableCollection<LogEvent>();
         }
 
-        public ObservableCollection<LogEvent> LogEvents { get; private set; }
+        public ObservableCollection<LogEvent> LogEvents { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
