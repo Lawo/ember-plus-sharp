@@ -4,9 +4,9 @@
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace Tutorial
+namespace Lawo.EmberPlusSharp.Model
 {
-// The following suppressions are necessary so that tested code snippets can be included in the documentation.
+    // The following suppressions are necessary so that tested code snippets can be included in the documentation.
 #pragma warning disable SA1123 // Do not place regions within elements
 #pragma warning disable SA1124 // Do not use regions
 #pragma warning disable SA1515 // Single-line comment must be preceded by blank line
@@ -15,12 +15,11 @@ namespace Tutorial
     using System.Linq;
     using System.Net.Sockets;
     using System.Threading.Tasks;
-    using Lawo.EmberPlusSharp.Model;
-    using Lawo.EmberPlusSharp.S101;
-    using Lawo.Threading.Tasks;
-    #endregion
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using S101;
+    using Threading.Tasks;
+    #endregion
 
     /// <summary>Tests the <see cref="Consumer{T}"/>-based code shown in the tutorial.</summary>
     [TestClass]

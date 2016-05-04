@@ -1524,18 +1524,18 @@ namespace Lawo.EmberPlusSharp.Model
                             () => root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All + 1);
                         Assert.AreEqual(policy, root.ChildrenRetrievalPolicy);
 
-                        const string expectedMessage =
+                        const string ExpectedMessage =
                             "A new value cannot be set if the current value is not equal to ChildrenRetrievalPolicy.None.\r\nParameter name: value";
 
                         if (root.ChildrenRetrievalPolicy == ChildrenRetrievalPolicy.None)
                         {
                             root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
                             AssertThrow<ArgumentException>(
-                                () => root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All, expectedMessage);
+                                () => root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All, ExpectedMessage);
                         }
                         else
                         {
-                            AssertThrow<ArgumentException>(() => root.ChildrenRetrievalPolicy -= 1, expectedMessage);
+                            AssertThrow<ArgumentException>(() => root.ChildrenRetrievalPolicy -= 1, ExpectedMessage);
                         }
 
                         if (policy == ChildrenRetrievalPolicy.None)
