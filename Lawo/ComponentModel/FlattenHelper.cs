@@ -63,7 +63,7 @@ namespace Lawo.ComponentModel
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             private static int GetTotalCount(IEnumerable<ReadOnlyObservableCollection<T>> inners) =>
-                inners.Aggregate(0, (c, i) => c + (i == null ? 0 : i.Count));
+                inners.Aggregate(0, (c, i) => c + (i?.Count ?? 0));
 
             private static void Unsubscribe(INotifyCollectionChanged inner, NotifyCollectionChangedEventHandler handler)
             {
@@ -78,11 +78,10 @@ namespace Lawo.ComponentModel
 
             private void AddedToOuter(int outerIndex, ReadOnlyObservableCollection<T> inner)
             {
-                var handler = inner == null ? (NotifyCollectionChangedEventHandler)null :
-                    inner.AddChangeHandlers<ReadOnlyObservableCollection<T>, T>(
-                        (index, item) => this.AddedToInner(inner, index, item),
-                        (index, item) => this.RemovedFromInner(inner, index),
-                        () => this.ClearedInner(inner));
+                var handler = inner?.AddChangeHandlers<ReadOnlyObservableCollection<T>, T>(
+                    (index, item) => this.AddedToInner(inner, index, item),
+                    (index, item) => this.RemovedFromInner(inner, index),
+                    () => this.ClearedInner(inner));
                 this.unsubscribeCallbacks.Insert(outerIndex, () => Unsubscribe(inner, handler));
             }
 
@@ -93,7 +92,7 @@ namespace Lawo.ComponentModel
                 unsubscribeCallback();
 
                 var startIndex = GetTotalCount(this.original.Take(outerIndex));
-                var pastEndIndex = startIndex + (inner == null ? 0 : inner.Count);
+                var pastEndIndex = startIndex + (inner?.Count ?? 0);
 
                 for (var index = startIndex; index < pastEndIndex; ++index)
                 {

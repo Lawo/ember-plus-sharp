@@ -52,7 +52,7 @@ namespace Lawo.UnitTesting
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way to achieve argument type deduction.")]
         public static T CreateInstance(params object[] args)
         {
-            return CreateInstanceImpl(args.Select(obj => obj == null ? null : obj.GetType()).ToArray(), args);
+            return CreateInstanceImpl(args.Select(obj => obj?.GetType()).ToArray(), args);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////

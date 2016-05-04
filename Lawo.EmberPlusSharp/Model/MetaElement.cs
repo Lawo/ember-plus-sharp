@@ -45,9 +45,8 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 this.Property = property;
                 var attribute = property.GetCustomAttribute<ElementAttribute>();
-                this.Identifier =
-                    (attribute == null) || (attribute.Identifier == null) ? property.Name : attribute.Identifier;
-                this.IsOptional = (attribute != null) && attribute.IsOptional;
+                this.Identifier = attribute?.Identifier ?? property.Name;
+                this.IsOptional = attribute?.IsOptional ?? false;
             }
 
             protected PropertyInfo Property { get; }
