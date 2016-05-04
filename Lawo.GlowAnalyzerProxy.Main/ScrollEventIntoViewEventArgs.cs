@@ -12,13 +12,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
     {
         internal ScrollEventIntoViewEventArgs(Event evt)
         {
-            this.evt = evt;
+            this.NewEvent = evt;
         }
 
-        internal Event NewEvent => this.evt;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly Event evt;
+        internal Event NewEvent { get; }
     }
 }

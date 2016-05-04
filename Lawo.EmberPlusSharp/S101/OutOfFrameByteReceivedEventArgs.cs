@@ -14,17 +14,13 @@ namespace Lawo.EmberPlusSharp.S101
     public sealed class OutOfFrameByteReceivedEventArgs : EventArgs
     {
         /// <summary>Gets the message.</summary>
-        public byte Value => this.value;
+        public byte Value { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal OutOfFrameByteReceivedEventArgs(byte value)
         {
-            this.value = value;
+            this.Value = value;
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly byte value;
     }
 }

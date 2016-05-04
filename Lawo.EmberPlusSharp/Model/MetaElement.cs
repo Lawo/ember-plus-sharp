@@ -30,7 +30,7 @@ namespace Lawo.EmberPlusSharp.Model
                 return (MetaElement)info.Invoke(new[] { property });
             }
 
-            internal string Identifier => this.identifier;
+            internal string Identifier { get; }
 
             internal abstract Element ReadContents(
                 EmberReader reader, ElementType actualType, Context context, out RetrievalState retrievalState);
@@ -43,16 +43,16 @@ namespace Lawo.EmberPlusSharp.Model
 
             protected MetaElement(PropertyInfo property)
             {
-                this.property = property;
+                this.Property = property;
                 var attribute = property.GetCustomAttribute<ElementAttribute>();
-                this.identifier =
+                this.Identifier =
                     (attribute == null) || (attribute.Identifier == null) ? property.Name : attribute.Identifier;
-                this.isOptional = (attribute != null) && attribute.IsOptional;
+                this.IsOptional = (attribute != null) && attribute.IsOptional;
             }
 
-            protected PropertyInfo Property => this.property;
+            protected PropertyInfo Property { get; }
 
-            protected bool IsOptional => this.isOptional;
+            protected bool IsOptional { get; }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -69,10 +69,6 @@ namespace Lawo.EmberPlusSharp.Model
                 throw new ModelException(
                     string.Format(CultureInfo.InvariantCulture, Format, property.Name, property.DeclaringType));
             }
-
-            private readonly PropertyInfo property;
-            private readonly string identifier;
-            private readonly bool isOptional;
         }
     }
 }

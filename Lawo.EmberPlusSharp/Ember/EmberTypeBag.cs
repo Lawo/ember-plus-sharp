@@ -32,10 +32,10 @@ namespace Lawo.EmberPlusSharp.Ember
 
             var allTypes = BerTypes.Concat(types).ToArray();
 
-            this.typeNames = new Dictionary<int, string>(allTypes.Length);
-            this.fieldNames = new Dictionary<FieldPath<int, EmberId>, string>(allTypes.Length * 3);
-            this.innerNumbers = new Dictionary<string, int>(allTypes.Length);
-            this.fieldIds = new Dictionary<FieldPath<string, string>, EmberId>(allTypes.Length * 3);
+            this.TypeNames = new Dictionary<int, string>(allTypes.Length);
+            this.FieldNames = new Dictionary<FieldPath<int, EmberId>, string>(allTypes.Length * 3);
+            this.InnerNumbers = new Dictionary<string, int>(allTypes.Length);
+            this.FieldIds = new Dictionary<FieldPath<string, string>, EmberId>(allTypes.Length * 3);
 
             foreach (var type in allTypes)
             {
@@ -47,8 +47,8 @@ namespace Lawo.EmberPlusSharp.Ember
                 if (nameField != null)
                 {
                     var name = (string)nameField.GetValue(null);
-                    this.typeNames.Add(innerNo, name);
-                    this.innerNumbers.Add(name, innerNo);
+                    this.TypeNames.Add(innerNo, name);
+                    this.InnerNumbers.Add(name, innerNo);
                 }
             }
 
@@ -56,10 +56,10 @@ namespace Lawo.EmberPlusSharp.Ember
             {
                 var typeInfo = type.Type.GetTypeInfo();
                 var innerNumber = (int)typeInfo.GetDeclaredField(InnerNumberFieldName).GetValue(null);
-                var innerTypeName = this.typeNames[innerNumber];
+                var innerTypeName = this.TypeNames[innerNumber];
 
                 var outerFieldIds = GetOuterFieldsIds(type.OuterFields);
-                var outerFieldNames = GetOuterFieldsNames(this.typeNames, type.OuterFields);
+                var outerFieldNames = GetOuterFieldsNames(this.TypeNames, type.OuterFields);
 
                 foreach (var nestedTypeInfo in typeInfo.DeclaredNestedTypes)
                 {
@@ -67,21 +67,21 @@ namespace Lawo.EmberPlusSharp.Ember
                     var innerFieldIds = new Field<int, EmberId>(innerNumber, innerFieldId);
                     var innerFieldName = (string)nestedTypeInfo.GetDeclaredField(NameFieldName).GetValue(null);
                     var innerFieldNames = new Field<string, string>(innerTypeName, innerFieldName);
-                    this.fieldNames.Add(FieldPath<int, EmberId>.Append(outerFieldIds, innerFieldIds), innerFieldName);
-                    this.fieldIds.Add(FieldPath<string, string>.Append(outerFieldNames, innerFieldNames), innerFieldId);
+                    this.FieldNames.Add(FieldPath<int, EmberId>.Append(outerFieldIds, innerFieldIds), innerFieldName);
+                    this.FieldIds.Add(FieldPath<string, string>.Append(outerFieldNames, innerFieldNames), innerFieldId);
                 }
             }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal Dictionary<int, string> TypeNames => this.typeNames;
+        internal Dictionary<int, string> TypeNames { get; }
 
-        internal Dictionary<FieldPath<int, EmberId>, string> FieldNames => this.fieldNames;
+        internal Dictionary<FieldPath<int, EmberId>, string> FieldNames { get; }
 
-        internal Dictionary<string, int> InnerNumbers => this.innerNumbers;
+        internal Dictionary<string, int> InnerNumbers { get; }
 
-        internal Dictionary<FieldPath<string, string>, EmberId> FieldIds => this.fieldIds;
+        internal Dictionary<FieldPath<string, string>, EmberId> FieldIds { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -128,10 +128,5 @@ namespace Lawo.EmberPlusSharp.Ember
             return new Field<string, string>(
                 typeName, (string)outerField.GetTypeInfo().GetDeclaredField(NameFieldName).GetValue(null));
         }
-
-        private readonly Dictionary<int, string> typeNames;
-        private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;
-        private readonly Dictionary<string, int> innerNumbers;
-        private readonly Dictionary<FieldPath<string, string>, EmberId> fieldIds;
     }
 }

@@ -17,25 +17,20 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Returns the lowest state of <paramref name="left"/> and <paramref name="right"/>.</summary>
         /// <remarks>Note that this is a generalization of the boolean &amp; operator to more than two states. Also
         /// known as <see href="http://en.wikipedia.org/wiki/Fuzzy_logic">Fuzzy Logic</see>.</remarks>
-        public static RetrievalState operator &(RetrievalState left, RetrievalState right)
-        {
-            return new RetrievalState(Math.Min(left.state, right.state));
-        }
+        public static RetrievalState operator &(RetrievalState left, RetrievalState right) =>
+            new RetrievalState(Math.Min(left.state, right.state));
 
-        public bool Equals(RetrievalState other)
-        {
-            return this.state == other.state;
-        }
+        public bool Equals(RetrievalState other) => this.state == other.state;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Gets the state used when a request needs to be issued for an element.</summary>
         /// <remarks>This is the lowest state.</remarks>
-        internal static RetrievalState None => NoneField;
+        internal static RetrievalState None { get; } = default(RetrievalState);
 
         /// <summary>Gets the state used when a request has been sent for a node.</summary>
         /// <remarks>This is the second lowest state.</remarks>
-        internal static RetrievalState RequestSent => RequestSentField;
+        internal static RetrievalState RequestSent { get; } = new RetrievalState(1);
 
         /// <summary>Gets the state used for subscribed stream parameters and nodes for which the provider has sent a
         /// response.</summary>
@@ -48,19 +43,14 @@ namespace Lawo.EmberPlusSharp.Model
         /// </list>
         /// <para>This is the second highest state.</para>
         /// </remarks>
-        internal static RetrievalState Complete => CompleteField;
+        internal static RetrievalState Complete { get; } = new RetrievalState(2);
 
         /// <summary>Gets the state used when we have verified that all required children are present for a node.
         /// </summary>
         /// <remarks>This is the highest state.</remarks>
-        internal static RetrievalState Verified => VerifiedField;
+        internal static RetrievalState Verified { get; } = new RetrievalState(3);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private static readonly RetrievalState NoneField = default(RetrievalState);
-        private static readonly RetrievalState RequestSentField = new RetrievalState(1);
-        private static readonly RetrievalState CompleteField = new RetrievalState(2);
-        private static readonly RetrievalState VerifiedField = new RetrievalState(3);
 
         private readonly int state;
 

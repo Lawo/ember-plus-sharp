@@ -13,13 +13,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
     {
         internal ListenFailedEventArgs(SocketException exception)
         {
-            this.exception = exception;
+            this.Exception = exception;
         }
 
-        internal SocketException Exception => this.exception;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly SocketException exception;
+        internal SocketException Exception { get; }
     }
 }

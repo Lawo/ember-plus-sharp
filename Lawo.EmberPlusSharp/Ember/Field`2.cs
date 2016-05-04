@@ -10,38 +10,27 @@ namespace Lawo.EmberPlusSharp.Ember
 
     internal struct Field<TTypeId, TFieldId> : IEquatable<Field<TTypeId, TFieldId>>
     {
-        public bool Equals(Field<TTypeId, TFieldId> other)
-        {
-            return GenericCompare.Equals(this.typeId, other.typeId) &&
-                GenericCompare.Equals(this.fieldId, other.fieldId);
-        }
+        public bool Equals(Field<TTypeId, TFieldId> other) =>
+            GenericCompare.Equals(this.TypeId, other.TypeId) && GenericCompare.Equals(this.FieldId, other.FieldId);
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(this.typeId.GetHashCode(), this.fieldId.GetHashCode());
-        }
+        public override int GetHashCode() => HashCode.Combine(this.TypeId.GetHashCode(), this.FieldId.GetHashCode());
 
         public override string ToString()
         {
-            var typeIdString = this.typeId.ToString();
-            return typeIdString + (string.IsNullOrEmpty(typeIdString) ? string.Empty : ".") + this.fieldId.ToString();
+            var typeIdString = this.TypeId.ToString();
+            return typeIdString + (string.IsNullOrEmpty(typeIdString) ? string.Empty : ".") + this.FieldId.ToString();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal Field(TTypeId typeId, TFieldId fieldId)
         {
-            this.typeId = typeId;
-            this.fieldId = fieldId;
+            this.TypeId = typeId;
+            this.FieldId = fieldId;
         }
 
-        internal TTypeId TypeId => this.typeId;
+        internal TTypeId TypeId { get; }
 
-        internal TFieldId FieldId => this.fieldId;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly TTypeId typeId;
-        private readonly TFieldId fieldId;
+        internal TFieldId FieldId { get; }
     }
 }

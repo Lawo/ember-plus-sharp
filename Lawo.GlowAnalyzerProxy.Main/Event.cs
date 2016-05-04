@@ -11,22 +11,22 @@ namespace Lawo.GlowAnalyzerProxy.Main
     internal sealed class Event
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public int Conn => this.conn;
+        public int Conn { get; }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public double Time => this.time;
+        public double Time { get; }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public string Type => this.type;
+        public string Type { get; }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public string Dir => this.direction;
+        public string Dir { get; }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public int? No => this.number;
+        public int? No { get; }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
-        public int? Payload => this.length;
+        public int? Payload { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,33 +41,21 @@ namespace Lawo.GlowAnalyzerProxy.Main
             long logPosition,
             long logLength)
         {
-            this.conn = connection;
-            this.time = time;
-            this.type = type;
-            this.direction = direction;
-            this.number = number;
-            this.length = length;
-            this.logPath = logPath;
-            this.logPosition = logPosition;
-            this.logLength = logLength;
+            this.Conn = connection;
+            this.Time = time;
+            this.Type = type;
+            this.Dir = direction;
+            this.No = number;
+            this.Payload = length;
+            this.LogPath = logPath;
+            this.LogPosition = logPosition;
+            this.LogLength = logLength;
         }
 
-        internal string LogPath => this.logPath;
+        internal string LogPath { get; }
 
-        internal long LogPosition => this.logPosition;
+        internal long LogPosition { get; }
 
-        internal long LogLength => this.logLength;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly int conn;
-        private readonly double time;
-        private readonly string type;
-        private readonly string direction;
-        private readonly int? number;
-        private readonly int? length;
-        private readonly string logPath;
-        private readonly long logPosition;
-        private readonly long logLength;
+        internal long LogLength { get; }
     }
 }

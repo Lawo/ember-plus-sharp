@@ -30,10 +30,10 @@ namespace Lawo.IO
     public abstract class BufferStream : NonSeekableStream
     {
         /// <inheritdoc/>
-        public sealed override bool CanRead => this.readBuffer != null;
+        public sealed override bool CanRead => this.ReadBuffer != null;
 
         /// <inheritdoc/>
-        public override bool CanWrite => this.writeBuffer != null;
+        public override bool CanWrite => this.WriteBuffer != null;
 
         /// <summary>Asynchronously flushes the write buffer and then disposes the underlying stream.</summary>
         [CLSCompliant(false)]
@@ -49,8 +49,8 @@ namespace Lawo.IO
             }
             finally
             {
-                this.readBuffer = null;
-                this.writeBuffer = null;
+                this.ReadBuffer = null;
+                this.WriteBuffer = null;
             }
         }
 
@@ -60,18 +60,18 @@ namespace Lawo.IO
         /// <remarks>Pass <c>null</c> for one of the buffers to create a stream that only supports reading or writing.</remarks>
         protected BufferStream(ReadBuffer readBuffer, WriteBuffer writeBuffer)
         {
-            this.readBuffer = readBuffer;
-            this.writeBuffer = writeBuffer;
+            this.ReadBuffer = readBuffer;
+            this.WriteBuffer = writeBuffer;
         }
 
         /// <summary>Gets a value indicating whether <see cref="Stream.Dispose()"/> has been called.</summary>
-        protected bool IsDisposed => (this.readBuffer == null) && (this.writeBuffer == null);
+        protected bool IsDisposed => (this.ReadBuffer == null) && (this.WriteBuffer == null);
 
         /// <summary>Gets a reference to the read buffer.</summary>
-        protected ReadBuffer ReadBuffer => this.readBuffer;
+        protected ReadBuffer ReadBuffer { get; private set; }
 
         /// <summary>Gets a reference to the write buffer.</summary>
-        protected WriteBuffer WriteBuffer => this.writeBuffer;
+        protected WriteBuffer WriteBuffer { get; private set; }
 
         /// <summary>Flushes the write buffer and then disposes the underlying stream.</summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Dispose() must never throw.")]
@@ -89,15 +89,10 @@ namespace Lawo.IO
             }
             finally
             {
-                this.readBuffer = null;
-                this.writeBuffer = null;
+                this.ReadBuffer = null;
+                this.WriteBuffer = null;
                 base.Dispose(disposing);
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private ReadBuffer readBuffer;
-        private WriteBuffer writeBuffer;
     }
 }

@@ -68,8 +68,8 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <inheritdoc/>
         public bool Equals(EmberId other)
         {
-            return (this.theClass == other.theClass) &&
-                (this.isConstructed == other.isConstructed) && (this.number == other.number);
+            return (this.Class == other.Class) &&
+                (this.IsConstructed == other.IsConstructed) && (this.Number == other.Number);
         }
 
         /// <inheritdoc/>
@@ -82,13 +82,13 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            return HashCode.Combine((int)this.theClass, this.isConstructed ? 1 : 0, this.number);
+            return HashCode.Combine((int)this.Class, this.IsConstructed ? 1 : 0, this.Number);
         }
 
         /// <summary>Returns a string that represents the current object.</summary>
         public override string ToString()
         {
-            return ToChar(this.theClass) + "-" + this.number.ToString(CultureInfo.InvariantCulture);
+            return ToChar(this.Class) + "-" + this.Number.ToString(CultureInfo.InvariantCulture);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,25 +112,25 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw new ArgumentOutOfRangeException(nameof(number), ExceptionMessages.NonnegativeNumberRequired);
             }
 
-            this.theClass = theClass;
-            this.isConstructed = isConstructed;
-            this.number = number;
+            this.Class = theClass;
+            this.IsConstructed = isConstructed;
+            this.Number = number;
         }
 
-        internal Class Class => this.theClass;
+        internal Class Class { get; }
 
-        internal bool IsConstructed => this.isConstructed;
+        internal bool IsConstructed { get; }
 
-        internal int Number => this.number;
+        internal int Number { get; }
 
         internal int? ToInnerNumber()
         {
-            switch (this.theClass)
+            switch (this.Class)
             {
                 case Class.Universal:
-                    return this.number;
+                    return this.Number;
                 case Class.Application:
-                    return this.number + InnerNumber.FirstApplication;
+                    return this.Number + InnerNumber.FirstApplication;
                 default:
                     return null;
             }
@@ -169,9 +169,5 @@ namespace Lawo.EmberPlusSharp.Ember
                     return null;
             }
         }
-
-        private readonly Class theClass;
-        private readonly bool isConstructed;
-        private readonly int number;
     }
 }

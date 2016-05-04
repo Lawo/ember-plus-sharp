@@ -15,14 +15,10 @@ namespace Lawo.IO
         /// <summary>Initializes a new instance of the <see cref="ConnectionLostEventArgs"/> class.</summary>
         public ConnectionLostEventArgs(Exception exception)
         {
-            this.exception = exception;
+            this.Exception = exception;
         }
 
         /// <summary>Gets the exception that was thrown when the connection was lost.</summary>
-        public Exception Exception => this.exception;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly Exception exception;
+        public Exception Exception { get; }
     }
 }

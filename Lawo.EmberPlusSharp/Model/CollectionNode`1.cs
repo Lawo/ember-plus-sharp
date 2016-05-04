@@ -26,7 +26,7 @@ namespace Lawo.EmberPlusSharp.Model
         where TElement : IElement
     {
         /// <summary>Gets the children of this node.</summary>
-        public ReadOnlyObservableCollection<TElement> Children => this.readOnlyChildren;
+        public ReadOnlyObservableCollection<TElement> Children { get; }
 
         /// <summary>Gets the child where <see cref="Element.Number"/> equals <paramref name="number"/>.</summary>
         /// <exception cref="KeyNotFoundException">No child exists where <see cref="Element.Number"/> equals
@@ -79,11 +79,10 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         private readonly ObservableCollection<TElement> children = new ObservableCollection<TElement>();
-        private readonly ReadOnlyObservableCollection<TElement> readOnlyChildren;
 
         private CollectionNode()
         {
-            this.readOnlyChildren = new ReadOnlyObservableCollection<TElement>(this.children);
+            this.Children = new ReadOnlyObservableCollection<TElement>(this.children);
         }
 
         private delegate Element ReadContentsMethod(

@@ -62,14 +62,10 @@ namespace Lawo
             /// <inheritdoc/>
             public void Dispose()
             {
-                this.disposeCalled = true;
+                this.DisposeCalled = true;
             }
 
-            internal bool DisposeCalled => this.disposeCalled;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            private bool disposeCalled;
+            internal bool DisposeCalled { get; private set; }
         }
     }
 }

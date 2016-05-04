@@ -940,26 +940,19 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             internal PositionInfo(EmberId emberId, bool isInner, long lengthPosition, long? endPosition)
             {
-                this.emberId = emberId;
-                this.isInner = isInner;
-                this.lengthPosition = lengthPosition;
-                this.endPosition = endPosition;
+                this.EmberId = emberId;
+                this.IsInner = isInner;
+                this.LengthPosition = lengthPosition;
+                this.EndPosition = endPosition;
             }
 
-            internal EmberId EmberId => this.emberId;
+            internal EmberId EmberId { get; }
 
-            internal bool IsInner => this.isInner;
+            internal bool IsInner { get; }
 
-            internal long LengthPosition => this.lengthPosition;
+            internal long LengthPosition { get; }
 
-            internal long? EndPosition => this.endPosition;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            private readonly EmberId emberId;
-            private readonly bool isInner;
-            private readonly long lengthPosition;
-            private readonly long? endPosition;
+            internal long? EndPosition { get; }
         }
     }
 }

@@ -13,29 +13,20 @@ namespace Lawo.EmberPlusSharp.Model
     public struct StreamDescription : IEquatable<StreamDescription>
     {
         /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are equal.</summary>
-        public static bool operator ==(StreamDescription left, StreamDescription right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(StreamDescription left, StreamDescription right) => left.Equals(right);
 
         /// <summary>Determines whether two specified instances of <see cref="StreamDescription"/> are not equal.
         /// </summary>
-        public static bool operator !=(StreamDescription left, StreamDescription right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(StreamDescription left, StreamDescription right) => !left.Equals(right);
 
         /// <summary>Gets the format.</summary>
-        public StreamFormat Format => this.format;
+        public StreamFormat Format { get; }
 
         /// <summary>Gets the offset in bytes.</summary>
-        public int Offset => this.offset;
+        public int Offset { get; }
 
         /// <inheritdoc/>
-        public bool Equals(StreamDescription other)
-        {
-            return (this.format == other.format) && (this.offset == other.offset);
-        }
+        public bool Equals(StreamDescription other) => (this.Format == other.Format) && (this.Offset == other.Offset);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
@@ -45,22 +36,14 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine((int)this.format, this.offset);
-        }
+        public override int GetHashCode() => HashCode.Combine((int)this.Format, this.Offset);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal StreamDescription(StreamFormat format, int offset)
         {
-            this.format = format;
-            this.offset = offset;
+            this.Format = format;
+            this.Offset = offset;
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly StreamFormat format;
-        private readonly int offset;
     }
 }

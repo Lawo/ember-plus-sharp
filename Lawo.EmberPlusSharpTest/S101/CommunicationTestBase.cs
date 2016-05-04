@@ -27,17 +27,17 @@ namespace Lawo.EmberPlusSharp.S101
     public abstract class CommunicationTestBase : TestBase
     {
         /// <summary>Gets the <see cref="EmberData"/> instance for the current version.</summary>
-        protected static EmberData EmberDataCommand => EmberDataCommandField;
+        protected static EmberData EmberDataCommand { get; } = new EmberData(0x01, 0x0A, 0x02);
 
         /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="EmberData"/> command for the current
         /// version.</summary>
-        protected static S101Message EmberDataMessage => EmberDataMessageField;
+        protected static S101Message EmberDataMessage { get; } = new S101Message(0x00, EmberDataCommand);
 
         /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="KeepAliveRequest"/> command.</summary>
-        protected static S101Message KeepAliveRequestMessage => KeepAliveRequestMessageField;
+        protected static S101Message KeepAliveRequestMessage { get; } = new S101Message(0x00, new KeepAliveRequest());
 
         /// <summary>Gets a <see cref="S101Message"/> message with an <see cref="KeepAliveResponse"/> command.</summary>
-        protected static S101Message KeepAliveResponseMessage => KeepAliveResponseMessageField;
+        protected static S101Message KeepAliveResponseMessage { get; } = new S101Message(0x00, new KeepAliveResponse());
 
         /// <summary>Uses <see cref="S101Robot"/> to simulate a provider communicating with the <see cref="S101Client"/>
         /// object passed to <paramref name="testCallback"/>.</summary>
@@ -269,14 +269,6 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private static readonly EmberData EmberDataCommandField = new EmberData(0x01, 0x0A, 0x02);
-        private static readonly S101Message EmberDataMessageField = new S101Message(0x00, EmberDataCommandField);
-        private static readonly S101Message KeepAliveRequestMessageField =
-            new S101Message(0x00, new KeepAliveRequest());
-
-        private static readonly S101Message KeepAliveResponseMessageField =
-            new S101Message(0x00, new KeepAliveResponse());
 
         private static Task<int> Read(
             Stream stream,

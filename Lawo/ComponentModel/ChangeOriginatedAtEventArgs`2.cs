@@ -17,17 +17,13 @@ namespace Lawo.ComponentModel
     public sealed class ChangeOriginatedAtEventArgs<TOwner, TProperty> : EventArgs
     {
         /// <summary>Gets the property where the change originated at.</summary>
-        public IProperty<TOwner, TProperty> Property => this.property;
+        public IProperty<TOwner, TProperty> Property { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal ChangeOriginatedAtEventArgs(IProperty<TOwner, TProperty> property)
         {
-            this.property = property;
+            this.Property = property;
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private readonly IProperty<TOwner, TProperty> property;
     }
 }
