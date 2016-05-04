@@ -67,11 +67,11 @@ namespace Tutorial
                         INode root = consumer.Root;
 
                         // Navigate to the parameter we're interested in.
-                        var sapphire = (INode)root.Children.Where(c => c.Identifier == "Sapphire").First();
-                        var sources = (INode)sapphire.Children.Where(c => c.Identifier == "Sources").First();
-                        var fpgm1 = (INode)sources.Children.Where(c => c.Identifier == "FPGM 1").First();
-                        var fader = (INode)fpgm1.Children.Where(c => c.Identifier == "Fader").First();
-                        var positionParameter = fader.Children.Where(c => c.Identifier == "Position").First();
+                        var sapphire = (INode)root.Children.First(c => c.Identifier == "Sapphire");
+                        var sources = (INode)sapphire.Children.First(c => c.Identifier == "Sources");
+                        var fpgm1 = (INode)sources.Children.First(c => c.Identifier == "FPGM 1");
+                        var fader = (INode)fpgm1.Children.First(c => c.Identifier == "Fader");
+                        var positionParameter = fader.Children.First(c => c.Identifier == "Position");
 
                         var valueChanged = new TaskCompletionSource<string>();
                         positionParameter.PropertyChanged += (s, e) => valueChanged.SetResult(((IElement)s).GetPath());
@@ -97,12 +97,12 @@ namespace Tutorial
                         INode root = consumer.Root;
 
                         // Navigate to the parameters we're interested in.
-                        var sapphire = (INode)root.Children.Where(c => c.Identifier == "Sapphire").First();
-                        var sources = (INode)sapphire.Children.Where(c => c.Identifier == "Sources").First();
-                        var fpgm1 = (INode)sources.Children.Where(c => c.Identifier == "FPGM 1").First();
-                        var fader = (INode)fpgm1.Children.Where(c => c.Identifier == "Fader").First();
-                        var dbValue = (IParameter)fader.Children.Where(c => c.Identifier == "dB Value").First();
-                        var position = (IParameter)fader.Children.Where(c => c.Identifier == "Position").First();
+                        var sapphire = (INode)root.Children.First(c => c.Identifier == "Sapphire");
+                        var sources = (INode)sapphire.Children.First(c => c.Identifier == "Sources");
+                        var fpgm1 = (INode)sources.Children.First(c => c.Identifier == "FPGM 1");
+                        var fader = (INode)fpgm1.Children.First(c => c.Identifier == "Fader");
+                        var dbValue = (IParameter)fader.Children.First(c => c.Identifier == "dB Value");
+                        var position = (IParameter)fader.Children.First(c => c.Identifier == "Position");
 
                         // Set parameters to the desired values.
                         dbValue.Value = -67.0;

@@ -49,12 +49,12 @@ Public Class TutorialTestVB
                         Dim root As INode = con.Root
 
                         ' Navigate to the parameters we're interested in.
-                        Dim sapphire = DirectCast(root.Children.Where(Function(c) c.Identifier = "Sapphire").First(), INode)
-                        Dim sources = DirectCast(sapphire.Children.Where(Function(c) c.Identifier = "Sources").First(), INode)
-                        Dim fpgm1 = DirectCast(sources.Children.Where(Function(c) c.Identifier = "FPGM 1").First(), INode)
-                        Dim fader = DirectCast(fpgm1.Children.Where(Function(c) c.Identifier = "Fader").First(), INode)
-                        Dim dbValue = DirectCast(fader.Children.Where(Function(c) c.Identifier = "dB Value").First(), IParameter)
-                        Dim position = DirectCast(fader.Children.Where(Function(c) c.Identifier = "Position").First(), IParameter)
+                        Dim sapphire = DirectCast(root.Children.First(Function(c) c.Identifier = "Sapphire"), INode)
+                        Dim sources = DirectCast(sapphire.Children.First(Function(c) c.Identifier = "Sources"), INode)
+                        Dim fpgm1 = DirectCast(sources.Children.First(Function(c) c.Identifier = "FPGM 1"), INode)
+                        Dim fader = DirectCast(fpgm1.Children.First(Function(c) c.Identifier = "Fader"), INode)
+                        Dim dbValue = DirectCast(fader.Children.First(Function(c) c.Identifier = "dB Value"), IParameter)
+                        Dim position = DirectCast(fader.Children.First(Function(c) c.Identifier = "Position"), IParameter)
 
                         ' Set parameters to the desired values.
                         dbValue.Value = -67.0
