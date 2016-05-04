@@ -24,7 +24,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Initializes a new instance of the <see cref="S101Message"/> class.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="command"/> equals <c>null</c>.</exception>
         public S101Message(byte slot, S101Command command)
-            : this(slot, S101.MessageType.Ember, command)
+            : this(slot, MessageType.Ember, command)
         {
             if (command == null)
             {
@@ -90,7 +90,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             var messageType = readBuffer[readBuffer.Index++];
 
-            if (messageType != S101.MessageType.Ember)
+            if (messageType != MessageType.Ember)
             {
                 throw new S101Exception("Unexpected Message Type.");
             }

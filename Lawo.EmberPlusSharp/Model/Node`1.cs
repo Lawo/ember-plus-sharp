@@ -124,7 +124,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             var child = (Element)this.observableChildren.FirstOrDefault(c => c.Identifier == pathElements[index]);
-            return child == null ? child : child.GetElement(pathElements, index + 1);
+            return child?.GetElement(pathElements, index + 1);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -70,7 +70,7 @@ namespace Lawo.EmberPlusSharp.S101
             await base.WriteToCoreAsync(writeBuffer, cancellationToken);
             await writeBuffer.ReserveAsync(3, cancellationToken);
             writeBuffer[writeBuffer.Count++] = (byte)this.PacketFlags;
-            writeBuffer[writeBuffer.Count++] = (byte)this.dtd;
+            writeBuffer[writeBuffer.Count++] = this.dtd;
             writeBuffer[writeBuffer.Count++] = (byte)this.applicationBytes.Length;
             await writeBuffer.WriteAsync(
                 this.applicationBytes, 0, this.applicationBytes.Length, cancellationToken);
