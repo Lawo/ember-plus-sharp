@@ -6,8 +6,6 @@
 
 namespace Lawo.GlowAnalyzerProxy.Main
 {
-    using System.Windows;
-
     /// <summary>Contains the main entry point of the application.</summary>
     internal sealed partial class App
     {

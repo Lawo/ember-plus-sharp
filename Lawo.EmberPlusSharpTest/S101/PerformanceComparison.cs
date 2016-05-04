@@ -14,7 +14,6 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Threading.Tasks;
 
     using EmberLib.Glow.Framing;
-    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Threading.Tasks;
 

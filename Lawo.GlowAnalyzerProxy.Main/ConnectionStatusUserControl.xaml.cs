@@ -7,7 +7,6 @@
 namespace Lawo.GlowAnalyzerProxy.Main
 {
     using System.Windows;
-    using System.Windows.Controls;
 
     /// <summary>Represents a control that displays the status of a connection.</summary>
     internal sealed partial class ConnectionStatusUserControl

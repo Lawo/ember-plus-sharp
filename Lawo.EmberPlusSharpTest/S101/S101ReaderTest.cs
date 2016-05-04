@@ -12,7 +12,6 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Threading.Tasks;
     using UnitTesting;

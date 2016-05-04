@@ -27,7 +27,6 @@ namespace Lawo.EmberPlusSharp.Model
     using EmberLib.Framing;
     using EmberLib.Glow.Framing;
     using Glow;
-    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Reflection;
     using S101;

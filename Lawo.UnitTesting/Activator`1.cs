@@ -27,7 +27,7 @@ namespace Lawo.UnitTesting
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way to achieve argument type deduction.")]
         public static T CreateInstance<TP1>(TP1 p1)
         {
-            return CreateInstanceImpl(new Type[] { typeof(TP1) }, new object[] { p1 });
+            return CreateInstanceImpl(new[] { typeof(TP1) }, new object[] { p1 });
         }
 
         /// <summary>Creates a new instance by passing <paramref name="p1"/> and <paramref name="p2"/> to a matching
@@ -40,7 +40,7 @@ namespace Lawo.UnitTesting
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way to achieve argument type deduction.")]
         public static T CreateInstance<TP1, TP2>(TP1 p1, TP2 p2)
         {
-            return CreateInstanceImpl(new Type[] { typeof(TP1), typeof(TP2) }, new object[] { p1, p2 });
+            return CreateInstanceImpl(new[] { typeof(TP1), typeof(TP2) }, new object[] { p1, p2 });
         }
 
         /// <summary>Creates a new instance by passing <paramref name="args"/> to a matching constructor of
