@@ -10,7 +10,7 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
+    using IO;
 
     /// <summary>Transparently encodes a single message.</summary>
     /// <remarks>

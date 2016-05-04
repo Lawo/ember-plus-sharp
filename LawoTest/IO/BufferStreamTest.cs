@@ -6,8 +6,8 @@
 
 namespace Lawo.IO
 {
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="BufferStream"/>.</summary>
     [TestClass]

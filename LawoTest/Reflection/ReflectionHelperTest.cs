@@ -7,8 +7,9 @@
 namespace Lawo.Reflection
 {
     using System;
-    using Lawo.UnitTesting;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="ReflectionHelper"/> class.</summary>
     [TestClass]

@@ -9,8 +9,8 @@ namespace Lawo.IO
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="JsonSerializer"/>.</summary>
     [TestClass]

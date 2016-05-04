@@ -9,8 +9,8 @@ namespace Lawo.Threading.Tasks
     using System;
     using System.Threading.Tasks;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="TaskQueue"/> class.</summary>
     [TestClass]

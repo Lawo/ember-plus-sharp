@@ -7,9 +7,10 @@
 namespace Lawo.ComponentModel
 {
     using System;
-    using Lawo.Reflection;
-    using Lawo.UnitTesting;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Reflection;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="Binding{T, U, V, W}"/>.</summary>
     [TestClass]

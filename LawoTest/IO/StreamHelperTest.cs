@@ -9,9 +9,9 @@ namespace Lawo.IO
     using System;
     using System.Threading;
 
-    using Lawo.Threading.Tasks;
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Threading.Tasks;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="StreamHelper"/>.</summary>
     [TestClass]

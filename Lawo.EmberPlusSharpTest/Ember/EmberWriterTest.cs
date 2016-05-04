@@ -10,8 +10,8 @@ namespace Lawo.EmberPlusSharp.Ember
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="EmberWriter"/>.</summary>
     [TestClass]

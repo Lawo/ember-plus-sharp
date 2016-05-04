@@ -7,8 +7,9 @@
 namespace Lawo.Linq.Expressions
 {
     using System.Reflection;
-    using Lawo.UnitTesting;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="ExpressionHelper"/> class.</summary>
     [TestClass]

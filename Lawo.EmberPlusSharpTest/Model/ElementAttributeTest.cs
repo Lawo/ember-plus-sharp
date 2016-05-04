@@ -8,8 +8,8 @@ namespace Lawo.EmberPlusSharp.Model
 {
     using System;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="ElementAttribute"/>.</summary>
     [TestClass]

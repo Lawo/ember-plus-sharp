@@ -10,8 +10,9 @@ namespace Lawo.ComponentModel
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Lawo.UnitTesting;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="FilterHelper"/>.</summary>
     [TestClass]

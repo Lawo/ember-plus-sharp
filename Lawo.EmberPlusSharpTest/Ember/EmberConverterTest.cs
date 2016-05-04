@@ -14,10 +14,11 @@ namespace Lawo.EmberPlusSharp.Ember
     using System.Reflection;
     using System.Text;
     using System.Xml;
-    using Lawo.EmberPlusSharp.Ember.EmberDataPayloads;
-    using Lawo.EmberPlusSharp.Glow;
-    using Lawo.UnitTesting;
+
+    using EmberDataPayloads;
+    using Glow;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="EmberConverter"/>.</summary>
     [TestClass]

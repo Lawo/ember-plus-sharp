@@ -11,8 +11,8 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Reflection;
     using System.Xml;
 
-    using Lawo.EmberPlusSharp.Ember;
-    using Lawo.EmberPlusSharp.S101.EmberDataPayloads;
+    using Ember;
+    using EmberDataPayloads;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>Tests <see cref="S101Client"/>.</summary>

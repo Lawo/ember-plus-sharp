@@ -11,10 +11,10 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Threading.Tasks;
     using System.Xml;
 
-    using Lawo.EmberPlusSharp.Ember;
-    using Lawo.EmberPlusSharp.S101.EmberDataPayloads;
-    using Lawo.Threading.Tasks;
+    using Ember;
+    using EmberDataPayloads;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Threading.Tasks;
 
     /// <summary>Tests <see cref="S101Client"/>.</summary>
     [TestClass]

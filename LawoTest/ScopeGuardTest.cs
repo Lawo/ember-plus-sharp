@@ -9,8 +9,8 @@ namespace Lawo
 {
     using System;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="ScopeGuard"/> class.</summary>
     [TestClass]

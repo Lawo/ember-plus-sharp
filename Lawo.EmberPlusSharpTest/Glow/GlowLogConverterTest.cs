@@ -10,9 +10,10 @@ namespace Lawo.EmberPlusSharp.Glow
     using System.IO;
     using System.Reflection;
     using System.Xml;
-    using Lawo.EmberPlusSharp.Model.Test.EmberDataPayloads;
-    using Lawo.EmberPlusSharp.S101;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model.Test.EmberDataPayloads;
+    using S101;
 
     /// <summary>Tests <see cref="S101Client"/>.</summary>
     [TestClass]

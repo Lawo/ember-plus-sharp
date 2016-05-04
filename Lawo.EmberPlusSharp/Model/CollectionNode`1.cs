@@ -72,7 +72,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private static ReadContentsMethod GetReadContentsMethod()
         {
-            var implementationType = Element.GetImplementationType(typeof(TElement));
+            var implementationType = GetImplementationType(typeof(TElement));
             return (implementationType == null) ? null :
                 (ReadContentsMethod)typeof(Element<>).MakeGenericType(implementationType).GetRuntimeMethods().First(
                     m => m.Name == "ReadContents").CreateDelegate(typeof(ReadContentsMethod));

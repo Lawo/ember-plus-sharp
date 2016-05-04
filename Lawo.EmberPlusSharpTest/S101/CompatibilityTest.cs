@@ -9,10 +9,11 @@ namespace Lawo.EmberPlusSharp.S101
     using System.IO;
     using System.Threading;
     using EmberLib.Glow.Framing;
-    using Lawo.IO;
-    using Lawo.Threading.Tasks;
-    using Lawo.UnitTesting;
+
+    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Threading.Tasks;
+    using UnitTesting;
 
     /// <summary>Tests compatibility with EmberLib.net.</summary>
     [TestClass]

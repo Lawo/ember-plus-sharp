@@ -32,7 +32,7 @@ namespace Lawo.GlowLogConverter.Main
             using (var reader = XmlReader.Create(args[0], null, null))
             using (var writer = XmlWriter.Create(Path.ChangeExtension(args[0], "converted.xml"), settings))
             {
-                Lawo.EmberPlusSharp.Glow.GlowLogConverter.Convert(reader, writer);
+                EmberPlusSharp.Glow.GlowLogConverter.Convert(reader, writer);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Lawo.EmberPlusSharp.Model
 {
     using System.Collections.Generic;
 
-    using Lawo.EmberPlusSharp.Ember;
+    using Ember;
 
     internal sealed class DynamicFunction : FunctionBase<DynamicFunction>
     {

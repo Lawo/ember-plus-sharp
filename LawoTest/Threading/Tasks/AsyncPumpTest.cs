@@ -12,8 +12,8 @@ namespace Lawo.Threading.Tasks
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="AsyncPump"/> class.</summary>
     [TestClass]

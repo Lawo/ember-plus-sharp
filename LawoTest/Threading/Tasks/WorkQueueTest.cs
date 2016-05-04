@@ -8,8 +8,8 @@ namespace Lawo.Threading.Tasks
 {
     using System;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="WorkQueue"/> class.</summary>
     [TestClass]

@@ -57,7 +57,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             private static Type GetMetaPropertyType(PropertyInfo property)
             {
-                var implementationType = Element.GetImplementationType(property.PropertyType);
+                var implementationType = GetImplementationType(property.PropertyType);
 
                 if (implementationType != null)
                 {

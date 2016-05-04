@@ -9,8 +9,8 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Linq;
     using System.Reflection;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="StreamDescription"/>.</summary>
     [TestClass]

@@ -9,8 +9,8 @@ namespace Lawo.EmberPlusSharp.Ember
     using System;
     using System.IO;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="EmberId"/>.</summary>
     [TestClass]

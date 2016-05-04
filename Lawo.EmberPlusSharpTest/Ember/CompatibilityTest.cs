@@ -13,8 +13,8 @@ namespace Lawo.EmberPlusSharp.Ember
     using System.Runtime.InteropServices;
 
     using BerLib;
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests compatibility with EmberLib.net.</summary>
     [TestClass]

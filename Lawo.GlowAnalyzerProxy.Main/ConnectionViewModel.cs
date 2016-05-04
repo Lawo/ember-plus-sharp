@@ -9,8 +9,9 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System;
     using System.Globalization;
     using System.Net.Sockets;
-    using Lawo.ComponentModel;
-    using Lawo.Reflection;
+
+    using ComponentModel;
+    using Reflection;
 
     internal sealed class ConnectionViewModel : NotifyPropertyChanged
     {

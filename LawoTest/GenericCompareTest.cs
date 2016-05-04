@@ -10,8 +10,8 @@ namespace Lawo
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
-    using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests the <see cref="GenericCompare"/> class.</summary>
     [TestClass]
@@ -47,7 +47,7 @@ namespace Lawo
 
             for (int current = 0; current < count; ++current)
             {
-                conventionalCount += object.Equals(first, second) ? 1 : 0;
+                conventionalCount += Equals(first, second) ? 1 : 0;
             }
 
             convetional.Stop();

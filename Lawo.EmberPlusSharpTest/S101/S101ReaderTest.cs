@@ -12,10 +12,10 @@ namespace Lawo.EmberPlusSharp.S101
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Lawo.IO;
-    using Lawo.Threading.Tasks;
-    using Lawo.UnitTesting;
+    using IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Threading.Tasks;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="MessageEncodingStream"/>.</summary>
     [TestClass]

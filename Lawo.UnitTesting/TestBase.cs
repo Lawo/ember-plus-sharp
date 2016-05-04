@@ -142,7 +142,7 @@ namespace Lawo.UnitTesting
 
             foreach (var property in typeof(T).GetTypeInfo().DeclaredProperties)
             {
-                AssertIsTrue(object.Equals(property.GetValue(obj1, null), property.GetValue(obj3, null)));
+                AssertIsTrue(Equals(property.GetValue(obj1, null), property.GetValue(obj3, null)));
             }
 
             AssertIsTrue(obj1.GetHashCode() == obj3.GetHashCode());
@@ -330,7 +330,7 @@ namespace Lawo.UnitTesting
         private static void CheckPropagation(
             Exception exception, string expectedMessage, Exception expectedInnerException)
         {
-            if ((expectedMessage != null) && !object.ReferenceEquals(expectedMessage, exception.Message))
+            if ((expectedMessage != null) && !ReferenceEquals(expectedMessage, exception.Message))
             {
                 throw new ArgumentException(
                     "A constructor of this type does not propagate the message argument correctly.", "T");

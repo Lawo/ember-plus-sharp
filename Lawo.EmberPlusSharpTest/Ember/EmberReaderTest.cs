@@ -15,9 +15,10 @@ namespace Lawo.EmberPlusSharp.Ember
     using System.Reflection;
     using System.Text;
     using System.Xml;
-    using Lawo.EmberPlusSharp.Glow;
-    using Lawo.UnitTesting;
+
+    using Glow;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="EmberReader"/>.</summary>
     [TestClass]

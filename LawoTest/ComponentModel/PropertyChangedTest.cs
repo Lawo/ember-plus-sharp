@@ -10,9 +10,10 @@ namespace Lawo.ComponentModel
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Lawo.Reflection;
-    using Lawo.UnitTesting;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Reflection;
+    using UnitTesting;
 
     /// <summary>Tests <see cref="PropertyChangedRegistration"/> and <see cref="NotifyPropertyChanged"/>.</summary>
     [TestClass]
