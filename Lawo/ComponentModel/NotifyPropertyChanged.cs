@@ -6,12 +6,9 @@
 
 namespace Lawo.ComponentModel
 {
-    using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
-    using Lawo.Reflection;
 
     /// <summary>Provides a generic implementation for <see cref="INotifyPropertyChanged"/>.</summary>
     /// <threadsafety static="true" instance="false"/>

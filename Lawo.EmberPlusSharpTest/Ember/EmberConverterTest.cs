@@ -13,12 +13,9 @@ namespace Lawo.EmberPlusSharp.Ember
     using System.IO;
     using System.Reflection;
     using System.Text;
-    using System.Threading;
     using System.Xml;
     using Lawo.EmberPlusSharp.Ember.EmberDataPayloads;
     using Lawo.EmberPlusSharp.Glow;
-    using Lawo.EmberPlusSharp.S101;
-    using Lawo.Threading.Tasks;
     using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

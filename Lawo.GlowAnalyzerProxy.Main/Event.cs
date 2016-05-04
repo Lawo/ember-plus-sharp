@@ -6,9 +6,7 @@
 
 namespace Lawo.GlowAnalyzerProxy.Main
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
-    using Lawo.EmberPlusSharp.S101;
 
     internal sealed class Event
     {

@@ -7,7 +7,6 @@
 namespace Lawo.Reflection
 {
     using System;
-    using System.Reflection;
 
     /// <summary>Provides the means to get and set the value of a property as well as access to the owner object and
     /// property metadata.</summary>

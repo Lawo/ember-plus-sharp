@@ -8,7 +8,6 @@ namespace Lawo.Threading.Tasks
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;

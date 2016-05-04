@@ -7,7 +7,6 @@
 namespace Lawo.Reflection
 {
     using System;
-    using System.Reflection;
     using Lawo.UnitTesting;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
