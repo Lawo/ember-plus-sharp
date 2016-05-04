@@ -59,8 +59,8 @@ namespace Lawo.UnitTesting
 
         private static T CreateInstanceImpl(Type[] ctorArgTypes, object[] ctorArgs)
         {
-            var info = typeof(T).GetTypeInfo().DeclaredConstructors.Where(
-                c => c.GetParameters().Select(p => p.ParameterType).SequenceEqual(ctorArgTypes)).FirstOrDefault();
+            var info = typeof(T).GetTypeInfo().DeclaredConstructors.FirstOrDefault(
+                c => c.GetParameters().Select(p => p.ParameterType).SequenceEqual(ctorArgTypes));
 
             if (info == null)
             {

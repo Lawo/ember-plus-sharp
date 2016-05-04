@@ -178,8 +178,8 @@ namespace Lawo.Diagnostics.Tracing
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static Log instance = new Log();
-        private static string moduleNameDefault = string.Empty;
+        private static readonly Log instance = new Log();
+        private static readonly string moduleNameDefault = string.Empty;
 
         private Log()
         {

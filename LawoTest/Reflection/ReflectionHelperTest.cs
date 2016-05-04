@@ -53,7 +53,7 @@ namespace Lawo.Reflection
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private int someField;
+        private readonly int someField;
 
         private int SomeProperty { get; set; }
 
