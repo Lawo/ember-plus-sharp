@@ -33,7 +33,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 () => new EmberTypeBag(null).ToString(),
                 () => new EmberConverter(null).ToString());
 
-            AssertThrow<ArgumentException>(() => new EmberType(new Type[0]).ToString());
+            AssertThrow<ArgumentException>(() => new EmberType().ToString());
 
             using (var stream = new MemoryStream())
             using (var reader = new EmberReader(stream))
