@@ -48,12 +48,7 @@ namespace Lawo.ComponentModel
                     this.original.CollectionChanged -= this.handler;
                 }
 
-                var disposable = this.original as IDisposable;
-
-                if (disposable != null)
-                {
-                    disposable.Dispose();
-                }
+                (this.original as IDisposable)?.Dispose();
             }
         }
 

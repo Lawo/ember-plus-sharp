@@ -111,9 +111,9 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     this.hasChanges = value;
 
-                    if (value && (this.parent != null))
+                    if (value)
                     {
-                        this.parent.SetHasChanges();
+                        this.parent?.SetHasChanges();
                     }
                 }
             }
@@ -175,11 +175,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal void AppendPath(StringBuilder builder)
         {
-            if (this.parent != null)
-            {
-                this.parent.AppendPath(builder);
-            }
-
+            this.parent?.AppendPath(builder);
             builder.Append(this.identifier);
             builder.Append('/');
         }

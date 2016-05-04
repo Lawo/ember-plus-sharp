@@ -380,15 +380,7 @@ namespace Lawo.EmberPlusSharp.Model
             return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, parameter.GetPath()), ex);
         }
 
-        private void RaiseHasChangesSet()
-        {
-            var handler = this.HasChangesSet;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
+        private void RaiseHasChangesSet() => this.HasChangesSet?.Invoke(this, EventArgs.Empty);
 
         private void ReadQualifiedChild(EmberReader reader, ElementType actualType)
         {

@@ -350,12 +350,11 @@ namespace Lawo.GlowAnalyzerProxy.Main
                 }
 
                 this.eventCache.Clear();
-                var handler = this.ScrollEventIntoView;
 
-                if ((this.events.Count > 0) &&
-                    this.AutoScrollToMostRecentEvent.GetValueOrDefault() && (handler != null))
+                if ((this.events.Count > 0) && this.AutoScrollToMostRecentEvent.GetValueOrDefault())
                 {
-                    handler(this, new ScrollEventIntoViewEventArgs(this.events[this.events.Count - 1]));
+                    this.ScrollEventIntoView?.Invoke(
+                        this, new ScrollEventIntoViewEventArgs(this.events[this.events.Count - 1]));
                 }
 
                 await Task.Delay(250);
@@ -376,12 +375,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
             catch (SocketException ex)
             {
-                var handler = this.ListenFailed;
-
-                if (handler != null)
-                {
-                    handler(this, new ListenFailedEventArgs(ex));
-                }
+                this.ListenFailed?.Invoke(this, new ListenFailedEventArgs(ex));
             }
             finally
             {

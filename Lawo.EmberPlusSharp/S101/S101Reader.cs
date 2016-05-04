@@ -178,15 +178,8 @@ namespace Lawo.EmberPlusSharp.S101
             return this.stream.Message != null;
         }
 
-        private void OnOutOfFrameByteReceived(byte value)
-        {
-            var handler = this.OutOfFrameByteReceived;
-
-            if (handler != null)
-            {
-                handler(this, new OutOfFrameByteReceivedEventArgs(value));
-            }
-        }
+        private void OnOutOfFrameByteReceived(byte value) =>
+            this.OutOfFrameByteReceived?.Invoke(this, new OutOfFrameByteReceivedEventArgs(value));
 
         private void AssertNotDisposed()
         {

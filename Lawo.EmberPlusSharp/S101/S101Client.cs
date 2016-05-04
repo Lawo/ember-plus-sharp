@@ -349,12 +349,7 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 reader.OutOfFrameByteReceived -= this.OnOutOfFrameByteReceived;
                 this.DisposeCore(false);
-
-                if (connection != null)
-                {
-                    connection.Dispose();
-                }
-
+                connection?.Dispose();
                 this.source.Dispose();
             }
 
@@ -461,12 +456,9 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 await this.EnqueueLogOperation(() => this.logger.LogEvent("CancellationFailed"));
 
-                if (connection != null)
-                {
-                    // For IO objects that do not support cancellation with CancellationToken, the recommended practice is
-                    // to simply dispose and then wait for the async operations to complete.
-                    connection.Dispose();
-                }
+                // For IO objects that do not support cancellation with CancellationToken, the recommended practice is
+                // to simply dispose and then wait for the async operations to complete.
+                connection?.Dispose();
             }
 
             try
@@ -497,10 +489,7 @@ namespace Lawo.EmberPlusSharp.S101
         private void OnEvent<TEventArgs>(EventHandler<TEventArgs> handler, TEventArgs args)
             where TEventArgs : EventArgs
         {
-            if (handler != null)
-            {
-                handler(this, args);
-            }
+            handler?.Invoke(this, args);
         }
 
         private async Task ProcessMessage(S101Reader reader, byte[] buffer)

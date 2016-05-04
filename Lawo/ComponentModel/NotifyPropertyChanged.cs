@@ -27,15 +27,8 @@ namespace Lawo.ComponentModel
         /// changed property.</param>
         /// <remarks>Overrides must call this method if a change needs to be published through the
         /// <see cref="PropertyChanged"/> event.</remarks>
-        protected internal virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            var handler = this.PropertyChanged;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
+        protected internal virtual void OnPropertyChanged(PropertyChangedEventArgs e) =>
+            this.PropertyChanged?.Invoke(this, e);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

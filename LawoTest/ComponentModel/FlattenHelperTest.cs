@@ -22,17 +22,7 @@ namespace Lawo.ComponentModel
         public void AddTest()
         {
             this.VerifyModification((parent, children) => parent.Add(MakeReadOnly(this.CreateRandomChild())));
-
-            this.VerifyModification(
-                (parent, children) =>
-                {
-                    var child = this.GetRandomChild(children);
-
-                    if (child != null)
-                    {
-                        child.Add(this.CreateRandomItem());
-                    }
-                });
+            this.VerifyModification((parent, children) => this.GetRandomChild(children)?.Add(this.CreateRandomItem()));
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by inserting elements.</summary>
@@ -46,11 +36,7 @@ namespace Lawo.ComponentModel
                 (parent, children) =>
                 {
                     var child = this.GetRandomChild(children);
-
-                    if (child != null)
-                    {
-                        child.Insert(this.Random.Next(child.Count + 1), this.CreateRandomItem());
-                    }
+                    child?.Insert(this.Random.Next(child.Count + 1), this.CreateRandomItem());
                 });
         }
 
@@ -109,17 +95,7 @@ namespace Lawo.ComponentModel
         public void ClearTest()
         {
             this.VerifyModification((parent, children) => parent.Clear());
-
-            this.VerifyModification(
-                (parent, children) =>
-                {
-                    var child = this.GetRandomChild(children);
-
-                    if (child != null)
-                    {
-                        child.Clear();
-                    }
-                });
+            this.VerifyModification((parent, children) => this.GetRandomChild(children)?.Clear());
         }
 
         /// <summary>Tests <see cref="FlattenHelper"/> by modifying a removed inner collection.</summary>
@@ -133,12 +109,7 @@ namespace Lawo.ComponentModel
                     {
                         var randomIndex = this.Random.Next(children.Count);
                         parent.RemoveAt(randomIndex);
-                        var child = children[randomIndex];
-
-                        if (child != null)
-                        {
-                            child.Add(this.CreateRandomItem());
-                        }
+                        children[randomIndex]?.Add(this.CreateRandomItem());
                     }
                 });
         }

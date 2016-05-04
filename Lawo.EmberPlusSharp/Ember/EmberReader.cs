@@ -107,10 +107,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             try
             {
-                if (this.stream != null)
-                {
-                    this.stream.Dispose();
-                }
+                this.stream?.Dispose();
             }
             catch
             {

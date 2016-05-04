@@ -377,15 +377,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.receiveQueue.WaitForMessageAsync();
         }
 
-        private void OnConnectionLost(object sender, ConnectionLostEventArgs e)
-        {
-            var handler = this.ConnectionLost;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
+        private void OnConnectionLost(object sender, ConnectionLostEventArgs e) => this.ConnectionLost?.Invoke(this, e);
 
         private async Task DelayAutoSend()
         {
