@@ -37,7 +37,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <paramref name="timeout"/>, 0x00)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
         public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout) =>
-			CreateAsync(client, timeout, (byte)0x00);
+            CreateAsync(client, timeout, (byte)0x00);
 
         /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)">
         /// CreateAsync(<paramref name="client"/>, <paramref name="timeout"/>, <paramref name="childrenRetrievalPolicy"/>,
