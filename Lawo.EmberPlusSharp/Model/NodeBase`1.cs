@@ -64,28 +64,16 @@ namespace Lawo.EmberPlusSharp.Model
         int[] IParent.NumberPath => this.NumberPath;
 
         /// <inheritdoc/>
-        void IParent.SetHasChanges()
-        {
-            this.HasChanges = true;
-        }
+        void IParent.SetHasChanges() => this.HasChanges = true;
 
         /// <inheritdoc/>
-        void IParent.ResetRetrievalState()
-        {
-            this.ResetRetrievalState();
-        }
+        void IParent.ResetRetrievalState() => this.ResetRetrievalState();
 
         /// <inheritdoc/>
-        void IParent.AppendPath(StringBuilder builder)
-        {
-            this.AppendPath(builder);
-        }
+        void IParent.AppendPath(StringBuilder builder) => this.AppendPath(builder);
 
         /// <inheritdoc/>
-        void IParent.OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            this.OnPropertyChanged(e);
-        }
+        void IParent.OnPropertyChanged(PropertyChangedEventArgs e) => this.OnPropertyChanged(e);
 
         internal NodeBase()
             : base(RetrievalState.None)
@@ -101,10 +89,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.childrenRetrievalPolicy = context.ChildrenRetrievalPolicy;
         }
 
-        internal IElement GetChild(int number)
-        {
-            return this.children[number];
-        }
+        internal IElement GetChild(int number) => this.children[number];
 
         internal void ReadChild(EmberReader reader, ElementType actualType)
         {
@@ -181,10 +166,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Changes the visibility of <paramref name="child"/>.</summary>
         /// <param name="child">The child to change the visibility for.</param>
         /// <returns><c>true</c> if the visibility has been changed; otherwise, <c>false</c>.</returns>
-        internal virtual bool ChangeVisibility(IElement child)
-        {
-            return false;
-        }
+        internal virtual bool ChangeVisibility(IElement child) => false;
 
         internal sealed override RetrievalState ReadChildren(EmberReader reader)
         {

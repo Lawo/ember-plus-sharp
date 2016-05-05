@@ -52,10 +52,8 @@ namespace Lawo.EmberPlusSharp.Model
             return reader.AssertAndReadContentsAsInt64();
         }
 
-        internal sealed override void WriteValue(EmberWriter writer, long? value)
-        {
+        internal sealed override void WriteValue(EmberWriter writer, long? value) =>
             writer.WriteValue(GlowParameterContents.Value.OuterId, value.Value);
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

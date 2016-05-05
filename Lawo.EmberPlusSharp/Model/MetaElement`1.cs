@@ -80,15 +80,13 @@ namespace Lawo.EmberPlusSharp.Model
             private readonly Func<TMostDerived, TProperty> get;
             private readonly Action<TMostDerived, TProperty> set;
 
-            private ModelException CreateRequiredPropertyException(IParent parent, string format)
-            {
-                return new ModelException(string.Format(
+            private ModelException CreateRequiredPropertyException(IParent parent, string format) =>
+                new ModelException(string.Format(
                     CultureInfo.InvariantCulture,
                     format,
                     this.Property.DeclaringType.FullName,
                     this.Property.Name,
                     parent.GetPath()));
-            }
         }
     }
 }

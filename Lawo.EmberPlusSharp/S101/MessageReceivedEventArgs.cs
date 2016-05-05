@@ -20,10 +20,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Gets the payload of the message.</summary>
         /// <returns>The payload of the message if the message has a payload; otherwise <c>null</c>.</returns>
-        public byte[] GetPayload()
-        {
-            return this.payload;
-        }
+        public byte[] GetPayload() => this.payload;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -25,17 +25,11 @@ namespace Lawo.EmberPlusSharp.Model
         /// <see cref="Consumer{T}.AutoSendInterval"/>. When
         /// <see cref="Consumer{T}.AutoSendInterval"/> equals <see cref="Timeout.Infinite"/>,
         /// <see cref="Consumer{T}.SendAsync"/> must be called before awaiting the returned task.</remarks>
-        public Task<TResult> InvokeAsync()
-        {
-            return this.InvokeCoreAsync(new TResult());
-        }
+        public Task<TResult> InvokeAsync() => this.InvokeCoreAsync(new TResult());
 
         /// <summary>Returns the return value of <see cref="InvokeAsync"/>.</summary>
         [Obsolete("Call InvokeAsync instead.")]
-        public Task<TResult> Invoke()
-        {
-            return this.InvokeAsync();
-        }
+        public Task<TResult> Invoke() => this.InvokeAsync();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

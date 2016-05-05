@@ -11,10 +11,7 @@ namespace Lawo.EmberPlusSharp.S101
 
     internal sealed class CompleteOnDispose : IDisposable
     {
-        public void Dispose()
-        {
-            this.source.TrySetException(new OperationCanceledException());
-        }
+        public void Dispose() => this.source.TrySetException(new OperationCanceledException());
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

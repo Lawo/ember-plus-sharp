@@ -15,15 +15,11 @@ namespace Lawo.GlowAnalyzerProxy.Main
     public sealed class BoolToVisibilityConverter : IValueConverter
     {
         /// <inheritdoc/>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+            (bool)value ? Visibility.Visible : Visibility.Collapsed;
 
         /// <inheritdoc/>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (Visibility)value == Visibility.Visible;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            (Visibility)value == Visibility.Visible;
     }
 }

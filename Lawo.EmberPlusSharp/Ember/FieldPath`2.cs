@@ -10,16 +10,11 @@ namespace Lawo.EmberPlusSharp.Ember
 
     internal struct FieldPath<TTypeId, TFieldId> : IEquatable<FieldPath<TTypeId, TFieldId>>
     {
-        public bool Equals(FieldPath<TTypeId, TFieldId> other)
-        {
-            return this.field1.Equals(other.field1) &&
-                this.field2.Equals(other.field2) && this.field3.Equals(other.field3);
-        }
+        public bool Equals(FieldPath<TTypeId, TFieldId> other) =>
+            this.field1.Equals(other.field1) && this.field2.Equals(other.field2) && this.field3.Equals(other.field3);
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(this.field1.GetHashCode(), this.field2.GetHashCode(), this.field3.GetHashCode());
-        }
+        public override int GetHashCode() =>
+            HashCode.Combine(this.field1.GetHashCode(), this.field2.GetHashCode(), this.field3.GetHashCode());
 
         public override string ToString()
         {

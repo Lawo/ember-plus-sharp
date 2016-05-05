@@ -20,30 +20,16 @@ namespace Lawo.EmberPlusSharp.S101
     public abstract class S101Command : IEquatable<S101Command>
     {
         /// <inheritdoc/>
-        public bool Equals(S101Command other)
-        {
-            // We're enforcing the glow dtd version for EmberData instances, so it is sufficient to compare the
-            // command types.
-            return (other != null) && (other.commandType == this.commandType);
-        }
+        public bool Equals(S101Command other) => (other != null) && (other.commandType == this.commandType);
 
         /// <inheritdoc/>
-        public sealed override bool Equals(object obj)
-        {
-            return this.Equals(obj as S101Command);
-        }
+        public sealed override bool Equals(object obj) => this.Equals(obj as S101Command);
 
         /// <inheritdoc/>
-        public sealed override int GetHashCode()
-        {
-            return (int)this.commandType;
-        }
+        public sealed override int GetHashCode() => (int)this.commandType;
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return this.commandType.ToString();
-        }
+        public override string ToString() => this.commandType.ToString();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -83,15 +69,11 @@ namespace Lawo.EmberPlusSharp.S101
             await this.WriteToCoreAsync(writeBuffer, cancellationToken);
         }
 
-        internal virtual Task ReadFromCoreAsync(ReadBuffer readBuffer, CancellationToken cancellationToken)
-        {
-            return Completed;
-        }
+        internal virtual Task ReadFromCoreAsync(ReadBuffer readBuffer, CancellationToken cancellationToken) =>
+            Completed;
 
-        internal virtual Task WriteToCoreAsync(WriteBuffer writeBuffer, CancellationToken cancellationToken)
-        {
-            return Completed;
-        }
+        internal virtual Task WriteToCoreAsync(WriteBuffer writeBuffer, CancellationToken cancellationToken) =>
+            Completed;
 
         internal virtual void ParseCore(string[] components)
         {

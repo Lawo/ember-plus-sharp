@@ -420,10 +420,7 @@ namespace Lawo.EmberPlusSharp.Ember
             return (byte)((int)emberId.Class | (emberId.IsConstructed ? ConstructedFlag : PrimitiveFlag) | bits);
         }
 
-        private static int GetLengthFromShift8Bit(int shift)
-        {
-            return (shift / Constants.BitsPerByte) + 1;
-        }
+        private static int GetLengthFromShift8Bit(int shift) => (shift / Constants.BitsPerByte) + 1;
 
         private static int GetLengthLength(int? length, out int shift)
         {

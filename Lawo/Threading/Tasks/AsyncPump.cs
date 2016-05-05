@@ -61,20 +61,11 @@ namespace Lawo.Threading.Tasks
 
         private sealed class SingleThreadSynchronizationContext : SynchronizationContext, IDisposable
         {
-            public void Dispose()
-            {
-                this.queue.Dispose();
-            }
+            public void Dispose() => this.queue.Dispose();
 
-            public sealed override SynchronizationContext CreateCopy()
-            {
-                return this;
-            }
+            public sealed override SynchronizationContext CreateCopy() => this;
 
-            public sealed override void OperationStarted()
-            {
-                Interlocked.Increment(ref this.operationCount);
-            }
+            public sealed override void OperationStarted() => Interlocked.Increment(ref this.operationCount);
 
             public sealed override void OperationCompleted()
             {

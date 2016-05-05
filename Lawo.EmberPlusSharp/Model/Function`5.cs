@@ -32,24 +32,19 @@ namespace Lawo.EmberPlusSharp.Model
         /// <see cref="Consumer{T}.AutoSendInterval"/>. When
         /// <see cref="Consumer{T}.AutoSendInterval"/> equals <see cref="Timeout.Infinite"/>,
         /// <see cref="Consumer{T}.SendAsync"/> must be called before awaiting the returned task.</remarks>
-        public Task<TResult> InvokeAsync(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-        {
-            return this.InvokeCoreAsync(
+        public Task<TResult> InvokeAsync(T1 arg1, T2 arg2, T3 arg3, T4 arg4) =>
+            this.InvokeCoreAsync(
                 new TResult(),
                 new ValueWriter<T1>(arg1).WriteValue,
                 new ValueWriter<T2>(arg2).WriteValue,
                 new ValueWriter<T3>(arg3).WriteValue,
                 new ValueWriter<T4>(arg4).WriteValue);
-        }
 
         /// <summary>Returns the return value of
         /// <see cref="InvokeAsync(T1, T2, T3, T4)">InvokeAsync(<paramref name="arg1"/>, <paramref name="arg2"/>,
         /// <paramref name="arg3"/>, <paramref name="arg4"/>)</see>.</summary>
         [Obsolete("Call InvokeAsync instead.")]
-        public Task<TResult> Invoke(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-        {
-            return this.InvokeAsync(arg1, arg2, arg3, arg4);
-        }
+        public Task<TResult> Invoke(T1 arg1, T2 arg2, T3 arg3, T4 arg4) => this.InvokeAsync(arg1, arg2, arg3, arg4);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

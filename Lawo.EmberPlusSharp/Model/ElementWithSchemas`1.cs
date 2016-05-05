@@ -83,10 +83,8 @@ namespace Lawo.EmberPlusSharp.Model
             this.RetrievalState = retrievalState;
         }
 
-        internal void ReadSchemaIdentifiers(EmberReader reader)
-        {
+        internal void ReadSchemaIdentifiers(EmberReader reader) =>
             this.SchemaIdentifiers = reader.AssertAndReadContentsAsString().Split('\n');
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

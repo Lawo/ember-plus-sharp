@@ -25,9 +25,7 @@ namespace Lawo.EmberPlusSharp.Model
             throw new ModelException("Unexpected contents for intermediate node in basePath.");
         }
 
-        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
-        {
+        internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations) =>
             this.HasChanges = false;
-        }
     }
 }

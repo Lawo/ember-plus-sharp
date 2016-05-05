@@ -52,12 +52,10 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Tests <see cref="EmberId"/> exceptions.</summary>
         [TestMethod]
-        public void ExceptionTest()
-        {
+        public void ExceptionTest() =>
             AssertThrow<ArgumentOutOfRangeException>(
                 () => EmberId.CreateApplication(-1),
                 () => EmberId.CreateContextSpecific(-1));
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

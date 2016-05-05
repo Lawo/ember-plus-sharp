@@ -74,10 +74,7 @@ namespace Lawo.EmberPlusSharp.Glow
         /// <remarks>
         /// <para>When a <see cref="GlowLogInterpreter"/> is first created and initialized, there is no information
         /// available. You must call <see cref="Read"/> to read the first message.</para></remarks>
-        public bool Read()
-        {
-            return this.reader.Read();
-        }
+        public bool Read() => this.reader.Read();
 
         /// <summary>Applies the payload of the current message to the tree rooted in <see cref="Root"/>.</summary>
         /// <exception cref="InvalidOperationException">

@@ -14,10 +14,7 @@ namespace Lawo.EmberPlusSharp.Model
     {
         object IValueReader.Value => this.Value;
 
-        void IValueReader.ReadValue(EmberReader reader)
-        {
-            this.Value = ReadValueCore(reader);
-        }
+        void IValueReader.ReadValue(EmberReader reader) => this.Value = ReadValueCore(reader);
 
         internal T Value { get; private set; }
 

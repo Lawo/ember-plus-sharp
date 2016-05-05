@@ -28,10 +28,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Establishes a connection to a provider and creates a dynamic local copy of the database.</summary>
         [TestMethod]
         [TestCategory("Manual")]
-        public void DynamicConnectTest()
-        {
-            Main();
-        }
+        public void DynamicConnectTest() => Main();
 
         /// <summary>Iterates over the dynamic local database.</summary>
         [TestMethod]

@@ -115,10 +115,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <exception cref="InvalidOperationException">The <see cref="Task.IsCompleted"/> property is <c>false</c> for
         /// the <see cref="Task"/> object returned by a previously called async method.</exception>
         [CLSCompliant(false)]
-        public Task DisposeAsync(CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
-        }
+        public Task DisposeAsync(CancellationToken cancellationToken) =>
+            this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
 
         /// <summary>Asynchronously reads the next message.</summary>
         /// <returns><c>true</c> if the next message was read successfully; <c>false</c> if there are no more messages
@@ -135,10 +133,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// You must call <see cref="ReadAsync"/> to read the first message.</para>
         /// <para>Possibly unread payload of the previous message is automatically skipped.</para></remarks>
         [CLSCompliant(false)]
-        public Task<bool> ReadAsync(CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.ReadCoreAsync(cancellationToken));
-        }
+        public Task<bool> ReadAsync(CancellationToken cancellationToken) =>
+            this.taskSingleton.Execute(() => this.ReadCoreAsync(cancellationToken));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

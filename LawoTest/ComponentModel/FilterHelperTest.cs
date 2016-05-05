@@ -20,18 +20,13 @@ namespace Lawo.ComponentModel
     {
         /// <summary>Tests <see cref="FilterHelper"/> by adding elements.</summary>
         [TestMethod]
-        public void AddTest()
-        {
-            this.VerifyModification(original => original.Add(this.CreateRandomItem()), Predicate);
-        }
+        public void AddTest() => this.VerifyModification(original => original.Add(this.CreateRandomItem()), Predicate);
 
         /// <summary>Tests <see cref="FilterHelper"/> by inserting elements.</summary>
         [TestMethod]
-        public void InsertTest()
-        {
+        public void InsertTest() =>
             this.VerifyModification(
                 original => original.Insert(this.Random.Next(original.Count + 1), this.CreateRandomItem()), Predicate);
-        }
 
         /// <summary>Tests <see cref="FilterHelper"/> by replacing elements.</summary>
         [TestMethod]
@@ -65,10 +60,7 @@ namespace Lawo.ComponentModel
 
         /// <summary>Tests <see cref="FilterHelper"/> by clearing elements.</summary>
         [TestMethod]
-        public void ClearTest()
-        {
-            this.VerifyModification(original => original.Clear(), Predicate);
-        }
+        public void ClearTest() => this.VerifyModification(original => original.Clear(), Predicate);
 
         /// <summary>Tests <see cref="FilterHelper"/> exceptions.</summary>
         [TestMethod]
@@ -124,9 +116,6 @@ namespace Lawo.ComponentModel
             }
         }
 
-        private int CreateRandomItem()
-        {
-            return this.Random.Next(10);
-        }
+        private int CreateRandomItem() => this.Random.Next(10);
     }
 }

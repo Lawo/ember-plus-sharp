@@ -31,18 +31,13 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Returns the return value of
         /// <see cref="CreateAsync(S101Client, int)">CreateAsync(<paramref name="client"/>, 10000)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
-        public static Task<Consumer<TRoot>> CreateAsync(S101Client client)
-        {
-            return CreateAsync(client, 10000);
-        }
+        public static Task<Consumer<TRoot>> CreateAsync(S101Client client) => CreateAsync(client, 10000);
 
         /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, byte)">CreateAsync(<paramref name="client"/>,
         /// <paramref name="timeout"/>, 0x00)</see>.</summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
-        public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout)
-        {
-            return CreateAsync(client, timeout, (byte)0x00);
-        }
+        public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout) =>
+			CreateAsync(client, timeout, (byte)0x00);
 
         /// <summary>Returns the return value of <see cref="CreateAsync(S101Client, int, ChildrenRetrievalPolicy, byte)">
         /// CreateAsync(<paramref name="client"/>, <paramref name="timeout"/>, <paramref name="childrenRetrievalPolicy"/>,
@@ -60,10 +55,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// <see cref="ChildrenRetrievalPolicy.All">ChildrenRetrievalPolicy.All</see>, <paramref name="slot"/>)</see>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way.")]
-        public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout, byte slot)
-        {
-            return CreateAsync(client, timeout, ChildrenRetrievalPolicy.All, slot);
-        }
+        public static Task<Consumer<TRoot>> CreateAsync(S101Client client, int timeout, byte slot) =>
+            CreateAsync(client, timeout, ChildrenRetrievalPolicy.All, slot);
 
         /// <summary>Asynchronously uses <paramref name="client"/> to create a new <see cref="Consumer{T}"/> object.
         /// </summary>
@@ -171,10 +164,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Calls <see cref="SendAsync"/>.</summary>
         [Obsolete("Call SendAsync instead.")]
-        public Task SendChangesAsync()
-        {
-            return this.SendAsync();
-        }
+        public Task SendChangesAsync() => this.SendAsync();
 
         /// <summary>Asynchronously sends the locally applied changes and invocations to the provider.</summary>
         /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the
@@ -218,10 +208,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
 
-        private static string GetVersion(IReadOnlyCollection<byte> applicationBytes)
-        {
-            return string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
-        }
+        private static string GetVersion(IReadOnlyCollection<byte> applicationBytes) =>
+            string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
 
         private readonly ReceiveQueue receiveQueue = new ReceiveQueue();
         private readonly InvocationCollection pendingInvocations = new InvocationCollection();
@@ -273,10 +261,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private void OnHasChangesSet(object sender, EventArgs e)
-        {
-            this.hasChangesSetSource.TrySetResult(true);
-        }
+        private void OnHasChangesSet(object sender, EventArgs e) => this.hasChangesSetSource.TrySetResult(true);
 
         private async Task RetrieveChildrenAsync()
         {
@@ -372,10 +357,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private Task WaitForProviderChangesAsync()
-        {
-            return this.receiveQueue.WaitForMessageAsync();
-        }
+        private Task WaitForProviderChangesAsync() => this.receiveQueue.WaitForMessageAsync();
 
         private void OnConnectionLost(object sender, ConnectionLostEventArgs e) => this.ConnectionLost?.Invoke(this, e);
 
@@ -512,10 +494,7 @@ namespace Lawo.EmberPlusSharp.Model
                 this.nonEmpty = new TaskCompletionSource<bool>();
             }
 
-            internal MessageReceivedEventArgs DequeueMessage()
-            {
-                return this.queue.Dequeue();
-            }
+            internal MessageReceivedEventArgs DequeueMessage() => this.queue.Dequeue();
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -348,10 +348,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <para>This method has no effect, if the reader is currently placed on a data value with primitive encoding
         /// (the next call to <see cref="Read"/> will skip possibly unread contents anyway).</para>
         /// </remarks>
-        public void Skip()
-        {
-            this.SkipCore(this.InnerNumber);
-        }
+        public void Skip() => this.SkipCore(this.InnerNumber);
 
         /// <summary>Skips to the end of the current container.</summary>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
@@ -384,10 +381,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <para>This method has no effect, if the reader is currently placed on a data value with primitive encoding
         /// (the next call to <see cref="Read"/> will skip possibly unread contents anyway).</para>
         /// </remarks>
-        public object Copy(EmberWriter writer)
-        {
-            return this.CopyCore(writer, this.InnerNumber);
-        }
+        public object Copy(EmberWriter writer) => this.CopyCore(writer, this.InnerNumber);
 
         /// <summary>Reads data and writes it to <paramref name="writer"/> until the end of the current container is
         /// reached.</summary>
@@ -677,15 +671,11 @@ namespace Lawo.EmberPlusSharp.Ember
             return result;
         }
 
-        private static EmberException CreateEmberException(string format, params object[] positions)
-        {
-            return new EmberException(string.Format(CultureInfo.InvariantCulture, format, positions));
-        }
+        private static EmberException CreateEmberException(string format, params object[] positions) =>
+            new EmberException(string.Format(CultureInfo.InvariantCulture, format, positions));
 
-        private static EmberException CreateEmberException(EndOfStreamException ex)
-        {
-            return new EmberException("Unexpected end of stream.", ex);
-        }
+        private static EmberException CreateEmberException(EndOfStreamException ex) =>
+            new EmberException("Unexpected end of stream.", ex);
 
         private readonly Stack<PositionInfo> endPositions = new Stack<PositionInfo>(32);
         private readonly ReadBuffer readBuffer;

@@ -132,9 +132,7 @@ namespace Lawo.EmberPlusSharp.S101
             await this.message.WriteToAsync(this.unframedBuffer, cancellationToken);
         }
 
-        private Task WriteUnframedAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
-            return this.framingStream.WriteAsync(buffer, offset, count, cancellationToken);
-        }
+        private Task WriteUnframedAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
+            this.framingStream.WriteAsync(buffer, offset, count, cancellationToken);
     }
 }

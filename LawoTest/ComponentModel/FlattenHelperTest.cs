@@ -117,18 +117,14 @@ namespace Lawo.ComponentModel
 
         /// <summary>Tests <see cref="FlattenHelper"/> exceptions.</summary>
         [TestMethod]
-        public void ExceptionTest()
-        {
+        public void ExceptionTest() =>
             AssertThrow<ArgumentNullException>(
                 () => ((ReadOnlyObservableCollection<ReadOnlyObservableCollection<int>>)null).Flatten());
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static ReadOnlyObservableCollection<int> MakeReadOnly(ObservableCollection<int> child)
-        {
-            return child == null ? null : new ReadOnlyObservableCollection<int>(child);
-        }
+        private static ReadOnlyObservableCollection<int> MakeReadOnly(ObservableCollection<int> child) =>
+            child == null ? null : new ReadOnlyObservableCollection<int>(child);
 
         private static List<int> GetExpected(ObservableCollection<ReadOnlyObservableCollection<int>> parent)
         {
@@ -163,16 +159,11 @@ namespace Lawo.ComponentModel
             }
         }
 
-        private ObservableCollection<int> CreateRandomChild()
-        {
-            return this.Random.Next(5) == 0 ? null : new ObservableCollection<int>(
+        private ObservableCollection<int> CreateRandomChild() =>
+            this.Random.Next(5) == 0 ? null : new ObservableCollection<int>(
                 Enumerable.Range(0, this.Random.Next(10)).Select(i2 => this.CreateRandomItem()));
-        }
 
-        private int CreateRandomItem()
-        {
-            return this.Random.Next(100);
-        }
+        private int CreateRandomItem() => this.Random.Next(100);
 
         private T GetRandomChild<T>(IList<T> children)
             where T : class

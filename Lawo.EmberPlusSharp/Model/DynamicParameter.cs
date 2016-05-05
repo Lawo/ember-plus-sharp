@@ -87,25 +87,13 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal sealed override object GetMinimum()
-        {
-            return this.minimum;
-        }
+        internal sealed override object GetMinimum() => this.minimum;
 
-        internal sealed override void SetMinimum(object value)
-        {
-            this.SetValue(ref this.minimum, value, "Minimum");
-        }
+        internal sealed override void SetMinimum(object value) => this.SetValue(ref this.minimum, value, "Minimum");
 
-        internal sealed override object GetMaximum()
-        {
-            return this.maximum;
-        }
+        internal sealed override object GetMaximum() => this.maximum;
 
-        internal sealed override void SetMaximum(object value)
-        {
-            this.SetValue(ref this.maximum, value, "Maximum");
-        }
+        internal sealed override void SetMaximum(object value) => this.SetValue(ref this.maximum, value, "Maximum");
 
         internal sealed override object AssertValueType(object value)
         {

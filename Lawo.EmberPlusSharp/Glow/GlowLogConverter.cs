@@ -52,10 +52,7 @@ namespace Lawo.EmberPlusSharp.Glow
 
         private sealed class Converter : IEmberConverter
         {
-            public void ToXml(byte[] dummyBuffer, XmlWriter dummyWriter)
-            {
-                this.interpreter.ApplyPayload();
-            }
+            public void ToXml(byte[] dummyBuffer, XmlWriter dummyWriter) => this.interpreter.ApplyPayload();
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -68,10 +65,7 @@ namespace Lawo.EmberPlusSharp.Glow
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private static string LowerFirst(string str)
-            {
-                return char.ToLowerInvariant(str[0]) + str.Substring(1);
-            }
+            private static string LowerFirst(string str) => char.ToLowerInvariant(str[0]) + str.Substring(1);
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "There's no meaningful way to reduce the complexity.")]
             [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "There is only one cast per method call, CA bug?")]
@@ -196,10 +190,8 @@ namespace Lawo.EmberPlusSharp.Glow
                 this.WriteOperation("Init", node, "SchemaIdentifiers");
             }
 
-            private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-            {
+            private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) =>
                 this.WriteOperation("Set", (IElement)sender, e.PropertyName);
-            }
 
             private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {

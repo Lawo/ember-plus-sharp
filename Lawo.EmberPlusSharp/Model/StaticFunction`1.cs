@@ -87,10 +87,8 @@ namespace Lawo.EmberPlusSharp.Model
                 resultType.IsConstructedGenericType ? resultType.GenericTypeArguments : Enumerable.Empty<Type>());
         }
 
-        private static KeyValuePair<string, ParameterType>[] CreateTypeArray(IEnumerable<Type> argumentTypes)
-        {
-            return argumentTypes.Select(t => new KeyValuePair<string, ParameterType>(null, GetType(t))).ToArray();
-        }
+        private static KeyValuePair<string, ParameterType>[] CreateTypeArray(IEnumerable<Type> argumentTypes) =>
+            argumentTypes.Select(t => new KeyValuePair<string, ParameterType>(null, GetType(t))).ToArray();
 
         private static ParameterType GetType(Type type)
         {

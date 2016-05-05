@@ -61,8 +61,7 @@ namespace Lawo
 
         /// <summary>Tests exceptional paths.</summary>
         [TestMethod]
-        public void ExceptionTest()
-        {
+        public void ExceptionTest() =>
             AssertThrow<ArgumentException>(
                 () => FastEnum.IsDefined(5),
                 () => FastEnum.ToEnum<int>(42),
@@ -71,7 +70,6 @@ namespace Lawo
                 () => FastEnum.ToUInt64('G'),
                 () => FastEnum.GetValueNameMap<DateTime>(),
                 () => FastEnum.GetNameValueMap<char>());
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

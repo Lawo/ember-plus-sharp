@@ -346,21 +346,15 @@ namespace Lawo.EmberPlusSharp.Ember
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static void AssertDecode(byte[] contents)
-        {
+        private static void AssertDecode(byte[] contents) =>
             AssertDecodeContents(InnerNumber.Octetstring, contents, contents);
-        }
 
-        private static void AssertDecode(string str)
-        {
+        private static void AssertDecode(string str) =>
             AssertDecodeContents(InnerNumber.Utf8String, str, Encoding.UTF8.GetBytes(str));
-        }
 
-        private static void AssertDecode(int[] contents)
-        {
+        private static void AssertDecode(int[] contents) =>
             AssertDecodeContents(
                 InnerNumber.RelativeObjectIdentifier, contents, contents.Select(id => (byte)id).ToArray());
-        }
 
         private static void AssertDecodeContents(int expectedInnerNumber, object expectedValue, byte[] contents)
         {
@@ -390,10 +384,8 @@ namespace Lawo.EmberPlusSharp.Ember
             }
         }
 
-        private static void AssertDecode(int expectedInnerNumber, object expectedValue, params byte[] input)
-        {
+        private static void AssertDecode(int expectedInnerNumber, object expectedValue, params byte[] input) =>
             AssertDecode(expectedInnerNumber, expectedValue, Assert.AreEqual, input);
-        }
 
         private static void AssertDecode<T>(
             int expectedInnerNumber, T expectedValue, Action<T, T> assertEqual, params byte[] input)

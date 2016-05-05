@@ -91,10 +91,7 @@ namespace Lawo.EmberPlusSharp.Model
         StreamDescription? IStreamedParameter.StreamDescriptor => this.StreamDescriptor;
 
         /// <inheritdoc/>
-        void IStreamedParameter.SetProviderValue(object value)
-        {
-            this.SetProviderValue(this.AssertValueType(value));
-        }
+        void IStreamedParameter.SetProviderValue(object value) => this.SetProviderValue(this.AssertValueType(value));
 
         internal ParameterBase()
             : base(RetrievalState.Complete)
@@ -158,28 +155,19 @@ namespace Lawo.EmberPlusSharp.Model
             set { }
         }
 
-        internal TValue GetValue()
-        {
-            return this.theValue;
-        }
+        internal TValue GetValue() => this.theValue;
 
         internal abstract TValue ReadValue(EmberReader reader, out ParameterType? parameterType);
 
         internal abstract void WriteValue(EmberWriter writer, TValue value);
 
-        internal virtual object GetMinimum()
-        {
-            return null;
-        }
+        internal virtual object GetMinimum() => null;
 
         internal virtual void SetMinimum(TValue value)
         {
         }
 
-        internal virtual object GetMaximum()
-        {
-            return null;
-        }
+        internal virtual object GetMaximum() => null;
 
         internal virtual void SetMaximum(TValue value)
         {

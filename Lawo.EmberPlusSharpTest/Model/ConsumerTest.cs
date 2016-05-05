@@ -1398,10 +1398,7 @@ namespace Lawo.EmberPlusSharp.Model
             return ToPayload(args.Length > 0 ? string.Format(CultureInfo.InvariantCulture, xml, args) : xml);
         }
 
-        private static string GetXml(string payloadXmlName)
-        {
-            return GetContent<ModelPayloads>(payloadXmlName);
-        }
+        private static string GetXml(string payloadXmlName) => GetContent<ModelPayloads>(payloadXmlName);
 
         private static byte[] ToPayload(string xml)
         {
@@ -1511,9 +1508,8 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static Task StaticChildrenRetrievalPolicyTestAsync(ChildrenRetrievalPolicy policy, string logName)
-        {
-            return TestWithRobot<ModelPayloads>(
+        private static Task StaticChildrenRetrievalPolicyTestAsync(ChildrenRetrievalPolicy policy, string logName) =>
+            TestWithRobot<ModelPayloads>(
                 async client =>
                 {
                     using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(client, 4000, policy))
@@ -1555,12 +1551,9 @@ namespace Lawo.EmberPlusSharp.Model
                 GlowTypes.Instance,
                 false,
                 logName);
-        }
 
-        private static Task WaitForCompletion(Consumer<EmptyNodeRoot> consumer, bool delay)
-        {
-            return delay ? Task.Delay(consumer.AutoSendInterval + 500) : consumer.SendAsync();
-        }
+        private static Task WaitForCompletion(Consumer<EmptyNodeRoot> consumer, bool delay) =>
+            delay ? Task.Delay(consumer.AutoSendInterval + 500) : consumer.SendAsync();
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed within the called method.")]
         private static Task TestWithRobot<TRoot>(
@@ -1814,10 +1807,7 @@ namespace Lawo.EmberPlusSharp.Model
                 new XmlWriterSettings { Indent = true, CloseOutput = true });
         }
 
-        private static byte[] Genuine(byte[] bytes)
-        {
-            return bytes;
-        }
+        private static byte[] Genuine(byte[] bytes) => bytes;
 
         private static byte[] OneByteMissing(byte[] bytes)
         {
@@ -1826,15 +1816,9 @@ namespace Lawo.EmberPlusSharp.Model
             return result;
         }
 
-        private static int Genuine(int format)
-        {
-            return format;
-        }
+        private static int Genuine(int format) => format;
 
-        private static int Invalid(int format)
-        {
-            return 4242;
-        }
+        private static int Invalid(int format) => 4242;
 
         private static int Mismatch(int format)
         {
@@ -1956,10 +1940,8 @@ namespace Lawo.EmberPlusSharp.Model
                 "ChildrenRetrievalPolicyLog3.xml");
         }
 
-        private Task StreamTestCore(object intValue, object enumValue, object realValue)
-        {
-            return this.StreamTestCore(intValue, enumValue, realValue, Genuine, Genuine, false);
-        }
+        private Task StreamTestCore(object intValue, object enumValue, object realValue) =>
+            this.StreamTestCore(intValue, enumValue, realValue, Genuine, Genuine, false);
 
         private async Task StreamTestCore(
             object intValue,

@@ -20,10 +20,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.value = value;
         }
 
-        internal void WriteValue(EmberWriter writer)
-        {
-            WriteValueCore(writer, GlowTuple.Value.OuterId, this.value);
-        }
+        internal void WriteValue(EmberWriter writer) => WriteValueCore(writer, GlowTuple.Value.OuterId, this.value);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

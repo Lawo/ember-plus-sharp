@@ -203,10 +203,7 @@ namespace Lawo.UnitTesting
 
         /// <summary>Gets a random <see cref="string"/> value.</summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
-        protected static string GetRandomString()
-        {
-            return Guid.NewGuid().ToString();
-        }
+        protected static string GetRandomString() => Guid.NewGuid().ToString();
 
         /// <summary>Initializes a new instance of the <see cref="TestBase"/> class by calling
         /// <see cref="TestBase(int)">TestBase((int)DateTime.Now.TimeOfDay.TotalMilliseconds)</see>.</summary>
@@ -250,10 +247,7 @@ namespace Lawo.UnitTesting
 
         /// <summary>Gets a random <see cref="bool"/> value.</summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "A property is not suitable.")]
-        protected bool GetRandomBoolean()
-        {
-            return this.Random.Next(2) == 1;
-        }
+        protected bool GetRandomBoolean() => this.Random.Next(2) == 1;
 
         /// <summary>Gets a random enum value.</summary>
         /// <typeparam name="TEnum">The type of the enum.</typeparam>

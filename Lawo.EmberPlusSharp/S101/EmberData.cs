@@ -37,12 +37,10 @@ namespace Lawo.EmberPlusSharp.S101
         public IReadOnlyCollection<byte> ApplicationBytes => this.applicationBytes;
 
         /// <inheritdoc/>
-        public sealed override string ToString()
-        {
-            return base.ToString() + ' ' + this.dtd.ToString("X2", CultureInfo.InvariantCulture) +
-                (this.applicationBytes.Length > 0 ? " " : null) +
-                string.Join(" ", this.applicationBytes.Select(b => b.ToString("X2", CultureInfo.InvariantCulture)));
-        }
+        public sealed override string ToString() =>
+            base.ToString() + ' ' + this.dtd.ToString("X2", CultureInfo.InvariantCulture) +
+            (this.applicationBytes.Length > 0 ? " " : null) +
+            string.Join(" ", this.applicationBytes.Select(b => b.ToString("X2", CultureInfo.InvariantCulture)));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

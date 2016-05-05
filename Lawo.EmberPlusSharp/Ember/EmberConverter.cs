@@ -162,10 +162,7 @@ namespace Lawo.EmberPlusSharp.Ember
             writer.WriteEndAttribute();
         }
 
-        private static bool ReadNext(XmlReader reader)
-        {
-            return reader.Read() && (reader.MoveToContent() != XmlNodeType.None);
-        }
+        private static bool ReadNext(XmlReader reader) => reader.Read() && (reader.MoveToContent() != XmlNodeType.None);
 
         private static TValue ReadValue<TValue>(
             XmlReader reader, Func<XmlReader, TValue> read, TValue emptyValue = default(TValue))
@@ -213,10 +210,7 @@ namespace Lawo.EmberPlusSharp.Ember
             writer.WriteValue(fieldId, value);
         }
 
-        private static string GetFallbackName(int innerNumber)
-        {
-            return EmberId.FromInnerNumber(innerNumber).ToString();
-        }
+        private static string GetFallbackName(int innerNumber) => EmberId.FromInnerNumber(innerNumber).ToString();
 
         private readonly Dictionary<int, string> typeNames;
         private readonly Dictionary<FieldPath<int, EmberId>, string> fieldNames;

@@ -145,10 +145,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Tests <see cref="S101Message"/> methods.</summary>
         [TestMethod]
-        public void MessageTest()
-        {
-            AssertThrow<ArgumentNullException>(() => new S101Message(0x00, null).ToString());
-        }
+        public void MessageTest() => AssertThrow<ArgumentNullException>(() => new S101Message(0x00, null).ToString());
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -27,10 +27,8 @@ namespace Lawo.EmberPlusSharp.Model
             set { this.impl.EnumMapCore = value; }
         }
 
-        internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
-        {
-            return this.impl.ReadContents(base.ReadContents, reader, actualType);
-        }
+        internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType) =>
+            this.impl.ReadContents(base.ReadContents, reader, actualType);
 
         internal sealed override TEnum? ReadValue(EmberReader reader, out ParameterType? parameterType)
         {
@@ -39,10 +37,8 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
-        internal sealed override void WriteValue(EmberWriter writer, TEnum? value)
-        {
+        internal sealed override void WriteValue(EmberWriter writer, TEnum? value) =>
             writer.WriteValue(GlowParameterContents.Value.OuterId, FastEnum.ToInt64(value.Value));
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

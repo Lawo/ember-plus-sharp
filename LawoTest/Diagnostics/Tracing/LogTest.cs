@@ -51,73 +51,43 @@ namespace Lawo.Diagnostics.Tracing
 
         /// <summary>Tests the debug level.</summary>
         [TestMethod]
-        public void DebugTest()
-        {
-            TestLevel(EventLevel.Verbose, 1);
-        }
+        public void DebugTest() => TestLevel(EventLevel.Verbose, 1);
 
         /// <summary>Tests the info level.</summary>
         [TestMethod]
-        public void InfoTest()
-        {
-            TestLevel(EventLevel.Informational, 2);
-        }
+        public void InfoTest() => TestLevel(EventLevel.Informational, 2);
 
         /// <summary>Tests the warn level.</summary>
         [TestMethod]
-        public void WarnTest()
-        {
-            TestLevel(EventLevel.Warning, 3);
-        }
+        public void WarnTest() => TestLevel(EventLevel.Warning, 3);
 
         /// <summary>Tests the error level.</summary>
         [TestMethod]
-        public void ErrorTest()
-        {
-            TestLevel(EventLevel.Error, 4);
-        }
+        public void ErrorTest() => TestLevel(EventLevel.Error, 4);
 
         /// <summary>Tests the critical level.</summary>
         [TestMethod]
-        public void CriticalTest()
-        {
-            TestLevel(EventLevel.Critical, 5);
-        }
+        public void CriticalTest() => TestLevel(EventLevel.Critical, 5);
 
         /// <summary>Tests the debug level with specified module name.</summary>
         [TestMethod]
-        public void DebugTestModule()
-        {
-            TestLevel("Lawo", EventLevel.Verbose, 1);
-        }
+        public void DebugTestModule() => TestLevel("Lawo", EventLevel.Verbose, 1);
 
         /// <summary>Tests the info level with specified module name.</summary>
         [TestMethod]
-        public void InfoTestModule()
-        {
-            TestLevel("Lawo", EventLevel.Informational, 2);
-        }
+        public void InfoTestModule() => TestLevel("Lawo", EventLevel.Informational, 2);
 
         /// <summary>Tests the warn level with specified module name.</summary>
         [TestMethod]
-        public void WarnTestModule()
-        {
-            TestLevel("Lawo", EventLevel.Warning, 3);
-        }
+        public void WarnTestModule() => TestLevel("Lawo", EventLevel.Warning, 3);
 
         /// <summary>Tests the error level with specified module name.</summary>
         [TestMethod]
-        public void ErrorTestModule()
-        {
-            TestLevel("Lawo", EventLevel.Error, 4);
-        }
+        public void ErrorTestModule() => TestLevel("Lawo", EventLevel.Error, 4);
 
         /// <summary>Tests the critical level with specified module name.</summary>
         [TestMethod]
-        public void CriticalTestModule()
-        {
-            TestLevel("Lawo", EventLevel.Critical, 5);
-        }
+        public void CriticalTestModule() => TestLevel("Lawo", EventLevel.Critical, 5);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,10 +111,7 @@ namespace Lawo.Diagnostics.Tracing
             Log.Debug(CreateLogMessage(testName, EventLevel.Verbose), moduleName);
         }
 
-        private static string CreateLogMessage(string testName, EventLevel eventLevel)
-        {
-            return testName + "-" + eventLevel;
-        }
+        private static string CreateLogMessage(string testName, EventLevel eventLevel) => testName + "-" + eventLevel;
 
         private static async void TestLevel(EventLevel eventLevel, int expectedId, [CallerMemberName] string testName = null)
         {

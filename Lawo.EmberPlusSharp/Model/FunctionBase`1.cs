@@ -33,17 +33,11 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
-        Task<IResult> IFunction.InvokeAsync(params object[] actualArguments)
-        {
-            return this.InvokeCoreAsync(actualArguments);
-        }
+        Task<IResult> IFunction.InvokeAsync(params object[] actualArguments) => this.InvokeCoreAsync(actualArguments);
 
         /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Only relevant for interface client code.")]
-        Task<IResult> IFunction.Invoke(params object[] actualArguments)
-        {
-            return this.InvokeCoreAsync(actualArguments);
-        }
+        Task<IResult> IFunction.Invoke(params object[] actualArguments) => this.InvokeCoreAsync(actualArguments);
 
         internal FunctionBase(
             KeyValuePair<string, ParameterType>[] arguments, KeyValuePair<string, ParameterType>[] result)

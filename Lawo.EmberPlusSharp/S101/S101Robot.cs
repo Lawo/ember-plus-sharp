@@ -98,10 +98,7 @@ namespace Lawo.EmberPlusSharp.S101
             this.SendMessages();
         }
 
-        private Task WaitAsync()
-        {
-            return this.done.Task;
-        }
+        private Task WaitAsync() => this.done.Task;
 
         private void Dispose()
         {
@@ -130,11 +127,9 @@ namespace Lawo.EmberPlusSharp.S101
             await this.taskQueue.Enqueue(() => this.ProcessIncomingMessage(e));
         }
 
-        private void OnClientConnectionLost(object sender, ConnectionLostEventArgs e)
-        {
+        private void OnClientConnectionLost(object sender, ConnectionLostEventArgs e) =>
             this.done.TrySetException(
                 new S101Exception("The connection was lost before all messages could be processed.", e.Exception));
-        }
 
         private async Task SendMessagesAsync()
         {

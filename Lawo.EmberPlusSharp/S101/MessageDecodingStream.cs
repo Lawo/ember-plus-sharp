@@ -151,9 +151,7 @@ namespace Lawo.EmberPlusSharp.S101
             this.message = newMessage;
         }
 
-        private Task<int> ReadDeframedAsync(byte[] buffer, int index, int count, CancellationToken cancellationToken)
-        {
-            return this.deframingStream.ReadAsync(buffer, index, count, cancellationToken);
-        }
+        private Task<int> ReadDeframedAsync(byte[] buffer, int index, int count, CancellationToken cancellationToken) =>
+            this.deframingStream.ReadAsync(buffer, index, count, cancellationToken);
     }
 }

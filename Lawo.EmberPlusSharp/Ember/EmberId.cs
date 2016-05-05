@@ -16,30 +16,18 @@ namespace Lawo.EmberPlusSharp.Ember
     public struct EmberId : IEquatable<EmberId>
     {
         /// <summary>Tests whether two <see cref="EmberId"/> structures are equal.</summary>
-        public static bool operator ==(EmberId left, EmberId right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(EmberId left, EmberId right) => left.Equals(right);
 
         /// <summary>Tests whether two <see cref="EmberId"/> structures differ.</summary>
-        public static bool operator !=(EmberId left, EmberId right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(EmberId left, EmberId right) => !left.Equals(right);
 
         /// <summary>Creates a constructed identifier of the Application class with the specified number.</summary>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="number"/> is negative.</exception>
-        public static EmberId CreateApplication(int number)
-        {
-            return new EmberId(Class.Application, true, number);
-        }
+        public static EmberId CreateApplication(int number) => new EmberId(Class.Application, true, number);
 
         /// <summary>Creates a constructed identifier of the Context-specific class with the specified number.</summary>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="number"/> is negative.</exception>
-        public static EmberId CreateContextSpecific(int number)
-        {
-            return new EmberId(Class.ContextSpecific, true, number);
-        }
+        public static EmberId CreateContextSpecific(int number) => new EmberId(Class.ContextSpecific, true, number);
 
         /// <summary>Converts the string representation of an identifier <paramref name="input"/> into its
         /// <see cref="EmberId"/> equivalent and returns a value whether the conversion succeeded.</summary>
@@ -66,11 +54,8 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <inheritdoc/>
-        public bool Equals(EmberId other)
-        {
-            return (this.Class == other.Class) &&
-                (this.IsConstructed == other.IsConstructed) && (this.Number == other.Number);
-        }
+        public bool Equals(EmberId other) =>
+            (this.Class == other.Class) && (this.IsConstructed == other.IsConstructed) && (this.Number == other.Number);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
@@ -80,30 +65,20 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine((int)this.Class, this.IsConstructed ? 1 : 0, this.Number);
-        }
+        public override int GetHashCode() => HashCode.Combine((int)this.Class, this.IsConstructed ? 1 : 0, this.Number);
 
         /// <summary>Returns a string that represents the current object.</summary>
-        public override string ToString()
-        {
-            return ToChar(this.Class) + "-" + this.Number.ToString(CultureInfo.InvariantCulture);
-        }
+        public override string ToString() =>
+            ToChar(this.Class) + "-" + this.Number.ToString(CultureInfo.InvariantCulture);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal static EmberId CreateUniversal(int number)
-        {
-            return new EmberId(
-                Class.Universal, (number == InnerNumber.Sequence) || (number == InnerNumber.Set), number);
-        }
+        internal static EmberId CreateUniversal(int number) =>
+            new EmberId(Class.Universal, (number == InnerNumber.Sequence) || (number == InnerNumber.Set), number);
 
-        internal static EmberId FromInnerNumber(int innerNumber)
-        {
-            return innerNumber < InnerNumber.FirstApplication ?
+        internal static EmberId FromInnerNumber(int innerNumber) =>
+            innerNumber < InnerNumber.FirstApplication ?
                 CreateUniversal(innerNumber) : CreateApplication(innerNumber - InnerNumber.FirstApplication);
-        }
 
         internal EmberId(Class theClass, bool isConstructed, int number)
         {

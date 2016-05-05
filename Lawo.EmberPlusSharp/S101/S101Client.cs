@@ -214,10 +214,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Calls
         /// <see cref="SendMessageAsync(S101Message, byte[])">SendMessageAsync(<paramref name="message"/>, null)</see>.
         /// </summary>
-        public Task SendMessageAsync(S101Message message)
-        {
-            return this.SendMessageAsync(message, null);
-        }
+        public Task SendMessageAsync(S101Message message) => this.SendMessageAsync(message, null);
 
         /// <summary>Sends <paramref name="message"/> followed by <paramref name="payload"/>.</summary>
         /// <param name="message">The message to send.</param>
@@ -249,10 +246,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <remarks>Cancels all communication currently in progress and calls <see cref="IDisposable.Dispose"/> on the
         /// connection object passed to the constructor.</remarks>
         [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", Justification = "All fields are disposed in ReadLoop.")]
-        public void Dispose()
-        {
-            this.DisposeCore(true);
-        }
+        public void Dispose() => this.DisposeCore(true);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -30,10 +30,8 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         private MainWindowViewModel ViewModel => (MainWindowViewModel)this.DataContext;
 
-        private void OnScrollEventIntoView(object sender, ScrollEventIntoViewEventArgs e)
-        {
+        private void OnScrollEventIntoView(object sender, ScrollEventIntoViewEventArgs e) =>
             this.EventsDataGrid.ScrollIntoView(e.NewEvent);
-        }
 
         private void OnListenFailed(object sender, ListenFailedEventArgs e)
         {

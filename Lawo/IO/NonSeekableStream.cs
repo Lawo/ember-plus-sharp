@@ -46,10 +46,7 @@ namespace Lawo.IO
 
         /// <summary>Asynchronously disposes resources.</summary>
         [CLSCompliant(false)]
-        public virtual Task DisposeAsync(CancellationToken cancellationToken)
-        {
-            return Completed;
-        }
+        public virtual Task DisposeAsync(CancellationToken cancellationToken) => Completed;
 
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)
@@ -85,18 +82,13 @@ namespace Lawo.IO
 
         /// <summary>See <see cref="Stream.FlushAsync(CancellationToken)"/>.</summary>
         /// <remarks>This method does nothing, derived classes should override as necessary.</remarks>
-        public override Task FlushAsync(CancellationToken cancellationToken)
-        {
-            return Completed;
-        }
+        public override Task FlushAsync(CancellationToken cancellationToken) => Completed;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>Creates the exception thrown by all unsupported members.</summary>
-        protected static Exception CreateNotSupportedException()
-        {
-            return new NotSupportedException("This operation is not supported.");
-        }
+        protected static Exception CreateNotSupportedException() =>
+            new NotSupportedException("This operation is not supported.");
 
         /// <summary>Initializes a new instance of the <see cref="NonSeekableStream"/> class.</summary>
         protected NonSeekableStream()

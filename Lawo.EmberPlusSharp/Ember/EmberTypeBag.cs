@@ -101,18 +101,14 @@ namespace Lawo.EmberPlusSharp.Ember
             typeof(BerSet)
         };
 
-        private static FieldPath<int, EmberId> GetOuterFieldsIds(IEnumerable<Type> outerFields)
-        {
-            return outerFields.Aggregate(
+        private static FieldPath<int, EmberId> GetOuterFieldsIds(IEnumerable<Type> outerFields) =>
+            outerFields.Aggregate(
                 default(FieldPath<int, EmberId>), (p, f) => FieldPath<int, EmberId>.Append(p, GetFieldIds(f)));
-        }
 
-        private static Field<int, EmberId> GetFieldIds(Type outerField)
-        {
-            return new Field<int, EmberId>(
+        private static Field<int, EmberId> GetFieldIds(Type outerField) =>
+            new Field<int, EmberId>(
                 (int)outerField.DeclaringType.GetTypeInfo().GetDeclaredField(InnerNumberFieldName).GetValue(null),
                 (EmberId)outerField.GetTypeInfo().GetDeclaredField(OuterIdFieldName).GetValue(null));
-        }
 
         private static FieldPath<string, string> GetOuterFieldsNames(
             Dictionary<int, string> typeNames, IEnumerable<Type> outerFields)

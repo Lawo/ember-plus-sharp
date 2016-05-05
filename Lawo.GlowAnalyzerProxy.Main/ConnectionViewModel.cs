@@ -77,10 +77,8 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static string GetCount(bool isValid, long count)
-        {
-            return isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
-        }
+        private static string GetCount(bool isValid, long count) =>
+            isValid ? count.ToString(CultureInfo.InvariantCulture) : string.Empty;
 
         private readonly MainWindowViewModel parent;
         private readonly CalculatedProperty<string> connectionCount;

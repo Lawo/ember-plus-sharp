@@ -234,10 +234,7 @@ namespace Lawo.EmberPlusSharp.Model
             throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
         }
 
-        internal virtual void ReadAdditionalFields(EmberReader reader)
-        {
-            reader.Skip();
-        }
+        internal virtual void ReadAdditionalFields(EmberReader reader) => reader.Skip();
 
         /// <summary>Recursively updates the state of all children and returns the state of this element.</summary>
         /// <remarks>Only the children with a state not equal to <see cref="RetrievalState.Verified"/> are visited.
@@ -256,10 +253,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// <remarks>Recursively visits all children with a state equal to <see cref="RetrievalState.None"/>, writes
         /// a getDirectory command for nodes that do not yet have children or a subscribe command for stream parameters
         /// and changes their state accordingly.</remarks>
-        internal virtual bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
-        {
-            return false;
-        }
+        internal virtual bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters) =>
+            false;
 
         internal abstract void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations);
 
@@ -268,20 +263,12 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <summary>Returns a value indicating whether all required children are available for this element.</summary>
-        internal virtual bool AreRequiredChildrenAvailable(bool throwIfMissing)
-        {
-            return true;
-        }
+        internal virtual bool AreRequiredChildrenAvailable(bool throwIfMissing) => true;
 
-        internal virtual IParent GetFirstIncompleteChild()
-        {
-            return null;
-        }
+        internal virtual IParent GetFirstIncompleteChild() => null;
 
-        internal virtual IElement GetElement(string[] pathElements, int index)
-        {
-            return index == pathElements.Length ? this : null;
-        }
+        internal virtual IElement GetElement(string[] pathElements, int index) =>
+            index == pathElements.Length ? this : null;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

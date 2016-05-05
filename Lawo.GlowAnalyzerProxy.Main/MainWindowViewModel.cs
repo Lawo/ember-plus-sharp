@@ -170,10 +170,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
         }
 
-        public void SaveSettings()
-        {
-            this.settings.Save();
-        }
+        public void SaveSettings() => this.settings.Save();
 
         public void LoadFullEventDetail()
         {
@@ -285,10 +282,8 @@ namespace Lawo.GlowAnalyzerProxy.Main
             }
         }
 
-        private static string ValidateFolder(string folder)
-        {
-            return Directory.Exists(folder) ? null : "Folder does not exist.";
-        }
+        private static string ValidateFolder(string folder) =>
+            Directory.Exists(folder) ? null : "Folder does not exist.";
 
         private static string GetShortType(string type)
         {
@@ -468,17 +463,13 @@ namespace Lawo.GlowAnalyzerProxy.Main
             return providerClient;
         }
 
-        private Task ForwardFromConsumerAsync(LogInfo logInfo)
-        {
-            return this.ForwardAsync(
+        private Task ForwardFromConsumerAsync(LogInfo logInfo) =>
+            this.ForwardAsync(
                 this.ConsumerConnection, this.ProviderConnection, logInfo, ShortConsumerToProvider, ConsumerToProvider);
-        }
 
-        private Task ForwardFromProviderAsync(LogInfo logInfo)
-        {
-            return this.ForwardAsync(
+        private Task ForwardFromProviderAsync(LogInfo logInfo) =>
+            this.ForwardAsync(
                 this.ProviderConnection, this.ConsumerConnection, logInfo, ShortProviderToConsumer, ProviderToConsumer);
-        }
 
         private async Task ForwardAsync(
             ConnectionViewModel readConnection,

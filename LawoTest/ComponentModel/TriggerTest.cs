@@ -37,12 +37,10 @@ namespace Lawo.ComponentModel
 
         /// <summary>Tests the exceptional <see cref="Trigger"/> use cases.</summary>
         [TestMethod]
-        public void ExceptionTest()
-        {
+        public void ExceptionTest() =>
             AssertThrow<ArgumentNullException>(
                 () => Trigger.Create((IProperty<Source, int>)null, p => { }).Dispose(),
                 () => Trigger.Create(new Source().GetProperty(o => o.Value), null).Dispose());
-        }
 
         private sealed class Source : NotifyPropertyChanged
         {

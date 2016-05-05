@@ -50,10 +50,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <inheritdoc/>
-        void IParent.AppendPath(StringBuilder builder)
-        {
-            this.AppendPath(builder);
-        }
+        void IParent.AppendPath(StringBuilder builder) => this.AppendPath(builder);
 
         internal event EventHandler<EventArgs> HasChangesSet;
 
@@ -81,10 +78,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        internal sealed override bool GetIsRoot()
-        {
-            return true;
-        }
+        internal sealed override bool GetIsRoot() => true;
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "RootElement", Justification = "Official Glow name.")]
@@ -281,10 +275,8 @@ namespace Lawo.EmberPlusSharp.Model
                     throw new ModelException(
                         string.Format(CultureInfo.InvariantCulture, Format, rawValue, parameter.GetPath()));
                 }
-                else
-                {
-                    return BitConvert(parameter, rawArray);
-                }
+
+                return BitConvert(parameter, rawArray);
             }
             else
             {

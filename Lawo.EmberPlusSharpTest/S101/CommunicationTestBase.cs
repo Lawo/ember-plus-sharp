@@ -130,10 +130,7 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <summary>Asynchronously waits for a TCP connection to port 8099.</summary>
-        protected static Task<TcpClient> WaitForConnectionAsync()
-        {
-            return WaitForConnectionAsync(8099);
-        }
+        protected static Task<TcpClient> WaitForConnectionAsync() => WaitForConnectionAsync(8099);
 
         /// <summary>Asynchronously waits for a TCP connection to port 8099.</summary>
         protected static async Task<TcpClient> WaitForConnectionAsync(int port)

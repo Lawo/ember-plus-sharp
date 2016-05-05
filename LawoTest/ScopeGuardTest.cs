@@ -60,10 +60,7 @@ namespace Lawo
         private sealed class Disposable : IDisposable
         {
             /// <inheritdoc/>
-            public void Dispose()
-            {
-                this.DisposeCalled = true;
-            }
+            public void Dispose() => this.DisposeCalled = true;
 
             internal bool DisposeCalled { get; private set; }
         }

@@ -78,10 +78,7 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <inheritdoc/>
-        public EventInfo LogEvent(string eventName)
-        {
-            return this.LogEvent(eventName, null);
-        }
+        public EventInfo LogEvent(string eventName) => this.LogEvent(eventName, null);
 
         /// <inheritdoc/>
         public EventInfo LogEvent(string eventName, string data)
@@ -104,10 +101,8 @@ namespace Lawo.EmberPlusSharp.S101
         }
 
         /// <inheritdoc/>
-        public EventInfo LogMessage(string direction, S101Message message, byte[] payload)
-        {
-            return this.LogMessage(DateTime.UtcNow, direction, message, payload);
-        }
+        public EventInfo LogMessage(string direction, S101Message message, byte[] payload) =>
+            this.LogMessage(DateTime.UtcNow, direction, message, payload);
 
         /// <inheritdoc/>
         public EventInfo LogException(string direction, Exception exception)
@@ -126,10 +121,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Releases all resources used by the current instance of the <see cref="S101Logger"/> class.
         /// </summary>
-        public void Dispose()
-        {
-            this.xmlLogWriter.Dispose();
-        }
+        public void Dispose() => this.xmlLogWriter.Dispose();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

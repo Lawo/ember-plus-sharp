@@ -52,19 +52,15 @@ namespace Lawo.EmberPlusSharp.S101
         /// <exception cref="InvalidOperationException">The <see cref="Task.IsCompleted"/> property is <c>false</c> for
         /// the <see cref="Task"/> object returned by a previously called async method.</exception>
         [CLSCompliant(false)]
-        public Task DisposeAsync(CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
-        }
+        public Task DisposeAsync(CancellationToken cancellationToken) =>
+            this.taskSingleton.Execute(() => this.DisposeCoreAsync(cancellationToken));
 
         /// <summary>Writes <paramref name="value"/> as an out-of-frame byte.</summary>
         /// <param name="value">The byte to write.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <exception cref="ArgumentException"><paramref name="value"/> equals <c>0xFE</c>.</exception>
-        public Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken)
-        {
-            return this.taskSingleton.Execute(() => this.WriteOutOfFrameByteCoreAsync(value, cancellationToken));
-        }
+        public Task WriteOutOfFrameByteAsync(byte value, CancellationToken cancellationToken) =>
+            this.taskSingleton.Execute(() => this.WriteOutOfFrameByteCoreAsync(value, cancellationToken));
 
         /// <summary>Asynchronously writes <paramref name="message"/>.</summary>
         /// <param name="message">The message to write.</param>

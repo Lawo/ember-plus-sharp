@@ -52,25 +52,13 @@ namespace Lawo.EmberPlusSharp.Model
             set { this.Formula = value; }
         }
 
-        internal sealed override object GetMinimum()
-        {
-            return this.Minimum;
-        }
+        internal sealed override object GetMinimum() => this.Minimum;
 
-        internal sealed override void SetMinimum(TValue? value)
-        {
-            this.Minimum = value;
-        }
+        internal sealed override void SetMinimum(TValue? value) => this.Minimum = value;
 
-        internal sealed override object GetMaximum()
-        {
-            return this.Maximum;
-        }
+        internal sealed override object GetMaximum() => this.Maximum;
 
-        internal sealed override void SetMaximum(TValue? value)
-        {
-            this.Maximum = value;
-        }
+        internal sealed override void SetMaximum(TValue? value) => this.Maximum = value;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

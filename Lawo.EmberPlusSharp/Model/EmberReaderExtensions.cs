@@ -13,10 +13,8 @@ namespace Lawo.EmberPlusSharp.Model
 
     internal static class EmberReaderExtensions
     {
-        internal static bool AssertAndReadContentsAsBoolean(this EmberReader reader)
-        {
-            return AssertAndReadContents(reader, r => r.ReadContentsAsBoolean());
-        }
+        internal static bool AssertAndReadContentsAsBoolean(this EmberReader reader) =>
+            AssertAndReadContents(reader, r => r.ReadContentsAsBoolean());
 
         internal static int AssertAndReadContentsAsInt32(this EmberReader reader)
         {
@@ -31,30 +29,20 @@ namespace Lawo.EmberPlusSharp.Model
             return (int)result;
         }
 
-        internal static long AssertAndReadContentsAsInt64(this EmberReader reader)
-        {
-            return AssertAndReadContents(reader, r => r.ReadContentsAsInt64());
-        }
+        internal static long AssertAndReadContentsAsInt64(this EmberReader reader) =>
+            AssertAndReadContents(reader, r => r.ReadContentsAsInt64());
 
-        internal static byte[] AssertAndReadContentsAsByteArray(this EmberReader reader)
-        {
-            return AssertAndReadContents(reader, r => r.ReadContentsAsByteArray());
-        }
+        internal static byte[] AssertAndReadContentsAsByteArray(this EmberReader reader) =>
+            AssertAndReadContents(reader, r => r.ReadContentsAsByteArray());
 
-        internal static double AssertAndReadContentsAsDouble(this EmberReader reader)
-        {
-            return AssertAndReadContents(reader, r => r.ReadContentsAsDouble());
-        }
+        internal static double AssertAndReadContentsAsDouble(this EmberReader reader) =>
+            AssertAndReadContents(reader, r => r.ReadContentsAsDouble());
 
-        internal static string AssertAndReadContentsAsString(this EmberReader reader)
-        {
-            return AssertAndReadContents(reader, r => r.ReadContentsAsString());
-        }
+        internal static string AssertAndReadContentsAsString(this EmberReader reader) =>
+            AssertAndReadContents(reader, r => r.ReadContentsAsString());
 
-        internal static int[] AssertAndReadContentsAsInt32Array(this EmberReader reader)
-        {
-            return AssertAndReadContents(reader, r => r.ReadContentsAsInt32Array());
-        }
+        internal static int[] AssertAndReadContentsAsInt32Array(this EmberReader reader) =>
+            AssertAndReadContents(reader, r => r.ReadContentsAsInt32Array());
 
         internal static void ReadAndAssertOuter(this EmberReader reader, EmberId expectedOuter)
         {
@@ -133,10 +121,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private static string GetId(EmberId? expectedOuter)
-        {
-            return string.Format(
-                CultureInfo.InvariantCulture, "{0}{1}", expectedOuter == null ? null : " ", expectedOuter);
-        }
+        private static string GetId(EmberId? expectedOuter) =>
+            string.Format(CultureInfo.InvariantCulture, "{0}{1}", expectedOuter == null ? null : " ", expectedOuter);
     }
 }

@@ -55,10 +55,7 @@ namespace Lawo.EmberPlusSharp.Model
             this.readOnlyObservableChildren = new ReadOnlyObservableCollection<IElement>(this.observableChildren);
         }
 
-        internal virtual bool GetIsRoot()
-        {
-            return this.isRoot;
-        }
+        internal virtual bool GetIsRoot() => this.isRoot;
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal override bool ChangeVisibility(IElement child)

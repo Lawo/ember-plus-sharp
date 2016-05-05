@@ -25,10 +25,7 @@ namespace Lawo.UnitTesting
         /// <paramref name="p1"/>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "This is a generic parameter.")]
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way to achieve argument type deduction.")]
-        public static T CreateInstance<TP1>(TP1 p1)
-        {
-            return CreateInstanceImpl(new[] { typeof(TP1) }, new object[] { p1 });
-        }
+        public static T CreateInstance<TP1>(TP1 p1) => CreateInstanceImpl(new[] { typeof(TP1) }, new object[] { p1 });
 
         /// <summary>Creates a new instance by passing <paramref name="p1"/> and <paramref name="p2"/> to a matching
         /// constructor of <typeparamref name="T"/>.</summary>
@@ -38,10 +35,8 @@ namespace Lawo.UnitTesting
         /// <paramref name="p1"/> and <paramref name="p2"/>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "These are generic parameters.")]
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way to achieve argument type deduction.")]
-        public static T CreateInstance<TP1, TP2>(TP1 p1, TP2 p2)
-        {
-            return CreateInstanceImpl(new[] { typeof(TP1), typeof(TP2) }, new object[] { p1, p2 });
-        }
+        public static T CreateInstance<TP1, TP2>(TP1 p1, TP2 p2) =>
+            CreateInstanceImpl(new[] { typeof(TP1), typeof(TP2) }, new object[] { p1, p2 });
 
         /// <summary>Creates a new instance by passing <paramref name="args"/> to a matching constructor of
         /// <typeparamref name="T"/>.</summary>
@@ -50,10 +45,8 @@ namespace Lawo.UnitTesting
         /// <exception cref="ArgumentException"><typeparamref name="T"/> does not have a constructor that accepts
         /// <paramref name="args"/>.</exception>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "There's no other way to achieve argument type deduction.")]
-        public static T CreateInstance(params object[] args)
-        {
-            return CreateInstanceImpl(args.Select(obj => obj?.GetType()).ToArray(), args);
-        }
+        public static T CreateInstance(params object[] args) =>
+            CreateInstanceImpl(args.Select(obj => obj?.GetType()).ToArray(), args);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
