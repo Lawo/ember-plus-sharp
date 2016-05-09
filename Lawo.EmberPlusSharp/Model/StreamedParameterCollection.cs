@@ -13,7 +13,7 @@ namespace Lawo.EmberPlusSharp.Model
     {
         void IStreamedParameterCollection.Add(IStreamedParameter parameter)
         {
-            var streamIdentifier = (int)parameter.StreamIdentifier;
+            var streamIdentifier = parameter.StreamIdentifier.GetValueOrDefault();
             IEnumerable<IStreamedParameter> group;
 
             if (!this.TryGetValue(streamIdentifier, out group))

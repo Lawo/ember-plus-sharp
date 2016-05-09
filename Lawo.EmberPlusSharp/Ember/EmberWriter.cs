@@ -328,7 +328,7 @@ namespace Lawo.EmberPlusSharp.Ember
             else
             {
                 writeBuffer[writeBuffer.Count++] = (byte)((lengthLength - 1) | 0x80);
-                Write8Bit(writeBuffer, length.Value, shift);
+                Write8Bit(writeBuffer, length.GetValueOrDefault(), shift);
             }
         }
 

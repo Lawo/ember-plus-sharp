@@ -38,7 +38,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override void WriteValue(EmberWriter writer, TEnum? value) =>
-            writer.WriteValue(GlowParameterContents.Value.OuterId, FastEnum.ToInt64(value.Value));
+            writer.WriteValue(GlowParameterContents.Value.OuterId, FastEnum.ToInt64(value.GetValueOrDefault()));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

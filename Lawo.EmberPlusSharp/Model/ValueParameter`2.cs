@@ -28,7 +28,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <see cref="ParameterBase{T, U}.Access"/>.</exception>
         public TValue Value
         {
-            get { return this.ValueCore.Value; }
+            get { return this.ValueCore.GetValueOrDefault(); }
             set { this.ValueCore = value; }
         }
 

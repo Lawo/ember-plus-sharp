@@ -170,8 +170,6 @@ namespace Lawo.ComponentModel
                 test.TestCore(createCalculated, false, validateHandler, this.addends);
             }
 
-            internal int SumValue => this.sum.Value;
-
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Test code.")]
@@ -267,6 +265,8 @@ namespace Lawo.ComponentModel
 
             private readonly Addend[] addends;
             private readonly CalculatedProperty<int> sum;
+
+            private int SumValue => this.sum.Value;
         }
 
         private sealed class Exceptional : NotifyPropertyChanged

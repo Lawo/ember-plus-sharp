@@ -24,7 +24,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         internal sealed override void WriteValue(EmberWriter writer, bool? value) =>
-            writer.WriteValue(GlowParameterContents.Value.OuterId, value.Value);
+            writer.WriteValue(GlowParameterContents.Value.OuterId, value.GetValueOrDefault());
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

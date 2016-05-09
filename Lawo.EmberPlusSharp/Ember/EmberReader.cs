@@ -60,7 +60,7 @@ namespace Lawo.EmberPlusSharp.Ember
             get
             {
                 this.AssertRead();
-                return this.innerNumber.Value;
+                return this.innerNumber.GetValueOrDefault();
             }
         }
 
@@ -151,7 +151,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
             if (this.CanReadContents)
             {
-                var endPosition = this.EndPosition.Value;
+                var endPosition = this.EndPosition.GetValueOrDefault();
 
                 while ((this.readBuffer.Position < endPosition) &&
                     ((this.readBuffer.Index < this.readBuffer.Count) || this.readBuffer.Read()))
@@ -198,7 +198,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public bool ReadContentsAsBoolean()
         {
             this.AssertCanReadContents(Ember.InnerNumber.Boolean);
-            return Read8Bit(this.readBuffer, this.ContentsLength.Value, false) != 0;
+            return Read8Bit(this.readBuffer, this.ContentsLength.GetValueOrDefault(), false) != 0;
         }
 
         /// <summary>Reads the contents of the current data value as a <see cref="long"/>.</summary>
@@ -214,7 +214,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public long ReadContentsAsInt64()
         {
             this.AssertCanReadContents(Ember.InnerNumber.Integer);
-            return Read8Bit(this.readBuffer, this.ContentsLength.Value, true);
+            return Read8Bit(this.readBuffer, this.ContentsLength.GetValueOrDefault(), true);
         }
 
         /// <summary>Reads the contents of the current data value as a <see cref="byte"/> array.</summary>
@@ -231,7 +231,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public byte[] ReadContentsAsByteArray()
         {
             this.AssertCanReadContents(Ember.InnerNumber.Octetstring);
-            var result = new byte[this.ContentsLength.Value];
+            var result = new byte[this.ContentsLength.GetValueOrDefault()];
 
             try
             {
@@ -258,7 +258,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public double ReadContentsAsDouble()
         {
             this.AssertCanReadContents(Ember.InnerNumber.Real);
-            return ReadReal(this.readBuffer, this.ContentsLength.Value);
+            return ReadReal(this.readBuffer, this.ContentsLength.GetValueOrDefault());
         }
 
         /// <summary>Reads the contents of the current data value as a <see cref="string"/>.</summary>
@@ -275,7 +275,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public string ReadContentsAsString()
         {
             this.AssertCanReadContents(Ember.InnerNumber.Utf8String);
-            return this.readBuffer.ReadUtf8(this.ContentsLength.Value);
+            return this.readBuffer.ReadUtf8(this.ContentsLength.GetValueOrDefault());
         }
 
         /// <summary>Reads the contents of the current data value as an <see cref="int"/> array.</summary>
@@ -292,7 +292,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public int[] ReadContentsAsInt32Array()
         {
             this.AssertCanReadContents(Ember.InnerNumber.RelativeObjectIdentifier);
-            var endPosition = this.EndPosition.Value;
+            var endPosition = this.EndPosition.GetValueOrDefault();
             var result = new List<int>();
 
             while (this.readBuffer.Position < endPosition)
@@ -360,7 +360,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             int inner;
 
-            while (this.Read() && ((inner = this.innerNumber.Value) != Ember.InnerNumber.EndContainer))
+            while (this.Read() && ((inner = this.innerNumber.GetValueOrDefault()) != Ember.InnerNumber.EndContainer))
             {
                 this.SkipCore(inner);
             }
@@ -403,7 +403,7 @@ namespace Lawo.EmberPlusSharp.Ember
             object result = null;
             var inner = -1;
 
-            while (this.Read() && ((inner = this.innerNumber.Value) != Ember.InnerNumber.EndContainer))
+            while (this.Read() && ((inner = this.innerNumber.GetValueOrDefault()) != Ember.InnerNumber.EndContainer))
             {
                 var candidate = this.CopyCore(writer, inner);
 
@@ -781,38 +781,38 @@ namespace Lawo.EmberPlusSharp.Ember
             {
                 case Ember.InnerNumber.Boolean:
                     var boolean = this.ReadContentsAsBoolean();
-                    writer.WriteValue(this.outer.Value, boolean);
+                    writer.WriteValue(this.outer.GetValueOrDefault(), boolean);
                     return boolean;
                 case Ember.InnerNumber.Integer:
                     var int64 = this.ReadContentsAsInt64();
-                    writer.WriteValue(this.outer.Value, int64);
+                    writer.WriteValue(this.outer.GetValueOrDefault(), int64);
                     return int64;
                 case Ember.InnerNumber.Octetstring:
                     var byteArray = this.ReadContentsAsByteArray();
-                    writer.WriteValue(this.outer.Value, byteArray);
+                    writer.WriteValue(this.outer.GetValueOrDefault(), byteArray);
                     return byteArray;
                 case Ember.InnerNumber.Real:
                     var dbl = this.ReadContentsAsDouble();
-                    writer.WriteValue(this.outer.Value, dbl);
+                    writer.WriteValue(this.outer.GetValueOrDefault(), dbl);
                     return dbl;
                 case Ember.InnerNumber.Utf8String:
                     var str = this.ReadContentsAsString();
-                    writer.WriteValue(this.outer.Value, str);
+                    writer.WriteValue(this.outer.GetValueOrDefault(), str);
                     return str;
                 case Ember.InnerNumber.RelativeObjectIdentifier:
                     var int32Array = this.ReadContentsAsInt32Array();
-                    writer.WriteValue(this.outer.Value, int32Array);
+                    writer.WriteValue(this.outer.GetValueOrDefault(), int32Array);
                     return int32Array;
                 case Ember.InnerNumber.Sequence:
-                    writer.WriteStartSequence(this.outer.Value);
+                    writer.WriteStartSequence(this.outer.GetValueOrDefault());
                     this.CopyToEndContainer(writer, null);
                     return null;
                 case Ember.InnerNumber.Set:
-                    writer.WriteStartSet(this.outer.Value);
+                    writer.WriteStartSet(this.outer.GetValueOrDefault());
                     this.CopyToEndContainer(writer, null);
                     return null;
                 default:
-                    writer.WriteStartApplicationDefinedType(this.outer.Value, inner);
+                    writer.WriteStartApplicationDefinedType(this.outer.GetValueOrDefault(), inner);
                     this.CopyToEndContainer(writer, null);
                     return null;
             }

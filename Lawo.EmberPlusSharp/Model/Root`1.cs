@@ -286,7 +286,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         private static object BitConvert(IStreamedParameter parameter, byte[] rawArray)
         {
-            var descriptor = parameter.StreamDescriptor.Value;
+            var descriptor = parameter.StreamDescriptor.GetValueOrDefault();
             int offset;
             var array = GetArray(descriptor, rawArray, out offset);
 

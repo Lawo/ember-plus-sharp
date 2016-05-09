@@ -20,12 +20,12 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             if (this.field1.HasValue)
             {
-                return this.field1.ToString() + "." +
-                    this.field2.Value.FieldId.ToString() + "." + this.field3.Value.FieldId.ToString();
+                return this.field1.ToString() + "." + this.field2.GetValueOrDefault().FieldId.ToString() + "." +
+                    this.field3.GetValueOrDefault().FieldId.ToString();
             }
             else if (this.field2.HasValue)
             {
-                return this.field2.ToString() + "." + this.field3.Value.FieldId.ToString();
+                return this.field2.ToString() + "." + this.field3.GetValueOrDefault().FieldId.ToString();
             }
             else
             {
