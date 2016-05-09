@@ -326,7 +326,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
             finally
             {
-                this.OnConnectionLost(this, new ConnectionLostEventArgs(exception));
+                this.ConnectionLost?.Invoke(this, new ConnectionLostEventArgs(exception));
                 this.CancelAutoSendDelay();
                 this.autoSendDelayCancellationSource.Dispose();
                 this.Dispose();
@@ -358,8 +358,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         private Task WaitForProviderChangesAsync() => this.receiveQueue.WaitForMessageAsync();
-
-        private void OnConnectionLost(object sender, ConnectionLostEventArgs e) => this.ConnectionLost?.Invoke(this, e);
 
         private async Task DelayAutoSend()
         {
