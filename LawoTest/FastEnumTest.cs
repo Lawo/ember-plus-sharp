@@ -18,7 +18,8 @@ namespace Lawo
     [TestClass]
     public sealed class FastEnumTest : TestBase
     {
-        /// <summary>Tests <see cref="FastEnum.GetValueNameMap"/> and <see cref="FastEnum.GetNameValueMap"/>.</summary>
+        /// <summary>Tests <see cref="FastEnum.GetValueNameMap{TEnum}"/> and
+        /// <see cref="FastEnum.GetNameValueMap{TEnum}"/>.</summary>
         [TestMethod]
         public void MapTest()
         {

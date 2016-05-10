@@ -19,7 +19,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Gets or sets the policy for this node.</summary>
         /// <exception cref="ArgumentException">Attempted to set a new value when the current value is not equal to
-        /// <see cref="ChildrenRetrievalPolicy.None"/>.</exception>
+        /// <see cref="Model.ChildrenRetrievalPolicy.None"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Attempted to set a value that is not equal to one of the named
         /// constants of <see cref="ChildrenRetrievalPolicy"/>.</exception>
         /// <remarks>Setting this property prompts the consumer to retrieve direct and indirect children according to

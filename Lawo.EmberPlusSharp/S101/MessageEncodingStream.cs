@@ -15,8 +15,8 @@ namespace Lawo.EmberPlusSharp.S101
     /// <summary>Transparently encodes a single message.</summary>
     /// <remarks>
     /// <para>At construction, the passed message is first appended to the <see cref="WriteBuffer"/> object passed to
-    /// <see cref="MessageEncodingStream.MessageEncodingStream"/>. Afterwards, when data is written to this stream
-    /// then it is first encoded and the encoded form is then appended to the <see cref="WriteBuffer"/> object.</para>
+    /// <see cref="CreateAsync"/>. Afterwards, when data is written to this stream then it is first encoded and the
+    /// encoded form is then appended to the <see cref="WriteBuffer"/> object.</para>
     /// <para><b>Caution</b>: <see cref="DisposeAsync"/> <b>must</b> be called in the end.</para>
     /// <para>If necessary, the message plus payload is automatically partitioned into multiple packets such that the
     /// unencoded length of each packet does not exceed 1024 bytes.</para>

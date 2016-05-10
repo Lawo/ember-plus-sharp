@@ -16,10 +16,9 @@ namespace Lawo.EmberPlusSharp.S101
     /// <summary>Transparently decodes a single S101 message.</summary>
     /// <remarks>
     /// <para>At construction, a <see cref="Message"/> object is first decoded from the <see cref="ReadBuffer"/> object
-    /// passed to <see cref="MessageDecodingStream.MessageDecodingStream"/> and made available through the
-    /// <see cref="MessageDecodingStream.Message"/> property. Afterwards, a call to any of the Read methods of this
-    /// stream removes data from <see cref="ReadBuffer"/> object passed to the constructor. The data is then decoded and
-    /// the decoded form is then returned.</para>
+    /// passed to <see cref="CreateAsync"/> and made available through the <see cref="Message"/> property. Afterwards, a
+    /// call to any of the Read methods of this stream removes data from <see cref="ReadBuffer"/> object passed to the
+    /// <see cref="CreateAsync"/>. The data is then decoded and the decoded form is then returned.</para>
     /// <para>If a message contains multiple packets, their payload is automatically joined such that it can be read
     /// through this stream as if the message consisted of only one packet.</para>
     /// </remarks>

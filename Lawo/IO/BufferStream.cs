@@ -18,11 +18,11 @@ namespace Lawo.IO
     /// <remarks>
     /// <para>A concrete subclass should implement the abstract
     /// <see cref="Stream.ReadAsync(byte[], int, int, CancellationToken)"/> method in terms of the
-    /// <see cref="Buffer.this"/>, <see cref="ReadBuffer.Index"/>, <see cref="ReadBuffer.Count"/> and
-    /// <see cref="ReadBuffer.FillAsync(int, CancellationToken)"/> members of the object accessible through the
+    /// <see cref="Buffer.this"/>, <see cref="IO.ReadBuffer.Index"/>, <see cref="IO.ReadBuffer.Count"/> and
+    /// <see cref="IO.ReadBuffer.FillAsync(int, CancellationToken)"/> members of the object accessible through the
     /// <see cref="ReadBuffer"/> property. The abstract
     /// <see cref="Stream.WriteAsync(byte[], int, int, CancellationToken)"/> method should be implemented in terms of
-    /// the <see cref="Buffer.this"/>, <see cref="WriteBuffer.Count"/> and <see cref="WriteBuffer.Flush"/> members of
+    /// the <see cref="Buffer.this"/>, <see cref="IO.WriteBuffer.Count"/> and <see cref="IO.WriteBuffer.Flush"/> members of
     /// the object accessible through the <see cref="WriteBuffer"/> property.</para>
     /// </remarks>
     /// <threadsafety static="true" instance="false"/>

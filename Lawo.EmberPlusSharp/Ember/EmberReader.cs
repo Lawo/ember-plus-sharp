@@ -53,7 +53,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// </list></exception>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         /// <remarks>The number of an Universal class identifier is returned unaltered.
-        /// <see cref="InnerNumber.FirstApplication"/> is added to the number of an Application class identifier.</remarks>
+        /// <see cref="Ember.InnerNumber.FirstApplication"/> is added to the number of an Application class identifier.</remarks>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "There's not much of an alternative.")]
         public int InnerNumber
         {
@@ -69,7 +69,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <list type="bullet">
         /// <item><see cref="Read"/> has never been called, or</item>
         /// <item>The last <see cref="Read"/> call returned <c>false</c> or threw an exception, or</item>
-        /// <item>The value of <see cref="InnerNumber"/> currently equals <see cref="InnerNumber.EndContainer"/>.</item>
+        /// <item>The value of <see cref="InnerNumber"/> currently equals <see cref="Ember.InnerNumber.EndContainer"/>.</item>
         /// </list></exception>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         public EmberId OuterId
@@ -92,10 +92,10 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <value><c>true</c>, if all of the following conditions hold; otherwise, <c>false</c>:
         /// <list type="bullet">
         /// <item>The last call to <see cref="Read"/> has returned <c>true</c>, and</item>
-        /// <item>The <see cref="InnerNumber"/> property equals <see cref="InnerNumber.Boolean"/>,
-        /// <see cref="InnerNumber.Integer"/>, <see cref="InnerNumber.Octetstring"/>,
-        /// <see cref="InnerNumber.Real"/>, <see cref="InnerNumber.Utf8String"/> or
-        /// <see cref="InnerNumber.RelativeObjectIdentifier"/>, and</item>
+        /// <item>The <see cref="InnerNumber"/> property equals <see cref="Ember.InnerNumber.Boolean"/>,
+        /// <see cref="Ember.InnerNumber.Integer"/>, <see cref="Ember.InnerNumber.Octetstring"/>,
+        /// <see cref="Ember.InnerNumber.Real"/>, <see cref="Ember.InnerNumber.Utf8String"/> or
+        /// <see cref="Ember.InnerNumber.RelativeObjectIdentifier"/>, and</item>
         /// <item>None of the ReadContents methods have yet been called for the current data value.</item>
         /// </list></value>
         public bool CanReadContents { get; private set; }
@@ -190,7 +190,8 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Boolean"/>, or</item>
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="Ember.InnerNumber.Boolean"/>,
+        /// or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>
@@ -206,7 +207,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Integer"/>, or</item>
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="Ember.InnerNumber.Integer"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>
@@ -222,7 +223,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Octetstring"/>,
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="Ember.InnerNumber.Octetstring"/>,
         /// or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
@@ -250,7 +251,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Real"/>, or</item>
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="Ember.InnerNumber.Real"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>
@@ -266,7 +267,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <see cref="Exception.Message"/> for more information.</exception>
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
-        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="InnerNumber.Utf8String"/>,
+        /// <item>The value of <see cref="InnerNumber"/> is not equal to <see cref="Ember.InnerNumber.Utf8String"/>,
         /// or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
@@ -284,7 +285,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <exception cref="InvalidOperationException">
         /// <list type="bullet">
         /// <item>The value of <see cref="InnerNumber"/> is not equal to
-        /// <see cref="InnerNumber.RelativeObjectIdentifier"/>, or</item>
+        /// <see cref="Ember.InnerNumber.RelativeObjectIdentifier"/>, or</item>
         /// <item>The contents of the current data value has already been read.</item>
         /// </list>
         /// </exception>

@@ -46,7 +46,7 @@ namespace Lawo
     public sealed class ScopeGuard<T> : IDisposable
         where T : IDisposable
     {
-        /// <summary>Gets the resource object passed to <see cref="ScopeGuard.Create"/>.</summary>
+        /// <summary>Gets the resource object passed to <see cref="ScopeGuard.Create{T}"/>.</summary>
         /// <exception cref="ObjectDisposedException">The scope guard has already been disposed.</exception>
         public T Resource
         {

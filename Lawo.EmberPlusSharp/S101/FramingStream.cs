@@ -15,7 +15,7 @@ namespace Lawo.EmberPlusSharp.S101
     /// <summary>Transparently encodes a single frame.</summary>
     /// <remarks>
     /// <para>At construction, the BOF is first appended to the <see cref="WriteBuffer"/> object passed to
-    /// <see cref="FramingStream.FramingStream"/>. Afterwards, when data is written to this stream
+    /// <see cref="FramingStream.CreateAsync"/>. Afterwards, when data is written to this stream
     /// then it is first encoded and the encoded form is then appended to the <see cref="WriteBuffer"/> object.</para>
     /// <para><b>Caution</b>: <see cref="DisposeAsync"/> <b>must</b> be called in the end.</para>
     /// </remarks>
