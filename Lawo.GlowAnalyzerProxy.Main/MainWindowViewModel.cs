@@ -45,7 +45,7 @@ namespace Lawo.GlowAnalyzerProxy.Main
             get
             {
                 return "Lawo Glow Analyzer Proxy " +
-                    System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             }
         }
         #endregion

@@ -52,17 +52,17 @@ namespace Lawo.EmberPlusSharp.S101
             AsyncPump.Run(
                 async () =>
                 {
-                    new S101Reader((b, o, c, t) => Task.FromResult(0));
+                    new S101Reader((b, o, c, t) => Task.FromResult(0)).Ignore();
 
-                    AssertThrow<ArgumentNullException>(() => new S101Reader(null, 1));
-                    AssertThrow<ArgumentOutOfRangeException>(() => new S101Reader((b, o, c, t) => Task.FromResult(0), 0));
+                    AssertThrow<ArgumentNullException>(() => new S101Reader(null, 1).Ignore());
+                    AssertThrow<ArgumentOutOfRangeException>(() => new S101Reader((b, o, c, t) => Task.FromResult(0), 0).Ignore());
 
                     using (var input = new MemoryStream(
                         new byte[] { 0xFE, 0x00, 0x0E, 0x01, 0x01, 0x94, 0xE4, 0xFF, 0xFE, 0x00, 0x0E, 0x02, 0x01, 0xFD, 0xDC, 0xCE, 0xFF }))
                     {
                         var reader = new S101Reader(input.ReadAsync, 1);
-                        AssertThrow<InvalidOperationException>(() => reader.Message.ToString());
-                        AssertThrow<InvalidOperationException>(() => reader.Payload.ToString());
+                        AssertThrow<InvalidOperationException>(() => reader.Message.Ignore());
+                        AssertThrow<InvalidOperationException>(() => reader.Payload.Ignore());
                         Assert.IsTrue(await reader.ReadAsync(CancellationToken.None));
                         Assert.IsInstanceOfType(reader.Message.Command, typeof(KeepAliveRequest));
                         Assert.AreEqual(0, await reader.Payload.ReadAsync(new byte[1], 0, 1, CancellationToken.None));
@@ -73,12 +73,12 @@ namespace Lawo.EmberPlusSharp.S101
                         Assert.IsInstanceOfType(reader.Message.Command, typeof(KeepAliveResponse));
                         Assert.AreEqual(0, await reader.Payload.ReadAsync(new byte[1], 0, 1, CancellationToken.None));
                         Assert.IsFalse(await reader.ReadAsync(CancellationToken.None));
-                        AssertThrow<InvalidOperationException>(() => reader.Message.ToString());
-                        AssertThrow<InvalidOperationException>(() => reader.Payload.ToString());
+                        AssertThrow<InvalidOperationException>(() => reader.Message.Ignore());
+                        AssertThrow<InvalidOperationException>(() => reader.Payload.Ignore());
                         await reader.DisposeAsync(CancellationToken.None);
                         await AssertThrowAsync<ObjectDisposedException>(() => reader.ReadAsync(CancellationToken.None));
                         AssertThrow<ObjectDisposedException>(
-                            () => reader.Message.ToString(), () => reader.Payload.ToString());
+                            () => reader.Message.Ignore(), () => reader.Payload.Ignore());
                     }
 
                     await AssertS101Exception("CRC failed.", 0xFE, 0xFF);
@@ -145,7 +145,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <summary>Tests <see cref="S101Message"/> methods.</summary>
         [TestMethod]
-        public void MessageTest() => AssertThrow<ArgumentNullException>(() => new S101Message(0x00, null).ToString());
+        public void MessageTest() => AssertThrow<ArgumentNullException>(() => new S101Message(0x00, null).Ignore());
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

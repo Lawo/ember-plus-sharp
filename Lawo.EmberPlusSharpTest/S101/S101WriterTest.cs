@@ -8,7 +8,6 @@ namespace Lawo.EmberPlusSharp.S101
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Threading;
@@ -176,11 +175,11 @@ namespace Lawo.EmberPlusSharp.S101
             AsyncPump.Run(
                 async () =>
                 {
-                    new S101Writer((b, o, c, t) => Task.FromResult(false));
+                    new S101Writer((b, o, c, t) => Task.FromResult(false)).Ignore();
 
-                    AssertThrow<ArgumentNullException>(() => new S101Writer(null, 1));
+                    AssertThrow<ArgumentNullException>(() => new S101Writer(null, 1).Ignore());
                     AssertThrow<ArgumentOutOfRangeException>(
-                        () => new S101Writer((b, o, c, t) => Task.FromResult(false), 0));
+                        () => new S101Writer((b, o, c, t) => Task.FromResult(false), 0).Ignore());
 
                     var writer = new S101Writer((b, o, c, t) => Task.FromResult(false), 1);
                     await AssertThrowAsync<ArgumentNullException>(
@@ -205,9 +204,9 @@ namespace Lawo.EmberPlusSharp.S101
 
                         Assert.IsFalse(stream.CanSeek);
                         AssertThrow<NotSupportedException>(
-                            () => stream.Length.ToString(CultureInfo.InvariantCulture),
+                            () => stream.Length.Ignore(),
                             () => stream.SetLength(0),
-                            () => stream.Position.ToString(CultureInfo.InvariantCulture),
+                            () => stream.Position.Ignore(),
                             () => stream.Position = 0,
                             () => stream.Seek(0, SeekOrigin.Begin));
 

@@ -45,7 +45,7 @@ namespace Lawo.EmberPlusSharp.S101
                         var providerClient = await providerClientTask;
                         var stream = providerClient.GetStream();
 
-                        using (var provider = new S101Client(
+                        using (new S101Client(
                             providerClient,
                             stream.ReadAsync,
                             stream.WriteAsync,
@@ -78,7 +78,7 @@ namespace Lawo.EmberPlusSharp.S101
                     using (var consumerClient =
                         new S101Client(consumer, stream.ReadAsync, stream.WriteAsync, logger, timeout, 8192))
                     {
-                        var provider = await providerTask;
+                        (await providerTask).Ignore();
                         consumerClient.KeepAliveRequestSlot = (byte)this.Random.Next(byte.MaxValue + 1);
                         var source = new TaskCompletionSource<bool>();
                         consumerClient.ConnectionLost += (s, e) => OnConnectionLost(source, e);
@@ -191,8 +191,6 @@ namespace Lawo.EmberPlusSharp.S101
                         AssertThrow<ArgumentOutOfRangeException>(
                             () => new S101Client(dummy, fakeRead, fakeWrite, null, 3000, 0).Dispose(),
                             () => new S101Client(dummy, fakeRead, fakeWrite, null, -2, 1).Dispose());
-
-                        var readResult = new TaskCompletionSource<int>();
 
                         using (var connection = new CompleteOnDispose())
                         using (var client = new S101Client(

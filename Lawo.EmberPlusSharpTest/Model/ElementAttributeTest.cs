@@ -24,7 +24,7 @@ namespace Lawo.EmberPlusSharp.Model
             var attribute = new ElementAttribute() { Identifier = identifier, IsOptional = isOptional };
             Assert.AreEqual(identifier, attribute.Identifier);
             Assert.AreEqual(isOptional, attribute.IsOptional);
-            AssertThrow<ArgumentNullException>(() => new ElementAttribute() { Identifier = null });
+            AssertThrow<ArgumentNullException>(() => new ElementAttribute() { Identifier = null }.Ignore());
         }
     }
 }

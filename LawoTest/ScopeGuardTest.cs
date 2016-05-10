@@ -40,9 +40,9 @@ namespace Lawo
                 ScopeGuard<Disposable> disposableGuard = ScopeGuard.Create(disposable);
                 disposableGuard.Dispose();
                 Assert.IsTrue(disposable.DisposeCalled);
-                AssertThrow<ObjectDisposedException>(delegate { Disposable test = disposableGuard.Resource; });
+                AssertThrow<ObjectDisposedException>(delegate { disposableGuard.Resource.Ignore(); });
                 disposableGuard.Dispose();
-                AssertThrow<ObjectDisposedException>(delegate { Disposable test = disposableGuard.Resource; });
+                AssertThrow<ObjectDisposedException>(delegate { disposableGuard.Resource.Ignore(); });
                 AssertThrow<ObjectDisposedException>(delegate { disposableGuard.Dismiss(); });
             }
         }

@@ -140,19 +140,19 @@ namespace Lawo.EmberPlusSharp.Model
         internal virtual int? FactorCore
         {
             get { return null; }
-            set { }
+            set { value.Ignore(); }
         }
 
         internal virtual string FormulaCore
         {
             get { return null; }
-            set { }
+            set { value.Ignore(); }
         }
 
         internal virtual IReadOnlyList<KeyValuePair<string, int>> EnumMapCore
         {
             get { return null; }
-            set { }
+            set { value.Ignore(); }
         }
 
         internal TValue GetValue() => this.theValue;

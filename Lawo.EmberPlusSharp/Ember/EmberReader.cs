@@ -716,6 +716,8 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw new InvalidOperationException("The current data value does not have contents of the requested type.");
             }
 
+            expectedInnerNumber.Ignore();
+
             if (!this.CanReadContents)
             {
                 throw new InvalidOperationException("The contents of the current data value has already been read.");
@@ -914,6 +916,7 @@ namespace Lawo.EmberPlusSharp.Ember
                     "Unexpected constructed encoding at position {0}.", innerIdentifierPosition);
             }
 
+            innerIdentifier.Ignore();
             var length = this.ContentsLength;
 
             if (!length.HasValue)

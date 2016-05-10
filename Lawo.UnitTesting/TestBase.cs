@@ -335,6 +335,10 @@ namespace Lawo.UnitTesting
                 throw new ArgumentException(
                     "A constructor of this type does not propagate the innerException argument correctly.", "T");
             }
+
+            exception.Ignore();
+            expectedInnerException.Ignore();
+            expectedInnerException.Ignore();
         }
 
         private static void AssertIsTrue(bool value)
@@ -343,6 +347,8 @@ namespace Lawo.UnitTesting
             {
                 throw new ArgumentException("Struct equality methods are not implemented correctly.");
             }
+
+            value.Ignore();
         }
 
         private readonly Random random;

@@ -29,11 +29,11 @@ namespace Lawo.EmberPlusSharp.Ember
         public void ExceptionTest()
         {
             AssertThrow<ArgumentNullException>(
-                () => new EmberType(null).ToString(),
-                () => new EmberTypeBag(null).ToString(),
-                () => new EmberConverter(null).ToString());
+                () => new EmberType(null).Ignore(),
+                () => new EmberTypeBag(null).Ignore(),
+                () => new EmberConverter(null).Ignore());
 
-            AssertThrow<ArgumentException>(() => new EmberType().ToString());
+            AssertThrow<ArgumentException>(() => new EmberType().Ignore());
 
             using (var stream = new MemoryStream())
             using (var reader = new EmberReader(stream))

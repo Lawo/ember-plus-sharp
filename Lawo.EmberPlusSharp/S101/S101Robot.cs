@@ -102,14 +102,14 @@ namespace Lawo.EmberPlusSharp.S101
 
         private void Dispose()
         {
-            var disposeTask = this.taskQueue.Enqueue(
+            this.taskQueue.Enqueue(
                 () =>
                 {
                     this.client.ConnectionLost -= this.OnClientConnectionLost;
                     this.client.EmberDataReceived -= this.OnClientEmberDataReceived;
                     this.client.OutOfFrameByteReceived -= this.OnOutOfFrameByteReceived;
                     return Task.FromResult(false);
-                });
+                }).Ignore();
         }
 
         private async void SendMessages()

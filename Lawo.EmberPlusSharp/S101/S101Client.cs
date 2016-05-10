@@ -363,7 +363,7 @@ namespace Lawo.EmberPlusSharp.S101
 
                 // We're deliberately not awaiting this task, so that the Dispose call will be enqueued even if this
                 // one fails with an exception.
-                var logTask = this.EnqueueLogOperation(logAction);
+                this.EnqueueLogOperation(logAction).Ignore();
                 await this.EnqueueLogOperation(() => this.logger.Dispose());
                 await cancellationFailed;
             }
@@ -381,7 +381,7 @@ namespace Lawo.EmberPlusSharp.S101
                 {
                     // We're deliberately not awaiting this task, it will be implicitly awaited by following logging
                     // operations.
-                    var logTask = this.EnqueueLogOperation(() => this.logger.LogEvent("StoppingReadLoop"));
+                    this.EnqueueLogOperation(() => this.logger.LogEvent("StoppingReadLoop")).Ignore();
                 }
 
                 this.source.Cancel();

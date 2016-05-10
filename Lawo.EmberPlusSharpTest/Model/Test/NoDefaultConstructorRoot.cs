@@ -13,7 +13,7 @@ namespace Lawo.EmberPlusSharp.Model.Test
     {
         internal NoDefaultConstructorRoot(bool whatever)
         {
-            whatever.ToString();
+            whatever.Ignore();
         }
     }
 }

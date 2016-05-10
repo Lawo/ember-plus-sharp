@@ -24,7 +24,7 @@ namespace Lawo.Threading.Tasks
                 {
                     var counter = 0;
                     var queue = new WorkQueue();
-                    var task1 = queue.Enqueue(() => ++counter);
+                    queue.Enqueue(() => ++counter).Ignore();
                     await queue.Enqueue(() => ++counter);
                     Assert.AreEqual(2, counter);
                 });

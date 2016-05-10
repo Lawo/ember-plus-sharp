@@ -147,12 +147,12 @@ namespace Lawo.IO
                 async () =>
                 {
                     AssertThrow<ArgumentNullException>(
-                        () => new ReadBuffer((ReadCallback)null, 1).ToString(),
-                        () => new ReadBuffer((ReadAsyncCallback)null, 1).ToString(),
-                        () => new WriteBuffer((WriteCallback)null, 1).ToString(),
-                        () => new WriteBuffer((WriteAsyncCallback)null, 1).ToString(),
+                        () => new ReadBuffer((ReadCallback)null, 1).Ignore(),
+                        () => new ReadBuffer((ReadAsyncCallback)null, 1).Ignore(),
+                        () => new WriteBuffer((WriteCallback)null, 1).Ignore(),
+                        () => new WriteBuffer((WriteAsyncCallback)null, 1).Ignore(),
                         () => new WriteBuffer((b, o, c) => { }, 1).WriteAsUtf8(null, 0));
-                    AssertThrow<ArgumentOutOfRangeException>(() => new ReadBuffer((b, o, c) => 0, 0).ToString());
+                    AssertThrow<ArgumentOutOfRangeException>(() => new ReadBuffer((b, o, c) => 0, 0).Ignore());
 
                     using (var stream = new MemoryStream())
                     {

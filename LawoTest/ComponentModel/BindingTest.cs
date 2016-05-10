@@ -70,9 +70,9 @@ namespace Lawo.ComponentModel
             this.AssertValues(value, 2, value, 3);
             AssertOriginatedCounts(1, sourceOriginated, 1, targetOriginated);
 
-            var sourceValue = this.source.Property;
+            this.source.Property.Ignore();
             var targetValue = this.target.Property;
-            this.source.Property = sourceValue = GetRandomString();
+            var sourceValue = this.source.Property = GetRandomString();
             this.AssertValues(sourceValue, 3, targetValue, 3);
             AssertOriginatedCounts(1, sourceOriginated, 1, targetOriginated);
             this.target.Property = targetValue = GetRandomString();

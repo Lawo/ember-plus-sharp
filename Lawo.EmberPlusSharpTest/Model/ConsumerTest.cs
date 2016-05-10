@@ -1491,11 +1491,11 @@ namespace Lawo.EmberPlusSharp.Model
 
             if ((parameter.Access & ParameterAccess.Read) == 0)
             {
-                AssertThrow<InvalidOperationException>(() => parameter.Value.ToString(CultureInfo.InvariantCulture));
+                AssertThrow<InvalidOperationException>(() => parameter.Value.Ignore());
             }
             else
             {
-                parameter.Value.ToString(CultureInfo.InvariantCulture);
+                parameter.Value.Ignore();
             }
 
             if ((parameter.Access & ParameterAccess.Write) == 0)
@@ -1605,7 +1605,7 @@ namespace Lawo.EmberPlusSharp.Model
             var encodedPayloadStream = await GetS101MessageStreamAsync(GetBigTreePayload(magnitude));
             var encodedPayload = encodedPayloadStream.ToArray();
 
-            using (var logWriter = File.CreateText(".\\BigTreeOutput.txt"))
+            using (File.CreateText(".\\BigTreeOutput.txt"))
             {
                 var stopwatch = new Stopwatch();
 
@@ -1966,8 +1966,8 @@ namespace Lawo.EmberPlusSharp.Model
             bool failType)
         {
             var boolValue = this.GetRandomBoolean();
-            var intFormat = GetFormat(intValue);
-            var enumFormat = GetFormat(enumValue);
+            GetFormat(intValue).Ignore();
+            GetFormat(enumValue).Ignore();
             var octetStringValue = new byte[this.Random.Next(0, 5)];
             this.Random.NextBytes(octetStringValue);
             var stringValue = GetRandomString();

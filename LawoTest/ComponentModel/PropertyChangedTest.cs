@@ -46,24 +46,24 @@ namespace Lawo.ComponentModel
                 () => new PropertyChangedRegistration((s, e) => { }, null).Dispose());
             AssertThrow<ArgumentException>(
                 () => new PropertyChangedRegistration((s, e) => { }, NullProperty).Dispose());
-            new Exceptional().ToString();
+            new Exceptional().Ignore();
         }
 
         /// <summary>Tests <see cref="NotifyPropertyChanged"/>.</summary>
         [TestMethod]
         public void NotifyPropertyChangedTest()
         {
-            new CalculatedSum(this, 1).ToString();
-            new CalculatedSum(this, 2).ToString();
-            new CalculatedSum(this, 3).ToString();
-            new CalculatedSum(this, 4).ToString();
-            new CalculatedSum(this, 5).ToString();
-            new CalculatedSum(this, 6).ToString();
-            new CalculatedSum(this, 7).ToString();
-            new CalculatedSum(this, 8).ToString();
-            new CalculatedSum(this, 9).ToString();
-            new CalculatedSum(this, 10).ToString();
-            new CalculatedSum(this, 11).ToString();
+            new CalculatedSum(this, 1).Ignore();
+            new CalculatedSum(this, 2).Ignore();
+            new CalculatedSum(this, 3).Ignore();
+            new CalculatedSum(this, 4).Ignore();
+            new CalculatedSum(this, 5).Ignore();
+            new CalculatedSum(this, 6).Ignore();
+            new CalculatedSum(this, 7).Ignore();
+            new CalculatedSum(this, 8).Ignore();
+            new CalculatedSum(this, 9).Ignore();
+            new CalculatedSum(this, 10).Ignore();
+            new CalculatedSum(this, 11).Ignore();
         }
 
         /// <summary>Exposes a NullReferenceException bug, see change history for details.</summary>
@@ -89,7 +89,7 @@ namespace Lawo.ComponentModel
             int totalCount;
             var changedCount = 0;
 
-            using (var calculated = createCalculated(validate + ((s, e) => ++changedCount)))
+            using (createCalculated(validate + ((s, e) => ++changedCount)))
             {
                 totalCount = this.IncrementAddends(0, addends) + (creationIsNotified ? 1 : 0);
                 Assert.AreEqual(totalCount, changedCount);

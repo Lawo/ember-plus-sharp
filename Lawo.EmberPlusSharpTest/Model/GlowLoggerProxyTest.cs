@@ -50,7 +50,7 @@ namespace Lawo.EmberPlusSharp.Model
                                 {
                                     var robotTask = S101Robot.RunAsync(proS101, GlowTypes.Instance, reader, true);
 
-                                    using (var con = await Consumer<EmptyDynamicRoot>.CreateAsync(conS101))
+                                    using (await Consumer<EmptyDynamicRoot>.CreateAsync(conS101))
                                     {
                                         await conS101.SendOutOfFrameByteAsync(0x00);
                                         await robotTask;

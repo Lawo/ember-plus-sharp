@@ -41,7 +41,7 @@ namespace Lawo.Reflection
         public void ExceptionTest()
         {
             AssertThrow<ArgumentNullException>(
-                () => ((ReflectionHelperTest)null).GetProperty(o => o.SomeProperty).ToString(),
+                () => ((ReflectionHelperTest)null).GetProperty(o => o.SomeProperty).Ignore(),
                 () => this.GetProperty<ReflectionHelperTest, int>(null));
             AssertThrow<ArgumentException>(
                 () => this.GetProperty(o => 1),

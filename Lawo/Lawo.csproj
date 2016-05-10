@@ -92,6 +92,7 @@
     <Compile Include="IO\StreamHelper.cs" />
     <Compile Include="IO\WriteBuffer.cs" />
     <Compile Include="IO\JsonSerializer.cs" />
+    <Compile Include="ObjectHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\IProperty`2.cs" />
     <Compile Include="Reflection\IProperty`1.cs" />
