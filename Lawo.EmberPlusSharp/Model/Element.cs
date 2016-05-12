@@ -126,7 +126,7 @@ namespace Lawo.EmberPlusSharp.Model
         internal virtual RetrievalState RetrievalState
         {
             get { return RetrievalState.Complete; }
-            set { } // Intentionally empty
+            set { value.Ignore(); } // Intentionally empty
         }
 
         internal void SetRetrieveDetailsChangeStatus(Func<bool> setValue)
