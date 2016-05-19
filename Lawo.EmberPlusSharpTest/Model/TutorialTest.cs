@@ -97,11 +97,11 @@ namespace Lawo.EmberPlusSharp.Model
                         var sources = (INode)sapphire.Children.First(c => c.Identifier == "Sources");
                         var fpgm1 = (INode)sources.Children.First(c => c.Identifier == "FPGM 1");
                         var fader = (INode)fpgm1.Children.First(c => c.Identifier == "Fader");
-                        var dbValue = (IParameter)fader.Children.First(c => c.Identifier == "dB Value");
+                        var level = (IParameter)fader.Children.First(c => c.Identifier == "dB Value");
                         var position = (IParameter)fader.Children.First(c => c.Identifier == "Position");
 
                         // Set parameters to the desired values.
-                        dbValue.Value = -67.0;
+                        level.Value = -67.0;
                         position.Value = 128L;
 
                         // We send the changes back to the provider with the call below. Here, this is necessary so that
