@@ -32,7 +32,7 @@
       <DocumentationSource sourceFile="..\Lawo\Lawo.csproj" />
       <DocumentationSource sourceFile="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj" />
     </DocumentationSources>
-    <MissingTags>Summary, Namespace, TypeParameter</MissingTags>
+    <MissingTags>Summary, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
     <HelpFileVersion>0.0.0.1</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
