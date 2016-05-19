@@ -39,6 +39,8 @@ namespace Lawo.EmberPlusSharp.Ember
             AssertEncode(writer => writer.WriteValue(EmberId.CreateContextSpecific(3), 0.0), 0xA3, 0x02, 0x09, 0x00);
             AssertEncode(writer => writer.WriteValue(EmberId.CreateContextSpecific(3), double.PositiveInfinity), 0xA3, 0x03, 0x09, 0x01, 0x40);
             AssertEncode(writer => writer.WriteValue(EmberId.CreateContextSpecific(3), double.NegativeInfinity), 0xA3, 0x03, 0x09, 0x01, 0x41);
+            AssertEncode(writer => writer.WriteValue(EmberId.CreateContextSpecific(3), double.NaN), 0xA3, 0x03, 0x09, 0x01, 0x42);
+            AssertEncode(writer => writer.WriteValue(EmberId.CreateContextSpecific(3), -0.0), 0xA3, 0x03, 0x09, 0x01, 0x43);
             AssertEncode(writer => writer.WriteValue(EmberId.CreateContextSpecific(3), -1.0), 0xA3, 0x05, 0x09, 0x03, 0xC0, 0x00, 0x01);
 
             AssertEncode(

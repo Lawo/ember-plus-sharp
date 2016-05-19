@@ -470,17 +470,20 @@ namespace Lawo.EmberPlusSharp.Ember
             long sign;
             int exponentLength;
 
-            // 8.5.3 - 8.5.6, encoding must be base 2, so the bits 6 to 3 must be 0. Moreover, bits 8 to 7 must not
-            // both be 0 (which would imply a decimal encoding). Finally, bit 2 cannot be 1 if bit 8 is 0 and bit 7 is
-            // 1. This leaves exactly the 10 cases enumerated below.
+            // 8.5.3 - 8.5.7, encoding must be base 2, so the bits 6 to 3 must be 0. Moreover, bits 8 to 7 must not
+            // both be 0 (which would imply a decimal encoding). This leaves exactly the 12 cases enumerated below.
             switch (firstContentsOctet)
             {
                 case 0x40:
-                    return double.PositiveInfinity; // 8.5.8
+                    return double.PositiveInfinity; // 8.5.9
                 case 0x41:
-                    return double.NegativeInfinity; // 8.5.8
+                    return double.NegativeInfinity; // 8.5.9
+                case 0x42:
+                    return double.NaN; // 8.5.9
+                case 0x43:
+                    return -0.0; // 8.5.9
 
-                // 8.5.6.4 a)
+                // 8.5.7.4 a)
                 case 0x80:
                     sign = 0;
                     exponentLength = 1;
@@ -490,7 +493,7 @@ namespace Lawo.EmberPlusSharp.Ember
                     exponentLength = 1;
                     break;
 
-                // 8.5.6.4 b)
+                // 8.5.7.4 b)
                 case 0x81:
                     sign = 0;
                     exponentLength = 2;
@@ -500,7 +503,7 @@ namespace Lawo.EmberPlusSharp.Ember
                     exponentLength = 2;
                     break;
 
-                // 8.5.6.4 c)
+                // 8.5.7.4 c)
                 case 0x82:
                     sign = 0;
                     exponentLength = 3;
@@ -510,7 +513,7 @@ namespace Lawo.EmberPlusSharp.Ember
                     exponentLength = 3;
                     break;
 
-                // 8.5.6.4 d)
+                // 8.5.7.4 d)
                 case 0x83:
                     sign = 0;
                     exponentLength = readBuffer[readBuffer.Index++];
@@ -526,7 +529,7 @@ namespace Lawo.EmberPlusSharp.Ember
                     throw CreateEmberException("Unexpected encoding for Real at position {0}.", position);
             }
 
-            var mantissaLength = length - exponentLength; // 8.5.6.5
+            var mantissaLength = length - exponentLength; // 8.5.7.5
 
             if (mantissaLength < 1)
             {

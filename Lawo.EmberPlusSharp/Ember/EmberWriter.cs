@@ -267,6 +267,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
         private static readonly EmberId Sequence = EmberId.CreateUniversal(InnerNumber.Sequence);
         private static readonly EmberId Set = EmberId.CreateUniversal(InnerNumber.Set);
+        private static readonly long NegativeZeroInteger = BitConverter.DoubleToInt64Bits(-0.0);
 
         private static int Get8BitStartShift(long value, bool isSigned)
         {
@@ -345,11 +346,23 @@ namespace Lawo.EmberPlusSharp.Ember
 
             if (double.IsInfinity(value))
             {
-                writeBuffer[writeBuffer.Count++] = (byte)(value > 0 ? 0x40 : 0x41); // 8.5.5 c) and 8.5.8
+                writeBuffer[writeBuffer.Count++] = (byte)(value > 0 ? 0x40 : 0x41); // 8.5.6 c) and 8.5.9
+                return;
+            }
+
+            if (double.IsNaN(value))
+            {
+                writeBuffer[writeBuffer.Count++] = 0x42; // 8.5.9
                 return;
             }
 
             var bits = BitConverter.DoubleToInt64Bits(value);
+
+            if (bits == NegativeZeroInteger)
+            {
+                writeBuffer[writeBuffer.Count++] = 0x43; // 8.5.3 and 8.5.9
+                return;
+            }
 
             // 8.5.2
             if (bits == 0)
@@ -357,12 +370,12 @@ namespace Lawo.EmberPlusSharp.Ember
                 return;
             }
 
-            // 8.5.5 a)
+            // 8.5.6 a)
             byte firstContentsOctet = 0x80;
 
             const long SignMask = long.MinValue;
 
-            // 8.5.6.1
+            // 8.5.7.1
             if ((bits & SignMask) != 0)
             {
                 firstContentsOctet |= 0x40;
@@ -371,7 +384,7 @@ namespace Lawo.EmberPlusSharp.Ember
             var exponent =
                 ((bits & Constants.DoubleExponentMask) >> Constants.DoubleMantissaBits) - Constants.DoubleExponentBias;
             var exponentShift = Get8BitStartShift(exponent, true);
-            firstContentsOctet |= (byte)(GetLengthFromShift8Bit(exponentShift) - 1); // 8.5.6.4
+            firstContentsOctet |= (byte)(GetLengthFromShift8Bit(exponentShift) - 1); // 8.5.7.4
             writeBuffer[writeBuffer.Count++] = firstContentsOctet;
             Write8Bit(writeBuffer, exponent, exponentShift);
 
@@ -390,7 +403,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 mantissa >>= 1;
             }
 
-            // TODO: According to 8.5.6.5 we should pass false below, but we pass true to avoid a bug in EmberLib.
+            // TODO: According to 8.5.7.5 we should pass false below, but we pass true to avoid a bug in EmberLib.
             Write8Bit(writeBuffer, mantissa, Get8BitStartShift(mantissa, true)); // 8.5.6.5
         }
 
