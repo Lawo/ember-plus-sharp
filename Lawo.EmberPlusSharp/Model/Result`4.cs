@@ -14,7 +14,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="T3">The type of the third component.</typeparam>
     /// <typeparam name="T4">The type of the fourth component.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     public sealed class Result<T1, T2, T3, T4> : ResultBase<Result<T1, T2, T3, T4>>
     {
         /// <summary>Initializes a new instance of the <see cref="Result{T1,T2,T3,T4}"/> class.</summary>

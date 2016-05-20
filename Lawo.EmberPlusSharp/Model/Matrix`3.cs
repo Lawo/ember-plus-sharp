@@ -18,7 +18,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="TSource">The type of the node containing the parameters of a single source.</typeparam>
     /// <typeparam name="TConnection">The type of the node containing the parameters of a single connection.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     public sealed class Matrix<TTarget, TSource, TConnection> :
         ElementWithSchemas<Matrix<TTarget, TSource, TConnection>>, IMatrix
         where TTarget : Node<TTarget>

@@ -19,7 +19,6 @@ namespace Lawo.EmberPlusSharp.Model
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "There's no other way.")]
     [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Function", Justification = "Intentional, usability from other languages is not a priority.")]
     public sealed class Function<T1, T2, T3, T4, TResult> : StaticFunction<Function<T1, T2, T3, T4, TResult>>
         where TResult : ResultBase<TResult>, new()

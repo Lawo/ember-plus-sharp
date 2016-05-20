@@ -17,7 +17,6 @@ namespace Lawo.ComponentModel
     /// <typeparam name="TTargetOwner">The type of the object owning the target property.</typeparam>
     /// <typeparam name="TTarget">The type of the target property.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "Client code almost never needs to mention this type.")]
     public sealed class Binding<TSourceOwner, TSource, TTargetOwner, TTarget> : IDisposable
         where TSourceOwner : INotifyPropertyChanged
         where TTargetOwner : INotifyPropertyChanged

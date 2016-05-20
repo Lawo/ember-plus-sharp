@@ -54,7 +54,6 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         /// <remarks>The number of an Universal class identifier is returned unaltered.
         /// <see cref="Ember.InnerNumber.FirstApplication"/> is added to the number of an Application class identifier.</remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "There's not much of an alternative.")]
         public int InnerNumber
         {
             get
