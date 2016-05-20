@@ -14,7 +14,6 @@ namespace Lawo.GlowLogConverter.Main
 
     internal static class Program
     {
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will never be localized.")]
         private static void Main(string[] args)
         {
             if ((args.Length != 1) || !File.Exists(args[0]))

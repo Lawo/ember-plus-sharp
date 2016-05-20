@@ -1597,7 +1597,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Objects are disposed in called method.")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Test code.")]
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", Justification = "Test code.")]
         private static async Task BigTreeAssemblyTestCore<TRoot>(int magnitude, bool writeLog)
             where TRoot : Root<TRoot>

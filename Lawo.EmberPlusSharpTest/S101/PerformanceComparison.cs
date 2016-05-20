@@ -22,7 +22,6 @@ namespace Lawo.EmberPlusSharp.S101
     public class PerformanceComparison : CommunicationTestBase
     {
         /// <summary>Measures <see cref="S101Reader"/> asynchronous performance.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will not be localized.")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Text references code elements.")]
         [TestMethod]
         public void S101ReadTest()
@@ -63,7 +62,6 @@ namespace Lawo.EmberPlusSharp.S101
         /// </list>
         /// These conditions ensure that most memory accesses can be satisfied by the cache (i.e. memory bandwidth
         /// should not be a limiting factor) and that the time to write the output can be ignored.</remarks>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Will not be localized.")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Text references code elements.")]
         [TestMethod]
         public void S101WriteTest()

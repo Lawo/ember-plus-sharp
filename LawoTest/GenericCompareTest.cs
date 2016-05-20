@@ -32,7 +32,6 @@ namespace Lawo
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         private static void Test<T>(T first, T second)
         {
             TestCore(first, second, 1); // Make sure everything is JITed.

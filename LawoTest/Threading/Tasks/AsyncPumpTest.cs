@@ -20,7 +20,6 @@ namespace Lawo.Threading.Tasks
     public sealed class AsyncPumpTest : TestBase
     {
         /// <summary>Tests <see cref="AsyncPump"/> main use cases.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         [TestMethod]
         public void MainTest()
         {
@@ -71,7 +70,6 @@ namespace Lawo.Threading.Tasks
         }
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "String is a format specifier.")]
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         private static void LogMethodPosition(string position, [CallerMemberName] string methodName = null) =>
             Console.WriteLine("{0:HH:mm:ss.ff} {1}() {2}", DateTime.Now, methodName, position);
     }

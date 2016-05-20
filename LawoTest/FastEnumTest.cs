@@ -80,7 +80,6 @@ namespace Lawo
             PerformanceTest(ToObjectTest, value);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         private static void PerformanceTest<T>(Func<T, int, double> test, T value)
             where T : struct
         {

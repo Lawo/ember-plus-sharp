@@ -192,7 +192,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Tests <see cref="EmberWriter"/> exceptions.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1117:ParametersMustBeOnSameLineOrSeparateLines", Justification = "In this case readability is improved.")]
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1115:ParameterMustFollowComma", Justification = "In this case readability is improved.")]
         [TestMethod]
@@ -278,7 +277,6 @@ namespace Lawo.EmberPlusSharp.Ember
         }
 
         /// <summary>Reads a real world file.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String,System.Object)", Justification = "Test code.")]
         [TestMethod]
         public void ReadFileTest()
         {

@@ -235,7 +235,6 @@ Public Class TutorialTestVB
 #End Region
 
 #Region "Write Children"
-    <System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification:="Test code.")>
     Private Shared Sub WriteChildren(node As INode, depth As Integer)
         Dim indent = New String(" "c, 2 * depth)
 

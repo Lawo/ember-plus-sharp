@@ -17,7 +17,6 @@ namespace Lawo.IO
     public class JsonSerializerTest : TestBase
     {
         /// <summary>Test the main use case. Serialize an object to string and deserialize it again.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestDataContract.set_Text(System.String)", Justification = "Test code.")]
         [TestMethod]
         public void SerializeAndDeserialize()
         {
@@ -32,7 +31,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Try to serialize an non serializable object.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Lawo.IO.JsonSerializerTest+TestNoDataContract.set_Text(System.String)", Justification = "Test code.")]
         [TestMethod]
         public void NoSerialization()
         {

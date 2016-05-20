@@ -304,7 +304,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
         #endregion
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test code.")]
         #region Write Children
         private static void WriteChildren(INode node, int depth)
         {
