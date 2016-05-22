@@ -24,21 +24,21 @@ namespace Lawo.EmberPlusSharp.Ember
     /// <code>
     /// internal static class GlowCommand
     /// {
-    ///     internal const int InnerNumber = InnerNumber.FirstApplication + 2;
+    ///     internal const int InnerNumber = Ember.InnerNumber.FirstApplication + 2;
     ///     internal const string Name = "Command";
     ///
     ///     internal static class Number
     ///     {
     ///         internal const int OuterNumber = 0;
     ///         internal const string Name = "number";
-    ///         internal static readonly Identifier OuterId = Identifier.CreateContextSpecific(OuterNumber);
+    ///         internal static readonly EmberId OuterId = EmberId.CreateContextSpecific(OuterNumber);
     ///     }
     ///
-    ///     internal static class Options
+    ///     internal static class DirFieldMask
     ///     {
     ///         internal const int OuterNumber = 1;
-    ///         internal const string Name = "options";
-    ///         internal static readonly Identifier OuterId = Identifier.CreateContextSpecific(OuterNumber);
+    ///         internal const string Name = "dirFieldMask";
+    ///         internal static readonly EmberId OuterId = EmberId.CreateContextSpecific(OuterNumber);
     ///     }
     /// }
     /// </code>
