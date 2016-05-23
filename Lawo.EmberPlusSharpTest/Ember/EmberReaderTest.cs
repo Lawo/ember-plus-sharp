@@ -252,7 +252,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
             AssertEmberException(
                 "The exponent of the Real at position 4 exceeds the expected range.",
-                0x60, 0x06, 0x09, 0x04, 0x81, 0x04, 0x00, 0x01);
+                0x60, 0x06, 0x09, 0x04, 0x81, 0x04, 0x01, 0x01);
 
             AssertEmberException(
                 "The exponent of the Real at position 4 exceeds the expected range.",
