@@ -981,6 +981,8 @@
   <HelpKINode Title="IFunction.Invoke method" Url="html/255DF039.htm" />
   <HelpKINode Title="IFunction.InvokeAsync method" Url="html/82DCD54D.htm" />
   <HelpKINode Title="IFunction.Result property" Url="html/62643633.htm" />
+  <HelpKINode Title="Ignore(Of T) method" Url="html/3ACFDB.htm" />
+  <HelpKINode Title="Ignore&lt;T&gt; method" Url="html/3ACFDB.htm" />
   <HelpKINode Title="IMatrix interface">
     <HelpKINode Title="IMatrix Interface" Url="html/185CF8FF.htm" />
     <HelpKINode Title="about IMatrix interface" Url="html/185CF8FF.htm" />
@@ -1438,6 +1440,7 @@
   <HelpKINode Title="Lawo.IO.WriteCallback delegate" Url="html/38CBBE2D.htm" />
   <HelpKINode Title="Lawo.Linq.Expressions namespace" Url="html/FF54ADF6.htm" />
   <HelpKINode Title="Lawo.Linq.Expressions.ExpressionHelper class" Url="html/C92E4DC3.htm" />
+  <HelpKINode Title="Lawo.ObjectHelper class" Url="html/2BE754D7.htm" />
   <HelpKINode Title="Lawo.Reflection namespace" Url="html/8381C488.htm" />
   <HelpKINode Title="Lawo.Reflection.IProperty(Of TOwner) interface" Url="html/E9BB1A90.htm" />
   <HelpKINode Title="Lawo.Reflection.IProperty(Of TOwner, TProperty) interface" Url="html/E9BB1A8F.htm" />
@@ -1816,6 +1819,13 @@
   <HelpKINode Title="NumericParameter&lt;TMostDerived, TValue&gt;.Formula property" Url="html/998A37A7.htm" />
   <HelpKINode Title="NumericParameter&lt;TMostDerived, TValue&gt;.Maximum property" Url="html/80756370.htm" />
   <HelpKINode Title="NumericParameter&lt;TMostDerived, TValue&gt;.Minimum property" Url="html/820F6478.htm" />
+  <HelpKINode Title="ObjectHelper class">
+    <HelpKINode Title="ObjectHelper Class" Url="html/2BE754D7.htm" />
+    <HelpKINode Title="about ObjectHelper class" Url="html/2BE754D7.htm" />
+    <HelpKINode Title="methods" Url="html/B796481A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ObjectHelper.Ignore(Of T) method" Url="html/3ACFDB.htm" />
+  <HelpKINode Title="ObjectHelper.Ignore&lt;T&gt; method" Url="html/3ACFDB.htm" />
   <HelpKINode Title="ObservableCollectionHelper class">
     <HelpKINode Title="ObservableCollectionHelper Class" Url="html/B54372D2.htm" />
     <HelpKINode Title="about ObservableCollectionHelper class" Url="html/B54372D2.htm" />
