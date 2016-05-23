@@ -545,7 +545,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 {
                     return signBits == 0 ? double.PositiveInfinity : double.NegativeInfinity;
                 }
-                else if (mantissa == Constants.DoubleMantissaMask)
+                else
                 {
                     return double.NaN;
                 }
