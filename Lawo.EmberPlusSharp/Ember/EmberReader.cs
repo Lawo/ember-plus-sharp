@@ -537,6 +537,19 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             var exponent = Read8Bit(readBuffer, exponentLength, true);
+            var mantissa = Read8Bit(readBuffer, mantissaLength, false);
+
+            if (exponent == 1024)
+            {
+                if (mantissa == 0)
+                {
+                    return signBits == 0 ? double.PositiveInfinity : double.NegativeInfinity;
+                }
+                else if (mantissa == Constants.DoubleMantissaMask)
+                {
+                    return double.NaN;
+                }
+            }
 
             // https://en.wikipedia.org/wiki/Double-precision_floating-point_format
             if ((exponent <= -Constants.DoubleExponentBias) || (exponent > Constants.DoubleExponentBias))
@@ -544,8 +557,6 @@ namespace Lawo.EmberPlusSharp.Ember
                 throw CreateEmberException(
                     "The exponent of the Real at position {0} exceeds the expected range.", position);
             }
-
-            var mantissa = Read8Bit(readBuffer, mantissaLength, false);
 
             if (mantissa == 0)
             {
