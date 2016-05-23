@@ -466,7 +466,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
             var firstContentsOctet = readBuffer[readBuffer.Index++];
             --length;
-            long sign;
+            long signBits;
             int exponentLength;
 
             // 8.5.3 - 8.5.7, encoding must be base 2, so the bits 6 to 3 must be 0. Moreover, bits 8 to 7 must not
@@ -484,42 +484,42 @@ namespace Lawo.EmberPlusSharp.Ember
 
                 // 8.5.7.4 a)
                 case 0x80:
-                    sign = 0;
+                    signBits = 0;
                     exponentLength = 1;
                     break;
                 case 0xC0:
-                    sign = long.MinValue;
+                    signBits = long.MinValue;
                     exponentLength = 1;
                     break;
 
                 // 8.5.7.4 b)
                 case 0x81:
-                    sign = 0;
+                    signBits = 0;
                     exponentLength = 2;
                     break;
                 case 0xC1:
-                    sign = long.MinValue;
+                    signBits = long.MinValue;
                     exponentLength = 2;
                     break;
 
                 // 8.5.7.4 c)
                 case 0x82:
-                    sign = 0;
+                    signBits = 0;
                     exponentLength = 3;
                     break;
                 case 0xC2:
-                    sign = long.MinValue;
+                    signBits = long.MinValue;
                     exponentLength = 3;
                     break;
 
                 // 8.5.7.4 d)
                 case 0x83:
-                    sign = 0;
+                    signBits = 0;
                     exponentLength = readBuffer[readBuffer.Index++];
                     --length;
                     break;
                 case 0xC3:
-                    sign = long.MinValue;
+                    signBits = long.MinValue;
                     exponentLength = readBuffer[readBuffer.Index++];
                     --length;
                     break;
@@ -538,13 +538,12 @@ namespace Lawo.EmberPlusSharp.Ember
 
             var exponent = Read8Bit(readBuffer, exponentLength, true);
 
-            if ((exponent < -Constants.DoubleExponentBias) || (exponent > Constants.DoubleExponentBias))
+            // https://en.wikipedia.org/wiki/Double-precision_floating-point_format
+            if ((exponent <= -Constants.DoubleExponentBias) || (exponent > Constants.DoubleExponentBias))
             {
                 throw CreateEmberException(
                     "The exponent of the Real at position {0} exceeds the expected range.", position);
             }
-
-            exponent = (exponent + Constants.DoubleExponentBias) << Constants.DoubleMantissaBits;
 
             var mantissa = Read8Bit(readBuffer, mantissaLength, false);
 
@@ -567,7 +566,8 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             mantissa &= Constants.DoubleMantissaMask;
-            return BitConverter.Int64BitsToDouble(sign | exponent | mantissa);
+            var exponentBits = (exponent + Constants.DoubleExponentBias) << Constants.DoubleMantissaBits;
+            return BitConverter.Int64BitsToDouble(signBits | exponentBits | mantissa);
         }
 
         /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.3.</summary>
