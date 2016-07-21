@@ -31,10 +31,11 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <inheritdoc/>
-        void IInvocationResult.Read(EmberReader reader, bool success)
-        {
-            this.ReadResult(reader);
+        void IInvocationResult.Read(EmberReader reader) => this.ReadResult(reader);
 
+        /// <inheritdoc/>
+        void IInvocationResult.Publish(bool success)
+        {
             if (success)
             {
                 this.taskCompletionSource.SetResult((TMostDerived)this);

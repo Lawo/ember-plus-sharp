@@ -1342,6 +1342,38 @@ namespace Lawo.EmberPlusSharp.Model
             AsyncPump.Run(() => TestWithRobot<BooleanRoot>(c => Task.FromResult(false), true, "Bug5639Log.xml"));
         }
 
+        /// <summary>Exposes <see href="https://github.com/Lawo/ember-plus-sharp/issues/27">Bug 27</see>.</summary>
+        [TestMethod]
+        public void Bug27Test()
+        {
+            AsyncPump.Run(() => TestWithRobot<GrassRoot>(
+                async c =>
+                {
+                    var result = await c.Root.Production.LoadSnapshot.InvokeAsync("snapshot0004");
+                    Assert.AreEqual(0, result.Items.Count());
+                },
+                true,
+                "Bug27Log.xml",
+                "true"));
+
+            AsyncPump.Run(() => TestWithRobot<GrassRoot>(
+                async c =>
+                {
+                    try
+                    {
+                        var result = await c.Root.Production.LoadSnapshot.InvokeAsync("snapshot0004");
+                        Assert.Fail("Unexpected success.");
+                    }
+                    catch (InvocationFailedException ex)
+                    {
+                        Assert.AreEqual(0, ex.Result.Items.Count());
+                    }
+                },
+                true,
+                "Bug27Log.xml",
+                "false"));
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static Task TestConsumerAfterFirstRequest<TRoot>(

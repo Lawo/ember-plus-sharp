@@ -87,6 +87,8 @@
     </Compile>
     <Compile Include="Ember\EmberDataPayloads\EmberPayloads.cs" />
     <Compile Include="Model\GlowLoggerProxyTest.cs" />
+    <Compile Include="Model\Test\Production.cs" />
+    <Compile Include="Model\Test\GrassRoot.cs" />
     <Compile Include="Model\Test\EmptyRoot.cs" />
     <Compile Include="Model\Test\FunctionNode.cs" />
     <Compile Include="Model\Test\EmptyZoneNode.cs" />
@@ -604,6 +606,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug27Log.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

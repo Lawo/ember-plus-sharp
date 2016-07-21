@@ -165,26 +165,25 @@ namespace Lawo.EmberPlusSharp.Model
         private static void ReadInvocationResult(
             EmberReader reader, IDictionary<int, IInvocationResult> pendingInvocations)
         {
-            int invocationId = 0;
-            bool success = true;
+            var success = true;
+            IInvocationResult result = null;
 
             while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
             {
                 switch (reader.GetContextSpecificOuterNumber())
                 {
                     case GlowInvocationResult.InvocationId.OuterNumber:
-                        invocationId = reader.AssertAndReadContentsAsInt32();
+                        var invocationId = reader.AssertAndReadContentsAsInt32();
+                        pendingInvocations.TryGetValue(invocationId, out result);
+                        pendingInvocations.Remove(invocationId);
                         break;
                     case GlowInvocationResult.Success.OuterNumber:
                         success = reader.ReadContentsAsBoolean();
                         break;
                     case GlowInvocationResult.Result.OuterNumber:
-                        IInvocationResult result;
-
-                        if (pendingInvocations.TryGetValue(invocationId, out result))
+                        if (result != null)
                         {
-                            result.Read(reader, success);
-                            pendingInvocations.Remove(invocationId);
+                            result.Read(reader);
                         }
                         else
                         {
@@ -197,6 +196,8 @@ namespace Lawo.EmberPlusSharp.Model
                         break;
                 }
             }
+
+            result?.Publish(success);
         }
 
         private static void ReadStreamCollection(

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012-2016 Lawo AG (http://www.lawo.com). -->
+<!-- Distributed under the Boost Software License, Version 1.0. -->
+<!-- (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) -->
+<S101Log>
+  <Event type="Message" timeUtc="08:43:10.84" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="08:43:10.93" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1186491</path>
+          <contents type="Set">
+            <identifier type="UTF8String">_6</identifier>
+            <description type="UTF8String">Production</description>
+            <isOnline type="Boolean">true</isOnline>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="08:43:11.02" direction="Send" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1186491</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="08:43:11.04" direction="Receive" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1186491</path>
+          <children type="ElementCollection">
+            <Element type="Function">
+              <number type="Integer">1186492</number>
+              <contents type="Set">
+                <identifier type="UTF8String">_230000</identifier>
+                <description type="UTF8String">Get Snapshot List</description>
+                <result type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">3</type>
+                    <name type="UTF8String">Snapshot Names</name>
+                  </TupleItemDescription>
+                </result>
+              </contents>
+            </Element>
+            <Element type="Function">
+              <number type="Integer">1186493</number>
+              <contents type="Set">
+                <identifier type="UTF8String">_10021</identifier>
+                <description type="UTF8String">Get Current Snapshot</description>
+                <result type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">3</type>
+                    <name type="UTF8String">Snapshot Name</name>
+                  </TupleItemDescription>
+                </result>
+              </contents>
+            </Element>
+            <Element type="Function">
+              <number type="Integer">1186494</number>
+              <contents type="Set">
+                <identifier type="UTF8String">_20052</identifier>
+                <description type="UTF8String">Load Snapshot</description>
+                <arguments type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">3</type>
+                    <name type="UTF8String">Snapshot Name</name>
+                  </TupleItemDescription>
+                </arguments>
+              </contents>
+            </Element>
+            <Element type="Function">
+              <number type="Integer">1186495</number>
+              <contents type="Set">
+                <identifier type="UTF8String">_20042</identifier>
+                <description type="UTF8String">Save Snapshot</description>
+                <arguments type="Sequence">
+                  <TupleItemDescription type="TupleItemDescription">
+                    <type type="Integer">3</type>
+                    <name type="UTF8String">Snapshot Name</name>
+                  </TupleItemDescription>
+                </arguments>
+              </contents>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="08:43:13.64" direction="Send" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedFunction">
+          <path type="RelativeObjectIdentifier">1186491.1186494</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">33</number>
+              <invocation type="Invocation">
+                <invocationId type="Integer">1</invocationId>
+                <arguments type="Sequence">
+                  <Value type="UTF8String">snapshot0004</Value>
+                </arguments>
+              </invocation>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="08:43:13.67" direction="Receive" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 1F 02</Command>
+    <Payload>
+      <Root type="InvocationResult">
+        <invocationId type="Integer">1</invocationId>
+        <success type="Boolean">{0}</success>
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

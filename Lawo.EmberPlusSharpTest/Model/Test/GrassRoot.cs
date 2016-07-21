@@ -4,14 +4,14 @@
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace Lawo.EmberPlusSharp.Model
+namespace Lawo.EmberPlusSharp.Model.Test
 {
-    using Ember;
+    using System.Diagnostics.CodeAnalysis;
 
-    internal interface IInvocationResult : IResult
+    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+    internal sealed class GrassRoot : DynamicRoot<GrassRoot>
     {
-        void Read(EmberReader reader);
-
-        void Publish(bool success);
+        [Element(Identifier = "_6")]
+        internal Production Production { get; private set; }
     }
 }
