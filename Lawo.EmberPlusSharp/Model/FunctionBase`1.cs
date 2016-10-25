@@ -57,11 +57,14 @@ namespace Lawo.EmberPlusSharp.Model
         internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Function, actualType);
+            var isEmpty = true;
             var argumentsRead = false;
             var resultRead = false;
 
             while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
             {
+                isEmpty = false;
+
                 switch (reader.GetContextSpecificOuterNumber())
                 {
                     case GlowFunctionContents.Description.OuterNumber:
@@ -81,7 +84,8 @@ namespace Lawo.EmberPlusSharp.Model
                 }
             }
 
-            if ((!argumentsRead && (this.arguments.Length > 0)) || (!resultRead && (this.result.Length > 0)))
+            if (!isEmpty &&
+                ((!argumentsRead && (this.arguments.Length > 0)) || (!resultRead && (this.result.Length > 0))))
             {
                 throw this.CreateSignatureMismatchException();
             }
