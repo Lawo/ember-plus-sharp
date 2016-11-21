@@ -136,7 +136,7 @@ namespace Lawo.EmberPlusSharp.S101
                 throw new S101Exception("Inconsistent Slot in multi-packet message.");
             }
 
-            if (!this.message.Command.Equals(newMessage.Command))
+            if (!(this.message.Command?.Equals(newMessage.Command) ?? (newMessage.Command == null)))
             {
                 throw new S101Exception("Inconsistent Command in multi-packet message.");
             }
