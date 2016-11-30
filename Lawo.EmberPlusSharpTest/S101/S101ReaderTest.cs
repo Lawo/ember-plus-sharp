@@ -80,17 +80,17 @@ namespace Lawo.EmberPlusSharp.S101
                             () => reader.Message.Ignore(), () => reader.Payload.Ignore());
                     }
 
-                    await AssertS101Exception("CRC failed.", 0xFE, 0xFF);
-                    await AssertS101Exception("Invalid byte in frame.", 0xFE, 0xFE);
+                    await AssertEmpty(0xFE, 0xFF);
+                    await AssertEmpty(0xFE, 0xFE);
 
                     for (byte invalid = 0xF8; invalid < 0xFD; ++invalid)
                     {
-                        await AssertS101Exception("Invalid byte in frame.", 0xFE, invalid);
+                        await AssertEmpty(0xFE, invalid);
                     }
 
                     for (ushort invalid = 0xF8; invalid < 0x100; ++invalid)
                     {
-                        await AssertS101Exception("Invalid escaped byte.", 0xFE, 0xFD, (byte)invalid);
+                        await AssertEmpty(0xFE, 0xFD, (byte)invalid);
                     }
 
                     await AssertS101Exception("Unexpected end of stream.", 0xFE, 0x00, 0x00, 0x00);
@@ -184,6 +184,13 @@ namespace Lawo.EmberPlusSharp.S101
                     () => decodingStream.ReadAsync(dummyBuffer, 0, dummyBuffer.Length, CancellationToken.None));
                 await reader.DisposeAsync(CancellationToken.None);
             }
+        }
+
+        private static async Task AssertEmpty(params byte[] input)
+        {
+            var reader = CreateAsyncReader(input);
+            Assert.IsFalse(await reader.ReadAsync(CancellationToken.None));
+            await reader.DisposeAsync(CancellationToken.None);
         }
 
         private static async Task AssertS101Exception(string message, params byte[] input)

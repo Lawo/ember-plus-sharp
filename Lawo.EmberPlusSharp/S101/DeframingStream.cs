@@ -112,18 +112,22 @@ namespace Lawo.EmberPlusSharp.S101
                             case Frame.EscapeByte:
                                 this.state = State.InFrameEscaped;
                                 break;
+                            case Frame.BeginOfFrame:
+                                this.decodedQueue.Clear();
+                                break;
                             case Frame.EndOfFrame:
                                 this.state = State.AfterFrame;
 
                                 if (this.crc != 0xF0B8)
                                 {
-                                    throw new S101Exception("CRC failed.");
+                                    this.decodedQueue.Clear();
                                 }
 
                                 return false;
                             default:
                                 this.state = State.AfterFrame;
-                                throw new S101Exception("Invalid byte in frame.");
+                                this.decodedQueue.Clear();
+                                break;
                         }
                     }
 
@@ -132,7 +136,7 @@ namespace Lawo.EmberPlusSharp.S101
                     if (currentByte >= Frame.InvalidStart)
                     {
                         this.state = State.AfterFrame;
-                        throw new S101Exception("Invalid escaped byte.");
+                        this.decodedQueue.Clear();
                     }
 
                     currentByte = (byte)(currentByte ^ Frame.EscapeXor);
