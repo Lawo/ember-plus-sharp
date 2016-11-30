@@ -146,7 +146,7 @@ namespace Lawo.EmberPlusSharp.S101
             this.xmlLogWriter.WriteAttributeString(LogNames.Number, number.ToString(CultureInfo.InvariantCulture));
             this.xmlLogWriter.WriteElementString(
                 LogNames.Slot, message.Slot.ToString("X2", CultureInfo.InvariantCulture));
-            this.xmlLogWriter.WriteElementString(LogNames.Command, message.Command?.ToString());
+            this.xmlLogWriter.WriteElementString(LogNames.Command, message.Command.ToString());
             this.xmlLogWriter.WriteStartElement(LogNames.Payload);
 
             if (payload != null)

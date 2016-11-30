@@ -66,13 +66,13 @@ namespace Lawo.EmberPlusSharp.S101
             return new S101Message(slot, messageType, command);
         }
 
-        internal bool CanHavePayload => this.Command?.CanHavePayload ?? false;
+        internal bool CanHavePayload => this.Command.CanHavePayload;
 
-        internal bool CanHaveMultiplePackets => this.Command?.CanHaveMultiplePackets ?? false;
+        internal bool CanHaveMultiplePackets => this.Command.CanHaveMultiplePackets;
 
         internal PacketFlags PacketFlags
         {
-            get { return this.Command?.PacketFlags ?? PacketFlags.SinglePacket; }
+            get { return this.Command.PacketFlags; }
             set { this.Command.PacketFlags = value; }
         }
 

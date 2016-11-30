@@ -419,11 +419,6 @@ namespace Lawo.EmberPlusSharp.Model
 
             var command = (EmberData)args.Message.Command;
 
-            if (command == null)
-            {
-                return;
-            }
-
             if (command.Dtd != EmberDataCommand.Dtd)
             {
                 throw new ModelException(
