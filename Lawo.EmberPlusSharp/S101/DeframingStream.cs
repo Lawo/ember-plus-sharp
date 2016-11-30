@@ -114,6 +114,7 @@ namespace Lawo.EmberPlusSharp.S101
                                 break;
                             case Frame.BeginOfFrame:
                                 this.decodedQueue.Clear();
+                                this.crc = 0xFFFF;
                                 break;
                             case Frame.EndOfFrame:
                                 this.state = State.AfterFrame;
