@@ -24,18 +24,27 @@ namespace Lawo.EmberPlusSharp.S101
         public sealed override async Task<int> ReadAsync(
             byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            if (this.state == State.AfterFrame)
+            if (this.state != State.AfterFrame)
             {
-                return 0;
+                // We're reading the full frame before touching the passed buffer, so that we have a chance to silently
+                // throw away data if it turns out to be invalid. This is necessary so that we can correctly
+                // communicate with consumers and providers which mix Ember+ data with other data. For example,
+                // vsmStudio often sends a first Ember message followed by an Ember+ message.
+                var readBuffer = this.ReadBuffer;
+
+                while (((readBuffer.Index < readBuffer.Count) || await readBuffer.ReadAsync(cancellationToken)) &&
+                    this.ReadByte(readBuffer))
+                {
+                }
             }
 
-            var readBuffer = this.ReadBuffer;
             var index = offset;
             var pastEnd = offset + count;
 
-            while ((index < pastEnd) && ((readBuffer.Index < readBuffer.Count) ||
-                await readBuffer.ReadAsync(cancellationToken)) && this.ReadByte(readBuffer, buffer, ref index))
+            // The last 2 bytes are the CRC
+            while ((index < pastEnd) && (this.decodedQueue.Count > 2))
             {
+                buffer[index++] = this.decodedQueue.Dequeue();
             }
 
             return index - offset;
@@ -52,7 +61,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private readonly Queue<byte> decodedQueue = new Queue<byte>();
+        private readonly Queue<byte> decodedQueue = new Queue<byte>(64);
         private readonly Action<byte> outOfFrameByteReceived;
         private State state;
         private ushort crc = 0xFFFF;
@@ -73,7 +82,7 @@ namespace Lawo.EmberPlusSharp.S101
             AfterFrame
         }
 
-        private bool ReadByte(ReadBuffer readBuffer, byte[] buffer, ref int index)
+        private bool ReadByte(ReadBuffer readBuffer)
         {
             var currentByte = readBuffer[readBuffer.Index++];
 
@@ -131,11 +140,6 @@ namespace Lawo.EmberPlusSharp.S101
                     this.decodedQueue.Enqueue(currentByte);
                     this.state = State.InFrame;
                     break;
-            }
-
-            if (this.decodedQueue.Count == 3)
-            {
-                buffer[index++] = this.decodedQueue.Dequeue();
             }
 
             return true;
