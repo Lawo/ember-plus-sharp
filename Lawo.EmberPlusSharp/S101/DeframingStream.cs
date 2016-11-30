@@ -33,15 +33,9 @@ namespace Lawo.EmberPlusSharp.S101
             var index = offset;
             var pastEnd = offset + count;
 
-            // (index == offset) ensures that we only try to get more encoded data if we haven't yet copied anything
-            // into buffer
             while ((index < pastEnd) && ((readBuffer.Index < readBuffer.Count) ||
-                ((index == offset) && await readBuffer.ReadAsync(cancellationToken))))
+                await readBuffer.ReadAsync(cancellationToken)) && this.ReadByte(readBuffer, buffer, ref index))
             {
-                if (!this.ReadByte(readBuffer, buffer, ref index))
-                {
-                    break;
-                }
             }
 
             return index - offset;
