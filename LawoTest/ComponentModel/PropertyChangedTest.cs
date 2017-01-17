@@ -64,6 +64,7 @@ namespace Lawo.ComponentModel
             new CalculatedSum(this, 9).Ignore();
             new CalculatedSum(this, 10).Ignore();
             new CalculatedSum(this, 11).Ignore();
+            new CalculatedSum(this, 12).Ignore();
         }
 
         /// <summary>Exposes a NullReferenceException bug, see change history for details.</summary>
@@ -257,6 +258,21 @@ namespace Lawo.ComponentModel
                             ps[8],
                             ps[9],
                             (p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) => p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9 + p10,
+                            calculated);
+                    case 11:
+                        return CalculatedProperty.Create(
+                            ps[0],
+                            ps[1],
+                            ps[2],
+                            ps[3],
+                            ps[4],
+                            ps[5],
+                            ps[6],
+                            ps[7],
+                            ps[8],
+                            ps[9],
+                            ps[10],
+                            (p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) => p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9 + p10 + p11,
                             calculated);
                     default:
                         return CalculatedProperty.Create(ps, vs => vs.Aggregate((a, r) => a + r), calculated);
