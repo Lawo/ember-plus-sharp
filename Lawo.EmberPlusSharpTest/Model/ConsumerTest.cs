@@ -321,6 +321,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void GetElementTest()
         {
             var mainRoot = GetRoot<MainRoot>("MainLog.xml");
+            AssertThrow<ArgumentNullException>(() => mainRoot.GetElement(null));
             Assert.AreEqual(mainRoot, mainRoot.GetElement(string.Empty));
             Assert.AreEqual(mainRoot, mainRoot.GetElement(mainRoot.GetPath()));
             Assert.AreEqual(mainRoot.BooleanParameter, mainRoot.GetElement(mainRoot.BooleanParameter.GetPath()));
