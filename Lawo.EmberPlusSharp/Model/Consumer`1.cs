@@ -162,10 +162,6 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        /// <summary>Calls <see cref="SendAsync"/>.</summary>
-        [Obsolete("Call SendAsync instead.")]
-        public Task SendChangesAsync() => this.SendAsync();
-
         /// <summary>Asynchronously sends the locally applied changes and invocations to the provider.</summary>
         /// <exception cref="Exception">An exception was thrown from one of the callbacks passed to the
         /// <see cref="S101Client"/> constructor, see <see cref="Exception.Message"/> for more information.</exception>

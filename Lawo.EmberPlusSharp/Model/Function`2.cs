@@ -29,11 +29,6 @@ namespace Lawo.EmberPlusSharp.Model
         public Task<TResult> InvokeAsync(T1 arg1) =>
             this.InvokeCoreAsync(new TResult(), new ValueWriter<T1>(arg1).WriteValue);
 
-        /// <summary>Returns the return value of
-        /// <see cref="InvokeAsync(T1)">InvokeAsync(<paramref name="arg1"/>)</see>.</summary>
-        [Obsolete("Call InvokeAsync instead.")]
-        public Task<TResult> Invoke(T1 arg1) => this.InvokeAsync(arg1);
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private Function()

@@ -37,12 +37,6 @@ namespace Lawo.EmberPlusSharp.Model
                 new ValueWriter<T2>(arg2).WriteValue,
                 new ValueWriter<T3>(arg3).WriteValue);
 
-        /// <summary>Returns the return value of
-        /// <see cref="InvokeAsync(T1, T2, T3)">InvokeAsync(<paramref name="arg1"/>, <paramref name="arg2"/>,
-        /// <paramref name="arg3"/>)</see>.</summary>
-        [Obsolete("Call InvokeAsync instead.")]
-        public Task<TResult> Invoke(T1 arg1, T2 arg2, T3 arg3) => this.InvokeAsync(arg1, arg2, arg3);
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private Function()

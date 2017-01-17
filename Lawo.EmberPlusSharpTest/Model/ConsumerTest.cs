@@ -610,9 +610,7 @@ namespace Lawo.EmberPlusSharp.Model
                 async consumer =>
                 {
                     Assert.AreEqual(42, consumer.Root.FieldNode.SomeParameter.Value);
-#pragma warning disable 0618
-                    await consumer.SendChangesAsync();
-#pragma warning restore 0618
+                    await consumer.SendAsync();
                 },
                 false,
                 "SlotLog.xml"));
