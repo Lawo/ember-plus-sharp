@@ -43,9 +43,8 @@ namespace Lawo.EmberPlusSharp.Model
                 {
                     if (this.childrenRetrievalPolicy != ChildrenRetrievalPolicy.None)
                     {
-                        throw new ArgumentException(
-                            "A new value cannot be set if the current value is not equal to ChildrenRetrievalPolicy.None.",
-                            nameof(value));
+                        throw new InvalidOperationException(
+                            "A new value cannot be set if the current value is not equal to None.");
                     }
 
                     this.SetRetrieveDetailsChangeStatus(() => this.SetValue(ref this.childrenRetrievalPolicy, value));
