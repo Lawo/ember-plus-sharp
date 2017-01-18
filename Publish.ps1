@@ -1,4 +1,4 @@
-# Copyright 2012-2016 Lawo AG (http://www.lawo.com).
+# Copyright 2012-2017 Lawo AG (http://www.lawo.com).
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
@@ -96,7 +96,7 @@ git push -q origin refs/heads/* refs/tags/*
 
 "Creating GitHub Release..."
 $auth = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($gitHubApiKey + ":x-oauth-basic"))
-$releaseData = @{ tag_name = $tag; draft = $true; prerelease = $false; }
+$releaseData = @{ tag_name = $tag; name = $tag; draft = $true; prerelease = $false; }
 
 $releaseParams = @{
     Uri = "https://api.github.com/repos/Lawo/ember-plus-sharp/releases";
