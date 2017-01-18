@@ -87,6 +87,8 @@
     </Compile>
     <Compile Include="Ember\EmberDataPayloads\EmberPayloads.cs" />
     <Compile Include="Model\GlowLoggerProxyTest.cs" />
+    <Compile Include="Model\Test\CollectionNodeRoot.cs" />
+    <Compile Include="Model\Test\CollectionNode.cs" />
     <Compile Include="Model\Test\Production.cs" />
     <Compile Include="Model\Test\GrassRoot.cs" />
     <Compile Include="Model\Test\EmptyRoot.cs" />
@@ -609,6 +611,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug27Log.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\CollectionNodeLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

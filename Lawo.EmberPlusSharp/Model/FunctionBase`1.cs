@@ -160,7 +160,7 @@ namespace Lawo.EmberPlusSharp.Model
         internal ModelException CreateSignatureMismatchException()
         {
             const string Format =
-                "The signature of the function with the path {0} does not match the signature of the one sent by the provider.";
+                "The actual signature for the function with the path {0} does not match the expected signature.";
             return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
         }
 

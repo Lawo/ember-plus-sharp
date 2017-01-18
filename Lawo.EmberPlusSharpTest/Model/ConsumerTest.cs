@@ -911,6 +911,25 @@ namespace Lawo.EmberPlusSharp.Model
                 });
         }
 
+        /// <summary>Tests <see cref="CollectionNode{TMostDerived, TElement}"/>.</summary>
+        [TestMethod]
+        public void CollectionNodeTest()
+        {
+            AsyncPump.Run(() => TestWithRobot<CollectionNodeRoot>(
+                consumer =>
+                {
+                    var node = consumer.Root.Node;
+                    Assert.AreEqual(1, node.Children.Count);
+                    Assert.AreEqual(42, node.Children[0].Value);
+                    Assert.AreEqual(43, node.Parameter2.Value);
+                    Assert.AreEqual(44, node.Parameter3.Value);
+                    Assert.AreEqual(3, ((INode)node).Children.Count);
+                    return Task.FromResult(false);
+                },
+                true,
+                "CollectionNodeLog.xml"));
+        }
+
         /// <summary>Tests various exceptional conditions.</summary>
         [TestMethod]
         public void ExceptionTest()
@@ -1039,35 +1058,35 @@ namespace Lawo.EmberPlusSharp.Model
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot1>(
                         "UnaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot2>(
                         "UnaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot3>(
                         "UnaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot4>(
                         "UnaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot5>(
                         "UnaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot6>(
                         "UnaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot1>(
                         "NullaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowInCreateAsync<ModelException, FunctionSignatureMismatchRoot4>(
                         "NullaryFunctionLog.xml",
-                        "The signature of the function with the path /Function does not match the signature of the one sent by the provider.",
+                        "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
                     await AssertThrowAsync<ModelException>(
                         () => TestWithRobot<FunctionResultMismatchRoot>(
