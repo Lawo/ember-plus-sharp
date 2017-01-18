@@ -506,6 +506,12 @@ namespace Lawo.GlowAnalyzerProxy.Main
                     var payload = payloadStream.ToArray();
                     var length = payload.Length;
 
+                    if (length > 0)
+                    {
+                        await this.logQueue.Enqueue(
+                            () => Task.Run(() => logInfo.Logger.LogData("DecodedPayload", direction, payload, 0, length)));
+                    }
+
                     await this.EnqueueLogOperationAsync(
                         logInfo, type, shortDirection, length, i => i.Logger.LogMessage(direction, message, payload));
                 }
