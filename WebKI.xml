@@ -195,7 +195,7 @@
   <HelpKINode Title="ChangeOriginatedAtSource event" Url="html/8A62612F.htm" />
   <HelpKINode Title="ChangeOriginatedAtTarget event" Url="html/4EB80E05.htm" />
   <HelpKINode Title="Children property">
-    <HelpKINode Title="CollectionNode(TElement).Children Property " Url="html/B7B50036.htm" />
+    <HelpKINode Title="CollectionNode(TMostDerived, TElement).Children Property " Url="html/58460036.htm" />
     <HelpKINode Title="INode.Children Property " Url="html/162F3ADE.htm" />
   </HelpKINode>
   <HelpKINode Title="ChildrenRetrievalPolicy enumeration" Url="html/B60F4F2.htm" />
@@ -210,8 +210,17 @@
     <HelpKINode Title="methods" Url="html/E45C5137.htm" />
     <HelpKINode Title="properties" Url="html/FE722720.htm" />
   </HelpKINode>
-  <HelpKINode Title="CollectionNode(Of TElement).Children property" Url="html/B7B50036.htm" />
-  <HelpKINode Title="CollectionNode(Of TElement).Item property" Url="html/724D2433.htm" />
+  <HelpKINode Title="CollectionNode(Of TMostDerived, TElement) class">
+    <HelpKINode Title="CollectionNode(TMostDerived, TElement) Class" Url="html/1B4F2B1D.htm" />
+    <HelpKINode Title="about CollectionNode(Of TMostDerived, TElement) class" Url="html/1B4F2B1D.htm" />
+    <HelpKINode Title="constructor" Url="html/E157FB06.htm" />
+    <HelpKINode Title="events" Url="html/DFAABFD2.htm" />
+    <HelpKINode Title="methods" Url="html/6FC15137.htm" />
+    <HelpKINode Title="properties" Url="html/5BCAB285.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CollectionNode(Of TMostDerived, TElement).Children property" Url="html/58460036.htm" />
+  <HelpKINode Title="CollectionNode(Of TMostDerived, TElement).CollectionNode constructor" Url="html/E157FB06.htm" />
+  <HelpKINode Title="CollectionNode(Of TMostDerived, TElement).Item property" Url="html/22F02433.htm" />
   <HelpKINode Title="CollectionNode&lt;TElement&gt; class">
     <HelpKINode Title="CollectionNode(TElement) Class" Url="html/BD7E2B1D.htm" />
     <HelpKINode Title="about CollectionNode&lt;TElement&gt; class" Url="html/BD7E2B1D.htm" />
@@ -219,8 +228,17 @@
     <HelpKINode Title="methods" Url="html/E45C5137.htm" />
     <HelpKINode Title="properties" Url="html/FE722720.htm" />
   </HelpKINode>
-  <HelpKINode Title="CollectionNode&lt;TElement&gt;.Children property" Url="html/B7B50036.htm" />
-  <HelpKINode Title="CollectionNode&lt;TElement&gt;.Item property" Url="html/724D2433.htm" />
+  <HelpKINode Title="CollectionNode&lt;TMostDerived, TElement&gt; class">
+    <HelpKINode Title="CollectionNode(TMostDerived, TElement) Class" Url="html/1B4F2B1D.htm" />
+    <HelpKINode Title="about CollectionNode&lt;TMostDerived, TElement&gt; class" Url="html/1B4F2B1D.htm" />
+    <HelpKINode Title="constructor" Url="html/E157FB06.htm" />
+    <HelpKINode Title="events" Url="html/DFAABFD2.htm" />
+    <HelpKINode Title="methods" Url="html/6FC15137.htm" />
+    <HelpKINode Title="properties" Url="html/5BCAB285.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CollectionNode&lt;TMostDerived, TElement&gt;.Children property" Url="html/58460036.htm" />
+  <HelpKINode Title="CollectionNode&lt;TMostDerived, TElement&gt;.CollectionNode constructor" Url="html/E157FB06.htm" />
+  <HelpKINode Title="CollectionNode&lt;TMostDerived, TElement&gt;.Item property" Url="html/22F02433.htm" />
   <HelpKINode Title="Combine method" Url="html/73F0F5BF.htm" />
   <HelpKINode Title="Command property" Url="html/5B32B57.htm" />
   <HelpKINode Title="ConnectionLost event">
@@ -261,7 +279,6 @@
   <HelpKINode Title="Consumer(Of TRoot).Dispose method" Url="html/817A3F2D.htm" />
   <HelpKINode Title="Consumer(Of TRoot).Root property" Url="html/F35B9A31.htm" />
   <HelpKINode Title="Consumer(Of TRoot).SendAsync method" Url="html/B5499501.htm" />
-  <HelpKINode Title="Consumer(Of TRoot).SendChangesAsync method" Url="html/C7CBA772.htm" />
   <HelpKINode Title="Consumer&lt;TRoot&gt; class">
     <HelpKINode Title="Consumer(TRoot) Class" Url="html/209188D0.htm" />
     <HelpKINode Title="about Consumer&lt;TRoot&gt; class" Url="html/209188D0.htm" />
@@ -275,7 +292,6 @@
   <HelpKINode Title="Consumer&lt;TRoot&gt;.Dispose method" Url="html/817A3F2D.htm" />
   <HelpKINode Title="Consumer&lt;TRoot&gt;.Root property" Url="html/F35B9A31.htm" />
   <HelpKINode Title="Consumer&lt;TRoot&gt;.SendAsync method" Url="html/B5499501.htm" />
-  <HelpKINode Title="Consumer&lt;TRoot&gt;.SendChangesAsync method" Url="html/C7CBA772.htm" />
   <HelpKINode Title="Convert method" Url="html/AA88B75C.htm" />
   <HelpKINode Title="Copy method" Url="html/67F5FE7F.htm" />
   <HelpKINode Title="CopyToEndContainer method" Url="html/6BE2FD0E.htm" />
@@ -733,7 +749,6 @@
     <HelpKINode Title="methods" Url="html/11080865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B6A1.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of T1, T2, T3, T4, T5, T6, TResult).Invoke method" Url="html/27FE7509.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, T4, T5, T6, TResult).InvokeAsync method" Url="html/34F19D0B.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, T4, T5, TResult) class">
     <HelpKINode Title="Function(T1, T2, T3, T4, T5, TResult) Class" Url="html/22B51A6C.htm" />
@@ -742,7 +757,6 @@
     <HelpKINode Title="methods" Url="html/11090865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B6A0.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of T1, T2, T3, T4, T5, TResult).Invoke method" Url="html/216B7509.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, T4, T5, TResult).InvokeAsync method" Url="html/4B7E9D0E.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, T4, TResult) class">
     <HelpKINode Title="Function(T1, T2, T3, T4, TResult) Class" Url="html/22B81A6C.htm" />
@@ -751,7 +765,6 @@
     <HelpKINode Title="methods" Url="html/110A0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69F.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of T1, T2, T3, T4, TResult).Invoke method" Url="html/F80750A.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, T4, TResult).InvokeAsync method" Url="html/D2F9DED.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, TResult) class">
     <HelpKINode Title="Function(T1, T2, T3, TResult) Class" Url="html/22B71A6C.htm" />
@@ -760,7 +773,6 @@
     <HelpKINode Title="methods" Url="html/110B0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69E.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of T1, T2, T3, TResult).Invoke method" Url="html/2BFD7509.htm" />
   <HelpKINode Title="Function(Of T1, T2, T3, TResult).InvokeAsync method" Url="html/A8CC9D0B.htm" />
   <HelpKINode Title="Function(Of T1, T2, TResult) class">
     <HelpKINode Title="Function(T1, T2, TResult) Class" Url="html/22B21A6C.htm" />
@@ -769,7 +781,6 @@
     <HelpKINode Title="methods" Url="html/110C0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69D.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of T1, T2, TResult).Invoke method" Url="html/1802750A.htm" />
   <HelpKINode Title="Function(Of T1, T2, TResult).InvokeAsync method" Url="html/25759DEE.htm" />
   <HelpKINode Title="Function(Of T1, TResult) class">
     <HelpKINode Title="Function(T1, TResult) Class" Url="html/22B11A6C.htm" />
@@ -778,7 +789,6 @@
     <HelpKINode Title="methods" Url="html/110D0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69C.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of T1, TResult).Invoke method" Url="html/137F750A.htm" />
   <HelpKINode Title="Function(Of T1, TResult).InvokeAsync method" Url="html/90929DED.htm" />
   <HelpKINode Title="Function(Of TResult) class">
     <HelpKINode Title="Function(TResult) Class" Url="html/22B41A6C.htm" />
@@ -787,7 +797,6 @@
     <HelpKINode Title="methods" Url="html/110E0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69B.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function(Of TResult).Invoke method" Url="html/FF84750A.htm" />
   <HelpKINode Title="Function(Of TResult).InvokeAsync method" Url="html/FDB39D0F.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, T4, T5, T6, TResult&gt; class">
     <HelpKINode Title="Function(T1, T2, T3, T4, T5, T6, TResult) Class" Url="html/22B61A6C.htm" />
@@ -796,7 +805,6 @@
     <HelpKINode Title="methods" Url="html/11080865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B6A1.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;T1, T2, T3, T4, T5, T6, TResult&gt;.Invoke method" Url="html/27FE7509.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, T4, T5, T6, TResult&gt;.InvokeAsync method" Url="html/34F19D0B.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, T4, T5, TResult&gt; class">
     <HelpKINode Title="Function(T1, T2, T3, T4, T5, TResult) Class" Url="html/22B51A6C.htm" />
@@ -805,7 +813,6 @@
     <HelpKINode Title="methods" Url="html/11090865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B6A0.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;T1, T2, T3, T4, T5, TResult&gt;.Invoke method" Url="html/216B7509.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, T4, T5, TResult&gt;.InvokeAsync method" Url="html/4B7E9D0E.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, T4, TResult&gt; class">
     <HelpKINode Title="Function(T1, T2, T3, T4, TResult) Class" Url="html/22B81A6C.htm" />
@@ -814,7 +821,6 @@
     <HelpKINode Title="methods" Url="html/110A0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69F.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;T1, T2, T3, T4, TResult&gt;.Invoke method" Url="html/F80750A.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, T4, TResult&gt;.InvokeAsync method" Url="html/D2F9DED.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, TResult&gt; class">
     <HelpKINode Title="Function(T1, T2, T3, TResult) Class" Url="html/22B71A6C.htm" />
@@ -823,7 +829,6 @@
     <HelpKINode Title="methods" Url="html/110B0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69E.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;T1, T2, T3, TResult&gt;.Invoke method" Url="html/2BFD7509.htm" />
   <HelpKINode Title="Function&lt;T1, T2, T3, TResult&gt;.InvokeAsync method" Url="html/A8CC9D0B.htm" />
   <HelpKINode Title="Function&lt;T1, T2, TResult&gt; class">
     <HelpKINode Title="Function(T1, T2, TResult) Class" Url="html/22B21A6C.htm" />
@@ -832,7 +837,6 @@
     <HelpKINode Title="methods" Url="html/110C0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69D.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;T1, T2, TResult&gt;.Invoke method" Url="html/1802750A.htm" />
   <HelpKINode Title="Function&lt;T1, T2, TResult&gt;.InvokeAsync method" Url="html/25759DEE.htm" />
   <HelpKINode Title="Function&lt;T1, TResult&gt; class">
     <HelpKINode Title="Function(T1, TResult) Class" Url="html/22B11A6C.htm" />
@@ -841,7 +845,6 @@
     <HelpKINode Title="methods" Url="html/110D0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69C.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;T1, TResult&gt;.Invoke method" Url="html/137F750A.htm" />
   <HelpKINode Title="Function&lt;T1, TResult&gt;.InvokeAsync method" Url="html/90929DED.htm" />
   <HelpKINode Title="Function&lt;TResult&gt; class">
     <HelpKINode Title="Function(TResult) Class" Url="html/22B41A6C.htm" />
@@ -850,7 +853,6 @@
     <HelpKINode Title="methods" Url="html/110E0865.htm" />
     <HelpKINode Title="properties" Url="html/8D31B69B.htm" />
   </HelpKINode>
-  <HelpKINode Title="Function&lt;TResult&gt;.Invoke method" Url="html/FF84750A.htm" />
   <HelpKINode Title="Function&lt;TResult&gt;.InvokeAsync method" Url="html/FDB39D0F.htm" />
   <HelpKINode Title="FunctionBase(Of TMostDerived) class">
     <HelpKINode Title="FunctionBase(TMostDerived) Class" Url="html/B329248A.htm" />
@@ -978,7 +980,6 @@
     <HelpKINode Title="properties" Url="html/9BA376FD.htm" />
   </HelpKINode>
   <HelpKINode Title="IFunction.Arguments property" Url="html/E8A95DF7.htm" />
-  <HelpKINode Title="IFunction.Invoke method" Url="html/255DF039.htm" />
   <HelpKINode Title="IFunction.InvokeAsync method" Url="html/82DCD54D.htm" />
   <HelpKINode Title="IFunction.Result property" Url="html/62643633.htm" />
   <HelpKINode Title="Ignore(Of T) method" Url="html/3ACFDB.htm" />
@@ -1081,16 +1082,6 @@
     <HelpKINode Title="properties" Url="html/F25BA95A.htm" />
   </HelpKINode>
   <HelpKINode Title="InvocationFailedException.Result property" Url="html/D04668AA.htm" />
-  <HelpKINode Title="Invoke method">
-    <HelpKINode Title="Function(T1, T2, T3, T4, T5, T6, TResult).Invoke Method " Url="html/27FE7509.htm" />
-    <HelpKINode Title="Function(T1, T2, T3, T4, T5, TResult).Invoke Method " Url="html/216B7509.htm" />
-    <HelpKINode Title="Function(T1, T2, T3, T4, TResult).Invoke Method " Url="html/F80750A.htm" />
-    <HelpKINode Title="Function(T1, T2, T3, TResult).Invoke Method " Url="html/2BFD7509.htm" />
-    <HelpKINode Title="Function(T1, T2, TResult).Invoke Method " Url="html/1802750A.htm" />
-    <HelpKINode Title="Function(T1, TResult).Invoke Method " Url="html/137F750A.htm" />
-    <HelpKINode Title="Function(TResult).Invoke Method " Url="html/FF84750A.htm" />
-    <HelpKINode Title="IFunction.Invoke Method " Url="html/255DF039.htm" />
-  </HelpKINode>
   <HelpKINode Title="InvokeAsync method">
     <HelpKINode Title="Function(T1, T2, T3, T4, T5, T6, TResult).InvokeAsync Method " Url="html/34F19D0B.htm" />
     <HelpKINode Title="Function(T1, T2, T3, T4, T5, TResult).InvokeAsync Method " Url="html/4B7E9D0E.htm" />
@@ -1177,7 +1168,7 @@
   </HelpKINode>
   <HelpKINode Title="Item property">
     <HelpKINode Title="Buffer.Item Property " Url="html/9A3A97A1.htm" />
-    <HelpKINode Title="CollectionNode(TElement).Item Property " Url="html/724D2433.htm" />
+    <HelpKINode Title="CollectionNode(TMostDerived, TElement).Item Property " Url="html/22F02433.htm" />
     <HelpKINode Title="INode.Item Property " Url="html/A2B0B7FA.htm" />
   </HelpKINode>
   <HelpKINode Title="Item1 property">
@@ -1298,7 +1289,9 @@
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.BooleanParameter class" Url="html/A3846A24.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.ChildrenRetrievalPolicy enumeration" Url="html/B60F4F2.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.CollectionNode(Of TElement) class" Url="html/BD7E2B1D.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.CollectionNode(Of TMostDerived, TElement) class" Url="html/1B4F2B1D.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.CollectionNode&lt;TElement&gt; class" Url="html/BD7E2B1D.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.CollectionNode&lt;TMostDerived, TElement&gt; class" Url="html/1B4F2B1D.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.Consumer(Of TRoot) class" Url="html/209188D0.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.Consumer&lt;TRoot&gt; class" Url="html/209188D0.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.DynamicFieldNode(Of TMostDerived) class" Url="html/C6A8309C.htm" />
@@ -2336,7 +2329,6 @@
   <HelpKINode Title="ScopeGuard&lt;T&gt;.Resource property" Url="html/D6F3DDD8.htm" />
   <HelpKINode Title="Seek method" Url="html/411DCF42.htm" />
   <HelpKINode Title="SendAsync method" Url="html/B5499501.htm" />
-  <HelpKINode Title="SendChangesAsync method" Url="html/C7CBA772.htm" />
   <HelpKINode Title="SendMessageAsync method" Url="html/58885BD5.htm" />
   <HelpKINode Title="SendOutOfFrameByteAsync method" Url="html/C6061264.htm" />
   <HelpKINode Title="Sequence field" Url="html/FCD1303C.htm" />
