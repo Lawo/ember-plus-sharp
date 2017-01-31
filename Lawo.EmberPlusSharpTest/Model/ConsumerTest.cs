@@ -16,6 +16,7 @@ namespace Lawo.EmberPlusSharp.Model
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Net.Sockets;
     using System.Reflection;
     using System.Runtime.Remoting.Metadata.W3cXsd2001;
     using System.Threading;
@@ -1390,6 +1391,35 @@ namespace Lawo.EmberPlusSharp.Model
                 true,
                 "Bug27Log.xml",
                 "false"));
+        }
+
+        /// <summary>Exposes <see href="https://github.com/Lawo/ember-plus-sharp/issues/33">Bug 33</see>.</summary>
+        [TestMethod]
+        [TestCategory("Manual")]
+        public void Bug33Test()
+        {
+            AsyncPump.Run(async () =>
+            {
+                var tcpClient = new TcpClient();
+                await tcpClient.ConnectAsync("localhost", 9000);
+                var stream = tcpClient.GetStream();
+                using (var client = new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync))
+                using (var consumer =
+                    await Consumer<EmptyDynamicRoot>.CreateAsync(client, 10000, ChildrenRetrievalPolicy.DirectOnly))
+                {
+                    foreach (var child in consumer.Root.DynamicChildren)
+                    {
+                        var node = child as INode;
+
+                        if (node != null)
+                        {
+                            node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
+                        }
+                    }
+
+                    await consumer.SendAsync();
+                }
+            });
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
