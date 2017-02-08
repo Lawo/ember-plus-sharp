@@ -37,7 +37,10 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 if (child.IsOnline)
                 {
-                    dynamicChildren.Add(child);
+                    if (!dynamicChildren.Contains(child))
+                    {
+                        dynamicChildren.Add(child);
+                    }
                 }
                 else
                 {

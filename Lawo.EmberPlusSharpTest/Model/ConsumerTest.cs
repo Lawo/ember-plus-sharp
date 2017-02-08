@@ -1393,35 +1393,6 @@ namespace Lawo.EmberPlusSharp.Model
                 "false"));
         }
 
-        /// <summary>Exposes <see href="https://github.com/Lawo/ember-plus-sharp/issues/33">Bug 33</see>.</summary>
-        [TestMethod]
-        [TestCategory("Manual")]
-        public void Bug33Test()
-        {
-            AsyncPump.Run(async () =>
-            {
-                var tcpClient = new TcpClient();
-                await tcpClient.ConnectAsync("localhost", 9000);
-                var stream = tcpClient.GetStream();
-                using (var client = new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync))
-                using (var consumer =
-                    await Consumer<EmptyDynamicRoot>.CreateAsync(client, 10000, ChildrenRetrievalPolicy.DirectOnly))
-                {
-                    foreach (var child in consumer.Root.DynamicChildren)
-                    {
-                        var node = child as INode;
-
-                        if (node != null)
-                        {
-                            node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
-                        }
-                    }
-
-                    await consumer.SendAsync();
-                }
-            });
-        }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static Task TestConsumerAfterFirstRequest<TRoot>(
@@ -2003,13 +1974,16 @@ namespace Lawo.EmberPlusSharp.Model
                         consumer.AutoSendInterval = this.Random.Next(100, 5000);
                         var root = consumer.Root;
                         Assert.IsNull(root.Node);
+                        Assert.AreEqual(0, ((INode)root).Children.Count);
                         Assert.AreEqual(ChildrenRetrievalPolicy.None, root.ChildrenRetrievalPolicy);
                         root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
                         await WaitForCompletion(consumer, delay);
                         Assert.IsNotNull(root.Node);
+                        Assert.AreEqual(1, ((INode)root).Children.Count);
                         Assert.AreEqual(ChildrenRetrievalPolicy.None, root.Node.ChildrenRetrievalPolicy);
                         root.Node.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All;
                         await WaitForCompletion(consumer, delay);
+                        Assert.AreEqual(1, ((INode)root).Children.Count);
                     }
                 },
                 null,

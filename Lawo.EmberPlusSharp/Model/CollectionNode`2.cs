@@ -62,7 +62,12 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 if (child.IsOnline)
                 {
-                    this.children.Add((TElement)child);
+                    var typedChild = (TElement)child;
+
+                    if (!this.children.Contains(typedChild))
+                    {
+                        this.children.Add(typedChild);
+                    }
                 }
                 else
                 {
