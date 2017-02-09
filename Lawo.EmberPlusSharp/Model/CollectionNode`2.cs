@@ -60,19 +60,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (!base.ChangeVisibility(child))
             {
-                if (child.IsOnline)
-                {
-                    var typedChild = (TElement)child;
-
-                    if (!this.children.Contains(typedChild))
-                    {
-                        this.children.Add(typedChild);
-                    }
-                }
-                else
-                {
-                    this.children.Remove((TElement)child);
-                }
+                VisibilityHelper.ChangeVisibility(this.children, (TElement)child);
             }
 
             return true;

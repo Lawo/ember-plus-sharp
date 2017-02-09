@@ -35,17 +35,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (!baseImpl(child))
             {
-                if (child.IsOnline)
-                {
-                    if (!dynamicChildren.Contains(child))
-                    {
-                        dynamicChildren.Add(child);
-                    }
-                }
-                else
-                {
-                    dynamicChildren.Remove(child);
-                }
+                VisibilityHelper.ChangeVisibility(dynamicChildren, child);
             }
 
             return true;

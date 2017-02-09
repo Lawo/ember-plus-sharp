@@ -60,18 +60,7 @@ namespace Lawo.EmberPlusSharp.Model
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal override bool ChangeVisibility(IElement child)
         {
-            if (child.IsOnline)
-            {
-                if (!this.observableChildren.Contains(child))
-                {
-                    this.observableChildren.Add(child);
-                }
-            }
-            else
-            {
-                this.observableChildren.Remove(child);
-            }
-
+            VisibilityHelper.ChangeVisibility(this.observableChildren, child);
             return base.ChangeVisibility(child);
         }
 
