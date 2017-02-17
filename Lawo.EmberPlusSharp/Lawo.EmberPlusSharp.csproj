@@ -183,6 +183,7 @@
     <Compile Include="Model\ValueWriter`1.cs" />
     <Compile Include="Model\ValueReader`1.cs" />
     <Compile Include="Model\VisibilityHelper.cs" />
+    <Compile Include="S101\ProviderStatus.cs" />
     <Compile Include="S101\EventInfo.cs" />
     <Compile Include="S101\LogNames.cs" />
     <Compile Include="Glow\GlowLogConverter.cs" />

@@ -103,6 +103,8 @@ namespace Lawo.EmberPlusSharp.S101
                     return new KeepAliveRequest();
                 case CommandType.KeepAliveResponse:
                     return new KeepAliveResponse();
+                case CommandType.ProviderStatus:
+                    return new ProviderStatus();
                 default:
                     throw new S101Exception("Unexpected Command.");
             }

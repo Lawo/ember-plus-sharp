@@ -19,6 +19,9 @@ namespace Lawo.EmberPlusSharp.S101
         KeepAliveRequest,
 
         /// <summary>Keep Alive Response.</summary>
-        KeepAliveResponse
+        KeepAliveResponse,
+
+        /// <summary>Provider Status.</summary>
+        ProviderStatus
     }
 }

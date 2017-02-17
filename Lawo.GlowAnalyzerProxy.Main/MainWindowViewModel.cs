@@ -258,6 +258,8 @@ namespace Lawo.GlowAnalyzerProxy.Main
         private const string ProviderToConsumer = "Provider to Consumer";
         private static readonly string KeepAliveRequestString = new KeepAliveRequest().ToString();
         private static readonly string KeepAliveResponseString = new KeepAliveResponse().ToString();
+        private static readonly string ProviderStatusPassiveString = new ProviderStatus(false).ToString();
+        private static readonly string ProviderStatusActiveString = new ProviderStatus(true).ToString();
 
         private static string ValidatePort(string value)
         {
@@ -294,6 +296,10 @@ namespace Lawo.GlowAnalyzerProxy.Main
             else if (type == KeepAliveResponseString)
             {
                 return "KA RSP";
+            }
+            else if ((type == ProviderStatusPassiveString) || (type == ProviderStatusActiveString))
+            {
+                return "PS";
             }
             else
             {
