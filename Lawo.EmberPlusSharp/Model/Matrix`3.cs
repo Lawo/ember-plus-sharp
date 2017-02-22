@@ -6,11 +6,12 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
-
+    using System.Linq;
     using Ember;
+    using Glow;
 
     /// <summary>Represents a matrix in the object tree accessible through
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
@@ -24,13 +25,6 @@ namespace Lawo.EmberPlusSharp.Model
         where TSource : Node<TSource>
         where TConnection : Node<TConnection>
     {
-        /// <inheritdoc/>
-        public MatrixType Type
-        {
-            get { return this.type; }
-            private set { this.SetValue(ref this.type, value); }
-        }
-
         /// <inheritdoc/>
         public int MaximumTotalConnects
         {
@@ -92,85 +86,135 @@ namespace Lawo.EmberPlusSharp.Model
         /// <inheritdoc/>
         INode IMatrix.Parameters => this.Parameters;
 
-        internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
+        internal sealed override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
-            ////this.AssertElementType(ElementType.Parameter, actualType);
+            if (this.RetrievalState.Equals(RetrievalState.None))
+            {
+                if (!this.isMatrixComplete)
+                {
+                    writer.WriteStartApplicationDefinedType(
+                        GlowElementCollection.Element.OuterId, GlowQualifiedMatrix.InnerNumber);
+                    writer.WriteValue(GlowQualifiedMatrix.Path.OuterId, this.NumberPath);
+                    writer.WriteStartApplicationDefinedType(
+                        GlowQualifiedMatrix.Children.OuterId, GlowElementCollection.InnerNumber);
+                    this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
+                    writer.WriteEndContainer();
+                    writer.WriteEndContainer();
+                }
 
-            ////ParameterType? valueType = null;
-            ////ParameterType? enumType = null;
-            ////ParameterType? typeType = null;
+                // TODO: Write GetDirectory request for parameters and labels, if present.
+            }
 
-            ////while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
-            ////{
-            ////    ParameterType? dummyType;
+            return true;
+        }
 
-            ////    switch (reader.GetContextSpecificOuterNumber())
-            ////    {
-            ////        case GlowParameterContents.Description.OuterNumber:
-            ////            this.Description = reader.AssertAndReadContentsAsString();
-            ////            break;
-            ////        case GlowParameterContents.Value.OuterNumber:
-            ////            if (!this.HasChanges)
-            ////            {
-            ////                this.SetValue(ref this.theValue, this.ReadValue(reader, out valueType), "Value");
-            ////            }
+        internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
+        {
+            this.AssertElementType(ElementType.Matrix, actualType);
+            var type = MatrixType.OneToN;
+            var addressingMode = MatrixAddressingMode.Linear;
 
-            ////            break;
-            ////        case GlowParameterContents.Minimum.OuterNumber:
-            ////            this.SetMinimum(this.ReadValue(reader, out dummyType));
-            ////            break;
-            ////        case GlowParameterContents.Maximum.OuterNumber:
-            ////            this.SetMaximum(this.ReadValue(reader, out dummyType));
-            ////            break;
-            ////        case GlowParameterContents.Access.OuterNumber:
-            ////            this.Access = this.ReadEnum<ParameterAccess>(reader, GlowParameterContents.Access.Name);
-            ////            break;
-            ////        case GlowParameterContents.Format.OuterNumber:
-            ////            this.Format = reader.AssertAndReadContentsAsString();
-            ////            break;
-            ////        case GlowParameterContents.Enumeration.OuterNumber:
-            ////            this.EnumMapCore = ReadEnumeration(reader);
-            ////            enumType = ParameterType.Enum;
-            ////            break;
-            ////        case GlowParameterContents.Factor.OuterNumber:
-            ////            this.FactorCore = ReadInt(reader, GlowParameterContents.Factor.Name);
-            ////            break;
-            ////        case GlowParameterContents.IsOnline.OuterNumber:
-            ////            this.IsOnline = reader.AssertAndReadContentsAsBoolean();
-            ////            break;
-            ////        case GlowParameterContents.Formula.OuterNumber:
-            ////            this.FormulaCore = reader.AssertAndReadContentsAsString();
-            ////            break;
-            ////        case GlowParameterContents.Step.OuterNumber:
-            ////            ReadInt(reader, GlowParameterContents.Step.Name);
-            ////            break;
-            ////        case GlowParameterContents.Default.OuterNumber:
-            ////            this.DefaultValue = this.ReadValue(reader, out dummyType);
-            ////            break;
-            ////        case GlowParameterContents.Type.OuterNumber:
-            ////            typeType = this.ReadEnum<ParameterType>(reader, GlowParameterContents.Type.Name);
-            ////            break;
-            ////        case GlowParameterContents.StreamIdentifier.OuterNumber:
-            ////            this.StreamIdentifier = ReadInt(reader, GlowParameterContents.StreamIdentifier.Name);
-            ////            break;
-            ////        case GlowParameterContents.EnumMap.OuterNumber:
-            ////            this.EnumMapCore = this.ReadEnumMap(reader);
-            ////            enumType = ParameterType.Enum;
-            ////            break;
-            ////        case GlowParameterContents.StreamDescriptor.OuterNumber:
-            ////            this.StreamDescriptor = this.ReadStreamDescriptor(reader);
-            ////            break;
-            ////        case GlowParameterContents.SchemaIdentifiers.OuterNumber:
-            ////            this.ReadSchemaIdentifiers(reader);
-            ////            break;
-            ////        default:
-            ////            reader.Skip();
-            ////            break;
-            ////    }
-            ////}
+            while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+            {
+                switch (reader.GetContextSpecificOuterNumber())
+                {
+                    case GlowMatrixContents.Description.OuterNumber:
+                        this.Description = reader.AssertAndReadContentsAsString();
+                        break;
+                    case GlowMatrixContents.Type.OuterNumber:
+                        type = this.ReadEnum<MatrixType>(reader, GlowMatrixContents.Type.Name);
+                        break;
+                    case GlowMatrixContents.AddressingMode.OuterNumber:
+                        addressingMode =
+                            this.ReadEnum<MatrixAddressingMode>(reader, GlowMatrixContents.AddressingMode.Name);
+                        break;
+                    case GlowMatrixContents.TargetCount.OuterNumber:
+                        this.Targets =
+                            Enumerable.Range(0, this.ReadInt(reader, GlowMatrixContents.TargetCount.Name)).ToList();
+                        break;
+                    case GlowMatrixContents.SourceCount.OuterNumber:
+                        this.Sources =
+                            Enumerable.Range(0, this.ReadInt(reader, GlowMatrixContents.SourceCount.Name)).ToList();
+                        break;
+                    case GlowMatrixContents.MaximumTotalConnects.OuterNumber:
+                        this.MaximumTotalConnects = this.ReadInt(reader, GlowMatrixContents.MaximumTotalConnects.Name);
+                        break;
+                    case GlowMatrixContents.MaximumConnectsPerTarget.OuterNumber:
+                        this.MaximumConnectsPerTarget =
+                            this.ReadInt(reader, GlowMatrixContents.MaximumConnectsPerTarget.Name);
+                        break;
+                    case GlowMatrixContents.ParametersLocation.OuterNumber:
+                        var parametersLocation = this.ReadParametersLocation(reader);
+                        break;
+                    case GlowMatrixContents.GainParameterNumber.OuterNumber:
+                        var gainParameterNumber = this.ReadInt(reader, GlowMatrixContents.GainParameterNumber.Name);
+                        break;
+                    case GlowMatrixContents.Labels.OuterNumber:
+                        var labels = ReadLabels(reader);
+                        break;
+                    case GlowMatrixContents.SchemaIdentifiers.OuterNumber:
+                        this.ReadSchemaIdentifiers(reader);
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
 
-            ////this.SetFinalTytpe(valueType, enumType, typeType);
+            if ((this.Targets != null) && (this.Sources != null))
+            {
+                this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
+
+                if (this.MaximumTotalConnects == 0)
+                {
+                    this.MaximumTotalConnects =
+                        GetMaximumTotalConnects(type, this.Targets.Count, this.Sources.Count);
+                }
+
+                if (this.MaximumConnectsPerTarget == 0)
+                {
+                    this.MaximumConnectsPerTarget = type == MatrixType.NToN ? this.Sources.Count : 1;
+                }
+            }
+
             return this.RetrievalState;
+        }
+
+        internal sealed override void ReadAdditionalFields(EmberReader reader)
+        {
+            switch (reader.GetContextSpecificOuterNumber())
+            {
+                case GlowMatrix.Targets.OuterNumber:
+                    reader.AssertInnerNumber(GlowTargetCollection.InnerNumber);
+                    this.Targets = this.ReadSignals(
+                        reader,
+                        this.Targets,
+                        GlowTargetCollection.Target.OuterNumber,
+                        GlowTarget.InnerNumber,
+                        GlowTarget.Number.OuterNumber,
+                        GlowTarget.Number.Name);
+                    this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
+                    this.isMatrixComplete = true;
+                    break;
+                case GlowMatrix.Sources.OuterNumber:
+                    reader.AssertInnerNumber(GlowSourceCollection.InnerNumber);
+                    this.Sources = this.ReadSignals(
+                        reader,
+                        this.Sources,
+                        GlowSourceCollection.Source.OuterNumber,
+                        GlowSource.InnerNumber,
+                        GlowSource.Number.OuterNumber,
+                        GlowSource.Number.Name);
+                    this.isMatrixComplete = true;
+                    break;
+                case GlowMatrix.Connections.OuterNumber:
+                    this.ReadConnections(reader);
+                    this.isMatrixComplete = true;
+                    break;
+                default:
+                    reader.Skip();
+                    break;
+            }
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
@@ -201,19 +245,262 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private MatrixType type;
+        private static IReadOnlyList<KeyValuePair<int[], string>> ReadLabels(EmberReader reader)
+        {
+            reader.AssertInnerNumber(GlowLabelCollection.InnerNumber);
+            var result = new List<KeyValuePair<int[], string>>();
+
+            while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+            {
+                switch (reader.GetContextSpecificOuterNumber())
+                {
+                    case GlowLabelCollection.Label.OuterNumber:
+                        reader.AssertInnerNumber(GlowLabel.InnerNumber);
+
+                        int[] basePath = null;
+                        string description = null;
+
+                        while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+                        {
+                            switch (reader.GetContextSpecificOuterNumber())
+                            {
+                                case GlowLabel.BasePath.OuterNumber:
+                                    basePath = reader.AssertAndReadContentsAsInt32Array();
+                                    break;
+                                case GlowLabel.Description.OuterNumber:
+                                    description = reader.AssertAndReadContentsAsString();
+                                    break;
+                                default:
+                                    reader.Skip();
+                                    break;
+                            }
+                        }
+
+                        if ((basePath != null) && (description != null))
+                        {
+                            result.Add(new KeyValuePair<int[], string>(basePath, description));
+                        }
+
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        private static int GetMaximumTotalConnects(MatrixType type, int targetCount, int sourceCount)
+        {
+            switch (type)
+            {
+                case MatrixType.OneToN:
+                    return targetCount;
+                case MatrixType.OneToOne:
+                    return Math.Min(sourceCount, targetCount);
+                default:
+                    return targetCount * sourceCount;
+            }
+        }
+
+        private static void Insert(ObservableCollection<int> existingSources, int[] sources, bool replace)
+        {
+            Array.Sort(sources);
+            int index = 0;
+
+            foreach (var source in sources)
+            {
+                int? existingSource = null;
+
+                while ((index < existingSources.Count) && ((existingSource = existingSources[index]) < source))
+                {
+                    if (replace)
+                    {
+                        existingSources.RemoveAt(index);
+                    }
+                    else
+                    {
+                        ++index;
+                    }
+                }
+
+                if (existingSource != source)
+                {
+                    existingSources.Insert(index, source);
+                }
+
+                ++index;
+            }
+        }
+
         private int maximumTotalConnects;
         private int maximumConnectsPerTarget;
         private MatrixParameters<TTarget, TSource, TConnection> parameters;
         private int? gainParameterNumber;
         private IReadOnlyList<KeyValuePair<string, MatrixLabels>> labels;
+        private bool isMatrixComplete;
         private IReadOnlyList<int> targets;
         private IReadOnlyList<int> sources;
         private IReadOnlyDictionary<int, ObservableCollection<int>> connections;
 
         private Matrix()
-            : base(RetrievalState.Complete)
+            : base(RetrievalState.None)
         {
+        }
+
+        private enum MatrixType
+        {
+            OneToN,
+            OneToOne,
+            NToN
+        }
+
+        private enum MatrixAddressingMode
+        {
+            Linear,
+            Nonlinear,
+        }
+
+        private enum ConnectionOperation
+        {
+            Absolute,
+            Connect,
+            Disconnect
+        }
+
+        private enum ConnectionDisposition
+        {
+            Tally,
+            Modified,
+            Pending,
+            Locked
+        }
+
+        private int[] ReadParametersLocation(EmberReader reader)
+        {
+            if (reader.InnerNumber == InnerNumber.RelativeObjectIdentifier)
+            {
+                return reader.ReadContentsAsInt32Array();
+            }
+            else
+            {
+                var path = new int[this.NumberPath.Length + 1];
+                Array.Copy(this.NumberPath, path, this.NumberPath.Length);
+                path[this.NumberPath.Length] = this.ReadInt(reader, GlowMatrixContents.ParametersLocation.Name);
+                return path;
+            }
+        }
+
+        private IReadOnlyList<int> ReadSignals(
+            EmberReader reader,
+            IReadOnlyList<int> signals,
+            int outerNumber,
+            int innerNumber,
+            int numberOuterNumber,
+            string numberName)
+        {
+            List<int> result = new List<int>();
+
+            while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+            {
+                if (reader.GetContextSpecificOuterNumber() == outerNumber)
+                {
+                    reader.AssertInnerNumber(innerNumber);
+
+                    while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+                    {
+                        if (reader.GetContextSpecificOuterNumber() == numberOuterNumber)
+                        {
+                            result.Add(this.ReadInt(reader, numberName));
+                        }
+                        else
+                        {
+                            reader.Skip();
+                        }
+                    }
+                }
+                else
+                {
+                    reader.Skip();
+                }
+            }
+
+            if (signals.Count != result.Count)
+            {
+                throw new ModelException("Inconsistent source or target counts in matrix.");
+            }
+
+            return result;
+        }
+
+        private void ReadConnections(EmberReader reader)
+        {
+            reader.AssertInnerNumber(GlowConnectionCollection.InnerNumber);
+
+            while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+            {
+                switch (reader.GetContextSpecificOuterNumber())
+                {
+                    case GlowConnectionCollection.Connection.OuterNumber:
+                        reader.AssertInnerNumber(GlowConnection.InnerNumber);
+                        int? target = null;
+                        int[] connectedSources = new int[0];
+                        ConnectionOperation operation = ConnectionOperation.Absolute;
+                        ConnectionDisposition disposition = ConnectionDisposition.Tally;
+
+                        while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
+                        {
+                            switch (reader.GetContextSpecificOuterNumber())
+                            {
+                                case GlowConnection.Target.OuterNumber:
+                                    target = this.ReadInt(reader, GlowConnection.Target.Name);
+                                    break;
+                                case GlowConnection.Sources.OuterNumber:
+                                    connectedSources = reader.AssertAndReadContentsAsInt32Array();
+                                    break;
+                                case GlowConnection.Operation.OuterNumber:
+                                    operation =
+                                        this.ReadEnum<ConnectionOperation>(reader, GlowConnection.Operation.Name);
+                                    break;
+                                case GlowConnection.Disposition.OuterNumber:
+                                    disposition =
+                                        this.ReadEnum<ConnectionDisposition>(reader, GlowConnection.Disposition.Name);
+                                    break;
+                                default:
+                                    reader.Skip();
+                                    break;
+                            }
+                        }
+
+                        if (target.HasValue && (disposition != ConnectionDisposition.Pending))
+                        {
+                            var existingConnectedSources = this.Connections[target.Value];
+
+                            switch (operation)
+                            {
+                                case ConnectionOperation.Absolute:
+                                    Insert(existingConnectedSources, connectedSources, true);
+                                    break;
+                                case ConnectionOperation.Connect:
+                                    Insert(existingConnectedSources, connectedSources, false);
+                                    break;
+                                case ConnectionOperation.Disconnect:
+                                    foreach (var source in connectedSources)
+                                    {
+                                        existingConnectedSources.Remove(source);
+                                    }
+
+                                    break;
+                            }
+                        }
+
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
         }
     }
 }

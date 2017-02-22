@@ -11,25 +11,32 @@ namespace Lawo.EmberPlusSharp.Model
 
     /// <summary>Provides the common interface for all matrices in the object tree accessible through
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
-    /// <remarks>Members for which the provider does not define a value are equal to <c>null</c>.</remarks>
+    /// <remarks>Contrary to what might be expected from the
+    /// <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>, the <see cref="MaximumTotalConnects"/>,
+    /// <see cref="MaximumConnectsPerTarget"/>, <see cref="Targets"/> and <see cref="Sources"/> properties offer
+    /// sensible values for <b>all</b> matrix types and addressing modes. Software therefore never needs to consider the
+    /// values of the redundant <i>type</i> and <i>addressingMode</i> fields, which is why they are not available as
+    /// properties.</remarks>
     public interface IMatrix : IElementWithSchemas
     {
-        /// <summary>Gets <b>type</b>.</summary>
-        MatrixType Type { get; }
-
         /// <summary>Gets <b>maximumTotalConnects</b>.</summary>
+        /// <remarks>Is never 0, contains the correct number for all matrix types.</remarks>
         int MaximumTotalConnects { get; }
 
         /// <summary>Gets <b>maximumConnectsPerTarget</b>.</summary>
+        /// <remarks>Is never 0, contains the correct number for all matrix types.</remarks>
         int MaximumConnectsPerTarget { get; }
 
         /// <summary>Gets the parameters associated with the matrix.</summary>
+        /// <remarks>Is <c>null</c> if the provider does send the <i>parametersLocation</i> field.</remarks>
         INode Parameters { get; }
 
         /// <summary>Gets <b>gainParameterNumber</b>.</summary>
+        /// <remarks>Is <c>null</c> if the provider does send the <i>parametersLocation</i> field.</remarks>
         int? GainParameterNumber { get; }
 
         /// <summary>Gets <b>labels</b></summary>
+        /// <remarks>Is <c>null</c> if the provider does send the <i>labels</i> field.</remarks>
         IReadOnlyList<KeyValuePair<string, MatrixLabels>> Labels { get; }
 
         /// <summary>Gets <b>targets</b>.</summary>

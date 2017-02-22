@@ -8,7 +8,7 @@ namespace Lawo.EmberPlusSharp.Model
 {
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>Represents a label set of a matrix.</summary>
+    /// <summary>Represents the parameters of a matrix.</summary>
     /// <typeparam name="TTarget">The type of the node containing the parameters of a single target.</typeparam>
     /// <typeparam name="TSource">The type of the node containing the parameters of a single source.</typeparam>
     /// <typeparam name="TConnection">The type of the node containing the parameters of a single connection.</typeparam>

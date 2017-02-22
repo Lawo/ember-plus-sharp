@@ -126,7 +126,6 @@
     <Compile Include="Model\InvocationFailedException.cs" />
     <Compile Include="Model\RetrieveDetailsChangeStatus.cs" />
     <Compile Include="Model\IValueReader.cs" />
-    <Compile Include="Model\MatrixAddressingMode.cs" />
     <Compile Include="Model\MatrixParameters`3.cs" />
     <Compile Include="Model\MatrixLabels.cs" />
     <Compile Include="Model\NodeBase`1.cs" />
@@ -143,7 +142,6 @@
     <Compile Include="Model\DynamicFunction.cs" />
     <Compile Include="Model\DynamicResult.cs" />
     <Compile Include="Model\Matrix`3.cs" />
-    <Compile Include="Model\MatrixType.cs" />
     <Compile Include="Model\Result`5.cs" />
     <Compile Include="Model\Result`6.cs" />
     <Compile Include="Model\ShadowNode.cs" />
