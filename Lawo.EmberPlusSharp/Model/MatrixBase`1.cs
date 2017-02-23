@@ -99,12 +99,13 @@ namespace Lawo.EmberPlusSharp.Model
                     this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
                     writer.WriteEndContainer();
                     writer.WriteEndContainer();
+                    return true;
                 }
 
                 // TODO: Write GetDirectory request for parameters and labels, if present.
             }
 
-            return true;
+            return false;
         }
 
         internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
@@ -179,9 +180,9 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
-        internal sealed override void ReadAdditionalFields(EmberReader reader)
+        internal sealed override void ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
         {
-            switch (reader.GetContextSpecificOuterNumber())
+            switch (contextSpecificOuterNumber)
             {
                 case GlowMatrix.Targets.OuterNumber:
                     reader.AssertInnerNumber(GlowTargetCollection.InnerNumber);

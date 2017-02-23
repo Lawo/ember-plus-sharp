@@ -153,6 +153,10 @@ namespace Lawo.EmberPlusSharp.Model
                         isEmpty = false;
                         this.ReadChild(reader, ElementType.Function);
                         break;
+                    case GlowMatrix.InnerNumber:
+                        isEmpty = false;
+                        this.ReadChild(reader, ElementType.Matrix);
+                        break;
                     default:
                         reader.Skip();
                         break;
@@ -325,7 +329,7 @@ namespace Lawo.EmberPlusSharp.Model
                         }
                         else
                         {
-                            child.ReadAdditionalFields(reader);
+                            child.ReadAdditionalField(reader, contextSpecificOuterNumber);
                         }
                     }
                 }

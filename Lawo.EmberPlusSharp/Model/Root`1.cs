@@ -102,6 +102,10 @@ namespace Lawo.EmberPlusSharp.Model
                         isEmpty = false;
                         this.ReadChild(reader, ElementType.Function);
                         break;
+                    case GlowMatrix.InnerNumber:
+                        isEmpty = false;
+                        this.ReadChild(reader, ElementType.Matrix);
+                        break;
                     case GlowQualifiedParameter.InnerNumber:
                         isEmpty = false;
                         this.ReadQualifiedChild(reader, ElementType.Parameter);
@@ -113,6 +117,10 @@ namespace Lawo.EmberPlusSharp.Model
                     case GlowQualifiedFunction.InnerNumber:
                         isEmpty = false;
                         this.ReadQualifiedChild(reader, ElementType.Function);
+                        break;
+                    case GlowQualifiedMatrix.InnerNumber:
+                        isEmpty = false;
+                        this.ReadQualifiedChild(reader, ElementType.Matrix);
                         break;
                     default:
                         reader.Skip();

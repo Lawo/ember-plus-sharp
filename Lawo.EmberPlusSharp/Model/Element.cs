@@ -238,7 +238,7 @@ namespace Lawo.EmberPlusSharp.Model
             throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
         }
 
-        internal virtual void ReadAdditionalFields(EmberReader reader) => reader.Skip();
+        internal virtual void ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber) => reader.Skip();
 
         /// <summary>Recursively updates the state of all children and returns the state of this element.</summary>
         /// <remarks>Only the children with a state not equal to <see cref="Model.RetrievalState.Verified"/> are
