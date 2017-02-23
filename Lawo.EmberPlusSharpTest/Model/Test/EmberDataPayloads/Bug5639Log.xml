@@ -52,12 +52,12 @@
         <RootElement type="Node">
           <number type="Integer">2</number>
           <children type="ElementCollection">
-            <Element type="Matrix">
-              <number type="Integer">75757</number>
-              <contents type="Set">
-                <identifier type="UTF8String">_3e8</identifier>
-                <description type="UTF8String">Inputs to Monitors</description>
-              </contents>
+            <Element type="A-4711">
+              <C-0 type="Integer">75757</C-0>
+              <C-1 type="Set">
+                <C-0 type="UTF8String">_3e8</C-0>
+                <C-1 type="UTF8String">Inputs to Monitors</C-1>
+              </C-1>
             </Element>
           </children>
         </RootElement>
