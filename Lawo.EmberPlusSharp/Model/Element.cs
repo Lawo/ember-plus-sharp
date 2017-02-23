@@ -84,6 +84,10 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 return typeof(DynamicFunction);
             }
+            else if (type == typeof(IMatrix))
+            {
+                return typeof(DynamicMatrix);
+            }
             else if (IsElement(type))
             {
                 return type;

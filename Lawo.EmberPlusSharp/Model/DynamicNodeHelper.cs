@@ -25,8 +25,10 @@ namespace Lawo.EmberPlusSharp.Model
                     return DynamicParameter.ReadContents(reader, actualType, context, out childRetrievalState);
                 case ElementType.Node:
                     return DynamicNode.ReadContents(reader, actualType, context, out childRetrievalState);
-                default:
+                case ElementType.Function:
                     return DynamicFunction.ReadContents(reader, actualType, context, out childRetrievalState);
+                default:
+                    return DynamicMatrix.ReadContents(reader, actualType, context, out childRetrievalState);
             }
         }
 
