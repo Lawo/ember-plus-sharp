@@ -194,7 +194,6 @@ namespace Lawo.EmberPlusSharp.Model
                         GlowTarget.Number.OuterNumber,
                         GlowTarget.Number.Name);
                     this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
-                    this.isMatrixComplete = true;
                     break;
                 case GlowMatrix.Sources.OuterNumber:
                     reader.AssertInnerNumber(GlowSourceCollection.InnerNumber);
@@ -205,7 +204,6 @@ namespace Lawo.EmberPlusSharp.Model
                         GlowSource.InnerNumber,
                         GlowSource.Number.OuterNumber,
                         GlowSource.Number.Name);
-                    this.isMatrixComplete = true;
                     break;
                 case GlowMatrix.Connections.OuterNumber:
                     this.ReadConnections(reader);
