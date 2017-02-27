@@ -329,7 +329,7 @@ namespace Lawo.EmberPlusSharp.Model
                         }
                         else
                         {
-                            child.ReadAdditionalField(reader, contextSpecificOuterNumber);
+                            childRetrievalState = child.ReadAdditionalField(reader, contextSpecificOuterNumber);
                         }
                     }
                 }

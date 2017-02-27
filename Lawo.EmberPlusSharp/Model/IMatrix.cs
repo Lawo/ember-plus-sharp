@@ -27,17 +27,17 @@ namespace Lawo.EmberPlusSharp.Model
         /// <remarks>Is never 0, contains the correct number for all matrix types.</remarks>
         int MaximumConnectsPerTarget { get; }
 
-        /// <summary>Gets the parameters associated with the matrix.</summary>
+        /// <summary>Gets the number path of the parameters associated with the matrix.</summary>
         /// <remarks>Is <c>null</c> if the provider does send the <i>parametersLocation</i> field.</remarks>
-        INode Parameters { get; }
+        IReadOnlyList<int> ParametersLocation { get; }
 
         /// <summary>Gets <b>gainParameterNumber</b>.</summary>
-        /// <remarks>Is <c>null</c> if the provider does send the <i>parametersLocation</i> field.</remarks>
+        /// <remarks>Is <c>null</c> if the provider does send the <i>gainParameterNumber</i> field.</remarks>
         int? GainParameterNumber { get; }
 
         /// <summary>Gets <b>labels</b></summary>
         /// <remarks>Is <c>null</c> if the provider does send the <i>labels</i> field.</remarks>
-        IReadOnlyList<KeyValuePair<string, MatrixLabels>> Labels { get; }
+        IReadOnlyList<MatrixLabel> Labels { get; }
 
         /// <summary>Gets <b>targets</b>.</summary>
         /// <remarks>Is never <c>null</c>, contains the target numbers for linear and nonlinear matrices.</remarks>

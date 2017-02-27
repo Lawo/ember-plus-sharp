@@ -110,6 +110,7 @@
     <Compile Include="Model\InvocationCollection.cs" />
     <Compile Include="Model\IStreamedParameter.cs" />
     <Compile Include="Model\IStreamedParameterCollection.cs" />
+    <Compile Include="Model\MatrixLabel.cs" />
     <Compile Include="Model\MatrixBase`1.cs" />
     <Compile Include="Model\DynamicMatrix.cs" />
     <Compile Include="Model\RetrievalState.cs" />
@@ -143,7 +144,7 @@
     <Compile Include="Model\FunctionBase`1.cs" />
     <Compile Include="Model\DynamicFunction.cs" />
     <Compile Include="Model\DynamicResult.cs" />
-    <Compile Include="Model\Matrix`3.cs" />
+    <Compile Include="Model\Matrix.cs" />
     <Compile Include="Model\Result`5.cs" />
     <Compile Include="Model\Result`6.cs" />
     <Compile Include="Model\ShadowNode.cs" />

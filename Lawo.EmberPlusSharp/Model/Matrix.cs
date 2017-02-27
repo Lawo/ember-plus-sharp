@@ -6,10 +6,13 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
-    internal sealed class DynamicMatrix :
-        MatrixBase<DynamicMatrix>
+    /// <summary>Represents a matrix in the object tree accessible through
+    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
+    /// <threadsafety static="true" instance="false"/>
+    public sealed class Matrix :
+        MatrixBase<Matrix>
     {
-        private DynamicMatrix()
+        private Matrix()
         {
         }
     }

@@ -9,7 +9,6 @@ namespace Lawo.EmberPlusSharp.Model
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Ember;
     using Glow;
@@ -38,6 +37,13 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <inheritdoc/>
+        public IReadOnlyList<int> ParametersLocation
+        {
+            get { return this.parametersLocation; }
+            private set { this.SetValue(ref this.parametersLocation, value); }
+        }
+
+        /// <inheritdoc/>
         public int? GainParameterNumber
         {
             get { return this.gainParameterNumber; }
@@ -45,7 +51,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <inheritdoc/>
-        public IReadOnlyList<KeyValuePair<string, MatrixLabels>> Labels
+        public IReadOnlyList<MatrixLabel> Labels
         {
             get { return this.labels; }
             private set { this.SetValue(ref this.labels, value); }
@@ -74,33 +80,24 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "Required property is provided by subclasses.")]
-        INode IMatrix.Parameters => this.GetParameters();
-
         internal MatrixBase()
             : base(RetrievalState.None)
         {
         }
 
-        internal abstract INode GetParameters();
-
         internal sealed override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
             if (this.RetrievalState.Equals(RetrievalState.None))
             {
-                if (!this.isMatrixComplete)
-                {
-                    writer.WriteStartApplicationDefinedType(
-                        GlowElementCollection.Element.OuterId, GlowQualifiedMatrix.InnerNumber);
-                    writer.WriteValue(GlowQualifiedMatrix.Path.OuterId, this.NumberPath);
-                    writer.WriteStartApplicationDefinedType(
-                        GlowQualifiedMatrix.Children.OuterId, GlowElementCollection.InnerNumber);
-                    this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
-                    writer.WriteEndContainer();
-                    writer.WriteEndContainer();
-                    return true;
-                }
+                writer.WriteStartApplicationDefinedType(
+                    GlowElementCollection.Element.OuterId, GlowQualifiedMatrix.InnerNumber);
+                writer.WriteValue(GlowQualifiedMatrix.Path.OuterId, this.NumberPath);
+                writer.WriteStartApplicationDefinedType(
+                    GlowQualifiedMatrix.Children.OuterId, GlowElementCollection.InnerNumber);
+                this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
+                writer.WriteEndContainer();
+                writer.WriteEndContainer();
+                return true;
 
                 // TODO: Write GetDirectory request for parameters and labels, if present.
             }
@@ -144,13 +141,13 @@ namespace Lawo.EmberPlusSharp.Model
                             this.ReadInt(reader, GlowMatrixContents.MaximumConnectsPerTarget.Name);
                         break;
                     case GlowMatrixContents.ParametersLocation.OuterNumber:
-                        var parametersLocation = this.ReadParametersLocation(reader);
+                        this.ParametersLocation = this.ReadParametersLocation(reader);
                         break;
                     case GlowMatrixContents.GainParameterNumber.OuterNumber:
-                        var gainParameterNumber = this.ReadInt(reader, GlowMatrixContents.GainParameterNumber.Name);
+                        this.GainParameterNumber = this.ReadInt(reader, GlowMatrixContents.GainParameterNumber.Name);
                         break;
                     case GlowMatrixContents.Labels.OuterNumber:
-                        var labels = ReadLabels(reader);
+                        this.Labels = ReadLabels(reader);
                         break;
                     case GlowMatrixContents.SchemaIdentifiers.OuterNumber:
                         this.ReadSchemaIdentifiers(reader);
@@ -180,7 +177,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
-        internal sealed override void ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
+        internal sealed override RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
         {
             switch (contextSpecificOuterNumber)
             {
@@ -207,12 +204,14 @@ namespace Lawo.EmberPlusSharp.Model
                     break;
                 case GlowMatrix.Connections.OuterNumber:
                     this.ReadConnections(reader);
-                    this.isMatrixComplete = true;
+                    this.RetrievalState = RetrievalState.Complete;
                     break;
                 default:
                     reader.Skip();
                     break;
             }
+
+            return this.RetrievalState;
         }
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
@@ -243,10 +242,10 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static IReadOnlyList<KeyValuePair<int[], string>> ReadLabels(EmberReader reader)
+        private static IReadOnlyList<MatrixLabel> ReadLabels(EmberReader reader)
         {
             reader.AssertInnerNumber(GlowLabelCollection.InnerNumber);
-            var result = new List<KeyValuePair<int[], string>>();
+            var result = new List<MatrixLabel>();
 
             while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
             {
@@ -276,7 +275,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                         if ((basePath != null) && (description != null))
                         {
-                            result.Add(new KeyValuePair<int[], string>(basePath, description));
+                            result.Add(new MatrixLabel(basePath, description));
                         }
 
                         break;
@@ -334,9 +333,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         private int maximumTotalConnects;
         private int maximumConnectsPerTarget;
+        private IReadOnlyList<int> parametersLocation;
         private int? gainParameterNumber;
-        private IReadOnlyList<KeyValuePair<string, MatrixLabels>> labels;
-        private bool isMatrixComplete;
+        private IReadOnlyList<MatrixLabel> labels;
         private IReadOnlyList<int> targets;
         private IReadOnlyList<int> sources;
         private IReadOnlyDictionary<int, ObservableCollection<int>> connections;
