@@ -6,19 +6,23 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>Represents a matrix label entry.</summary>
     /// <threadsafety static="true" instance="false"/>
+    [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "Default equality implementation is fine.")]
     public struct MatrixLabel
     {
         /// <summary>Gets <c>basePath</c>.</summary>
-        public int[] BasePath { get; }
+        public IReadOnlyList<int> BasePath { get; }
 
         /// <summary>Gets <c>description</c>.</summary>
         public string Description { get; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal MatrixLabel(int[] basePath, string description)
+        internal MatrixLabel(IReadOnlyList<int> basePath, string description)
         {
             this.BasePath = basePath;
             this.Description = description;
