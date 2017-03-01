@@ -9,6 +9,7 @@ namespace Lawo.EmberPlusSharp.Model
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Ember;
     using Glow;
@@ -177,6 +178,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
         {
             switch (contextSpecificOuterNumber)

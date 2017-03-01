@@ -6,6 +6,7 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
+    using System;
     using System.Collections.Generic;
 
     using Ember;
@@ -55,6 +56,12 @@ namespace Lawo.EmberPlusSharp.Model
                     this.noDetailsRetrievalState = value;
                 }
             }
+        }
+
+        internal override RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
+        {
+            reader.Skip();
+            return this.RetrievalState;
         }
 
         internal override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)

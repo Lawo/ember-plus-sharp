@@ -206,6 +206,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal abstract RetrievalState ReadContents(EmberReader reader, ElementType actualType);
 
+        internal abstract RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber);
+
         /// <summary>Recursively reads the children of an element as they appear in the message payload and returns
         /// the state of this element.</summary>
         /// <remarks>
@@ -236,12 +238,6 @@ namespace Lawo.EmberPlusSharp.Model
             const string Format =
                 "The path of a qualified element attempts to address a direct or indirect child of the element with the path {0}.";
             throw new ModelException(string.Format(CultureInfo.InvariantCulture, Format, this.GetPath()));
-        }
-
-        internal virtual RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
-        {
-            reader.Skip();
-            return RetrievalState.Complete;
         }
 
         /// <summary>Recursively updates the state of all children and returns the state of this element.</summary>

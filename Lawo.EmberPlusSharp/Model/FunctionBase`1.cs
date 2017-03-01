@@ -89,6 +89,12 @@ namespace Lawo.EmberPlusSharp.Model
             return RetrievalState.Complete;
         }
 
+        internal sealed override RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
+        {
+            reader.Skip();
+            return RetrievalState.Complete;
+        }
+
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)
