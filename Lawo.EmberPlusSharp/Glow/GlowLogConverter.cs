@@ -266,41 +266,17 @@ namespace Lawo.EmberPlusSharp.Glow
                     switch (propertyName)
                     {
                         case nameof(IParameter.EnumMap):
-                            this.writer.WriteStartElement("StringIntegerCollection");
-
-                            foreach (var pair in (IReadOnlyList<KeyValuePair<string, int>>)value)
-                            {
-                                this.writer.WriteStartElement("StringIntegerPair");
-                                this.writer.WriteAttributeString("entryString", pair.Key);
-                                this.writer.WriteAttributeString("entryInteger", pair.Value.ToString(InvariantCulture));
-                                this.writer.WriteEndElement();
-                            }
-
-                            this.writer.WriteEndElement();
+                            this.WriteEnumMap(value);
                             break;
                         case nameof(IStreamedParameter.StreamDescriptor):
-                            this.writer.WriteStartElement("StreamDescription");
-                            var description = (StreamDescription)value;
-                            this.writer.WriteAttributeString("format", description.Format.ToString());
-                            this.writer.WriteAttributeString("offset", description.Offset.ToString(InvariantCulture));
-                            this.writer.WriteEndElement();
+                            this.WriteStreamDescriptor(value);
                             break;
                         case nameof(IFunction.Arguments):
                         case nameof(IFunction.Result):
                             this.WriteTuple(value);
                             break;
                         case nameof(IMatrix.Labels):
-                            this.writer.WriteStartElement("LabelCollection");
-
-                            foreach (var label in (IReadOnlyList<MatrixLabel>)value)
-                            {
-                                this.writer.WriteStartElement("Label");
-                                this.writer.WriteAttributeString("basePath", Join(".", label.BasePath));
-                                this.writer.WriteAttributeString("description", label.Description);
-                                this.writer.WriteEndElement();
-                            }
-
-                            this.writer.WriteEndElement();
+                            this.WriteLabels(value);
                             break;
                         case nameof(IMatrix.Targets):
                             this.WriteSignals(value, "TargetCollection", "Target");
@@ -309,17 +285,7 @@ namespace Lawo.EmberPlusSharp.Glow
                             this.WriteSignals(value, "SourceCollection", "Source");
                             break;
                         case nameof(IMatrix.Connections):
-                            this.writer.WriteStartElement("ConnectionCollection");
-
-                            foreach (var connection in (IReadOnlyDictionary<int, ObservableCollection<int>>)value)
-                            {
-                                this.writer.WriteStartElement("Connection");
-                                this.writer.WriteAttributeString("target", connection.Key.ToString(InvariantCulture));
-                                this.writer.WriteAttributeString("sources", Join(" ", connection.Value));
-                                this.writer.WriteEndElement();
-                            }
-
-                            this.writer.WriteEndElement();
+                            this.WriteConnections(value);
                             break;
                         default:
                             this.writer.WriteValue(value);
@@ -338,6 +304,30 @@ namespace Lawo.EmberPlusSharp.Glow
                 }
             }
 
+            private void WriteEnumMap(object value)
+            {
+                this.writer.WriteStartElement("StringIntegerCollection");
+
+                foreach (var pair in (IReadOnlyList<KeyValuePair<string, int>>)value)
+                {
+                    this.writer.WriteStartElement("StringIntegerPair");
+                    this.writer.WriteAttributeString("entryString", pair.Key);
+                    this.writer.WriteAttributeString("entryInteger", pair.Value.ToString(InvariantCulture));
+                    this.writer.WriteEndElement();
+                }
+
+                this.writer.WriteEndElement();
+            }
+
+            private void WriteStreamDescriptor(object value)
+            {
+                this.writer.WriteStartElement("StreamDescription");
+                var description = (StreamDescription)value;
+                this.writer.WriteAttributeString("format", description.Format.ToString());
+                this.writer.WriteAttributeString("offset", description.Offset.ToString(InvariantCulture));
+                this.writer.WriteEndElement();
+            }
+
             private void WriteTuple(object value)
             {
                 this.writer.WriteStartElement("TupleDescription");
@@ -353,6 +343,21 @@ namespace Lawo.EmberPlusSharp.Glow
                 this.writer.WriteEndElement();
             }
 
+            private void WriteLabels(object value)
+            {
+                this.writer.WriteStartElement("LabelCollection");
+
+                foreach (var label in (IReadOnlyList<MatrixLabel>)value)
+                {
+                    this.writer.WriteStartElement("Label");
+                    this.writer.WriteAttributeString("basePath", Join(".", label.BasePath));
+                    this.writer.WriteAttributeString("description", label.Description);
+                    this.writer.WriteEndElement();
+                }
+
+                this.writer.WriteEndElement();
+            }
+
             private void WriteSignals(object value, string collectionName, string itemName)
             {
                 this.writer.WriteStartElement(collectionName);
@@ -361,6 +366,21 @@ namespace Lawo.EmberPlusSharp.Glow
                 {
                     this.writer.WriteStartElement(itemName);
                     this.writer.WriteAttributeString("number", signal.ToString(InvariantCulture));
+                    this.writer.WriteEndElement();
+                }
+
+                this.writer.WriteEndElement();
+            }
+
+            private void WriteConnections(object value)
+            {
+                this.writer.WriteStartElement("ConnectionCollection");
+
+                foreach (var connection in (IReadOnlyDictionary<int, ObservableCollection<int>>)value)
+                {
+                    this.writer.WriteStartElement("Connection");
+                    this.writer.WriteAttributeString("target", connection.Key.ToString(InvariantCulture));
+                    this.writer.WriteAttributeString("sources", Join(" ", connection.Value));
                     this.writer.WriteEndElement();
                 }
 
