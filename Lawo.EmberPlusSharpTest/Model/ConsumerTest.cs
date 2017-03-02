@@ -830,6 +830,24 @@ namespace Lawo.EmberPlusSharp.Model
                 });
         }
 
+        /// <summary>Tests Ember+ matrices</summary>
+        [TestMethod]
+        [TestCategory("Manual")]
+        public void MatrixTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    await TestWithRobot<MatrixRoot>(
+                        async consumer =>
+                        {
+                            await Task.Delay(0);
+                        },
+                        true,
+                        "MatrixLog.xml");
+                });
+        }
+
         /// <summary>Tests the behavior when <see cref="Element.IsOnline"/> changes.</summary>
         [TestMethod]
         public void IsOnlineTest()
@@ -2072,6 +2090,33 @@ namespace Lawo.EmberPlusSharp.Model
                 false,
                 "StreamLog.xml",
                 args);
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class MatrixRoot : Root<MatrixRoot>
+        {
+            [Element(Identifier = "SDN")]
+            public Sdn Sdn { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class Sdn : FieldNode<Sdn>
+        {
+            public Switching Switching { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class Switching : FieldNode<Switching>
+        {
+            [Element(Identifier = "Matrix-0")]
+            public Matrix0 Matrix0 { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class Matrix0 : FieldNode<Matrix0>
+        {
+            [Element(Identifier = "Matrix-0")]
+            public IMatrix Matrix { get; private set; }
         }
     }
 }

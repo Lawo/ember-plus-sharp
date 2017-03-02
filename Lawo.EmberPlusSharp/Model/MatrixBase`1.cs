@@ -99,8 +99,6 @@ namespace Lawo.EmberPlusSharp.Model
                 writer.WriteEndContainer();
                 writer.WriteEndContainer();
                 return true;
-
-                // TODO: Write GetDirectory request for parameters and labels, if present.
             }
 
             return false;
