@@ -832,7 +832,6 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Tests Ember+ matrices</summary>
         [TestMethod]
-        [TestCategory("Manual")]
         public void MatrixTest()
         {
             AsyncPump.Run(

@@ -131,6 +131,45 @@
               </Label>
             </labels>
           </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000</path>
+          <contents type="Set">
+            <identifier type="UTF8String">labels</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000</path>
+          <contents type="Set">
+            <identifier type="UTF8String">parameters</identifier>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.98" direction="Send" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.99" direction="Receive" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
           <targets type="Sequence">
             <Target type="Target">
               <number type="Integer">3001</number>
@@ -188,18 +227,6 @@
               <disposition type="Integer">0</disposition>
             </Connection>
           </connections>
-        </RootElement>
-        <RootElement type="QualifiedNode">
-          <path type="RelativeObjectIdentifier">1.1.0.1000</path>
-          <contents type="Set">
-            <identifier type="UTF8String">labels</identifier>
-          </contents>
-        </RootElement>
-        <RootElement type="QualifiedNode">
-          <path type="RelativeObjectIdentifier">1.1.0.2000</path>
-          <contents type="Set">
-            <identifier type="UTF8String">parameters</identifier>
-          </contents>
         </RootElement>
       </Root>
     </Payload>
