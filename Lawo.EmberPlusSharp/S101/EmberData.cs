@@ -8,12 +8,14 @@ namespace Lawo.EmberPlusSharp.S101
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
     using IO;
+
+    using static System.Globalization.CultureInfo;
+    using static System.Globalization.NumberStyles;
 
     /// <summary>Represents a command indicating that the following payload contains EmBER data.</summary>
     /// <remarks>See the <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>, chapter "Message Framing".
@@ -38,9 +40,9 @@ namespace Lawo.EmberPlusSharp.S101
 
         /// <inheritdoc/>
         public sealed override string ToString() =>
-            base.ToString() + ' ' + this.dtd.ToString("X2", CultureInfo.InvariantCulture) +
+            base.ToString() + ' ' + this.dtd.ToString("X2", InvariantCulture) +
             (this.applicationBytes.Length > 0 ? " " : null) +
-            string.Join(" ", this.applicationBytes.Select(b => b.ToString("X2", CultureInfo.InvariantCulture)));
+            string.Join(" ", this.applicationBytes.Select(b => b.ToString("X2", InvariantCulture)));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,9 +79,9 @@ namespace Lawo.EmberPlusSharp.S101
         internal sealed override void ParseCore(string[] components)
         {
             base.ParseCore(components);
-            this.dtd = byte.Parse(components[1], NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
-            this.applicationBytes = components.Skip(2).Select(
-                s => byte.Parse(s, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture)).ToArray();
+            this.dtd = byte.Parse(components[1], AllowHexSpecifier, InvariantCulture);
+            this.applicationBytes =
+                components.Skip(2).Select(s => byte.Parse(s, AllowHexSpecifier, InvariantCulture)).ToArray();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

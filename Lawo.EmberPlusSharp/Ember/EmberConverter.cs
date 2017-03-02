@@ -9,10 +9,11 @@ namespace Lawo.EmberPlusSharp.Ember
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Xml;
+
+    using static System.Globalization.CultureInfo;
 
     /// <summary>Provides methods to convert EmBER to XML and XML to EmBER.</summary>
     /// <threadsafety static="true" instance="false"/>
@@ -172,7 +173,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 if (emptyValue.Equals(default(TValue)))
                 {
                     const string Format = "Unexpected empty element for a field of type {0}.";
-                    throw new XmlException(string.Format(CultureInfo.InvariantCulture, Format, typeof(TValue).Name));
+                    throw new XmlException(string.Format(InvariantCulture, Format, typeof(TValue).Name));
                 }
                 else
                 {
@@ -206,7 +207,7 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             var pathElements = ReadValue(reader, r => r.ReadContentAsString()).Split('.');
             var value = (pathElements.Length == 1) && string.IsNullOrEmpty(pathElements[0]) ?
-                new int[0] : pathElements.Select(s => int.Parse(s, CultureInfo.InvariantCulture)).ToArray();
+                new int[0] : pathElements.Select(s => int.Parse(s, InvariantCulture)).ToArray();
             writer.WriteValue(fieldId, value);
         }
 
@@ -288,7 +289,7 @@ namespace Lawo.EmberPlusSharp.Ember
                         break;
                     case BerRelativeObjectIdentifier.InnerNumber:
                         var intOid = reader.ReadContentsAsInt32Array();
-                        var oid = string.Join(".", intOid.Select(e => e.ToString(CultureInfo.InvariantCulture)));
+                        var oid = string.Join(".", intOid.Select(e => e.ToString(InvariantCulture)));
                         WriteValue(writer, fieldName, BerRelativeObjectIdentifier.Name, oid, (w, o) => w.WriteValue(o));
                         break;
                     case BerSequence.InnerNumber:
@@ -329,7 +330,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 {
                     const string Format = "Unexpected Node Type: Encountered {0} while looking for {1}.";
                     throw new XmlException(
-                        string.Format(CultureInfo.InvariantCulture, Format, reader.NodeType, XmlNodeType.Element));
+                        string.Format(InvariantCulture, Format, reader.NodeType, XmlNodeType.Element));
                 }
 
                 var currentPath = Combine(previousPath, new Field<string, string>(currentType, reader.Name));
@@ -423,7 +424,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 return innerNumberCandidate.Value;
             }
 
-            throw new XmlException(string.Format(CultureInfo.InvariantCulture, "Unknown type: {0}.", type));
+            throw new XmlException(string.Format(InvariantCulture, "Unknown type: {0}.", type));
         }
 
         private string GetFieldName(FieldPath<int, EmberId> fieldPath)
@@ -448,7 +449,7 @@ namespace Lawo.EmberPlusSharp.Ember
                 return emberId;
             }
 
-            throw new XmlException(string.Format(CultureInfo.InvariantCulture, "Unknown field path: {0}.", fieldPath));
+            throw new XmlException(string.Format(InvariantCulture, "Unknown field path: {0}.", fieldPath));
         }
     }
 }

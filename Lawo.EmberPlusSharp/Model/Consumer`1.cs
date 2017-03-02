@@ -10,7 +10,6 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Threading;
@@ -19,6 +18,8 @@ namespace Lawo.EmberPlusSharp.Model
     using Ember;
     using IO;
     using S101;
+
+    using static System.Globalization.CultureInfo;
 
     /// <summary>Implements an Ember+ consumer that communicates with an Ember+ provider as specified in the
     /// <i>"Ember+ Specification"</i><cite>Ember+ Specification</cite>.</summary>
@@ -205,7 +206,7 @@ namespace Lawo.EmberPlusSharp.Model
         private static readonly EmberData EmberDataCommand = new EmberData(0x01, 0x0A, 0x02);
 
         private static string GetVersion(IReadOnlyCollection<byte> applicationBytes) =>
-            string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(CultureInfo.InvariantCulture)));
+            string.Join(".", applicationBytes.Reverse().Select(b => b.ToString(InvariantCulture)));
 
         private readonly ReceiveQueue receiveQueue = new ReceiveQueue();
         private readonly InvocationCollection pendingInvocations = new InvocationCollection();
@@ -417,8 +418,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             if (command.Dtd != EmberDataCommand.Dtd)
             {
-                throw new ModelException(
-                    string.Format(CultureInfo.InvariantCulture, "Unexpected DTD: {0:X2}.", command.Dtd));
+                throw new ModelException(string.Format(InvariantCulture, "Unexpected DTD: {0:X2}.", command.Dtd));
             }
 
             var actualBytes = command.ApplicationBytes;
@@ -428,7 +428,7 @@ namespace Lawo.EmberPlusSharp.Model
                 (actualBytes.Zip(expectedBytes, (l, r) => l - r).Reverse().FirstOrDefault(b => b != 0) < 0))
             {
                 throw new ModelException(string.Format(
-                    CultureInfo.InvariantCulture,
+                    InvariantCulture,
                     "Encountered actual Glow DTD Version {0} while expecting >= {1}.",
                     GetVersion(actualBytes),
                     GetVersion(expectedBytes)));
