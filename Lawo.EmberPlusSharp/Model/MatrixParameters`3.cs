@@ -16,9 +16,9 @@ namespace Lawo.EmberPlusSharp.Model
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public sealed class MatrixParameters<TTarget, TSource, TConnection> :
         FieldNode<MatrixParameters<TTarget, TSource, TConnection>>
-        where TTarget : Node<TTarget>
-        where TSource : Node<TSource>
-        where TConnection : Node<TConnection>
+        where TTarget : INode
+        where TSource : INode
+        where TConnection : INode
     {
         /// <summary>Gets <b>targets</b>.</summary>
         [Element(Identifier = "targets")]

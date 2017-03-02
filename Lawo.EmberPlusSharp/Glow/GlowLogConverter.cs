@@ -9,15 +9,18 @@ namespace Lawo.EmberPlusSharp.Glow
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
+    using System.Linq;
     using System.Xml;
 
     using Ember;
     using Model;
     using S101;
+
+    using static System.Globalization.CultureInfo;
 
     /// <summary>Converts the log written by an <see cref="S101Logger"/> instantiated with
     /// <see cref="GlowTypes.Instance"/> into an equivalent log the payloads of which can be much more easily read
@@ -73,47 +76,72 @@ namespace Lawo.EmberPlusSharp.Glow
             {
                 switch (name)
                 {
-                    case "Description":
+                    case nameof(element.Description):
                         return element.Description;
-                    case "IsOnline":
+                    case nameof(element.IsOnline):
                         return element.IsOnline;
-                    case "SchemaIdentifiers":
-                        return ((IElementWithSchemas)element).SchemaIdentifiers;
-                    case "Value":
+                    case nameof(IElementWithSchemas.SchemaIdentifiers):
+                        return Join(Environment.NewLine, ((IElementWithSchemas)element).SchemaIdentifiers);
+                    case nameof(IParameter.Value):
                         var parameter = (IParameter)element;
                         return (parameter.Access & ParameterAccess.Read) == 0 ? null : parameter.Value;
-                    case "Minimum":
+                    case nameof(IParameter.Minimum):
                         return ((IParameter)element).Minimum;
-                    case "Maximum":
+                    case nameof(IParameter.Maximum):
                         return ((IParameter)element).Maximum;
-                    case "Access":
+                    case nameof(IParameter.Access):
                         return LowerFirst(((IParameter)element).Access.ToString());
-                    case "Format":
+                    case nameof(IParameter.Format):
                         return ((IParameter)element).Format;
-                    case "Factor":
+                    case nameof(IParameter.Factor):
                         return ((IParameter)element).Factor;
-                    case "Formula":
+                    case nameof(IParameter.Formula):
                         return ((IParameter)element).Formula;
-                    case "DefaultValue":
+                    case nameof(IParameter.DefaultValue):
                         return ((IParameter)element).DefaultValue;
-                    case "Type":
+                    case nameof(IParameter.Type):
                         return LowerFirst(((IParameter)element).Type.ToString());
-                    case "StreamIdentifier":
+                    case nameof(IStreamedParameter.StreamIdentifier):
                         return ((IStreamedParameter)element).StreamIdentifier;
-                    case "EnumMap":
+                    case nameof(IParameter.EnumMap):
                         return ((IParameter)element).EnumMap;
-                    case "StreamDescriptor":
+                    case nameof(IStreamedParameter.StreamDescriptor):
                         return ((IStreamedParameter)element).StreamDescriptor;
-                    case "Arguments":
-                        return ((IFunction)element).Arguments;
-                    case "Result":
-                        return ((IFunction)element).Result;
-                    case "IsRoot":
+                    case nameof(INode.IsRoot):
                         return ((INode)element).IsRoot;
+                    case nameof(IFunction.Arguments):
+                        return ((IFunction)element).Arguments;
+                    case nameof(IFunction.Result):
+                        return ((IFunction)element).Result;
+                    case nameof(IMatrix.MaximumTotalConnects):
+                        return ((IMatrix)element).MaximumTotalConnects;
+                    case nameof(IMatrix.MaximumConnectsPerTarget):
+                        return ((IMatrix)element).MaximumConnectsPerTarget;
+                    case nameof(IMatrix.ParametersLocation):
+                        return Join(".", ((IMatrix)element).ParametersLocation);
+                    case nameof(IMatrix.GainParameterNumber):
+                        return ((IMatrix)element).GainParameterNumber;
+                    case nameof(IMatrix.Labels):
+                        return ((IMatrix)element).Labels;
+                    case nameof(IMatrix.Targets):
+                        return ((IMatrix)element).Targets;
+                    case nameof(IMatrix.Sources):
+                        return ((IMatrix)element).Sources;
+                    case nameof(IMatrix.Connections):
+                        return ((IMatrix)element).Connections;
                     default:
                         throw new ArgumentException("Unknown element or field name.");
                 }
             }
+
+            private static string Join<T>(string separator, IEnumerable<T> values)
+                where T : IFormattable
+            {
+                return values == null ? null : Join(separator, values.Select(l => l.ToString(null, InvariantCulture)));
+            }
+
+            private static string Join(string separator, IEnumerable<string> values) =>
+                values == null ? null : string.Join(separator, values);
 
             private readonly HashSet<IElement> subscribedElements = new HashSet<IElement>();
             private readonly GlowLogInterpreter interpreter;
@@ -141,7 +169,16 @@ namespace Lawo.EmberPlusSharp.Glow
                             }
                             else
                             {
-                                this.WriteInitSequence((IFunction)element);
+                                var function = element as IFunction;
+
+                                if (function != null)
+                                {
+                                    this.WriteInitSequence(function);
+                                }
+                                else
+                                {
+                                    this.WriteInitSequence((IMatrix)element);
+                                }
                             }
                         }
 
@@ -156,38 +193,52 @@ namespace Lawo.EmberPlusSharp.Glow
                 }
             }
 
+            private void WriteInitSequence(INode node)
+            {
+                this.WriteOperation("Init", node, nameof(node.Description));
+                this.WriteOperation("Init", node, nameof(node.IsRoot));
+                this.WriteOperation("Init", node, nameof(node.IsOnline));
+                this.WriteOperation("Init", node, nameof(node.SchemaIdentifiers));
+            }
+
             private void WriteInitSequence(IParameter parameter)
             {
-                this.WriteOperation("Init", parameter, "Description");
-                this.WriteOperation("Init", parameter, "Value");
-                this.WriteOperation("Init", parameter, "Minimum");
-                this.WriteOperation("Init", parameter, "Maximum");
-                this.WriteOperation("Init", parameter, "Access");
-                this.WriteOperation("Init", parameter, "Format");
-                this.WriteOperation("Init", parameter, "Factor");
-                this.WriteOperation("Init", parameter, "IsOnline");
-                this.WriteOperation("Init", parameter, "Formula");
-                this.WriteOperation("Init", parameter, "DefaultValue");
-                this.WriteOperation("Init", parameter, "Type");
-                this.WriteOperation("Init", parameter, "StreamIdentifier");
-                this.WriteOperation("Init", parameter, "EnumMap");
-                this.WriteOperation("Init", parameter, "StreamDescriptor");
-                this.WriteOperation("Init", parameter, "SchemaIdentifiers");
+                this.WriteOperation("Init", parameter, nameof(parameter.Description));
+                this.WriteOperation("Init", parameter, nameof(parameter.Value));
+                this.WriteOperation("Init", parameter, nameof(parameter.Minimum));
+                this.WriteOperation("Init", parameter, nameof(parameter.Maximum));
+                this.WriteOperation("Init", parameter, nameof(parameter.Access));
+                this.WriteOperation("Init", parameter, nameof(parameter.Format));
+                this.WriteOperation("Init", parameter, nameof(parameter.Factor));
+                this.WriteOperation("Init", parameter, nameof(parameter.IsOnline));
+                this.WriteOperation("Init", parameter, nameof(parameter.Formula));
+                this.WriteOperation("Init", parameter, nameof(parameter.DefaultValue));
+                this.WriteOperation("Init", parameter, nameof(parameter.Type));
+                this.WriteOperation("Init", parameter, nameof(IStreamedParameter.StreamIdentifier));
+                this.WriteOperation("Init", parameter, nameof(parameter.EnumMap));
+                this.WriteOperation("Init", parameter, nameof(IStreamedParameter.StreamDescriptor));
+                this.WriteOperation("Init", parameter, nameof(parameter.SchemaIdentifiers));
             }
 
             private void WriteInitSequence(IFunction function)
             {
-                this.WriteOperation("Init", function, "Description");
-                this.WriteOperation("Init", function, "Arguments");
-                this.WriteOperation("Init", function, "Result");
+                this.WriteOperation("Init", function, nameof(function.Description));
+                this.WriteOperation("Init", function, nameof(function.Arguments));
+                this.WriteOperation("Init", function, nameof(function.Result));
             }
 
-            private void WriteInitSequence(INode node)
+            private void WriteInitSequence(IMatrix matrix)
             {
-                this.WriteOperation("Init", node, "Description");
-                this.WriteOperation("Init", node, "IsRoot");
-                this.WriteOperation("Init", node, "IsOnline");
-                this.WriteOperation("Init", node, "SchemaIdentifiers");
+                this.WriteOperation("Init", matrix, nameof(matrix.Description));
+                this.WriteOperation("Init", matrix, nameof(matrix.MaximumTotalConnects));
+                this.WriteOperation("Init", matrix, nameof(matrix.MaximumConnectsPerTarget));
+                this.WriteOperation("Init", matrix, nameof(matrix.ParametersLocation));
+                this.WriteOperation("Init", matrix, nameof(matrix.GainParameterNumber));
+                this.WriteOperation("Init", matrix, nameof(matrix.Labels));
+                this.WriteOperation("Init", matrix, nameof(matrix.SchemaIdentifiers));
+                this.WriteOperation("Init", matrix, nameof(matrix.Targets));
+                this.WriteOperation("Init", matrix, nameof(matrix.Sources));
+                this.WriteOperation("Init", matrix, nameof(matrix.Connections));
             }
 
             private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) =>
@@ -214,34 +265,61 @@ namespace Lawo.EmberPlusSharp.Glow
                 {
                     switch (propertyName)
                     {
-                        case "EnumMap":
-                            var map = (IReadOnlyList<KeyValuePair<string, int>>)value;
+                        case nameof(IParameter.EnumMap):
                             this.writer.WriteStartElement("StringIntegerCollection");
 
-                            foreach (var pair in map)
+                            foreach (var pair in (IReadOnlyList<KeyValuePair<string, int>>)value)
                             {
                                 this.writer.WriteStartElement("StringIntegerPair");
                                 this.writer.WriteAttributeString("entryString", pair.Key);
-                                this.writer.WriteAttributeString(
-                                    "entryInteger", pair.Value.ToString(CultureInfo.InvariantCulture));
-
+                                this.writer.WriteAttributeString("entryInteger", pair.Value.ToString(InvariantCulture));
                                 this.writer.WriteEndElement();
                             }
 
                             this.writer.WriteEndElement();
                             break;
-                        case "StreamDescriptor":
-                            var description = (StreamDescription)value;
+                        case nameof(IStreamedParameter.StreamDescriptor):
                             this.writer.WriteStartElement("StreamDescription");
+                            var description = (StreamDescription)value;
                             this.writer.WriteAttributeString("format", description.Format.ToString());
-                            this.writer.WriteAttributeString(
-                                "offset", description.Offset.ToString(CultureInfo.InvariantCulture));
+                            this.writer.WriteAttributeString("offset", description.Offset.ToString(InvariantCulture));
+                            this.writer.WriteEndElement();
+                            break;
+                        case nameof(IFunction.Arguments):
+                        case nameof(IFunction.Result):
+                            this.WriteTuple(value);
+                            break;
+                        case nameof(IMatrix.Labels):
+                            this.writer.WriteStartElement("LabelCollection");
+
+                            foreach (var label in (IReadOnlyList<MatrixLabel>)value)
+                            {
+                                this.writer.WriteStartElement("Label");
+                                this.writer.WriteAttributeString("basePath", Join(".", label.BasePath));
+                                this.writer.WriteAttributeString("description", label.Description);
+                                this.writer.WriteEndElement();
+                            }
 
                             this.writer.WriteEndElement();
                             break;
-                        case "Arguments":
-                        case "Result":
-                            this.WriteTuple(value);
+                        case nameof(IMatrix.Targets):
+                            this.WriteSignals(value, "TargetCollection", "Target");
+                            break;
+                        case nameof(IMatrix.Sources):
+                            this.WriteSignals(value, "SourceCollection", "Source");
+                            break;
+                        case nameof(IMatrix.Connections):
+                            this.writer.WriteStartElement("ConnectionCollection");
+
+                            foreach (var connection in (IReadOnlyDictionary<int, ObservableCollection<int>>)value)
+                            {
+                                this.writer.WriteStartElement("Connection");
+                                this.writer.WriteAttributeString("target", connection.Key.ToString(InvariantCulture));
+                                this.writer.WriteAttributeString("sources", Join(" ", connection.Value));
+                                this.writer.WriteEndElement();
+                            }
+
+                            this.writer.WriteEndElement();
                             break;
                         default:
                             this.writer.WriteValue(value);
@@ -262,14 +340,27 @@ namespace Lawo.EmberPlusSharp.Glow
 
             private void WriteTuple(object value)
             {
-                var arguments = (IReadOnlyList<KeyValuePair<string, ParameterType>>)value;
                 this.writer.WriteStartElement("TupleDescription");
 
-                foreach (var pair in arguments)
+                foreach (var pair in (IReadOnlyList<KeyValuePair<string, ParameterType>>)value)
                 {
                     this.writer.WriteStartElement("TupleItemDescription");
                     this.writer.WriteAttributeString("type", pair.Value.ToString());
                     this.writer.WriteAttributeString("name", pair.Key);
+                    this.writer.WriteEndElement();
+                }
+
+                this.writer.WriteEndElement();
+            }
+
+            private void WriteSignals(object value, string collectionName, string itemName)
+            {
+                this.writer.WriteStartElement(collectionName);
+
+                foreach (var signal in (IReadOnlyList<int>)value)
+                {
+                    this.writer.WriteStartElement(itemName);
+                    this.writer.WriteAttributeString("number", signal.ToString(InvariantCulture));
                     this.writer.WriteEndElement();
                 }
 
