@@ -75,8 +75,21 @@ namespace Lawo.EmberPlusSharp.Model
         /// <inheritdoc/>
         public IReadOnlyDictionary<int, ObservableCollection<int>> Connections
         {
-            get { return this.connections; }
-            private set { this.SetValue(ref this.connections, value); }
+            get
+            {
+                return this.connections;
+            }
+
+            private set
+            {
+                if (this.SetValue(ref this.connections, value))
+                {
+                    foreach (var connection in this.connections)
+                    {
+                        connection.Value.CollectionChanged += (s, e) => this.OnSourcesChanged(connection.Key);
+                    }
+                }
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -179,36 +192,45 @@ namespace Lawo.EmberPlusSharp.Model
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override RetrievalState ReadAdditionalField(EmberReader reader, int contextSpecificOuterNumber)
         {
-            switch (contextSpecificOuterNumber)
+            this.isProviderChangeInProgress = true;
+
+            try
             {
-                case GlowMatrix.Targets.OuterNumber:
-                    reader.AssertInnerNumber(GlowTargetCollection.InnerNumber);
-                    this.Targets = this.ReadSignals(
-                        reader,
-                        this.Targets,
-                        GlowTargetCollection.Target.OuterNumber,
-                        GlowTarget.InnerNumber,
-                        GlowTarget.Number.OuterNumber,
-                        GlowTarget.Number.Name);
-                    this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
-                    break;
-                case GlowMatrix.Sources.OuterNumber:
-                    reader.AssertInnerNumber(GlowSourceCollection.InnerNumber);
-                    this.Sources = this.ReadSignals(
-                        reader,
-                        this.Sources,
-                        GlowSourceCollection.Source.OuterNumber,
-                        GlowSource.InnerNumber,
-                        GlowSource.Number.OuterNumber,
-                        GlowSource.Number.Name);
-                    break;
-                case GlowMatrix.Connections.OuterNumber:
-                    this.ReadConnections(reader);
-                    this.RetrievalState = RetrievalState.Complete;
-                    break;
-                default:
-                    reader.Skip();
-                    break;
+                switch (contextSpecificOuterNumber)
+                {
+                    case GlowMatrix.Targets.OuterNumber:
+                        reader.AssertInnerNumber(GlowTargetCollection.InnerNumber);
+                        this.Targets = this.ReadSignals(
+                            reader,
+                            this.Targets,
+                            GlowTargetCollection.Target.OuterNumber,
+                            GlowTarget.InnerNumber,
+                            GlowTarget.Number.OuterNumber,
+                            GlowTarget.Number.Name);
+                        this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
+                        break;
+                    case GlowMatrix.Sources.OuterNumber:
+                        reader.AssertInnerNumber(GlowSourceCollection.InnerNumber);
+                        this.Sources = this.ReadSignals(
+                            reader,
+                            this.Sources,
+                            GlowSourceCollection.Source.OuterNumber,
+                            GlowSource.InnerNumber,
+                            GlowSource.Number.OuterNumber,
+                            GlowSource.Number.Name);
+                        break;
+                    case GlowMatrix.Connections.OuterNumber:
+                        this.ReadConnections(reader);
+                        this.RetrievalState = RetrievalState.Complete;
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            finally
+            {
+                this.isProviderChangeInProgress = false;
             }
 
             return this.RetrievalState;
@@ -216,28 +238,28 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
-            ////if (this.HasChanges)
-            ////{
-            ////    writer.WriteStartApplicationDefinedType(
-            ////        GlowElementCollection.Element.OuterId, GlowQualifiedParameter.InnerNumber);
+            if (this.HasChanges)
+            {
+                writer.WriteStartApplicationDefinedType(
+                    GlowElementCollection.Element.OuterId, GlowQualifiedMatrix.InnerNumber);
 
-            ////    writer.WriteValue(GlowQualifiedParameter.Path.OuterId, this.NumberPath);
-            ////    writer.WriteStartSet(GlowQualifiedParameter.Contents.OuterId);
+                writer.WriteValue(GlowQualifiedMatrix.Path.OuterId, this.NumberPath);
+                writer.WriteStartSequence(GlowQualifiedMatrix.Connections.OuterId);
 
-            ////    if (this.theValue == null)
-            ////    {
-            ////        // This can only happen when the parameter happens to be a trigger.
-            ////        writer.WriteValue(GlowParameterContents.Value.OuterId, 0);
-            ////    }
-            ////    else
-            ////    {
-            ////        this.WriteValue(writer, this.theValue);
-            ////    }
+                foreach (var target in this.targetsWithChangedConnections)
+                {
+                    writer.WriteStartApplicationDefinedType(
+                        GlowConnectionCollection.Connection.OuterId, GlowConnection.InnerNumber);
+                    writer.WriteValue(GlowConnection.Target.OuterId, target);
+                    writer.WriteValue(GlowConnection.Sources.OuterId, this.connections[target].ToArray());
+                    writer.WriteEndContainer();
+                }
 
-            ////    writer.WriteEndContainer();
-            ////    writer.WriteEndContainer();
-            ////    this.HasChanges = false;
-            ////}
+                writer.WriteEndContainer();
+                writer.WriteEndContainer();
+                this.targetsWithChangedConnections.Clear();
+                this.HasChanges = false;
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -331,6 +353,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        private readonly HashSet<int> targetsWithChangedConnections = new HashSet<int>();
         private int maximumTotalConnects;
         private int maximumConnectsPerTarget;
         private IReadOnlyList<int> parametersLocation;
@@ -339,6 +362,7 @@ namespace Lawo.EmberPlusSharp.Model
         private IReadOnlyList<int> targets;
         private IReadOnlyList<int> sources;
         private IReadOnlyDictionary<int, ObservableCollection<int>> connections;
+        private bool isProviderChangeInProgress;
 
         private enum MatrixType
         {
@@ -366,6 +390,15 @@ namespace Lawo.EmberPlusSharp.Model
             Modified,
             Pending,
             Locked
+        }
+
+        private void OnSourcesChanged(int target)
+        {
+            if (!this.isProviderChangeInProgress)
+            {
+                this.HasChanges = true;
+                this.targetsWithChangedConnections.Add(target);
+            }
         }
 
         private int[] ReadParametersLocation(EmberReader reader)
@@ -464,7 +497,7 @@ namespace Lawo.EmberPlusSharp.Model
                             }
                         }
 
-                        if (target.HasValue && (disposition != ConnectionDisposition.Pending))
+                        if (target.HasValue && (disposition != ConnectionDisposition.Pending) && !this.HasChanges)
                         {
                             var existingConnectedSources = this.Connections[target.Value];
 

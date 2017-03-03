@@ -847,6 +847,28 @@ namespace Lawo.EmberPlusSharp.Model
                 });
         }
 
+        /// <summary>Tests Ember+ matrices</summary>
+        [TestMethod]
+        [TestCategory("Manual")]
+        public void ManualMatrixTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    using (var tcpClient = new TcpClient())
+                    {
+                        await tcpClient.ConnectAsync("localhost", 8999);
+
+                        using (var stream = tcpClient.GetStream())
+                        using (var client = new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync))
+                        using (var consumer = await Consumer<MatrixRoot>.CreateAsync(client))
+                        {
+                            await Task.Delay(60000);
+                        }
+                    }
+                });
+        }
+
         /// <summary>Tests the behavior when <see cref="Element.IsOnline"/> changes.</summary>
         [TestMethod]
         public void IsOnlineTest()
