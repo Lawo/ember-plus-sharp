@@ -840,7 +840,17 @@ namespace Lawo.EmberPlusSharp.Model
                     await TestWithRobot<MatrixRoot>(
                         async consumer =>
                         {
-                            await Task.Delay(0);
+                            var matrix = consumer.Root.Sdn.Switching.Matrix0.Matrix;
+
+                            foreach (var connection in matrix.Connections)
+                            {
+                                Assert.AreEqual(0, connection.Value.Single());
+                            }
+
+                            var connectedSources = matrix.Connections[matrix.Targets.First()];
+                            connectedSources.Clear();
+                            connectedSources.Add(matrix.Sources.Skip(1).First());
+                            await Task.Delay(500);
                         },
                         true,
                         "MatrixLog.xml");
