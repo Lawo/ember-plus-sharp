@@ -853,10 +853,16 @@ namespace Lawo.EmberPlusSharp.Model
                                 Assert.AreEqual(0, connection.Value.Single());
                             }
 
-                            var connectedSources = matrix.Connections[matrix.Targets[0]];
-                            connectedSources.Clear();
-                            connectedSources.Add(matrix.Sources[1]);
-                            await WaitAndAssertStableAsync(matrix.Connections[matrix.Targets[1]], new[] { 2711 });
+                            var targets = matrix.Targets;
+                            var sources = matrix.Sources;
+                            var connections = matrix.Connections;
+                            connections[targets[0]].Clear();
+                            connections[targets[0]].Add(sources[1]);
+                            await WaitAndAssertStableAsync(connections[targets[1]], new[] { sources[1] });
+                            connections[targets[0]].Clear();
+                            connections[targets[1]].Clear();
+                            await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[2], sources[4] });
+                            Assert.AreEqual(0, connections[targets[1]].Count);
                         },
                         true,
                         "MatrixLog.xml");
