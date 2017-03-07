@@ -8,6 +8,7 @@ namespace Lawo.EmberPlusSharp.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -841,16 +842,21 @@ namespace Lawo.EmberPlusSharp.Model
                         async consumer =>
                         {
                             var matrix = consumer.Root.Sdn.Switching.Matrix0.Matrix;
+                            Assert.AreEqual(1, matrix.Labels.Count);
+                            CollectionAssert.AreEqual(new[] { 1, 1, 0, 1000, 1 }, matrix.Labels[0].BasePath.ToArray());
+                            CollectionAssert.AreEqual(new[] { 3001, 3002, 3003, 3004 }, matrix.Targets.ToArray());
+                            CollectionAssert.AreEqual(new[] { 0, 2711, 2712, 2713, 2714 }, matrix.Sources.ToArray());
+                            CollectionAssert.AreEqual(matrix.Targets.ToArray(), matrix.Connections.Keys.ToArray());
 
                             foreach (var connection in matrix.Connections)
                             {
                                 Assert.AreEqual(0, connection.Value.Single());
                             }
 
-                            var connectedSources = matrix.Connections[matrix.Targets.First()];
+                            var connectedSources = matrix.Connections[matrix.Targets[0]];
                             connectedSources.Clear();
-                            connectedSources.Add(matrix.Sources.Skip(1).First());
-                            await Task.Delay(500);
+                            connectedSources.Add(matrix.Sources[1]);
+                            await WaitForChangeAsync(matrix.Connections[matrix.Targets[1]], new[] { 2711 });
                         },
                         true,
                         "MatrixLog.xml");
@@ -2010,6 +2016,25 @@ namespace Lawo.EmberPlusSharp.Model
                 default:
                     throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unexpected type: {0}", value));
             }
+        }
+
+        private static Task WaitForChangeAsync(ObservableCollection<int> collection, int[] expected)
+        {
+            var source = new TaskCompletionSource<bool>();
+            NotifyCollectionChangedEventHandler collectionChanged = null;
+
+            collectionChanged =
+                (s, e) =>
+                {
+                    if (collection.SequenceEqual(expected))
+                    {
+                        collection.CollectionChanged -= collectionChanged;
+                        source.SetResult(false);
+                    }
+                };
+
+            collection.CollectionChanged += collectionChanged;
+            return source.Task;
         }
 
         private Task DynamicChildrenRetrievalPolicyTestAsync(bool delay)

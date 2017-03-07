@@ -267,4 +267,23 @@
       </Root>
     </Payload>
   </Event>
+  <Event type="Message" timeUtc="15:54:44.12" direction="Receive" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3002</target>
+              <sources type="RelativeObjectIdentifier">2711</sources>
+              <operation type="Integer">0</operation>
+              <disposition type="Integer">1</disposition>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
 </S101Log>
