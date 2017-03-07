@@ -856,7 +856,7 @@ namespace Lawo.EmberPlusSharp.Model
                             var connectedSources = matrix.Connections[matrix.Targets[0]];
                             connectedSources.Clear();
                             connectedSources.Add(matrix.Sources[1]);
-                            await WaitForChangeAsync(matrix.Connections[matrix.Targets[1]], new[] { 2711 });
+                            await WaitAndAssertStableAsync(matrix.Connections[matrix.Targets[1]], new[] { 2711 });
                         },
                         true,
                         "MatrixLog.xml");
@@ -2014,11 +2014,12 @@ namespace Lawo.EmberPlusSharp.Model
                 case TypeCode.Double:
                     return BitConverter.GetBytes((double)value);
                 default:
-                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Unexpected type: {0}", value));
+                    throw new ArgumentException(
+                        string.Format(CultureInfo.InvariantCulture, "Unexpected type: {0}", value));
             }
         }
 
-        private static Task WaitForChangeAsync(ObservableCollection<int> collection, int[] expected)
+        private static async Task WaitAndAssertStableAsync(ObservableCollection<int> collection, int[] expected)
         {
             var source = new TaskCompletionSource<bool>();
             NotifyCollectionChangedEventHandler collectionChanged = null;
@@ -2034,7 +2035,11 @@ namespace Lawo.EmberPlusSharp.Model
                 };
 
             collection.CollectionChanged += collectionChanged;
-            return source.Task;
+            await source.Task;
+
+            // The following two lines verify that the change we've detected above is not just an intermediate state.
+            await Task.Delay(250);
+            CollectionAssert.AreEqual(collection, expected);
         }
 
         private Task DynamicChildrenRetrievalPolicyTestAsync(bool delay)
