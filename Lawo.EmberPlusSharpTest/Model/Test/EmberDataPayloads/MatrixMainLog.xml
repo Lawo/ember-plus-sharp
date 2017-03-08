@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <S101Log>
-  <Event type="StartingReadLoop" timeUtc="15:54:43.75" />
   <Event type="Message" timeUtc="15:54:43.82" direction="Send" number="1">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
@@ -171,6 +170,22 @@
             </Element>
           </children>
         </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
       </Root>
     </Payload>
   </Event>
@@ -254,10 +269,702 @@
             <A-117 type="A-117"></A-117>
           </C-4711>
         </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Primary</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">targets</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">sources</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3</path>
+          <contents type="Set">
+            <identifier type="UTF8String">connections</identifier>
+          </contents>
+        </RootElement>
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="6">
+  <Event type="Message" timeUtc="09:45:39.51" direction="Send" number="6">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="09:45:39.55" direction="Receive" number="6">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">targets</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1.2</path>
+          <contents type="Set">
+            <identifier type="UTF8String">sources</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3001</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3001</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3002</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3002</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3003</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3003</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3004</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3004</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">source - 0</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2711</path>
+          <contents type="Set">
+            <identifier type="UTF8String">source - 2711</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2712</path>
+          <contents type="Set">
+            <identifier type="UTF8String">source - 2712</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2713</path>
+          <contents type="Set">
+            <identifier type="UTF8String">source - 2713</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2714</path>
+          <contents type="Set">
+            <identifier type="UTF8String">source - 2714</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3001</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3002</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3003</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004</path>
+          <contents type="Set">
+            <identifier type="UTF8String">target - 3004</identifier>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="09:45:39.59" direction="Send" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1.2</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3001</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3002</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3003</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3004</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2711</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2712</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2713</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2714</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="09:45:39.61" direction="Receive" number="7">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1.1</path>
+        </RootElement>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.0.1000.1.2.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Label-0</identifier>
+            <value type="UTF8String">Disconnected</value>
+            <access type="Integer">1</access>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3001</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3002</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3003</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.1.3004</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.0</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2711</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2712</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2713</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.2.2714</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 0</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2711</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2711</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2712</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2712</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2713</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2713</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2714</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2714</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 0</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2711</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2711</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2712</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2712</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2713</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2713</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2714</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2714</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 0</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2711</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2711</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2712</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2712</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2713</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2713</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2714</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2714</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 0</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2711</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2711</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2712</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2712</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2713</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2713</identifier>
+          </contents>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2714</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Source - 2714</identifier>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="09:45:39.66" direction="Send" number="8">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2711</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2712</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2713</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2714</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2711</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2712</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2713</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2714</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2711</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2712</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2713</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2714</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2711</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2712</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2713</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2714</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="09:45:39.67" direction="Receive" number="8">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.0</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2711</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2712</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2713</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3001.2714</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.0</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2711</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2712</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2713</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3002.2714</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.0</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2711</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2712</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2713</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3003.2714</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.0</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2711</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2712</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2713</path>
+        </RootElement>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0.2000.3.3004.2714</path>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="9">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -274,7 +981,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.12" direction="Receive" number="6">
+  <Event type="Message" timeUtc="15:54:44.12" direction="Receive" number="9">
     <Slot>00</Slot>
     <Command>EmberData 01 28 02</Command>
     <Payload>
@@ -293,7 +1000,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.12" direction="Receive" number="7">
+  <Event type="Message" timeUtc="15:54:44.12" direction="Receive" number="10">
     <Slot>00</Slot>
     <Command>EmberData 01 28 02</Command>
     <Payload>
@@ -312,7 +1019,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="7">
+  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="10">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -333,7 +1040,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="8">
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="11">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -358,7 +1065,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="9">
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="12">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -377,7 +1084,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="8">
+  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="11">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -394,7 +1101,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="10">
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="13">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
@@ -413,7 +1120,7 @@
       </Root>
     </Payload>
   </Event>
-  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="11">
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="14">
     <Slot>00</Slot>
     <Command>EmberData 01 0A 02</Command>
     <Payload>
