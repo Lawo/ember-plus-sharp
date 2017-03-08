@@ -842,8 +842,18 @@ namespace Lawo.EmberPlusSharp.Model
                         async consumer =>
                         {
                             var matrix = consumer.Root.Sdn.Switching.Matrix0.Matrix;
+                            Assert.AreEqual("Matrix-0", matrix.Identifier);
+                            Assert.AreEqual("Matrix 0", matrix.Description);
+                            Assert.AreEqual(4, matrix.MaximumTotalConnects);
+                            Assert.AreEqual(1, matrix.MaximumConnectsPerTarget);
+                            CollectionAssert.AreEqual(new[] { 1, 1, 0, 2000 }, matrix.ParametersLocation.ToArray());
+                            Assert.AreEqual(17, matrix.GainParameterNumber);
                             Assert.AreEqual(1, matrix.Labels.Count);
+                            Assert.AreEqual("Primary", matrix.Labels[0].Description);
                             CollectionAssert.AreEqual(new[] { 1, 1, 0, 1000, 1 }, matrix.Labels[0].BasePath.ToArray());
+                            Assert.AreEqual(1, matrix.SchemaIdentifiers.Count);
+                            Assert.AreEqual("com.company", matrix.SchemaIdentifiers[0]);
+
                             CollectionAssert.AreEqual(new[] { 3001, 3002, 3003, 3004 }, matrix.Targets.ToArray());
                             CollectionAssert.AreEqual(new[] { 0, 2711, 2712, 2713, 2714 }, matrix.Sources.ToArray());
                             CollectionAssert.AreEqual(matrix.Targets.ToArray(), matrix.Connections.Keys.ToArray());
@@ -863,6 +873,8 @@ namespace Lawo.EmberPlusSharp.Model
                             connections[targets[1]].Clear();
                             await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[2], sources[4] });
                             Assert.AreEqual(0, connections[targets[1]].Count);
+                            connections[targets[1]].Add(sources[0]);
+                            await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
                         },
                         true,
                         "MatrixLog.xml");

@@ -119,17 +119,28 @@
           <path type="RelativeObjectIdentifier">1.1.0.0</path>
           <contents type="Set">
             <identifier type="UTF8String">Matrix-0</identifier>
+            <description type="UTF8String">Matrix 0</description>
             <type type="Integer">0</type>
             <addressingMode type="Integer">1</addressingMode>
             <targetCount type="Integer">4</targetCount>
             <sourceCount type="Integer">5</sourceCount>
+            <maximumTotalConnects type="Integer">4</maximumTotalConnects>
+            <maximumConnectsPerTarget type="Integer">1</maximumConnectsPerTarget>
             <parametersLocation type="RelativeObjectIdentifier">1.1.0.2000</parametersLocation>
+            <gainParameterNumber type="Integer">17</gainParameterNumber>
             <labels type="Sequence">
               <Label type="Label">
                 <basePath type="RelativeObjectIdentifier">1.1.0.1000.1</basePath>
                 <description type="UTF8String">Primary</description>
+                <C-4711 type="A-1589">
+                  <A-117 type="A-117"></A-117>
+                </C-4711>
               </Label>
+              <C-4711 type="A-1589">
+                <A-117 type="A-117"></A-117>
+              </C-4711>
             </labels>
+            <schemaIdentifiers type="UTF8String">com.company</schemaIdentifiers>
           </contents>
         </RootElement>
         <RootElement type="QualifiedNode">
@@ -182,7 +193,13 @@
             </Target>
             <Target type="Target">
               <number type="Integer">3004</number>
+              <C-4711 type="A-1589">
+                <A-117 type="A-117"></A-117>
+              </C-4711>
             </Target>
+            <C-4711 type="A-1589">
+              <A-117 type="A-117"></A-117>
+            </C-4711>
           </targets>
           <sources type="Sequence">
             <Source type="Source">
@@ -207,6 +224,9 @@
               <sources type="RelativeObjectIdentifier">0</sources>
               <operation type="Integer">0</operation>
               <disposition type="Integer">0</disposition>
+              <C-4711 type="A-1589">
+                <A-117 type="A-117"></A-117>
+              </C-4711>
             </Connection>
             <Connection type="Connection">
               <target type="Integer">3002</target>
@@ -226,7 +246,13 @@
               <operation type="Integer">0</operation>
               <disposition type="Integer">0</disposition>
             </Connection>
+            <C-4711 type="A-1589">
+              <A-117 type="A-117"></A-117>
+            </C-4711>
           </connections>
+          <C-4711 type="A-1589">
+            <A-117 type="A-117"></A-117>
+          </C-4711>
         </RootElement>
       </Root>
     </Payload>
@@ -344,6 +370,61 @@
               <target type="Integer">3001</target>
               <sources type="RelativeObjectIdentifier">2712.2714</sources>
               <operation type="Integer">0</operation>
+              <disposition type="Integer">1</disposition>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="8">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3002</target>
+              <sources type="RelativeObjectIdentifier">0</sources>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="10">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3002</target>
+              <sources type="RelativeObjectIdentifier">0</sources>
+              <operation type="Integer">0</operation>
+              <disposition type="Integer">1</disposition>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="11">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3001</target>
+              <sources type="RelativeObjectIdentifier">2711.2713.2714</sources>
+              <operation type="Integer">1</operation>
               <disposition type="Integer">1</disposition>
             </Connection>
           </connections>
