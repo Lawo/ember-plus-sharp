@@ -863,20 +863,6 @@ namespace Lawo.EmberPlusSharp.Model
                                 Assert.AreEqual(0, connection.Value.Single());
                             }
 
-                            var targets = matrix.Targets;
-                            var sources = matrix.Sources;
-                            var connections = matrix.Connections;
-                            connections[targets[0]].Clear();
-                            connections[targets[0]].Add(sources[1]);
-                            await WaitAndAssertStableAsync(connections[targets[1]], new[] { sources[1] });
-                            connections[targets[0]].Clear();
-                            connections[targets[1]].Clear();
-                            await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[2], sources[4] });
-                            Assert.AreEqual(0, connections[targets[1]].Count);
-                            connections[targets[1]].Add(sources[0]);
-                            await WaitAndAssertStableAsync(
-                                connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
-
                             var labels = consumer.Root.Sdn.Switching.Matrix0.Labels.Children.Single();
                             Assert.AreEqual("Primary", labels.Identifier);
                             Assert.AreEqual(0, labels.Targets.Children.Count);
@@ -918,6 +904,20 @@ namespace Lawo.EmberPlusSharp.Model
                                     Assert.AreEqual(0, targetParameters[source].Children.Count);
                                 }
                             }
+
+                            var targets = matrix.Targets;
+                            var sources = matrix.Sources;
+                            var connections = matrix.Connections;
+                            connections[targets[0]].Clear();
+                            connections[targets[0]].Add(sources[1]);
+                            await WaitAndAssertStableAsync(connections[targets[1]], new[] { sources[1] });
+                            connections[targets[0]].Clear();
+                            connections[targets[1]].Clear();
+                            await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[2], sources[4] });
+                            Assert.AreEqual(0, connections[targets[1]].Count);
+                            connections[targets[1]].Add(sources[0]);
+                            await WaitAndAssertStableAsync(
+                                connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
                         },
                         true,
                         "MatrixMainLog.xml");
