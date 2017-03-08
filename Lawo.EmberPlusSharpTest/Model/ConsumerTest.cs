@@ -874,7 +874,8 @@ namespace Lawo.EmberPlusSharp.Model
                             await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[2], sources[4] });
                             Assert.AreEqual(0, connections[targets[1]].Count);
                             connections[targets[1]].Add(sources[0]);
-                            await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
+                            await WaitAndAssertStableAsync(
+                                connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
 
                             var labels = consumer.Root.Sdn.Switching.Matrix0.Labels.Children.Single();
                             Assert.AreEqual("Primary", labels.Identifier);
@@ -884,27 +885,37 @@ namespace Lawo.EmberPlusSharp.Model
                             var parameters = consumer.Root.Sdn.Switching.Matrix0.Parameters;
                             Assert.AreEqual(matrix.Targets.Count, parameters.Targets.Children.Count);
 
+                            CollectionAssert.AreEqual(
+                                matrix.Targets.ToArray(), parameters.Targets.Children.Select(t => t.Number).ToArray());
+
                             foreach (var target in parameters.Targets.Children)
                             {
                                 Assert.AreEqual(0, target.Children.Count);
                             }
 
-                            Assert.AreEqual(matrix.Sources.Count, parameters.Sources.Children.Count);
+                            CollectionAssert.AreEqual(
+                                matrix.Sources.ToArray(), parameters.Sources.Children.Select(t => t.Number).ToArray());
 
                             foreach (var source in parameters.Sources.Children)
                             {
                                 Assert.AreEqual(0, source.Children.Count);
                             }
 
-                            Assert.AreEqual(matrix.Connections.Count, parameters.Connections.Children.Count);
+                            CollectionAssert.AreEqual(
+                                matrix.Connections.Keys.ToArray(),
+                                parameters.Connections.Children.Select(t => t.Number).ToArray());
 
-                            foreach (var connection in parameters.Connections.Children)
+                            foreach (var target in matrix.Targets)
                             {
-                                Assert.AreEqual(matrix.Sources.Count, connection.Children.Count);
+                                var targetParameters = parameters.Connections[target];
 
-                                foreach (var source in connection.Children)
+                                CollectionAssert.AreEqual(
+                                    matrix.Sources.ToArray(),
+                                    targetParameters.Children.Select(t => t.Number).ToArray());
+
+                                foreach (var source in matrix.Sources)
                                 {
-                                    Assert.AreEqual(0, source.Children.Count);
+                                    Assert.AreEqual(0, targetParameters[source].Children.Count);
                                 }
                             }
                         },
