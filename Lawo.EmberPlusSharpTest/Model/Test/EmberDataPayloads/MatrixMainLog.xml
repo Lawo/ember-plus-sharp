@@ -1139,4 +1139,59 @@
       </Root>
     </Payload>
   </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Send" number="12">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3001</target>
+              <sources type="RelativeObjectIdentifier">2712.2713.2714</sources>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="15">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3001</target>
+              <sources type="RelativeObjectIdentifier">2712.2713.2714</sources>
+              <operation type="Integer">0</operation>
+              <disposition type="Integer">1</disposition>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:44.10" direction="Receive" number="16">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">3001</target>
+              <sources type="RelativeObjectIdentifier">2713</sources>
+              <operation type="Integer">2</operation>
+              <disposition type="Integer">1</disposition>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
 </S101Log>

@@ -26,6 +26,7 @@ namespace Lawo.EmberPlusSharp.Glow
             TestS101LogConverter("MainLog.xml");
             TestS101LogConverter("FunctionLog.xml");
             TestS101LogConverter("IsOnlineLog.xml");
+            TestS101LogConverter("MatrixMainLog.xml");
         }
 
         /// <summary>Tests <see cref="GlowLogConverter"/> exceptions.</summary>

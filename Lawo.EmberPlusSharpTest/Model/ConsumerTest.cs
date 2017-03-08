@@ -918,6 +918,8 @@ namespace Lawo.EmberPlusSharp.Model
                             connections[targets[1]].Add(sources[0]);
                             await WaitAndAssertStableAsync(
                                 connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
+                            connections[targets[0]].Remove(sources[1]);
+                            await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[2], sources[4] });
                         },
                         true,
                         "MatrixMainLog.xml");
