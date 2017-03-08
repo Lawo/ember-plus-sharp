@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<S101Log>
+  <Event type="StartingReadLoop" timeUtc="15:54:43.75" />
+  <Event type="Message" timeUtc="15:54:43.82" direction="Send" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Command">
+          <number type="Integer">32</number>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.92" direction="Receive" number="1">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="Node">
+          <number type="Integer">1</number>
+          <contents type="Set">
+            <identifier type="UTF8String">SDN</identifier>
+            <isRoot type="Boolean">true</isRoot>
+            <isOnline type="Boolean">true</isOnline>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.96" direction="Send" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.97" direction="Receive" number="2">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Switching</identifier>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.97" direction="Send" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.97" direction="Receive" number="3">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Matrix-0</identifier>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.98" direction="Send" number="4">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.99" direction="Receive" number="4">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <contents type="Set">
+            <identifier type="UTF8String">Matrix-0</identifier>
+            <targetCount type="Integer">4</targetCount>
+            <sourceCount type="Integer">5</sourceCount>
+          </contents>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.98" direction="Send" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 0A 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <children type="ElementCollection">
+            <Element type="Command">
+              <number type="Integer">32</number>
+            </Element>
+          </children>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+  <Event type="Message" timeUtc="15:54:43.99" direction="Receive" number="5">
+    <Slot>00</Slot>
+    <Command>EmberData 01 28 02</Command>
+    <Payload>
+      <Root type="RootElementCollection">
+        <RootElement type="QualifiedMatrix">
+          <path type="RelativeObjectIdentifier">1.1.0.0</path>
+          <connections type="Sequence">
+            <Connection type="Connection">
+              <target type="Integer">0</target>
+              <sources type="RelativeObjectIdentifier"></sources>
+            </Connection>
+            <Connection type="Connection">
+              <target type="Integer">1</target>
+              <sources type="RelativeObjectIdentifier"></sources>
+            </Connection>
+            <Connection type="Connection">
+              <target type="Integer">2</target>
+              <sources type="RelativeObjectIdentifier"></sources>
+            </Connection>
+            <Connection type="Connection">
+              <target type="Integer">3</target>
+              <sources type="RelativeObjectIdentifier"></sources>
+            </Connection>
+          </connections>
+        </RootElement>
+      </Root>
+    </Payload>
+  </Event>
+</S101Log>

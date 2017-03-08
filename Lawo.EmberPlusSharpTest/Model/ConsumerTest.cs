@@ -831,9 +831,9 @@ namespace Lawo.EmberPlusSharp.Model
                 });
         }
 
-        /// <summary>Tests Ember+ matrices</summary>
+        /// <summary>Tests the main use cases of Ember+ matrices.</summary>
         [TestMethod]
-        public void MatrixTest()
+        public void MatrixMainTest()
         {
             AsyncPump.Run(
                 async () =>
@@ -846,12 +846,12 @@ namespace Lawo.EmberPlusSharp.Model
                             Assert.AreEqual("Matrix 0", matrix.Description);
                             Assert.AreEqual(4, matrix.MaximumTotalConnects);
                             Assert.AreEqual(1, matrix.MaximumConnectsPerTarget);
-                            CollectionAssert.AreEqual(new[] { 1, 1, 0, 2000 }, matrix.ParametersLocation.ToArray());
+                            CollectionAssert.AreEqual(new[] { 1, 1, 0, 2000 }, matrix.ParametersLocation?.ToArray());
                             Assert.AreEqual(17, matrix.GainParameterNumber);
-                            Assert.AreEqual(1, matrix.Labels.Count);
+                            Assert.AreEqual(1, matrix.Labels?.Count);
                             Assert.AreEqual("Primary", matrix.Labels[0].Description);
                             CollectionAssert.AreEqual(new[] { 1, 1, 0, 1000, 1 }, matrix.Labels[0].BasePath.ToArray());
-                            Assert.AreEqual(1, matrix.SchemaIdentifiers.Count);
+                            Assert.AreEqual(1, matrix.SchemaIdentifiers?.Count);
                             Assert.AreEqual("com.company", matrix.SchemaIdentifiers[0]);
 
                             CollectionAssert.AreEqual(new[] { 3001, 3002, 3003, 3004 }, matrix.Targets.ToArray());
@@ -877,29 +877,42 @@ namespace Lawo.EmberPlusSharp.Model
                             await WaitAndAssertStableAsync(connections[targets[0]], new[] { sources[1], sources[2], sources[3], sources[4] });
                         },
                         true,
-                        "MatrixLog.xml");
+                        "MatrixMainLog.xml");
                 });
         }
 
-        /// <summary>Tests Ember+ matrices</summary>
+        /// <summary>Tests default values for Ember+ matrices.</summary>
         [TestMethod]
-        [TestCategory("Manual")]
-        public void ManualMatrixTest()
+        public void MatrixMinimalTest()
         {
             AsyncPump.Run(
                 async () =>
                 {
-                    using (var tcpClient = new TcpClient())
-                    {
-                        await tcpClient.ConnectAsync("localhost", 8999);
-
-                        using (var stream = tcpClient.GetStream())
-                        using (var client = new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync))
-                        using (var consumer = await Consumer<MatrixRoot>.CreateAsync(client))
+                    await TestWithRobot<MatrixRoot>(
+                        consumer =>
                         {
-                            await Task.Delay(60000);
-                        }
-                    }
+                            var matrix = consumer.Root.Sdn.Switching.Matrix0.Matrix;
+                            Assert.AreEqual("Matrix-0", matrix.Identifier);
+                            Assert.AreEqual(4, matrix.MaximumTotalConnects);
+                            Assert.AreEqual(1, matrix.MaximumConnectsPerTarget);
+                            Assert.AreEqual(null, matrix.ParametersLocation);
+                            Assert.AreEqual(null, matrix.GainParameterNumber);
+                            Assert.AreEqual(null, matrix.Labels);
+                            Assert.AreEqual(null, matrix.SchemaIdentifiers);
+
+                            CollectionAssert.AreEqual(new[] { 0, 1, 2, 3 }, matrix.Targets.ToArray());
+                            CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 4 }, matrix.Sources.ToArray());
+                            CollectionAssert.AreEqual(matrix.Targets.ToArray(), matrix.Connections.Keys.ToArray());
+
+                            foreach (var connection in matrix.Connections)
+                            {
+                                Assert.AreEqual(0, connection.Value.Count);
+                            }
+
+                            return Task.FromResult(false);
+                        },
+                        true,
+                        "MatrixMinimalLog.xml");
                 });
         }
 

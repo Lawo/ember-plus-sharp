@@ -618,7 +618,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MatrixLog.xml" />
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MatrixMainLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Test\EmberDataPayloads\MatrixMinimalLog.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
