@@ -42,6 +42,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Initializes a new instance of the <see cref="S101Client"/> class by calling
         /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger)">S101Client(<paramref name="connection"/>,
         /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, null)</see>.</summary>
+        /// <remarks>See <see cref="S101Client"/> remarks for more information.</remarks>
         [CLSCompliant(false)]
         public S101Client(IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync)
             : this(connection, readAsync, writeAsync, null)
@@ -52,6 +53,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <see cref="S101Client(IDisposable, ReadAsyncCallback, WriteAsyncCallback, IS101Logger, int, int)">S101Client(<paramref name="connection"/>,
         /// <paramref name="readAsync"/>, <paramref name="writeAsync"/>, <paramref name="logger"/>, 3000, 8192)</see>.
         /// </summary>
+        /// <remarks>See <see cref="S101Client"/> remarks for more information.</remarks>
         [CLSCompliant(false)]
         public S101Client(
             IDisposable connection, ReadAsyncCallback readAsync, WriteAsyncCallback writeAsync, IS101Logger logger)
@@ -79,6 +81,7 @@ namespace Lawo.EmberPlusSharp.S101
         /// <paramref name="timeout"/> is less than -1.</exception>
         /// <exception cref="NotSupportedException">S101Client is not supported when SynchronizationContext.Current ==
         /// null.</exception>
+        /// <remarks>See <see cref="S101Client"/> remarks for more information.</remarks>
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Official class name.")]
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposed in ReadLoop.")]
         [CLSCompliant(false)]
