@@ -191,11 +191,11 @@ namespace Lawo.EmberPlusSharp.Model
             if (!this.disposed)
             {
                 this.disposed = true;
-                this.root.HasChangesSet -= this.OnHasChangesSet;
+                this.root.SendRequired -= this.OnSendRequired;
                 this.client.ConnectionLost -= this.receiveQueue.OnConnectionLost;
                 this.client.EmberDataReceived -= this.receiveQueue.OnMessageReceived;
                 this.isVerifiedSource.TrySetCanceled();
-                this.hasChangesSetSource.TrySetCanceled();
+                this.isSendRequiredSource.TrySetCanceled();
                 this.CancelAutoSendDelay();
                 this.receiveQueue.OnConnectionLost(this, new ConnectionLostEventArgs(null));
             }
@@ -217,7 +217,7 @@ namespace Lawo.EmberPlusSharp.Model
         private readonly S101Message emberDataMessage;
         private int autoSendInterval = 100;
         private CancellationTokenSource autoSendDelayCancellationSource;
-        private TaskCompletionSource<bool> hasChangesSetSource;
+        private TaskCompletionSource<bool> isSendRequiredSource;
         private TaskCompletionSource<bool> isVerifiedSource;
         private bool disposed;
 
@@ -258,7 +258,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private void OnHasChangesSet(object sender, EventArgs e) => this.hasChangesSetSource.TrySetResult(true);
+        private void OnSendRequired(object sender, EventArgs e) => this.isSendRequiredSource.TrySetResult(true);
 
         private async Task RetrieveChildrenAsync()
         {
@@ -283,22 +283,22 @@ namespace Lawo.EmberPlusSharp.Model
         {
             Exception exception = null;
             this.autoSendDelayCancellationSource = new CancellationTokenSource();
-            this.hasChangesSetSource = new TaskCompletionSource<bool>();
+            this.isSendRequiredSource = new TaskCompletionSource<bool>();
             this.isVerifiedSource = new TaskCompletionSource<bool>();
-            this.root.HasChangesSet += this.OnHasChangesSet;
+            this.root.SendRequired += this.OnSendRequired;
 
             try
             {
-                var localTask = this.WaitForLocalChangesAsync();
+                var waitForSendRequiredTask = this.WaitForSendRequiredAsync();
                 var providerTask = this.WaitForProviderChangesAsync();
 
                 while (true)
                 {
-                    if (await Task.WhenAny(localTask, providerTask) == localTask)
+                    if (await Task.WhenAny(waitForSendRequiredTask, providerTask) == waitForSendRequiredTask)
                     {
-                        await localTask;
+                        await waitForSendRequiredTask;
                         await this.SendCoreAsync();
-                        localTask = this.WaitForLocalChangesAsync();
+                        waitForSendRequiredTask = this.WaitForSendRequiredAsync();
                     }
                     else
                     {
@@ -330,11 +330,11 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
-        private async Task WaitForLocalChangesAsync()
+        private async Task WaitForSendRequiredAsync()
         {
-            await this.hasChangesSetSource.Task;
+            await this.isSendRequiredSource.Task;
             await this.DelayAutoSend();
-            this.hasChangesSetSource = new TaskCompletionSource<bool>();
+            this.isSendRequiredSource = new TaskCompletionSource<bool>();
         }
 
         private async Task RetrieveChildrenCoreAsync()

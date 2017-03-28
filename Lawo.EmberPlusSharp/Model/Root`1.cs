@@ -45,14 +45,14 @@ namespace Lawo.EmberPlusSharp.Model
             if (!this.HasChanges)
             {
                 this.HasChanges = true;
-                this.RaiseHasChangesSet();
+                this.RaiseSendRequired();
             }
         }
 
         /// <inheritdoc/>
         void IParent.AppendPath(StringBuilder builder) => this.AppendPath(builder);
 
-        internal event EventHandler<EventArgs> HasChangesSet;
+        internal event EventHandler<EventArgs> SendRequired;
 
         internal void Read(
             EmberReader reader,
@@ -155,7 +155,7 @@ namespace Lawo.EmberPlusSharp.Model
         internal sealed override void ResetRetrievalState()
         {
             this.RetrievalState = RetrievalState.None;
-            this.RaiseHasChangesSet();
+            this.RaiseSendRequired();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -380,7 +380,7 @@ namespace Lawo.EmberPlusSharp.Model
             return new ModelException(string.Format(CultureInfo.InvariantCulture, Format, parameter.GetPath()), ex);
         }
 
-        private void RaiseHasChangesSet() => this.HasChangesSet?.Invoke(this, EventArgs.Empty);
+        private void RaiseSendRequired() => this.SendRequired?.Invoke(this, EventArgs.Empty);
 
         private void ReadQualifiedChild(EmberReader reader, ElementType actualType)
         {
