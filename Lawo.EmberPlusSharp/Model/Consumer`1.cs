@@ -290,11 +290,12 @@ namespace Lawo.EmberPlusSharp.Model
             try
             {
                 var waitForSendRequiredTask = this.WaitForSendRequiredAsync();
-                var providerTask = this.WaitForProviderChangesAsync();
+                var waitForProviderChangesTask = this.WaitForProviderChangesAsync();
 
                 while (true)
                 {
-                    if (await Task.WhenAny(waitForSendRequiredTask, providerTask) == waitForSendRequiredTask)
+                    if (await Task.WhenAny(waitForSendRequiredTask, waitForProviderChangesTask) ==
+                        waitForSendRequiredTask)
                     {
                         await waitForSendRequiredTask;
                         await this.SendCoreAsync();
@@ -302,12 +303,12 @@ namespace Lawo.EmberPlusSharp.Model
                     }
                     else
                     {
-                        await providerTask;
+                        await waitForProviderChangesTask;
                         this.ApplyProviderChanges();
                         await this.RetrieveChildrenAsync();
                         this.isVerifiedSource.TrySetResult(false);
                         this.isVerifiedSource = new TaskCompletionSource<bool>();
-                        providerTask = this.WaitForProviderChangesAsync();
+                        waitForProviderChangesTask = this.WaitForProviderChangesAsync();
                     }
                 }
             }
