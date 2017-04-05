@@ -1524,6 +1524,21 @@ namespace Lawo.EmberPlusSharp.Model
                 "false"));
         }
 
+        /// <summary>Tests that Ember+ trees received with different <see cref="ChildrenRetrievalPolicy"/> have an equal
+        /// structure.</summary>
+        [TestMethod]
+        [TestCategory("Manual")]
+        public void Bug40Test()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    var automaticRoot = await GetTreeAsync(ChildrenRetrievalPolicy.All);
+                    var manualRoot = await GetTreeAsync(ChildrenRetrievalPolicy.DirectOnly);
+                    Compare(automaticRoot, manualRoot);
+                });
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private static Task TestConsumerAfterFirstRequest<TRoot>(
@@ -2116,6 +2131,60 @@ namespace Lawo.EmberPlusSharp.Model
             // The following two lines verify that the change we've detected above is not just an intermediate state.
             await Task.Delay(250);
             CollectionAssert.AreEqual(collection, expected);
+        }
+
+        private static async Task<EmptyDynamicRoot> GetTreeAsync(ChildrenRetrievalPolicy policy)
+        {
+            using (var tcpClient = new TcpClient())
+            {
+                await tcpClient.ConnectAsync("localhost", 8999);
+
+                using (var stream = tcpClient.GetStream())
+                using (var client = new S101Client(tcpClient, stream.ReadAsync, stream.WriteAsync))
+                using (var consumer = await Consumer<EmptyDynamicRoot>.CreateAsync(client, 10000, policy))
+                {
+                    if (policy != ChildrenRetrievalPolicy.All)
+                    {
+                        await RetrieveChildrenAsync(consumer, consumer.Root);
+                    }
+
+                    return consumer.Root;
+                }
+            }
+        }
+
+        private static async Task RetrieveChildrenAsync(Consumer<EmptyDynamicRoot> consumer, INode node)
+        {
+            foreach (IElement child in node.Children)
+            {
+                var childNode = child as INode;
+
+                if (childNode != null)
+                {
+                    childNode.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
+                    await consumer.SendAsync();
+                    await RetrieveChildrenAsync(consumer, childNode);
+                }
+            }
+        }
+
+        private static void Compare(INode expected, INode actual)
+        {
+            foreach (IElement expectedChild in expected.Children)
+            {
+                var actualChild = actual[expectedChild.Number];
+                Assert.IsNotNull(actualChild);
+                Assert.AreEqual(expectedChild.GetType(), actualChild.GetType());
+
+                var expectedChildNode = expectedChild as INode;
+
+                if (expectedChildNode != null)
+                {
+                    var actualChildNode = actualChild as INode;
+                    Assert.IsNotNull(actualChildNode);
+                    Compare(expectedChildNode, actualChildNode);
+                }
+            }
         }
 
         private Task DynamicChildrenRetrievalPolicyTestAsync(bool delay)
