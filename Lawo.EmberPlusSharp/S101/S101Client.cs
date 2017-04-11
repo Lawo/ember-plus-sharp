@@ -151,7 +151,7 @@ namespace Lawo.EmberPlusSharp.S101
                         };
                 }
 
-                this.threadId = NativeMethods.GetCurrentThreadId();
+                this.threadId = Thread.CurrentThread.ManagedThreadId;
                 this.writer = new S101Writer(writeAsyncWithLog, bufferSize);
                 this.logger = logger;
                 this.timeout = timeout;
@@ -287,7 +287,7 @@ namespace Lawo.EmberPlusSharp.S101
         private readonly WorkQueue logQueue = new WorkQueue();
         private readonly TaskQueue sendQueue = new TaskQueue();
         private readonly CancellationTokenSource source = new CancellationTokenSource();
-        private readonly uint threadId;
+        private readonly int threadId;
         private readonly S101Writer writer;
         private readonly IS101Logger logger;
         private readonly int timeout;
@@ -300,7 +300,7 @@ namespace Lawo.EmberPlusSharp.S101
                 throw new ObjectDisposedException(this.GetType().Name);
             }
 
-            if (this.threadId != NativeMethods.GetCurrentThreadId())
+            if (this.threadId != Thread.CurrentThread.ManagedThreadId)
             {
                 throw new InvalidOperationException(
                     "Accessed a S101Client object from a thread other than the one that executed the constructor.");
