@@ -326,15 +326,15 @@ namespace Lawo.EmberPlusSharp.Model
         private static void Insert(ObservableCollection<int> existingSources, int[] sources, bool replace)
         {
             Array.Sort(sources);
-            int index = 0;
 
-            foreach (var source in sources)
+            if (replace)
             {
-                int? existingSource = null;
+                // Remove all elements in existingSources not contained in sources
+                var index = 0;
 
-                while ((index < existingSources.Count) && ((existingSource = existingSources[index]) < source))
+                while (index < existingSources.Count)
                 {
-                    if (replace)
+                    if (Array.BinarySearch(sources, existingSources[index]) < 0)
                     {
                         existingSources.RemoveAt(index);
                     }
@@ -343,13 +343,24 @@ namespace Lawo.EmberPlusSharp.Model
                         ++index;
                     }
                 }
+            }
 
-                if (existingSource != source)
+            // Insert sources elements into existingSources, but skip elements already present in existingSources
+            var insertIndex = 0;
+
+            foreach (var source in sources)
+            {
+                int? existingSource = null;
+
+                while ((insertIndex < existingSources.Count) && ((existingSource = existingSources[insertIndex]) < source))
                 {
-                    existingSources.Insert(index, source);
+                    ++insertIndex;
                 }
 
-                ++index;
+                if (source != existingSource)
+                {
+                    existingSources.Insert(insertIndex, source);
+                }
             }
         }
 
