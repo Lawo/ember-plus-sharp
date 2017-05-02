@@ -21,6 +21,7 @@
   </HelpKINode>
   <HelpKINode Title="AsyncPump.Run method" Url="html/B5A149C5.htm" />
   <HelpKINode Title="AutoSendInterval property" Url="html/F1C18AE1.htm" />
+  <HelpKINode Title="BasePath property" Url="html/2F2746D2.htm" />
   <HelpKINode Title="BerBoolean class">
     <HelpKINode Title="BerBoolean Class" Url="html/DE434F58.htm" />
     <HelpKINode Title="about BerBoolean class" Url="html/DE434F58.htm" />
@@ -257,7 +258,7 @@
   <HelpKINode Title="ConnectionLostEventArgs.Exception property" Url="html/367D0C00.htm" />
   <HelpKINode Title="Connections property">
     <HelpKINode Title="IMatrix.Connections Property " Url="html/4B286D21.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).Connections Property " Url="html/BCEC4928.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).Connections Property " Url="html/79AD6BF0.htm" />
     <HelpKINode Title="MatrixParameters(TTarget, TSource, TConnection).Connections Property " Url="html/9F755C8A.htm" />
   </HelpKINode>
   <HelpKINode Title="ConsoleLogListener class">
@@ -330,6 +331,7 @@
   <HelpKINode Title="Description property">
     <HelpKINode Title="Element.Description Property " Url="html/178740AB.htm" />
     <HelpKINode Title="IElement.Description Property " Url="html/D0A9BBF1.htm" />
+    <HelpKINode Title="MatrixLabel.Description Property " Url="html/1204168F.htm" />
   </HelpKINode>
   <HelpKINode Title="Deserialize(Of T) method" Url="html/A642B7D2.htm" />
   <HelpKINode Title="Deserialize&lt;T&gt; method" Url="html/A642B7D2.htm" />
@@ -870,7 +872,7 @@
   </HelpKINode>
   <HelpKINode Title="GainParameterNumber property">
     <HelpKINode Title="IMatrix.GainParameterNumber Property " Url="html/C7C2F359.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).GainParameterNumber Property " Url="html/C6750A13.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).GainParameterNumber Property " Url="html/C00E0598.htm" />
   </HelpKINode>
   <HelpKINode Title="GenericCompare class">
     <HelpKINode Title="GenericCompare Class" Url="html/605C9C45.htm" />
@@ -996,10 +998,9 @@
   <HelpKINode Title="IMatrix.Labels property" Url="html/247AFC1F.htm" />
   <HelpKINode Title="IMatrix.MaximumConnectsPerTarget property" Url="html/E08576F8.htm" />
   <HelpKINode Title="IMatrix.MaximumTotalConnects property" Url="html/630CA105.htm" />
-  <HelpKINode Title="IMatrix.Parameters property" Url="html/4599BB8F.htm" />
+  <HelpKINode Title="IMatrix.ParametersLocation property" Url="html/E1E13584.htm" />
   <HelpKINode Title="IMatrix.Sources property" Url="html/6E24155.htm" />
   <HelpKINode Title="IMatrix.Targets property" Url="html/428D47.htm" />
-  <HelpKINode Title="IMatrix.Type property" Url="html/2938C37B.htm" />
   <HelpKINode Title="IMonitoredConnection interface">
     <HelpKINode Title="IMonitoredConnection Interface" Url="html/BD8ABE5E.htm" />
     <HelpKINode Title="about IMonitoredConnection interface" Url="html/BD8ABE5E.htm" />
@@ -1150,6 +1151,7 @@
   <HelpKINode Title="IS101Logger.LogEvent method" Url="html/C8CBB4A4.htm" />
   <HelpKINode Title="IS101Logger.LogException method" Url="html/687C5A07.htm" />
   <HelpKINode Title="IS101Logger.LogMessage method" Url="html/6BC73D59.htm" />
+  <HelpKINode Title="IsActive property" Url="html/594F8BAF.htm" />
   <HelpKINode Title="IsAnotherMessageAvailable property">
     <HelpKINode Title="MessageReceivedEventArgs.IsAnotherMessageAvailable Property " Url="html/36BD02E4.htm" />
     <HelpKINode Title="S101Reader.IsAnotherMessageAvailable Property " Url="html/B5C9007B.htm" />
@@ -1232,7 +1234,7 @@
   <HelpKINode Title="KeepAliveResponse.KeepAliveResponse constructor" Url="html/CEEDA8C.htm" />
   <HelpKINode Title="Labels property">
     <HelpKINode Title="IMatrix.Labels Property " Url="html/247AFC1F.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).Labels Property " Url="html/48525A74.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).Labels Property " Url="html/4D4534AD.htm" />
   </HelpKINode>
   <HelpKINode Title="Lawo namespace" Url="html/ED2FD13F.htm" />
   <HelpKINode Title="Lawo.BufferHelper class" Url="html/D93BA2BE.htm" />
@@ -1335,13 +1337,13 @@
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.InvocationFailedException class" Url="html/E348B577.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.IParameter interface" Url="html/49FA7AAD.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.IResult interface" Url="html/5D94FCD6.htm" />
-  <HelpKINode Title="Lawo.EmberPlusSharp.Model.Matrix(Of TTarget, TSource, TConnection) class" Url="html/611ADC15.htm" />
-  <HelpKINode Title="Lawo.EmberPlusSharp.Model.Matrix&lt;TTarget, TSource, TConnection&gt; class" Url="html/611ADC15.htm" />
-  <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixAddressingMode enumeration" Url="html/ABDD8C14.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.Matrix class" Url="html/6DAF966F.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixBase(Of TMostDerived) class" Url="html/B82B973C.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixBase&lt;TMostDerived&gt; class" Url="html/B82B973C.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixLabel structure" Url="html/82D384FF.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixLabels class" Url="html/9DC884FF.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixParameters(Of TTarget, TSource, TConnection) class" Url="html/171D76E5.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixParameters&lt;TTarget, TSource, TConnection&gt; class" Url="html/171D76E5.htm" />
-  <HelpKINode Title="Lawo.EmberPlusSharp.Model.MatrixType enumeration" Url="html/825B2FF.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.ModelException class" Url="html/3DF66B8A.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.Node(Of TMostDerived) class" Url="html/83EA4D97.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.Model.Node&lt;TMostDerived&gt; class" Url="html/83EA4D97.htm" />
@@ -1402,6 +1404,7 @@
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.KeepAliveResponse class" Url="html/32D54549.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.MessageReceivedEventArgs class" Url="html/1F9E1825.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.OutOfFrameByteReceivedEventArgs class" Url="html/8C695ECB.htm" />
+  <HelpKINode Title="Lawo.EmberPlusSharp.S101.ProviderStatus class" Url="html/865865DE.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.S101Client class" Url="html/9F3D3A83.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.S101Command class" Url="html/70EE950A.htm" />
   <HelpKINode Title="Lawo.EmberPlusSharp.S101.S101Exception class" Url="html/18261EC6.htm" />
@@ -1451,7 +1454,6 @@
   <HelpKINode Title="Lawo.Threading.Tasks.TaskSingleton class" Url="html/68D3AC2C.htm" />
   <HelpKINode Title="Lawo.Threading.Tasks.WorkQueue class" Url="html/BD88094F.htm" />
   <HelpKINode Title="Length property" Url="html/9F5AEDFD.htm" />
-  <HelpKINode Title="Linear enumeration member" Url="html/ABDD8C14.htm" />
   <HelpKINode Title="Log class">
     <HelpKINode Title="Log Class" Url="html/5AF39ADF.htm" />
     <HelpKINode Title="about Log class" Url="html/5AF39ADF.htm" />
@@ -1488,39 +1490,51 @@
     <HelpKINode Title="IS101Logger.LogMessage Method " Url="html/6BC73D59.htm" />
     <HelpKINode Title="S101Logger.LogMessage Method " Url="html/DE6F9F52.htm" />
   </HelpKINode>
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection) class">
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection) Class" Url="html/611ADC15.htm" />
-    <HelpKINode Title="about Matrix(Of TTarget, TSource, TConnection) class" Url="html/611ADC15.htm" />
-    <HelpKINode Title="events" Url="html/1866BA0C.htm" />
-    <HelpKINode Title="methods" Url="html/E50E150E.htm" />
-    <HelpKINode Title="properties" Url="html/C2413A8C.htm" />
+  <HelpKINode Title="Matrix class">
+    <HelpKINode Title="Matrix Class" Url="html/6DAF966F.htm" />
+    <HelpKINode Title="about Matrix class" Url="html/6DAF966F.htm" />
+    <HelpKINode Title="events" Url="html/AD16E507.htm" />
+    <HelpKINode Title="methods" Url="html/62E19214.htm" />
+    <HelpKINode Title="properties" Url="html/4406F36D.htm" />
   </HelpKINode>
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).Connections property" Url="html/BCEC4928.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).GainParameterNumber property" Url="html/C6750A13.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).Labels property" Url="html/48525A74.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).MaximumConnectsPerTarget property" Url="html/716AAA22.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).MaximumTotalConnects property" Url="html/CB8CAFBE.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).Parameters property" Url="html/64DE26F2.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).Sources property" Url="html/2F24AAE1.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).Targets property" Url="html/87ED136B.htm" />
-  <HelpKINode Title="Matrix(Of TTarget, TSource, TConnection).Type property" Url="html/D1A8C174.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt; class">
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection) Class" Url="html/611ADC15.htm" />
-    <HelpKINode Title="about Matrix&lt;TTarget, TSource, TConnection&gt; class" Url="html/611ADC15.htm" />
-    <HelpKINode Title="events" Url="html/1866BA0C.htm" />
-    <HelpKINode Title="methods" Url="html/E50E150E.htm" />
-    <HelpKINode Title="properties" Url="html/C2413A8C.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived) class">
+    <HelpKINode Title="MatrixBase(TMostDerived) Class" Url="html/B82B973C.htm" />
+    <HelpKINode Title="about MatrixBase(Of TMostDerived) class" Url="html/B82B973C.htm" />
+    <HelpKINode Title="events" Url="html/F77039AC.htm" />
+    <HelpKINode Title="methods" Url="html/2317AE3B.htm" />
+    <HelpKINode Title="properties" Url="html/5E6BFBD4.htm" />
   </HelpKINode>
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.Connections property" Url="html/BCEC4928.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.GainParameterNumber property" Url="html/C6750A13.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.Labels property" Url="html/48525A74.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.MaximumConnectsPerTarget property" Url="html/716AAA22.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.MaximumTotalConnects property" Url="html/CB8CAFBE.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.Parameters property" Url="html/64DE26F2.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.Sources property" Url="html/2F24AAE1.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.Targets property" Url="html/87ED136B.htm" />
-  <HelpKINode Title="Matrix&lt;TTarget, TSource, TConnection&gt;.Type property" Url="html/D1A8C174.htm" />
-  <HelpKINode Title="MatrixAddressingMode enumeration" Url="html/ABDD8C14.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).Connections property" Url="html/79AD6BF0.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).GainParameterNumber property" Url="html/C00E0598.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).Labels property" Url="html/4D4534AD.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).MaximumConnectsPerTarget property" Url="html/FF3F2E8B.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).MaximumTotalConnects property" Url="html/9D45664F.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).ParametersLocation property" Url="html/FBB532D4.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).Sources property" Url="html/843D1010.htm" />
+  <HelpKINode Title="MatrixBase(Of TMostDerived).Targets property" Url="html/D3BDC010.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt; class">
+    <HelpKINode Title="MatrixBase(TMostDerived) Class" Url="html/B82B973C.htm" />
+    <HelpKINode Title="about MatrixBase&lt;TMostDerived&gt; class" Url="html/B82B973C.htm" />
+    <HelpKINode Title="events" Url="html/F77039AC.htm" />
+    <HelpKINode Title="methods" Url="html/2317AE3B.htm" />
+    <HelpKINode Title="properties" Url="html/5E6BFBD4.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.Connections property" Url="html/79AD6BF0.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.GainParameterNumber property" Url="html/C00E0598.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.Labels property" Url="html/4D4534AD.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.MaximumConnectsPerTarget property" Url="html/FF3F2E8B.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.MaximumTotalConnects property" Url="html/9D45664F.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.ParametersLocation property" Url="html/FBB532D4.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.Sources property" Url="html/843D1010.htm" />
+  <HelpKINode Title="MatrixBase&lt;TMostDerived&gt;.Targets property" Url="html/D3BDC010.htm" />
+  <HelpKINode Title="MatrixLabel structure">
+    <HelpKINode Title="MatrixLabel Structure" Url="html/82D384FF.htm" />
+    <HelpKINode Title="about MatrixLabel structure" Url="html/82D384FF.htm" />
+    <HelpKINode Title="methods" Url="html/7A17A06E.htm" />
+    <HelpKINode Title="properties" Url="html/6D5158C2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MatrixLabel.BasePath property" Url="html/2F2746D2.htm" />
+  <HelpKINode Title="MatrixLabel.Description property" Url="html/1204168F.htm" />
   <HelpKINode Title="MatrixLabels class">
     <HelpKINode Title="MatrixLabels Class" Url="html/9DC884FF.htm" />
     <HelpKINode Title="about MatrixLabels class" Url="html/9DC884FF.htm" />
@@ -1550,7 +1564,6 @@
   <HelpKINode Title="MatrixParameters&lt;TTarget, TSource, TConnection&gt;.Connections property" Url="html/9F755C8A.htm" />
   <HelpKINode Title="MatrixParameters&lt;TTarget, TSource, TConnection&gt;.Sources property" Url="html/6CFBA65.htm" />
   <HelpKINode Title="MatrixParameters&lt;TTarget, TSource, TConnection&gt;.Targets property" Url="html/B7EA493.htm" />
-  <HelpKINode Title="MatrixType enumeration" Url="html/825B2FF.htm" />
   <HelpKINode Title="Maximum property">
     <HelpKINode Title="IParameter.Maximum Property " Url="html/EB48CB23.htm" />
     <HelpKINode Title="NullableNumericParameter(TMostDerived, TValue).Maximum Property " Url="html/7CD82E84.htm" />
@@ -1558,11 +1571,11 @@
   </HelpKINode>
   <HelpKINode Title="MaximumConnectsPerTarget property">
     <HelpKINode Title="IMatrix.MaximumConnectsPerTarget Property " Url="html/E08576F8.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).MaximumConnectsPerTarget Property " Url="html/716AAA22.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).MaximumConnectsPerTarget Property " Url="html/FF3F2E8B.htm" />
   </HelpKINode>
   <HelpKINode Title="MaximumTotalConnects property">
     <HelpKINode Title="IMatrix.MaximumTotalConnects Property " Url="html/630CA105.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).MaximumTotalConnects Property " Url="html/CB8CAFBE.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).MaximumTotalConnects Property " Url="html/9D45664F.htm" />
   </HelpKINode>
   <HelpKINode Title="Message property">
     <HelpKINode Title="GlowLogInterpreter.Message Property " Url="html/93D8DB39.htm" />
@@ -1665,7 +1678,6 @@
     <HelpKINode Title="ChildrenRetrievalPolicy Enumeration" Url="html/B60F4F2.htm" />
     <HelpKINode Title="ParameterAccess Enumeration" Url="html/44947CDC.htm" />
   </HelpKINode>
-  <HelpKINode Title="Nonlinear enumeration member" Url="html/ABDD8C14.htm" />
   <HelpKINode Title="NonnegativeNumberRequired field" Url="html/2520F2B9.htm" />
   <HelpKINode Title="NonSeekableStream class">
     <HelpKINode Title="NonSeekableStream Class" Url="html/9CADE788.htm" />
@@ -1701,7 +1713,6 @@
   <HelpKINode Title="NotifyPropertyChanged.PropertyChanged event" Url="html/93FBCA8.htm" />
   <HelpKINode Title="NotifyPropertyChanged.SetValue(Of T) method" Url="html/FB2853E5.htm" />
   <HelpKINode Title="NotifyPropertyChanged.SetValue&lt;T&gt; method" Url="html/FB2853E5.htm" />
-  <HelpKINode Title="NToN enumeration member" Url="html/825B2FF.htm" />
   <HelpKINode Title="NullableBooleanParameter class">
     <HelpKINode Title="NullableBooleanParameter Class" Url="html/84C8C591.htm" />
     <HelpKINode Title="about NullableBooleanParameter class" Url="html/84C8C591.htm" />
@@ -1836,8 +1847,6 @@
     <HelpKINode Title="properties" Url="html/D01E9FB9.htm" />
   </HelpKINode>
   <HelpKINode Title="Offset property" Url="html/9ECFCB7A.htm" />
-  <HelpKINode Title="OneToN enumeration member" Url="html/825B2FF.htm" />
-  <HelpKINode Title="OneToOne enumeration member" Url="html/825B2FF.htm" />
   <HelpKINode Title="OnEventSourceCreated method" Url="html/A68EADDF.htm" />
   <HelpKINode Title="OneWayBinding class">
     <HelpKINode Title="OneWayBinding Class" Url="html/AE7F434C.htm" />
@@ -1896,9 +1905,9 @@
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.DefaultValue property" Url="html/4E6BDB9C.htm" />
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.Format property" Url="html/164BEB7B.htm" />
   <HelpKINode Title="ParameterBase&lt;TMostDerived, TValue&gt;.Type property" Url="html/45D86ED3.htm" />
-  <HelpKINode Title="Parameters property">
-    <HelpKINode Title="IMatrix.Parameters Property " Url="html/4599BB8F.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).Parameters Property " Url="html/64DE26F2.htm" />
+  <HelpKINode Title="ParametersLocation property">
+    <HelpKINode Title="IMatrix.ParametersLocation Property " Url="html/E1E13584.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).ParametersLocation Property " Url="html/FBB532D4.htm" />
   </HelpKINode>
   <HelpKINode Title="ParameterType enumeration" Url="html/E51F2BB2.htm" />
   <HelpKINode Title="Parent property">
@@ -1932,6 +1941,16 @@
   <HelpKINode Title="PropertyChangedRegistration.Dispose method" Url="html/73112C17.htm" />
   <HelpKINode Title="PropertyChangedRegistration.PropertyChangedRegistration constructor" Url="html/2CBF37C6.htm" />
   <HelpKINode Title="PropertyInfo property" Url="html/5577BCE1.htm" />
+  <HelpKINode Title="ProviderStatus class">
+    <HelpKINode Title="ProviderStatus Class" Url="html/865865DE.htm" />
+    <HelpKINode Title="about ProviderStatus class" Url="html/865865DE.htm" />
+    <HelpKINode Title="constructor" Url="html/8627A6B7.htm" />
+    <HelpKINode Title="methods" Url="html/B4113B7.htm" />
+    <HelpKINode Title="properties" Url="html/DEAFA790.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ProviderStatus.IsActive property" Url="html/594F8BAF.htm" />
+  <HelpKINode Title="ProviderStatus.ProviderStatus constructor" Url="html/8627A6B7.htm" />
+  <HelpKINode Title="ProviderStatus.ToString method" Url="html/AAEF55BC.htm" />
   <HelpKINode Title="Read enumeration member" Url="html/44947CDC.htm" />
   <HelpKINode Title="Read method">
     <HelpKINode Title="EmberReader.Read Method " Url="html/E1E44043.htm" />
@@ -2344,7 +2363,7 @@
   <HelpKINode Title="Source property" Url="html/A9633453.htm" />
   <HelpKINode Title="Sources property">
     <HelpKINode Title="IMatrix.Sources Property " Url="html/6E24155.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).Sources Property " Url="html/2F24AAE1.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).Sources Property " Url="html/843D1010.htm" />
     <HelpKINode Title="MatrixLabels.Sources Property " Url="html/21BF0D88.htm" />
     <HelpKINode Title="MatrixParameters(TTarget, TSource, TConnection).Sources Property " Url="html/6CFBA65.htm" />
   </HelpKINode>
@@ -2400,7 +2419,7 @@
   <HelpKINode Title="Target property" Url="html/EC6A7B75.htm" />
   <HelpKINode Title="Targets property">
     <HelpKINode Title="IMatrix.Targets Property " Url="html/428D47.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).Targets Property " Url="html/87ED136B.htm" />
+    <HelpKINode Title="MatrixBase(TMostDerived).Targets Property " Url="html/D3BDC010.htm" />
     <HelpKINode Title="MatrixLabels.Targets Property " Url="html/555353B8.htm" />
     <HelpKINode Title="MatrixParameters(TTarget, TSource, TConnection).Targets Property " Url="html/B7EA493.htm" />
   </HelpKINode>
@@ -2444,6 +2463,7 @@
   <HelpKINode Title="ToString method">
     <HelpKINode Title="EmberData.ToString Method " Url="html/A21B02B5.htm" />
     <HelpKINode Title="EmberId.ToString Method " Url="html/165CC5C.htm" />
+    <HelpKINode Title="ProviderStatus.ToString Method " Url="html/AAEF55BC.htm" />
     <HelpKINode Title="S101Command.ToString Method " Url="html/55627F4F.htm" />
   </HelpKINode>
   <HelpKINode Title="ToUInt64(Of TEnum) method" Url="html/A37E0DC7.htm" />
@@ -2470,9 +2490,7 @@
   </HelpKINode>
   <HelpKINode Title="TwoWayBinding.Create method" Url="html/86759667.htm" />
   <HelpKINode Title="Type property">
-    <HelpKINode Title="IMatrix.Type Property " Url="html/2938C37B.htm" />
     <HelpKINode Title="IParameter.Type Property " Url="html/26CA39E9.htm" />
-    <HelpKINode Title="Matrix(TTarget, TSource, TConnection).Type Property " Url="html/D1A8C174.htm" />
     <HelpKINode Title="ParameterBase(TMostDerived, TValue).Type Property " Url="html/45D86ED3.htm" />
   </HelpKINode>
   <HelpKINode Title="Type to EmberType conversion" Url="html/C4FAB326.htm" />
