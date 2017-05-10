@@ -43,12 +43,7 @@ namespace Lawo.IO
                 throw new ArgumentNullException(nameof(writeAsync));
             }
 
-            if (dataAvailable == null)
-            {
-                throw new ArgumentNullException(nameof(dataAvailable));
-            }
-
-            this.dataAvailable = dataAvailable;
+            this.dataAvailable = dataAvailable ?? throw new ArgumentNullException(nameof(dataAvailable));
         }
 
         /// <summary>Gets a value indicating whether data is available on the <see cref="TelnetStream"/> to be

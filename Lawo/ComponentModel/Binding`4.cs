@@ -8,7 +8,6 @@ namespace Lawo.ComponentModel
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using Reflection;
 
     /// <summary>Represents a binding between two properties.</summary>
@@ -50,24 +49,11 @@ namespace Lawo.ComponentModel
             IProperty<TTargetOwner, TTarget> target,
             Func<TTarget, TSource> toSource)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if (toTarget == null)
-            {
-                throw new ArgumentNullException(nameof(toTarget));
-            }
-
-            if (target == null)
-            {
-                throw new ArgumentNullException(nameof(target));
-            }
-
-            this.sourceEventArgs = new ChangeOriginatedAtEventArgs<TSourceOwner, TSource>(source);
-            this.toTarget = toTarget;
-            this.targetEventArgs = new ChangeOriginatedAtEventArgs<TTargetOwner, TTarget>(target);
+            this.sourceEventArgs = new ChangeOriginatedAtEventArgs<TSourceOwner, TSource>(
+                source ?? throw new ArgumentNullException(nameof(source)));
+            this.toTarget = toTarget ?? throw new ArgumentNullException(nameof(toTarget));
+            this.targetEventArgs = new ChangeOriginatedAtEventArgs<TTargetOwner, TTarget>(
+                target ?? throw new ArgumentNullException(nameof(target)));
             this.toSource = toSource;
 
             this.targetEventArgs.Property.Value = this.toTarget(this.sourceEventArgs.Property.Value);

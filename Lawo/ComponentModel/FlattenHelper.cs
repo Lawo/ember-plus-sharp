@@ -34,12 +34,7 @@ namespace Lawo.ComponentModel
         {
             internal FlattenCollection(ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>> original)
             {
-                if (original == null)
-                {
-                    throw new ArgumentNullException(nameof(original));
-                }
-
-                this.original = original;
+                this.original = original ?? throw new ArgumentNullException(nameof(original));
                 var handler = this.original.AddChangeHandlers<ReadOnlyObservableCollection<ReadOnlyObservableCollection<T>>, ReadOnlyObservableCollection<T>>(
                     this.AddedToOuter, this.RemovedFromOuter, this.ClearedOuter);
                 this.RegisterForRemoval(original, handler);

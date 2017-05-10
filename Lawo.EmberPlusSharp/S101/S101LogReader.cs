@@ -25,14 +25,9 @@ namespace Lawo.EmberPlusSharp.S101
         /// <c>null</c>.</exception>
         public S101LogReader(EmberTypeBag types, XmlReader logReader)
         {
-            if (logReader == null)
-            {
-                throw new ArgumentNullException(nameof(logReader));
-            }
-
             this.converter = new EmberConverter(types);
-            this.logReader = logReader;
-            logReader.ReadStartElement(LogNames.Root);
+            this.logReader = logReader ?? throw new ArgumentNullException(nameof(logReader));
+            this.logReader.ReadStartElement(LogNames.Root);
         }
 
         /// <summary>Gets the type of the current event.</summary>

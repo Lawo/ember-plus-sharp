@@ -82,14 +82,10 @@ namespace Lawo.EmberPlusSharp.Ember
 
         internal EmberId(Class theClass, bool isConstructed, int number)
         {
-            if (number < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(number), ExceptionMessages.NonnegativeNumberRequired);
-            }
-
             this.Class = theClass;
             this.IsConstructed = isConstructed;
-            this.Number = number;
+            this.Number = number >= 0 ? number :
+                throw new ArgumentOutOfRangeException(nameof(number), ExceptionMessages.NonnegativeNumberRequired);
         }
 
         internal Class Class { get; }

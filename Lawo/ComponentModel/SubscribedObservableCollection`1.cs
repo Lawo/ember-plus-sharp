@@ -64,23 +64,13 @@ namespace Lawo.ComponentModel
         internal void RegisterForRemoval(
             INotifyCollectionChanged theOriginal, NotifyCollectionChangedEventHandler theHandler)
         {
-            if (theOriginal == null)
-            {
-                throw new ArgumentNullException(nameof(theOriginal));
-            }
-
-            if (theHandler == null)
-            {
-                throw new ArgumentNullException(nameof(theHandler));
-            }
-
             if ((this.original != null) || (this.handler != null))
             {
                 throw new InvalidOperationException("RegisterForRemoval was called more than once.");
             }
 
-            this.original = theOriginal;
-            this.handler = theHandler;
+            this.original = theOriginal ?? throw new ArgumentNullException(nameof(theOriginal));
+            this.handler = theHandler ?? throw new ArgumentNullException(nameof(theHandler));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

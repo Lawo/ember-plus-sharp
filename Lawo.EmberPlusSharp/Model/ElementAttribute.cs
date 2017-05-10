@@ -21,20 +21,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// <exception cref="ArgumentNullException">Attempted to set the value <c>null</c>.</exception>
         public string Identifier
         {
-            get
-            {
-                return this.identifier;
-            }
-
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                this.identifier = value;
-            }
+            get => this.identifier;
+            set => this.identifier = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>Gets or sets a value indicating whether the element represented by the property carrying this

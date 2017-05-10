@@ -60,18 +60,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// equal <c>null</c>.</exception>
         public S101Logger(IEmberConverter converter, XmlWriter xmlLogWriter)
         {
-            if (converter == null)
-            {
-                throw new ArgumentNullException(nameof(converter));
-            }
-
-            if (xmlLogWriter == null)
-            {
-                throw new ArgumentNullException(nameof(xmlLogWriter));
-            }
-
-            this.converter = converter;
-            this.xmlLogWriter = xmlLogWriter;
+            this.converter = converter ?? throw new ArgumentNullException(nameof(converter));
+            this.xmlLogWriter = xmlLogWriter ?? throw new ArgumentNullException(nameof(xmlLogWriter));
             this.xmlLogWriter.WriteStartDocument();
             this.xmlLogWriter.WriteStartElement(LogNames.Root);
             this.xmlLogWriter.Flush();
@@ -107,14 +97,9 @@ namespace Lawo.EmberPlusSharp.S101
         /// <inheritdoc/>
         public EventInfo LogException(string direction, Exception exception)
         {
-            if (exception == null)
-            {
-                throw new ArgumentNullException(nameof(exception));
-            }
-
             var info = new EventInfo(this.WriteStartEvent(LogNames.Exception));
             this.xmlLogWriter.WriteAttributeString(LogNames.Direction, direction);
-            this.xmlLogWriter.WriteString(exception.ToString());
+            this.xmlLogWriter.WriteString((exception ?? throw new ArgumentNullException(nameof(exception))).ToString());
             this.WriteEndEvent();
             return info;
         }
@@ -161,15 +146,8 @@ namespace Lawo.EmberPlusSharp.S101
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static TextWriter ValidateLogWriter(TextWriter logWriter)
-        {
-            if (logWriter == null)
-            {
-                throw new ArgumentNullException(nameof(logWriter));
-            }
-
-            return logWriter;
-        }
+        private static TextWriter ValidateLogWriter(TextWriter logWriter) =>
+            logWriter ?? throw new ArgumentNullException(nameof(logWriter));
 
         private readonly IEmberConverter converter;
         private readonly XmlWriter xmlLogWriter;

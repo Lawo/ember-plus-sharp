@@ -72,12 +72,7 @@ namespace Lawo.IO
         public WriteBuffer(WriteCallback write, int bufferSize)
             : base(bufferSize)
         {
-            if (write == null)
-            {
-                throw new ArgumentNullException(nameof(write));
-            }
-
-            this.write = write;
+            this.write = write ?? throw new ArgumentNullException(nameof(write));
             this.writeAsync = (b, o, c, t) => ThrowInvalidAsyncOperationException();
         }
 
@@ -90,12 +85,7 @@ namespace Lawo.IO
         public WriteBuffer(WriteAsyncCallback writeAsync, int bufferSize)
             : base(bufferSize)
         {
-            if (writeAsync == null)
-            {
-                throw new ArgumentNullException(nameof(writeAsync));
-            }
-
-            this.writeAsync = writeAsync;
+            this.writeAsync = writeAsync ?? throw new ArgumentNullException(nameof(writeAsync));
             this.write = (b, o, c) => ThrowInvalidSyncOperationException();
         }
 

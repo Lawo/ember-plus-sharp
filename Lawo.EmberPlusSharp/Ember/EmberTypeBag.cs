@@ -25,13 +25,7 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <see cref="BerSet"/>.</remarks>
         public EmberTypeBag(params EmberType[] types)
         {
-            if (types == null)
-            {
-                throw new ArgumentNullException(nameof(types));
-            }
-
-            var allTypes = BerTypes.Concat(types).ToArray();
-
+            var allTypes = BerTypes.Concat(types ?? throw new ArgumentNullException(nameof(types))).ToArray();
             this.TypeNames = new Dictionary<int, string>(allTypes.Length);
             this.FieldNames = new Dictionary<FieldPath<int, EmberId>, string>(allTypes.Length * 3);
             this.InnerNumbers = new Dictionary<string, int>(allTypes.Length);
