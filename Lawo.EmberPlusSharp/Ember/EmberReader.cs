@@ -165,13 +165,13 @@ namespace Lawo.EmberPlusSharp.Ember
             this.innerNumber = null;
             this.outer = null;
 
-            if ((this.endPositions.Count > 0) && (this.readBuffer.Position > this.EndPosition))
+            while ((this.endPositions.Count > 0) && (this.readBuffer.Position >= this.EndPosition))
             {
-                throw CreateEmberException("Incorrect length at position {0}.", this.endPositions.Peek().LengthPosition);
-            }
+                if (this.readBuffer.Position > this.EndPosition)
+                {
+                    throw CreateEmberException("Incorrect length at position {0}.", this.endPositions.Peek().LengthPosition);
+                }
 
-            while ((this.endPositions.Count > 0) && (this.readBuffer.Position == this.EndPosition))
-            {
                 var endPosition = this.endPositions.Pop();
 
                 if (IsContainer(endPosition))
