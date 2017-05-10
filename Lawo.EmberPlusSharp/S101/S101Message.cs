@@ -24,12 +24,8 @@ namespace Lawo.EmberPlusSharp.S101
         /// <summary>Initializes a new instance of the <see cref="S101Message"/> class.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="command"/> equals <c>null</c>.</exception>
         public S101Message(byte slot, S101Command command)
-            : this(slot, MessageType.Ember, command)
+            : this(slot, MessageType.Ember, command ?? throw new ArgumentNullException(nameof(command)))
         {
-            if (command == null)
-            {
-                throw new ArgumentNullException(nameof(command));
-            }
         }
 
         /// <summary>Gets the Slot.</summary>

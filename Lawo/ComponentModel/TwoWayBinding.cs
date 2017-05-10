@@ -49,12 +49,8 @@ namespace Lawo.ComponentModel
             where TSourceOwner : INotifyPropertyChanged
             where TTargetOwner : INotifyPropertyChanged
         {
-            if (toSource == null)
-            {
-                throw new ArgumentNullException(nameof(toSource));
-            }
-
-            return new Binding<TSourceOwner, TSource, TTargetOwner, TTarget>(source, toTarget, target, toSource);
+            return new Binding<TSourceOwner, TSource, TTargetOwner, TTarget>(
+                source, toTarget, target, toSource ?? throw new ArgumentNullException(nameof(toSource)));
         }
     }
 }

@@ -46,12 +46,7 @@ namespace Lawo.ComponentModel
             internal FilterCollection(
                 ReadOnlyObservableCollection<T> originalItems, Predicate<T> predicate, IComparer<T> comparer)
             {
-                if (predicate == null)
-                {
-                    throw new ArgumentNullException(nameof(predicate));
-                }
-
-                this.predicate = predicate;
+                this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
                 this.comparer = comparer;
                 var handler = originalItems.AddChangeHandlers<ReadOnlyObservableCollection<T>, T>(
                     this.InsertIfMatch, this.Remove, this.Clear);

@@ -105,18 +105,14 @@ namespace Lawo.EmberPlusSharp.Model
         public static async Task<Consumer<TRoot>> CreateAsync(
             S101Client client, int timeout, ChildrenRetrievalPolicy childrenRetrievalPolicy, byte slot)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
-
             if ((childrenRetrievalPolicy < ChildrenRetrievalPolicy.None) ||
                 (childrenRetrievalPolicy > ChildrenRetrievalPolicy.All))
             {
                 throw new ArgumentOutOfRangeException(nameof(childrenRetrievalPolicy));
             }
 
-            var result = new Consumer<TRoot>(client, timeout, childrenRetrievalPolicy, slot);
+            var result = new Consumer<TRoot>(
+                client ?? throw new ArgumentNullException(nameof(client)), timeout, childrenRetrievalPolicy, slot);
             await result.RetrieveChildrenAsync();
             result.SendReceiveLoop();
             return result;
@@ -154,12 +150,8 @@ namespace Lawo.EmberPlusSharp.Model
 
             set
             {
-                if (value < Timeout.Infinite)
-                {
+                this.autoSendInterval = value >= Timeout.Infinite ? value :
                     throw new ArgumentOutOfRangeException(nameof(value), "Must be >= -1.");
-                }
-
-                this.autoSendInterval = value;
                 this.CancelAutoSendDelay();
             }
         }

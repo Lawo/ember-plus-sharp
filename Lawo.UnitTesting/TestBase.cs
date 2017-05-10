@@ -262,12 +262,7 @@ namespace Lawo.UnitTesting
         private static void AssertThrowCore<TException>(Action[] actions, string expectedMessage)
             where TException : Exception
         {
-            if (actions == null)
-            {
-                throw new ArgumentNullException(nameof(actions));
-            }
-
-            foreach (Action action in actions)
+            foreach (Action action in actions ?? throw new ArgumentNullException(nameof(actions)))
             {
                 if (action != null)
                 {
@@ -293,12 +288,7 @@ namespace Lawo.UnitTesting
         private static async Task AssertThrowCoreAsync<TException>(Func<Task>[] actions, string expectedMessage)
             where TException : Exception
         {
-            if (actions == null)
-            {
-                throw new ArgumentNullException(nameof(actions));
-            }
-
-            foreach (Func<Task> action in actions)
+            foreach (Func<Task> action in actions ?? throw new ArgumentNullException(nameof(actions)))
             {
                 if (action != null)
                 {

@@ -30,17 +30,9 @@ namespace Lawo.ComponentModel
             IProperty<TOwner, TProperty> property, Action<IProperty<TOwner, TProperty>> handler)
             where TOwner : INotifyPropertyChanged
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-
-            if (handler == null)
-            {
-                throw new ArgumentNullException(nameof(handler));
-            }
-
-            return new Forwarder<TOwner, TProperty>(property, handler);
+            return new Forwarder<TOwner, TProperty>(
+                property ?? throw new ArgumentNullException(nameof(property)),
+                handler ?? throw new ArgumentNullException(nameof(handler)));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

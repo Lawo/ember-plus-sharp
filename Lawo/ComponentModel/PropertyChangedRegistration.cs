@@ -27,11 +27,6 @@ namespace Lawo.ComponentModel
         public PropertyChangedRegistration(
             PropertyChangedEventHandler handler, params IProperty<INotifyPropertyChanged>[] properties)
         {
-            if (handler == null)
-            {
-                throw new ArgumentNullException(nameof(handler));
-            }
-
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -42,7 +37,7 @@ namespace Lawo.ComponentModel
                 throw new ArgumentException("Array elements cannot be null.", nameof(properties));
             }
 
-            this.handler = handler;
+            this.handler = handler ?? throw new ArgumentNullException(nameof(handler));
             this.propertyNames = properties.ToLookup(p => p.Owner, p => p.PropertyInfo.Name);
 
             foreach (var grouping in this.propertyNames)
