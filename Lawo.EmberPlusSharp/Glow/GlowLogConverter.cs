@@ -177,7 +177,14 @@ namespace Lawo.EmberPlusSharp.Glow
                                 }
                                 else
                                 {
-                                    this.WriteInitSequence((IMatrix)element);
+                                    var matrix = (IMatrix)element;
+                                    this.WriteInitSequence(matrix);
+
+                                    foreach (var connection in matrix.Connections)
+                                    {
+                                        connection.Value.CollectionChanged +=
+                                            (s, e) => this.WriteConnection(matrix, connection);
+                                    }
                                 }
                             }
                         }
@@ -378,12 +385,27 @@ namespace Lawo.EmberPlusSharp.Glow
 
                 foreach (var connection in (IReadOnlyDictionary<int, ObservableCollection<int>>)value)
                 {
-                    this.writer.WriteStartElement("Connection");
-                    this.writer.WriteAttributeString("target", connection.Key.ToString(InvariantCulture));
-                    this.writer.WriteAttributeString("sources", Join(" ", connection.Value));
-                    this.writer.WriteEndElement();
+                    this.WriteConnectionImpl(connection);
                 }
 
+                this.writer.WriteEndElement();
+            }
+
+            private void WriteConnection(IMatrix matrix, KeyValuePair<int, ObservableCollection<int>> connection)
+            {
+                this.writer.WriteStartElement("Set");
+                var fieldName = LowerFirst(nameof(IMatrix.Connections));
+                this.writer.WriteAttributeString("path", matrix.GetPath() + "." + fieldName);
+
+                this.WriteConnectionImpl(connection);
+                this.writer.WriteEndElement();
+            }
+
+            private void WriteConnectionImpl(KeyValuePair<int, ObservableCollection<int>> connection)
+            {
+                this.writer.WriteStartElement("Connection");
+                this.writer.WriteAttributeString("target", connection.Key.ToString(InvariantCulture));
+                this.writer.WriteAttributeString("sources", Join(" ", connection.Value));
                 this.writer.WriteEndElement();
             }
         }
