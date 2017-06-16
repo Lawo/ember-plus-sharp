@@ -11,6 +11,7 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using Ember;
     using Glow;
 
@@ -397,11 +398,15 @@ namespace Lawo.EmberPlusSharp.Model
             Locked
         }
 
-        private void SetSignals(ref IReadOnlyList<int> field, IReadOnlyList<int> signals, IReadOnlyList<int> other)
+        private void SetSignals(
+            ref IReadOnlyList<int> field,
+            IReadOnlyList<int> signals,
+            IReadOnlyList<int> other,
+            [CallerMemberName] string propertyName = null)
         {
             if (field?.SequenceEqual(signals) != true)
             {
-                this.SetValue(ref field, signals);
+                this.SetValue(ref field, signals, propertyName);
 
                 if (other != null)
                 {
