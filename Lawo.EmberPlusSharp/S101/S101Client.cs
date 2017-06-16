@@ -427,14 +427,12 @@ namespace Lawo.EmberPlusSharp.S101
             int timeoutCount = 0;
             var timeoutHalf = this.timeout >= 0 ? this.timeout / 2 : this.timeout;
             var readTask = reader.ReadAsync(this.source.Token);
-            Task timeoutTask;
 
             // In a perfect world, the cancellationFailed business would not be necessary, because readTask should
             // complete immediately when a cancellation is requested. In the real world however, such "rarely" used
             // classes as NetworkStream do not support cancellation, see
             // http://stackoverflow.com/questions/12421989/networkstream-readasync-with-a-cancellation-token-never-cancels
-            while (
-                await Task.WhenAny(readTask, timeoutTask = Task.Delay(timeoutHalf), cancellationFailed) == timeoutTask)
+            while (await Task.WhenAny(readTask, cancellationFailed).TimeoutAsync(timeoutHalf))
             {
                 switch (++timeoutCount)
                 {

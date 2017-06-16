@@ -18,6 +18,7 @@ namespace Lawo.EmberPlusSharp.Model
     using Ember;
     using IO;
     using S101;
+    using Threading.Tasks;
 
     using static System.Globalization.CultureInfo;
 
@@ -296,8 +297,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             var retrieveChildrenTask = this.RetrieveChildrenCoreAsync();
 
-            if ((await Task.WhenAny(retrieveChildrenTask, Task.Delay(this.childrenRetrievalTimeout))) !=
-                retrieveChildrenTask)
+            if (await retrieveChildrenTask.TimeoutAsync(this.childrenRetrievalTimeout))
             {
                 this.root.UpdateRetrievalState(this.root.RetrievalState.Equals(RetrievalState.Complete));
                 var firstIncompleteNode = this.root.GetFirstIncompleteChild();

@@ -101,6 +101,7 @@
     <Compile Include="ScopeGuard`1.cs" />
     <Compile Include="Threading\NativeMethods.cs" />
     <Compile Include="Threading\Tasks\AsyncPump.cs" />
+    <Compile Include="Threading\Tasks\TaskHelper.cs" />
     <Compile Include="Threading\Tasks\TaskSingleton.cs" />
     <Compile Include="Threading\Tasks\TaskQueue.cs" />
     <Compile Include="Threading\Tasks\WorkQueue.cs" />
