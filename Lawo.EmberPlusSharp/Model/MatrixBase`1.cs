@@ -61,15 +61,15 @@ namespace Lawo.EmberPlusSharp.Model
         /// <inheritdoc/>
         public IReadOnlyList<int> Targets
         {
-            get { return this.targets; }
-            private set { this.SetValue(ref this.targets, value); }
+            get => this.targets;
+            private set => this.SetSignals(ref this.targets, value, this.sources);
         }
 
         /// <inheritdoc/>
         public IReadOnlyList<int> Sources
         {
-            get { return this.sources; }
-            private set { this.SetValue(ref this.sources, value); }
+            get => this.sources;
+            private set => this.SetSignals(ref this.sources, value, this.targets);
         }
 
         /// <inheritdoc/>
@@ -82,12 +82,22 @@ namespace Lawo.EmberPlusSharp.Model
 
             private set
             {
-                if (this.SetValue(ref this.connections, value))
+                this.SetValue(ref this.connections, value);
+
+                foreach (var connection in this.connections)
                 {
-                    foreach (var connection in this.connections)
-                    {
-                        connection.Value.CollectionChanged += (s, e) => this.OnSourcesChanged(connection.Key);
-                    }
+                    connection.Value.CollectionChanged += (s, e) => this.OnSourcesChanged(connection.Key);
+                }
+
+                if (this.MaximumTotalConnects == 0)
+                {
+                    this.MaximumTotalConnects =
+                        GetMaximumTotalConnects(this.type, this.Targets.Count, this.Sources.Count);
+                }
+
+                if (this.MaximumConnectsPerTarget == 0)
+                {
+                    this.MaximumConnectsPerTarget = this.type == MatrixType.NToN ? this.Sources.Count : 1;
                 }
             }
         }
@@ -120,7 +130,6 @@ namespace Lawo.EmberPlusSharp.Model
         internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Matrix, actualType);
-            var type = MatrixType.OneToN;
             var addressingMode = MatrixAddressingMode.Linear;
 
             while (reader.Read() && (reader.InnerNumber != InnerNumber.EndContainer))
@@ -131,7 +140,7 @@ namespace Lawo.EmberPlusSharp.Model
                         this.Description = reader.AssertAndReadContentsAsString();
                         break;
                     case GlowMatrixContents.Type.OuterNumber:
-                        type = this.ReadEnum<MatrixType>(reader, GlowMatrixContents.Type.Name);
+                        this.type = this.ReadEnum<MatrixType>(reader, GlowMatrixContents.Type.Name);
                         break;
                     case GlowMatrixContents.AddressingMode.OuterNumber:
                         addressingMode =
@@ -170,22 +179,6 @@ namespace Lawo.EmberPlusSharp.Model
                 }
             }
 
-            if ((this.Targets != null) && (this.Sources != null))
-            {
-                this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
-
-                if (this.MaximumTotalConnects == 0)
-                {
-                    this.MaximumTotalConnects =
-                        GetMaximumTotalConnects(type, this.Targets.Count, this.Sources.Count);
-                }
-
-                if (this.MaximumConnectsPerTarget == 0)
-                {
-                    this.MaximumConnectsPerTarget = type == MatrixType.NToN ? this.Sources.Count : 1;
-                }
-            }
-
             return this.RetrievalState;
         }
 
@@ -207,7 +200,7 @@ namespace Lawo.EmberPlusSharp.Model
                             GlowTarget.InnerNumber,
                             GlowTarget.Number.OuterNumber,
                             GlowTarget.Number.Name);
-                        this.Connections = this.Targets.ToDictionary(i => i, i => new ObservableCollection<int>());
+
                         break;
                     case GlowMatrix.Sources.OuterNumber:
                         reader.AssertInnerNumber(GlowSourceCollection.InnerNumber);
@@ -365,6 +358,7 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         private readonly HashSet<int> targetsWithChangedConnections = new HashSet<int>();
+        private MatrixType type = MatrixType.OneToN;
         private int maximumTotalConnects;
         private int maximumConnectsPerTarget;
         private IReadOnlyList<int> parametersLocation;
@@ -401,6 +395,19 @@ namespace Lawo.EmberPlusSharp.Model
             Modified,
             Pending,
             Locked
+        }
+
+        private void SetSignals(ref IReadOnlyList<int> field, IReadOnlyList<int> signals, IReadOnlyList<int> other)
+        {
+            if (field?.SequenceEqual(signals) != true)
+            {
+                this.SetValue(ref field, signals);
+
+                if (other != null)
+                {
+                    this.Connections = this.targets.ToDictionary(i => i, i => new ObservableCollection<int>());
+                }
+            }
         }
 
         private void OnSourcesChanged(int target)
