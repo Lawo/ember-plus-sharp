@@ -62,15 +62,15 @@ namespace Lawo.EmberPlusSharp.Model
         /// <inheritdoc/>
         public IReadOnlyList<int> Targets
         {
-            get => this.targets;
-            private set => this.SetSignals(ref this.targets, value, this.sources);
+            get { return this.targets; }
+            private set { this.SetSignals(ref this.targets, value, this.sources); }
         }
 
         /// <inheritdoc/>
         public IReadOnlyList<int> Sources
         {
-            get => this.sources;
-            private set => this.SetSignals(ref this.sources, value, this.targets);
+            get { return this.sources; }
+            private set { this.SetSignals(ref this.sources, value, this.targets); }
         }
 
         /// <inheritdoc/>
