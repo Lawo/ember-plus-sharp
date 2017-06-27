@@ -992,6 +992,9 @@ namespace Lawo.EmberPlusSharp.Model
                             state.Value = 5;
                             await WaitForChangeAsync(receivers.Children.GetProperty(c => c.Count), 1);
                             await WaitForChangeAsync(((INode)receivers).Children.GetProperty(c => c.Count), 1);
+                            Assert.AreEqual("text44", receivers.Children[0].Uri.Value);
+                            Assert.AreEqual("text45", receivers.Children[0].Sdp.Value);
+                            Assert.AreEqual(99, receivers.Children[0].State.Value);
                         },
                         true,
                         "IsOnlineLog.xml");
