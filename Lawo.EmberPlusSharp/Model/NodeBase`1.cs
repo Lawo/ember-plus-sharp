@@ -98,7 +98,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal bool WriteCommandCollection(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
-            if (this.children.Count == 0)
+            if (!this.areChildrenCurrent)
             {
                 this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
                 return true;
@@ -207,7 +207,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal sealed override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {
-            if (!this.RetrieveDetails || (this.children.Count == 0))
+            if (!this.RetrieveDetails || !this.areChildrenCurrent)
             {
                 return base.UpdateRetrievalState(throwForMissingRequiredChildren);
             }
@@ -245,9 +245,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (this.RetrievalState.Equals(RetrievalState.None))
             {
-                var isEmpty = this.children.Count == 0;
-
-                if (isEmpty)
+                if (!this.areChildrenCurrent)
                 {
                     writer.WriteStartApplicationDefinedType(
                         GlowElementCollection.Element.OuterId, GlowQualifiedNode.InnerNumber);
@@ -258,7 +256,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                 var result = this.WriteCommandCollection(writer, streamedParameters);
 
-                if (isEmpty)
+                if (!this.areChildrenCurrent)
                 {
                     writer.WriteEndContainer();
                     writer.WriteEndContainer();
@@ -286,7 +284,7 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (this.RetrievalState.Equals(RetrievalState.RequestSent))
             {
-                return this.children.Count == 0 ? this :
+                return !this.areChildrenCurrent ? this :
                     this.children.Values.Select(c => c.GetFirstIncompleteChild()).FirstOrDefault(c => c != null);
             }
             else
@@ -298,6 +296,7 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private readonly SortedDictionary<int, Element> children = new SortedDictionary<int, Element>();
+        private bool areChildrenCurrent;
         private ChildrenRetrievalPolicy childrenRetrievalPolicy;
 
         private void ReadChild(EmberReader reader, ElementType actualType, int number)
@@ -341,7 +340,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             this.RetrievalState =
-                (this.children.Count == 0 ? RetrievalState.Complete : this.RetrievalState) & childRetrievalState;
+                (!this.areChildrenCurrent ? RetrievalState.Complete : this.RetrievalState) & childRetrievalState;
         }
 
         private void ReadChildContents(
@@ -356,6 +355,7 @@ namespace Lawo.EmberPlusSharp.Model
             if (child != null)
             {
                 childRetrievalState = child.ReadContents(reader, actualType);
+                this.areChildrenCurrent = true;
             }
             else
             {
@@ -384,6 +384,7 @@ namespace Lawo.EmberPlusSharp.Model
                             if (child != null)
                             {
                                 this.children.Add(number, child);
+                                this.areChildrenCurrent = true;
                             }
                         }
                     }
