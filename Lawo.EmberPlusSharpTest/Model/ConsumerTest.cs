@@ -983,15 +983,15 @@ namespace Lawo.EmberPlusSharp.Model
                             Assert.AreEqual("text43", receivers.Children[0].Sdp.Value);
                             Assert.AreEqual(0, receivers.Children[0].State.Value);
                             state.Value = 2;
+                            await WaitForChangeAsync(receivers.Children[0].GetProperty(r => r.Sdp), null);
+                            state.Value = 3;
+                            await WaitForChangeAsync(receivers.Children[0].GetProperty(r => r.Sdp));
+                            state.Value = 4;
                             await WaitForChangeAsync(receivers.Children.GetProperty(c => c.Count), 0);
                             await WaitForChangeAsync(((INode)receivers).Children.GetProperty(c => c.Count), 0);
-                            state.Value = 3;
+                            state.Value = 5;
                             await WaitForChangeAsync(receivers.Children.GetProperty(c => c.Count), 1);
                             await WaitForChangeAsync(((INode)receivers).Children.GetProperty(c => c.Count), 1);
-                            state.Value = 4;
-                            await WaitForChangeAsync(receivers.Children[0].GetProperty(r => r.Sdp), null);
-                            state.Value = 5;
-                            await WaitForChangeAsync(receivers.Children[0].GetProperty(r => r.Sdp));
                         },
                         true,
                         "IsOnlineLog.xml");

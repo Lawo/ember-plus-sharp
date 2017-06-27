@@ -186,6 +186,14 @@ namespace Lawo.EmberPlusSharp.Model
             }
         }
 
+        internal sealed override void ResetRetrievalState()
+        {
+            if (this.StreamIdentifier.HasValue)
+            {
+                base.ResetRetrievalState();
+            }
+        }
+
         internal sealed override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
             if (this.RetrievalState.Equals(RetrievalState.None))

@@ -319,8 +319,8 @@
     <Command>EmberData 01 1F 02</Command>
     <Payload>
       <Root type="RootElementCollection">
-        <RootElement type="QualifiedNode">
-          <path type="RelativeObjectIdentifier">1.1.2.1</path>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.1.2</path>
           <contents type="Set">
             <isOnline type="Boolean">false</isOnline>
           </contents>
@@ -347,8 +347,8 @@
     <Command>EmberData 01 1F 02</Command>
     <Payload>
       <Root type="RootElementCollection">
-        <RootElement type="QualifiedNode">
-          <path type="RelativeObjectIdentifier">1.1.2.1</path>
+        <RootElement type="QualifiedParameter">
+          <path type="RelativeObjectIdentifier">1.1.2.1.2</path>
           <contents type="Set">
             <isOnline type="Boolean">true</isOnline>
           </contents>
@@ -375,8 +375,8 @@
     <Command>EmberData 01 1F 02</Command>
     <Payload>
       <Root type="RootElementCollection">
-        <RootElement type="QualifiedParameter">
-          <path type="RelativeObjectIdentifier">1.1.2.1.2</path>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.1</path>
           <contents type="Set">
             <isOnline type="Boolean">false</isOnline>
           </contents>
@@ -403,8 +403,8 @@
     <Command>EmberData 01 1F 02</Command>
     <Payload>
       <Root type="RootElementCollection">
-        <RootElement type="QualifiedParameter">
-          <path type="RelativeObjectIdentifier">1.1.2.1.2</path>
+        <RootElement type="QualifiedNode">
+          <path type="RelativeObjectIdentifier">1.1.2.1</path>
           <contents type="Set">
             <isOnline type="Boolean">true</isOnline>
           </contents>

@@ -36,7 +36,11 @@ namespace Lawo.EmberPlusSharp.Model
             {
                 if (base.IsOnline != value)
                 {
-                    if (!value)
+                    if (value)
+                    {
+                        this.areChildrenCurrent = false;
+                    }
+                    else
                     {
                         foreach (var child in this.children.Values)
                         {
