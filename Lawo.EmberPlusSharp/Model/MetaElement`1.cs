@@ -64,13 +64,6 @@ namespace Lawo.EmberPlusSharp.Model
             [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
             internal sealed override void ChangeVisibility(IParent parent, IElement element)
             {
-                if (!this.IsOptional && !element.IsOnline)
-                {
-                    const string Format =
-                        "The required property {0}.{1} in the node with the path {2} has been set offline by the provider.";
-                    throw this.CreateRequiredPropertyException(parent, Format);
-                }
-
                 this.set((TMostDerived)parent, (TProperty)(element.IsOnline ? element : null));
                 parent.OnPropertyChanged(new PropertyChangedEventArgs(this.Property.Name));
             }

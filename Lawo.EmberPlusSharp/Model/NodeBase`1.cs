@@ -24,6 +24,31 @@ namespace Lawo.EmberPlusSharp.Model
     public abstract class NodeBase<TMostDerived> : ElementWithSchemas<TMostDerived>, IParent
         where TMostDerived : NodeBase<TMostDerived>
     {
+        /// <inheritdoc/>
+        public sealed override bool IsOnline
+        {
+            get
+            {
+                return base.IsOnline;
+            }
+
+            internal set
+            {
+                if (base.IsOnline != value)
+                {
+                    if (!value)
+                    {
+                        foreach (var child in this.children.Values)
+                        {
+                            child.IsOnline = false;
+                        }
+                    }
+                }
+
+                base.IsOnline = value;
+            }
+        }
+
         /// <inheritdoc cref="INode.ChildrenRetrievalPolicy"/>
         public ChildrenRetrievalPolicy ChildrenRetrievalPolicy
         {
@@ -64,6 +89,9 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <inheritdoc/>
         void IParent.SetHasChanges() => this.HasChanges = true;
+
+        /// <inheritdoc/>
+        void IParent.SetIsOnline() => this.IsOnline = true;
 
         /// <inheritdoc/>
         void IParent.ResetRetrievalState() => this.ResetRetrievalState();

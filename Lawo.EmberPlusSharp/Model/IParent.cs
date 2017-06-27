@@ -15,6 +15,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         void SetHasChanges();
 
+        void SetIsOnline();
+
         void ResetRetrievalState();
 
         string GetPath();

@@ -79,6 +79,11 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal sealed override bool AreRequiredChildrenAvailable(bool throwIfMissing)
         {
+            if (!this.IsOnline)
+            {
+                return true;
+            }
+
             foreach (var metaChild in MetaChildren.Values)
             {
                 if (!metaChild.IsAvailable(this, throwIfMissing))
