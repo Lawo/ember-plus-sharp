@@ -98,12 +98,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         internal bool WriteCommandCollection(EmberWriter writer, IStreamedParameterCollection streamedParameters)
         {
-            if (!this.areChildrenCurrent)
-            {
-                this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
-                return true;
-            }
-            else
+            if (this.areChildrenCurrent)
             {
                 var result = false;
 
@@ -114,6 +109,11 @@ namespace Lawo.EmberPlusSharp.Model
                 }
 
                 return result;
+            }
+            else
+            {
+                this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
+                return true;
             }
         }
 
@@ -284,8 +284,8 @@ namespace Lawo.EmberPlusSharp.Model
         {
             if (this.RetrievalState.Equals(RetrievalState.RequestSent))
             {
-                return !this.areChildrenCurrent ? this :
-                    this.children.Values.Select(c => c.GetFirstIncompleteChild()).FirstOrDefault(c => c != null);
+                return this.areChildrenCurrent ?
+                    this.children.Values.Select(c => c.GetFirstIncompleteChild()).FirstOrDefault(c => c != null) : this;
             }
             else
             {
@@ -340,7 +340,7 @@ namespace Lawo.EmberPlusSharp.Model
             }
 
             this.RetrievalState =
-                (!this.areChildrenCurrent ? RetrievalState.Complete : this.RetrievalState) & childRetrievalState;
+                (this.areChildrenCurrent ? this.RetrievalState : RetrievalState.Complete) & childRetrievalState;
         }
 
         private void ReadChildContents(
