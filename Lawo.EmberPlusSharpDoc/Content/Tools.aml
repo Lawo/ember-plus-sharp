@@ -56,12 +56,15 @@
             </listItem>
             <listItem>
               <para>
-                All fields of new elements are logged with <code>&lt;Init&gt;</code> tags, no matter whether the
+                All fields of new elements are logged with <codeinline>&lt;Init&gt;</codeinline> tags, no matter whether the
                 provider has sent an initial value or not.
               </para>
             </listItem>
             <listItem>
-              <para>Control commands (GetDirectory, Subscribe, Unsubscribe) do not appear in the converted log.</para>
+              <para>
+                Control commands (<codeinline>GetDirectory</codeinline>, <codeinline>Subscribe</codeinline>,
+                <codeinline>Unsubscribe</codeinline>) do not appear in the converted log.
+              </para>
             </listItem>
           </list>
         </alert>
