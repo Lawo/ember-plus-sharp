@@ -11,13 +11,13 @@ namespace Lawo.EmberPlusSharp.Model.Test
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
     internal sealed class MediaSessionReceiver : FieldNode<MediaSessionReceiver>
     {
-        [Element(Identifier = "uri")]
+        [Element(Identifier = "uri", IsOptional = true)]
         internal StringParameter Uri { get; private set; }
 
         [Element(Identifier = "sdp", IsOptional = true)]
         internal StringParameter Sdp { get; private set; }
 
-        [Element(Identifier = "state")]
+        [Element(Identifier = "state", IsOptional = true)]
         internal IntegerParameter State { get; private set; }
     }
 }
