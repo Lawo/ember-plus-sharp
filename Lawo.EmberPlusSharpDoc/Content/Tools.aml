@@ -41,6 +41,30 @@
           XML log files as they have been written by <application>Glow Analyzer Proxy</application> into an even more
           human-readable format.
         </para>
+        <alert class="note">
+          <para>
+            Due to its implementation, the output of this tool shows how a consumer-side element tree implemented with
+            the <application>Ember+ Sharp Library</application> is modified by the messages. This leads to the following
+            limitations:
+          </para>
+          <list class="bullet">
+            <listItem>
+              <para>
+                Elements that that the provider initially reports as offline do not appear in the converted log until
+                they become online.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                All fields of new elements are logged with <code>&lt;Init&gt;</code> tags, no matter whether the
+                provider has sent an initial value or not.
+              </para>
+            </listItem>
+            <listItem>
+              <para>Control commands (GetDirectory, Subscribe, Unsubscribe) do not appear in the converted log.</para>
+            </listItem>
+          </list>
+        </alert>
       </content>
     </section>
     <relatedTopics/>
