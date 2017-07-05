@@ -7,7 +7,7 @@
 namespace Lawo.EmberPlusSharp.Model
 {
     internal sealed class DynamicMatrix :
-        MatrixBase<DynamicMatrix>
+        Matrix<DynamicMatrix>
     {
         private DynamicMatrix()
         {

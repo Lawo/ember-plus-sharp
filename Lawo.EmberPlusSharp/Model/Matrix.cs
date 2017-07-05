@@ -10,7 +10,7 @@ namespace Lawo.EmberPlusSharp.Model
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <threadsafety static="true" instance="false"/>
     public sealed class Matrix :
-        MatrixBase<Matrix>
+        Matrix<Matrix>
     {
         private Matrix()
         {

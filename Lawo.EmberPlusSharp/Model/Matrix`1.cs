@@ -20,9 +20,9 @@ namespace Lawo.EmberPlusSharp.Model
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
-    public abstract class MatrixBase<TMostDerived> :
+    public abstract class Matrix<TMostDerived> :
         ElementWithSchemas<TMostDerived>, IMatrix
-        where TMostDerived : MatrixBase<TMostDerived>
+        where TMostDerived : Matrix<TMostDerived>
     {
         /// <inheritdoc/>
         public int MaximumTotalConnects
@@ -105,7 +105,7 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        internal MatrixBase()
+        internal Matrix()
             : base(RetrievalState.None)
         {
         }
