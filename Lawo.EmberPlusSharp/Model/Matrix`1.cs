@@ -20,8 +20,9 @@ namespace Lawo.EmberPlusSharp.Model
     /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
     /// <threadsafety static="true" instance="false"/>
+    [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     public abstract class Matrix<TMostDerived> :
-        ElementWithSchemas<TMostDerived>, IMatrix
+        FieldNode<TMostDerived>, IMatrix
         where TMostDerived : Matrix<TMostDerived>
     {
         /// <inheritdoc/>
@@ -106,28 +107,12 @@ namespace Lawo.EmberPlusSharp.Model
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal Matrix()
-            : base(RetrievalState.None)
         {
         }
 
-        internal sealed override bool WriteRequest(EmberWriter writer, IStreamedParameterCollection streamedParameters)
-        {
-            if (this.RetrievalState.Equals(RetrievalState.None))
-            {
-                writer.WriteStartApplicationDefinedType(
-                    GlowElementCollection.Element.OuterId, GlowQualifiedMatrix.InnerNumber);
-                writer.WriteValue(GlowQualifiedMatrix.Path.OuterId, this.NumberPath);
-                writer.WriteStartApplicationDefinedType(
-                    GlowQualifiedMatrix.Children.OuterId, GlowElementCollection.InnerNumber);
-                this.WriteCommandCollection(writer, GlowCommandNumber.GetDirectory, RetrievalState.RequestSent);
-                writer.WriteEndContainer();
-                writer.WriteEndContainer();
-                return true;
-            }
+        internal sealed override int FinalElementType => GlowQualifiedMatrix.InnerNumber;
 
-            return false;
-        }
-
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Matrix, actualType);
@@ -230,6 +215,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Method is not public, CA bug?")]
         internal sealed override void WriteChanges(EmberWriter writer, IInvocationCollection pendingInvocations)
         {
             if (this.HasChanges)

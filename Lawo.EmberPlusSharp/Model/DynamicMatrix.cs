@@ -6,6 +6,9 @@
 
 namespace Lawo.EmberPlusSharp.Model
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
     internal sealed class DynamicMatrix :
         Matrix<DynamicMatrix>
     {

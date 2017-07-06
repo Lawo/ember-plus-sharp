@@ -64,7 +64,7 @@ namespace Lawo.EmberPlusSharp.Model
             return base.ChangeVisibility(child);
         }
 
-        internal sealed override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
+        internal override RetrievalState ReadContents(EmberReader reader, ElementType actualType)
         {
             this.AssertElementType(ElementType.Node, actualType);
 

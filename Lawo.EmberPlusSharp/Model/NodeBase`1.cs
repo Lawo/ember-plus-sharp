@@ -114,6 +114,8 @@ namespace Lawo.EmberPlusSharp.Model
         internal sealed override bool RetrieveDetails =>
             (this.ChildrenRetrievalPolicy != ChildrenRetrievalPolicy.None) && base.RetrieveDetails;
 
+        internal virtual int FinalElementType => GlowQualifiedNode.InnerNumber;
+
         internal sealed override void SetContext(Context context)
         {
             base.SetContext(context);
@@ -280,7 +282,7 @@ namespace Lawo.EmberPlusSharp.Model
                 if (!this.areChildrenCurrent)
                 {
                     writer.WriteStartApplicationDefinedType(
-                        GlowElementCollection.Element.OuterId, GlowQualifiedNode.InnerNumber);
+                        GlowElementCollection.Element.OuterId, this.FinalElementType);
                     writer.WriteValue(GlowQualifiedNode.Path.OuterId, this.NumberPath);
                     writer.WriteStartApplicationDefinedType(
                         GlowQualifiedNode.Children.OuterId, GlowElementCollection.InnerNumber);
