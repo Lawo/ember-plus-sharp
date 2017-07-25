@@ -29,13 +29,24 @@ namespace Lawo.EmberPlusSharp.Model
     /// <item><see cref="IParameter"/>.</item>
     /// <item><see cref="INode"/>.</item>
     /// <item><see cref="IFunction"/>.</item>
+    /// <item><see cref="IMatrix"/>.</item>
     /// <item><see cref="BooleanParameter"/>.</item>
+    /// <item><see cref="EnumParameter{TEnum}"/>.</item>
     /// <item><see cref="IntegerParameter"/>.</item>
     /// <item><see cref="OctetstringParameter"/>.</item>
     /// <item><see cref="RealParameter"/>.</item>
     /// <item><see cref="StringParameter"/>.</item>
-    /// <item>A <see cref="FieldNode{TMostDerived}"/> subtype.</item>
+    /// <item><see cref="NullableBooleanParameter"/>.</item>
+    /// <item><see cref="NullableEnumParameter{TEnum}"/>.</item>
+    /// <item><see cref="NullableIntegerParameter"/>.</item>
+    /// <item><see cref="NullableOctetstringParameter"/>.</item>
+    /// <item><see cref="NullableRealParameter"/>.</item>
+    /// <item><see cref="NullableStringParameter"/>.</item>
     /// <item><see cref="CollectionNode{TElement}"/>.</item>
+    /// <item>A <see cref="FieldNode{TMostDerived}"/> subtype.</item>
+    /// <item>A <see cref="DynamicFieldNode{TMostDerived}"/> subtype.</item>
+    /// <item>A <see cref="Matrix{TMostDerived}"/> subtype.</item>
+    /// <item>A <see cref="DynamicMatrix{TMostDerived}"/> subtype.</item>
     /// <item><see cref="Function{T}"/>, <see cref="Function{T, U}"/>, <see cref="Function{T, U, V}"/>,
     /// <see cref="Function{T, U, V, W}"/>, <see cref="Function{T, U, V, W, X}"/>,
     /// <see cref="Function{T, U, V, W, X, Y}"/>, or <see cref="Function{T, U, V, W, X, Y, Z}"/>.</item>

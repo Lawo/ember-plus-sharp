@@ -15,14 +15,45 @@ namespace Lawo.EmberPlusSharp.Model
     using Ember;
     using Glow;
 
-    /// <summary>This API is not intended to be used directly from your code.</summary>
-    /// <remarks>Provides common implementation for all matrices in the object tree accessible through
-    /// <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</remarks>
+    /// <summary>Represents a matrix with optional static children in the object tree accessible
+    /// through <see cref="Consumer{T}.Root">Consumer&lt;TRoot&gt;.Root</see>.</summary>
     /// <typeparam name="TMostDerived">The most-derived subtype of this class.</typeparam>
+    /// <remarks>
+    /// <para><typeparamref name="TMostDerived"/> must contain a property with a getter and a setter for each
+    /// child of the represented matrix. The property getters and setters can have any accessibility. The name of each
+    /// property must be equal to the identifier of the corresponding child, or carry an
+    /// <see cref="ElementAttribute"/> to which the identifier is passed.</para>
+    /// <para>The type of each <typeparamref name="TMostDerived"/> property must be of one of the following:
+    /// <list type="bullet">
+    /// <item><see cref="IParameter"/>.</item>
+    /// <item><see cref="INode"/>.</item>
+    /// <item><see cref="IFunction"/>.</item>
+    /// <item><see cref="IMatrix"/>.</item>
+    /// <item><see cref="BooleanParameter"/>.</item>
+    /// <item><see cref="EnumParameter{TEnum}"/>.</item>
+    /// <item><see cref="IntegerParameter"/>.</item>
+    /// <item><see cref="OctetstringParameter"/>.</item>
+    /// <item><see cref="RealParameter"/>.</item>
+    /// <item><see cref="StringParameter"/>.</item>
+    /// <item><see cref="NullableBooleanParameter"/>.</item>
+    /// <item><see cref="NullableEnumParameter{TEnum}"/>.</item>
+    /// <item><see cref="NullableIntegerParameter"/>.</item>
+    /// <item><see cref="NullableOctetstringParameter"/>.</item>
+    /// <item><see cref="NullableRealParameter"/>.</item>
+    /// <item><see cref="NullableStringParameter"/>.</item>
+    /// <item><see cref="CollectionNode{TElement}"/>.</item>
+    /// <item>A <see cref="FieldNode{TMostDerived}"/> subtype.</item>
+    /// <item>A <see cref="DynamicFieldNode{TMostDerived}"/> subtype.</item>
+    /// <item>A <see cref="Matrix{TMostDerived}"/> subtype.</item>
+    /// <item>A <see cref="DynamicMatrix{TMostDerived}"/> subtype.</item>
+    /// <item><see cref="Function{T}"/>, <see cref="Function{T, U}"/>, <see cref="Function{T, U, V}"/>,
+    /// <see cref="Function{T, U, V, W}"/>, <see cref="Function{T, U, V, W, X}"/>,
+    /// <see cref="Function{T, U, V, W, X, Y}"/>, or <see cref="Function{T, U, V, W, X, Y, Z}"/>.</item>
+    /// </list></para>
+    /// </remarks>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Fewer levels of inheritance would lead to more code duplication.")]
-    public abstract class Matrix<TMostDerived> :
-        FieldNode<TMostDerived>, IMatrix
+    public abstract class Matrix<TMostDerived> : FieldNode<TMostDerived>, IMatrix
         where TMostDerived : Matrix<TMostDerived>
     {
         /// <inheritdoc/>
@@ -105,10 +136,6 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        internal Matrix()
-        {
-        }
 
         internal sealed override int FinalElementType => GlowQualifiedMatrix.InnerNumber;
 
@@ -240,6 +267,17 @@ namespace Lawo.EmberPlusSharp.Model
                 this.targetsWithChangedConnections.Clear();
                 this.HasChanges = false;
             }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>Initializes a new instance of the <see cref="Matrix{TMostDerived}"/> class.</summary>
+        /// <remarks>
+        /// <para>Objects of subtypes are not created by client code directly but indirectly when a
+        /// <see cref="Consumer{T}"/> object is created.</para>
+        /// </remarks>
+        protected Matrix()
+        {
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

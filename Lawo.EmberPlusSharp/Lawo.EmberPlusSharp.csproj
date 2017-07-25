@@ -99,6 +99,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\ChildrenRetrievalPolicy.cs" />
     <Compile Include="Model\CollectionNode`2.cs" />
+    <Compile Include="Model\DynamicMatrix`1.cs" />
     <Compile Include="Model\ElementWithSchemas`1.cs" />
     <Compile Include="Model\Function`1.cs" />
     <Compile Include="Model\Function`2.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="Model\FunctionBase`1.cs" />
     <Compile Include="Model\DynamicFunction.cs" />
     <Compile Include="Model\DynamicResult.cs" />
-    <Compile Include="Model\Matrix.cs" />
+    <Compile Include="Model\DynamicMatrixBase`1.cs" />
     <Compile Include="Model\Result`5.cs" />
     <Compile Include="Model\Result`6.cs" />
     <Compile Include="Model\ShadowNode.cs" />

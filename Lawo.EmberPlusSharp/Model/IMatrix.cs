@@ -17,7 +17,7 @@ namespace Lawo.EmberPlusSharp.Model
     /// sensible values for <b>all</b> matrix types and addressing modes. Software therefore never needs to consider the
     /// values of the redundant <i>type</i> and <i>addressingMode</i> fields, which is why they are not available as
     /// properties.</remarks>
-    public interface IMatrix : IElementWithSchemas
+    public interface IMatrix : INode
     {
         /// <summary>Gets <b>maximumTotalConnects</b>.</summary>
         /// <remarks>Is never 0, contains the correct number for all matrix types.</remarks>
@@ -28,15 +28,15 @@ namespace Lawo.EmberPlusSharp.Model
         int MaximumConnectsPerTarget { get; }
 
         /// <summary>Gets the number path of the parameters associated with the matrix.</summary>
-        /// <remarks>Is <c>null</c> if the provider does send the <i>parametersLocation</i> field.</remarks>
+        /// <remarks>Is <c>null</c> if the provider does not send the <i>parametersLocation</i> field.</remarks>
         IReadOnlyList<int> ParametersLocation { get; }
 
         /// <summary>Gets <b>gainParameterNumber</b>.</summary>
-        /// <remarks>Is <c>null</c> if the provider does send the <i>gainParameterNumber</i> field.</remarks>
+        /// <remarks>Is <c>null</c> if the provider does not send the <i>gainParameterNumber</i> field.</remarks>
         int? GainParameterNumber { get; }
 
         /// <summary>Gets <b>labels</b></summary>
-        /// <remarks>Is <c>null</c> if the provider does send the <i>labels</i> field.</remarks>
+        /// <remarks>Is <c>null</c> if the provider does not send the <i>labels</i> field.</remarks>
         IReadOnlyList<MatrixLabel> Labels { get; }
 
         /// <summary>Gets <b>targets</b>.</summary>
