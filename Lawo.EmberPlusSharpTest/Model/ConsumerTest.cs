@@ -978,12 +978,22 @@ namespace Lawo.EmberPlusSharp.Model
                             Assert.AreEqual(null, matrix.ParametersLocation);
                             Assert.AreEqual(null, matrix.GainParameterNumber);
                             Assert.AreEqual(1, matrix.Labels?.Count);
-                            CollectionAssert.AreEqual(new[] { 1, 7, 666999666 }, matrix.Labels[0].BasePath.ToArray());
-                            Assert.AreEqual(null, matrix.SchemaIdentifiers);
-
                             CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 64, 65, 66, 67, 68, 69, 70, 71, 128, 129, 192, 193, 256, 257, 320, 321 }, matrix.Targets.ToArray());
                             CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 64, 65, 66, 67, 68, 69, 70, 71, 128, 129, 192, 193, 256, 257, 320, 321 }, matrix.Sources.ToArray());
                             CollectionAssert.AreEqual(matrix.Targets.ToArray(), matrix.Connections.Keys.ToArray());
+
+                            var labelsPath = matrix.Labels[0].BasePath;
+                            CollectionAssert.AreEqual(new[] { 1, 7, 666999666 }, labelsPath.ToArray());
+                            var labels = (INode)matrix[labelsPath[labelsPath.Count - 1]];
+                            var targetLabels = (INode)labels.Children.First(c => c.Identifier == "targets");
+                            CollectionAssert.AreEqual(targetLabels.Children.Select(t => t.Number).OrderBy(n => n).ToArray(), matrix.Targets.ToArray());
+                            Assert.AreEqual(targetLabels.Children.Count, targetLabels.Children.Cast<IParameter>().Select(p => p.Value).OfType<string>().Count());
+
+                            var sourceLabels = (INode)labels.Children.First(c => c.Identifier == "sources");
+                            CollectionAssert.AreEqual(sourceLabels.Children.Select(t => t.Number).OrderBy(n => n).ToArray(), matrix.Sources.ToArray());
+                            Assert.AreEqual(sourceLabels.Children.Count, sourceLabels.Children.Cast<IParameter>().Select(p => p.Value).OfType<string>().Count());
+
+                            Assert.AreEqual(null, matrix.SchemaIdentifiers);
 
                             foreach (var connection in matrix.Connections)
                             {
