@@ -227,7 +227,7 @@ namespace Lawo.EmberPlusSharp.Model
                         break;
                     case GlowMatrix.Connections.OuterNumber:
                         this.ReadConnections(reader);
-                        this.RetrievalState = RetrievalState.Complete;
+                        this.connectionsRead = true;
                         break;
                     default:
                         reader.Skip();
@@ -267,6 +267,33 @@ namespace Lawo.EmberPlusSharp.Model
                 this.targetsWithChangedConnections.Clear();
                 this.HasChanges = false;
             }
+        }
+
+        internal sealed override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
+        {
+            base.UpdateRetrievalState(throwForMissingRequiredChildren);
+
+            // According to the specification, the provider is not obligated to send an empty children collection when
+            // a matrix does not have any children. Since is must respond with at least the connections to a
+            // GetDirectory command, a consumer has no easy way to determine whether all children (if any) of a matrix
+            // have been received or not (for nodes without children the provider responds with just number or path and
+            // nothing else). We cannot assume the matrix is complete when its connections have been received, as we
+            // might still be missing direct or indirect children. The following code implements a heuristic, which
+            // assumes that a provider would send the direct children (if any) before sending the connections.
+            if (this.connectionsRead)
+            {
+                if (this.RetrievalState.Equals(RetrievalState.RequestSent) && (this.GetFirstIncompleteChild() == this))
+                {
+                    this.RetrievalState = this.AreRequiredChildrenAvailable(throwForMissingRequiredChildren) ?
+                        RetrievalState.Verified : RetrievalState.Complete;
+                }
+            }
+            else
+            {
+                this.RetrievalState &= RetrievalState.RequestSent;
+            }
+
+            return this.RetrievalState;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,6 +419,7 @@ namespace Lawo.EmberPlusSharp.Model
         private IReadOnlyList<int> targets;
         private IReadOnlyList<int> sources;
         private IReadOnlyDictionary<int, ObservableCollection<int>> connections;
+        private bool connectionsRead;
         private bool isProviderChangeInProgress;
 
         private enum MatrixType

@@ -961,6 +961,42 @@ namespace Lawo.EmberPlusSharp.Model
                 });
         }
 
+        /// <summary>Tests Ember+ matrices with inline elements.</summary>
+        [TestMethod]
+        public void MatrixInlineTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    await TestWithRobot<MatrixInlineRoot>(
+                        consumer =>
+                        {
+                            var matrix = consumer.Root.Device.Routing;
+                            Assert.AreEqual("routing", matrix.Identifier);
+                            Assert.AreEqual(20, matrix.MaximumTotalConnects);
+                            Assert.AreEqual(1, matrix.MaximumConnectsPerTarget);
+                            Assert.AreEqual(null, matrix.ParametersLocation);
+                            Assert.AreEqual(null, matrix.GainParameterNumber);
+                            Assert.AreEqual(1, matrix.Labels?.Count);
+                            CollectionAssert.AreEqual(new[] { 1, 7, 666999666 }, matrix.Labels[0].BasePath.ToArray());
+                            Assert.AreEqual(null, matrix.SchemaIdentifiers);
+
+                            CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 64, 65, 66, 67, 68, 69, 70, 71, 128, 129, 192, 193, 256, 257, 320, 321 }, matrix.Targets.ToArray());
+                            CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 64, 65, 66, 67, 68, 69, 70, 71, 128, 129, 192, 193, 256, 257, 320, 321 }, matrix.Sources.ToArray());
+                            CollectionAssert.AreEqual(matrix.Targets.ToArray(), matrix.Connections.Keys.ToArray());
+
+                            foreach (var connection in matrix.Connections)
+                            {
+                                Assert.AreEqual(0, connection.Value.Count);
+                            }
+
+                            return Task.FromResult(false);
+                        },
+                        true,
+                        "MatrixInlineLog.xml");
+                });
+        }
+
         /// <summary>Tests the behavior when <see cref="Element.IsOnline"/> changes.</summary>
         [TestMethod]
         public void IsOnlineTest()
@@ -2332,6 +2368,22 @@ namespace Lawo.EmberPlusSharp.Model
 
             [Element(Identifier = "parameters", IsOptional = true)]
             public MatrixParameters<INode, INode, INode> Parameters { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class MatrixInlineRoot : Root<MatrixInlineRoot>
+        {
+            public Device Device { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class Device : FieldNode<Device>
+        {
+            [Element(Identifier = "identity")]
+            public INode Identity { get; private set; }
+
+            [Element(Identifier = "routing")]
+            public IMatrix Routing { get; private set; }
         }
     }
 }

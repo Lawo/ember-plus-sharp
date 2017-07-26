@@ -239,7 +239,7 @@ namespace Lawo.EmberPlusSharp.Model
             return this.RetrievalState;
         }
 
-        internal sealed override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
+        internal override RetrievalState UpdateRetrievalState(bool throwForMissingRequiredChildren)
         {
             if (!this.RetrieveDetails || !this.areChildrenCurrent)
             {
