@@ -9,6 +9,7 @@ namespace Lawo.EmberPlusSharp.Model
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -401,31 +402,28 @@ namespace Lawo.EmberPlusSharp.Model
                     writer.WriteStartSet(GlowNode.Contents.OuterId);
                     var identifier = reader.CopyToEndContainer(writer, GlowNodeContents.Identifier.OuterId) as string;
 
-                    if (identifier != null)
+                    if (identifier == null)
                     {
-                        writer.Flush();
-                        stream.Position = 0;
-
-                        using (var contentsReader = new EmberReader(stream))
-                        {
-                            contentsReader.Read(); // Read what we have written with WriteStartSet above
-
-                            var newPolicy = this.childrenRetrievalPolicy == ChildrenRetrievalPolicy.All ?
-                                ChildrenRetrievalPolicy.All : ChildrenRetrievalPolicy.None;
-                            var context = new Context(this, number, identifier, newPolicy);
-                            child = this.ReadNewChildContents(contentsReader, actualType, context, out childRetrievalState);
-
-                            if (child != null)
-                            {
-                                this.children.Add(number, child);
-                                this.areChildrenCurrent = true;
-                            }
-                        }
+                        identifier = number.ToString(CultureInfo.InvariantCulture);
                     }
-                    else
+
+                    writer.Flush();
+                    stream.Position = 0;
+
+                    using (var contentsReader = new EmberReader(stream))
                     {
-                        childRetrievalState = RetrievalState.Complete;
-                        child = null;
+                        contentsReader.Read(); // Read what we have written with WriteStartSet above
+
+                        var newPolicy = this.childrenRetrievalPolicy == ChildrenRetrievalPolicy.All ?
+                            ChildrenRetrievalPolicy.All : ChildrenRetrievalPolicy.None;
+                        var context = new Context(this, number, identifier, newPolicy);
+                        child = this.ReadNewChildContents(contentsReader, actualType, context, out childRetrievalState);
+
+                        if (child != null)
+                        {
+                            this.children.Add(number, child);
+                            this.areChildrenCurrent = true;
+                        }
                     }
                 }
             }
