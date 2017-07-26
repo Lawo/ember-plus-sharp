@@ -963,12 +963,12 @@ namespace Lawo.EmberPlusSharp.Model
 
         /// <summary>Tests Ember+ matrices with inline elements.</summary>
         [TestMethod]
-        public void MatrixInlineTest()
+        public void DynamicMatrixInlineTest()
         {
             AsyncPump.Run(
                 async () =>
                 {
-                    await TestWithRobot<MatrixInlineRoot>(
+                    await TestWithRobot<DynamicMatrixInlineRoot>(
                         consumer =>
                         {
                             var matrix = consumer.Root.Device.Routing;
@@ -992,6 +992,49 @@ namespace Lawo.EmberPlusSharp.Model
                             var sourceLabels = (INode)labels.Children.First(c => c.Identifier == "sources");
                             CollectionAssert.AreEqual(sourceLabels.Children.Select(t => t.Number).OrderBy(n => n).ToArray(), matrix.Sources.ToArray());
                             Assert.AreEqual(sourceLabels.Children.Count, sourceLabels.Children.Cast<IParameter>().Select(p => p.Value).OfType<string>().Count());
+
+                            Assert.AreEqual(null, matrix.SchemaIdentifiers);
+
+                            foreach (var connection in matrix.Connections)
+                            {
+                                Assert.AreEqual(0, connection.Value.Count);
+                            }
+
+                            return Task.FromResult(false);
+                        },
+                        true,
+                        "MatrixInlineLog.xml");
+                });
+        }
+
+        /// <summary>Tests Ember+ matrices with inline elements.</summary>
+        [TestMethod]
+        public void MatrixInlineTest()
+        {
+            AsyncPump.Run(
+                async () =>
+                {
+                    await TestWithRobot<MatrixInlineRoot>(
+                        consumer =>
+                        {
+                            var matrix = consumer.Root.Device.Routing;
+                            Assert.AreEqual("routing", matrix.Identifier);
+                            Assert.AreEqual(20, matrix.MaximumTotalConnects);
+                            Assert.AreEqual(1, matrix.MaximumConnectsPerTarget);
+                            Assert.AreEqual(null, matrix.ParametersLocation);
+                            Assert.AreEqual(null, matrix.GainParameterNumber);
+                            Assert.AreEqual(1, matrix.Labels?.Count);
+                            CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 64, 65, 66, 67, 68, 69, 70, 71, 128, 129, 192, 193, 256, 257, 320, 321 }, matrix.Targets.ToArray());
+                            CollectionAssert.AreEqual(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 64, 65, 66, 67, 68, 69, 70, 71, 128, 129, 192, 193, 256, 257, 320, 321 }, matrix.Sources.ToArray());
+                            CollectionAssert.AreEqual(matrix.Targets.ToArray(), matrix.Connections.Keys.ToArray());
+
+                            var labelsPath = matrix.Labels[0].BasePath;
+                            CollectionAssert.AreEqual(new[] { 1, 7, 666999666 }, labelsPath.ToArray());
+                            var targetLabels = matrix.MatrixLabels.Targets;
+                            CollectionAssert.AreEqual(targetLabels.Children.Select(t => t.Number).OrderBy(n => n).ToArray(), matrix.Targets.ToArray());
+
+                            var sourceLabels = matrix.MatrixLabels.Sources;
+                            CollectionAssert.AreEqual(sourceLabels.Children.Select(t => t.Number).OrderBy(n => n).ToArray(), matrix.Sources.ToArray());
 
                             Assert.AreEqual(null, matrix.SchemaIdentifiers);
 
@@ -2381,6 +2424,22 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class DynamicMatrixInlineRoot : Root<DynamicMatrixInlineRoot>
+        {
+            public DynamicDevice Device { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class DynamicDevice : FieldNode<DynamicDevice>
+        {
+            [Element(Identifier = "identity")]
+            public INode Identity { get; private set; }
+
+            [Element(Identifier = "routing")]
+            public IMatrix Routing { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
         private sealed class MatrixInlineRoot : Root<MatrixInlineRoot>
         {
             public Device Device { get; private set; }
@@ -2393,7 +2452,14 @@ namespace Lawo.EmberPlusSharp.Model
             public INode Identity { get; private set; }
 
             [Element(Identifier = "routing")]
-            public IMatrix Routing { get; private set; }
+            public InlineMatrix Routing { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class InlineMatrix : Matrix<InlineMatrix>
+        {
+            [Element(Identifier = "Labels")]
+            public MatrixLabels MatrixLabels { get; private set; }
         }
     }
 }
