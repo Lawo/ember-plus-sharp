@@ -984,7 +984,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                             var labelsPath = matrix.Labels[0].BasePath;
                             CollectionAssert.AreEqual(new[] { 1, 7, 666999666 }, labelsPath.ToArray());
-                            var labels = (INode)matrix[labelsPath[labelsPath.Count - 1]];
+                            var labels = (INode)matrix.DynamicChildren.First();
                             var targetLabels = (INode)labels.Children.First(c => c.Identifier == "targets");
                             CollectionAssert.AreEqual(targetLabels.Children.Select(t => t.Number).OrderBy(n => n).ToArray(), matrix.Targets.ToArray());
                             Assert.AreEqual(targetLabels.Children.Count, targetLabels.Children.Cast<IParameter>().Select(p => p.Value).OfType<string>().Count());
@@ -2436,7 +2436,12 @@ namespace Lawo.EmberPlusSharp.Model
             public INode Identity { get; private set; }
 
             [Element(Identifier = "routing")]
-            public IMatrix Routing { get; private set; }
+            public DynamicMatrixInline Routing { get; private set; }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
+        private sealed class DynamicMatrixInline : DynamicMatrix<DynamicMatrixInline>
+        {
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
@@ -2452,11 +2457,11 @@ namespace Lawo.EmberPlusSharp.Model
             public INode Identity { get; private set; }
 
             [Element(Identifier = "routing")]
-            public InlineMatrix Routing { get; private set; }
+            public MatrixInline Routing { get; private set; }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated through reflection.")]
-        private sealed class InlineMatrix : Matrix<InlineMatrix>
+        private sealed class MatrixInline : Matrix<MatrixInline>
         {
             [Element(Identifier = "Labels")]
             public MatrixLabels MatrixLabels { get; private set; }

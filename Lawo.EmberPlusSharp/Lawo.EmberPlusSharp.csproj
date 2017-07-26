@@ -148,7 +148,6 @@
     <Compile Include="Model\DynamicMatrixBase`1.cs" />
     <Compile Include="Model\Result`5.cs" />
     <Compile Include="Model\Result`6.cs" />
-    <Compile Include="Model\ShadowNode.cs" />
     <Compile Include="Model\StaticFunction`1.cs" />
     <Compile Include="Model\Result`2.cs" />
     <Compile Include="Model\Result`3.cs" />
