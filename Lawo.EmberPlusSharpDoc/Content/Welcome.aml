@@ -94,6 +94,64 @@
         </list>
       </content>
     </section>
+    <section address="Development">
+      <title>Development</title>
+      <content/>
+      <sections>
+        <section address="Environment">
+          <title>Environment</title>
+          <content>
+            <list class="bullet">
+              <listItem>
+                <para>Windows 10</para>
+              </listItem>
+              <listItem>
+                <para>Visual Studio 2015 (2017 works too)</para>
+              </listItem>
+              <listItem>
+                <para>
+                  <externalLink>
+                    <linkText>SHFB</linkText>
+                    <linkUri>https://github.com/EWSoftware/SHFB</linkUri>
+                  </externalLink>
+                </para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+        <section address="SourceCode">
+          <title>Source Code</title>
+          <content>
+            <para>
+              <externalLink>
+                <linkText>https://github.com/Lawo/ember-plus-sharp</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp</linkUri>
+              </externalLink>
+            </para>
+          </content>
+        </section>
+        <section address="Builds">
+          <title>Builds</title>
+          <content>
+            <para>
+              The process of building, packaging and publishing a release is implemented in the
+              <externalLink>
+                <linkText>Publish.ps1 PowerShell script</linkText>
+                <linkUri>https://github.com/Lawo/ember-plus-sharp/blob/master/Publish.ps1</linkUri>
+              </externalLink>.
+              It requests the password of the cimaster user (necessary so that build artifacts can be donwloaded from
+              cimaster) as well as a GitHub API Key, which can be created in the
+              <externalLink>
+                <linkText>Personal access tokens</linkText>
+                <linkUri>https://github.com/settings/tokens</linkUri>
+              </externalLink>
+              section of GitHub. The token must have at least the scopes <codeInline>repo</codeInline> and
+              <codeInline>gist</codeInline>.
+            </para>
+          </content>
+        </section>
+      </sections>
+    </section>
     <bibliography/>
     <relatedTopics/>
   </developerConceptualDocument>
