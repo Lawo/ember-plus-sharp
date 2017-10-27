@@ -9,5 +9,7 @@ rmdir CoverageResults /s /q
 
 mkdir CoverageResults
 move TestResults\*.trx CoverageResults\TestResults.trx
-for /r TestResults %%f in (*.coverage) do move "%%f" CoverageResults\CodeCoverage.coverage
-"C:\Program Files (x86)\VisualCoverage\VisualCoverage.exe" -i CoverageResults\CodeCoverage.coverage --clover CoverageResults\CodeCoverage.xml
+
+rem Coverage is only supported in VS Enterprise, which we no longer have access to
+rem for /r TestResults %%f in (*.coverage) do move "%%f" CoverageResults\CodeCoverage.coverage
+rem "C:\Program Files (x86)\VisualCoverage\VisualCoverage.exe" -i CoverageResults\CodeCoverage.coverage --clover CoverageResults\CodeCoverage.xml
