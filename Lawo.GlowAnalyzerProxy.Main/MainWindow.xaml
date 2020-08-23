@@ -3,9 +3,9 @@
     x:Class="Lawo.GlowAnalyzerProxy.Main.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
-    xmlns:local="clr-namespace:Lawo.GlowAnalyzerProxy.Main"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:ie="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:main="clr-namespace:Lawo.GlowAnalyzerProxy.Main"
     MinHeight="540"
     MinWidth="960"
     Height="540"
@@ -39,7 +39,7 @@
         <Style x:Key="TrippleDotButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="5,0,5,0"/>
         </Style>
-        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <main:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -154,12 +154,10 @@
                 <ColumnDefinition/> 
             </Grid.ColumnDefinitions>
             <!-- #region CompositePropertyBinding -->
-            <local:ConnectionStatusUserControl
-                Grid.Row="0" Grid.Column="0" DataContext="{Binding ConsumerConnection}"
-                Header="Consumer to Proxy Connection Status"/>
-            <local:ConnectionStatusUserControl
-                Grid.Row="0" Grid.Column="2" DataContext="{Binding ProviderConnection}"
-                Header="Proxy to Provider Connection Status"/>
+            <main:ConnectionStatusUserControl
+                Grid.Row="0" Grid.Column="0" Header="Consumer to Proxy Connection Status" DataContext="{Binding ConsumerConnection}"/>
+            <main:ConnectionStatusUserControl
+                Grid.Row="0" Grid.Column="2" Header="Proxy to Provider Connection Status" DataContext="{Binding ProviderConnection}"/>
             <!-- #endregion -->
             <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Event Detail">
                 <Grid Margin="{StaticResource Margin}">

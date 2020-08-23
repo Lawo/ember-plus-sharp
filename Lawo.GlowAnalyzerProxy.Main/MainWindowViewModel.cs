@@ -20,13 +20,12 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System.Threading.Tasks;
     using System.Windows.Documents;
     using System.Windows.Media;
-
-    using ComponentModel;
-    using EmberPlusSharp.S101;
-    using IO;
-    using Properties;
-    using Reflection;
-    using Threading.Tasks;
+    using Lawo.ComponentModel;
+    using Lawo.EmberPlusSharp.S101;
+    using Lawo.GlowAnalyzerProxy.Main.Properties;
+    using Lawo.IO;
+    using Lawo.Reflection;
+    using Lawo.Threading.Tasks;
 
     // The following suppressions are necessary so that tested code snippets can be included in the documentation.
 #pragma warning disable SA1123 // Do not place regions within elements
@@ -185,6 +184,10 @@ namespace Lawo.GlowAnalyzerProxy.Main
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+        /// </summary>
+        /// <param name="settings"></param>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Permanent binding is intended.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called through reflection.")]
         internal MainWindowViewModel(Settings settings)
