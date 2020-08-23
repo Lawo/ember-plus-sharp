@@ -1,5 +1,8 @@
 ﻿[*.cs]
 
+# SA1636: File header copyright text should match
+dotnet_diagnostic.SA1636.severity = suggestion
+
 # SA1614: Element parameter documentation should have text
 dotnet_diagnostic.SA1614.severity = suggestion
 
@@ -11,6 +14,3 @@ dotnet_diagnostic.SA1600.severity = suggestion
 
 # SA1201: Elements should appear in the correct order
 dotnet_diagnostic.SA1201.severity = suggestion
-
-# SA1636: File header copyright text should match
-dotnet_diagnostic.SA1636.severity = suggestion
