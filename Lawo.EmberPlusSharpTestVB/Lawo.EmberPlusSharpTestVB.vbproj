@@ -90,19 +90,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj">
-      <Project>{cd75460d-43d8-4602-8e78-4c6ea6de9c87}</Project>
-      <Name>Lawo.EmberPlusSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lawo\Lawo.csproj">
-      <Project>{4b9ed1f0-f237-4132-b247-cbc37df5177a}</Project>
-      <Name>Lawo</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
       <Link>CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj">
+      <Project>{1be88b2d-2a49-47c0-9c60-59d662c0821a}</Project>
+      <Name>Lawo.EmberPlusSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lawo\Lawo.csproj">
+      <Project>{47067303-08c7-442d-aefd-5793595b179f}</Project>
+      <Name>Lawo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

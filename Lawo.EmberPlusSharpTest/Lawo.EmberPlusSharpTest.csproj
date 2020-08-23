@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -160,20 +161,6 @@
     <Compile Include="S101\S101WriterTest.cs" />
     <Compile Include="S101\CompatibilityTest.cs" />
     <Compile Include="S101\PerformanceComparison.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj">
-      <Project>{cd75460d-43d8-4602-8e78-4c6ea6de9c87}</Project>
-      <Name>Lawo.EmberPlusSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lawo.UnitTesting\Lawo.UnitTesting.csproj">
-      <Project>{018d45fd-bc81-433e-9b90-788d4ae2d31c}</Project>
-      <Name>Lawo.UnitTesting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lawo\Lawo.csproj">
-      <Project>{4b9ed1f0-f237-4132-b247-cbc37df5177a}</Project>
-      <Name>Lawo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
@@ -602,12 +589,6 @@
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\stylecop.json">
       <Link>stylecop.json</Link>
     </AdditionalFiles>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\Bug27Log.xml" />
@@ -625,6 +606,28 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model\Test\EmberDataPayloads\MatrixInlineLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lawo.EmberPlusSharp\Lawo.EmberPlusSharp.csproj">
+      <Project>{1be88b2d-2a49-47c0-9c60-59d662c0821a}</Project>
+      <Name>Lawo.EmberPlusSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lawo.UnitTesting\Lawo.UnitTesting.csproj">
+      <Project>{018d45fd-bc81-433e-9b90-788d4ae2d31c}</Project>
+      <Name>Lawo.UnitTesting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lawo\Lawo.csproj">
+      <Project>{47067303-08c7-442d-aefd-5793595b179f}</Project>
+      <Name>Lawo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

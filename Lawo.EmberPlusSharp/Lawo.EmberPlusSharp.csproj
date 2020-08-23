@@ -1,255 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD75460D-43D8-4602-8E78-4C6EA6DE9C87}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lawo.EmberPlusSharp</RootNamespace>
-    <AssemblyName>Lawo.EmberPlusSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworks>netstandard2.1;net48;net45</TargetFrameworks>
+    <Description></Description>
+    <Company>Lawo GmbH</Company>
+    <Copyright>Copyright 2012-2020 Lawo GmbH (http://www.lawo.com). Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)</Copyright>
+    <Authors />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Lawo.EmberPlusSharp.xml</DocumentationFile>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Lawo.EmberPlusSharp.xml</DocumentationFile>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\StrongNameKey.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Ember\BerSet.cs" />
-    <Compile Include="Ember\BerSequence.cs" />
-    <Compile Include="Ember\BerRelativeObjectIdentifier.cs" />
-    <Compile Include="Ember\EmberGlobal.cs" />
-    <Compile Include="Ember\EmberTypeBag.cs" />
-    <Compile Include="Ember\BerUtf8String.cs" />
-    <Compile Include="Ember\BerReal.cs" />
-    <Compile Include="Ember\BerOctetstring.cs" />
-    <Compile Include="Ember\BerInteger.cs" />
-    <Compile Include="Ember\BerBoolean.cs" />
-    <Compile Include="Ember\EmberException.cs" />
-    <Compile Include="Ember\EmberReader.cs" />
-    <Compile Include="Ember\EmberWriter.cs" />
-    <Compile Include="Ember\Class.cs" />
-    <Compile Include="Ember\Constants.cs" />
-    <Compile Include="Ember\Field`2.cs" />
-    <Compile Include="Ember\FieldPath`2.cs" />
-    <Compile Include="Ember\IEmberConverter.cs" />
-    <Compile Include="Ember\InnerNumber.cs" />
-    <Compile Include="Ember\EmberId.cs" />
-    <Compile Include="Ember\EmberConverter.cs" />
-    <Compile Include="Crc.cs" />
-    <Compile Include="Ember\EmberType.cs" />
-    <Compile Include="Glow\GlowCommandNumber.cs" />
-    <Compile Include="Glow\GlowInvocationResult.cs" />
-    <Compile Include="Glow\GlowInvocation.cs" />
-    <Compile Include="Glow\GlowSource.cs" />
-    <Compile Include="Glow\GlowConnectionCollection.cs" />
-    <Compile Include="Glow\GlowConnection.cs" />
-    <Compile Include="Glow\GlowTarget.cs" />
-    <Compile Include="Glow\GlowSourceCollection.cs" />
-    <Compile Include="Glow\GlowTargetCollection.cs" />
-    <Compile Include="Glow\GlowMatrixContents.cs" />
-    <Compile Include="Glow\GlowTuple.cs" />
-    <Compile Include="Glow\GlowLabelCollection.cs" />
-    <Compile Include="Glow\GlowLabel.cs" />
-    <Compile Include="Glow\GlowTupleItemDescription.cs" />
-    <Compile Include="Glow\GlowTupleDescription.cs" />
-    <Compile Include="Glow\GlowNodeContents.cs" />
-    <Compile Include="Glow\GlowFunction.cs" />
-    <Compile Include="Glow\GlowFunctionContents.cs" />
-    <Compile Include="Glow\GlowQualifiedFunction.cs" />
-    <Compile Include="Glow\GlowTypes.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Model\ChildrenRetrievalPolicy.cs" />
-    <Compile Include="Model\CollectionNode`2.cs" />
-    <Compile Include="Model\DynamicMatrix`1.cs" />
-    <Compile Include="Model\ElementWithSchemas`1.cs" />
-    <Compile Include="Model\Function`1.cs" />
-    <Compile Include="Model\Function`2.cs" />
-    <Compile Include="Model\Function`4.cs" />
-    <Compile Include="Model\Function`6.cs" />
-    <Compile Include="Model\Function`7.cs" />
-    <Compile Include="Model\Function`5.cs" />
-    <Compile Include="Model\Function`3.cs" />
-    <Compile Include="Model\InvocationCollection.cs" />
-    <Compile Include="Model\IStreamedParameter.cs" />
-    <Compile Include="Model\IStreamedParameterCollection.cs" />
-    <Compile Include="Model\MatrixLabel.cs" />
-    <Compile Include="Model\Matrix`1.cs" />
-    <Compile Include="Model\DynamicMatrix.cs" />
-    <Compile Include="Model\RetrievalState.cs" />
-    <Compile Include="Model\DynamicRoot`1.cs" />
-    <Compile Include="Model\DynamicNodeHelper.cs" />
-    <Compile Include="Model\DynamicNode.cs" />
-    <Compile Include="Model\DynamicFieldNode`1.cs" />
-    <Compile Include="Model\DynamicNodeBase`1.cs" />
-    <Compile Include="Model\DynamicParameter.cs" />
-    <Compile Include="Model\IElementWithSchemas.cs" />
-    <Compile Include="Model\IFunction.cs" />
-    <Compile Include="Model\IInvocationCollection.cs" />
-    <Compile Include="Model\IMatrix.cs" />
-    <Compile Include="Model\IResult.cs" />
-    <Compile Include="Model\IInvocationResult.cs" />
-    <Compile Include="Model\InvocationFailedException.cs" />
-    <Compile Include="Model\RetrieveDetailsChangeStatus.cs" />
-    <Compile Include="Model\IValueReader.cs" />
-    <Compile Include="Model\MatrixParameters`3.cs" />
-    <Compile Include="Model\MatrixLabels.cs" />
-    <Compile Include="Model\NodeBase`1.cs" />
-    <Compile Include="Model\NullableEnumParameter`1.cs" />
-    <Compile Include="Model\EnumParameterImpl`1.cs" />
-    <Compile Include="Model\EnumParameter`1.cs" />
-    <Compile Include="Model\NullableStringParameter.cs" />
-    <Compile Include="Model\NullableOctetstringParameter.cs" />
-    <Compile Include="Model\NullableRealParameter.cs" />
-    <Compile Include="Model\NullableIntegerParameter.cs" />
-    <Compile Include="Model\NullableBooleanParameter.cs" />
-    <Compile Include="Model\NullableNumericParameter`2.cs" />
-    <Compile Include="Model\FunctionBase`1.cs" />
-    <Compile Include="Model\DynamicFunction.cs" />
-    <Compile Include="Model\DynamicResult.cs" />
-    <Compile Include="Model\DynamicMatrixBase`1.cs" />
-    <Compile Include="Model\Result`5.cs" />
-    <Compile Include="Model\Result`6.cs" />
-    <Compile Include="Model\StaticFunction`1.cs" />
-    <Compile Include="Model\Result`2.cs" />
-    <Compile Include="Model\Result`3.cs" />
-    <Compile Include="Model\Result`4.cs" />
-    <Compile Include="Model\Result`1.cs" />
-    <Compile Include="Model\Result.cs" />
-    <Compile Include="Model\ResultBase`1.cs" />
-    <Compile Include="Model\StreamedParameterCollection.cs" />
-    <Compile Include="Model\ValueParameter`2.cs" />
-    <Compile Include="Model\ReferenceParameter`2.cs" />
-    <Compile Include="Model\NullableParameter`2.cs" />
-    <Compile Include="Model\ParameterBase`2.cs" />
-    <Compile Include="Model\ElementType.cs" />
-    <Compile Include="Model\EmberReaderExtensions.cs" />
-    <Compile Include="Model\BooleanParameter.cs" />
-    <Compile Include="Glow\GlowCommand.cs" />
-    <Compile Include="Glow\GlowGlobal.cs" />
-    <Compile Include="Glow\GlowQualifiedMatrix.cs" />
-    <Compile Include="Glow\GlowMatrix.cs" />
-    <Compile Include="Glow\GlowStreamDescription.cs" />
-    <Compile Include="Glow\GlowRootElementCollection.cs" />
-    <Compile Include="Glow\GlowQualifiedNode.cs" />
-    <Compile Include="Glow\GlowQualifiedParameter.cs" />
-    <Compile Include="Glow\GlowStringIntegerCollection.cs" />
-    <Compile Include="Glow\GlowStringIntegerPair.cs" />
-    <Compile Include="Glow\GlowStreamCollection.cs" />
-    <Compile Include="Glow\GlowParameterContents.cs" />
-    <Compile Include="Glow\GlowStreamEntry.cs" />
-    <Compile Include="Glow\GlowElementCollection.cs" />
-    <Compile Include="Glow\GlowNode.cs" />
-    <Compile Include="Glow\GlowParameter.cs" />
-    <Compile Include="Model\CollectionNode`1.cs" />
-    <Compile Include="Model\IParent.cs" />
-    <Compile Include="Model\ValueWriter`1.cs" />
-    <Compile Include="Model\ValueReader`1.cs" />
-    <Compile Include="Model\VisibilityHelper.cs" />
-    <Compile Include="S101\ProviderStatus.cs" />
-    <Compile Include="S101\EventInfo.cs" />
-    <Compile Include="S101\LogNames.cs" />
-    <Compile Include="Glow\GlowLogConverter.cs" />
-    <Compile Include="S101\OutOfFrameByteReceivedEventArgs.cs" />
-    <Compile Include="S101\S101Logger.cs" />
-    <Compile Include="Model\Node`1.cs" />
-    <Compile Include="Model\OctetstringParameter.cs" />
-    <Compile Include="Model\Root`1.cs" />
-    <Compile Include="Model\StringParameter.cs" />
-    <Compile Include="Model\IntegerParameter.cs" />
-    <Compile Include="Model\IParameter.cs" />
-    <Compile Include="Model\ModelException.cs" />
-    <Compile Include="Model\Element.cs" />
-    <Compile Include="Model\Element`1.cs" />
-    <Compile Include="Model\ElementAttribute.cs" />
-    <Compile Include="Model\IElement.cs" />
-    <Compile Include="Model\INode.cs" />
-    <Compile Include="Model\Context.cs" />
-    <Compile Include="Model\MetaElement.cs" />
-    <Compile Include="Model\MetaElement`1.cs" />
-    <Compile Include="Model\NumericParameter`2.cs" />
-    <Compile Include="Model\Parameter`2.cs" />
-    <Compile Include="Model\ParameterAccess.cs" />
-    <Compile Include="Model\ParameterType.cs" />
-    <Compile Include="Model\RealParameter.cs" />
-    <Compile Include="Model\Consumer`1.cs" />
-    <Compile Include="Model\StreamDescription.cs" />
-    <Compile Include="Model\StreamFormat.cs" />
-    <Compile Include="Model\FieldNode`1.cs" />
-    <Compile Include="S101\S101Command.cs" />
-    <Compile Include="S101\CommandType.cs" />
-    <Compile Include="S101\Constants.cs" />
-    <Compile Include="S101\IS101Logger.cs" />
-    <Compile Include="S101\MessageReceivedEventArgs.cs" />
-    <Compile Include="S101\MessageDecodingStream.cs" />
-    <Compile Include="S101\Frame.cs" />
-    <Compile Include="S101\MessageEncodingStream.cs" />
-    <Compile Include="Glow\GlowLogInterpreter.cs" />
-    <Compile Include="S101\S101LogReader.cs" />
-    <Compile Include="S101\S101Message.cs" />
-    <Compile Include="S101\MessageType.cs" />
-    <Compile Include="S101\DeframingStream.cs" />
-    <Compile Include="S101\EmberData.cs" />
-    <Compile Include="S101\PacketFlags.cs" />
-    <Compile Include="S101\FramingStream.cs" />
-    <Compile Include="S101\KeepAliveResponse.cs" />
-    <Compile Include="S101\KeepAliveRequest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="S101\S101Client.cs" />
-    <Compile Include="S101\S101Exception.cs" />
-    <Compile Include="S101\S101Reader.cs" />
-    <Compile Include="S101\S101Robot.cs" />
-    <Compile Include="S101\S101Writer.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
-      <Link>CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lawo\Lawo.csproj">
-      <Project>{4b9ed1f0-f237-4132-b247-cbc37df5177a}</Project>
-      <Name>Lawo</Name>
-    </ProjectReference>
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -258,17 +27,13 @@
       <Link>stylecop.json</Link>
     </AdditionalFiles>
   </ItemGroup>
+
   <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lawo\Lawo.csproj" />
+  </ItemGroup>
+
 </Project>
