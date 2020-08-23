@@ -9,9 +9,8 @@ namespace Lawo.GlowAnalyzerProxy.Main
     using System;
     using System.IO;
     using System.Xml;
-
-    using EmberPlusSharp.Glow;
-    using EmberPlusSharp.S101;
+    using Lawo.EmberPlusSharp.Glow;
+    using Lawo.EmberPlusSharp.S101;
 
     internal sealed class LogInfo : IDisposable
     {
