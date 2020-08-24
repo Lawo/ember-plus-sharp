@@ -12,6 +12,7 @@ Imports System.Threading.Tasks
 Imports Lawo.EmberPlusSharp.Model
 Imports Lawo.EmberPlusSharp.S101
 Imports Lawo.Threading.Tasks
+'Imports Microsoft.TeamFoundation.Framework.Common
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 #End Region
 

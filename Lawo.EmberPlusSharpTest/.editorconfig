@@ -1,0 +1,17 @@
+﻿[*.cs]
+
+# CS3003: Type is not CLS-compliant
+dotnet_diagnostic.CS3003.severity = suggestion
+
+# CS3001: Argument type is not CLS-compliant
+dotnet_diagnostic.CS3001.severity = suggestion
+
+# CS3002: Return type is not CLS-compliant
+dotnet_diagnostic.CS3002.severity = suggestion
+
+# CS3009: Base type is not CLS-compliant
+dotnet_diagnostic.CS3009.severity = warning
+
+# CS3024: Constraint type is not CLS-compliant
+dotnet_diagnostic.CS3024.severity = warning
+
