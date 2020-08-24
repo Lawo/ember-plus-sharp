@@ -16,10 +16,10 @@ namespace Lawo.GlowAnalyzerProxy.Main
     {
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-            (bool)value ? Visibility.Visible : Visibility.Collapsed;
+            value != null && (bool)value ? Visibility.Visible : Visibility.Collapsed;
 
         /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-            (Visibility)value == Visibility.Visible;
+            value != null && (Visibility)value == Visibility.Visible;
     }
 }
