@@ -422,6 +422,9 @@ namespace Lawo.EmberPlusSharp.Model
         private bool connectionsRead;
         private bool isProviderChangeInProgress;
 
+        /// <summary>
+        /// Defines the possible values of the "type" field of GlowMatrix
+        /// </summary>
         private enum MatrixType
         {
             OneToN,
@@ -429,12 +432,18 @@ namespace Lawo.EmberPlusSharp.Model
             NToN
         }
 
+        /// <summary>
+        /// Defines the possible values of the "addressingMode" field of GlowMatrix
+        /// </summary>
         private enum MatrixAddressingMode
         {
             Linear,
             Nonlinear,
         }
 
+        /// <summary>
+        /// Defines the possible values of the "operation" field of GlowConnection
+        /// </summary>
         private enum ConnectionOperation
         {
             Absolute,
@@ -442,6 +451,9 @@ namespace Lawo.EmberPlusSharp.Model
             Disconnect
         }
 
+        /// <summary>
+        /// Defines the possible values of the "disposition" field of GlowConnection
+        /// </summary>
         private enum ConnectionDisposition
         {
             Tally,

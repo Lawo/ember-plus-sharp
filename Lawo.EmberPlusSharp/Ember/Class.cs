@@ -6,7 +6,10 @@
 
 namespace Lawo.EmberPlusSharp.Ember
 {
-    /// <summary>See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.2.2.</summary>
+    /// <summary>
+    /// BER tag classes
+    /// See <i>"X.690"</i><cite>X.690</cite>, chapter 8.1.2.2.
+    /// </summary>
     internal enum Class
     {
         /// <summary>Universal class.</summary>
