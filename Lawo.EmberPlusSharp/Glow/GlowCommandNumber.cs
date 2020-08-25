@@ -6,6 +6,9 @@
 
 namespace Lawo.EmberPlusSharp.Glow
 {
+    /// <summary>
+    /// Defines the possible values of the "number" field of GlowCommand.
+    /// </summary>
     internal enum GlowCommandNumber : long
     {
         /// <summary><c>Subscribe</c> command</summary>
@@ -15,6 +18,9 @@ namespace Lawo.EmberPlusSharp.Glow
         Unsubscribe = 31,
 
         /// <summary><c>GetDirectory</c> command</summary>
-        GetDirectory = 32
+        GetDirectory = 32,
+
+        /// <summary><c>Invoke</c> command</summary>
+        Invoke = 33
     }
 }

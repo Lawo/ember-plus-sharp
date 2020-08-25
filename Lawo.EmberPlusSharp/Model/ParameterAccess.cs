@@ -8,7 +8,10 @@ namespace Lawo.EmberPlusSharp.Model
 {
     using System;
 
-    /// <summary>Indicates how a parameter can be accessed.</summary>
+    /// <summary>
+    /// Indicates how a parameter can be accessed.
+    /// Defines the possible values of the "access" field of GlowParameter (GlowAccess)
+    /// </summary>
     [Flags]
     public enum ParameterAccess
     {
