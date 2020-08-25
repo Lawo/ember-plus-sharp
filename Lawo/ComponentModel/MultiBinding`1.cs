@@ -39,12 +39,7 @@ namespace Lawo.ComponentModel
                     string.Format(CultureInfo.InvariantCulture, "s{0}", nullIndex + 1));
             }
 
-            if (target == null)
-            {
-                throw new ArgumentNullException(nameof(target));
-            }
-
-            this.target = target;
+            this.target = target ?? throw new ArgumentNullException(nameof(target));
             this.calculate = toTarget;
             this.propertyChangedRegistration = new PropertyChangedRegistration(this.OnPropertyChanged, sources);
             this.target.Value = this.calculate();

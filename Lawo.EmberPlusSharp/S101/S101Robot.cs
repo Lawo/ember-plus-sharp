@@ -83,12 +83,7 @@ namespace Lawo.EmberPlusSharp.S101
 
         private S101Robot(S101Client client, EmberTypeBag types, XmlReader logReader, bool sendFirstMessage)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
-
-            this.client = client;
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
             this.logReader = new S101LogReader(types, logReader);
             this.sendFirstMessage = sendFirstMessage;
 

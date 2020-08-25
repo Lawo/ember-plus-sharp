@@ -57,12 +57,8 @@ namespace Lawo.ComponentModel
             internal ProjectionCollection(
                 TOriginalCollection originalItems, Func<TOriginal, TProjected> projectionFunction)
             {
-                if (projectionFunction == null)
-                {
-                    throw new ArgumentNullException(nameof(projectionFunction));
-                }
-
-                this.projectionFunction = projectionFunction;
+                this.projectionFunction =
+                    projectionFunction ?? throw new ArgumentNullException(nameof(projectionFunction));
                 var handler = originalItems.AddChangeHandlers<TOriginalCollection, TOriginal>(
                     this.Insert, this.Remove, this.Clear);
                 this.RegisterForRemoval(originalItems, handler);

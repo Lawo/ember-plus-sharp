@@ -62,20 +62,11 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <c>null</c>.</exception>
         /// <exception cref="EmberException">The EmBER-encoded data is invalid, see <see cref="Exception.Message"/> for
         /// details.</exception>
-        public void ToXml(EmberReader reader, XmlWriter writer)
-        {
-            if (reader == null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
-
-            if (writer == null)
-            {
-                throw new ArgumentNullException(nameof(writer));
-            }
-
-            this.ToXmlCore(reader, writer, default(FieldPath<int, EmberId>), EmberGlobal.InnerNumber);
-        }
+        public void ToXml(EmberReader reader, XmlWriter writer) => this.ToXmlCore(
+            reader ?? throw new ArgumentNullException(nameof(reader)),
+            writer ?? throw new ArgumentNullException(nameof(writer)),
+            default(FieldPath<int, EmberId>),
+            EmberGlobal.InnerNumber);
 
         /// <summary>Reads XML with <paramref name="reader"/> and returns the equivalent EmBER representation.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> equals <c>null</c>.</exception>
@@ -100,20 +91,11 @@ namespace Lawo.EmberPlusSharp.Ember
         /// <c>null</c>.</exception>
         /// <exception cref="XmlException">The XML is invalid, see <see cref="Exception.Message"/> for details.
         /// </exception>
-        public void FromXml(XmlReader reader, EmberWriter writer)
-        {
-            if (reader == null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
-
-            if (writer == null)
-            {
-                throw new ArgumentNullException(nameof(writer));
-            }
-
-            this.FromXmlCore(reader, writer, default(FieldPath<string, string>), EmberGlobal.Name);
-        }
+        public void FromXml(XmlReader reader, EmberWriter writer) => this.FromXmlCore(
+            reader ?? throw new ArgumentNullException(nameof(reader)),
+            writer ?? throw new ArgumentNullException(nameof(writer)),
+            default(FieldPath<string, string>),
+            EmberGlobal.Name);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
