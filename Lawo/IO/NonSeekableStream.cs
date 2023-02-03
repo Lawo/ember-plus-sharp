@@ -45,7 +45,6 @@ namespace Lawo.IO
         }
 
         /// <summary>Asynchronously disposes resources.</summary>
-        [CLSCompliant(false)]
         public virtual Task DisposeAsync(CancellationToken cancellationToken) => Completed;
 
         /// <inheritdoc/>

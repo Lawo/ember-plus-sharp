@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General
-[assembly: AssemblyTitle("Lawo")]
+//[assembly: AssemblyTitle("Lawo")]
 [assembly: AssemblyDescription("")]
 
 // CA enforced

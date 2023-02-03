@@ -59,11 +59,10 @@ namespace Lawo.IO
         /// <exception cref="EndOfStreamException">The end of the stream has been reached before
         /// <paramref name="buffer"/> could be filled to <paramref name="count"/> bytes.</exception>
         /// <exception cref="Exception"><paramref name="read"/> has thrown an exception.</exception>
-        [CLSCompliant(false)]
         public static async Task FillAsync(
             ReadAsyncCallback read, byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            if (count != await TryFillAsync(read, buffer, offset, count, cancellationToken))
+            if (count != await TryFillAsync(read, buffer, offset, count, cancellationToken).ConfigureAwait(false))
             {
                 throw new EndOfStreamException("Unexpected end of stream.");
             }
@@ -75,7 +74,6 @@ namespace Lawo.IO
         /// contains the number of bytes read.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="read"/> equals <c>null</c>.</exception>
         /// <exception cref="Exception"><paramref name="read"/> has thrown an exception.</exception>
-        [CLSCompliant(false)]
         public static async Task<int> TryFillAsync(
             ReadAsyncCallback read, byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
@@ -87,7 +85,7 @@ namespace Lawo.IO
             int index = offset;
             int readCount;
 
-            while ((readCount = await read(buffer, index, count, cancellationToken)) > 0)
+            while ((readCount = await read(buffer, index, count, cancellationToken).ConfigureAwait(false)) > 0)
             {
                 index += readCount;
                 count -= readCount;

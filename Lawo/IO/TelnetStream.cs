@@ -21,7 +21,6 @@ namespace Lawo.IO
     /// internal write buffer, while flushing as needed.</para>
     /// </remarks>
     /// <threadsafety static="true" instance="false"/>
-    [CLSCompliant(false)]
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Type derives from Stream, CA bug?")]
     public sealed class TelnetStream : BufferStream
     {
@@ -61,16 +60,22 @@ namespace Lawo.IO
             // (index == offset) ensures that we only try to get more encoded data if we haven't yet copied anything
             // into buffer
             while ((index < pastEnd) && ((readBuffer.Index < readBuffer.Count) ||
-                ((index == offset) && await readBuffer.ReadAsync(cancellationToken))))
+                ((index == offset) && await readBuffer.ReadAsync(cancellationToken).ConfigureAwait(false))))
             {
-                var response = this.ReadByte(readBuffer, buffer, ref index);
-
-                if (response != null)
+                if (buffer != null)
                 {
-                    // TODO: The following is dangerous as another WriteAsync call could still be pending. It's probably
-                    // best to use something like TaskQueue internally.
-                    await this.WriteBuffer.WriteAsync(response, 0, response.Length, cancellationToken);
-                    await this.WriteBuffer.FlushAsync(cancellationToken);
+                    var response = this.ReadByte(readBuffer, buffer, ref index);
+
+                    if (response != null)
+                    {
+                        // TODO: The following is dangerous as another WriteAsync call could still be pending. It's probably best to use something like TaskQueue internally.
+                        await WriteBuffer.WriteAsync(response, 0, response.Length, cancellationToken).ConfigureAwait(false);
+                        await WriteBuffer.FlushAsync(cancellationToken).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Buffer is null in TelnetStream ReadAsync(), why?");
                 }
             }
 
@@ -86,7 +91,7 @@ namespace Lawo.IO
             var pastEnd = offset + count;
 
             while ((offset < pastEnd) && ((writeBuffer.Count < writeBuffer.Capacity) ||
-                await writeBuffer.FlushAsync(cancellationToken)))
+                await writeBuffer.FlushAsync(cancellationToken).ConfigureAwait(false)))
             {
                 offset = this.WriteByte(buffer, offset, writeBuffer);
             }
@@ -95,8 +100,8 @@ namespace Lawo.IO
         /// <inheritdoc/>
         public sealed override async Task FlushAsync(CancellationToken cancellationToken)
         {
-            await this.WriteBuffer.FlushAsync(cancellationToken);
-            await base.FlushAsync(cancellationToken);
+            await WriteBuffer.FlushAsync(cancellationToken).ConfigureAwait(false);
+            await base.FlushAsync(cancellationToken).ConfigureAwait(false);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

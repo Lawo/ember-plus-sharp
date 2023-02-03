@@ -33,7 +33,6 @@ namespace Lawo.IO
     /// The steps above ensure that cancellation will work correctly for APIs that do support
     /// <see cref="CancellationToken"/> as well as for those that don't (where the recommended practice is to simply
     /// call <see cref="IDisposable.Dispose"/> on the object representing the sink.</remarks>
-    [CLSCompliant(false)]
     public delegate Task WriteAsyncCallback(byte[] buffer, int offset, int count, CancellationToken cancellationToken);
 
     /// <summary>Provides a thin wrapper for a buffer that is emptied by calling the provided callback.</summary>
@@ -81,7 +80,6 @@ namespace Lawo.IO
         /// <param name="bufferSize">The size of the buffer in bytes.</param>
         /// <exception cref="ArgumentNullException"><paramref name="writeAsync"/> equals <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
-        [CLSCompliant(false)]
         public WriteBuffer(WriteAsyncCallback writeAsync, int bufferSize)
             : base(bufferSize)
         {
@@ -118,12 +116,11 @@ namespace Lawo.IO
         /// <exception cref="InvalidOperationException">The <see cref="WriteBuffer"/> object was created by calling
         /// <see cref="WriteBuffer(WriteCallback, int)"/>.</exception>
         /// <remarks>After calling this function, <see cref="Count"/> equals 0.</remarks>
-        [CLSCompliant(false)]
         public async Task<bool> FlushAsync(CancellationToken cancellationToken)
         {
             var count = this.Count;
             this.Count = 0; // Make sure that the buffer is empty even if write throws
-            await this.writeAsync(this.GetBuffer(), 0, count, cancellationToken);
+            await writeAsync(GetBuffer(), 0, count, cancellationToken).ConfigureAwait(false);
             return true;
         }
 
@@ -161,13 +158,12 @@ namespace Lawo.IO
         /// <item>If <paramref name="size"/> &gt; <see cref="Buffer.Capacity"/>, then enlarges the buffer such that it
         /// can hold at least <paramref name="size"/> bytes.</item>
         /// </list></remarks>
-        [CLSCompliant(false)]
         public async Task ReserveAsync(int size, CancellationToken cancellationToken)
         {
             if (size > (this.Capacity - this.Count))
             {
                 this.EnsureCapacity(size);
-                await this.FlushAsync(cancellationToken);
+                await FlushAsync(cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -213,7 +209,6 @@ namespace Lawo.IO
         /// <exception cref="InvalidOperationException">The <see cref="WriteBuffer"/> object was created by calling
         /// <see cref="WriteBuffer(WriteCallback, int)"/>.</exception>
         /// <remarks>The buffer is flushed as necessary.</remarks>
-        [CLSCompliant(false)]
         public async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
             var written = this.WriteToBuffer(buffer, offset, count);
@@ -222,11 +217,11 @@ namespace Lawo.IO
 
             if (count > 0)
             {
-                await this.FlushAsync(cancellationToken);
+                await FlushAsync(cancellationToken).ConfigureAwait(false);
 
                 if (count > this.Capacity)
                 {
-                    await this.writeAsync(buffer, offset, count, cancellationToken);
+                    await writeAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
                 }
                 else
                 {
