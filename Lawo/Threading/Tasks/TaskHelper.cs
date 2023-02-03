@@ -24,7 +24,7 @@ namespace Lawo.Threading.Tasks
 
             try
             {
-                return (await Task.WhenAny(task, Task.Delay(timeoutMilliseconds, source.Token))) != task;
+                return (await Task.WhenAny(task, Task.Delay(timeoutMilliseconds, source.Token)).ConfigureAwait(false)) != task;
             }
             finally
             {
