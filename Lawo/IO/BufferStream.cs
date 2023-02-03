@@ -36,15 +36,14 @@ namespace Lawo.IO
         public override bool CanWrite => this.WriteBuffer != null;
 
         /// <summary>Asynchronously flushes the write buffer and then disposes the underlying stream.</summary>
-        [CLSCompliant(false)]
         public override async Task DisposeAsync(CancellationToken cancellationToken)
         {
             try
             {
                 if (!this.IsDisposed)
                 {
-                    await this.FlushAsync(cancellationToken);
-                    await base.DisposeAsync(cancellationToken);
+                    await FlushAsync(cancellationToken).ConfigureAwait(false);
+                    await base.DisposeAsync(cancellationToken).ConfigureAwait(false);
                 }
             }
             finally

@@ -32,7 +32,7 @@ namespace Lawo.Threading.Tasks
             return this.Enqueue(
                 async () =>
                 {
-                    await function();
+                    await function().ConfigureAwait(false);
                     return false;
                 });
         }
@@ -60,8 +60,8 @@ namespace Lawo.Threading.Tasks
 
         private static async Task<TResult> EnqueueCore<TResult>(Task previousTask, Func<Task<TResult>> func)
         {
-            await previousTask;
-            return await func();
+            await previousTask.ConfigureAwait(false);
+            return await func().ConfigureAwait(false);
         }
 
         private Task previousTask = Task.FromResult(false);

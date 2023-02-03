@@ -32,7 +32,7 @@ namespace Lawo.Threading.Tasks
             return this.Execute(
                 async () =>
                 {
-                    await function();
+                    await function().ConfigureAwait(false);
                     return false;
                 });
         }

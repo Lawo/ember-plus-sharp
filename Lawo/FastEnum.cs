@@ -13,6 +13,7 @@ namespace Lawo
     /// <summary>Provides cached implementations for some of the <see cref="Enum"/> methods.</summary>
     /// <threadsafety static="true" instance="false"/>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "We reimplement a part of Enum.")]
+    [CLSCompliant(false)]
     public static class FastEnum
     {
         /// <summary>Provides a fast implementation of a part of the functionality of <see cref="Enum.IsDefined"/>.
@@ -39,7 +40,6 @@ namespace Lawo
         /// </summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        [CLSCompliant(false)]
         public static TEnum ToEnum<TEnum>(ulong value)
             where TEnum : struct
         {
@@ -58,7 +58,6 @@ namespace Lawo
         /// <summary>Returns the integer represented by <paramref name="value"/>.</summary>
         /// <typeparam name="TEnum">The enumeration type.</typeparam>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an Enum.</exception>
-        [CLSCompliant(false)]
         public static ulong ToUInt64<TEnum>(TEnum value)
             where TEnum : struct
         {

@@ -34,7 +34,6 @@ namespace Lawo.IO
     /// The steps above ensure that cancellation will work correctly for APIs that do support
     /// <see cref="CancellationToken"/> as well as for those that don't (where the recommended practice is to simply
     /// call <see cref="IDisposable.Dispose"/> on the object representing the source.</remarks>
-    [CLSCompliant(false)]
     public delegate Task<int> ReadAsyncCallback(
         byte[] buffer, int offset, int count, CancellationToken cancellationToken);
 
@@ -89,7 +88,6 @@ namespace Lawo.IO
         /// <param name="bufferSize">The size of the buffer in bytes.</param>
         /// <exception cref="ArgumentNullException"><paramref name="readAsync"/> equals <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is 0 or negative.</exception>
-        [CLSCompliant(false)]
         public ReadBuffer(ReadAsyncCallback readAsync, int bufferSize)
             : base(bufferSize)
         {
@@ -151,13 +149,12 @@ namespace Lawo.IO
         /// end of the buffer are first copied to the start of the buffer and the now empty part of the buffer is filled
         /// by calling the callback.</para>
         /// </remarks>
-        [CLSCompliant(false)]
         public async Task<bool> ReadAsync(CancellationToken cancellationToken)
         {
             this.Compact();
             var remainingCount = this.Count;
             var count = this.Capacity - remainingCount;
-            this.Count += await this.readAsync(this.GetBuffer(), remainingCount, count, cancellationToken);
+            this.Count += await readAsync(GetBuffer(), remainingCount, count, cancellationToken).ConfigureAwait(false);
             return this.Count > remainingCount;
         }
 
@@ -210,7 +207,6 @@ namespace Lawo.IO
         /// <see cref="ReadBuffer(ReadCallback, int)"/>.</exception>
         /// <remarks>The callback specified during construction is only called if <see cref="Index"/> equals
         /// <see cref="Count"/>.</remarks>
-        [CLSCompliant(false)]
         public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
             if (this.Index < this.Count)
@@ -222,13 +218,13 @@ namespace Lawo.IO
                 if (count > this.Capacity)
                 {
                     this.Compact();
-                    var readCount = await this.readAsync(buffer, offset, count, cancellationToken);
+                    var readCount = await readAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
                     this.previousPosition += readCount;
                     return readCount;
                 }
                 else
                 {
-                    await this.ReadAsync(cancellationToken);
+                    await ReadAsync(cancellationToken).ConfigureAwait(false);
                     return this.ReadFromBuffer(buffer, offset, count);
                 }
             }
@@ -262,12 +258,11 @@ namespace Lawo.IO
         /// <see cref="ReadBuffer(ReadCallback, int)"/>.</exception>
         /// <remarks>Asynchronously reads bytes into the buffer by repeatedly calling the callback specified during
         /// construction until at least <paramref name="count"/> bytes are available.</remarks>
-        [CLSCompliant(false)]
         public async Task FillAsync(int count, CancellationToken cancellationToken)
         {
             if (count > this.Count - this.Index)
             {
-                await this.FillCoreAsync(count, cancellationToken);
+                await FillCoreAsync(count, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -318,7 +313,6 @@ namespace Lawo.IO
         /// <see cref="ReadBuffer(ReadCallback, int)"/>.</exception>
         /// <remarks>If <paramref name="count"/> &gt; <see cref="Count"/> - <see cref="Index"/> the callback specified
         /// during construction is called as necessary.</remarks>
-        [CLSCompliant(false)]
         public async Task FillAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
             var readCount = this.ReadFromBuffer(buffer, offset, count);
@@ -330,12 +324,12 @@ namespace Lawo.IO
                 if (count > this.Capacity)
                 {
                     this.Compact();
-                    await StreamHelper.FillAsync(this.readAsync, buffer, offset, count, cancellationToken);
+                    await StreamHelper.FillAsync(readAsync, buffer, offset, count, cancellationToken).ConfigureAwait(false);
                     this.previousPosition += count;
                 }
                 else
                 {
-                    await this.FillAsync(count, cancellationToken);
+                    await FillAsync(count, cancellationToken).ConfigureAwait(false);
                     System.Buffer.BlockCopy(this.GetBuffer(), this.Index, buffer, offset, count);
                     this.Index += count;
                 }
@@ -391,7 +385,7 @@ namespace Lawo.IO
             {
                 var readCount = this.Capacity - this.Count;
                 this.CheckAndAddToCount(
-                    await this.readAsync(this.GetBuffer(), this.Count, readCount, cancellationToken));
+                    await readAsync(GetBuffer(), Count, readCount, cancellationToken).ConfigureAwait(false));
             }
         }
 
