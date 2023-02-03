@@ -26,6 +26,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void S101ReadTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -38,7 +39,7 @@ namespace Lawo.EmberPlusSharp.S101
                         using (var payloadStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
                         {
                             var payload = new byte[BlockSize];
-                            this.Random.NextBytes(payload);
+                            Random.Shared.NextBytes(payload);
                             await payloadStream.WriteAsync(payload, 0, payload.Length);
                             await payloadStream.DisposeAsync(CancellationToken.None);
                         }
@@ -50,7 +51,7 @@ namespace Lawo.EmberPlusSharp.S101
                     Console.WriteLine(
                         "S101Reader asynchronous: {0}ms",
                         await TimeMethod(count => TestS101ReaderAsync(input, count), LoopCount));
-                });
+                }, cancelToken);
         }
 
         /// <summary>Compares <see cref="S101Writer"/> performance with <see cref="GlowOutput"/> performance.</summary>
@@ -66,18 +67,20 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void S101WriteTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
                     var input = new byte[BlockSize];
-                    this.Random.NextBytes(input);
+                    Random.Shared.NextBytes(input);
                     var glowOutputMilliseconds = await TimeMethod(count => TestGlowOutput(input, count), LoopCount);
                     var s101WriterAsyncMilliseconds = await TimeMethod(count => TestS101WriterAsync(input, count), LoopCount);
 
                     Console.WriteLine("GlowOutput: {0}ms", glowOutputMilliseconds);
                     Console.WriteLine("S101Writer asynchronous: {0}ms", s101WriterAsyncMilliseconds);
                     Console.WriteLine("Ratio: {0}", (double)glowOutputMilliseconds / s101WriterAsyncMilliseconds);
-                });
+                },
+                cancelToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -24,6 +24,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void WriteTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -40,13 +41,14 @@ namespace Lawo.EmberPlusSharp.S101
                             0xFE, 0x00, 0x0E, 0x00, 0x01, 0x60, 0x01, 0x02, 0x0a, 0x02, 0x13, 0x53, 0xFF
                         },
                         await Encode(EmberDataMessage, new byte[] { }));
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Writer.WriteMessageAsync"/>.</summary>
         [TestMethod]
         public void OutOfFrameByteTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -105,13 +107,14 @@ namespace Lawo.EmberPlusSharp.S101
 
                         Assert.AreEqual(third, await thirdTask);
                     }
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests whether random written payload is read back the same.</summary>
         [TestMethod]
         public void PayloadTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -119,7 +122,7 @@ namespace Lawo.EmberPlusSharp.S101
                     #region Payload Test
                     var writtenMessage = new S101Message(0x00, new EmberData(0x01, 0x0A, 0x02));
                     var writtenPayload = new byte[8192];
-                    this.Random.NextBytes(writtenPayload);
+                    Random.Shared.NextBytes(writtenPayload);
 
                     using (var encodedStream = new MemoryStream())
                     {
@@ -164,7 +167,7 @@ namespace Lawo.EmberPlusSharp.S101
                     }
                     #endregion
 #pragma warning restore SA1123 // Do not place regions within elements
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Writer"/> exceptions.</summary>
@@ -172,55 +175,60 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void ExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
                     new S101Writer((b, o, c, t) => Task.FromResult(false)).Ignore();
 
-                    AssertThrow<ArgumentNullException>(() => new S101Writer(null, 1).Ignore());
-                    AssertThrow<ArgumentOutOfRangeException>(
+                    Assert.ThrowsException<ArgumentNullException>(() => new S101Writer(null, 1).Ignore());
+                    Assert.ThrowsException<ArgumentOutOfRangeException>(
                         () => new S101Writer((b, o, c, t) => Task.FromResult(false), 0).Ignore());
 
                     var writer = new S101Writer((b, o, c, t) => Task.FromResult(false), 1);
-                    await AssertThrowAsync<ArgumentNullException>(
+                    await Assert.ThrowsExceptionAsync<ArgumentNullException>(
                         () => writer.WriteMessageAsync(null, CancellationToken.None));
 
                     using (var stream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
                     {
-                        await AssertThrowAsync<ArgumentNullException>(
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(
                             () => stream.WriteAsync(null, 0, 0, CancellationToken.None));
 
-                        await AssertThrowAsync<ArgumentOutOfRangeException>(
-                            () => stream.WriteAsync(new byte[1], -1, 1, CancellationToken.None),
+                        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
+                            () => stream.WriteAsync(new byte[1], -1, 1, CancellationToken.None));
+                        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
                             () => stream.WriteAsync(new byte[1], 0, -1, CancellationToken.None));
 
-                        await AssertThrowAsync<ArgumentException>(
-                            () => stream.WriteAsync(new byte[1], 0, 2, CancellationToken.None),
-                            () => stream.WriteAsync(new byte[1], 2, 0, CancellationToken.None),
-                            () => stream.WriteAsync(new byte[1], 1, 1, CancellationToken.None));
+                        await Assert.ThrowsExceptionAsync<ArgumentException>(() => stream.WriteAsync(new byte[1], 0, 2, CancellationToken.None));
+                        await Assert.ThrowsExceptionAsync<ArgumentException>(() => stream.WriteAsync(new byte[1], 2, 0, CancellationToken.None));
+                        await Assert.ThrowsExceptionAsync<ArgumentException>(() => stream.WriteAsync(new byte[1], 1, 1, CancellationToken.None));
 
-                        await AssertThrowAsync<NotSupportedException>(
+                        await Assert.ThrowsExceptionAsync<NotSupportedException>(
                             () => stream.ReadAsync(null, 0, 0, CancellationToken.None));
 
                         Assert.IsFalse(stream.CanSeek);
-                        AssertThrow<NotSupportedException>(
-                            () => stream.Length.Ignore(),
-                            () => stream.SetLength(0),
-                            () => stream.Position.Ignore(),
-                            () => stream.Position = 0,
+                        Assert.ThrowsException<NotSupportedException>(
+                            () => stream.Length.Ignore());
+                        Assert.ThrowsException<NotSupportedException>(
+                            () => stream.SetLength(0));
+                        Assert.ThrowsException<NotSupportedException>(
+                            () => stream.Position.Ignore());
+                        Assert.ThrowsException<NotSupportedException>(
+                            () => stream.Position = 0);
+                        Assert.ThrowsException<NotSupportedException>(
                             () => stream.Seek(0, SeekOrigin.Begin));
 
-                        await AssertThrowAsync<InvalidOperationException>(() => writer.WriteMessageAsync(
+                        await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => writer.WriteMessageAsync(
                             new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
                         await stream.DisposeAsync(CancellationToken.None);
-                        await AssertThrowAsync<ObjectDisposedException>(
+                        await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                             () => stream.WriteAsync(new byte[] { 2 }, 0, 1, CancellationToken.None));
                     }
 
                     await writer.DisposeAsync(CancellationToken.None);
-                    await AssertThrowAsync<ObjectDisposedException>(() => writer.WriteMessageAsync(
+                    await Assert.ThrowsExceptionAsync<ObjectDisposedException>(() => writer.WriteMessageAsync(
                         new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
-                });
+                }, cancelToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -265,9 +273,9 @@ namespace Lawo.EmberPlusSharp.S101
                         await encodingStream.FlushAsync(CancellationToken.None);
                         await encodingStream.DisposeAsync(CancellationToken.None);
                         Assert.IsFalse(encodingStream.CanWrite);
-                        await AssertThrowAsync<ObjectDisposedException>(
+                        await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                             () => encodingStream.WriteAsync(new byte[] { 0 }, 0, 1, CancellationToken.None));
-                        await AssertThrowAsync<ObjectDisposedException>(
+                        await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                             () => encodingStream.FlushAsync(CancellationToken.None));
                     }
                 }

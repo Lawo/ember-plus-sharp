@@ -31,6 +31,9 @@ namespace Lawo.EmberPlusSharp.Model
         }
 
         /// <inheritdoc/>
+        public bool IsWriteable => this.access == ParameterAccess.ReadWrite;
+
+        /// <inheritdoc/>
         public string Format
         {
             get { return this.format; }

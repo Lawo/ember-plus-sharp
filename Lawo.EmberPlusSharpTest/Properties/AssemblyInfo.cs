@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General
-[assembly: AssemblyTitle("Lawo.EmberPlusSharpTest")]
+//[assembly: AssemblyTitle("Lawo.EmberPlusSharpTest")]
 [assembly: AssemblyDescription("")]
 
 // CA enforced

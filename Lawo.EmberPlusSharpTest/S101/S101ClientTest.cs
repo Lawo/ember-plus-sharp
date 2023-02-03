@@ -27,16 +27,17 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void KeepAliveMainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
                     var providerClientTask = WaitForConnectionAsync();
-                    int timeout = this.Random.Next(1000, 2000);
+                    int timeout = Random.Shared.Next(1000, 2000);
                     Console.WriteLine("Timeout: {0}", timeout);
 
                     using (var consumer = await ConnectAsync(timeout, null))
                     {
-                        var slot = (byte)this.Random.Next(byte.MaxValue + 1);
+                        var slot = (byte)Random.Shared.Next(byte.MaxValue + 1);
                         consumer.KeepAliveRequestSlot = slot;
                         Assert.AreEqual(slot, consumer.KeepAliveRequestSlot);
 
@@ -58,18 +59,19 @@ namespace Lawo.EmberPlusSharp.S101
 
                         await connectionLost.Task;
                     }
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests automatic keep alive with a provider that does not respond.</summary>
         [TestMethod]
         public void KeepAliveExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
                     var providerTask = WaitForConnectionAsync();
-                    int timeout = this.Random.Next(4000, 8000);
+                    int timeout = Random.Shared.Next(4000, 8000);
                     Console.WriteLine("Timeout: {0}", timeout);
 
                     using (var consumer = new TcpClient("localhost", 8099))
@@ -79,25 +81,27 @@ namespace Lawo.EmberPlusSharp.S101
                         new S101Client(consumer, stream.ReadAsync, stream.WriteAsync, logger, timeout, 8192))
                     {
                         (await providerTask).Ignore();
-                        consumerClient.KeepAliveRequestSlot = (byte)this.Random.Next(byte.MaxValue + 1);
+                        consumerClient.KeepAliveRequestSlot = (byte)Random.Shared.Next(byte.MaxValue + 1);
                         var source = new TaskCompletionSource<bool>();
                         consumerClient.ConnectionLost += (s, e) => OnConnectionLost(source, e);
                         var task = await Task.WhenAny(source.Task, Task.Delay(timeout + (timeout / 4)));
-                        await AssertThrowAsync<S101Exception>(() => task);
+                        await Assert.ThrowsExceptionAsync<S101Exception>(() => task);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests sending/receiving messages with <see cref="EmberData"/> commands.</summary>
         [TestMethod]
         public void EmberDataTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestNoExceptionsAsync(
                 async (consumer, provider) =>
                 {
-                    var slot = (byte)this.Random.Next(byte.MaxValue + 1);
-                    var data = new byte[this.Random.Next(512, 16384)];
-                    this.Random.NextBytes(data);
+                    var slot = (byte)Random.Shared.Next(byte.MaxValue + 1);
+                    var data = new byte[Random.Shared.Next(512, 16384)];
+                    Random.Shared.NextBytes(data);
 
                     var emberDataReceived = new TaskCompletionSource<bool>();
                     EventHandler<MessageReceivedEventArgs> emberDataHandler =
@@ -128,13 +132,15 @@ namespace Lawo.EmberPlusSharp.S101
                     provider.EmberDataReceived -= emberDataHandler;
                 },
                 () => ConnectAsync(-1, null),
-                () => WaitForConnectionAsync(null)));
+                () => WaitForConnectionAsync(null)),
+                cancelToken);
         }
 
         /// <summary>Tests what happens when the connection is lost.</summary>
         [TestMethod]
         public void ConnectionLostTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -157,10 +163,11 @@ namespace Lawo.EmberPlusSharp.S101
 
                         readResult.SetException(exception);
                         await connectionLost.Task;
-                        await AssertThrowAsync<ObjectDisposedException>(
+                        await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                             () => client.SendMessageAsync(new S101Message(0x00, new KeepAliveRequest())));
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Client"/> exceptions.</summary>
@@ -171,7 +178,9 @@ namespace Lawo.EmberPlusSharp.S101
             {
                 ReadAsyncCallback fakeRead = (b, o, c, t) => Task.FromResult(0);
                 WriteAsyncCallback fakeWrite = (b, o, c, t) => Task.FromResult(false);
-                AssertThrow<NotSupportedException>(() => new S101Client(dummy, fakeRead, fakeWrite).Dispose());
+                Assert.ThrowsException<NotSupportedException>(() => new S101Client(dummy, fakeRead, fakeWrite).Dispose());
+
+                var cancelToken = new CancellationTokenSource().Token;
 
                 AsyncPump.Run(
                     async () =>
@@ -179,33 +188,37 @@ namespace Lawo.EmberPlusSharp.S101
                         using (var connection = new CompleteOnDispose())
                         using (var client = new S101Client(connection, (b, o, c, t) => connection.Task, fakeWrite))
                         {
-                            await AssertThrowAsync<InvalidOperationException>(
+                            await Assert.ThrowsExceptionAsync<InvalidOperationException>(
                                 () => Task.Run(() => client.SendMessageAsync(new S101Message(0x00, new KeepAliveRequest()))));
                         }
 
-                        AssertThrow<ArgumentNullException>(
-                            () => new S101Client(null, fakeRead, fakeWrite).Dispose(),
-                            () => new S101Client(dummy, null, fakeWrite).Dispose(),
+                        Assert.ThrowsException<ArgumentNullException>(
+                            () => new S101Client(null, fakeRead, fakeWrite).Dispose());
+                        Assert.ThrowsException<ArgumentNullException>(
+                            () => new S101Client(dummy, null, fakeWrite).Dispose());
+                        Assert.ThrowsException<ArgumentNullException>(
                             () => new S101Client(dummy, fakeRead, null).Dispose());
 
-                        AssertThrow<ArgumentOutOfRangeException>(
-                            () => new S101Client(dummy, fakeRead, fakeWrite, null, 3000, 0).Dispose(),
+                        Assert.ThrowsException<ArgumentOutOfRangeException>(
+                            () => new S101Client(dummy, fakeRead, fakeWrite, null, 3000, 0).Dispose());
+                        Assert.ThrowsException<ArgumentOutOfRangeException>(
                             () => new S101Client(dummy, fakeRead, fakeWrite, null, -2, 1).Dispose());
 
                         using (var connection = new CompleteOnDispose())
                         using (var client = new S101Client(
                             connection, (b, o, c, t) => connection.Task, fakeWrite, null, 3000, 1))
                         {
-                            await AssertThrowAsync<ArgumentNullException>(
+                            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
                                 () => client.SendMessageAsync(null));
-                            await AssertThrowAsync<ArgumentException>(() => client.SendMessageAsync(EmberDataMessage));
-                            await AssertThrowAsync<ArgumentException>(() => client.SendOutOfFrameByteAsync(0xFE));
+                            await Assert.ThrowsExceptionAsync<ArgumentException>(() => client.SendMessageAsync(EmberDataMessage));
+                            await Assert.ThrowsExceptionAsync<ArgumentException>(() => client.SendOutOfFrameByteAsync(0xFE));
 
                             client.Dispose();
-                            await AssertThrowAsync<ObjectDisposedException>(
+                            await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                                 () => client.SendMessageAsync(new S101Message(0x00, new KeepAliveRequest())));
                         }
-                    });
+                    },
+                    cancelToken);
             }
         }
 
@@ -213,6 +226,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void VersionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<S101Payloads>(
                 client =>
                 {
@@ -227,7 +241,8 @@ namespace Lawo.EmberPlusSharp.S101
                 null,
                 new EmberTypeBag(),
                 true,
-                "VersionLog.xml"));
+                "VersionLog.xml"),
+                cancelToken);
         }
     }
 }

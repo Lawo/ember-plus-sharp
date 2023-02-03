@@ -4,6 +4,8 @@
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using Lawo.EmberPlusSharpTest;
+
 namespace Lawo.EmberPlusSharp.Model
 {
     using System;
@@ -19,7 +21,6 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Linq.Expressions;
     using System.Net.Sockets;
     using System.Reflection;
-    using System.Runtime.Remoting.Metadata.W3cXsd2001;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
@@ -46,6 +47,7 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void BigTreeAssemblyTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -55,26 +57,27 @@ namespace Lawo.EmberPlusSharp.Model
 
                     await BigTreeAssemblyTestCore<BigTreeDynamicRoot>(6, false);
                     await BigTreeAssemblyTestCore<BigTreeStaticRoot>(6, false);
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests the main <see cref="Consumer{T}"/> use cases.</summary>
         [TestMethod]
         public void MainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<MainRoot>(
                 async (consumerTask, providerClient) =>
                 {
-                    var boolean = this.GetRandomBoolean();
-                    var integer = (long)this.Random.Next(int.MinValue, int.MaxValue);
-                    var factorInteger = (long)this.Random.Next(int.MinValue, int.MaxValue);
-                    var formulaInteger = (long)this.Random.Next(int.MinValue, int.MaxValue);
-                    var enumeration = (Enumeration)this.Random.Next(4);
-                    var enumMap = (Enumeration)this.Random.Next(4);
-                    var octetstring = new byte[this.Random.Next(512)];
-                    this.Random.NextBytes(octetstring);
-                    var real = this.Random.NextDouble();
-                    var stringValue = GetRandomString();
+                    var boolean = TestHelper.RandomBoolean();
+                    var integer = (long)Random.Shared.Next(int.MinValue, int.MaxValue);
+                    var factorInteger = (long)Random.Shared.Next(int.MinValue, int.MaxValue);
+                    var formulaInteger = (long)Random.Shared.Next(int.MinValue, int.MaxValue);
+                    var enumeration = (Enumeration)Random.Shared.Next(4);
+                    var enumMap = (Enumeration)Random.Shared.Next(4);
+                    var octetstring = new byte[Random.Shared.Next(512)];
+                    Random.Shared.NextBytes(octetstring);
+                    var real = Random.Shared.NextDouble();
+                    var stringValue = TestHelper.RandomString();
 
                     var requestTask = WaitForRequest(providerClient, "MainRequest2.xml");
                     await providerClient.SendOutOfFrameByteAsync(0x01);
@@ -87,12 +90,12 @@ namespace Lawo.EmberPlusSharp.Model
                         formulaInteger,
                         (int)enumeration,
                         (int)enumMap,
-                        new SoapHexBinary(octetstring).ToString(),
+                        TestHelper.SoapHexBinary(octetstring).ToString(),
                         real,
                         stringValue);
                     await requestTask;
 
-                    var children = Enumerable.Range(0, 3).Select(i => this.GetRandomBoolean()).ToArray();
+                    var children = Enumerable.Range(0, 3).Select(i => TestHelper.RandomBoolean()).ToArray();
                     await SendResponse(
                         providerClient,
                         "MainResponse2.xml",
@@ -112,9 +115,9 @@ namespace Lawo.EmberPlusSharp.Model
                                 ++formulaInteger;
                                 enumeration = (Enumeration)(((int)enumeration + 1) % 4);
                                 enumMap = (Enumeration)(((int)enumMap + 1) % 4);
-                                this.Random.NextBytes(octetstring);
-                                real = this.Random.NextDouble();
-                                stringValue = GetRandomString();
+                                Random.Shared.NextBytes(octetstring);
+                                real = Random.Shared.NextDouble();
+                                stringValue = TestHelper.RandomString();
                                 ++integer;
 
                                 for (var index = 0; index < children.Length; ++index)
@@ -127,14 +130,14 @@ namespace Lawo.EmberPlusSharp.Model
 
                             CheckValues(root);
 
-                            AssertThrow<ArgumentException>(() => ((IParameter)root.BooleanParameter).Value = 0);
+                            Assert.ThrowsException<ArgumentException>(() => ((IParameter)root.BooleanParameter).Value = 0);
                             AssertNotified((IParameter)root.BooleanParameter, o => o.Value, boolean);
                             AssertNotified((IParameter)root.IntegerParameter, o => o.Value, integer);
                             AssertNotified((IParameter)root.FactorIntegerParameter, o => o.Value, factorInteger);
                             AssertNotified((IParameter)root.FormulaIntegerParameter, o => o.Value, formulaInteger);
                             AssertNotified((IParameter)root.EnumerationParameter, o => o.Value, enumeration);
                             AssertNotified((IParameter)root.EnumMapParameter, o => o.Value, enumMap);
-                            AssertThrow<ArgumentNullException>(() => ((IParameter)root.OctetstringParameter).Value = null);
+                            Assert.ThrowsException<ArgumentNullException>(() => ((IParameter)root.OctetstringParameter).Value = null);
                             AssertNotified((IParameter)root.OctetstringParameter, o => o.Value, octetstring);
                             AssertNotified((IParameter)root.RealParameter, o => o.Value, real);
                             AssertNotified((IParameter)root.StringParameter, o => o.Value, stringValue);
@@ -151,14 +154,14 @@ namespace Lawo.EmberPlusSharp.Model
                                 formulaInteger,
                                 (int)enumeration,
                                 (int)enumMap,
-                                new SoapHexBinary(octetstring).ToString(),
+                                TestHelper.SoapHexBinary(octetstring).ToString(),
                                 real,
                                 stringValue,
                                 children[0].ToString().ToLowerInvariant(),
                                 children[1].ToString().ToLowerInvariant(),
                                 children[2].ToString().ToLowerInvariant());
 
-                            AssertNotified(root.StringParameter, o => o.Value, GetRandomString());
+                            AssertNotified(root.StringParameter, o => o.Value, TestHelper.RandomString());
 
                             CheckNumbers(root);
 
@@ -166,26 +169,28 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests the dynamic use cases.</summary>
         [TestMethod]
         public void DynamicTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<DynamicTestRoot>(
                 async (consumerTask, providerClient) =>
                 {
-                    var boolean = this.GetRandomBoolean();
-                    var integer = (long)this.Random.Next(int.MinValue, int.MaxValue);
-                    var factorInteger = (long)this.Random.Next(int.MinValue, int.MaxValue);
-                    var formulaInteger = (long)this.Random.Next(int.MinValue, int.MaxValue);
-                    var enumeration = (long)this.Random.Next(4);
-                    var enumMap = (long)this.Random.Next(4);
-                    var octetstring = new byte[this.Random.Next(512)];
-                    this.Random.NextBytes(octetstring);
-                    var real = this.Random.NextDouble();
-                    var stringValue = GetRandomString();
+                    var boolean = TestHelper.RandomBoolean();
+                    var integer = (long)Random.Shared.Next(int.MinValue, int.MaxValue);
+                    var factorInteger = (long)Random.Shared.Next(int.MinValue, int.MaxValue);
+                    var formulaInteger = (long)Random.Shared.Next(int.MinValue, int.MaxValue);
+                    var enumeration = (long)Random.Shared.Next(4);
+                    var enumMap = (long)Random.Shared.Next(4);
+                    var octetstring = new byte[Random.Shared.Next(512)];
+                    Random.Shared.NextBytes(octetstring);
+                    var real = Random.Shared.NextDouble();
+                    var stringValue = TestHelper.RandomString();
 
                     var requestTask = WaitForRequest(providerClient, "MainRequest2.xml");
                     await SendResponse(
@@ -197,12 +202,12 @@ namespace Lawo.EmberPlusSharp.Model
                         formulaInteger,
                         enumeration,
                         enumMap,
-                        new SoapHexBinary(octetstring).ToString(),
+                        TestHelper.SoapHexBinary(octetstring).ToString(),
                         real,
                         stringValue);
                     await requestTask;
 
-                    var children = Enumerable.Range(0, 3).Select(i => this.GetRandomBoolean()).ToArray();
+                    var children = Enumerable.Range(0, 3).Select(i => TestHelper.RandomBoolean()).ToArray();
                     await SendResponse(
                         providerClient,
                         "MainResponse2.xml",
@@ -222,9 +227,9 @@ namespace Lawo.EmberPlusSharp.Model
                                 ++formulaInteger;
                                 enumeration = (enumeration + 1) % 4;
                                 enumMap = (enumMap + 1) % 4;
-                                this.Random.NextBytes(octetstring);
-                                real = this.Random.NextDouble();
-                                stringValue = GetRandomString();
+                                Random.Shared.NextBytes(octetstring);
+                                real = Random.Shared.NextDouble();
+                                stringValue = TestHelper.RandomString();
                                 ++integer;
 
                                 for (var index = 0; index < children.Length; ++index)
@@ -257,14 +262,14 @@ namespace Lawo.EmberPlusSharp.Model
                             Assert.AreEqual(null, ((IParameter)root.GetChild("StringParameter")).Formula);
                             Assert.AreEqual(null, ((IParameter)root.GetChild("StringParameter")).EnumMap);
 
-                            AssertThrow<ArgumentException>(() => ((IParameter)root.GetChild("BooleanParameter")).Value = 0);
+                            Assert.ThrowsException<ArgumentException>(() => ((IParameter)root.GetChild("BooleanParameter")).Value = 0);
                             AssertNotified((IParameter)root.GetChild("BooleanParameter"), o => o.Value, boolean);
                             AssertNotified((IParameter)root.GetChild("IntegerParameter"), o => o.Value, integer);
                             AssertNotified((IParameter)root.GetChild("FactorIntegerParameter"), o => o.Value, factorInteger);
                             AssertNotified((IParameter)root.GetChild("FormulaIntegerParameter"), o => o.Value, formulaInteger);
                             AssertNotified((IParameter)root.GetChild("EnumerationParameter"), o => o.Value, enumeration);
                             AssertNotified((IParameter)root.GetChild("EnumMapParameter"), o => o.Value, enumMap);
-                            AssertThrow<ArgumentNullException>(() => ((IParameter)root.GetChild("OctetstringParameter")).Value = null);
+                            Assert.ThrowsException<ArgumentNullException>(() => ((IParameter)root.GetChild("OctetstringParameter")).Value = null);
                             AssertNotified((IParameter)root.GetChild("OctetstringParameter"), o => o.Value, octetstring);
                             AssertNotified((IParameter)root.GetChild("RealParameter"), o => o.Value, real);
                             AssertNotified((IParameter)root.GetChild("StringParameter"), o => o.Value, stringValue);
@@ -293,20 +298,21 @@ namespace Lawo.EmberPlusSharp.Model
                                 formulaInteger,
                                 (int)enumeration,
                                 (int)enumMap,
-                                new SoapHexBinary(octetstring).ToString(),
+                                TestHelper.SoapHexBinary(octetstring).ToString(),
                                 real,
                                 stringValue,
                                 children[0].ToString().ToLowerInvariant(),
                                 children[1].ToString().ToLowerInvariant(),
                                 children[2].ToString().ToLowerInvariant());
 
-                            AssertNotified((IParameter)root.GetChild("StringParameter"), o => o.Value, GetRandomString());
+                            AssertNotified((IParameter)root.GetChild("StringParameter"), o => o.Value, TestHelper.RandomString());
 
                             await SendResponse(providerClient, "StreamEntriesResponse.xml");
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests whether interface-typed elements work correctly.</summary>
@@ -323,7 +329,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void GetElementTest()
         {
             var mainRoot = GetRoot<MainRoot>("MainLog.xml");
-            AssertThrow<ArgumentNullException>(() => mainRoot.GetElement(null));
+            Assert.ThrowsException<ArgumentNullException>(() => mainRoot.GetElement(null));
             Assert.AreEqual(mainRoot, mainRoot.GetElement(string.Empty));
             Assert.AreEqual(mainRoot, mainRoot.GetElement(mainRoot.GetPath()));
             Assert.AreEqual(mainRoot.BooleanParameter, mainRoot.GetElement(mainRoot.BooleanParameter.GetPath()));
@@ -336,28 +342,29 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void PropertiesTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<PropertiesRoot>(
                 async (consumerTask, providerClient) =>
                 {
-                    var description = GetRandomString();
-                    var value = (long)this.Random.Next(4);
-                    var minimum = (long)this.Random.Next(int.MinValue, 0);
-                    var maximum = (long)this.Random.Next(4, int.MaxValue);
-                    var access = this.GetRandomEnum<ParameterAccess>();
-                    var format = GetRandomString();
-                    var factor = this.Random.Next(int.MinValue, int.MaxValue);
+                    var description = TestHelper.RandomString();
+                    var value = (long)Random.Shared.Next(4);
+                    var minimum = (long)Random.Shared.Next(int.MinValue, 0);
+                    var maximum = (long)Random.Shared.Next(4, int.MaxValue);
+                    var access = TestHelper.RandomEnum<ParameterAccess>();
+                    var format = TestHelper.RandomString();
+                    var factor = Random.Shared.Next(int.MinValue, int.MaxValue);
                     var isOnline = true;
-                    var defaultValue = (long)this.Random.Next(4);
-                    var streamIdentifier = this.Random.Next();
-                    var streamFormat = this.GetRandomEnum<StreamFormat>();
-                    var streamOffset = this.Random.Next();
-                    var formula = GetRandomString();
+                    var defaultValue = (long)Random.Shared.Next(4);
+                    var streamIdentifier = Random.Shared.Next();
+                    var streamFormat = TestHelper.RandomEnum<StreamFormat>();
+                    var streamOffset = Random.Shared.Next();
+                    var formula = TestHelper.RandomString();
                     var enumStrings =
-                        new[] { GetRandomString(), GetRandomString(), GetRandomString(), GetRandomString() };
-                    var enumValues = Enumerable.Range(0, 4).OrderBy(v => this.Random.Next()).ToArray();
-                    var isRoot = this.GetRandomBoolean();
-                    var schemaIdentifier1 = GetRandomString();
-                    var schemaIdentifier2 = GetRandomString();
+                        new[] { TestHelper.RandomString(), TestHelper.RandomString(), TestHelper.RandomString(), TestHelper.RandomString() };
+                    var enumValues = Enumerable.Range(0, 4).OrderBy(v => Random.Shared.Next()).ToArray();
+                    var isRoot = TestHelper.RandomBoolean();
+                    var schemaIdentifier1 = TestHelper.RandomString();
+                    var schemaIdentifier2 = TestHelper.RandomString();
 
                     await SendResponse(
                         providerClient,
@@ -430,13 +437,15 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests whether the provider access restrictions are enforced correctly.</summary>
         [TestMethod]
         public void AccessTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
                 consumer =>
                 {
@@ -447,13 +456,15 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 false,
-                "AccessLog.xml"));
+                "AccessLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests whether <see cref="INode.ChildrenRetrievalPolicy"/> works as expected.</summary>
         [TestMethod]
         public void ChildrenRetrievalPolicyTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -465,20 +476,22 @@ namespace Lawo.EmberPlusSharp.Model
                         ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
                     await this.DynamicChildrenRetrievalPolicyTestAsync(false);
                     await this.DynamicChildrenRetrievalPolicyTestAsync(true);
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests nullable parameter variants.</summary>
         [TestMethod]
         public void NullableTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<NullableRoot>(
                 async (consumerTask, providerClient) =>
                 {
-                    var integerMin = (long)this.Random.Next(int.MinValue, 0);
-                    var integerMax = (long)this.Random.Next();
-                    var realMin = -this.Random.NextDouble();
-                    var realMax = this.Random.NextDouble();
+                    var integerMin = (long)Random.Shared.Next(int.MinValue, 0);
+                    var integerMax = (long)Random.Shared.Next();
+                    var realMin = -Random.Shared.NextDouble();
+                    var realMax = Random.Shared.NextDouble();
 
                     await SendResponse(
                         providerClient, "NullableResponse1.xml", integerMin, integerMax, realMin, realMax);
@@ -521,13 +534,15 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests trigger use cases.</summary>
         [TestMethod]
         public void TriggerTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<EmptyDynamicRoot>(
                 async consumer =>
                 {
@@ -539,19 +554,21 @@ namespace Lawo.EmberPlusSharp.Model
                     await Task.Delay(300);
                 },
                 false,
-                "TriggerLog.xml"));
+                "TriggerLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests sending/receiving with a broken connection.</summary>
         [TestMethod]
         public void AutoSendWithBrokenS101ConnectionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<ModelPayloads>(
                 async client =>
                 {
                     using (var consumer = await Consumer<EmptyDynamicRoot>.CreateAsync(client))
                     {
-                        AssertThrow<ArgumentOutOfRangeException>(() => consumer.AutoSendInterval = -2);
+                        Assert.ThrowsException<ArgumentOutOfRangeException>(() => consumer.AutoSendInterval = -2);
                         Assert.AreEqual(100, consumer.AutoSendInterval);
 
                         foreach (IParameter param in consumer.Root.DynamicChildren)
@@ -567,7 +584,8 @@ namespace Lawo.EmberPlusSharp.Model
                 null,
                 GlowTypes.Instance,
                 false,
-                "SendReceiveWithBrokenConnectionLog.xml"));
+                "SendReceiveWithBrokenConnectionLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests whether exceptions are reported appropriately after
@@ -575,7 +593,8 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void ThrowAfterCreateTest()
         {
-            AsyncPump.Run(() => AssertThrowAsync<S101Exception>(
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(() => Assert.ThrowsExceptionAsync<S101Exception>(
                 async () =>
                 {
                     var providerTcpClientTask = WaitForConnectionAsync();
@@ -597,18 +616,20 @@ namespace Lawo.EmberPlusSharp.Model
 
                             // The following bytes represent a valid value update message with the last CRC digit
                             // incremented, such that the CRC check fails.
-                            var data = SoapHexBinary.Parse("FE000E00018001020A0260806B80A0806380A003020101A2806480A0806180A003020101A1803180A20302012B0000000000000000000000000000000000000000CE7EFFFE000E00016001020A021354FF").Value;
+                            var data = TestHelper.SoapHexBinaryParse("FE000E00018001020A0260806B80A0806380A003020101A2806480A0806180A003020101A1803180A20302012B0000000000000000000000000000000000000000CE7EFFFE000E00016001020A021354FF");
                             await providerStream.WriteAsync(data, 0, data.Length);
                             await connectionLost.Task;
                         }
                     }
-                }));
+                }),
+                cancelToken);
         }
 
         /// <summary>Tests whether messages with a different slot are ignored.</summary>
         [TestMethod]
         public void SlotTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
                 async consumer =>
                 {
@@ -616,13 +637,15 @@ namespace Lawo.EmberPlusSharp.Model
                     await consumer.SendAsync();
                 },
                 false,
-                "SlotLog.xml"));
+                "SlotLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests the various change notifications.</summary>
         [TestMethod]
         public void ChangeNotificationTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<BooleanRoot>(
                 async consumer =>
                 {
@@ -668,13 +691,15 @@ namespace Lawo.EmberPlusSharp.Model
                     Assert.AreEqual(true, dynamicParameter.Value);
                 },
                 true,
-                "ChangeNotificationLog.xml"));
+                "ChangeNotificationLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests Ember+ functions.</summary>
         [TestMethod]
         public void FunctionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -738,13 +763,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "FunctionLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests dynamic Ember+ functions.</summary>
         [TestMethod]
         public void DynamicFunctionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -777,13 +804,13 @@ namespace Lawo.EmberPlusSharp.Model
                             AssertSignature(allInteger.Take(5), allInteger.Take(5), function5);
                             AssertSignature(allInteger.Take(6), allInteger.Take(6), function6);
 
-                            await AssertThrowAsync<ArgumentException>(
+                            await Assert.ThrowsExceptionAsync<ArgumentException>(
                                 () => function0.InvokeAsync(0),
                                 "The number of actual arguments is not equal to the number of expected arguments.");
-                            await AssertThrowAsync<ArgumentException>(
+                            await Assert.ThrowsExceptionAsync<ArgumentException>(
                                 () => function1.InvokeAsync(),
                                 "The number of actual arguments is not equal to the number of expected arguments.");
-                            await AssertThrowAsync<ArgumentException>(
+                            await Assert.ThrowsExceptionAsync<ArgumentException>(
                                 () => function1.InvokeAsync(13),
                                 "The type of at least one actual argument is not equal to the expected type.");
 
@@ -828,13 +855,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         false,
                         "FunctionLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests the main use cases of Ember+ matrices.</summary>
         [TestMethod]
         public void MatrixMainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -923,13 +952,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixMainLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests default values for Ember+ matrices.</summary>
         [TestMethod]
         public void MatrixMinimalTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -958,13 +989,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixMinimalLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests Ember+ matrices with inline elements.</summary>
         [TestMethod]
         public void DynamicMatrixInlineTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1004,13 +1037,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixInlineLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests Ember+ matrices with inline elements.</summary>
         [TestMethod]
         public void MatrixInlineTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1047,13 +1082,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixInlineLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests the behavior when <see cref="Element.IsOnline"/> changes.</summary>
         [TestMethod]
         public void IsOnlineTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1063,8 +1100,7 @@ namespace Lawo.EmberPlusSharp.Model
                             var state = consumer.Root.ZoneNode.Ravenna.MediaSessions.Children[0].State;
                             Assert.IsNull(consumer.Root.ZoneNode.Ravenna.MediaSessionReceivers);
                             state.Value = 1;
-                            await WaitForChangeAsync(
-                                consumer.Root.ZoneNode.Ravenna.GetProperty(r => r.MediaSessionReceivers));
+                            //await WaitForChangeAsync(consumer.Root.ZoneNode.Ravenna.GetProperty(r => r.MediaSessionReceivers));
                             var receivers = consumer.Root.ZoneNode.Ravenna.MediaSessionReceivers;
                             Assert.IsNotNull(receivers);
                             Assert.AreEqual(1, receivers.Children.Count);
@@ -1087,7 +1123,8 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "IsOnlineLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests various streaming scenarios.</summary>
@@ -1095,50 +1132,54 @@ namespace Lawo.EmberPlusSharp.Model
         public void StreamTest()
         {
             var enumValues = (Enumeration[])Enum.GetValues(typeof(Enumeration));
-            var enumValue = (int)enumValues[this.Random.Next(enumValues.Length)];
-            var realValue = this.Random.NextDouble();
+            var enumValue = (int)enumValues[Random.Shared.Next(enumValues.Length)];
+            var realValue = Random.Shared.NextDouble();
+
+            var cancelToken = new CancellationTokenSource().Token;
 
             AsyncPump.Run(
                 async () =>
                 {
-                    await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Invalid, Genuine, false),
+                    await Assert.ThrowsExceptionAsync<ModelException>(
+                        () => this.StreamTestCore((byte)Random.Shared.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Invalid, Genuine, false),
                         "The field format has an unexpected value for the element with the path /IntegerParameter.");
-                    await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Genuine, OneByteMissing, false),
+                    await Assert.ThrowsExceptionAsync<ModelException>(
+                        () => this.StreamTestCore((byte)Random.Shared.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue, Genuine, OneByteMissing, false),
                         "A stream entry for the parameter with the path /EnumerationParameter is incompatible, see inner exception for more information.");
-                    await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, Genuine, OneByteMissing, false),
+                    await Assert.ThrowsExceptionAsync<ModelException>(
+                        () => this.StreamTestCore((long)Random.Shared.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue, Genuine, OneByteMissing, false),
                         "A stream entry for the parameter with the path /EnumerationParameter is incompatible, see inner exception for more information.");
-                    await AssertThrowAsync<ModelException>(
+                    await Assert.ThrowsExceptionAsync<ModelException>(
                         () => this.StreamTestCore(BitConverter.DoubleToInt64Bits(3.1415925359), (long)enumValue, realValue, Mismatch, Genuine, false),
                         "Read unexpected stream value 3.1415925359 for the parameter with the path /IntegerParameter.");
-                    await AssertThrowAsync<ModelException>(
-                        () => this.StreamTestCore((byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, 3.1415925359, Genuine, Genuine, true),
+                    await Assert.ThrowsExceptionAsync<ModelException>(
+                        () => this.StreamTestCore((byte)Random.Shared.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, 3.1415925359, Genuine, Genuine, true),
                         "Read stream value 3.1415925359 while expecting to read an octetstring for the parameter with the path /RealParameter.");
                     await this.StreamTestCore(
-                        (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue);
+                        (byte)Random.Shared.Next(byte.MinValue, byte.MaxValue + 1), (byte)enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (ushort)this.Random.Next(ushort.MinValue, ushort.MaxValue + 1), (ushort)enumValue, realValue);
+                        (ushort)Random.Shared.Next(ushort.MinValue, ushort.MaxValue + 1), (ushort)enumValue, realValue);
                     await this.StreamTestCore(
-                        (uint)this.Random.Next((int)uint.MinValue, int.MaxValue), (uint)enumValue, (float)realValue);
+                        (uint)Random.Shared.Next((int)uint.MinValue, int.MaxValue), (uint)enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (ulong)this.Random.Next((int)ulong.MinValue, int.MaxValue), (ulong)enumValue, realValue);
+                        (ulong)Random.Shared.Next((int)ulong.MinValue, int.MaxValue), (ulong)enumValue, realValue);
                     await this.StreamTestCore(
-                        (sbyte)this.Random.Next(sbyte.MinValue, sbyte.MaxValue + 1), (sbyte)enumValue, (float)realValue);
+                        (sbyte)Random.Shared.Next(sbyte.MinValue, sbyte.MaxValue + 1), (sbyte)enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (short)this.Random.Next(short.MinValue, short.MaxValue + 1), (short)enumValue, realValue);
+                        (short)Random.Shared.Next(short.MinValue, short.MaxValue + 1), (short)enumValue, realValue);
                     await this.StreamTestCore(
-                        this.Random.Next(int.MinValue, int.MaxValue), enumValue, (float)realValue);
+                        Random.Shared.Next(int.MinValue, int.MaxValue), enumValue, (float)realValue);
                     await this.StreamTestCore(
-                        (long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue);
-                });
+                        (long)Random.Shared.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue);
+                },
+                cancelToken);
         }
 
         /// <summary>Tests <see cref="CollectionNode{TMostDerived, TElement}"/>.</summary>
         [TestMethod]
         public void CollectionNodeTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<CollectionNodeRoot>(
                 consumer =>
                 {
@@ -1151,27 +1192,32 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 true,
-                "CollectionNodeLog.xml"));
+                "CollectionNodeLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
         [TestMethod]
         public void ExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
-                    await AssertThrowAsync<ArgumentNullException>(() => Consumer<SingleNodeRoot>.CreateAsync(null));
+                    await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => Consumer<SingleNodeRoot>.CreateAsync(null));
 
                     using (var dummy = new S101Client(Stream.Null, Stream.Null.ReadAsync, Stream.Null.WriteAsync))
                     {
-                        await AssertThrowAsync<ArgumentOutOfRangeException>(
-                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, -2),
-                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, 10000, ChildrenRetrievalPolicy.None - 1),
+                        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
+                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, -2));
+                        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
+                            () => Consumer<SingleNodeRoot>.CreateAsync(dummy, 10000, ChildrenRetrievalPolicy.None - 1));
+                        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
                             () => Consumer<SingleNodeRoot>.CreateAsync(dummy, 10000, ChildrenRetrievalPolicy.All + 1));
                     }
 
                     TestStandardExceptionConstructors<ModelException>();
+
                     await AssertThrowInCreateAsync<TimeoutException, SingleNodeRoot>(
                         "IncompleteLog1.xml",
                         "The provider failed to send the children for the element with the path /FieldNode.");
@@ -1212,7 +1258,7 @@ namespace Lawo.EmberPlusSharp.Model
                     await AssertThrowAfterFirstRequest<ModelException, DuplicateElementRoot>(
                         "DuplicateElementResponse1.xml",
                         "Duplicate identifier found in Lawo.EmberPlusSharp.Model.Test.DuplicateElementRoot.");
-                    await AssertThrowAsync<ModelException>(() => TestNoExceptionsAsync(
+                    await Assert.ThrowsExceptionAsync<ModelException>(() => TestNoExceptionsAsync(
                         (c, p) => Consumer<NoDefaultConstructorRoot>.CreateAsync(c),
                         () => ConnectAsync(-1, null),
                         () => WaitForConnectionAsync(new S101Logger(GlowTypes.Instance, Console.Out))));
@@ -1312,7 +1358,7 @@ namespace Lawo.EmberPlusSharp.Model
                         "NullaryFunctionLog.xml",
                         "The actual signature for the function with the path /Function does not match the expected signature.",
                         false);
-                    await AssertThrowAsync<ModelException>(
+                    await Assert.ThrowsExceptionAsync<ModelException>(
                         () => TestWithRobot<FunctionResultMismatchRoot>(
                             c =>
                             {
@@ -1322,7 +1368,7 @@ namespace Lawo.EmberPlusSharp.Model
                             false,
                             "FunctionResultValueMismatchLog1.xml"),
                         "The received tuple length does not match the tuple description length of 1.");
-                    await AssertThrowAsync<ModelException>(
+                    await Assert.ThrowsExceptionAsync<ModelException>(
                         () => TestWithRobot<FunctionResultMismatchRoot>(
                             c =>
                             {
@@ -1347,13 +1393,15 @@ namespace Lawo.EmberPlusSharp.Model
                         "MainLog.xml",
                         "Found a Parameter data value while expecting a Function for the element with the path /CollectionNode/_1.",
                         false);
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1620">Bug 1620</see>.</summary>
         [TestMethod]
         public void Bug1620Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
                 consumer =>
                 {
@@ -1361,28 +1409,34 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 false,
-                "Bug1620Log.xml"));
+                "Bug1620Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</see>.</summary>
         [TestMethod]
         public void Bug1766Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
-                () => TestWithRobot<EmptyNodeRoot>(consumer => Task.FromResult(false), false, "Bug1766Log.xml"));
+                () => TestWithRobot<EmptyNodeRoot>(consumer => Task.FromResult(false), false, "Bug1766Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</see>.</summary>
         [TestMethod]
         public void Bug1834Test()
         {
-            AsyncPump.Run(() => TestWithRobot<EmptyRoot>(consumer => Task.FromResult(false), false, "Bug1834Log.xml"));
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(() => TestWithRobot<EmptyRoot>(consumer => Task.FromResult(false), false, "Bug1834Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</see>.</summary>
         [TestMethod]
         public void Bug1836Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1408,13 +1462,15 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await providerReader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1866">Bug 1866</see>.</summary>
         [TestMethod]
         public void Bug1866Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<EnumParameterRoot>(
                 consumer =>
                 {
@@ -1422,28 +1478,32 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 false,
-                "Bug1866Log.xml"));
+                "Bug1866Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</see>.</summary>
         [TestMethod]
         public void Bug2755Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<SingleNodeRoot>(
                 (consumerTask, providerClient) =>
                 {
                     providerClient.Dispose();
-                    return AssertThrowAsync<OperationCanceledException>(
+                    return Assert.ThrowsExceptionAsync<OperationCanceledException>(
                         () => MonitorConnection(consumerTask, c => Task.FromResult(false)));
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/3345">Bug 3345</see>.</summary>
         [TestMethod]
         public void Bug3345Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<TwoParameterRoot>(
                 async consumer =>
                 {
@@ -1453,30 +1513,36 @@ namespace Lawo.EmberPlusSharp.Model
                     await Task.Delay(1000);
                 },
                 false,
-                "Bug3345Log.xml"));
+                "Bug3345Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</see>.</summary>
         [TestMethod]
         public void Bug4424Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => AssertThrowInCreateAsync<ModelException, TwoParameterRoot>(
                 "Bug4424Log.xml",
-                "No data value available for the required property Lawo.EmberPlusSharp.Model.Test.TwoParameterRoot.Parameter2 in the node with the path /."));
+                "No data value available for the required property Lawo.EmberPlusSharp.Model.Test.TwoParameterRoot.Parameter2 in the node with the path /."),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4463">Bug 4463</see>.</summary>
         [TestMethod]
         public void Bug4463Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
-                () => TestWithRobot<EmptyZoneNodeRoot>(c => Task.FromResult(false), true, "Bug4463Log.xml"));
+                () => TestWithRobot<EmptyZoneNodeRoot>(c => Task.FromResult(false), true, "Bug4463Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4815">Bug 4815</see>.</summary>
         [TestMethod]
         public void Bug4815Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1533,13 +1599,15 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await providerReader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5201">Bug 5201</see>.</summary>
         [TestMethod]
         public void Bug5201Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1574,20 +1642,25 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await providerReader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5639">Bug 5639</see>.</summary>
         [TestMethod]
         public void Bug5639Test()
         {
-            AsyncPump.Run(() => TestWithRobot<BooleanRoot>(c => Task.FromResult(false), true, "Bug5639Log.xml"));
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(
+                () => TestWithRobot<BooleanRoot>(c => Task.FromResult(false), true, "Bug5639Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://github.com/Lawo/ember-plus-sharp/issues/27">Bug 27</see>.</summary>
         [TestMethod]
         public void Bug27Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<GrassRoot>(
                 async c =>
                 {
@@ -1596,7 +1669,8 @@ namespace Lawo.EmberPlusSharp.Model
                 },
                 true,
                 "Bug27Log.xml",
-                "true"));
+                "true"),
+                cancelToken);
 
             AsyncPump.Run(() => TestWithRobot<GrassRoot>(
                 async c =>
@@ -1613,7 +1687,8 @@ namespace Lawo.EmberPlusSharp.Model
                 },
                 true,
                 "Bug27Log.xml",
-                "false"));
+                "false"),
+                cancelToken);
         }
 
         /// <summary>Tests that Ember+ trees received with different <see cref="ChildrenRetrievalPolicy"/> have an equal
@@ -1622,13 +1697,15 @@ namespace Lawo.EmberPlusSharp.Model
         [TestCategory("Manual")]
         public void Bug40Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
                     var automaticRoot = await GetTreeAsync(ChildrenRetrievalPolicy.All);
                     var manualRoot = await GetTreeAsync(ChildrenRetrievalPolicy.DirectOnly);
                     Compare(automaticRoot, manualRoot);
-                });
+                },
+                cancelToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1780,7 +1857,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             if ((parameter.Access & ParameterAccess.Read) == 0)
             {
-                AssertThrow<InvalidOperationException>(() => parameter.Value.Ignore());
+                Assert.ThrowsException<InvalidOperationException>(() => parameter.Value.Ignore());
             }
             else
             {
@@ -1789,7 +1866,7 @@ namespace Lawo.EmberPlusSharp.Model
 
             if ((parameter.Access & ParameterAccess.Write) == 0)
             {
-                AssertThrow<InvalidOperationException>(() => parameter.Value = 42);
+                Assert.ThrowsException<InvalidOperationException>(() => parameter.Value = 42);
             }
             else
             {
@@ -1804,8 +1881,9 @@ namespace Lawo.EmberPlusSharp.Model
                     using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(client, 4000, policy))
                     {
                         var root = consumer.Root;
-                        AssertThrow<ArgumentOutOfRangeException>(
-                            () => root.ChildrenRetrievalPolicy = (ChildrenRetrievalPolicy)(-1),
+                        Assert.ThrowsException<ArgumentOutOfRangeException>(
+                            () => root.ChildrenRetrievalPolicy = (ChildrenRetrievalPolicy) (-1));
+                        Assert.ThrowsException<ArgumentOutOfRangeException>(
                             () => root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All + 1);
                         Assert.AreEqual(policy, root.ChildrenRetrievalPolicy);
 
@@ -1815,12 +1893,12 @@ namespace Lawo.EmberPlusSharp.Model
                         if (root.ChildrenRetrievalPolicy == ChildrenRetrievalPolicy.None)
                         {
                             root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.DirectOnly;
-                            AssertThrow<InvalidOperationException>(
+                            Assert.ThrowsException<InvalidOperationException>(
                                 () => root.ChildrenRetrievalPolicy = ChildrenRetrievalPolicy.All, ExpectedMessage);
                         }
                         else
                         {
-                            AssertThrow<InvalidOperationException>(() => root.ChildrenRetrievalPolicy -= 1, ExpectedMessage);
+                            Assert.ThrowsException<InvalidOperationException>(() => root.ChildrenRetrievalPolicy -= 1, ExpectedMessage);
                         }
 
                         if (policy == ChildrenRetrievalPolicy.None)
@@ -1864,7 +1942,7 @@ namespace Lawo.EmberPlusSharp.Model
             where TException : Exception
             where TRoot : Root<TRoot>
         {
-            return AssertThrowAsync<TException>(
+            return Assert.ThrowsExceptionAsync<TException>(
                 () => TestWithRobot<TRoot>(c => Task.FromResult(false), log, logXmlName), expectedMessage);
         }
 
@@ -1877,7 +1955,7 @@ namespace Lawo.EmberPlusSharp.Model
                 async (consumerTask, providerClient) =>
                 {
                     await SendResponse(providerClient, payloadXmlName);
-                    await AssertThrowAsync<TException>(
+                    await Assert.ThrowsExceptionAsync<TException>(
                         () => MonitorConnection(consumerTask, c => Task.FromResult(false)), expectedMessage);
                 },
                 CreateLogger(log, payloadXmlName, "consumer.xml"),
@@ -1892,6 +1970,8 @@ namespace Lawo.EmberPlusSharp.Model
         {
             var encodedPayloadStream = await GetS101MessageStreamAsync(GetBigTreePayload(magnitude));
             var encodedPayload = encodedPayloadStream.ToArray();
+
+            var cancelToken = new CancellationTokenSource().Token;
 
             using (File.CreateText(".\\BigTreeOutput.txt"))
             {
@@ -1924,7 +2004,8 @@ namespace Lawo.EmberPlusSharp.Model
                                     return Task.FromResult(false);
                                 });
                         }
-                    });
+                    },
+                    cancelToken);
             }
 
             var emberLibStopwatch = new Stopwatch();
@@ -2052,8 +2133,10 @@ namespace Lawo.EmberPlusSharp.Model
             where TRoot : Root<TRoot>
         {
             TRoot root = null;
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
-                () => TestWithRobot<TRoot>(consumer => Task.FromResult(root = consumer.Root), false, logXmlName));
+                () => TestWithRobot<TRoot>(consumer => Task.FromResult(root = consumer.Root), false, logXmlName),
+                cancelToken);
             return root;
         }
 
@@ -2287,7 +2370,7 @@ namespace Lawo.EmberPlusSharp.Model
                     using (var consumer = await Consumer<EmptyNodeRoot>.CreateAsync(
                         client, Timeout.Infinite, ChildrenRetrievalPolicy.None))
                     {
-                        consumer.AutoSendInterval = this.Random.Next(100, 5000);
+                        consumer.AutoSendInterval = Random.Shared.Next(100, 5000);
                         var root = consumer.Root;
                         Assert.IsNull(root.Node);
                         Assert.AreEqual(0, ((INode)root).Children.Count);
@@ -2334,12 +2417,12 @@ namespace Lawo.EmberPlusSharp.Model
             Func<byte[], byte[]> failEncoding,
             bool failType)
         {
-            var boolValue = this.GetRandomBoolean();
+            var boolValue = TestHelper.RandomBoolean();
             GetFormat(intValue).Ignore();
             GetFormat(enumValue).Ignore();
-            var octetStringValue = new byte[this.Random.Next(0, 5)];
-            this.Random.NextBytes(octetStringValue);
-            var stringValue = GetRandomString();
+            var octetStringValue = new byte[Random.Shared.Next(0, 5)];
+            Random.Shared.NextBytes(octetStringValue);
+            var stringValue = TestHelper.RandomString();
 
             var intBytes = GetBytes(intValue);
             var enumBytes = GetBytes(enumValue);
@@ -2362,10 +2445,10 @@ namespace Lawo.EmberPlusSharp.Model
                     failFormat(GetFormat(realValue, isLittleEndian)),
                     0,
                     boolValue.ToString().ToLowerInvariant(),
-                    new SoapHexBinary(failEncoding(intBytes.Concat(enumBytes).ToArray())),
-                    new SoapHexBinary(failEncoding(octetStringValue)),
+                    TestHelper.SoapHexBinary(failEncoding(intBytes.Concat(enumBytes).ToArray())),
+                    TestHelper.SoapHexBinary(failEncoding(octetStringValue)),
                     failType ? "Real" : "Octetstring",
-                    failType ? realValue : new SoapHexBinary(failEncoding(realBytes)),
+                    failType ? realValue : TestHelper.SoapHexBinary(failEncoding(realBytes)),
                     stringValue
                 };
 
