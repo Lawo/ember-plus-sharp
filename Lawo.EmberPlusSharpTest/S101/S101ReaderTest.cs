@@ -24,6 +24,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void ReadTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -35,7 +36,7 @@ namespace Lawo.EmberPlusSharp.S101
                             0xFE, 0x00, 0x0E, 0x00, 0x01, 0x80, 0x01, 0x02, 0x0A, 0x02, 0xF5, 0x78, 0xFF,
                             0xFE, 0x00, 0x0E, 0x00, 0x01, 0x60, 0x01, 0x02, 0x0A, 0x02, 0x13, 0x53, 0xFF
                         });
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Reader"/> exceptions.</summary>
@@ -48,6 +49,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             TestStandardExceptionConstructors<S101Exception>();
 
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -129,7 +131,7 @@ namespace Lawo.EmberPlusSharp.S101
                         "FirstPacket flag in subsequent packet.",
                         0xFE, 0x00, 0x0E, 0x00, 0x01, 0x80, 0x01, 0x02, 0x0A, 0x02, 0xF5, 0x78, 0xFF,
                         0xFE, 0x00, 0x0E, 0x00, 0x01, 0xE0, 0x01, 0x02, 0x0A, 0x02, 0x00, 0x00, 0x00);
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Command"/> methods.</summary>

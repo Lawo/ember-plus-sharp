@@ -26,6 +26,7 @@ namespace Lawo.EmberPlusSharp.Model
         [TestCategory("Manual")]
         public void MainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -59,7 +60,8 @@ namespace Lawo.EmberPlusSharp.Model
                             }
                         }
                     }
-                });
+                },
+                cancelToken);
         }
     }
 }

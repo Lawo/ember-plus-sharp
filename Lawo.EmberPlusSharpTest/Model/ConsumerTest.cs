@@ -4,6 +4,8 @@
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using Lawo.EmberPlusSharpTest;
+
 namespace Lawo.EmberPlusSharp.Model
 {
     using System;
@@ -19,7 +21,6 @@ namespace Lawo.EmberPlusSharp.Model
     using System.Linq.Expressions;
     using System.Net.Sockets;
     using System.Reflection;
-    using System.Runtime.Remoting.Metadata.W3cXsd2001;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
@@ -46,6 +47,7 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void BigTreeAssemblyTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -55,13 +57,14 @@ namespace Lawo.EmberPlusSharp.Model
 
                     await BigTreeAssemblyTestCore<BigTreeDynamicRoot>(6, false);
                     await BigTreeAssemblyTestCore<BigTreeStaticRoot>(6, false);
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests the main <see cref="Consumer{T}"/> use cases.</summary>
         [TestMethod]
         public void MainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<MainRoot>(
                 async (consumerTask, providerClient) =>
                 {
@@ -166,13 +169,15 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests the dynamic use cases.</summary>
         [TestMethod]
         public void DynamicTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<DynamicTestRoot>(
                 async (consumerTask, providerClient) =>
                 {
@@ -306,7 +311,8 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests whether interface-typed elements work correctly.</summary>
@@ -323,7 +329,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void GetElementTest()
         {
             var mainRoot = GetRoot<MainRoot>("MainLog.xml");
-            AssertThrow<ArgumentNullException>(() => mainRoot.GetElement(null));
+            Assert.ThrowsException<ArgumentNullException>(() => mainRoot.GetElement(null));
             Assert.AreEqual(mainRoot, mainRoot.GetElement(string.Empty));
             Assert.AreEqual(mainRoot, mainRoot.GetElement(mainRoot.GetPath()));
             Assert.AreEqual(mainRoot.BooleanParameter, mainRoot.GetElement(mainRoot.BooleanParameter.GetPath()));
@@ -336,6 +342,7 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void PropertiesTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<PropertiesRoot>(
                 async (consumerTask, providerClient) =>
                 {
@@ -430,13 +437,15 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests whether the provider access restrictions are enforced correctly.</summary>
         [TestMethod]
         public void AccessTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
                 consumer =>
                 {
@@ -447,13 +456,15 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 false,
-                "AccessLog.xml"));
+                "AccessLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests whether <see cref="INode.ChildrenRetrievalPolicy"/> works as expected.</summary>
         [TestMethod]
         public void ChildrenRetrievalPolicyTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -465,13 +476,15 @@ namespace Lawo.EmberPlusSharp.Model
                         ChildrenRetrievalPolicy.All, "ChildrenRetrievalPolicyLog3.xml");
                     await this.DynamicChildrenRetrievalPolicyTestAsync(false);
                     await this.DynamicChildrenRetrievalPolicyTestAsync(true);
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests nullable parameter variants.</summary>
         [TestMethod]
         public void NullableTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<NullableRoot>(
                 async (consumerTask, providerClient) =>
                 {
@@ -521,13 +534,15 @@ namespace Lawo.EmberPlusSharp.Model
                         });
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Tests trigger use cases.</summary>
         [TestMethod]
         public void TriggerTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<EmptyDynamicRoot>(
                 async consumer =>
                 {
@@ -539,13 +554,15 @@ namespace Lawo.EmberPlusSharp.Model
                     await Task.Delay(300);
                 },
                 false,
-                "TriggerLog.xml"));
+                "TriggerLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests sending/receiving with a broken connection.</summary>
         [TestMethod]
         public void AutoSendWithBrokenS101ConnectionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<ModelPayloads>(
                 async client =>
                 {
@@ -567,7 +584,8 @@ namespace Lawo.EmberPlusSharp.Model
                 null,
                 GlowTypes.Instance,
                 false,
-                "SendReceiveWithBrokenConnectionLog.xml"));
+                "SendReceiveWithBrokenConnectionLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests whether exceptions are reported appropriately after
@@ -575,7 +593,8 @@ namespace Lawo.EmberPlusSharp.Model
         [TestMethod]
         public void ThrowAfterCreateTest()
         {
-            AsyncPump.Run(() => AssertThrowAsync<S101Exception>(
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(() => Assert.ThrowsExceptionAsync<S101Exception>(
                 async () =>
                 {
                     var providerTcpClientTask = WaitForConnectionAsync();
@@ -602,13 +621,15 @@ namespace Lawo.EmberPlusSharp.Model
                             await connectionLost.Task;
                         }
                     }
-                }));
+                }),
+                cancelToken);
         }
 
         /// <summary>Tests whether messages with a different slot are ignored.</summary>
         [TestMethod]
         public void SlotTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
                 async consumer =>
                 {
@@ -616,13 +637,15 @@ namespace Lawo.EmberPlusSharp.Model
                     await consumer.SendAsync();
                 },
                 false,
-                "SlotLog.xml"));
+                "SlotLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests the various change notifications.</summary>
         [TestMethod]
         public void ChangeNotificationTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<BooleanRoot>(
                 async consumer =>
                 {
@@ -668,13 +691,15 @@ namespace Lawo.EmberPlusSharp.Model
                     Assert.AreEqual(true, dynamicParameter.Value);
                 },
                 true,
-                "ChangeNotificationLog.xml"));
+                "ChangeNotificationLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests Ember+ functions.</summary>
         [TestMethod]
         public void FunctionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -738,13 +763,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "FunctionLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests dynamic Ember+ functions.</summary>
         [TestMethod]
         public void DynamicFunctionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -828,13 +855,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         false,
                         "FunctionLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests the main use cases of Ember+ matrices.</summary>
         [TestMethod]
         public void MatrixMainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -923,13 +952,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixMainLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests default values for Ember+ matrices.</summary>
         [TestMethod]
         public void MatrixMinimalTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -958,13 +989,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixMinimalLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests Ember+ matrices with inline elements.</summary>
         [TestMethod]
         public void DynamicMatrixInlineTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1004,13 +1037,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixInlineLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests Ember+ matrices with inline elements.</summary>
         [TestMethod]
         public void MatrixInlineTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1047,13 +1082,15 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "MatrixInlineLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests the behavior when <see cref="Element.IsOnline"/> changes.</summary>
         [TestMethod]
         public void IsOnlineTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1087,7 +1124,8 @@ namespace Lawo.EmberPlusSharp.Model
                         },
                         true,
                         "IsOnlineLog.xml");
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests various streaming scenarios.</summary>
@@ -1097,6 +1135,8 @@ namespace Lawo.EmberPlusSharp.Model
             var enumValues = (Enumeration[])Enum.GetValues(typeof(Enumeration));
             var enumValue = (int)enumValues[this.Random.Next(enumValues.Length)];
             var realValue = this.Random.NextDouble();
+
+            var cancelToken = new CancellationTokenSource().Token;
 
             AsyncPump.Run(
                 async () =>
@@ -1132,13 +1172,15 @@ namespace Lawo.EmberPlusSharp.Model
                         this.Random.Next(int.MinValue, int.MaxValue), enumValue, (float)realValue);
                     await this.StreamTestCore(
                         (long)this.Random.Next(int.MinValue, int.MaxValue), (long)enumValue, realValue);
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests <see cref="CollectionNode{TMostDerived, TElement}"/>.</summary>
         [TestMethod]
         public void CollectionNodeTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<CollectionNodeRoot>(
                 consumer =>
                 {
@@ -1151,13 +1193,15 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 true,
-                "CollectionNodeLog.xml"));
+                "CollectionNodeLog.xml"),
+                cancelToken);
         }
 
         /// <summary>Tests various exceptional conditions.</summary>
         [TestMethod]
         public void ExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1347,13 +1391,15 @@ namespace Lawo.EmberPlusSharp.Model
                         "MainLog.xml",
                         "Found a Parameter data value while expecting a Function for the element with the path /CollectionNode/_1.",
                         false);
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1620">Bug 1620</see>.</summary>
         [TestMethod]
         public void Bug1620Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<SingleNodeRoot>(
                 consumer =>
                 {
@@ -1361,28 +1407,34 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 false,
-                "Bug1620Log.xml"));
+                "Bug1620Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1766">Bug 1766</see>.</summary>
         [TestMethod]
         public void Bug1766Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
-                () => TestWithRobot<EmptyNodeRoot>(consumer => Task.FromResult(false), false, "Bug1766Log.xml"));
+                () => TestWithRobot<EmptyNodeRoot>(consumer => Task.FromResult(false), false, "Bug1766Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1834">Bug 1834</see>.</summary>
         [TestMethod]
         public void Bug1834Test()
         {
-            AsyncPump.Run(() => TestWithRobot<EmptyRoot>(consumer => Task.FromResult(false), false, "Bug1834Log.xml"));
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(() => TestWithRobot<EmptyRoot>(consumer => Task.FromResult(false), false, "Bug1834Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1836">Bug 1836</see>.</summary>
         [TestMethod]
         public void Bug1836Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1408,13 +1460,15 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await providerReader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/1866">Bug 1866</see>.</summary>
         [TestMethod]
         public void Bug1866Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<EnumParameterRoot>(
                 consumer =>
                 {
@@ -1422,13 +1476,15 @@ namespace Lawo.EmberPlusSharp.Model
                     return Task.FromResult(false);
                 },
                 false,
-                "Bug1866Log.xml"));
+                "Bug1866Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/2755">Bug 2755</see>.</summary>
         [TestMethod]
         public void Bug2755Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestConsumerAfterFirstRequest<SingleNodeRoot>(
                 (consumerTask, providerClient) =>
                 {
@@ -1437,13 +1493,15 @@ namespace Lawo.EmberPlusSharp.Model
                         () => MonitorConnection(consumerTask, c => Task.FromResult(false)));
                 },
                 null,
-                new S101Logger(GlowTypes.Instance, Console.Out)));
+                new S101Logger(GlowTypes.Instance, Console.Out)),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/3345">Bug 3345</see>.</summary>
         [TestMethod]
         public void Bug3345Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<TwoParameterRoot>(
                 async consumer =>
                 {
@@ -1453,30 +1511,36 @@ namespace Lawo.EmberPlusSharp.Model
                     await Task.Delay(1000);
                 },
                 false,
-                "Bug3345Log.xml"));
+                "Bug3345Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4424">Bug 4424</see>.</summary>
         [TestMethod]
         public void Bug4424Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => AssertThrowInCreateAsync<ModelException, TwoParameterRoot>(
                 "Bug4424Log.xml",
-                "No data value available for the required property Lawo.EmberPlusSharp.Model.Test.TwoParameterRoot.Parameter2 in the node with the path /."));
+                "No data value available for the required property Lawo.EmberPlusSharp.Model.Test.TwoParameterRoot.Parameter2 in the node with the path /."),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4463">Bug 4463</see>.</summary>
         [TestMethod]
         public void Bug4463Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
-                () => TestWithRobot<EmptyZoneNodeRoot>(c => Task.FromResult(false), true, "Bug4463Log.xml"));
+                () => TestWithRobot<EmptyZoneNodeRoot>(c => Task.FromResult(false), true, "Bug4463Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/4815">Bug 4815</see>.</summary>
         [TestMethod]
         public void Bug4815Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1533,13 +1597,15 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await providerReader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5201">Bug 5201</see>.</summary>
         [TestMethod]
         public void Bug5201Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -1574,20 +1640,25 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await providerReader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://redmine.lawo.de/redmine/issues/5639">Bug 5639</see>.</summary>
         [TestMethod]
         public void Bug5639Test()
         {
-            AsyncPump.Run(() => TestWithRobot<BooleanRoot>(c => Task.FromResult(false), true, "Bug5639Log.xml"));
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(
+                () => TestWithRobot<BooleanRoot>(c => Task.FromResult(false), true, "Bug5639Log.xml"),
+                cancelToken);
         }
 
         /// <summary>Exposes <see href="https://github.com/Lawo/ember-plus-sharp/issues/27">Bug 27</see>.</summary>
         [TestMethod]
         public void Bug27Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<GrassRoot>(
                 async c =>
                 {
@@ -1596,7 +1667,8 @@ namespace Lawo.EmberPlusSharp.Model
                 },
                 true,
                 "Bug27Log.xml",
-                "true"));
+                "true"),
+                cancelToken);
 
             AsyncPump.Run(() => TestWithRobot<GrassRoot>(
                 async c =>
@@ -1613,7 +1685,8 @@ namespace Lawo.EmberPlusSharp.Model
                 },
                 true,
                 "Bug27Log.xml",
-                "false"));
+                "false"),
+                cancelToken);
         }
 
         /// <summary>Tests that Ember+ trees received with different <see cref="ChildrenRetrievalPolicy"/> have an equal
@@ -1622,13 +1695,15 @@ namespace Lawo.EmberPlusSharp.Model
         [TestCategory("Manual")]
         public void Bug40Test()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
                     var automaticRoot = await GetTreeAsync(ChildrenRetrievalPolicy.All);
                     var manualRoot = await GetTreeAsync(ChildrenRetrievalPolicy.DirectOnly);
                     Compare(automaticRoot, manualRoot);
-                });
+                },
+                cancelToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1893,6 +1968,8 @@ namespace Lawo.EmberPlusSharp.Model
             var encodedPayloadStream = await GetS101MessageStreamAsync(GetBigTreePayload(magnitude));
             var encodedPayload = encodedPayloadStream.ToArray();
 
+            var cancelToken = new CancellationTokenSource().Token;
+
             using (File.CreateText(".\\BigTreeOutput.txt"))
             {
                 var stopwatch = new Stopwatch();
@@ -1924,7 +2001,8 @@ namespace Lawo.EmberPlusSharp.Model
                                     return Task.FromResult(false);
                                 });
                         }
-                    });
+                    },
+                    cancelToken);
             }
 
             var emberLibStopwatch = new Stopwatch();
@@ -2052,8 +2130,10 @@ namespace Lawo.EmberPlusSharp.Model
             where TRoot : Root<TRoot>
         {
             TRoot root = null;
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
-                () => TestWithRobot<TRoot>(consumer => Task.FromResult(root = consumer.Root), false, logXmlName));
+                () => TestWithRobot<TRoot>(consumer => Task.FromResult(root = consumer.Root), false, logXmlName),
+                cancelToken);
             return root;
         }
 
