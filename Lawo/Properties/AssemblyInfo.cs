@@ -8,10 +8,6 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-// General
-//[assembly: AssemblyTitle("Lawo")]
-[assembly: AssemblyDescription("")]
-
 // CA enforced
 [assembly: CLSCompliant(true)]
 

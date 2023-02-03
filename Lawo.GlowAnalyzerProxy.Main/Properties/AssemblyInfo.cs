@@ -9,10 +9,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-// General
-[assembly: AssemblyTitle("Lawo.GlowAnalyzerProxy.Main")]
-[assembly: AssemblyDescription("")]
-
 // CA enforced
 [assembly: CLSCompliant(true)]
 
