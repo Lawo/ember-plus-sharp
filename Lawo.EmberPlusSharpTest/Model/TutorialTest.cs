@@ -28,7 +28,7 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Establishes a connection to a provider and creates a dynamic local copy of the database.</summary>
         [TestMethod]
         [TestCategory("Manual")]
-        public void DynamicConnectTest() => Main();
+        public void DynamicConnectTest() => MainTutorial();
 
         /// <summary>Iterates over the dynamic local database.</summary>
         [TestMethod]
@@ -267,8 +267,8 @@ namespace Lawo.EmberPlusSharp.Model
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        #region Main Method
-        private static void Main()
+        #region MainTutorial Method
+        private static void MainTutorial()
         {
             // This is necessary so that we can execute async code in a console application.
             AsyncPump.Run(

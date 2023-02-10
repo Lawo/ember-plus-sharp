@@ -8,6 +8,7 @@
 Imports System
 Imports System.Linq
 Imports System.Net.Sockets
+Imports System.Threading
 Imports System.Threading.Tasks
 Imports Lawo.EmberPlusSharp.Model
 Imports Lawo.EmberPlusSharp.S101
@@ -15,18 +16,18 @@ Imports Lawo.Threading.Tasks
 'Imports Microsoft.TeamFoundation.Framework.Common
 #End Region
 
-<TestClass>
-Public Class TutorialTestVB
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub DynamicConnectTest()
+Public NotInheritable Class TutorialTestVB
+
+    Private Sub New()
+    End Sub
+
+    Public Shared Sub DynamicConnectTest()
         Main()
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub DynamicIterateTest()
+    Public Shared Sub DynamicIterateTest()
 #Region "Dynamic Iterate"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -35,13 +36,13 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub DynamicModifyTest()
+    Public Shared Sub DynamicModifyTest()
 #Region "Dynamic Modify"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -69,13 +70,14 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub ConnectionLostTest()
+    Public Shared Sub ConnectionLostTest()
 #Region "Connection Lost"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -90,13 +92,13 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub StaticIterateTest()
+    Public Shared Sub StaticIterateTest()
 #Region "Static Iterate"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -105,13 +107,13 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub StaticReactToChangesTest()
+    Public Shared Sub StaticReactToChangesTest()
 #Region "Static React to Changes"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -124,13 +126,13 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub StaticModifyTest()
+    Public Shared Sub StaticModifyTest()
 #Region "Static Modify"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -142,30 +144,30 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub CollectionNodeTest()
+    Public Shared Sub CollectionNodeTest()
 #Region "Collection Node"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
                     Using con = Await Consumer(Of UnboundedSapphireRoot).CreateAsync(client)
-                        For Each source In con.Root.Sapphire.Sources.Children
-                            Console.WriteLine(source.Fader.Position.Value)
+                        For Each Source In con.Root.Sapphire.Sources.Children
+                            Console.WriteLine(Source.Fader.Position.Value)
                         Next
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub MixedIterateTest()
+    Public Shared Sub MixedIterateTest()
 #Region "Mixed Iterate"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
@@ -174,28 +176,29 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
-    <TestMethod>
-    <TestCategory("Manual")>
-    Public Sub MixedModifyTest()
+    Public Shared Sub MixedModifyTest()
 #Region "Mixed Modify"
+
         AsyncPump.Run(
             Async Function()
                 Using client = Await ConnectAsync("localhost", 9000)
                     Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
-                        For Each source In con.Root.Sapphire.Sources.Children
-                            source.Fader.DBValue.Value = -67.0
-                            source.Fader.Position.Value = 128
-                            source.Dsp.Input.LRMode.Value = LRMode.Mono
-                            source.Dsp.Input.Phase.Value = False
+                        For Each Source In con.Root.Sapphire.Sources.Children
+                            Source.Fader.DBValue.Value = -67.0
+                            Source.Fader.Position.Value = 128
+                            Source.Dsp.Input.LRMode.Value = LRMode.Mono
+                            Source.Dsp.Input.Phase.Value = False
                         Next
 
                         Await con.SendAsync()
                     End Using
                 End Using
             End Function)
+
 #End Region
     End Sub
 
@@ -204,6 +207,7 @@ Public Class TutorialTestVB
 #Region "Main Method"
     Private Shared Sub Main()
         ' This is necessary so that we can execute async code in a console application.
+
         AsyncPump.Run(
             Async Function()
                 ' Establish S101 protocol
@@ -218,6 +222,7 @@ Public Class TutorialTestVB
                     End Using
                 End Using
             End Function)
+
     End Sub
 #End Region
 

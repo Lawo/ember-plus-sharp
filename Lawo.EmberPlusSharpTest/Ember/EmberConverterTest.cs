@@ -28,23 +28,21 @@ namespace Lawo.EmberPlusSharp.Ember
         [TestMethod]
         public void ExceptionTest()
         {
-            AssertThrow<ArgumentNullException>(
-                () => new EmberType(null).Ignore(),
-                () => new EmberTypeBag(null).Ignore(),
-                () => new EmberConverter(null).Ignore());
+            Assert.ThrowsException<ArgumentNullException>(() => new EmberType(null).Ignore());
+            Assert.ThrowsException<ArgumentNullException>(() => new EmberTypeBag(null).Ignore());
+            Assert.ThrowsException<ArgumentNullException>(() => new EmberConverter(null).Ignore());
 
-            AssertThrow<ArgumentException>(() => new EmberType().Ignore());
+            Assert.ThrowsException<ArgumentException>(() => new EmberType().Ignore());
 
             using (var stream = new MemoryStream())
             using (var reader = new EmberReader(stream))
             using (var writer = XmlWriter.Create(new StringBuilder()))
             {
                 var converter = new EmberConverter();
-                AssertThrow<ArgumentNullException>(
-                    () => converter.ToXml((byte[])null, writer),
-                    () => converter.ToXml(new byte[0], null),
-                    () => converter.ToXml((EmberReader)null, writer),
-                    () => converter.ToXml(reader, null));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.ToXml((byte[]) null, writer));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.ToXml(new byte[0], null));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.ToXml((EmberReader) null, writer));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.ToXml(reader, null));
             }
 
             using (var stringReader = new StringReader(string.Empty))
@@ -53,10 +51,9 @@ namespace Lawo.EmberPlusSharp.Ember
             using (var writer = new EmberWriter(stream))
             {
                 var converter = new EmberConverter();
-                AssertThrow<ArgumentNullException>(
-                    () => converter.FromXml(null),
-                    () => converter.FromXml(null, writer),
-                    () => converter.FromXml(reader, null));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.FromXml(null));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.FromXml(null, writer));
+                Assert.ThrowsException<ArgumentNullException>(() => converter.FromXml(reader, null));
             }
 
             AssertXmlException("<whatever type=\"A-11\"></whatever>", "Unknown field path: whatever.");

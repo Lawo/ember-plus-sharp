@@ -21,7 +21,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public void MainTest()
         {
             var u1 = default(EmberId);
-            var n1 = this.Random.Next();
+            var n1 = Random.Shared.Next();
             var n2 = n1 + 1;
             var a1 = EmberId.CreateApplication(n1);
             var a2 = EmberId.CreateApplication(n2);
@@ -52,10 +52,10 @@ namespace Lawo.EmberPlusSharp.Ember
 
         /// <summary>Tests <see cref="EmberId"/> exceptions.</summary>
         [TestMethod]
-        public void ExceptionTest() =>
-            AssertThrow<ArgumentOutOfRangeException>(
-                () => EmberId.CreateApplication(-1),
-                () => EmberId.CreateContextSpecific(-1));
+        public void ExceptionTest() {
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => EmberId.CreateApplication(-1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => EmberId.CreateContextSpecific(-1));
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

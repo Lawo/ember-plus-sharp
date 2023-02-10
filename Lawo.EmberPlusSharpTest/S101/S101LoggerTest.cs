@@ -25,18 +25,24 @@ namespace Lawo.EmberPlusSharp.S101
         {
             using (var writer = new StringWriter(CultureInfo.InvariantCulture))
             {
-                AssertThrow<ArgumentNullException>(
-                    () => new S101Logger(null, writer).Dispose(),
-                    () => new S101Logger(GlowTypes.Instance, (TextWriter)null).Dispose(),
-                    () => new S101Logger(GlowTypes.Instance, (XmlWriter)null).Dispose(),
+                Assert.ThrowsException<ArgumentNullException>(
+                    () => new S101Logger(null, writer).Dispose());
+                Assert.ThrowsException<ArgumentNullException>(
+                    () => new S101Logger(GlowTypes.Instance, (TextWriter) null).Dispose());
+                Assert.ThrowsException<ArgumentNullException>(
+                    () => new S101Logger(GlowTypes.Instance, (XmlWriter) null).Dispose());
+                Assert.ThrowsException<ArgumentNullException>(
                     () => new S101Logger((IEmberConverter)null, XmlWriter.Create(writer)).Dispose());
 
                 using (var logger = new S101Logger(GlowTypes.Instance, writer))
                 {
-                    AssertThrow<ArgumentNullException>(
-                        () => logger.LogData("Whatever", "Send", null, 0, 0),
-                        () => logger.LogMessage(null, new S101Message(0x00, new KeepAliveRequest()), null),
-                        () => logger.LogMessage("Send", null, null),
+                    Assert.ThrowsException<ArgumentNullException>(
+                        () => logger.LogData("Whatever", "Send", null, 0, 0));
+                    Assert.ThrowsException<ArgumentNullException>(
+                        () => logger.LogMessage(null, new S101Message(0x00, new KeepAliveRequest()), null));
+                    Assert.ThrowsException<ArgumentNullException>(
+                        () => logger.LogMessage("Send", null, null));
+                    Assert.ThrowsException<ArgumentNullException>(
                         () => logger.LogException("Send", null));
                 }
             }

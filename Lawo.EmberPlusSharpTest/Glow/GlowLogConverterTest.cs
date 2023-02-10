@@ -31,10 +31,10 @@ namespace Lawo.EmberPlusSharp.Glow
 
         /// <summary>Tests <see cref="GlowLogConverter"/> exceptions.</summary>
         [TestMethod]
-        public void ExceptionTest() =>
-            AssertThrow<ArgumentNullException>(
-                () => GlowLogConverter.Convert(null, XmlWriter.Create(Stream.Null)),
-                () => GlowLogConverter.Convert(XmlReader.Create(Stream.Null), null));
+        public void ExceptionTest() {
+            Assert.ThrowsException<ArgumentNullException>(() => GlowLogConverter.Convert(null, XmlWriter.Create(Stream.Null)));
+            Assert.ThrowsException<ArgumentNullException>(() => GlowLogConverter.Convert(XmlReader.Create(Stream.Null), null));
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
