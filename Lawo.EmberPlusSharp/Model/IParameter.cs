@@ -29,6 +29,8 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Gets <b>access</b>.</summary>
         ParameterAccess Access { get; }
 
+        bool IsWriteable { get; }
+
         /// <summary>Gets <b>format</b>.</summary>
         string Format { get; }
 
