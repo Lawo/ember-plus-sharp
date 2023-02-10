@@ -79,6 +79,10 @@ namespace Lawo.EmberPlusSharp.Model
             return path.ToString();
         }
 
+        public string IdentifierPath => GetPath();
+
+        public int[] Path => this.numberPath;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         internal static Type GetImplementationType(Type type)

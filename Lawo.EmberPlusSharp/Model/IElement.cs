@@ -23,6 +23,12 @@ namespace Lawo.EmberPlusSharp.Model
         /// <summary>Gets <b>identifier</b>.</summary>
         string Identifier { get; }
 
+        /// <summary>Gets <b>identifier string path</b></summary>
+        string IdentifierPath { get; }
+
+        /// <summary>Gets <b>identifier integer path</b></summary>
+        int[] Path { get; }
+
         /// <summary>Gets <b>description</b>.</summary>
         string Description { get; }
 
