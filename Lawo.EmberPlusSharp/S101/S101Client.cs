@@ -395,24 +395,22 @@ namespace Lawo.EmberPlusSharp.S101
         {
             await this.EnqueueLogOperation(() => this.logger.LogMessage(LogNames.Send, message, payload));
 
-            await this.sendQueue.Enqueue(
-                async () =>
+            await this.sendQueue.Enqueue(async () => {
+                var payloadStream = await this.writer.WriteMessageAsync(message, this.source.Token);
+
+                if ((payload == null) != (payloadStream == null))
                 {
-                    var payloadStream = await this.writer.WriteMessageAsync(message, this.source.Token);
+                    throw new ArgumentException(
+                        "The payload requirements of the command of the passed message do not match the passed payload.",
+                        nameof(payload));
+                }
 
-                    if ((payload == null) != (payloadStream == null))
-                    {
-                        throw new ArgumentException(
-                            "The payload requirements of the command of the passed message do not match the passed payload.",
-                            nameof(payload));
-                    }
-
-                    if (payload != null)
-                    {
-                        await payloadStream.WriteAsync(payload, 0, payload.Length, this.source.Token);
-                        await payloadStream.DisposeAsync(this.source.Token);
-                    }
-                });
+                if (payload != null)
+                {
+                    await payloadStream.WriteAsync(payload, 0, payload.Length, this.source.Token);
+                    await payloadStream.DisposeAsync(this.source.Token);
+                }
+            });
         }
 
         private async Task SendOutOfFrameByteCoreAsync(byte value)

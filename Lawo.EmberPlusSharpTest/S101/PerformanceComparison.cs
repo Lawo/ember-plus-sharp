@@ -38,7 +38,7 @@ namespace Lawo.EmberPlusSharp.S101
                         using (var payloadStream = await writer.WriteMessageAsync(EmberDataMessage, CancellationToken.None))
                         {
                             var payload = new byte[BlockSize];
-                            this.Random.NextBytes(payload);
+                            Random.Shared.NextBytes(payload);
                             await payloadStream.WriteAsync(payload, 0, payload.Length);
                             await payloadStream.DisposeAsync(CancellationToken.None);
                         }
@@ -70,7 +70,7 @@ namespace Lawo.EmberPlusSharp.S101
                 async () =>
                 {
                     var input = new byte[BlockSize];
-                    this.Random.NextBytes(input);
+                    Random.Shared.NextBytes(input);
                     var glowOutputMilliseconds = await TimeMethod(count => TestGlowOutput(input, count), LoopCount);
                     var s101WriterAsyncMilliseconds = await TimeMethod(count => TestS101WriterAsync(input, count), LoopCount);
 

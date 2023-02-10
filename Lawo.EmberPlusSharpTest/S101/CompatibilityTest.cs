@@ -26,8 +26,8 @@ namespace Lawo.EmberPlusSharp.S101
             AsyncPump.Run(
                 async () =>
                 {
-                    var writtenBytes = new byte[this.Random.Next(3072, 10241)];
-                    this.Random.NextBytes(writtenBytes);
+                    var writtenBytes = new byte[Random.Shared.Next(3072, 10241)];
+                    Random.Shared.NextBytes(writtenBytes);
 
                     using (var output = new MemoryStream())
                     {

@@ -48,7 +48,7 @@ namespace Lawo.EmberPlusSharp.Ember
             }
 
             var original = new byte[64];
-            this.Random.NextBytes(original);
+            Random.Shared.NextBytes(original);
             byte[] encoded;
 
             using (var stream = new MemoryStream())
@@ -109,14 +109,14 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             AssertDecode(new byte[0]);
             AssertDecode(this.Randomize(new byte[1]));
-            AssertDecode(this.Randomize(new byte[this.Random.Next(126)]));
+            AssertDecode(this.Randomize(new byte[Random.Shared.Next(126)]));
         }
 
         /// <summary>Tests Octetstring contents with lengths &gt;= 128.</summary>
         [TestMethod]
         public void LongOctetstringTest()
         {
-            var contents = new byte[this.Random.Next(128, 253)];
+            var contents = new byte[Random.Shared.Next(128, 253)];
             this.Randomize(contents);
 
             var header =
@@ -167,11 +167,11 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             AssertDecode(new int[] { });
 
-            var relativeObjectIdentifier = new int[this.Random.Next(32)];
+            var relativeObjectIdentifier = new int[Random.Shared.Next(32)];
 
             for (int index = 0; index < relativeObjectIdentifier.Length; ++index)
             {
-                relativeObjectIdentifier[index] = this.Random.Next(128);
+                relativeObjectIdentifier[index] = Random.Shared.Next(128);
             }
 
             AssertDecode(relativeObjectIdentifier);
@@ -185,10 +185,10 @@ namespace Lawo.EmberPlusSharp.Ember
                 reader =>
                 {
                     Assert.IsFalse(reader.CanReadContents);
-                    AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsObject());
+                    Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsObject());
                     Assert.IsTrue(reader.Read());
                     Assert.AreEqual(InnerNumber.EndContainer, reader.InnerNumber);
-                    AssertThrow<InvalidOperationException>(() => reader.OuterId.Ignore());
+                    Assert.ThrowsException<InvalidOperationException>(() => reader.OuterId.Ignore());
                 };
 
             AssertDecode(InnerNumber.Sequence, assertEqual, 0x60, 0x80, 0x30, 0x80, 0x00, 0x00, 0x00, 0x00);
@@ -205,14 +205,14 @@ namespace Lawo.EmberPlusSharp.Ember
         {
             TestStandardExceptionConstructors<EmberException>();
 
-            AssertThrow<ArgumentNullException>(() => new EmberReader(null, 1).Dispose());
+            Assert.ThrowsException<ArgumentNullException>(() => new EmberReader(null, 1).Dispose());
             AssertEmberException("Incorrect length at position 3.", 0x60, 0x03, 0x0D, 0x01, 0xFF, 0x00);
 
             using (var stream = new MemoryStream(new byte[] { 0x60, 0x03, 0x01, 0x01, 0xFF }))
             using (var reader = new EmberReader(stream, 1))
             {
                 reader.Read();
-                AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsString());
+                Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsString());
                 reader.ReadContentsAsBoolean();
             }
 
@@ -411,22 +411,22 @@ namespace Lawo.EmberPlusSharp.Ember
             using (var stream = new MemoryStream(input))
             using (var reader = new EmberReader(stream, 1))
             {
-                AssertThrow<InvalidOperationException>(() => reader.InnerNumber.GetHashCode().Ignore());
-                AssertThrow<InvalidOperationException>(() => reader.OuterId.Ignore());
-                AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsObject());
+                Assert.ThrowsException<InvalidOperationException>(() => reader.InnerNumber.GetHashCode().Ignore());
+                Assert.ThrowsException<InvalidOperationException>(() => reader.OuterId.Ignore());
+                Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsObject());
                 Assert.IsFalse(reader.CanReadContents);
                 Assert.IsTrue(reader.Read());
                 Assert.AreEqual(EmberId.CreateApplication(0), reader.OuterId);
                 Assert.AreEqual(expectedInnerNumber, reader.InnerNumber);
                 assertEqual(reader);
-                AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsObject());
+                Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsObject());
                 Assert.IsFalse(reader.Read());
 
                 reader.Dispose();
                 Assert.IsFalse(reader.CanReadContents);
-                AssertThrow<ObjectDisposedException>(() => reader.InnerNumber.Ignore());
-                AssertThrow<ObjectDisposedException>(() => reader.OuterId.Ignore());
-                AssertThrow<ObjectDisposedException>(() => reader.ReadContentsAsObject());
+                Assert.ThrowsException<ObjectDisposedException>(() => reader.InnerNumber.Ignore());
+                Assert.ThrowsException<ObjectDisposedException>(() => reader.OuterId.Ignore());
+                Assert.ThrowsException<ObjectDisposedException>(() => reader.ReadContentsAsObject());
             }
 
             using (var writer = XmlWriter.Create(Console.Out, new XmlWriterSettings() { Indent = true }))
@@ -460,15 +460,15 @@ namespace Lawo.EmberPlusSharp.Ember
                     switch (reader.InnerNumber)
                     {
                         case InnerNumber.EndContainer:
-                            AssertThrow<InvalidOperationException>(() => reader.OuterId.Ignore());
+                            Assert.ThrowsException<InvalidOperationException>(() => reader.OuterId.Ignore());
                             Assert.IsFalse(reader.CanReadContents);
-                            AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsObject());
+                            Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsObject());
                             break;
                         case InnerNumber.Sequence:
                         case InnerNumber.Set:
                             reader.OuterId.Ignore();
                             Assert.IsFalse(reader.CanReadContents);
-                            AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsObject());
+                            Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsObject());
                             break;
                         case InnerNumber.Boolean:
                         case InnerNumber.Integer:
@@ -484,7 +484,7 @@ namespace Lawo.EmberPlusSharp.Ember
                             Assert.IsTrue(reader.InnerNumber >= InnerNumber.FirstApplication);
                             reader.OuterId.Ignore();
                             Assert.IsFalse(reader.CanReadContents);
-                            AssertThrow<InvalidOperationException>(() => reader.ReadContentsAsObject());
+                            Assert.ThrowsException<InvalidOperationException>(() => reader.ReadContentsAsObject());
                             break;
                     }
                 }
@@ -493,7 +493,7 @@ namespace Lawo.EmberPlusSharp.Ember
 
         private byte[] Randomize(byte[] bytes)
         {
-            this.Random.NextBytes(bytes);
+            Random.Shared.NextBytes(bytes);
             return bytes;
         }
     }
