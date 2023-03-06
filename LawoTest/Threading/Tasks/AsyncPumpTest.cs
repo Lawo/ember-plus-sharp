@@ -24,7 +24,8 @@ namespace Lawo.Threading.Tasks
         public void MainTest()
         {
             LogMethodPosition("Begin");
-            AsyncPump.Run(DoEverything);
+            var cancelToken = new CancellationTokenSource().Token;
+            AsyncPump.Run(DoEverything, cancelToken);
             LogMethodPosition("End");
         }
 
@@ -34,6 +35,7 @@ namespace Lawo.Threading.Tasks
         {
             AssertThrow<ArgumentNullException>(() => AsyncPump.Run(null));
             AssertThrow<ArgumentException>(() => AsyncPump.Run(() => null));
+            var cancelToken = new CancellationTokenSource().Token;
 
             AsyncPump.Run(
                 () =>
@@ -41,10 +43,11 @@ namespace Lawo.Threading.Tasks
                     AssertThrow<NotSupportedException>(() => SynchronizationContext.Current.Send(o => { }, null));
                     AssertThrow<ArgumentNullException>(() => SynchronizationContext.Current.Post(null, new object()));
                     return Task.FromResult(false);
-                });
+                },
+                cancelToken);
 
             AssertThrow<InvalidOperationException>(
-                () => AsyncPump.Run(() => { throw new InvalidOperationException(); }));
+                () => AsyncPump.Run(() => { throw new InvalidOperationException(); }, cancelToken));
         }
 
         private static async Task DoEverything()

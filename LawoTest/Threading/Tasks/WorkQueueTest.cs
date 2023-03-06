@@ -19,6 +19,7 @@ namespace Lawo.Threading.Tasks
         [TestMethod]
         public void MainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -27,7 +28,7 @@ namespace Lawo.Threading.Tasks
                     queue.Enqueue(() => ++counter).Ignore();
                     await queue.Enqueue(() => ++counter);
                     Assert.AreEqual(2, counter);
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests the exceptional cases.</summary>

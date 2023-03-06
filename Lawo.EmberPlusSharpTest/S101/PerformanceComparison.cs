@@ -26,6 +26,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void S101ReadTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -50,7 +51,7 @@ namespace Lawo.EmberPlusSharp.S101
                     Console.WriteLine(
                         "S101Reader asynchronous: {0}ms",
                         await TimeMethod(count => TestS101ReaderAsync(input, count), LoopCount));
-                });
+                }, cancelToken);
         }
 
         /// <summary>Compares <see cref="S101Writer"/> performance with <see cref="GlowOutput"/> performance.</summary>
@@ -66,6 +67,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void S101WriteTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -77,7 +79,8 @@ namespace Lawo.EmberPlusSharp.S101
                     Console.WriteLine("GlowOutput: {0}ms", glowOutputMilliseconds);
                     Console.WriteLine("S101Writer asynchronous: {0}ms", s101WriterAsyncMilliseconds);
                     Console.WriteLine("Ratio: {0}", (double)glowOutputMilliseconds / s101WriterAsyncMilliseconds);
-                });
+                },
+                cancelToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -36,6 +36,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void DynamicIterateTest()
         {
             #region Dynamic Iterate
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -44,7 +45,7 @@ namespace Lawo.EmberPlusSharp.Model
                     {
                         WriteChildren(consumer.Root, 0);
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -54,6 +55,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void DynamicReactToChangesTest()
         {
             #region Dynamic React to Changes
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -74,7 +76,7 @@ namespace Lawo.EmberPlusSharp.Model
                         Console.WriteLine("Waiting for the parameter to change...");
                         Console.WriteLine("A value of the element with the path {0} has been changed.", await valueChanged.Task);
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -84,6 +86,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void DynamicModifyTest()
         {
             #region Dynamic Modify
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -111,7 +114,7 @@ namespace Lawo.EmberPlusSharp.Model
                         // information.
                         await consumer.SendAsync();
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -121,6 +124,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void ConnectionLostTest()
         {
             #region Connection Lost
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -135,7 +139,7 @@ namespace Lawo.EmberPlusSharp.Model
                         Console.WriteLine("Connection Lost!");
                         Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine);
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -145,6 +149,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void StaticIterateTest()
         {
             #region Static Iterate
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -153,7 +158,7 @@ namespace Lawo.EmberPlusSharp.Model
                     {
                         WriteChildren(consumer.Root, 0);
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -163,6 +168,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void StaticReactToChangesTest()
         {
             #region Static React to Changes
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -175,7 +181,7 @@ namespace Lawo.EmberPlusSharp.Model
                         Console.WriteLine("Waiting for the parameter to change...");
                         Console.WriteLine("A value of the element with the path {0} has been changed.", await valueChanged.Task);
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -185,6 +191,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void StaticModifyTest()
         {
             #region Static Modify
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -196,7 +203,7 @@ namespace Lawo.EmberPlusSharp.Model
                         fader.Position.Value = 128;
                         await consumer.SendAsync();
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -206,6 +213,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void CollectionNodeTest()
         {
             #region Collection Node
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -217,7 +225,7 @@ namespace Lawo.EmberPlusSharp.Model
                             Console.WriteLine(source.Fader.Position.Value);
                         }
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -227,6 +235,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void MixedIterateTest()
         {
             #region Mixed Iterate
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -235,7 +244,7 @@ namespace Lawo.EmberPlusSharp.Model
                     {
                         WriteChildren(consumer.Root, 0);
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -245,6 +254,7 @@ namespace Lawo.EmberPlusSharp.Model
         public void MixedModifyTest()
         {
             #region Mixed Modify
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -261,7 +271,7 @@ namespace Lawo.EmberPlusSharp.Model
 
                         await consumer.SendAsync();
                     }
-                });
+                }, cancelToken);
             #endregion
         }
 
@@ -271,6 +281,7 @@ namespace Lawo.EmberPlusSharp.Model
         private static void MainTutorial()
         {
             // This is necessary so that we can execute async code in a console application.
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -286,7 +297,7 @@ namespace Lawo.EmberPlusSharp.Model
                         // For now just output the number of direct children under the root node.
                         Console.WriteLine(root.Children.Count);
                     }
-                });
+                }, cancelToken);
         }
         #endregion
 

@@ -50,6 +50,7 @@ namespace Lawo.IO
         [TestMethod]
         public void ReadAsyncTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -78,13 +79,14 @@ namespace Lawo.IO
                             CollectionAssert.AreEqual(originalBytes, readStream.ToArray());
                         }
                     }
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="ReadBuffer.FillAsync(byte[], int, int, CancellationToken)"/>.</summary>
         [TestMethod]
         public void FillAsyncTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -98,7 +100,8 @@ namespace Lawo.IO
                         await readBuffer.FillAsync(readBytes, 0, readBytes.Length, CancellationToken.None);
                         CollectionAssert.AreEqual(originalBytes, readBytes);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests less executed <see cref="WriteBuffer"/> use cases.</summary>
@@ -122,6 +125,7 @@ namespace Lawo.IO
         [TestMethod]
         public void WriteAsyncTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -136,13 +140,15 @@ namespace Lawo.IO
                         await writeBuffer.FlushAsync(CancellationToken.None);
                         CollectionAssert.AreEqual(bytes, stream.ToArray());
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests various exceptions.</summary>
         [TestMethod]
         public void ExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -194,7 +200,8 @@ namespace Lawo.IO
                         AssertThrow<InvalidOperationException>(
                             () => asyncWriteBuffer.WriteAsUtf8(str, Encoding.UTF8.GetByteCount(str)));
                     }
-                });
+                },
+                cancelToken);
         }
     }
 }

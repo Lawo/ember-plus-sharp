@@ -27,6 +27,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void KeepAliveMainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -58,13 +59,14 @@ namespace Lawo.EmberPlusSharp.S101
 
                         await connectionLost.Task;
                     }
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests automatic keep alive with a provider that does not respond.</summary>
         [TestMethod]
         public void KeepAliveExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -85,13 +87,15 @@ namespace Lawo.EmberPlusSharp.S101
                         var task = await Task.WhenAny(source.Task, Task.Delay(timeout + (timeout / 4)));
                         await Assert.ThrowsExceptionAsync<S101Exception>(() => task);
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests sending/receiving messages with <see cref="EmberData"/> commands.</summary>
         [TestMethod]
         public void EmberDataTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestNoExceptionsAsync(
                 async (consumer, provider) =>
                 {
@@ -128,13 +132,15 @@ namespace Lawo.EmberPlusSharp.S101
                     provider.EmberDataReceived -= emberDataHandler;
                 },
                 () => ConnectAsync(-1, null),
-                () => WaitForConnectionAsync(null)));
+                () => WaitForConnectionAsync(null)),
+                cancelToken);
         }
 
         /// <summary>Tests what happens when the connection is lost.</summary>
         [TestMethod]
         public void ConnectionLostTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -160,7 +166,8 @@ namespace Lawo.EmberPlusSharp.S101
                         await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                             () => client.SendMessageAsync(new S101Message(0x00, new KeepAliveRequest())));
                     }
-                });
+                },
+                cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Client"/> exceptions.</summary>
@@ -172,6 +179,8 @@ namespace Lawo.EmberPlusSharp.S101
                 ReadAsyncCallback fakeRead = (b, o, c, t) => Task.FromResult(0);
                 WriteAsyncCallback fakeWrite = (b, o, c, t) => Task.FromResult(false);
                 Assert.ThrowsException<NotSupportedException>(() => new S101Client(dummy, fakeRead, fakeWrite).Dispose());
+
+                var cancelToken = new CancellationTokenSource().Token;
 
                 AsyncPump.Run(
                     async () =>
@@ -208,7 +217,8 @@ namespace Lawo.EmberPlusSharp.S101
                             await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
                                 () => client.SendMessageAsync(new S101Message(0x00, new KeepAliveRequest())));
                         }
-                    });
+                    },
+                    cancelToken);
             }
         }
 
@@ -216,6 +226,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void VersionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(() => TestWithRobot<S101Payloads>(
                 client =>
                 {
@@ -230,7 +241,8 @@ namespace Lawo.EmberPlusSharp.S101
                 null,
                 new EmberTypeBag(),
                 true,
-                "VersionLog.xml"));
+                "VersionLog.xml"),
+                cancelToken);
         }
     }
 }

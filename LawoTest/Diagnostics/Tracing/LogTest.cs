@@ -26,6 +26,7 @@ namespace Lawo.Diagnostics.Tracing
         [TestMethod]
         public void LogEventTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -46,7 +47,7 @@ namespace Lawo.Diagnostics.Tracing
                     Assert.IsTrue(logEvent.FilePath.Contains("LogTest.cs"));
                     Assert.AreEqual(37, logEvent.LineNumber);
                     Assert.AreEqual(moduleName, logEvent.ModluleName);
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests the debug level.</summary>

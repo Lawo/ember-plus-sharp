@@ -10,8 +10,8 @@ namespace Lawo.Threading.Tasks
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
+    using System.Threading;
 
     /// <summary>Represents a pump that runs an asynchronous method and all its continuations on the current thread.
     /// </summary>
@@ -26,11 +26,17 @@ namespace Lawo.Threading.Tasks
         /// <summary>Runs <paramref name="asyncMethod"/> on the current thread.</summary>
         /// <exception cref="Exception"><paramref name="asyncMethod"/> completed in the <see cref="TaskStatus.Faulted"/>
         /// state.</exception>
-        public static void Run(Func<Task> asyncMethod)
+        /// <summary>Add <paramref name="cancellationToken"/> for operation control.</summary>
+        public static void Run(Func<Task> asyncMethod, CancellationToken cancellationToken)
         {
             if (asyncMethod == null)
             {
                 throw new ArgumentNullException(nameof(asyncMethod));
+            }
+
+            if (cancellationToken == null)
+            {
+                throw new ArgumentNullException(nameof(cancellationToken));
             }
 
             var previousContext = SynchronizationContext.Current;
@@ -48,7 +54,7 @@ namespace Lawo.Threading.Tasks
                     throw new ArgumentException("The method returned null.", nameof(asyncMethod));
                 }
 
-                task.ContinueWith(t => newContext.OperationCompleted(), TaskScheduler.Default);
+                task.ContinueWith(t => newContext.OperationCompleted(), cancellationToken, TaskContinuationOptions.NotOnCanceled, TaskScheduler.Default);
                 newContext.RunOnCurrentThread();
                 task.GetAwaiter().GetResult();
             }
@@ -75,8 +81,7 @@ namespace Lawo.Threading.Tasks
                 }
             }
 
-            public sealed override void Post(SendOrPostCallback d, object state) => this.queue.Add(
-                new KeyValuePair<SendOrPostCallback, object>(d ?? throw new ArgumentNullException(nameof(d)), state));
+            public sealed override void Post(SendOrPostCallback d, object state) => this.queue.Add(new KeyValuePair<SendOrPostCallback, object>(d ?? throw new ArgumentNullException(nameof(d)), state ?? ""));
 
             public sealed override void Send(SendOrPostCallback d, object state) =>
                 throw new NotSupportedException("Send is not supported.");

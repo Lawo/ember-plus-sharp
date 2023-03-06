@@ -24,6 +24,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void WriteTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -40,13 +41,14 @@ namespace Lawo.EmberPlusSharp.S101
                             0xFE, 0x00, 0x0E, 0x00, 0x01, 0x60, 0x01, 0x02, 0x0a, 0x02, 0x13, 0x53, 0xFF
                         },
                         await Encode(EmberDataMessage, new byte[] { }));
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Writer.WriteMessageAsync"/>.</summary>
         [TestMethod]
         public void OutOfFrameByteTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -105,13 +107,14 @@ namespace Lawo.EmberPlusSharp.S101
 
                         Assert.AreEqual(third, await thirdTask);
                     }
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests whether random written payload is read back the same.</summary>
         [TestMethod]
         public void PayloadTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -164,7 +167,7 @@ namespace Lawo.EmberPlusSharp.S101
                     }
                     #endregion
 #pragma warning restore SA1123 // Do not place regions within elements
-                });
+                }, cancelToken);
         }
 
         /// <summary>Tests <see cref="S101Writer"/> exceptions.</summary>
@@ -172,6 +175,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void ExceptionTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -224,7 +228,7 @@ namespace Lawo.EmberPlusSharp.S101
                     await writer.DisposeAsync(CancellationToken.None);
                     await Assert.ThrowsExceptionAsync<ObjectDisposedException>(() => writer.WriteMessageAsync(
                         new S101Message(0x00, new KeepAliveRequest()), CancellationToken.None));
-                });
+                }, cancelToken);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

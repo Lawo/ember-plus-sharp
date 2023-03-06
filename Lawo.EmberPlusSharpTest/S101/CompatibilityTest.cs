@@ -23,6 +23,7 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void MainTest()
         {
+            var cancelToken = new CancellationTokenSource().Token;
             AsyncPump.Run(
                 async () =>
                 {
@@ -50,7 +51,8 @@ namespace Lawo.EmberPlusSharp.S101
 
                         await reader.DisposeAsync(CancellationToken.None);
                     }
-                });
+                },
+                cancelToken);
         }
     }
 }
