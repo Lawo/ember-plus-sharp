@@ -14,7 +14,6 @@ Imports Lawo.EmberPlusSharp.Model
 Imports Lawo.EmberPlusSharp.S101
 Imports Lawo.Threading.Tasks
 'Imports Microsoft.TeamFoundation.Framework.Common
-Imports Microsoft.VisualStudio.TestTools.UnitTesting
 #End Region
 
 Public NotInheritable Class TutorialTestVB
@@ -30,13 +29,13 @@ Public NotInheritable Class TutorialTestVB
 #Region "Dynamic Iterate"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of MyRoot).CreateAsync(client)
-                        WriteChildren(con.Root, 0)
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MyRoot).CreateAsync(client)
+                            WriteChildren(con.Root, 0)
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -45,32 +44,32 @@ Public NotInheritable Class TutorialTestVB
 #Region "Dynamic Modify"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of MyRoot).CreateAsync(client)
-                        Dim root As INode = con.Root
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MyRoot).CreateAsync(client)
+                            Dim root As INode = con.Root
 
-                        ' Navigate to the parameters we're interested in.
-                        Dim sapphire = DirectCast(root.Children.First(Function(c) c.Identifier = "Sapphire"), INode)
-                        Dim sources = DirectCast(sapphire.Children.First(Function(c) c.Identifier = "Sources"), INode)
-                        Dim fpgm1 = DirectCast(sources.Children.First(Function(c) c.Identifier = "FPGM 1"), INode)
-                        Dim fader = DirectCast(fpgm1.Children.First(Function(c) c.Identifier = "Fader"), INode)
-                        Dim dbValue = DirectCast(fader.Children.First(Function(c) c.Identifier = "dB Value"), IParameter)
-                        Dim position = DirectCast(fader.Children.First(Function(c) c.Identifier = "Position"), IParameter)
+                            ' Navigate to the parameters we're interested in.
+                            Dim sapphire = DirectCast(root.Children.First(Function(c) c.Identifier = "Sapphire"), INode)
+                            Dim sources = DirectCast(sapphire.Children.First(Function(c) c.Identifier = "Sources"), INode)
+                            Dim fpgm1 = DirectCast(sources.Children.First(Function(c) c.Identifier = "FPGM 1"), INode)
+                            Dim fader = DirectCast(fpgm1.Children.First(Function(c) c.Identifier = "Fader"), INode)
+                            Dim dbValue = DirectCast(fader.Children.First(Function(c) c.Identifier = "dB Value"), IParameter)
+                            Dim position = DirectCast(fader.Children.First(Function(c) c.Identifier = "Position"), IParameter)
 
-                        ' Set parameters to the desired values.
-                        dbValue.Value = -67.0
-                        position.Value = 128L
+                            ' Set parameters to the desired values.
+                            dbValue.Value = -67.0
+                            position.Value = 128L
 
-                        ' We send the changes back to the provider with the call below. Here, this is necessary so that
-                        ' the changes are sent before Dispose is called on the consumer. In a real-world application
-                        ' however, SendAsync often does not need to be called explicitly because it is automatically
-                        ' called every 100ms as long as there are pending changes. See AutoSendInterval for more
-                        ' information.
-                        Await con.SendAsync()
+                            ' We send the changes back to the provider with the call below. Here, this is necessary so that
+                            ' the changes are sent before Dispose is called on the consumer. In a real-world application
+                            ' however, SendAsync often does not need to be called explicitly because it is automatically
+                            ' called every 100ms as long as there are pending changes. See AutoSendInterval for more
+                            ' information.
+                            Await con.SendAsync()
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 
 #End Region
@@ -80,19 +79,19 @@ Public NotInheritable Class TutorialTestVB
 #Region "Connection Lost"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of MyRoot).CreateAsync(client)
-                        Dim connectionLost = New TaskCompletionSource(Of Exception)()
-                        AddHandler con.ConnectionLost, Sub(s, e) connectionLost.SetResult(e.Exception)
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MyRoot).CreateAsync(client)
+                            Dim connectionLost = New TaskCompletionSource(Of Exception)()
+                            AddHandler con.ConnectionLost, Sub(s, e) connectionLost.SetResult(e.Exception)
 
-                        Console.WriteLine("Waiting for the provider to disconnect...")
-                        Dim exception = Await connectionLost.Task
-                        Console.WriteLine("Connection Lost!")
-                        Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine)
+                            Console.WriteLine("Waiting for the provider to disconnect...")
+                            Dim exception = Await connectionLost.Task
+                            Console.WriteLine("Connection Lost!")
+                            Console.WriteLine("Exception:{0}{1}", exception, Environment.NewLine)
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -101,13 +100,13 @@ Public NotInheritable Class TutorialTestVB
 #Region "Static Iterate"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
-                        WriteChildren(con.Root, 0)
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                            WriteChildren(con.Root, 0)
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -116,17 +115,17 @@ Public NotInheritable Class TutorialTestVB
 #Region "Static React to Changes"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
-                        Dim valueChanged = New TaskCompletionSource(Of String)()
-                        Dim positionParameter = con.Root.Sapphire.Sources.Fpgm1.Fader.Position
-                        AddHandler positionParameter.PropertyChanged, Sub(s, e) valueChanged.SetResult(DirectCast(s, IElement).GetPath())
-                        Console.WriteLine("Waiting for the parameter to change...")
-                        Console.WriteLine("A value of the element with the path {0} has been changed.", Await valueChanged.Task)
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                            Dim valueChanged = New TaskCompletionSource(Of String)()
+                            Dim positionParameter = con.Root.Sapphire.Sources.Fpgm1.Fader.Position
+                            AddHandler positionParameter.PropertyChanged, Sub(s, e) valueChanged.SetResult(DirectCast(s, IElement).GetPath())
+                            Console.WriteLine("Waiting for the parameter to change...")
+                            Console.WriteLine("A value of the element with the path {0} has been changed.", Await valueChanged.Task)
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -135,16 +134,16 @@ Public NotInheritable Class TutorialTestVB
 #Region "Static Modify"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
-                        Dim fader = con.Root.Sapphire.Sources.Fpgm1.Fader
-                        fader.DBValue.Value = -67.0
-                        fader.Position.Value = 128
-                        Await con.SendAsync()
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of SapphireRoot).CreateAsync(client)
+                            Dim fader = con.Root.Sapphire.Sources.Fpgm1.Fader
+                            fader.DBValue.Value = -67.0
+                            fader.Position.Value = 128
+                            Await con.SendAsync()
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -153,15 +152,15 @@ Public NotInheritable Class TutorialTestVB
 #Region "Collection Node"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of UnboundedSapphireRoot).CreateAsync(client)
-                        For Each Source In con.Root.Sapphire.Sources.Children
-                            Console.WriteLine(Source.Fader.Position.Value)
-                        Next
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of UnboundedSapphireRoot).CreateAsync(client)
+                            For Each Source In con.Root.Sapphire.Sources.Children
+                                Console.WriteLine(Source.Fader.Position.Value)
+                            Next
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -170,13 +169,13 @@ Public NotInheritable Class TutorialTestVB
 #Region "Mixed Iterate"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
-                        WriteChildren(con.Root, 0)
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
+                            WriteChildren(con.Root, 0)
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -185,20 +184,20 @@ Public NotInheritable Class TutorialTestVB
 #Region "Mixed Modify"
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                Using client = Await ConnectAsync("localhost", 9000)
-                    Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
-                        For Each Source In con.Root.Sapphire.Sources.Children
-                            Source.Fader.DBValue.Value = -67.0
-                            Source.Fader.Position.Value = 128
-                            Source.Dsp.Input.LRMode.Value = LRMode.Mono
-                            Source.Dsp.Input.Phase.Value = False
-                        Next
+                Async Function()
+                    Using client = Await ConnectAsync("localhost", 9000)
+                        Using con = Await Consumer(Of MixedSapphireRoot).CreateAsync(client)
+                            For Each Source In con.Root.Sapphire.Sources.Children
+                                Source.Fader.DBValue.Value = -67.0
+                                Source.Fader.Position.Value = 128
+                                Source.Dsp.Input.LRMode.Value = LRMode.Mono
+                                Source.Dsp.Input.Phase.Value = False
+                            Next
 
-                        Await con.SendAsync()
+                            Await con.SendAsync()
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
 #End Region
     End Sub
@@ -210,19 +209,19 @@ Public NotInheritable Class TutorialTestVB
         ' This is necessary so that we can execute async code in a console application.
         Using cancelToken As New CancellationTokenSource()
             AsyncPump.Run(
-            Async Function()
-                ' Establish S101 protocol
-                Using client As S101Client = Await ConnectAsync("localhost", 9000)
-                    ' Retrieve *all* elements in the provider database and store them in a local copy
-                    Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
-                        ' Get the root of the local database.
-                        Dim root As INode = con.Root
+                Async Function()
+                    ' Establish S101 protocol
+                    Using client As S101Client = Await ConnectAsync("localhost", 9000)
+                        ' Retrieve *all* elements in the provider database and store them in a local copy
+                        Using con As Consumer(Of MyRoot) = Await Consumer(Of MyRoot).CreateAsync(client)
+                            ' Get the root of the local database.
+                            Dim root As INode = con.Root
 
-                        ' For now just output the number of direct children under the root node.
-                        Console.WriteLine(root.Children.Count)
+                            ' For now just output the number of direct children under the root node.
+                            Console.WriteLine(root.Children.Count)
+                        End Using
                     End Using
-                End Using
-            End Function, cancelToken.Token)
+                End Function, cancelToken.Token)
         End Using
     End Sub
 #End Region

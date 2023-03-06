@@ -258,7 +258,7 @@ namespace Lawo.EmberPlusSharp.S101
         {
             byte result;
 
-            while (exceptions.Contains(result = (byte)this.Random.Next(byte.MinValue, byte.MaxValue + 1)))
+            while (exceptions.Contains(result = (byte)Random.Shared.Next(byte.MinValue, byte.MaxValue + 1)))
             {
             }
 

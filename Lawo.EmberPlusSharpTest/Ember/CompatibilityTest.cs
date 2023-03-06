@@ -24,7 +24,7 @@ namespace Lawo.EmberPlusSharp.Ember
         [TestMethod]
         public void BooleanTest()
         {
-            var value = this.Random.Next(0, 2) == 1;
+            var value = Random.Shared.Next(0, 2) == 1;
             this.AssertEqual((w, i, v) => w.WriteValue(i, v), r => r.GetBoolean(), value);
             this.AssertEqual((w, t, v) => w.Write(t, v), r => r.ReadContentsAsBoolean(), value);
         }
@@ -34,7 +34,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public void IntegerTest()
         {
             var longBytes = new byte[Marshal.SizeOf(typeof(long))];
-            this.Random.NextBytes(longBytes);
+            Random.Shared.NextBytes(longBytes);
             var value = BitConverter.ToInt64(longBytes, 0);
 
             this.AssertEqual((w, i, v) => w.WriteValue(i, v), r => r.GetLong(), value);
@@ -46,7 +46,7 @@ namespace Lawo.EmberPlusSharp.Ember
         public void OctetstringTest()
         {
             var value = new byte[1024];
-            this.Random.NextBytes(value);
+            Random.Shared.NextBytes(value);
             this.CollectionAssertEqual((w, i, v) => w.WriteValue(i, v), r => r.GetOctetString(), value);
             this.CollectionAssertEqual((w, t, v) => w.Write(t, v), r => r.ReadContentsAsByteArray(), value);
         }
@@ -55,7 +55,7 @@ namespace Lawo.EmberPlusSharp.Ember
         [TestMethod]
         public void RealTest()
         {
-            var value = (this.Random.NextDouble() - 0.5) * this.Random.Next(int.MaxValue);
+            var value = (Random.Shared.NextDouble() - 0.5) * Random.Shared.Next(int.MaxValue);
             this.AssertEqual((w, i, v) => w.WriteValue(i, v), r => r.GetReal(), value);
             this.AssertEqual((w, t, v) => w.Write(t, v), r => r.ReadContentsAsDouble(), value);
         }
@@ -82,11 +82,11 @@ namespace Lawo.EmberPlusSharp.Ember
         [TestMethod]
         public void RelativeObjectIdentifierTest()
         {
-            var value = new int[this.Random.Next(0, 16)];
+            var value = new int[Random.Shared.Next(0, 16)];
 
             for (int index = 0; index < value.Length; ++index)
             {
-                value[index] = this.Random.Next();
+                value[index] = Random.Shared.Next();
             }
 
             this.CollectionAssertEqual((w, i, v) => w.WriteValue(i, v), r => r.GetRelativeOid(), value);
@@ -138,7 +138,7 @@ namespace Lawo.EmberPlusSharp.Ember
         private void AssertEqual<T>(
             Action<EmberWriter, EmberId, T> write, Func<EmberLib.EmberReader, T> read, T value, Action<T, T> assertEqual)
         {
-            var number = this.Random.Next();
+            var number = Random.Shared.Next();
             var outer = EmberId.CreateApplication(number);
             var tag = new BerTag(BerClass.Application, (uint)number);
 
@@ -160,7 +160,7 @@ namespace Lawo.EmberPlusSharp.Ember
         private void AssertEqual<T>(
             Action<EmberLib.EmberWriter, BerTag, T> write, Func<EmberReader, T> read, T value, Action<T, T> assertEqual)
         {
-            var number = this.Random.Next();
+            var number = Random.Shared.Next();
             var outerId = EmberId.CreateApplication(number);
             var tag = new BerTag(BerClass.Application, (uint)number);
 

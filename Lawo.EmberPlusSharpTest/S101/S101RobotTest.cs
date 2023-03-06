@@ -104,13 +104,15 @@ namespace Lawo.EmberPlusSharp.S101
                 {
                     using (var client = new S101Client(Stream.Null, Stream.Null.ReadAsync, Stream.Null.WriteAsync))
                     {
-                        await AssertThrowAsync<ArgumentNullException>(
-                            () => S101Robot.RunAsync(null, Types, XmlReader.Create(Stream.Null), false),
-                            () => S101Robot.RunAsync(client, null, XmlReader.Create(Stream.Null), false),
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+                            () => S101Robot.RunAsync(null, Types, XmlReader.Create(Stream.Null), false));
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+                            () => S101Robot.RunAsync(client, null, XmlReader.Create(Stream.Null), false));
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(
                             () => S101Robot.RunAsync(client, Types, null, false));
                     }
 
-                    await AssertThrowAsync<XmlException>(() => TestWithRobot<S101Payloads>(
+                    await Assert.ThrowsExceptionAsync<XmlException>(() => TestWithRobot<S101Payloads>(
                         client => Task.FromResult(false), null, null, Types, true, "MissingPayloadLog.xml"));
                 },
                 cancelToken);

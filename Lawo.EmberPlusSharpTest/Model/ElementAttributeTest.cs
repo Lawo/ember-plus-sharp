@@ -7,24 +7,23 @@
 namespace Lawo.EmberPlusSharp.Model
 {
     using System;
-
+    using Lawo.EmberPlusSharpTest;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using UnitTesting;
 
     /// <summary>Tests <see cref="ElementAttribute"/>.</summary>
     [TestClass]
-    public sealed class ElementAttributeTest : TestBase
+    public sealed class ElementAttributeTest
     {
         /// <summary>Tests the main use cases.</summary>
         [TestMethod]
         public void MainTest()
         {
-            var identifier = GetRandomString();
-            var isOptional = this.GetRandomBoolean();
+            var identifier = TestHelper.RandomString();
+            var isOptional = TestHelper.RandomBoolean();
             var attribute = new ElementAttribute() { Identifier = identifier, IsOptional = isOptional };
             Assert.AreEqual(identifier, attribute.Identifier);
             Assert.AreEqual(isOptional, attribute.IsOptional);
-            AssertThrow<ArgumentNullException>(() => new ElementAttribute() { Identifier = null }.Ignore());
+            Assert.ThrowsException<ArgumentNullException>(() => new ElementAttribute() { Identifier = null }.Ignore());
         }
     }
 }

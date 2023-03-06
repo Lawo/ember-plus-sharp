@@ -74,33 +74,31 @@ namespace Lawo.EmberPlusSharp.Ember
         [TestMethod]
         public void ExceptionTest()
         {
-            AssertThrow<ArgumentNullException>(() => new EmberWriter(null, 1).Dispose());
-            AssertThrow<ArgumentException>(() => new EmberWriter(new MemoryStream(), 0).Dispose());
+            Assert.ThrowsException<ArgumentNullException>(() => new EmberWriter(null, 1).Dispose());
+            Assert.ThrowsException<ArgumentException>(() => new EmberWriter(new MemoryStream(), 0).Dispose());
 
             using (var writer = new EmberWriter(new MemoryStream(), 1))
             {
                 var outer = EmberId.CreateApplication(0);
 
-                AssertThrow<ArgumentNullException>(
-                    () => writer.WriteValue(outer, (byte[])null),
-                    () => writer.WriteValue(outer, (int[])null),
-                    () => writer.WriteValue(outer, (string)null));
+                Assert.ThrowsException<ArgumentNullException>(() => writer.WriteValue(outer, (byte[]) null));
+                Assert.ThrowsException<ArgumentNullException>(() => writer.WriteValue(outer, (int[]) null));
+                Assert.ThrowsException<ArgumentNullException>(() => writer.WriteValue(outer, (string)null));
 
-                AssertThrow<ArgumentOutOfRangeException>(
+                Assert.ThrowsException<ArgumentOutOfRangeException>(
                     () => writer.WriteStartApplicationDefinedType(outer, InnerNumber.FirstApplication - 1));
 
                 writer.Dispose();
-                AssertThrow<ObjectDisposedException>(
-                    () => writer.WriteValue(outer, true),
-                    () => writer.WriteValue(outer, 0),
-                    () => writer.WriteValue(outer, new byte[] { }),
-                    () => writer.WriteValue(outer, 0.0),
-                    () => writer.WriteValue(outer, string.Empty),
-                    () => writer.WriteValue(outer, new int[] { }),
-                    () => writer.WriteStartSequence(outer),
-                    () => writer.WriteStartSet(outer),
-                    () => writer.WriteStartApplicationDefinedType(outer, InnerNumber.FirstApplication),
-                    () => writer.WriteEndContainer());
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteValue(outer, true));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteValue(outer, 0));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteValue(outer, new byte[] { }));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteValue(outer, 0.0));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteValue(outer, string.Empty));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteValue(outer, new int[] { }));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteStartSequence(outer));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteStartSet(outer));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteStartApplicationDefinedType(outer, InnerNumber.FirstApplication));
+                Assert.ThrowsException<ObjectDisposedException>(() => writer.WriteEndContainer());
             }
         }
 

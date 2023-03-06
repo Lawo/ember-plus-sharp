@@ -86,12 +86,13 @@ namespace Lawo.EmberPlusSharp.S101
         [TestMethod]
         public void ExceptionTest()
         {
-            AssertThrow<ArgumentNullException>(
-                () => new S101LogReader(null, XmlReader.Create(Stream.Null)).Ignore(),
+            Assert.ThrowsException<ArgumentNullException>(
+                () => new S101LogReader(null, XmlReader.Create(Stream.Null)).Ignore());
+            Assert.ThrowsException<ArgumentNullException>(
                 () => new S101LogReader(Types, null).Ignore());
-            AssertThrow<InvalidOperationException>(
+            Assert.ThrowsException<InvalidOperationException>(
                 () => TestS101LogReader("IncomingLog.xml", r => r.Direction.Ignore()));
-            AssertThrow<XmlException>(() => TestS101LogReader("MissingPayloadLog.xml", r => r.Read()));
+            Assert.ThrowsException<XmlException>(() => TestS101LogReader("MissingPayloadLog.xml", r => r.Read()));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
